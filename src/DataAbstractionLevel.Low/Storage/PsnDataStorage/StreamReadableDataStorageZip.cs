@@ -7,6 +7,7 @@ using DataAbstractionLevel.Low.Storage.Contracts;
 using DataAbstractionLevel.Low.Storage.PsnData;
 using DataAbstractionLevel.Low.Storage.StreamableData;
 using DataAbstractionLevel.Low.Storage.StreamableData.Contracts;
+using DataAbstractionLevel.Low.Storage.StreamableData.ZippedFile;
 using Ionic.Zip;
 using Ionic.Zlib;
 

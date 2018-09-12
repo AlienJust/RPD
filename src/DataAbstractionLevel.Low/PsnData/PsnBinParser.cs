@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using AlienJust.Support.IO;
 using DataAbstractionLevel.Low.InternalKitchen.Extensions;
+using DataAbstractionLevel.Low.PsnData.Contracts;
 using DataAbstractionLevel.Low.Storage.Contracts;
 using DataAbstractionLevel.Low.Storage.DeviceInformationStorage.Nand.SystemConfiguration.Contracts;
 

@@ -1,4 +1,5 @@
 using System;
+using DataAbstractionLevel.Low.PsnData.Contracts;
 
 namespace DataAbstractionLevel.Low.PsnData {
 	internal sealed class SimplePsnPagesLocationInfo : IPsnPagesLocationInfo {

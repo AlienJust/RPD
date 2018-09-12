@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataAbstractionLevel.Low.PsnData {
+namespace DataAbstractionLevel.Low.PsnData.Contracts {
 	/// <summary>
 	/// Класс, описывающий точку канала
 	/// </summary>

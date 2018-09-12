@@ -8,6 +8,7 @@ using DataAbstractionLevel.Low.Storage.FtpFilesStorage.Contracts;
 using DataAbstractionLevel.Low.Storage.PsnData;
 using DataAbstractionLevel.Low.Storage.StreamableData;
 using DataAbstractionLevel.Low.Storage.StreamableData.Contracts;
+using DataAbstractionLevel.Low.Storage.StreamableData.FtpFile;
 
 namespace DataAbstractionLevel.Low.Storage.PsnDataStorage {
 	public sealed class StreamReadableDataStorageFtpUrl : IPsnDataStorage {

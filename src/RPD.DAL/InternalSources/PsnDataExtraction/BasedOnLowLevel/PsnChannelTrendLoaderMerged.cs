@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using DataAbstractionLevel.Low.PsnConfig.Contracts;
 using DataAbstractionLevel.Low.PsnData;
+using DataAbstractionLevel.Low.PsnData.Contracts;
 using DataAbstractionLevel.Low.Storage.Contracts;
 using RPD.DAL.DataExtraction.SimpleRelease;
 using RPD.DAL.PsnDataExtraction.Contracts;

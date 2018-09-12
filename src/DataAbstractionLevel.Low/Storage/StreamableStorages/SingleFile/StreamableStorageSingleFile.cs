@@ -40,8 +40,4 @@ namespace DataAbstractionLevel.Low.Storage.StreamableStorages.SingleFile
 			throw new NotSupportedException("Cannot add remove data from storage, operation is not supported");
 		}
 	}
-
-	internal interface IIntervalWithId<out T> : IObjectWithIdentifier {
-		IInterval<T> Interval { get; }
-	}
 }

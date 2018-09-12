@@ -7,6 +7,7 @@ using DataAbstractionLevel.Low.Storage.Contracts;
 using DataAbstractionLevel.Low.Storage.FtpFilesStorage.Contracts;
 using DataAbstractionLevel.Low.Storage.PsnDataFaultReason;
 using DataAbstractionLevel.Low.Storage.StreamableData;
+using DataAbstractionLevel.Low.Storage.StreamableData.FtpFile;
 
 namespace DataAbstractionLevel.Low.Storage.PsnDataFaultReasonStorage {
 	public sealed class PsnDataFaultReasonStorageFtpUrl : IStorage<IPsnDataFaultReason> {

@@ -2,7 +2,7 @@
 using DataAbstractionLevel.Low.InternalKitchen.Streamable;
 using DataAbstractionLevel.Low.Storage.StreamableData.Contracts;
 
-namespace DataAbstractionLevel.Low.Storage.StreamableData
+namespace DataAbstractionLevel.Low.Storage.StreamableData.ZippedFile
 {
 	public class StreamedZippedFile : IStreamedData, IStreamedDataWritable {
 		private readonly string _zipFilename;
