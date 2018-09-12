@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Трамвай 11103" Version="1" Description="Конфигурация для трамвая" Id="B466B332-4D10-4342-862A-C15395EDFE48" RpdId="1">
+  <PsnMeters>
+    <PsnMeter Address="0x01" Name="Преобразователь тяговый (ПТ) 1" />
+    <PsnMeter Address="0x02" Name="Преобразователь обмоток возбуждения (СТПР) 1" />
+    <PsnMeter Address="0x11" Name="Преобразователь тяговый (ПТ) 2" />
+    <PsnMeter Address="0x12" Name="Преобразователь обмоток возбуждения (СТПР) 2" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="БС-ТП и ПТ1">
+      <Request Length="14" Position="0" CycleMsTime="75">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="c00e4fa1-18ef-435e-842e-58e8eecf6d74" />
+        <DefVal Position="1.0" Length="8" Value="0x01" Name="#NCMD" Id="c652e59b-fa38-4a3f-a240-18ba94ec7a37" />
+        <CpzPrm Name="Уставка момента двигателя 1" Expression="[s2] * 256.0 + [u3]" Id="83fbcc08-7eb1-4378-8e23-1b83968059a7" />
+        <CpzPrm Name="Уставка момента двигателя 2" Expression="[s4] * 256.0 + [u5]" Id="6e2ce828-6694-4302-92c6-175dbbcc5fec" />
+        <CpzPrm Name="Ток возбуждения 1, А" Expression="[s7] * 256.0 + [u8]" Id="fd69fc07-0c4f-472b-abc3-aefc25ed70be" />
+        <CpzPrm Name="Ток возбуждения 2, А" Expression="[s9] * 256.0 + [u10]" Id="bdc5c9c9-490d-412c-8d60-c86f8356ea7c" />
+        <CpzPrm Name="Скорость электровоза, км/ч" Expression="[u11] * 1.0" Id="d69eaaf9-16c3-4575-a77d-c09f608cff6f" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="2b3222a4-486d-4c8c-9aaa-62cfbfced131" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="2dfefb72-07b5-45de-b114-d05275222eb0" />
+      </Request>
+      <Reply Length="28" Position="14">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="99e57552-08e8-465c-8e4a-1852ad307a09" />
+        <DefVal Position="1.0" Length="8" Value="0x01" Name="#NCMD" Id="e0f57ca8-64a9-498b-a662-476e97cab83c" />
+        <CpzPrm Name="Уставка тока возбуждения для СТПР1, А" Expression="[s2] * 256.0 + [u3]" Id="eb571fe6-45bc-49d5-ba12-a416f371637f" />
+        <CpzPrm Name="Уставка тока возбуждения для СТПР2, А" Expression="[s4] * 256.0 + [u5]" Id="145dbc09-74c9-4152-945c-944e115b9c4a" />
+        <CpzPrm Name="Момент расчетный двигателя 1" Expression="[s6] * 256.0 + [u7]" Id="c4ab803a-d63e-40eb-a29f-0da9be49ec63" />
+        <CpzPrm Name="Момент расчетный двигателя 2" Expression="[s8] * 256.0 + [u9]" Id="a2e04887-1b4c-4001-9a43-d897b6d1bf3f" />
+        <CpzPrm Name="Ток якоря ключа 1" Expression="[s10] * 256.0 + [u11]" Id="8a1df9fa-6c99-4b4b-9438-1c557508d16b" />
+        <CpzPrm Name="Ток якоря ключа 2" Expression="[s12] * 256.0 + [u13]" Id="262bfff0-d755-48c2-acac-47648592791e" />
+        <CpzPrm Name="Напряжение двигатель 1" Expression="[s14] * 256.0 + [u15]" Id="436c8469-481c-4504-a222-485b4d5bb337" />
+        <CpzPrm Name="Напряжение двигатель 2" Expression="[s16] * 256.0 + [u17]" Id="8d1b3e06-54aa-4341-8301-96360152fcba" />
+        <CpzPrm Name="ШИМ ключа 1" Expression="[s18] * 256.0 + [u19]" Id="cd3b04ab-dc7a-4528-ba1a-55bfc6dfc537" />
+        <CpzPrm Name="ШИМ ключа 2" Expression="[s20] * 256.0 + [u20]" Id="aff2150b-7d94-4e59-81c6-566305fbe698" />
+        <CpzPrm Name="Напряжение входное" Expression="[s22] * 256.0 + [u23]" Id="63a634df-dfc7-4edd-857a-af894df0a7fd" />
+        <CpzPrm Name="Байт диагностики 1" Expression="[u24] * 1.0" Id="297f3181-d21f-427d-9649-38f77173dcca" />
+        <CpzPrm Name="Байт диагностики 2" Expression="[u25] * 1.0" Id="7c49e3b0-302b-423c-bb23-e7d67f98d771" />
+        <VarVal Position="26.0" Length="8" Name="#CRCH" Id="6b5edb0c-f760-4ad3-985e-9400dbda314e" />
+        <VarVal Position="27.0" Length="8" Name="#CRCL" Id="3336564b-6738-4613-9e10-3f39243aa575" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БС-ТП и СТПР1">
+      <Request Length="8" Position="0" CycleMsTime="75">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="af5b6ba3-ee99-4b72-a4ff-2d23f5d0739c" />
+        <DefVal Position="1.0" Length="8" Value="0x02" Name="#NCMD" Id="ea4ea55b-d773-4fdc-9666-612f3e5d0435" />
+        <CpzPrm Name="Уставка тока возбуждения для СТПР1, А" Expression="[s2] * 256.0 + [u3]" Id="ddb39882-f359-41fa-81e8-fd1dbfc19004" />
+        <CpzPrm Name="Уставка тока возбуждения для СТПР2, А" Expression="[s4] * 256.0 + [u5]" Id="4db9ca45-f055-4ae0-b250-6c79d5b821bb" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="63bd25a8-dd0f-4c83-85ac-f266a82f5571" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="682b4618-e6a3-4ba5-9ed2-1d4183b3a381" />
+      </Request>
+      <Reply Length="14" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="7c0421b0-6b24-463b-8727-2533a3caefca" />
+        <DefVal Position="1.0" Length="8" Value="0x02" Name="#NCMD" Id="54561a92-ed60-4821-a7c4-d6065f821559" />
+        <CpzPrm Name="Ток возбуждения 1, А" Expression="[s2] * 256.0 + [u3]" Id="55af9b3a-d042-41e4-9edf-f8bc789a8df5" />
+        <CpzPrm Name="Ток возбуждения 2, А" Expression="[s4] * 256.0 + [u5]" Id="095d5c19-0dfd-4c34-a24d-7b44eaa581bf" />
+        <CpzPrm Name="ШИМ канала 1" Expression="[s6] * 256.0 + [u7]" Id="6d325533-694f-4cd1-bee7-bddcb1f131d0" />
+        <CpzPrm Name="ШИМ канала 2" Expression="[s8] * 256.0 + [u9]" Id="60a2c117-51f9-4749-a02c-09a1f30250c7" />
+        <VarVal Position="10.7" Length="1" Name="Байт диагностики 1: наличие ошибки( ответ от драйвера)" Id="039f1c08-1c25-4cf4-8f2d-a8769cf1a94a" />
+        <VarVal Position="10.3" Length="1" Name="Байт диагностики 1: наличие ошибки ERR4" Id="d35bfcaa-6eb3-4f1e-9d89-a65c76e91dab" />
+        <VarVal Position="10.2" Length="1" Name="Байт диагностики 1: наличие ошибки ERR3" Id="b2c12ee3-65c8-47d7-8834-7f8ac3cef637" />
+        <VarVal Position="10.1" Length="1" Name="Байт диагностики 1: наличие ошибки ERR2" Id="884002c1-52d1-48ef-8dfc-6ca016c2f0cc" />
+        <VarVal Position="10.0" Length="1" Name="Байт диагностики 1: наличие ошибки ERR1" Id="ea846431-273a-4426-ac9b-ffbc95056d96" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="c0fa9fb0-1321-41d8-af71-b32160dd3932" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="628af510-d3e9-40dc-b0ec-229553d67d3f" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Электровоз ПЭ2У, БС-СН с абонентами по М8 v8" Version="8" Description="Конфигурация обмена БС-СН с абонентами по М8, версия 08 (2017.02.09)" Id="CA1F2278-3024-469D-9C64-A958987F8CBD" RpdId="46">
+  <PsnMeters>
+    <PsnMeter Address="0x06" Name="ИПБС (1)" />
+    <PsnMeter Address="0x16" Name="ИПБС (2)" />
+    <PsnMeter Address="0x07" Name="ИПЗУ (1)" />
+    <PsnMeter Address="0x17" Name="ИПЗУ (2)" />
+    <PsnMeter Address="0x08" Name="ПСН-ПЭ2ум (1)" />
+    <PsnMeter Address="0x09" Name="ПСН-ПЭ2ум (2)" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="БС-СН и ИПБС 600/110 (1)">
+      <Request Length="6" Position="0" CycleMsTime="50">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="fea5e57f-5182-43f2-882e-e7b416d767e5" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="7ea399fe-1564-44bd-84a5-153fdf235206" />
+        <VarVal Position="2.7" Length="1" Name="Команда БС-СН: D7 – Команда «Включение ИПБС (1)» = 0" Id="6f8abf03-3145-448e-b811-4cb163c708c4" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="93d0d673-ebd8-4cb4-899c-4e2ba1c663ad" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="205ff205-3325-433e-b664-d5fbb59ff7a7" />
+      </Request>
+      <Reply Length="14" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="e6e4059c-9b70-4dd9-9316-c8bd6d7e945c" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="ae613ef3-7547-4c66-8b3b-03f559e24cae" />
+        <CpzPrm Name="Входное напряжение, В" Expression="[u2] * 4.0" Id="39e9ad5e-0ca1-4717-8641-59f501994476" />
+        <CpzPrm Name="Выходное напряжение (половинное), В" Expression="[u3] * 1.0" Id="047e78aa-053c-4ff5-9e8d-0a220e489cc6" />
+        <CpzPrm Name="Выходной ток, А" Expression="[u4] * 1.0" Id="1788a937-60f4-4d55-9474-18d019576dc4" />
+        <CpzPrm Name="Температура, °С" Expression="[s6] * 256.0 + [u5]" Id="9826a6f3-5854-4f82-8fe1-0d26fa3197a0" />
+        <CpzPrm Name="Величина ШИМ ИПБС (1)" Expression="[u7] * 1.0" Id="e345f5c5-e51b-4d1f-817e-7453ad22ce99" />
+        <VarVal Position="8.7" Length="1" Name="Диагностика: Авария в нагрузке ИПБС (1)" Id="776a51b4-482a-4fb6-897c-a87547961abd" />
+        <VarVal Position="8.6" Length="1" Name="Диагностика: Перегрузка по току ИПБС (1)" Id="53dacdcd-da47-48d5-a64f-f77cc7971053" />
+        <VarVal Position="8.5" Length="1" Name="Диагностика: Защита по температуре ИПБС (1)" Id="56b54b2b-dfa1-4a59-9b05-572151360199" />
+        <VarVal Position="8.4" Length="1" Name="Диагностика: Защита по току силовой сборки ИПБС (1)" Id="9f784a8f-bb47-45d1-bdd0-e6714650e77b" />
+        <VarVal Position="8.3" Length="1" Name="Диагностика: Повышенное входное напряжение (больше 800В) " Id="4dc8a5c5-04a6-4b5d-83f0-a7ac3ac88f46" />
+        <VarVal Position="8.2" Length="1" Name="Диагностика: Пониженное входное напряжение (меньше 400В)" Id="420390f4-1539-4a96-9e73-603a68290d40" />
+        <VarVal Position="8.1" Length="1" Name="Диагностика: Напряжение стабилизации больше 100В" Id="4245327f-a3a3-4735-9c61-dccf0d5d509a" />
+        <VarVal Position="8.0" Length="1" Name="Диагностика: Резерв" Id="775d5062-ef75-4ecb-b12b-18f008e31e13" />
+        <VarVal Position="9.0" Length="8" Name="Резерв" Id="d73cef42-ad2b-4e56-85da-600879439877" />
+        <VarVal Position="10.0" Length="8" Name="Резерв" Id="b40bc826-426b-423d-bd92-8a55d171f8af" />
+        <VarVal Position="11.0" Length="8" Name="Резерв" Id="1ddfb86a-7deb-4b8f-ae77-b1eb93481455" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="0cbe4078-4e04-4b95-8533-4f8d88350b1c" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="2ea2b92d-9e75-45d6-bf54-acad3034a550" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БС-СН и ИПБС 600/110 (2)">
+      <Request Length="6" Position="0" CycleMsTime="50">
+        <DefVal Position="0.0" Length="8" Value="0x16" Name="#ADDR" Id="2b67d3ba-f813-4455-bcda-8899dd5f21d3" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="d1dd8280-c404-41fd-8b90-3ba6ea7d12d5" />
+        <VarVal Position="2.7" Length="1" Name="Команда БС-СН: Команда «Включение ИПБС (2)» = 0" Id="ef333a7f-583b-4603-987b-03b4ae9cc210" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="7f1013c5-bfb3-4691-8216-cf7524a0ca54" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="d00cba3c-3af4-48a3-8304-e423c1642a52" />
+      </Request>
+      <Reply Length="14" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x16" Name="#ADDR" Id="b1b013b5-6fda-4cab-8003-62d7832652e2" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="49165771-9818-409b-a590-7489022bc480" />
+        <CpzPrm Name="Входное напряжение, В" Expression="[u2] * 4.0" Id="efa8eeb3-d40f-44fd-a13b-ec2da7e0df60" />
+        <CpzPrm Name="Выходное напряжение (половинное), В" Expression="[u3] * 1.0" Id="034420bc-99bd-4520-acd7-f29221ad73fa" />
+        <CpzPrm Name="Выходной ток, А" Expression="[u4] * 1.0" Id="2fd2182e-974a-4a5b-9dfa-f2258f5684ca" />
+        <CpzPrm Name="Температура, °С" Expression="[s6] * 256.0 + [u5]" Id="aea849c5-ec4f-4ff6-87da-2983483a4281" />
+        <CpzPrm Name="Величина ШИМ ИПБС (2)" Expression="[u7] * 1.0" Id="f74515f3-8fe1-4018-9740-ebc0c512de28" />
+        <VarVal Position="8.7" Length="1" Name="Диагностика: Авария в нагрузке" Id="e1f0d98c-487b-4f05-af82-738032305ec6" />
+        <VarVal Position="8.6" Length="1" Name="Диагностика: Перегрузка по току " Id="7482fdea-bab8-41e0-b635-ac93f83d9c9d" />
+        <VarVal Position="8.5" Length="1" Name="Диагностика: Защита по температуре" Id="b1564545-b834-472f-8e0d-062703e4d693" />
+        <VarVal Position="8.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Id="b592c7fc-d9f1-46c3-9fee-003b049f4aa2" />
+        <VarVal Position="8.3" Length="1" Name="Диагностика: Повышенное входное напряжение (больше 800В)" Id="1cd804b9-ed0a-4cf5-9b51-bb625b9ead20" />
+        <VarVal Position="8.2" Length="1" Name="Диагностика: Пониженное входное напряжение (меньше 400В)" Id="f2c20326-980d-4f95-82b2-be34314a9200" />
+        <VarVal Position="8.1" Length="1" Name="Диагностика: Напряжение стабилизации больше 100В" Id="a6b586e7-7515-4790-9e2e-434876b37f6a" />
+        <VarVal Position="8.0" Length="1" Name="Диагностика: Резерв" Id="daf08c09-e81c-4e45-a3c1-476d9a570616" />
+        <VarVal Position="9.0" Length="8" Name="Резерв" Id="0e0d4781-0547-481d-8fb8-8d0ee71c9264" />
+        <VarVal Position="10.0" Length="8" Name="Резерв" Id="5f534c76-2a6e-4a81-a480-8267ea7fdd0d" />
+        <VarVal Position="11.0" Length="8" Name="Резерв" Id="ddc731f8-6cda-46bd-a54a-64850aa26b37" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="69cc8c47-3636-46d5-80be-f5db9f95f09a" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="d18fa565-a0b5-48e3-86be-dd334dfd8df7" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БС-СН и ИПЗУ110/150 (1)">
+      <Request Length="6" Position="0" CycleMsTime="50">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="3188e189-d9cd-43eb-8525-4ce4f6b12de1" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="dff38330-a2fa-43da-9812-b04feac831b0" />
+        <VarVal Position="2.7" Length="1" Name="Команда БС-СН: Команда «Включение ИПЗУ (1)» = 0" Id="2454948c-3dc8-426d-a131-70b1877148f4" />
+        <VarVal Position="2.0" Length="1" Name="Команда БС-СН: Команда «Закрытие ключей» = 0" Id="5b5a9585-9268-4721-b07d-bbd48931898e" />
+        <CpzPrm Name="Ограничение по напряжению заряда АКБ, В" Expression="[u3] * 1.0" Id="1afadccf-6c2c-435b-907c-ca6791dcb30d" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="b52bd976-cac3-47c1-b854-9685d4a409ec" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="d47030fa-f2c1-4605-9e98-7127c42d67bf" />
+      </Request>
+      <Reply Length="14" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="7950cde9-65cd-48d9-867d-9da591b5466f" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="96f5be77-3d8f-4791-a3b2-438bf0ba7026" />
+        <CpzPrm Name="Входное напряжение, В" Expression="[u2] * 4.0" Id="47ff7cac-9c31-4271-890a-1b8670a48026" />
+        <CpzPrm Name="Выходное напряжение, В" Expression="[u3] * 1.0" Id="13059d8e-1c8b-40b2-8148-fff9b0cf97d0" />
+        <CpzPrm Name="Выходной ток, А" Expression="[s4] * 1.0" Id="f2917f07-1b42-4a40-9a6c-539cf417889f" />
+        <CpzPrm Name="Температура, °С" Expression="[s6] * 256.0 + [u5]" Id="6ca5e703-bae8-4e11-8dfd-34366da4b7c0" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u7] * 1.0" Id="7c862377-5a27-4b90-9bd5-43a8445632ce" />
+        <VarVal Position="8.7" Length="1" Name="Диагностика: Авария в нагрузке" Id="049be366-4835-4ac1-8239-0ccbb2237a8e" />
+        <VarVal Position="8.6" Length="1" Name="Диагностика: Перегрузка по току" Id="d0ef35f5-26c2-40c3-b52d-0f6dc57aaa62" />
+        <VarVal Position="8.5" Length="1" Name="Диагностика: Защита по температуре" Id="6f667c71-d79b-45b7-ab30-b679fd33ae39" />
+        <VarVal Position="8.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Id="b3b659f8-6941-4190-a245-7a0e5a5c1b58" />
+        <VarVal Position="8.3" Length="1" Name="Диагностика: Повышенное входное напряжение (больше 200В)" Id="12577e76-7990-44b2-92c5-bb97496658aa" />
+        <VarVal Position="8.2" Length="1" Name="Диагностика: Пониженное входное напряжение (меньше 77В)" Id="9367a3b9-fc08-4a59-be4d-143c487bb24a" />
+        <VarVal Position="9.0" Length="8" Name="Резерв" Id="66815aa4-26c8-4419-b588-a12d37b35943" />
+        <VarVal Position="10.0" Length="8" Name="Резерв" Id="ff16a1cd-8fba-4e0d-aeb7-5db70fbe245b" />
+        <VarVal Position="11.0" Length="8" Name="Резерв" Id="5b4a7bfe-1f37-40d7-8d56-f5477a66eac9" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="7f17f518-90fa-4ee6-859d-af3da4775e83" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="be0cded8-4002-4760-abe2-9e06ae1db04a" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БС-СН и ИПЗУ110/150 (2)">
+      <Request Length="6" Position="0" CycleMsTime="50">
+        <DefVal Position="0.0" Length="8" Value="0x17" Name="#ADDR" Id="62d56650-61a3-4ead-b3be-6325db4cee54" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="2efa53c4-f737-4927-a2c6-aff052648038" />
+        <VarVal Position="2.7" Length="1" Name="Команда БС-СН: Команда «Включение ИПЗУ (2)» = 0" Id="2420b70b-1d65-45ba-967f-607aa36d5173" />
+        <VarVal Position="2.0" Length="1" Name="Команда БС-СН: Команда «Закрытие ключей» = 0" Id="8f23611f-aefb-41ab-a6c0-ffaa04a5fd04" />
+        <CpzPrm Name="Ограничение по напряжению заряда АКБ, В" Expression="[u3] * 1.0" Id="cca35e5f-517f-4744-8f2c-2f957ba7c753" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="6f7ce9b4-df49-4f6d-a346-29c1b71d711c" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="6bb419ec-7306-4b07-abec-29e9840e78bf" />
+      </Request>
+      <Reply Length="14" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x17" Name="#ADDR" Id="a473b49f-6580-4dec-90f1-3c5143557226" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="82f5ca9a-0f96-4496-9bf7-ebb49ea898ec" />
+        <CpzPrm Name="Входное напряжение, В" Expression="[u2] * 4.0" Id="cf8659eb-b8c2-49ac-8627-5e88e5d15f91" />
+        <CpzPrm Name="Выходное напряжение, В" Expression="[u3] * 1.0" Id="23ea22e3-72f1-430c-91da-7ddf76f58c9a" />
+        <CpzPrm Name="Выходной ток, А" Expression="[s4] * 1.0" Id="ad366f7f-dcfa-48c2-ae8d-bdabc004db74" />
+        <CpzPrm Name="Температура, °С" Expression="[s6] * 256.0 + [u5]" Id="3e976185-996f-4de8-9559-98c9e1cc0eb8" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u7] * 1.0" Id="dd393f6a-6056-4807-9353-7e2a05bfc76c" />
+        <VarVal Position="8.7" Length="1" Name="Диагностика: Авария в нагрузке" Id="e63a5c8e-2490-4d80-8833-905ab36d0173" />
+        <VarVal Position="8.6" Length="1" Name="Диагностика: Перегрузка по току " Id="581ace6c-68ad-4d39-b6d0-931c16cba024" />
+        <VarVal Position="8.5" Length="1" Name="Диагностика: Защита по температуре" Id="b5887e08-e720-405e-b71e-1d5631d08698" />
+        <VarVal Position="8.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Id="d22f9490-d9b9-45bf-9f76-0cf984cd0539" />
+        <VarVal Position="8.3" Length="1" Name="Диагностика: Повышенное входное напряжение (больше 200В)" Id="56ef6828-3700-4c70-9c59-6739f9341abb" />
+        <VarVal Position="8.2" Length="1" Name="Диагностика: Пониженное входное напряжение (меньше 77В)" Id="46f60566-547d-44bc-98eb-b36008b330ad" />
+        <VarVal Position="9.0" Length="8" Name="Резерв" Id="f8351d9c-a2b6-4887-b5d4-70a79707e372" />
+        <VarVal Position="10.0" Length="8" Name="Резерв" Id="6c2d639d-34f2-4909-886a-fcda0829a116" />
+        <VarVal Position="11.0" Length="8" Name="Резерв" Id="d8099f62-bf89-4787-90ac-25824cc7254c" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="2be20233-e71a-48a8-960c-77013816c26f" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="09479e79-0a96-45fa-99ac-7c57fddfd44d" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БС-СН и ПСН-ПЭ2ум (1)">
+      <Request Length="4" Position="0" CycleMsTime="50">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="c3108a5c-f12e-4bfc-8131-857f8016f42f" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="105ad4c7-850b-4b44-bc17-29523a6d0fe5" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="795e4058-6788-47cb-986b-6b70f79d90eb" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="ab3d4de4-b35a-4507-95a6-e0637d2c3cab" />
+      </Request>
+      <Reply Length="15" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="334bd9ba-9685-4434-8009-d80b033dbdd3" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="bbfcc713-a1c1-4c62-981a-92ebb9a9cb6e" />
+        <CpzPrm Name="Входное напряжение Uвх, В" Expression="[u3] * 256.0 + [u2] * 1.0" Id="bd0299a2-5a91-4209-b26c-8d7307d1423b" />
+        <CpzPrm Name="Выходной ток. 50В канал, А" Expression="[u4] * 4.0" Id="267b3852-16f1-4789-abe9-b4f659d56cfd" />
+        <CpzPrm Name="Выходное напряжение. 50В канал, В" Expression="[u5] * 1.0" Id="cd232ec6-1ba5-45dc-8c1b-95d15c54503b" />
+        <CpzPrm Name="Выходной ток. 400В канал, А" Expression="[u6] * 1.0" Id="361bf007-14d6-445c-b8a1-f35771d40e03" />
+        <CpzPrm Name="Выходное напряжение. 400В канал, В" Expression="[u7] * 4.0" Id="455f148a-99bd-4f36-a920-4f6792943ccc" />
+        <CpzPrm Name="Температура, °С" Expression="[s8] * 2.0" Id="d05b5825-3b26-4e8b-a68f-4de37434a5df" />
+        <VarVal Position="9.7" Length="1" Name="Диагностика: Авария в нагрузке" Id="d7fec275-9bfe-4658-97e3-08370fb7c16c" />
+        <VarVal Position="9.6" Length="1" Name="Диагностика: Перегрузка по току " Id="323ee575-f24d-4032-97bb-090b2eaf3150" />
+        <VarVal Position="9.5" Length="1" Name="Диагностика: Защита по температуре" Id="511fa519-a2fe-4a77-ac27-7acfe1d0005f" />
+        <VarVal Position="9.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Id="79aa9709-9b00-4a82-9898-3c6994ef355b" />
+        <VarVal Position="9.3" Length="1" Name="Диагностика: Повышенное входное напряжение " Id="136a8af5-2fc2-47ac-a9e9-183cb8fcc6b0" />
+        <VarVal Position="9.2" Length="1" Name="Диагностика: Пониженное входное напряжение " Id="a913dc56-dd20-4228-b392-794f56b66919" />
+        <VarVal Position="9.1" Length="1" Name="Диагностика: Резерв" Id="9205f7d9-72ac-45b7-9bec-f39c3ec80d30" />
+        <VarVal Position="9.0" Length="1" Name="Диагностика: Резерв" Id="542e3e54-212a-475e-8859-75bb81005f48" />
+        <CpzPrm Name="Входное напряжение 2 Uвх, В" Expression="[u10] * 1.0 + [u11] * 256.0" Id="ed6d26e3-4ba8-493f-8ef6-321d46196403" />
+        <VarVal Position="12.7" Length="1" Name="Диагностика силовых ключей: Неисправность ключа инвертора 4" Id="1d53fe1f-4e99-4239-9420-008257b58bd4" />
+        <VarVal Position="12.6" Length="1" Name="Диагностика силовых ключей: Неисправность ключа инвертора 3" Id="ca900910-8b64-402f-9d9e-fb1148be6c9f" />
+        <VarVal Position="12.5" Length="1" Name="Диагностика силовых ключей: Неисправность ключа инвертора 2" Id="c51c1a88-6713-40d0-bf0d-248ce60a81af" />
+        <VarVal Position="12.4" Length="1" Name="Диагностика силовых ключей: Неисправность ключа инвертора 1" Id="7144f686-aaf3-4a1c-83ba-efa330b34e8f" />
+        <VarVal Position="12.3" Length="1" Name="Диагностика силовых ключей: Неисправность ключа TLBS4" Id="002504ec-cd48-4088-b6c4-761fbc80c595" />
+        <VarVal Position="12.2" Length="1" Name="Диагностика силовых ключей: Неисправность ключа TLBS3" Id="2a5cea83-bf01-4c71-86ac-4ae55da9a560" />
+        <VarVal Position="12.1" Length="1" Name="Диагностика силовых ключей: Неисправность ключа TLBS2" Id="a3b0f525-91af-46b5-84b3-3fe9d5dba791" />
+        <VarVal Position="12.0" Length="1" Name="Диагностика силовых ключей: Неисправность ключа TLBS1" Id="402db2a4-fdec-4f3b-bc91-8d0a9c8da33e" />
+        <VarVal Position="13.0" Length="8" Name="#CRCH" Id="a88ef5cd-ed6b-492b-9622-4c9a3f94afc2" />
+        <VarVal Position="14.0" Length="8" Name="#CRCL" Id="2f18a561-9fcc-488b-bb62-05bddb0f54d7" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БС-СН и ПСН-ПЭ2ум (2)">
+      <Request Length="4" Position="0" CycleMsTime="50">
+        <DefVal Position="0.0" Length="8" Value="0x09" Name="#ADDR" Id="051f8f40-ccd1-47c4-9cbb-51885ec6b162" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="2201203b-b6b5-4367-b0f0-b23c6a0531d7" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="662dc698-2e1c-4723-bf4b-bc6222b4a0a6" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="01db4cf3-256d-4cf3-8e86-5fedb9dc99fe" />
+      </Request>
+      <Reply Length="15" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x09" Name="#ADDR" Id="0387fa2b-75d3-4fa5-91d0-4cf90c4788b7" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="e6711d4a-7541-4744-98fa-dc511fe56a61" />
+        <CpzPrm Name="Входное напряжение Uвх, В" Expression="[u3] * 256.0 + [u2] * 1.0" Id="2553c960-b6b1-4d37-8b67-41ca1846c985" />
+        <CpzPrm Name="Выходной ток. 50В канал, А" Expression="[u4] * 4.0" Id="23680eea-458f-4bae-bebc-b98105111463" />
+        <CpzPrm Name="Выходное напряжение. 50В канал, В" Expression="[u5] * 1.0" Id="a4028b01-f174-438c-a770-9d60253965cf" />
+        <CpzPrm Name="Выходной ток. 400В канал, А" Expression="[u6] * 1.0" Id="c739ee38-283a-40cd-a47b-06418b3b2f59" />
+        <CpzPrm Name="Выходное напряжение. 400В канал, В" Expression="[u7] * 4.0" Id="1a1a0b2f-937a-4cf9-acf9-7726f8a6ef9f" />
+        <CpzPrm Name="Температура, °С" Expression="[s8] * 2.0" Id="8f3bd0a5-1103-4a16-a980-0e431005efa8" />
+        <VarVal Position="9.7" Length="1" Name="Диагностика: Авария в нагрузке" Id="1d7d96fc-c9c2-4ad3-9973-7d7d9f23078e" />
+        <VarVal Position="9.6" Length="1" Name="Диагностика: Перегрузка по току " Id="89703778-f3c3-4669-b47f-725d651ae3e9" />
+        <VarVal Position="9.5" Length="1" Name="Диагностика: Защита по температуре" Id="ff3eb12b-5d6a-4e90-a04d-d0453caf9d37" />
+        <VarVal Position="9.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Id="341e06a5-269b-4eaf-9940-9e42cbd70ee1" />
+        <VarVal Position="9.3" Length="1" Name="Диагностика: Повышенное входное напряжение " Id="8de5f6fd-9807-405e-96c9-c34c66c9641b" />
+        <VarVal Position="9.2" Length="1" Name="Диагностика: Пониженное входное напряжение " Id="68b81a04-81e5-4ceb-975c-4d6c91d36314" />
+        <VarVal Position="9.1" Length="1" Name="Диагностика: Резерв" Id="8762e9b3-c253-48af-90d4-af3e41d890e0" />
+        <VarVal Position="9.0" Length="1" Name="Диагностика: Резерв" Id="6a0106b1-7b94-41c5-8c1a-6c4c93610ee4" />
+        <CpzPrm Name="Входное напряжение 2 Uвх, В" Expression="[u10] * 1.0 + [u11] * 256.0" Id="b3feeda7-e395-452a-a53b-888f56dc5bdc" />
+        <VarVal Position="12.7" Length="1" Name="Диагностика силовых ключей: Неисправность ключа инвертора 4" Id="db182dc9-ef7c-4657-a250-08f2fc706238" />
+        <VarVal Position="12.6" Length="1" Name="Диагностика силовых ключей: Неисправность ключа инвертора 3" Id="b1f2b36b-00f7-4504-b1ab-673f82df29a0" />
+        <VarVal Position="12.5" Length="1" Name="Диагностика силовых ключей: Неисправность ключа инвертора 2" Id="14d0a277-d26f-47ae-9f77-67c1e93950f2" />
+        <VarVal Position="12.4" Length="1" Name="Диагностика силовых ключей: Неисправность ключа инвертора 1" Id="8ff36f9a-92b9-46de-9826-2028d594a099" />
+        <VarVal Position="12.3" Length="1" Name="Диагностика силовых ключей: Неисправность ключа TLBS4" Id="0d209a08-2db6-4ed7-a4e3-a4614adad027" />
+        <VarVal Position="12.2" Length="1" Name="Диагностика силовых ключей: Неисправность ключа TLBS3" Id="47389385-26c7-4f2b-b468-5588d800412d" />
+        <VarVal Position="12.1" Length="1" Name="Диагностика силовых ключей: Неисправность ключа TLBS2" Id="04ccf222-ff85-443c-8450-ef8808c0218d" />
+        <VarVal Position="12.0" Length="1" Name="Диагностика силовых ключей: Неисправность ключа TLBS1" Id="7555981a-3a0d-4806-ae42-8c4a817cbf2d" />
+        <VarVal Position="13.0" Length="8" Name="#CRCH" Id="652ef84f-29fa-427e-a18a-91b72765174c" />
+        <VarVal Position="14.0" Length="8" Name="#CRCL" Id="9196e54f-102e-4c07-bb21-d2b9faa518c8" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

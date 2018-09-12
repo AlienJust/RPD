@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Электровоз ПЭ2У, БУ с абонентами магистрали М4 RS-485 v21" Version="21" Description="Версия 21 от 26.04.2018" Id="57A4CACB-BE98-4E82-A39B-7814C1F8196F" RpdId="62">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="БС-СН" />
+		<PsnMeter Address="0x07" Name="БС-СМ" />
+		<PsnMeter Address="0xCE" Name="СКВТ" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="БУ и БС-СН">
+			<Request Length="4" Position="0" CycleMsTime="200">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="1c1871c2-ba65-4854-97a2-db4734122d05" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="033c1297-68da-4d4d-a735-8530f151d2bf" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="53969bcc-0a92-46d9-9e6b-c303d91f9370" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="4414a6f2-5a04-45d0-a6a6-d7e0043e5995" />
+			</Request>
+			<Reply Length="34" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="7bc98e62-3e44-4e87-9ac4-4a3963e47df6" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="555649f1-a112-4bac-81c0-9ebe709e3c3d" />
+				<CpzPrm Name="Входное напряжение Uвх ПСН-ПЭ2ум1,В" Expression="([u3] * 256.0 + [u2]) * 1.0" Id="9780c301-8055-43dc-8009-484ec71dc56a" />
+				<CpzPrm Name="Выходной ток. 50В канал.ПСН-ПЭ2ум1, А" Expression="[u4] * 4.0" Id="cc1f6ddb-6f4d-43b2-b7b0-d098ec3ebd78" />
+				<CpzPrm Name="Выходное напряжение. 50В канал. ПСН-ПЭ2ум1, В" Expression="[u5] * 1.0" Id="c5302613-4d60-4df7-9b1e-38588f203cde" />
+				<CpzPrm Name="Выходной ток. 600В канал. ПСН-ПЭ2ум1, А" Expression="[u6] * 1.0" Id="4330d98d-8934-4262-b05f-ed1e3021d49e" />
+				<CpzPrm Name="Выходное напряжение. 600В канал. ПСН-ПЭ2ум1, В" Expression="[u7] * 4.0" Id="4e878890-be19-4776-8f5f-5f4e4b467ce4" />
+				<CpzPrm Name="Температура.  ПСН-ПЭ2ум1, °С" Expression="[s8] * 2.0" Id="bdb7e706-ee5c-4827-ab33-f6b5b2c081a9" />
+				<BitPrm Byte="9" Bit="7" IsValueInverted="False" Name="Диагностика: Авария в нагрузке ПСН-ПЭ2У1" Id="78edc6ce-6c61-4004-a7ec-cf0165d09ffd" />
+				<BitPrm Byte="9" Bit="6" IsValueInverted="False" Name="Диагностика: Перегрузка по току ПСН-ПЭ2У1" Id="2339e364-817c-4127-9ff2-d8bf82a29e6c" />
+				<BitPrm Byte="9" Bit="5" IsValueInverted="False" Name="Диагностика: Защита по температуре ПСН-ПЭ2ум1" Id="9770b10d-ff5b-470b-afb8-a92a0a0f4fb2" />
+				<BitPrm Byte="9" Bit="4" IsValueInverted="False" Name="Диагностика: Защита по току силовой сборки ПСН-ПЭ2ум1" Id="62cdf6e5-f27b-4514-af37-0233bd316c0e" />
+				<BitPrm Byte="9" Bit="3" IsValueInverted="False" Name="Диагностика: Повышенное входное напряжение ПСН-ПЭ2ум1" Id="839d90ff-3985-4e44-bbeb-e1130956d4eb" />
+				<BitPrm Byte="9" Bit="2" IsValueInverted="False" Name="Диагностика: Пониженное входное напряжение ПСН-ПЭ2ум1" Id="2d580447-e495-4f49-8133-51a172f22452" />
+				<CpzPrm Name="Входное напряжение ИПБС (1), В" Expression="[u10] * 4.0" Id="6325636f-d99c-4b07-91d6-425b9db35fde" />
+				<CpzPrm Name="Выходное напряжение (половинное) ИПБС (1), В" Expression="[u11] * 1.0" Id="eb6000da-b9aa-456a-9cc0-db221df95800" />
+				<CpzPrm Name="Выходной ток ИПБС (1), А" Expression="[u12] * 1.0" Id="c0197032-f936-47c9-927b-a53e02b52318" />
+				<CpzPrm Name="Температура ИПБС (1),°С" Expression="[s14] * 256.0 + [u13]" Id="f9f39736-eb58-4ae7-b651-5351f056b3f6" />
+				<CpzPrm Name="Величина ШИМ ИПБС (1)" Expression="[u15] * 1.0" Id="9aa2854f-c494-443c-9d5c-2b5dd50f8523" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="Диагностика: Авария в нагрузке ИПБС (1)" Id="48baa21e-3598-4c97-9437-a19300230fa8" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="Диагностика: Перегрузка по току ИПБС (1)" Id="489d283f-72ff-43a9-9359-283609fa54df" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="Диагностика: Защита по температуре ИПБС (1)" Id="e005fad6-620f-4f26-92f6-a21219175d46" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="Диагностика: Защита по току силовой сборки ИПБС (1)" Id="bcffc97d-79cf-45a7-93a6-69a164c0bcae" />
+				<BitPrm Byte="16" Bit="3" IsValueInverted="False" Name="Диагностика: Повышенное входное напряжение (больше 800В) ИПБС (1)" Id="bd2636d1-eb46-417a-9cf9-6cbf7192011e" />
+				<BitPrm Byte="16" Bit="2" IsValueInverted="False" Name="Диагностика: Пониженное входное напряжение (меньше 400В) ИПБС (1)" Id="58d87b1f-f273-42a2-ad04-f601bb4e9e52" />
+				<BitPrm Byte="16" Bit="1" IsValueInverted="False" Name="Диагностика: Напряжение стабилизации больше 100В (1)" Id="973c0c73-ca36-427c-af48-0cddd5ae586f" />
+				<CpzPrm Name="Входное напряжение ИПЗУ (1), В" Expression="[u20] * 4.0" Id="da75bc89-76d4-4155-bf24-77023bdddf1a" />
+				<CpzPrm Name="Выходное напряжение ИПЗУ (1), В" Expression="[u21] * 1.0" Id="4b26b481-c96e-44e1-946f-518ace7ccb6d" />
+				<CpzPrm Name="Выходной ток ИПЗУ (1), А" Expression="[s22] * 1.0" Id="d470cc94-9cba-4960-ad89-5d23b0f398b4" />
+				<CpzPrm Name="Температура, ИПЗУ (1),°С" Expression="[s24] * 256.0 + [u23]" Id="1e82a1ff-8450-4706-8242-f015468775a4" />
+				<CpzPrm Name="Величина ШИМ ИПЗУ (1)" Expression="[u25] * 1.0" Id="362c82d9-5ba5-4bea-ab64-ae380df50db0" />
+				<BitPrm Byte="26" Bit="7" IsValueInverted="False" Name="Диагностика: Авария в нагрузке ИПЗУ (1)" Id="1b1f2e94-eda8-4e4b-b2e5-d062b2f12fc2" />
+				<BitPrm Byte="26" Bit="6" IsValueInverted="False" Name="Диагностика: Перегрузка по току ИПЗУ (1)" Id="31eb1608-5466-447a-95ae-1f8b4cfb68ee" />
+				<BitPrm Byte="26" Bit="5" IsValueInverted="False" Name="Диагностика: Защита по температуре ИПЗУ (1)" Id="ceb7538c-b048-4154-8443-e83ea217f2ed" />
+				<BitPrm Byte="26" Bit="4" IsValueInverted="False" Name="Диагностика: Защита по току силовой сборки ИПЗУ (1)" Id="3dd83120-861a-4195-81c0-9913d1475336" />
+				<BitPrm Byte="26" Bit="3" IsValueInverted="False" Name="Диагностика: Повышенное входное напряжение (больше 200В) ИПЗУ (1)" Id="81287954-b03c-4064-949d-aa05448fad91" />
+				<BitPrm Byte="26" Bit="2" IsValueInverted="False" Name="Диагностика: Пониженное входное напряжение (меньше 77В) ИПЗУ (1)" Id="a4aca13b-da2d-4523-a418-8037876c7e16" />
+				<CpzPrm Name="Входное напряжение 2 Uвх ПСН-ПЭ2у1" Expression="[u27] * 1.0 + [u28] * 4.0" Id="cb9b6616-cfa2-4bb4-9217-c4eddf58dcb3" />
+				<BitPrm Byte="29" Bit="7" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у1: Неисправность ключа инвертора 4" Id="a235543c-52a6-41b2-b115-5aa4588bea27" />
+				<BitPrm Byte="29" Bit="6" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у1: Неисправность ключа инвертора 3" Id="29129bd8-7a6b-4586-b378-2e98e14bf014" />
+				<BitPrm Byte="29" Bit="5" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у1: Неисправность ключа инвертора 2" Id="5cdd5650-53d5-4ed4-8356-cbda6c1e16ea" />
+				<BitPrm Byte="29" Bit="4" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у1: Неисправность ключа инвертора 1" Id="aa0bd0e1-4f8c-4d99-ad2c-5cf7f1677277" />
+				<BitPrm Byte="29" Bit="3" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у1: Неисправность ключа TLBS4" Id="f07efcb4-9913-4feb-9b5a-517394d69548" />
+				<BitPrm Byte="29" Bit="2" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у1: Неисправность ключа TLBS3" Id="f0e61448-f8e6-4cef-9433-16df19c8d395" />
+				<BitPrm Byte="29" Bit="1" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у1: Неисправность ключа TLBS2" Id="3db1612e-6508-4e6c-8a8b-ac317a72a3cb" />
+				<BitPrm Byte="29" Bit="0" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у1: Неисправность ключа TLBS1" Id="d5c969f0-10fc-4187-8fc2-791518da7ad8" />
+				<BitPrm Byte="30" Bit="5" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ИПЗУ1 в одном цикле" Id="4589295e-ca27-4197-9029-49f54c004d98" />
+				<BitPrm Byte="30" Bit="4" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ИПБС1 в одном цикле" Id="03263a94-e6c8-4426-a9f5-a738521ce869" />
+				<BitPrm Byte="30" Bit="3" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ПСН-ПЭ2ум1 в одном цикле" Id="3046d383-30e6-41ea-9c4b-b510ba24a285" />
+				<BitPrm Byte="30" Bit="2" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ИПЗУ1" Id="1a228ed8-ff9f-404e-8a3a-826e9d1e62a1" />
+				<BitPrm Byte="30" Bit="1" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ИПБС1" Id="579d2732-77fe-452e-a990-55fddd71a6a7" />
+				<BitPrm Byte="30" Bit="0" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ПСН-ПЭ2ум1" Id="1ee839c3-29f6-4d6e-b370-c9159e1ea601" />
+				<VarVal Position="31.0" Length="8" Name="Номер версии ПО БС-СН" Id="3852046c-822d-40ef-8373-57fd138069bb" />
+				<VarVal Position="32.0" Length="8" Name="#CRCH" Id="b720298d-9b9f-448f-8127-20cc14790d3d" />
+				<VarVal Position="33.0" Length="8" Name="#CRCL" Id="1f65d775-091e-41bf-aecd-f4a2a8851553" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС-СН">
+			<Request Length="4" Position="0" CycleMsTime="200">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="f04b51f6-c6e6-4b26-9b9e-f8b487e6bd81" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="6f26fce8-5c9f-4950-b341-f04859929cc7" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="7e0b3764-9639-4336-b782-c2f138618fbb" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="fde8905d-5004-4f48-9f6c-2378b0f28629" />
+			</Request>
+			<Reply Length="34" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="90d63df8-ba23-456c-a4f6-b4516df52bc4" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="be961422-725c-4472-8ae8-2cf19df4b5bf" />
+				<CpzPrm Name="Входное напряжение Uвх ПСН-ПЭ2ум2,В" Expression="([u3] * 256.0 + [u2]) * 1.0" Id="95365517-ca6b-4eb4-9e72-738da0af9246" />
+				<CpzPrm Name="Выходной ток. 50В канал. ПСН-ПЭ2ум2, А" Expression="[u4] * 4.0" Id="ef522fc2-d64b-41c7-baba-b36194aa04d8" />
+				<CpzPrm Name="Выходное напряжение. 50В канал. ПСН-ПЭ2ум2, В" Expression="[u5] * 1.0" Id="74034d01-88e8-4a99-ae80-a9421cdbcb51" />
+				<CpzPrm Name="Выходной ток. 600В канал. ПСН-ПЭ2ум2, А" Expression="[u6] * 1.0" Id="7e13517d-28c1-43cb-8ee4-6ba6c1bf3511" />
+				<CpzPrm Name="Выходное напряжение. 600В канал. ПСН-ПЭ2ум2, В" Expression="[u7] * 4.0" Id="caef0581-f08f-47c5-90ed-48249f57c595" />
+				<CpzPrm Name="Температура. ПСН-ПЭ2ум2, °С" Expression="[s8] * 2.0" Id="6c926406-8b68-4259-afdb-7a537f8b18f8" />
+				<BitPrm Byte="9" Bit="7" IsValueInverted="False" Name="Диагностика: Авария в нагрузке ПСН-ПЭ2У2" Id="5302acb5-486e-4a07-a7ce-3337f7032e16" />
+				<BitPrm Byte="9" Bit="6" IsValueInverted="False" Name="Диагностика: Перегрузка по току ПСН-ПЭ2У2" Id="d65a34b2-344c-479c-8a3e-1228da8d99b8" />
+				<BitPrm Byte="9" Bit="5" IsValueInverted="False" Name="Диагностика: Защита по температуре ПСН-ПЭ2ум2" Id="8f877ea5-81b1-4298-9b0c-ae8455e3ac83" />
+				<BitPrm Byte="9" Bit="4" IsValueInverted="False" Name="Диагностика: Защита по току силовой сборки ПСН-ПЭ2ум2" Id="1490bf5e-fd94-42fd-8940-9f248b5c7bee" />
+				<BitPrm Byte="9" Bit="3" IsValueInverted="False" Name="Диагностика: Повышенное входное напряжение ПСН-ПЭ2ум2" Id="72dd2938-a8f0-4ffb-bfd2-5aef27df89b7" />
+				<BitPrm Byte="9" Bit="2" IsValueInverted="False" Name="Диагностика: Пониженное входное напряжение ПСН-ПЭ2ум2" Id="c984946a-05b2-4c29-a792-6c651e5a6e6e" />
+				<CpzPrm Name="Входное напряжение ИПБС (2), В" Expression="[u10] * 4.0" Id="7d84f34b-4126-4b9d-b690-810db94d5aad" />
+				<CpzPrm Name="Выходное напряжение (половинное) ИПБС (2), В" Expression="[u11] * 1.0" Id="8092e3a2-3973-4268-81d3-4400a5e2bfff" />
+				<CpzPrm Name="Выходной ток ИПБС (2), А" Expression="[u12] * 1.0" Id="c62df4cd-a7a3-4ec0-a86c-5c70f2815baf" />
+				<CpzPrm Name="Температура, ИПБС (2),°С" Expression="[s14] * 256.0 + [u13]" Id="b1157bfd-727a-427c-a33c-7fc1e75f10fe" />
+				<CpzPrm Name="Величина ШИМ ИПБС (2)" Expression="[u15] * 1.0" Id="62ff6f42-fd97-45b9-9ddd-aacde161e9cd" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="Диагностика: Авария в нагрузке ИПБС (2)" Id="51cb8dad-5337-4e5d-b691-36e0c55db2d8" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="Диагностика: Перегрузка по току ИПБС (2)" Id="cc08dcd4-9ce4-4119-80f5-7b0cf7619b61" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="Диагностика: Защита по температуре ИПБС (2)" Id="b7ac84f2-61d5-49f6-be41-478e89f0f609" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="Диагностика: Защита по току силовой сборки ИПБС (2)" Id="90ea6393-2b03-4389-bff7-153bc65f5f20" />
+				<BitPrm Byte="16" Bit="3" IsValueInverted="False" Name="Диагностика: Повышенное входное напряжение (больше 800В) ИПБС (2)" Id="54a7b40c-f685-43ec-b619-1047975dc61c" />
+				<BitPrm Byte="16" Bit="2" IsValueInverted="False" Name="Диагностика: Пониженное входное напряжение (меньше 400В) ИПБС (2)" Id="6f2bd973-1563-4717-8f4a-24473fc41496" />
+				<BitPrm Byte="16" Bit="1" IsValueInverted="False" Name="Диагностика: Напряжение стабилизации больше 100В (1)" Id="af108f9b-30ad-4ccc-9ab4-5c34e649cc5e" />
+				<CpzPrm Name="Входное напряжение ИПЗУ (2), В" Expression="[u20] * 4.0" Id="bb0f6720-3915-431b-b203-2b0d31a29e72" />
+				<CpzPrm Name="Выходное напряжение ИПЗУ (2), В" Expression="[u21] * 1.0" Id="c8e66d84-b491-4527-a4d5-ad36e18cc8fb" />
+				<CpzPrm Name="Выходной ток ИПЗУ (2), А" Expression="[s22] * 1.0" Id="16c53d4e-88b9-4dc7-b78f-8eec1c4c9b50" />
+				<CpzPrm Name="Температура, ИПЗУ (2),°С" Expression="[s24] * 256.0 + [u23]" Id="abe293af-f077-427b-b18d-b3ee44179752" />
+				<CpzPrm Name="Величина ШИМ ИПЗУ (2)" Expression="[u25] * 1.0" Id="7a446199-4c0e-477f-81b3-149a1cfb850b" />
+				<BitPrm Byte="26" Bit="7" IsValueInverted="False" Name="Диагностика: Авария в нагрузке ИПЗУ (2)" Id="018dd191-6a7e-4a6f-a0a0-7193ef77e28e" />
+				<BitPrm Byte="26" Bit="6" IsValueInverted="False" Name="Диагностика: Перегрузка по току ИПЗУ (2)" Id="5e6b79c3-85cb-4ff6-b2b3-fc377ba8d016" />
+				<BitPrm Byte="26" Bit="5" IsValueInverted="False" Name="Диагностика: Защита по температуре ИПЗУ (2)" Id="2e2e976d-72fb-459c-9b68-b4561b78ffd6" />
+				<BitPrm Byte="26" Bit="4" IsValueInverted="False" Name="Диагностика: Защита по току силовой сборки ИПЗУ (2)" Id="e3ecc4a4-eb8f-455a-b1d4-d2f87aea442e" />
+				<BitPrm Byte="26" Bit="3" IsValueInverted="False" Name="Диагностика: Повышенное входное напряжение (больше 200В) ИПЗУ (2)" Id="57d22c25-c653-49ba-92ef-2757dcb19590" />
+				<BitPrm Byte="26" Bit="2" IsValueInverted="False" Name="Диагностика: Пониженное входное напряжение (меньше 77В) ИПЗУ (2)" Id="046c061d-139f-400a-9bc0-703f3faef250" />
+				<CpzPrm Name="Входное напряжение 2 Uвх ПСН-ПЭ2у2" Expression="[u27] * 1.0 + [u28] * 4.0" Id="84daf0b9-5c23-4ee2-b2b6-28710571eec3" />
+				<BitPrm Byte="29" Bit="7" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у2: Неисправность ключа инвертора 4" Id="58256d7f-810c-4c1b-b705-7a61ef4f1eaf" />
+				<BitPrm Byte="29" Bit="6" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у2: Неисправность ключа инвертора 3" Id="550ed537-0d09-442e-aef9-3f0499cae88e" />
+				<BitPrm Byte="29" Bit="5" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у2: Неисправность ключа инвертора 2" Id="016873b4-2b6c-433f-9155-1574fefbcf14" />
+				<BitPrm Byte="29" Bit="4" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у2: Неисправность ключа инвертора 1" Id="78020242-80bb-4ff5-87f9-a6c1c396da03" />
+				<BitPrm Byte="29" Bit="3" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у2: Неисправность ключа TLBS4" Id="264f6116-a81b-4ad0-99c1-25d0afab0615" />
+				<BitPrm Byte="29" Bit="2" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у2: Неисправность ключа TLBS3" Id="2bdee534-ecac-45a2-a5c1-56e745a8827b" />
+				<BitPrm Byte="29" Bit="1" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у2: Неисправность ключа TLBS2" Id="c7f38c1b-306b-477f-bba2-579b41b54c44" />
+				<BitPrm Byte="29" Bit="0" IsValueInverted="False" Name="Диагностика силовых ключей ПСН-ПЭ2у2: Неисправность ключа TLBS1" Id="d51040d1-ea10-46c1-8a2f-29e0cba78741" />
+				<BitPrm Byte="30" Bit="5" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ИПЗУ2 в одном цикле" Id="6b792cf3-521c-48b2-a466-6b35145eb62c" />
+				<BitPrm Byte="30" Bit="4" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ИПБС2 в одном цикле" Id="061d5c5a-60a1-4e65-b6f9-0481998085f1" />
+				<BitPrm Byte="30" Bit="3" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ПСН-ПЭ2ум2 в одном цикле" Id="d44a8d43-7623-4cbe-9596-12814b4f7d54" />
+				<BitPrm Byte="30" Bit="2" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ИПЗУ2" Id="65c06a00-1a04-4c43-9d40-7ce2a1010449" />
+				<BitPrm Byte="30" Bit="1" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ИПБС2" Id="15dd7a08-9f29-4e55-b925-d7d578b7a11b" />
+				<BitPrm Byte="30" Bit="0" IsValueInverted="False" Name="Диагностика БС-СН НС: Нет связи с ПСН-ПЭ2ум2" Id="dc62ab60-ac4d-4194-8731-0fd12b6c33b8" />
+				<VarVal Position="32.0" Length="8" Name="#CRCH" Id="67ce7bff-a11c-41b8-a14f-efcf740d4893" />
+				<VarVal Position="33.0" Length="8" Name="#CRCL" Id="821b77fc-f2f4-4a67-a06b-666a1412664f" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС-СМ">
+			<Request Length="4" Position="0" CycleMsTime="200">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="7cb8cebb-d0e8-42fe-9a7d-ad262ae19c62" />
+				<DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="9a6789d2-dcdb-4548-8549-d5a65fa04b34" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="3b37dc10-fc7b-4eed-bc20-215c5781aeed" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="0ffceba2-6e2a-4ed7-a0a7-f8db136a308d" />
+			</Request>
+			<Reply Length="20" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="6a4b03d3-15b5-49f6-adbd-112ea3f7e169" />
+				<DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="a6122978-c15c-48e8-975f-8520cd107855" />
+				<CpzPrm Name="Байт диагностики управляющего контроллера СМ" Expression="[u2] * 1.0" Id="a1971615-4f84-4cee-b2c8-a69d0a4dfcd0" />
+				<CpzPrm Name="Уставка по температуре в помещении,°С" Expression="[u3] * 1.0" Id="590df033-c7e4-45c3-8db1-aff163c781d8" />
+				<CpzPrm Name="Уставка по температуре приточного воздуха ,°С" Expression="[u4] * 1.0" Id="42da2a45-295e-43b5-a7eb-980dc263396c" />
+				<CpzPrm Name="Температура в помещении (калорифер1) ,°С" Expression="[u5] * 1.0" Id="120ea34e-f193-42da-be24-4e3fa14855aa" />
+				<CpzPrm Name="Байт диагностики калорифера 1" Expression="[u6] * 1.0" Id="d064ba2f-b3e5-4a92-b82f-aa7d898a7e82" />
+				<BitPrm Byte="7" Bit="5" IsValueInverted="False" Name="Байт состояния (калорифер1): Неисправность калорифера 1" Id="feb676d1-82fe-4963-bafe-f2be249a7be0" />
+				<BitPrm Byte="7" Bit="1" IsValueInverted="False" Name="Байт состояния (калорифер1): Включен ТЭН" Id="3c4880a3-feaa-4b8c-ab57-a4c3b1c11a4e" />
+				<BitPrm Byte="7" Bit="0" IsValueInverted="False" Name="Байт состояния (калорифер1): Включена установка" Id="ee6782e2-8eae-494e-8b15-dd427f94b8e1" />
+				<BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер1): Перегрузка по току (больше 250%)" Id="d08e1a34-4525-4add-9221-17ac08ceb7a8" />
+				<BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер1): Защита по температуре (больше 110°C)" Id="e44fad3f-bb32-4175-817d-5b3aec06774b" />
+				<BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер1): Пониж./повыш. напр. пит.транзисторов (15В)" Id="7c25db6e-3941-470a-9bef-1e6e594340b8" />
+				<BitPrm Byte="8" Bit="2" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер1): КЗ ниж. транз-в или перекрытие упр.сигналов" Id="16c72fd6-16a1-4293-bf56-52a647965b3f" />
+				<BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер1): Повышенное входное напряжение" Id="83ee9813-cf88-431d-ad0c-60cb91978af9" />
+				<BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер1): Перегрузка по току (больше 150%)" Id="6fc4e2e7-caa3-449e-9219-9c9cee4fe019" />
+				<CpzPrm Name="Температура в помещении (калорифер2),°С" Expression="[u9] * 1.0" Id="f52b3bf2-4569-4be8-9e5b-b0cc3d8ed58f" />
+				<CpzPrm Name="Байт диагностики калорифера 2" Expression="[u10] * 1.0" Id="8fdb4400-f3d7-4a00-8da8-bc60cff7f8c1" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="Байт состояния (калорифер2): Неисправность калорифера 2" Id="b4887403-59c2-4f53-8b94-cf963295e21b" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="Байт состояния (калорифер2): Включен ТЭН" Id="74b87301-1472-4003-894e-9a621320929a" />
+				<BitPrm Byte="11" Bit="0" IsValueInverted="False" Name="Байт состояния (калорифер2): Включена установка" Id="95a882a1-2bac-419a-96f3-b4f7ed0dd6b2" />
+				<BitPrm Byte="12" Bit="5" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер2):Перегрузка по току (больше250%)" Id="5179c91c-9374-453e-a190-c688230a5d5e" />
+				<BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер2):Защита по температуре (больше 110°C)" Id="a01602ff-a3e5-438d-95aa-c08c2c34dfde" />
+				<BitPrm Byte="12" Bit="3" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер2):Пониж./повыш. напр. пит.транзисторов (15В)" Id="8cadad32-8e28-415e-8d37-91aea8248c7e" />
+				<BitPrm Byte="12" Bit="2" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер2):КЗ ниж. транз-в или перекрытие упр.сигналов" Id="a2b4e770-9c71-4f43-b362-2cf2c8f3849a" />
+				<BitPrm Byte="12" Bit="1" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер2):Повышенное входное напряжение" Id="d243d215-ef56-4af7-9772-5f7f9e101835" />
+				<BitPrm Byte="12" Bit="0" IsValueInverted="False" Name="Байт диагностики ПЧ (калорифер2):Перегрузка по току (больше150%)" Id="84011b0b-3cbe-444e-9246-6fcbfce3ce93" />
+				<CpzPrm Name="Байт диагностики кондиционера" Expression="[u13] * 1.0" Id="9839ad89-7d7e-4481-a0c7-a4de4de21e02" />
+				<CpzPrm Name="Температура в канале приточного воздуха,°С" Expression="[u14] * 1.0" Id="6cfd8ff1-1761-4a97-9706-fad4c1526c07" />
+				<BitPrm Byte="15" Bit="5" IsValueInverted="False" Name="Состояния приточной установки и МВП: Неисправность" Id="79c58209-0475-4c92-a09b-4487517b7ee9" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="Состояния приточной установки и МВП: ТЭМ31М(№006): выдано управление вентилятором приточной установки" Id="0f29020c-6684-4cc9-856a-9ea45070eb2e" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="Состояния приточной установки и МВП: ТЭМ31М(№006): наличие вращения вентилятора приточной установки" Id="81dbba07-22bc-4caa-9ed7-8b20082abfc0" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="Состояния приточной установки и МВП: ТЭМ31М(№006): включен вентилятор приточной установки" Id="b168ea1c-ec51-41d2-b74f-f38de2d868e1" />
+				<BitPrm Byte="15" Bit="1" IsValueInverted="False" Name="Состояния приточной установки и МВП: Включен ТЭН" Id="92530463-6cdc-444a-8cb3-bae55c93e88f" />
+				<BitPrm Byte="15" Bit="0" IsValueInverted="False" Name="Состояния приточной установки и МВП: Включена установка" Id="132851bd-7d64-4224-b554-908cf8f0a2e5" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="Байт диаг.ПЧ приточной установки и МВП: Перегрузка по току (больше 250%)" Id="be6e78ba-993b-4a1a-a732-d1897f98fcab" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="Байт диаг.ПЧ приточной установки и МВП: Защита по температуре (больше 110°C)" Id="566fca19-e5b8-42e0-9695-604c27c59a05" />
+				<BitPrm Byte="16" Bit="3" IsValueInverted="False" Name="Байт диаг.ПЧ приточной установки и МВП: Пониж./повыш. напр. пит.транзисторов (15В)" Id="527c50cf-38f4-4f46-8c69-fb82f8e7e606" />
+				<BitPrm Byte="16" Bit="2" IsValueInverted="False" Name="Байт диаг.ПЧ приточной установки и МВП: КЗ ниж. транз-в или перекрытие упр.сигналов" Id="148ff9d8-4636-41d8-bfd2-35bf3806aded" />
+				<BitPrm Byte="16" Bit="1" IsValueInverted="False" Name="Байт диаг.ПЧ приточной установки и МВП: Повышенное входное напряжение" Id="50414081-bfd2-4595-b735-4b676ffc9c3d" />
+				<BitPrm Byte="16" Bit="0" IsValueInverted="False" Name="Байт диаг.ПЧ приточной установки и МВП: Перегрузка по току (больше 150%)" Id="0c439ac1-1eeb-41aa-add8-a5a4ee88f7d2" />
+				<BitPrm Byte="17" Bit="5" IsValueInverted="False" Name="Диагн.ПЧ конд-ра и тепл. панелей: Перегрузка по току (больше 250%)" Id="eeb916e4-b89c-45ad-a802-6771af627b63" />
+				<BitPrm Byte="17" Bit="4" IsValueInverted="False" Name="Диагн.ПЧ конд-ра и тепл. панелей: Защита по температуре (больше 110°C)" Id="ed8188d0-7af3-4d85-b76d-d7f3c8fcad0b" />
+				<BitPrm Byte="17" Bit="3" IsValueInverted="False" Name="Диагн.ПЧ конд-ра и тепл. панелей: Пониж./повыш. напр. пит.транзисторов (15В)" Id="167921b7-3039-4c19-b7a3-9fc2662236d9" />
+				<BitPrm Byte="17" Bit="2" IsValueInverted="False" Name="Диагн.ПЧ конд-ра и тепл. панелей: КЗ ниж. транз-в или перекрытие упр.сигналов" Id="d0d864d3-fc17-4e31-9fba-f9ad6b2c09b8" />
+				<BitPrm Byte="17" Bit="1" IsValueInverted="False" Name="Диагн.ПЧ конд-ра и тепл. панелей: Повышенное входное напряжение" Id="b00bc5b1-fb3f-468a-b869-f9ded0ec7f4b" />
+				<BitPrm Byte="17" Bit="0" IsValueInverted="False" Name="Диагн.ПЧ конд-ра и тепл. панелей: Перегрузка по току (больше 150%)" Id="4d9b6e7c-8f8d-48b7-9957-919c091ed13f" />
+				<VarVal Position="18.0" Length="8" Name="#CRCH" Id="79694438-6eb8-4f20-8ac9-c3018c87c01e" />
+				<VarVal Position="19.0" Length="8" Name="#CRCL" Id="1026c5be-2437-45d7-9bcc-99ed9301ccf7" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС-СМ (2)">
+			<Request Length="4" Position="0" CycleMsTime="200">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="1e65e60d-a376-44c9-8e4d-7ac4b469c986" />
+				<DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="72bf27dd-a08a-45e0-8158-df26785d52fc" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="6235b16d-766b-428a-90f6-d019e773ef1d" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="bc2f0e4b-411c-44bf-8b22-36e0c65b8800" />
+			</Request>
+			<Reply Length="18" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="be878aa1-0336-4dff-a34c-3afb7b62776b" />
+				<DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="cf5cbe19-7fe7-444e-a83b-dd22cef2dfb3" />
+				<CpzPrm Name="Уставка по расходу приточного воздуха, %" Expression="[u2] * 1.0" Id="bd25ea98-7f71-4ed3-b6e9-680f90cdb973" />
+				<CpzPrm Name="Температура на входе кондиционера (ВК1)Т1_АМК, °С" Expression="[u3] * 1.0" Id="499f3038-04f9-4262-a4bd-80cf8167e821" />
+				<CpzPrm Name="Темература на выходе кондиционера (ВК2)Т2_АМК, °С" Expression="[u4] * 1.0" Id="8b5c75e2-60a1-4573-88b0-90553cff5621" />
+				<CpzPrm Name="Температура конденсатора (ВК3)Т3_АМК, °С" Expression="[u5] * 1.0" Id="bb3539f8-698a-4360-9c6c-fff84528dbc7" />
+				<CpzPrm Name="Температура испарителя (ВК4) Т4_АМК, °С" Expression="[u6] * 1.0" Id="a780852e-ebc7-4be6-8c3c-66c6be53621a" />
+				<CpzPrm Name="Температура входного наружного воздуха кондиционера (ВК5)Т5_АМК, °С" Expression="[u7] * 1.0" Id="848ed616-4880-4274-8c77-b400f76e4551" />
+				<CpzPrm Name="Давление испарителя кГ/см² (Атм) " Expression="[u8] * 0.1" Id="c302b78c-02b8-4804-9790-bd5f17e4511d" />
+				<CpzPrm Name="Давление конденсатора кГ/см² (Атм)" Expression="[u9] * 0.1" Id="0932bd20-901a-4b25-b2e0-ecf99087cbed" />
+				<CpzPrm Name="Уставка ШИМ клапана кондиционера" Expression="[u10] * 1.0" Id="29b1b8e6-7d22-4d5a-b01a-4898dfcde24d" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="Входы платы расширения: Нет блок. компрессора по 15 ºC" Id="880c932d-869d-443b-bb9c-92a80f986630" />
+				<BitPrm Byte="11" Bit="4" IsValueInverted="False" Name="Входы платы расширения: Включение приточной установки" Id="cbf4ceb1-2ef4-474b-8e42-d3c95f648be9" />
+				<BitPrm Byte="11" Bit="3" IsValueInverted="False" Name="Входы платы расширения: Включение СМ" Id="f6664848-fbcf-44ba-b8ae-2d339cd372a0" />
+				<BitPrm Byte="11" Bit="2" IsValueInverted="False" Name="Входы платы расширения: Подтв.вкл.контактора компрессора S7" Id="1ca1e09c-c97f-41f9-a513-f4cd8b99f516" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="Входы платы расширения: Подтв.вкл.контактора компрессора S6" Id="6678d694-854a-4ca0-915c-a18a22d20e35" />
+				<BitPrm Byte="11" Bit="0" IsValueInverted="False" Name="Входы платы расширения: Подтв.вкл.контактора компрессора S5" Id="8ab83bba-acbd-4562-bfd1-00f668f97c45" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="Cостояние регулятора исп.(АМК Р16): Регулятор вызван" Id="9292e75c-2cc1-4e8f-b237-3b3dd4acd4de" />
+				<BitPrm Byte="12" Bit="6" IsValueInverted="False" Name="Cостояние регулятора исп.(АМК Р16): Получены все данные от датчиков" Id="33bddaf3-77dc-443b-b109-e5955f9c4238" />
+				<BitPrm Byte="12" Bit="5" IsValueInverted="False" Name="Cостояние регулятора исп.(АМК Р16): Получено с датчика давления норм.значение" Id="5f4638a3-702b-47b6-a896-68ee519efc04" />
+				<BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="Cостояние регулятора исп.(АМК Р16): Пройден контроль контактора компрессора" Id="72219883-02b2-4264-a598-4a41efcb3fed" />
+				<BitPrm Byte="12" Bit="3" IsValueInverted="False" Name="Cостояние регулятора исп.(АМК Р16): Получено с датчика давления значение" Id="fdb7908e-169f-4273-802d-bc2877087a31" />
+				<BitPrm Byte="12" Bit="2" IsValueInverted="False" Name="Cостояние регулятора исп.(АМК Р16): Включена система микроклимата" Id="1073af15-790c-44e5-a075-3fc0c1994a53" />
+				<BitPrm Byte="12" Bit="1" IsValueInverted="False" Name="Cостояние регулятора исп.(АМК Р16): Авт. формирование уставки ШИМ" Id="e66a8a26-25a0-46b0-80ee-4edc89467a90" />
+				<BitPrm Byte="12" Bit="0" IsValueInverted="False" Name="Cостояние регулятора исп.(АМК Р16): Летний режим" Id="b7bc9a5a-cb85-4a6f-adf8-c9156a1265c7" />
+				<CpzPrm Name="Диагн.приточной установки и МВП" Expression="[u2] * 1.0" Id="bd3ae5d6-7743-4eaa-b687-19c9d2edc615" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="6816fea7-ad1f-494d-a37d-7ae19b040b4b" />
+				<VarVal Position="17.0" Length="8" Name="#CRCL" Id="2fb3a493-bd14-49c9-afe2-7faf21361547" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и СКВТ">
+			<Request Length="8" Position="0" CycleMsTime="200">
+				<DefVal Position="0.0" Length="8" Value="0xCE" Name="#ADDR" Id="6b498aa8-b44a-43e9-a0c9-6d225d9a9bb7" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="2cf09ff6-e274-4129-9c3b-94cb62c44d4f" />
+				<DefVal Position="2.0" Length="8" Value="0x00" Name="Начальный адрес регистра" Id="28c36d88-7910-4c24-a692-49934def832e" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="Начальный адрес регистра" Id="c2afa1a8-a964-4874-b07f-9761acab7b1b" />
+				<DefVal Position="4.0" Length="8" Value="0x00" Name="Количество регистров" Id="dff92423-5b41-42e0-b401-e23e159eae1d" />
+				<DefVal Position="5.0" Length="8" Value="0x07" Name="Количество регистров" Id="280b71eb-6aa2-424f-a15e-b6a7b8ce7019" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="189affe6-c090-493d-a24e-c366815e7399" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="2aec2496-7cfb-4c28-908a-0b64b51ec79e" />
+			</Request>
+			<Reply Length="19" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0xCE" Name="#ADDR" Id="ec125314-11d7-4d92-9cf5-520504406b73" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="2dce210f-b31d-4bdb-a059-5af9696076db" />
+				<DefVal Position="2.0" Length="8" Value="0x0E" Name="Счётчик байт" Id="c35caf2b-6ee8-4181-b586-9e6b4a5abefa" />
+				<CpzPrm Name="E+, кВт" Expression="[3.4.4] * 10000.0 + [3.0.4] * 1000.0  + [4.4.4] * 100.0 + [4.0.4] * 10.0  + [5.4.4] * 1.0  + [5.0.4] * 0.1  + [6.4.4] * 0.01" Id="b5b2bd29-78f3-498b-b105-ea31e34f4d01" />
+				<CpzPrm Name="Ток, А" Expression="([6.0.4] * 10000.0 + [7.4.4] * 1000.0  + [7.0.4] * 100.0 + [8.4.4] * 10.0  + [8.0.4] * 1.0) * (44.0 - [u15] * 1.0 )" Id="98d12a9c-7c84-4514-99ab-d6d12c2e057d" />
+				<CpzPrm Name="Напряжение, В" Expression="[9.4.4] * 10000.0 + [9.0.4] * 1000.0  + [10.4.4] * 100.0 + [10.0.4] * 10.0  + [11.4.4] * 1.0" Id="11b11064-1122-4071-b8f2-077cdcd2f313" />
+				<CpzPrm Name="E-, кВт" Expression="[11.0.4] * 10000.0 + [12.4.4] * 1000.0  + [12.0.4] * 100.0 + [13.4.4] * 10.0  + [13.0.4] * 1.0  + [14.4.4] * 0.1  + [14.0.4] * 0.01" Id="62d987c3-0d37-4d16-ac18-56e86eada786" />
+				<VarVal Position="16.0" Length="8" Name="Резерв" Id="e021d0a8-ee9b-4b1a-b149-c5df83aabac5" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="61c4e22e-182d-4032-9564-5a982fcbf40e" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="3b3cbb0c-61e1-4f39-a081-6e6ac06c9930" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

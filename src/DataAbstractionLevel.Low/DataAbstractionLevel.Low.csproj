@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C8D3716F-7112-4ABA-8A5A-69C664696AE8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DataAbstractionLevel.Low</RootNamespace>
+    <AssemblyName>DataAbstractionLevel.Low</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\RPD\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\RPD\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AlienJust.Support.Identy">
+      <HintPath>..\Refs\AlienJust.Support.Identy.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Identy.Contracts">
+      <HintPath>..\Refs\AlienJust.Support.Identy.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.IO">
+      <HintPath>..\Refs\AlienJust.Support.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Numeric">
+      <HintPath>..\Refs\AlienJust.Support.Numeric.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.FtpClient, Version=1.0.5281.14405, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\System.Net.FtpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InternalKitchen\Extensions\ByteAndBitPosition.cs" />
+    <Compile Include="InternalKitchen\KeyValueStringStorage\KeyValueStringStorageMemory.cs" />
+    <Compile Include="InternalKitchen\KeyValueStringStorage\KeyValueStringStorageXmlMemCache.cs" />
+    <Compile Include="InternalKitchen\Extensions\StringExtensions.cs" />
+    <Compile Include="InternalKitchen\Extensions\TimeExtensions.cs" />
+    <Compile Include="InternalKitchen\Extensions\XmlExtensions.cs" />
+    <Compile Include="InternalKitchen\Streamable\StreamExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Big\BigArray.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Big\BigList.cs" />
+    <Compile Include="PsnConfig\Contracts\IFaultDefinePsnParameterConfigurationInfo.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnMergedDevice.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnMergedParameter.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnMergedParameterPart.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolCommandPartConfigurationCycle.cs" />
+    <Compile Include="PsnConfig\Contracts\DefinedPsnParameterInfoExtensions.cs" />
+    <Compile Include="PsnConfig\Contracts\PsnProtocolConfigurationExtensions.cs" />
+    <Compile Include="PsnConfig\PsnMergedDeviceSimple.cs" />
+    <Compile Include="PsnConfig\PsnMergedParameterSimple.cs" />
+    <Compile Include="PsnConfig\PsnMergedParameterPartSimple.cs" />
+    <Compile Include="PsnData\Contracts\IPsnCommandPartSearcher.cs" />
+    <Compile Include="PsnData\Contracts\IPsnDataHandlerWithResources.cs" />
+    <Compile Include="PsnData\Contracts\IPsnLogComparer.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Big\HugeStorage.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Contracts\IPsnCommandPartsPosition.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\FirstRunResult.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\IPsnDataHandlerRetrieveCmdPartByPos.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\PsnBinHandlerMappedLite.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\PsnCommandPartsAndPosition.cs" />
+    <Compile Include="PsnData\PsnCommandPartSearcherAllDefinedValuesAndCrc.cs" />
+    <Compile Include="PsnData\PsnCommandPartSearcherStandart.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Substreams\StreamOnlyGoodPsnPagesGoodIndexRecord.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Substreams\StreamOnlyGoodPsnPagesIndexRecord.cs" />
+    <Compile Include="Storage\Contracts\IBackSearchData.cs" />
+    <Compile Include="Storage\Contracts\IDeviceInformationWritable.cs" />
+    <Compile Include="Storage\Contracts\IPsnDataFaultReason.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\INandDeviceDiagnostic.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolCommandConfiguration.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolCommandPartConfiguration.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolConfiguration.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolConfigurationInformtaion.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolConfigurationLoader.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolDeviceConfiguration.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolParameterConfiguration.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnParameterConfigurationColor.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolDeviceSignalAddress.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolDeviceSignalConfiguration.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolParameterConfigurationVariable.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolParameterDefinedConfiguration.cs" />
+    <Compile Include="PsnConfig\Contracts\VariablePsnParameterInfoExtensions.cs" />
+    <Compile Include="PsnConfig\Contracts\PsnProtocolCommandPartType.cs" />
+    <Compile Include="PsnConfig\Contracts\PsnParameterConfigruationExtensions.cs" />
+    <Compile Include="PsnConfig\CyclePsnCommandPartInfoInfo.cs" />
+    <Compile Include="PsnConfig\PsnCmdPartExt.cs" />
+    <Compile Include="PsnConfig\PsnCommandInfo.cs" />
+    <Compile Include="PsnConfig\PsnCommandPart.cs" />
+    <Compile Include="PsnConfig\PsnCommandPartInfoExtensions.cs" />
+    <Compile Include="PsnConfig\PsnProtocolConfigurationLoaderFromXml.cs" />
+    <Compile Include="PsnConfig\PsnProtocolConfigurationSimple.cs" />
+    <Compile Include="PsnConfig\PsnDeviceConfigurationSimple.cs" />
+    <Compile Include="PsnConfig\PsnProtocolMeterConfigurationSimple.cs" />
+    <Compile Include="PsnConfig\PsnParamBase.cs" />
+    <Compile Include="PsnConfig\PsnParamDefinedByte.cs" />
+    <Compile Include="PsnConfig\PsnParamValueExtractor.cs" />
+    <Compile Include="PsnConfig\PsnParamVariableBit.cs" />
+    <Compile Include="PsnConfig\PsnParamVariableBitInverted.cs" />
+    <Compile Include="PsnConfig\PsnParamVariableByte.cs" />
+    <Compile Include="PsnConfig\PsnParamVariableComposed.cs" />
+    <Compile Include="PsnConfig\PsnParamVariableMultibit.cs" />
+    <Compile Include="PsnConfig\PsnParamVariableSByte.cs" />
+    <Compile Include="PsnConfig\PsnParamVariableSMultibit.cs" />
+    <Compile Include="PsnConfig\PsnProtocolXmlSerializer.cs" />
+    <Compile Include="PsnConfig\PsnSignalAddressSimple.cs" />
+    <Compile Include="PsnConfig\PsnSignalConfigurationSimple.cs" />
+    <Compile Include="InternalKitchen\KeyValueStringStorage.Contracts\IKeyValueStringStorage.cs" />
+    <Compile Include="PsnData\FragmentSplitInfo.cs" />
+    <Compile Include="PsnData\Contracts\IDataPoint.cs" />
+    <Compile Include="PsnData\Contracts\IInterval.cs" />
+    <Compile Include="PsnData\Contracts\IPsnChannelDataHandler.cs" />
+    <Compile Include="PsnData\Contracts\IPsnDataHandler.cs" />
+    <Compile Include="PsnData\Contracts\IPsnLogSaver.cs" />
+    <Compile Include="PsnConfig\Contracts\IPsnProtocolMeterConfiguration.cs" />
+    <Compile Include="PsnData\Contracts\IPsnPageExtractor.cs" />
+    <Compile Include="PsnData\Contracts\IPsnPagesLocationInfo.cs" />
+    <Compile Include="PsnData\IsHereCmdPartConfirmationExtensions.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Contracts\IPsnCommandPartAndConfirmation.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Contracts\IPsnDataHandlerIndexed.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Contracts\IPsnMapRecord.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Contracts\IPsnMapSubrecord.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\PsnCommandPartAndConfirmation.cs" />
+    <Compile Include="PsnData\Contracts\PsnCommandPartConfirmation.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\PsnCommandPartLocation.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\PsnMapRecord.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\PsnMapSubrecord.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\PsnPageIndexRecord.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Substreams\StreamBrokenReadonly.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Substreams\StreamOnlyGoodPsnPages.cs" />
+    <Compile Include="PsnData\PsnBinHandlerMapBased\Substreams\StreamPageHeaderSkipReadonly.cs" />
+    <Compile Include="PsnData\PsnBinLogAdvancedLocationInfo.cs" />
+    <Compile Include="PsnData\PsnBinLogLocationInfo.cs" />
+    <Compile Include="PsnData\PsnBinPageExtractor.cs" />
+    <Compile Include="PsnData\PsnBinPageExtractorFifteen.cs" />
+    <Compile Include="PsnData\PsnBinParser.cs" />
+    <Compile Include="PsnData\PsnChannelDataHandler.cs" />
+    <Compile Include="PsnData\PsnPageExtractorFactory.cs" />
+    <Compile Include="PsnData\PsnPageHeader.cs" />
+    <Compile Include="PsnData\PsnPageNumberAndTime.cs" />
+    <Compile Include="PsnData\SimlpleInterval.cs" />
+    <Compile Include="PsnData\SimplePsnPagesLocationInfo.cs" />
+    <Compile Include="Storage\Contracts\ICustomConfiguration.cs" />
+    <Compile Include="Storage\Contracts\ICustomConfigurationBuilder.cs" />
+    <Compile Include="Storage\Contracts\ICustomConfigurationSaver.cs" />
+    <Compile Include="Storage\Contracts\IDeviceInformation.cs" />
+    <Compile Include="Storage\Contracts\IDeviceInformationStorage.cs" />
+    <Compile Include="InternalKitchen\Contracts\IHashableObject.cs" />
+    <Compile Include="Storage\Contracts\IPsnDataCustomConfigration.cs" />
+    <Compile Include="Storage\Contracts\IPsnDataCustomConfigrationWritable.cs" />
+    <Compile Include="Storage\Contracts\IPsnDataCustomConfigurationsStorage.cs" />
+    <Compile Include="Storage\Contracts\IPsnDataInformation.cs" />
+    <Compile Include="Storage\Contracts\IPsnDataInformationStorage.cs" />
+    <Compile Include="Storage\Contracts\IPsnDataPaged.cs" />
+    <Compile Include="Storage\Contracts\IPsnData.cs" />
+    <Compile Include="Storage\Contracts\IPsnPageIndexRecord.cs" />
+    <Compile Include="Storage\Contracts\IRpdChannelCustomInformation.cs" />
+    <Compile Include="Storage\Contracts\IRpdDataCustomConfigration.cs" />
+    <Compile Include="Storage\Contracts\IRpdDataCustomConfigrationWritable.cs" />
+    <Compile Include="Storage\Contracts\IRpdDataCustomConfigurationsStorage.cs" />
+    <Compile Include="Storage\Contracts\IRpdDataInformation.cs" />
+    <Compile Include="Storage\Contracts\IRpdDataInformationStorage.cs" />
+    <Compile Include="Storage\Contracts\IRpdDataStreamed.cs" />
+    <Compile Include="Storage\Contracts\IRpdMeterCustomInfo.cs" />
+    <Compile Include="Storage\Contracts\IRpdPageIndexRecord.cs" />
+    <Compile Include="Storage\FtpFilesStorage\FtpFilesStorageLazyCached.cs" />
+    <Compile Include="Storage\FtpFilesStorage\FtpFilesStorageSimple.cs" />
+    <Compile Include="Storage\FtpFilesStorage\FtpFileInfo.cs" />
+    <Compile Include="Storage\FtpFilesStorage.Contracts\IFtpFileInfo.cs" />
+    <Compile Include="Storage\FtpFilesStorage.Contracts\IItemConatiner.cs" />
+    <Compile Include="Storage\PsnConfigurationStorage\PsnConfigurationStorageLazyReadonlyRelay.cs" />
+    <Compile Include="Storage\PsnConfigurationStorage\PsnConfigurationStorageXmlFiles.cs" />
+    <Compile Include="Storage\PsnDataFaultReasonStorage\PsnDataFaultReasonStorageFtpUrl.cs" />
+    <Compile Include="Storage\PsnDataFaultReason\PsnDataFaultReasonSimple.cs" />
+    <Compile Include="Storage\PsnDataFaultReason\PsnDataFaultReasonStorageXDocument.cs" />
+    <Compile Include="Storage\PsnDataFaultReason\PsnDataFaultReasonStorageFtpStream.cs" />
+    <Compile Include="Storage\PsnDataStorage\PsnDataStorageBasedOnStreamed.cs" />
+    <Compile Include="Storage\StreamableStorages\Contracts\IStreamableDataStorage.cs" />
+    <Compile Include="Storage\StreamableData\Contracts\IStreamedData.cs" />
+    <Compile Include="Storage\Contracts\IPsnDataStorage.cs" />
+    <Compile Include="Storage\StreamableData\Contracts\IStreamedDataWritable.cs" />
+    <Compile Include="Storage\Contracts\PsnPageInfo.cs" />
+    <Compile Include="Storage\Contracts\RpdMeterType.cs" />
+    <Compile Include="Storage\Contracts\RpdPageInfo.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\DeviceInformationStorageCustomSingle.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\CustomConfigurationBuilderDefault.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\CustomConfigurationBuilderFromRpdConfFile.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\CustomConfigurationSaverToRpdConfFile.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\CustomConfigurationSimple.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\DeviceInformationStorageNand.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\DeviceInformationStorageRelayMemoryCache.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\DeviceInformationStorageXDocument.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\RpdChannelCustomInformationSimple.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\RpdMeterCustomInfoSimple.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\RpdMeterTypeExtensions.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ContractsExtensions\NandDeviceDiagnosticExtensions.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ContractsExtensions\RpdDataInformationExtensions.cs" />
+    <Compile Include="Storage\PsnDataInformationStorage\PsnDataInformationStorageFtpFiles.cs" />
+    <Compile Include="Storage\PsnDataInformationStorage\PsnDataInformationStorageFtpUrl.cs" />
+    <Compile Include="Storage\PsnDataInformationStorage\PsnDataInformationStorageNand.cs" />
+    <Compile Include="Storage\PsnDataInformationStorage\PsnDataInformationStorageRelayMemoryCache.cs" />
+    <Compile Include="Storage\PsnDataInformationStorage\PsnDataInformationStorageXDocument.cs" />
+    <Compile Include="Storage\PsnDataInformationStorage\PsnLogTypeExt.cs" />
+    <Compile Include="Storage\PsnDataStorage\PsnDataStorageFtpFiles.cs" />
+    <Compile Include="Storage\PsnDataStorage\PsnDataStorageFtpUrl.cs" />
+    <Compile Include="Storage\PsnDataStorage\PsnDataStorageLocalDir.cs" />
+    <Compile Include="Storage\PsnDataStorage\PsnDataStorageNand.cs" />
+    <Compile Include="Storage\PsnDataStorage\PsnDataStorageZip.cs" />
+    <Compile Include="Storage\PsnDataStorage\StreamedDataStorageRelayMemoryCache.cs" />
+    <Compile Include="Storage\PsnData\PsnDataPagedHandlerRelay.cs" />
+    <Compile Include="Storage\PsnData\PsnDataRelayStream.cs" />
+    <Compile Include="Storage\PsnDataCustomConfigStorage\PsnDataCustomConfigurationsStorageRelayMemoryCache.cs" />
+    <Compile Include="Storage\PsnDataCustomConfigStorage\PsnDataCustomConfigurationsStorageXDocument.cs" />
+    <Compile Include="Storage\PsnDataCustomConfigStorage\PsnDataCustomConfigurationsStoragePredefined.cs" />
+    <Compile Include="Storage\Shared\DeviceInformationSimple.cs" />
+    <Compile Include="InternalKitchen\Id\IdentifierHashBased.cs" />
+    <Compile Include="PsnConfig\PsnConfigurationInformationSimple.cs" />
+    <Compile Include="Storage\Shared\PsnDataCustomConfigurationSimple.cs" />
+    <Compile Include="Storage\Shared\PsnDataInformationSimple.cs" />
+    <Compile Include="InternalKitchen\Streamable\FtpFileStream.cs" />
+    <Compile Include="InternalKitchen\Streamable\ReadOnlySubStream.cs" />
+    <Compile Include="Storage\StreamableData\SingleFile\StreamedFile.cs" />
+    <Compile Include="Storage\StreamableData\FilePart\StreamableFilePart.cs" />
+    <Compile Include="Storage\StreamableData\FtpFile\StreamedFtpFile.cs" />
+    <Compile Include="Storage\StreamableData\ZippedFile\StreamedZippedFile.cs" />
+    <Compile Include="InternalKitchen\Streamable\ZipFileStream.cs" />
+    <Compile Include="Storage\Shared\PsnDataFragmentType.cs" />
+    <Compile Include="Storage\Shared\RpdDataInformationSimple.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IPsnDataFragmentInformation.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IPsnDataFragmentInformationBuilder.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdDumpRule.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdDumpRuleBuilder.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdDumpRuleSaver.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdDataInformation.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdDataInformationBuilder.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdDataInformationSaver.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdMeterSystemInformation.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdMeterSystemInformationBuilder.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\IRpdMeterSystemInformationSaver.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\ISystemConfiguration.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\ISystemConfigurationBuilder.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Contracts\ISystemConfigurationSaver.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\PsnLogFragmentInfoBuilderFromStream.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Common\PsnDataFragmentInformationSimple.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\RpdDumpRuleBuilderFromStream.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Common\RpdDumpRuleSimple.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\RpdDumpRuleSaverToStream.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\RpdDataInformationBuilderFromStream.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\RpdDataInformationSaverToStream.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Common\RpdDataInformationSimple.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\RpdMeterInfoSaverToStream.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\RpdMeterSystemInformationBuilderFromStream.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Common\RpdMeterSystemInformationSimple.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Common\SystemConfigurationBuilderDefault.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\SystemConfigurationBuilderFromBinaryFile.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\ReleaseNand\SystemConfigurationSaverBinary.cs" />
+    <Compile Include="Storage\DeviceInformationStorage\Nand\SystemConfiguration\Common\SystemConfigurationSimple.cs" />
+    <Compile Include="Storage\StreamableStorages\Contracts\IStreamableDataWithId.cs" />
+    <Compile Include="Storage\StreamableStorages\Contracts\StreamableDataWithIdSimple.cs" />
+    <Compile Include="Storage\StreamableStorages\LocalDirFiles\StreamableStorageLocalDirFiles.cs" />
+    <Compile Include="Storage\StreamableStorages\Relay\StreamableStorageRelay.cs" />
+    <Compile Include="Storage\StreamableStorages\SingleFile\StreamableStorageSingleFile.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="PsnConfig\Contracts\Big\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

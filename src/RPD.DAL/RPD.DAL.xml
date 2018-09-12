@@ -1,0 +1,2602 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RPD.DAL</name>
+    </assembly>
+    <members>
+        <member name="M:RPD.Device.#ctor">
+            <summary>
+            Инициализирует новый девайс
+            </summary>
+        </member>
+        <member name="M:RPD.Device.OpenFromFileSystem(System.String)">
+            <summary>
+            Открыть девайс из файловой системы
+            </summary>
+            <param name="devPath">путь к девайсу</param>
+            <returns>Флаг успешности операции</returns>
+        </member>
+        <member name="M:RPD.Device.AttachPsnLog(RPD.DAL.PsnLog)">
+            <summary>
+            Links PsnLog with PsnMeters from this.DeviceConfig and adds PsnLog to this.Psns
+            </summary>
+            <param name="plog">PsnLog to link</param>
+        </member>
+        <member name="M:RPD.Device.SaveToFileSystem(System.String,System.Action{System.Int32})">
+            <summary>
+            Сохраняет девайс в директорию. После копирования путь к девайсу меняется!
+            </summary>
+            <param name="directoryPath">Путь к директории</param>
+        </member>
+        <member name="M:RPD.Device.CopyRpdLogsToDir(System.IO.DirectoryInfo,System.Action{System.Int32})">
+            <summary>
+            Скопировать информацию об авариях в другую папку
+            </summary>
+            <param name="dirPath">Путь к папке</param>
+        </member>
+        <member name="M:RPD.Device.CopySettingsToDir(System.IO.DirectoryInfo)">
+            <summary>
+            Копирует настроечные файлы в директорию назначения
+            </summary>
+            <param name="copyToDir">Путь назначения</param>
+        </member>
+        <member name="P:RPD.Device.Faults">
+            <summary>
+            Список логов аварий
+            </summary>
+        </member>
+        <member name="P:RPD.Device.Psns">
+            <summary>
+            Лог ПСН, хранящийся на устрйостве, вдруг их много? :)
+            </summary>
+        </member>
+        <member name="P:RPD.Device.IsOpened">
+            <summary>
+            Флаг, свидетельствующий об открытии девайса
+            </summary>
+        </member>
+        <member name="P:RPD.Device.Path">
+            <summary>
+            Пусть к девайсу
+            </summary>
+        </member>
+        <member name="P:RPD.Device.Id">
+            <summary>
+            Идентификатор девайса
+            </summary>
+        </member>
+        <member name="P:RPD.Device.DeviceConfig">
+            <summary>
+            Конфигурация устройства
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IPsnChannel">
+            <summary>
+            Описывание канала измерителя ПСН
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.ILazyTrendData">
+            <summary>
+            Тренд данных
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.ILazyTrendData.LoadTrendAsync(System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Загрузить тренд асинхронно
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.ILazyTrendData.LoadTrendAsync(System.DateTime,System.DateTime,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Загрузить тренд для определенного периода
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.ILazyTrendData.FreeTrend">
+            <summary>
+            Освободить память (Trend.Clear() etc)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ILazyTrendData.Trend">
+            <summary>
+            Сипсок точек сигнала, основанный на данных канала. Возможна такая ситуация, что разные каналы имеют разное временное разрешение и, как следствие,
+            разное число точек, поэтому всего скорее в сигналах будет присутствовать неравномерное временное распределение точек
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ILazyTrendData.Start">
+            <summary>
+            Начало интервала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ILazyTrendData.End">
+            <summary>
+            Конец интервала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ILazyTrendData.Type">
+            <summary>
+            Тип тренда (аналоговый/дискретный/...)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ILazyTrendData.IsTrendLoaded">
+            <summary>
+            Поднимается при явном вызове LoadTrend()
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnChannel.Name">
+            <summary>
+            Название канала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnChannel.IsEnabled">
+            <summary>
+            Флаг-какая-то хрень =) может удалить его?
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnChannel.IsInput">
+            <summary>
+            Флаг того, что канал является входящим (Параметр, переданный от МК1)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnChannel.CanBeFaultSign">
+            <summary>
+            Является ли канал признаком аварии
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnChannel.IsFaultSign">
+            <summary>
+            Флаг, что пользователь отметил сигнал как FaultSign (Значение этого флага не изменится при попытке его задать у канала без взведенного флага CanBeFaultSign
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnChannel.OwnerMeter">
+            <summary>
+            Измеритель, которому принадлежит
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.PsnChannel.LoadTrendAsync(System.DateTime,System.DateTime,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Загрузить тренд для определенного периода
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnChannel.Configuration">
+            <summary>
+            Конфигурация канала (ссылка на положение данных в контексте команды ПСН)
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IPsnMeter">
+            <summary>
+            Прибор магистрали ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnMeter.Name">
+            <summary>
+            Некая информация, для удобной работы (не 5-ый измеритель 8-ой аварии, а измеритель давления двигателя, наприер)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnMeter.Address">
+            <summary>
+            Некий номер измерителя
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnMeter.Channels">
+            <summary>
+            Список каналов, которые есть на измерителе
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnMeter.OwnerPsn">
+            <summary>
+            Авария, которой принадлежит измеритель
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IDeviceConfiguration">
+            <summary>
+            Интрфейс для аботы с конфигурацией устройства
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.CreateMeter">
+            <summary>
+            Фабрика измерителей
+            </summary>
+            <returns>Сыылка на новый измеритель</returns>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.Read(System.String,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Чтение конфигурации
+            </summary>
+            <param name="path">Путь к устройству</param>
+            <param name="onComplete">Callback завершения операции</param>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.Write(System.String,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Запись конфигурации
+            </summary>
+            <param name="path">Путь к устройству</param>
+            <param name="onComplete">Callback завершения операции</param>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.LoadAttributesFromXml(System.String)">
+            <summary>
+            Преобразует Xml файл в набор атрибутов (название локомотива и номер секции автометически проецируются в атрибуты)
+            </summary>
+            <param name="filename">Имя xml файла</param>
+            <returns>Флаг успеха операции</returns>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.SaveAttributesToXml">
+            <summary>
+            Сохраняет атрибуты девайса в XML файл (название локомотива и номер секции автометически проецируются в атрибуты)
+            </summary>
+            <returns>XML документ c атрибутами</returns>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.LoadRpdConfigFromXml(System.String)">
+            <summary>
+            Считать информацию об измерителях РПД из XML файла
+            </summary>
+            <param name="filename">Путь к XML файлу с описанием измерителей РПД</param>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.SaveRpdConfigToXml">
+            <summary>
+            Сохранить информацию об измерителях РПД данной конфигурации в XML документ
+            </summary>
+            <returns>Заполненный XML документ</returns>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.LoadPsnConfigFromXml(System.String)">
+            <summary>
+            Считать свою конфигурацию ПСН (измериетли и протокол обмена)
+            </summary>
+            <param name="filename">Путь к XML файлу, в котором хранится конфигурация ПСН (раньше таковым был psn.config.xml)</param>
+            <returns>XmlDocument для возможности дальнейшей работы с ним</returns>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.SavePsnConfigToXml">
+            <summary>
+            Сохранить конфигурацию ПСН (измериетли и протокол обмена)
+            </summary>
+            <returns>XmlDocument для возможности дальнейшей работы с ним</returns>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.ClearArchives(System.String)">
+            <summary>
+            "Очистка архивов" - при вызове этого метода производится сброс счетчика аварий и выдача служебной команды для РПД, файлы архивов на самом деле не трогаются
+            </summary>
+            <param name="driveLetter">Буква диска, которой определилось устройство в системе, например F</param>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.ClearArchivesAsync(System.String,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Асинхронная очистка архивов
+            </summary>
+            <param name="driveLetter">Буква диска устройства</param>
+            <param name="onComplete">Callback-метод завершения опреации</param>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.TestLinkWithMetersAsync(System.String,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Асинхронная проверка связи с измерителями
+            </summary>
+            <param name="driveLetter">Буква диска устройства</param>
+            <param name="onComplete">Callback-метод завершения опреации</param>
+        </member>
+        <member name="M:RPD.DAL.IDeviceConfiguration.WriteFirmware(System.String,System.String,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Прошивка ПО устройства
+            </summary>
+            <param name="deviceDriveLetter">Буква диска устрйоства</param>
+            <param name="firmwireHexFilename">Путь к файлу прошивки</param>
+            <param name="onComplete">Callback-метод завершения опреации</param>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.RpdMeters">
+            <summary>
+            Список измерителей, указаных в конфигурации
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.PsnMeters">
+            <summary>
+            Список измерителей, указаных в конфигурации
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.LocomotiveName">
+            <summary>
+            Имя локомотива
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.SectionNumber">
+            <summary>
+            Номер секции
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.Comment">
+            <summary>
+            Коментарий для человеков.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.Address">
+            <summary>
+            Адрес прибора.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.NetAddress">
+            <summary>
+            Сетевой адрес.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.UseHammingForNand">
+            <summary>
+            Применять код Хэминга к содержимому страниц в NAND.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.LogPsn">
+            <summary>
+            Вести лог магистрали ПСН.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.SaveByteInterval">
+            <summary>
+            Сохранять межбайтовый интервал в обмене ПСН.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.ResetFaultsDump">
+            <summary>
+            Сбрасывать параметры в таблице аварий и освобождать память под дампы аварий, если считаны все файлы дампов аварий.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.Diagnostic">
+            <summary>
+            Диагностика устройства
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceConfiguration.PsnVersion">
+            <summary>
+            Номер версии протокола ПСН
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.PsnProtocolVersion">
+            <summary>
+            Версия протокола магистрали ПСН, используемая в устройстве
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.PsnProtocolVersion.Four">
+            <summary>
+            Четвертая версия протокола
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.PsnProtocolVersion.Five">
+            <summary>
+            Пятая версия протокола
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.ConnectionPointsDescription">
+            <summary>
+            Описание конфигурации connection point'ов
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.ConnectionPointsDescription.#ctor">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.ConnectionPointsDescription.Load(System.String)">
+            <summary>
+            Загрузить из файла
+            </summary>
+            <param name="filename">Путь к файлу</param>
+        </member>
+        <member name="M:RPD.DAL.ConnectionPointsDescription.Save(System.String)">
+            <summary>
+            Сохранить в файл
+            </summary>
+            <param name="filename">Путь к файлу</param>
+        </member>
+        <member name="P:RPD.DAL.ConnectionPointsDescription.Groups">
+            <summary>
+            Список групп описания (конфигруации)
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.ConnectionPoint">
+            <summary>
+            Represents one connection point
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.ConnectionPoint.#ctor(System.String)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="name">Название будущей точки</param>
+        </member>
+        <member name="P:RPD.DAL.ConnectionPoint.Name">
+            <summary>
+            Название ConnectionPoint'а
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ConnectionPoint.Condition">
+            <summary>
+            Условие для этой точки
+            </summary>
+        </member>
+        <member name="T:RPD.AdvancedBinaryWriter">
+            <summary>
+            Позволяет использовать Big Endian порядок записи байт в поток, наследуется от System.IO.BinaryWriter
+            </summary>
+        </member>
+        <member name="T:RPD.AdvancedBinaryReader">
+            <summary>
+            Позволяет использовать Big Endian порядок чтения байт из потока, наследуется от System.IO.BinaryReader
+            </summary>
+        </member>
+        <member name="T:RPD.FaultArchivePage">
+            <summary>
+            Страница архива аварии РПД
+            </summary>
+        </member>
+        <member name="M:RPD.FaultArchivePage.#ctor(System.Byte[],RPD.DAL.FaultLog)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="rawView">Массив байт, прочитанных из файла вида AVRXX.bin</param>
+            <param name="ownerFault">Авария, к которой относится данная страница</param>
+        </member>
+        <member name="P:RPD.FaultArchivePage.RawView">
+            <summary>
+            Представление страницы ввиде набора байт
+            </summary>
+        </member>
+        <member name="P:RPD.FaultArchivePage.TimeCreated">
+            <summary>
+            Время создания страницы
+            </summary>
+        </member>
+        <member name="P:RPD.FaultArchivePage.Index">
+            <summary>
+            Индекс страницы в дампе AVRXX.bin
+            </summary>
+        </member>
+        <member name="P:RPD.FaultArchivePage.OwnerFault">
+            <summary>
+            Авария, к которой относится данная страница
+            </summary>
+        </member>
+        <member name="P:RPD.FaultArchivePage.MeterNumber">
+            <summary>
+            Номер измерителя, к которому принадлежит данная страница
+            </summary>
+        </member>
+        <member name="P:RPD.FaultArchivePage.Lines">
+            <summary>
+            Список строк страницы
+            </summary>
+        </member>
+        <member name="P:RPD.PageLine.MeterNumber">
+            <summary>
+            Номер измерителя, к которому принадлежит данная строка
+            </summary>
+        </member>
+        <member name="P:RPD.PageLine.ChannelNumber">
+            <summary>
+            Номер канала измерителя, к которому принадлежит данная строка
+            </summary>
+        </member>
+        <member name="P:RPD.PageLine.FaultNumber">
+            <summary>
+            Номер аварии, к которой относится данная строка
+            </summary>
+        </member>
+        <member name="P:RPD.PageLine.LineNumber">
+            <summary>
+            Номер данной строки
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.ISignal">
+            <summary>
+            Представляет собой аналоговый сигнал для отображения
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ISignal.Channels">
+            <summary>
+            Список каналов, с которыми связан сигнал
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ISignal.MathOperation">
+            <summary>
+            Мат. формула, которая оперирует значениями сигналов
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ISignal.Name">
+            <summary>
+            Имя сигнала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ISignal.OwnerFault">
+            <summary>
+            Авария, которой принадлежит сигнал
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.Sysconf">
+            <summary>
+            Представляет собой страницы файла SYSCONF.PSN
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.Sysconf.FileSize">
+            <summary>
+            Размер файла SYSCONF.BIN
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.Sysconf.PsnLogStartPagesMax">
+            <summary>
+            Размерность массива номеров страниц записей лога магистрали ПСН в NAND
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Sysconf.ReadFromSysConfDotBin(System.String)">
+            <summary>
+            Считать структуру из бинарника SYSCONF.BIN
+            </summary>
+            <param name="sysConfFilePath">Путь к SYSCONF.BIN</param>
+        </member>
+        <member name="M:RPD.DAL.Sysconf.WriteToSysConfDotBin(System.String)">
+            <summary>
+            Записать структуру в SYSCONF.BIN
+            </summary>
+            <param name="sysConfFilePath">Путь к файлу</param>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.Raw">
+            <summary>
+            Представление файла в виде последовательности байт
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.DeviceAddress">
+            <summary>
+            Адрес прибора (0-1)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.NetAddress">
+            <summary>
+            Сетевой адрес (2-5)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.FirmwareVersion">
+            <summary>
+            Версия ПО (8-9)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.LastWrittenPageAddress">
+            <summary>
+            Адрес последней записанной страницы в NAND (10-13)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.LastReadedBlockAddress">
+            <summary>
+            Адрес последнего считанного блока в NAND (14-15)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.BadBlocksCount">
+            <summary>
+            Количество плохих блоков (16-17)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.LastWrittenPageNumber">
+            <summary>
+            Порядковый номер последней записанной страницы (18-19)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.FirstWrittenAfterResetPageNumber">
+            <summary>
+            Номер первой записанной после сброса контроллера страницы (20-23)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.PsnLogStartPageNumber">
+            <summary>
+            Номер страницы в NAND, с которой начинается лог магистрали ПСН (24-27)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.ArrayDumpPsnStartPageNumber">
+            <summary>
+            Номер страницы в NAND, с которой начинается массив дампов аварий ПСН (28-31)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.FatOffsetFromPageZero">
+            <summary>
+            Сдвиг FAT от страницы №0 (32-35)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.RpdPagesCountTransmittedToPsnLog">
+            <summary>
+            Количество страниц области дампов аварий, перенесенных в область лога магистрали ПСН (36-39)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.ConfigurationByte">
+            <summary>
+            Байт конфигурации (40)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.FaulstCount">
+            <summary>
+            Количество записанных на устройстве аварий (Maximum - потому что всех аварий может и не быть после копирования в папку)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.FaultDumpsTable">
+            <summary>
+            Таблица дампов аварий (1-1900)
+            100 аварий * 19
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.MetersCount">
+            <summary>
+            Количесвто измерителей в системе (0)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.MetersTable">
+            <summary>
+            Таблица измерителей (1-1217?)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.PsnRegisterStatusMasks">
+            <summary>
+            Массив масок для регистров статуса прибовов в системе ПСН (1218-1239)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.DumpRules">
+            <summary>
+            Набор правил для РПД (1240-1569)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.CurrentPsnLogNumber">
+            <summary>
+            Текущий номер записи лога магистрали ПСН (0)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Sysconf.PsnLogStartPages">
+            <summary>
+            Массив из {PsnLogStartPagesCount} номеров страниц записей лога магистрали ПСН в NAND (1-401)
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.RpdMeterTableRecord">
+            <summary>
+            Репрезентс одну запись из таблицы измерителей (binary size = 38 bytes)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.RpdMeterTableRecord.#ctor">
+            <summary>
+            Конструктор по умолчанию записывает все байты 0xFF-ками
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.Address">
+            <summary>
+            Адрес с первого (0)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.Type">
+            <summary>
+            Тип измерителя (0 - Уран, 1 - ИРВИ, 2 - Радар, 0xFF - нечто недостоверное) (1)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.Status">
+            <summary>
+            Статус (2)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.LinkErrorCounter">
+            <summary>
+            Счетчик ошибок связи (CRC, TO) (3)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.ChannelsMask">
+            <summary>
+            Маска каналов (всего 16 => 2 байта) (4-5)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.ChannelsMaskFromMeter">
+            <summary>
+            Маска каналов, из измерителя (всего 16 => 2 байта) (6-7)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.ChannelsCount">
+            <summary>
+            Число каналов (8)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.ChannelsDumpedCount">
+            <summary>
+            Число каналов (9)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.ChannelsDumpRulesCodes">
+            <summary>
+            Массив из 16 (на каждый канал) кодов условий дампа каналов (от 1 до 47, 0 - нет условия) (10-25)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.HigherReadedFaultNumber">
+            <summary>
+            Номер вычитываемой аварии (до данного номера считаем, что все считанно) (26)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.ReadedFaultsCount">
+            <summary>
+            Число вычитанных аварий (27)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.NumberOfFaultDumpsForMeter">
+            <summary>
+            Количество одновременно хранимых дампов на измеритель (28)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.PageLine">
+            <summary>
+            Строка (29-32)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.PageLinesCountPerFault">
+            <summary>
+            Количество строк на аварию (33-36)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeterTableRecord.Crc">
+            <summary>
+            Контрльная сумма (37)
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.RpdDumpRule">
+            <summary>
+            Репрезентс правило дампа при аварии
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.RpdDumpRule.#ctor">
+            <summary>
+            Инициализирует пустую болванку для правила
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.RpdDumpRule.#ctor(System.Byte,System.Int16,System.Int16,System.Int16)">
+            <summary>
+            О нет, мне лень описывать конструктор с таким числом парамеров!
+            </summary>
+            <param name="type"></param>
+            <param name="controlValue"></param>
+            <param name="maxValue"></param>
+            <param name="minValue"></param>
+        </member>
+        <member name="P:RPD.DAL.RpdDumpRule.Type">
+            <summary>
+            Маска условий контроля и регистрации
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdDumpRule.ControlValue">
+            <summary>
+            Параметр выполнения условий контроля (пока один, 400)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdDumpRule.MaxValue">
+            <summary>
+            Верхний предел
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdDumpRule.MinValue">
+            <summary>
+            Нижний предел
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.TrendType">
+            <summary>
+            Тип тренда (аналоговый/дискретный/...)
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.TrendType.Discrete">
+            <summary>
+            Дискретный
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.TrendType.Analogue">
+            <summary>
+            Аналоговый
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.CmdParameter">
+            <summary>
+            Описывает значение, которое можно выделить из команды (ПСН)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.CmdParameter.FillFromXmlNode(System.Xml.XmlNode,System.Boolean)">
+            <summary>
+            Заполняет структуру экземпляра из XMl узла
+            </summary>
+            <param name="node">Узел-источник</param>
+            <param name="proceedValue">Флаг необходимости обработки атрибута "Value", для узлов DefVal</param>
+            <returns>Флаг успешности операции</returns>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.Name">
+            <summary>
+            Название параметра
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.PositionByteAbs">
+            <summary>
+            Абсолютное положение начального байта параметра в команде (не привязано к конкретной части)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.PositionByte">
+            <summary>
+            № байта в теле части команды
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.PositionBit">
+            <summary>
+            № бита в теле части команды (запрос/ответ)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.CanBeFaultDefine">
+            <summary>
+            Может определять аварию
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.RpdConfPosByte">
+            <summary>
+            № байта в конфигурации РПД
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.RpdConfPosBit">
+            <summary>
+            Номер бита в конфигурации РПД
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.IsValueSigned">
+            <summary>
+            Знаковое?
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.Multiplier">
+            <summary>
+            Множитель
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.Length">
+            <summary>
+            Длина значения параметра в битах
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.Value">
+            <summary>
+            Значение параметра (Int32 => 4 байта макс)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.CmdParameter.PsnCmdPartOwner">
+            <summary>
+            Часть команды, которая владеет данным параметром
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.Signal">
+            <summary>
+            Представляет собой аналоговый сигнал для отображения
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Signal.LoadTrendAsync(System.DateTime,System.DateTime,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Загрузить тренд для определенного периода
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.PsnLogParsing">
+            <summary>
+            Класс для тестирования
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.PsnLogParsing.PsnLogParsingTest">
+            <summary>
+            NUnit Test
+            </summary>
+        </member>
+        <member name="T:RPD.EventArgs.OnCompleteEventArgs">
+            <summary>
+            Аргументы события завершения опреации
+            </summary>
+        </member>
+        <member name="M:RPD.EventArgs.OnCompleteEventArgs.#ctor(RPD.EventArgs.OnCompleteEventArgs.CompleteResult,System.String,System.Object)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="resultCode">Результат операции</param>
+            <param name="message">Текстовое сообщение</param>
+            <param name="argument">Дополнительный аргумент</param>
+        </member>
+        <member name="M:RPD.EventArgs.OnCompleteEventArgs.#ctor(RPD.EventArgs.OnCompleteEventArgs.CompleteResult,System.String)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="resultCode">Результат операции</param>
+            <param name="message">Текстовое сообщение</param>
+        </member>
+        <member name="P:RPD.EventArgs.OnCompleteEventArgs.ResultCode">
+            <summary>
+            Результат операции
+            </summary>
+        </member>
+        <member name="P:RPD.EventArgs.OnCompleteEventArgs.Message">
+            <summary>
+            Текстовое сообщение
+            </summary>
+        </member>
+        <member name="P:RPD.EventArgs.OnCompleteEventArgs.Argument">
+            <summary>
+            Дополнительный аргумент
+            </summary>
+        </member>
+        <member name="T:RPD.EventArgs.OnCompleteEventArgs.CompleteResult">
+            <summary>
+            Возможные результаты операции
+            </summary>
+        </member>
+        <member name="F:RPD.EventArgs.OnCompleteEventArgs.CompleteResult.Ok">
+            <summary>
+            Успех
+            </summary>
+        </member>
+        <member name="F:RPD.EventArgs.OnCompleteEventArgs.CompleteResult.Error">
+            <summary>
+            Ошибка
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IRepository">
+            <summary>
+            Репозиторий
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.IRepository.Open(System.String,System.Action{RPD.EventArgs.OnCompleteEventArgs},System.Action{RPD.EventArgs.OnProgressChangeEventArgs})">
+            <summary>
+            Открывает репозиторий
+            onComplete получает код результата завершения операции
+            progressChanged получает процент завершения операции
+            </summary>
+            <param name="path">Путь к папке репозитория</param>
+            <param name="onComplete">Callback завершения операции</param>
+            <param name="onProgressChange">Callback прогресса</param>
+        </member>
+        <member name="M:RPD.DAL.IRepository.Remove(RPD.DAL.ILocomotive,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Удаляет локомотив из репозитория
+            </summary>
+            <param name="locomotive">Что удалять</param>
+            <param name="onComplete">Callback при завершении удаления</param>
+        </member>
+        <member name="P:RPD.DAL.IRepository.Locomotives">
+            <summary>
+            Список локомотивов
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IDeviceReader">
+            <summary>
+            Класс, позволяющий читать данные с устройств
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.IDeviceReader.OpenDevice(System.String,System.Action{RPD.EventArgs.OnDeviceReaderCompleteEventArgs})">
+            <summary>
+            Открыть устройство, после вызова этого метода можно смотреть список аварий и логов ПСН через свойсвто Locomotive
+            </summary>
+            <param name="path">Строка соединения с устройством</param>
+            <param name="onComplete">Callback метод при завершения операции</param>
+        </member>
+        <member name="M:RPD.DAL.IDeviceReader.ReadDeviceToRepository(System.Collections.Generic.List{RPD.DAL.IFaultLog},System.Collections.Generic.List{RPD.DAL.IPsnLog},System.Action{RPD.EventArgs.OnDeviceReaderCompleteEventArgs},System.Action{RPD.EventArgs.OnProgressChangeEventArgs})">
+            <summary>
+            Сохранить данные устройства в репозиторий
+            </summary>
+            <param name="faults">Список аварий, данные по которым необходимо вычитать</param>
+            <param name="psnLogs">Список логов ПСН, данные по которым необходимо вычитать</param>
+            <param name="onComplete">Callback метод при завершении операции, в аргументах передается локомотив с авариями, которые были считаны</param>
+            <param name="onProgressChange">Callback метод изменения прогресса</param>
+        </member>
+        <member name="T:RPD.DAL.TimeInterval">
+            <summary>
+            у меня не получилось объявить конструкцию вида List&lt;{DateTime, DateTime}&gt;,
+            поэтому я ввел тип TimeInterval, инкапсулирующий такую конструкцию
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.TimeInterval.Start">
+            <summary>
+            Начало интервала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.TimeInterval.Stop">
+            <summary>
+            Конец интервала
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IDumpCondition">
+            <summary>
+            Условия, при которых РПД производит дампы аварий
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.IDumpCondition.CopyFrom(RPD.DAL.IDumpCondition)">
+            <summary>
+            Копирует значения членов класса из другого объекта с интерфейсом IDumpCondition
+            </summary>
+            <param name="source">Условие-источник для копирования</param>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.ConnectionPointIndex">
+            <summary>
+            № точки подключения (индекс в массиве правил (1-47)), если значение равно нулю - Condition не используется
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.HighLimit">
+            <summary>
+            Верхний предел, при превышении которого будет дамп
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.UseHighLimit">
+            <summary>
+            Флаг, указывающий используется ли верхний предел в условии
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.LowLimit">
+            <summary>
+            Нижний предел, если значение уйдет ниже него - будет дамп
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.UseLowLimit">
+            <summary>
+            Флаг, указывающий используется ли нижний предел в условии
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.UseValueAbs">
+            <summary>
+            Флаг использования значения по модулю при сравнении с условием
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.UseLogicalAnd">
+            <summary>
+            Исользовать логическое И (то есть фактически услови дампа сработает, если значение не выйдет из диапазона, а войдет в него)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.ControlValue">
+            <summary>
+            Контролируемое значение
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.UseControlValue">
+            <summary>
+            Используется ли контролируемое значение для данного канала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDumpCondition.IsUsed">
+            <summary>
+            Используется ли условие
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.ILocomotive">
+            <summary>
+            Представляет собой локомотив
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ILocomotive.Sections">
+            <summary>
+            Список секций
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ILocomotive.Name">
+            <summary>
+            Название локомотива
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Locomotive.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:RPD.DAL.Locomotive.SectionExist(System.String)">
+            <summary>
+            существует ли секция с определенным номером у данного локомотива?
+            </summary>
+            <param name="sectionName">Номер секции для поиска</param>
+            <returns>Флаг существования секции с указаным номером в коллекции</returns>
+        </member>
+        <member name="M:RPD.DAL.Locomotive.GetSectionByName(System.String)">
+            <summary>
+            Получает секцию с определенным номером
+            </summary>
+            <param name="sectionName">Номер секции</param>
+            <returns>Секция, Could be null!</returns>
+        </member>
+        <member name="P:RPD.DAL.Locomotive.Name">
+            <summary>
+            Имя локомотива
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IDataPoint">
+            <summary>
+            Класс, описывающий точку канала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDataPoint.Value">
+            <summary>
+            Значение точки
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDataPoint.Time">
+            <summary>
+            Время точки
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDataPoint.Valid">
+            <summary>
+            Флаг валидности значения точки, если значение точки - false, значит Value необходимо игнорировать
+            Ну или можно усложнить сво-во Value, чтобы оно вырабатывало исключение, если сигнал невалиден
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.DalTest">
+            <summary>
+            Класс для тестирования
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.DalTest.manualEventWaitRepoOpened">
+            <summary>
+            Первый тест
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DalTest.FirstTest">
+            <summary>
+            Хрен знает, что тестируем
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DalTest.LoaderWorks">
+            <summary>
+            Тестируем Loader
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DalTest.ReadConfig">
+            <summary>
+            Тестируем чтение конфигурации
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.PsnData">
+            <summary>
+            Данные по ПСН (пара байт-межбайтовый интервал)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.PsnData.#ctor(System.Byte,System.Byte)">
+            <summary>
+            Создает новую пару данных "подслушанный байт - межбайтовый интервал"
+            </summary>
+            <param name="value">Значение подслушанного байта</param>
+            <param name="pause">Межбайтовый интервал</param>
+        </member>
+        <member name="M:RPD.DAL.PsnData.#ctor(System.Byte)">
+            <summary>
+            Создает новую пару данных "подслушанный байт - межбайтовый интервал = 0"
+            </summary>
+            <param name="value">Значение подслушанного байта</param>
+        </member>
+        <member name="F:RPD.DAL.PsnData.Value">
+            <summary>
+            Значение перехваченного байта
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.PsnData.Pause">
+            <summary>
+            Межбайтовый интервал
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.RpdMeter">
+            <summary>
+            Класс, описывающий измеритель (ИРВИ, УРАН и т.п.)
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IRpdMeter">
+            <summary>
+            Класс, описывающий измеритель (ИРВИ, УРАН и т.п.)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdMeter.Name">
+            <summary>
+            Некая информация, для удобной работы (не 5-ый измеритель 8-ой аварии, а измеритель давления двигателя, наприер)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdMeter.Type">
+            <summary>
+            Тип измерителя
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdMeter.Address">
+            <summary>
+            Некий номер измерителя
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdMeter.Channels">
+            <summary>
+            Список каналов, которые есть на измерителе
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdMeter.OwnerFault">
+            <summary>
+            Авария, которой принадлежит измеритель
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.RpdMeter.ReadSettings(RPD.FaultArchivePage)">
+            <summary>
+            Считать настройки измерителя из первой страницы (первая строка + заполнение спец. струкутр из оставшихся нулевых строк)
+            </summary>
+            <param name="firstPage">Первая послезаголовочная страница</param>
+        </member>
+        <member name="P:RPD.DAL.RpdMeter.SettingsLines">
+            <summary>
+            Строки, содержащие настройки измерителя
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeter.SettingsRaw">
+            <summary>
+            Массив байт для формирования TRegSetupRPD
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeter.Settings">
+            <summary>
+            Структура настроек измерителя
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeter.SettingsReaded">
+            <summary>
+            Признак получения информации о таймингах
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeter.TrendsTimeOffset">
+            <summary>
+            Время в мкс между последней выборкой и приходом команды "дамп памяти"
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeter.TrendDataCountBeforeDump">
+            <summary>
+            Количество выборок до команды "дамп памяти"
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdMeter.TrendDataCountAfterDump">
+            <summary>
+            Количество выборок после команды "дамп памяти"
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.TRegSetupRPD.Channels">
+            <summary>
+            Маска каналов (например = 15 в битах будет = 0000 0000 0000 1111 => 4 канала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.TRegSetupRPD.Time">
+            <summary>
+            На самом деле это частота (Гц) => dticks = 10 000 000 / Time
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.FaultLog">
+            <summary>
+            Класс, описывающий аварию
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IFaultLog">
+            <summary>
+            Класс, описывающий аварию
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IFaultLog.Name">
+            <summary>
+            Неоке имя аварии, для дальнейшего дополнительного идентифицирования пользователем
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IFaultLog.Signals">
+            <summary>
+            Список сигналов аварии (составляется по конфигурации)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IFaultLog.RpdMeters">
+            <summary>
+            Список каналов (сквозной) измеритель будет свойством канала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IFaultLog.AccuredAt">
+            <summary>
+            Время срабатывания аварии (Марат сказал, что требуется точность до 1сек, так что DateTime справится с задачей)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IFaultLog.OwnerSection">
+            <summary>
+            Секция локомотива, которой принадлежит данная авария
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IFaultLog.SavedToRepository">
+            <summary>
+            Флаг того, что авария сохранена в репозиторий
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IFaultLog.DeviceConfig">
+            <summary>
+            Конфигурация устройства, которому принадлежит данная авария
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.#ctor(RPD.DAL.ISection,System.String)">
+            <summary>
+            Section-side конструктор
+            </summary>
+            <param name="owner">Секция-владелец</param>
+            <param name="name">название аварии</param>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.#ctor(RPD.Device,System.String,System.Int32)">
+            <summary>
+            Device-side конструктор
+            </summary>
+            <param name="owner">Девайс-владелец</param>
+            <param name="name">Название аварии</param>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.ReadInfoFromBinaryFile(System.IO.FileInfo)">
+            <summary>
+            Прочитать информацию об аварии из бинарника вида AVR*.bin
+            Переопределяет название аварии из бинарника
+            Переопределяет время аварии
+            Переопределяет FileHash
+            Переопределяет BinFilePath
+            </summary>
+            <param name="sourceFile">Путь к бинарнику</param>
+            <returns>Результат операции</returns>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.ReadChannelTrendFromBinaryFile(RPD.DAL.RpdChannel)">
+            <summary>
+            Прочитать тренд из бинарника
+            </summary>
+            <param name="channel">Канал, для которого грузится тренд</param>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.RemoveMeterSettingLines(RPD.FaultArchivePage)">
+            <summary>
+            Удаляет нулевые строки из списка строк страницы, потому что в них хранятся настройки измерителей
+            </summary>
+            <param name="currentPage">Страница, из которой нужно удалить данные</param>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.GetMeterByAddress(System.Int32)">
+            <summary>
+            Получить измеритель по его адресу
+            </summary>
+            <param name="meterAddress">Aдрес измерителя</param>
+            <returns>Найденный измеритель или null, если измеритель с таким номером не найден</returns>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.SaveToFile(System.IO.DirectoryInfo)">
+            <summary>
+            Сохранить аварию в директорию. При этом изменяется свойство this.BinFilePath.
+            </summary>
+            <param name="destinationDir">Информация о папке аварии</param>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.UpdateName">
+            <summary>
+            Обновляет имя аварии, основываясь на BinFileName, SavedAt
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.FaultLog.GetFaultByFileHash(System.Collections.Generic.IEnumerable{RPD.DAL.FaultLog},System.String)">
+            <summary>
+            Получает лог аварии по хэшу файла
+            </summary>
+            <param name="fileHash">Строка хэша файла</param>
+            <returns>Найденый лог аварии, либо null</returns>
+        </member>
+        <member name="P:RPD.DAL.FaultLog.DeviceConfig">
+            <summary>
+            Dev. config.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.FaultLog.BinFilePath">
+            <summary>
+            Путь к бинарнику аварии, сначала на Flash
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.FaultLog.HeaderPageIndex">
+            <summary>
+            Запомним индекс заголовочной страницы для дальнейшей быстрой навигации
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.FaultLog.SavedToRepository">
+            <summary>
+            Флаг того, что авария сохранена в репозиторий
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.Repository.thisLock">
+            <summary>
+            объект синхронизации
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.Repository.tracer">
+            <summary>
+            Трассировщик
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Repository.#ctor">
+            <summary>
+            Инициализирует новый экземпляр класса Repository
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Repository.GetDevices(System.String)">
+            <summary>
+            Получает список девайсов из структуры папок
+            </summary>
+            <param name="path">Путь к папке репозитория</param>
+            <returns>Возвращает список полученных девайсов</returns>
+        </member>
+        <member name="M:RPD.DAL.Repository.FormOutLocomotivesList(System.Collections.Generic.IEnumerable{RPD.Device},System.Action{RPD.EventArgs.OnProgressChangeEventArgs})">
+            <summary>
+            Формирует список локомотивов на основе списка девайсов
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Repository.FillLogs(System.Collections.Generic.IEnumerable{RPD.DAL.ILocomotive},System.Action{RPD.EventArgs.OnProgressChangeEventArgs})">
+            <summary>
+            Заполняет списки аварий и псн-логов у секций
+            </summary>
+            <param name="locomotives">Перечисление локомотивов с заполненнымыи полями .Sections.Devices</param>
+            <param name="onProgressChange">Callback прогресса</param>
+        </member>
+        <member name="M:RPD.DAL.Repository.ReformLocomotivesFromDevices(System.Collections.ObjectModel.ObservableCollection{RPD.DAL.ILocomotive},System.Collections.Generic.List{RPD.Device},System.Action{RPD.EventArgs.OnProgressChangeEventArgs})">
+            <summary>
+            Переформировывает список локомотивов из списка девайсов. Основывается на FormOutLocomotivesList().
+            </summary>
+            <param name="locomotives">Список локомотивов для модификации</param>
+            <param name="devices">Список девайсов - источник модификации</param>
+            <param name="onProgressChange">Callback метод для отображения прогресса</param>
+        </member>
+        <member name="M:RPD.DAL.Repository.LocomotiveExistInList(System.String,System.Collections.Generic.IEnumerable{RPD.DAL.ILocomotive})">
+            <summary>
+            Существует ли локомотив в списке
+            </summary>
+            <param name="locomotiveName">Имя локомотива для поиска</param>
+            <param name="locomotives">Список, в котором производится поиск</param>
+            <returns>Флаг присутсвия локомотива в коллекции</returns>
+        </member>
+        <member name="M:RPD.DAL.Repository.GetLocomotive(System.String,System.Collections.Generic.IEnumerable{RPD.DAL.ILocomotive})">
+            <summary>
+            Получает ссылку локомотив из списка
+            </summary>
+            <param name="locomotiveName">Имя локомотива для поиска</param>
+            <param name="locomotives">Коллекция, в которой производится поиск</param>
+            <returns>Ссылка на найденный ILocomotive, COULD BE NULL!</returns>
+        </member>
+        <member name="M:RPD.DAL.Repository.DeviceExistInList(RPD.Device)">
+            <summary>
+            Существет ли девайс в репозитории?
+            </summary>
+            <param name="dev">Девайс, наличие которого фиксируется</param>
+            <returns>Результат проверки на существование</returns>
+        </member>
+        <member name="M:RPD.DAL.Repository.GetDeviceFromListByAttributes(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Возвращает девайс по атрибутам (порядок атрибутов может даже не совпадать)
+            </summary>
+            <param name="attributes">Атрибуты</param>
+            <returns>Девайс, null если не найден в рпозитории</returns>
+        </member>
+        <member name="M:RPD.DAL.Repository.AppendInfoFromDevice(RPD.Device)">
+            <summary>
+            Тут поидее должно происходить копирование файлов аварий в репозиторий
+            </summary>
+            <param name="dev">Девайс для присоединения</param>
+        </member>
+        <member name="M:RPD.DAL.Repository.Remove(RPD.DAL.ILocomotive,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Удаляет локомотив из репозитория (async)
+            </summary>
+            <param name="locomotive">Локомотив для удаления</param>
+            <param name="onComplete">Callback завершения операции</param>
+        </member>
+        <member name="M:RPD.DAL.Repository.SaveDevice(RPD.Device,System.Action{System.Int32})">
+            <summary>
+            Сохраняет девайс в репозиторий
+            </summary>
+            <param name="dev">Девайс для сохранения</param>
+        </member>
+        <member name="P:RPD.DAL.Repository.IsOpened">
+            <summary>
+            Флаг успешного открытия репозитория
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Repository.Locomotives">
+            <summary>
+            Список локомотивов репозитория
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Repository.BgwOpen">
+            <summary>
+            Хранитель потока, в контексте которого выполняется функция Open()
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Repository.Path">
+            <summary>
+            Хранитель пути к репозиторию
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Repository.TempPath">
+            <summary>
+            Хранитель пути к временной папке
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Repository.Devices">
+            <summary>
+            Список девайсов репозитория
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DeviceReader.#ctor(RPD.DAL.Repository)">
+            <summary>
+            Инициализирует новый девайс ридер
+            </summary>
+            <param name="repositoryToLink">Репозиторий, связанный с девайс ридером</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceReader.OpenDevice(System.String,System.Action{RPD.EventArgs.OnDeviceReaderCompleteEventArgs})">
+            <summary>
+            Открываем девайс асинхронно.
+            Сохранение в репозиторий на этом этапе не требуется.
+            </summary>
+            <param name="path">Путь к девайсу (строка соединения)</param>
+            <param name="onComplete">Callback завершения операции</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceReader.OpenDeviceFromFlash">
+            <summary>
+            Открыть девайс с флешки
+            </summary>
+            <returns>Локомотив с девайса</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceReader.RemoveUnneededFaultsFromDevice(RPD.Device,System.Collections.Generic.List{RPD.DAL.IFaultLog})">
+            <summary>
+            Убирает все аварии из Device, если они не указаны в списке
+            </summary>
+            <param name="dev">Device из которого нужно убирать не интересные аварии</param>
+            <param name="neededFaults">Аварии-исключения (интересные)</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceReader.RemoveUnneededPsnLogsFromDevice(RPD.Device,System.Collections.Generic.List{RPD.DAL.IPsnLog})">
+            <summary>
+            Убирает все PsnLogs из Device, если они не указаны в списке
+            </summary>
+            <param name="dev">Device из которого нужно убирать не интересные PsnLog</param>
+            <param name="neededPsnLogs">PsnLog-исключения (интересные)</param>
+        </member>
+        <member name="P:RPD.DAL.DeviceReader.Locomotive">
+            <summary>
+            Локомотив с девайса
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceReader.DevicePath">
+            <summary>
+            Путь к девайсу
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceReader.LinkedRepository">
+            <summary>
+            Связанный с девайсом репозиторий
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceReader.Dev">
+            <summary>
+            Девайс, ассоциирущийся с этим девайс-ридером
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.Read(System.String,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Чтение конфигурации
+            </summary>
+            <param name="path">Путь к устройству</param>
+            <param name="onComplete">Callback завершения операции</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.ReadSync(System.String)">
+            <summary>
+            Считать конфигурацию, синхронный метод
+            </summary>
+            <param name="devPath">путь к устройству</param>
+            <returns>Флаг успешности чтения конфигурации</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.GetXmlDocFromRpdconf(System.IO.FileStream)">
+            <summary>
+            Получает из текущей позиции файла RPDCONF.BIN XmlDocument, котроый был сжат и записан туда ранее
+            </summary>
+            <param name="rpdconfFileStream">Поток файла RPDCONF.BIN, с разрешенным чтением из файла</param>
+            <returns>Восстановленный XmlDocument</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.Write(System.String,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Запись конфигурации
+            </summary>
+            <param name="path">Путь к устройству</param>
+            <param name="onComplete">Callback завершения операции</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.WriteSync(System.String,System.Boolean)">
+            <summary>
+            Сохранить синхронно
+            </summary>
+            <param name="devPath">Путь для сохранения девайса</param>
+            <param name="updateConfigDateTime">Флаг необходимости обновления атрибута даты-времени конфигурации</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.CompressXml(System.Xml.XmlDocument)">
+            <summary>
+            Сжимает XML документ при помощи System.IO.GZipStream
+            </summary>
+            <param name="xdoc">XML документ, который необходимо сжать</param>
+            <returns>Массив байт, в которые был упакован XML документ</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.RemapRpdChannelsDumpConditions">
+            <summary>
+            Переопределяет ConnectionPointIndex для всех точек подключения каналов
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.RecreateMetersAndRulesTablesForSysconfFromMeters(RPD.DAL.Sysconf,System.Collections.ObjectModel.ObservableCollection{RPD.DAL.IRpdMeter})">
+            <summary>
+            Пересоздает таблицы правил дампов и измерителей в структуре SysconfStartPage
+            </summary>
+            <param name="sysconf">Что обновлять</param>
+            <param name="meters">Список измерителей, на основании которого обновлять</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.FillPsnMetersChannelsFromRpdConfig">
+            <summary>
+            Считать настройки ПСН каналов из конфиугурации РПД (из SYSCONF.BIN)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.FillRpdMetersFromSysconfAfterConfigRead">
+            <summary>
+            Модифиирует список РДП измерителей в соотв. с файлом SYSCONF.BIN (удаляет ненужные измерители - которых нет в SYSCONF.BIN, или добовляет при нехватке)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.GetPsnChannelByRpdConfPosition(System.Int32,System.Int32)">
+            <summary>
+            Производит сквозной поиск ПСН канала в списке измерителей ПСН данной конфигурации
+            </summary>
+            <param name="rpdConfPosByte">Параметр поиска - № байта в конфигурации РПД</param>
+            <param name="rpdConfPosBit">Параметр поиска - № бита в конфигурации РПД</param>
+            <returns>Найденный ПСН канал or null</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.ParseRulesAndMetersInfo(RPD.DAL.Sysconf,System.Collections.ObjectModel.ObservableCollection{RPD.DAL.IRpdMeter})">
+            <summary>
+            Парсит страницу 0 файла SYSCONF.BIN
+            </summary>
+            <param name="page">Что обновлять</param>
+            <param name="metersToUpdate">Список измерителей, на основании которого обновлять</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.LoadPsnConfigFromXml(System.String)">
+            <summary>
+            Считать свою конфигурацию ПСН (измериетли и протокол обмена)
+            </summary>
+            <param name="filename">Путь к XML файлу, в котором хранится конфигурация ПСН (раньше таковым был psn.config.xml)</param>
+            <returns>XmlDocument для возможности дальнейшей работы с ним (у конфигурации пока что не предусмотрен метод, сохраняющий конфигурацию ПСН)</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.FillPsnMetersChannelsFromPsnCommands">
+            <summary>
+            Формирует каналы измерителей по маскам комманд (по идее, можно размазать по классам)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.LoadAttributesFromXml(System.String)">
+            <summary>
+            Преобразует Xml файл в набор атрибутов (название локомотива и номер секции автометически проецируются в атрибуты)
+            </summary>
+            <param name="filename">Имя xml файла</param>
+            <returns>Флаг успеха операции</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.SaveAttributesToXml">
+            <summary>
+            Сохраняет атрибуты девайса в XML файл (название локомотива и номер секции автометически проецируются в атрибуты)
+            </summary>
+            <returns>XML документ c атрибутами</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.LoadRpdConfigFromXml(System.String)">
+            <summary>
+            Считать информацию об измерителях РПД из XML файла
+            </summary>
+            <param name="filename">Путь к XML файлу с описанием измерителей РПД</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.SaveRpdConfigToXml">
+            <summary>
+            Сохранить информацию об измерителях РПД данной конфигурации в XML документ
+            </summary>
+            <returns>Заполненный XML документ</returns>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.LinkCopiesOfRpdMetersToFault(RPD.DAL.FaultLog)">
+            <summary>
+            Связывает аварию и список копий измертелей РПД из данной конфигурации
+            </summary>
+            <param name="linkedFaultLog">Авария для связывания</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.LinkCopiesOfPsnMetersToFault(RPD.DAL.PsnLog)">
+            <summary>
+            Связывает псн-лог и список копий измерителей ПСН из данной конфигурации
+            </summary>
+            <param name="linkedPsnLog"></param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.ClearArchives(System.String)">
+            <summary>
+            "Очистка архивов" - при вызове этого метода производится сброс счетчика аварий и выдача служебной команды для РПД, файлы архивов на самом деле не трогаются
+            </summary>
+            <param name="driveLetter">Буква диска, которой определилось устройство в системе</param>
+        </member>
+        <member name="M:RPD.DAL.DeviceConfiguration.GetPsnCmdPartByChannel(RPD.DAL.PsnChannel)">
+            <summary>
+            Находит кусок (запрос или ответ) команды ПСН, в которой содержится информация о канале
+            </summary>
+            <param name="channel">Искомый ПСН канал</param>
+            <returns>Часть команды с информацией по каналу или null, если ничего не найдено</returns>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.Attributes">
+            <summary>
+            Словарь атрибутов девайса
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.RpdMeters">
+            <summary>
+            Измерители РПД
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.PsnMeters">
+            <summary>
+            Измерители ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.PsnCommands">
+            <summary>
+            Команды протокола ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.Diagnostic">
+            <summary>
+            Дианостика девайса
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.PsnVersion">
+            <summary>
+            Номер протокола ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.LocomotiveName">
+            <summary>
+            Имя локомотива - проецируется в Attributes
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.SectionNumber">
+            <summary>
+            Номер секции - проецируется в Attributes
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.Comment">
+            <summary>
+            Коментарий для человеков.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.Address">
+            <summary>
+            Адрес прибора.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.NetAddress">
+            <summary>
+            Сетевой адрес.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.UseHammingForNand">
+            <summary>
+            Применять код Хэминга к содержимому страниц в NAND.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.LogPsn">
+            <summary>
+            Вести лог магистрали ПСН.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.SaveByteInterval">
+            <summary>
+            Сохранять межбайтовый интервал в обмене ПСН.
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceConfiguration.ResetFaultsDump">
+            <summary>
+            Сбрасывать параметры в таблице аварий и освобождать память под дампы аварий, если считаны все файлы дампов аварий.
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.ConnectionPointsGroup">
+            <summary>
+            Репрезентс группу connection point'ов
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.ConnectionPointsGroup.#ctor(System.String)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="name">Название группы</param>
+        </member>
+        <member name="P:RPD.DAL.ConnectionPointsGroup.Name">
+            <summary>
+            Название группы точек
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ConnectionPointsGroup.Points">
+            <summary>
+            Список точек данной группы
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.RpdMeterType">
+            <summary>
+            Тип измерителя
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.RpdMeterType.Undefined">
+            <summary>
+            Тип измерителя неопределен
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.RpdMeterType.Uran">
+            <summary>
+            УРАН
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.RpdMeterType.Irvi">
+            <summary>
+            ИРВИ
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.RpdMeterType.Radar">
+            <summary>
+            Радар
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.ISection">
+            <summary>
+            Описывает секцию локомотива (Represents :))
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ISection.Faults">
+            <summary>
+            Список аварий
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ISection.Psns">
+            <summary>
+            Список ПСНов
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ISection.OwnerLocomotive">
+            <summary>
+            Локомотив, которому принадлежит секция
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.ISection.Name">
+            <summary>
+            Название секции (в простейшем варианте - № секции)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Section.GetFaultByFileHash(System.String)">
+            <summary>
+            Получает лог аварии по хэшу файла
+            </summary>
+            <param name="fileHash">Строка хэша файла</param>
+            <returns>Найденый лог аварии, либо null</returns>
+        </member>
+        <member name="P:RPD.DAL.Section.Devices">
+            <summary>
+            Список девайсов, относящихся к этой секции
+            </summary>
+        </member>
+        <member name="T:RPD.Support.Usefull">
+            <summary>
+            Клас полезной хрени
+            </summary>
+        </member>
+        <member name="M:RPD.Support.Usefull.CheckRemoveBackslashFromPath(System.String)">
+            <summary>
+            Убирает лишний символ \\ в конце строки - нормализует путь к директории
+            </summary>
+            <param name="path">Строка-путь к директории</param>
+            <returns>Нормализованный путь</returns>
+        </member>
+        <member name="M:RPD.Support.Usefull.GetPhysicalDriveName(System.String)">
+            <summary>
+            Получаеть название физического диска используя механизм WMI, если название не найдено - возвращает пустую строку
+            </summary>
+            <param name="driveLetter">Буква логического тома</param>
+            <returns>Название физического диска вида \\.\PHYSICALDRIVEX</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnCommand.GetFirstPosition(System.Collections.Generic.List{RPD.DAL.PsnData},System.Int32)">
+            <summary>
+            Поиск первого возможного вхождения команды в массиве байт (предположительно в странице ПСН)
+            </summary>
+            <param name="source">Данные магистрали, в которых производится поиск</param>
+            <param name="startSearchIndex">Индекс, с которого нужно начинать поиск</param>
+            <returns>Индекс возможного вхождения</returns>
+        </member>
+        <member name="T:RPD.DAL.DataPoint">
+            <summary>
+            Класс, описывающий точку канала
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.Conversions">
+            <summary>
+            Класс для тестирования
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Conversions.ConditionToRuleAndBack">
+            <summary>
+            ConditionToRuleAndBack
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Conversions.SysConfMetersToRecordsAndBack">
+            <summary>
+            Тестируем Содание бинароной записи из измерителя и обратное преобразование
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.Loader">
+            <summary>
+            Позволяет получить ссылки на корневые интерфейсы сборки RPD.DAL.
+            Для каждого экземпляра Loader многократный вызов метода GetRepository будет возвращать ссылку на один и тот же объект.
+            Но для каждого экземпляра Loader многократный вызов метода GetDeviceReader будет всегда возвращать ссылку на новый объект.
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Loader.#ctor">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.Loader.GetRepository">
+            <summary>
+            Получает ссылку на репозиторий, постоянный в данном экземпляре Loader
+            </summary>
+            <returns>Репозиторий</returns>
+        </member>
+        <member name="M:RPD.DAL.Loader.GetDeviceReader(RPD.DAL.IRepository)">
+            <summary>
+            Получает ссылку на девайс ридер
+            </summary>
+            <param name="rep">Репозиторий, к которому будет добавляться содержимое с девайса</param>
+            <returns>Девайс ридер</returns>
+        </member>
+        <member name="M:RPD.DAL.Loader.CreateDeviceConfiguration">
+            <summary>
+            Создает описание кофигурации
+            </summary>
+            <returns>Ссылка на новое описание конфигурации</returns>
+        </member>
+        <member name="T:RPD.DAL.IDeviceDiagnostic">
+            <summary>
+            Диагностика девайса
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceDiagnostic.FirmwareVersion">
+            <summary>
+            Версия прошивки
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceDiagnostic.LostFRAM">
+            <summary>
+            Нет связи с FRAM
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceDiagnostic.LostNAND">
+            <summary>
+            Нет связи с NAND
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceDiagnostic.ErrorRpdMetersTableCRC">
+            <summary>
+            Ошибка контрольной суммы в таблице измерителей
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceDiagnostic.ErrorDumpTableCRC">
+            <summary>
+            Ошибка CRC16 таблицы дампов аварий
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceDiagnostic.FaultLogsCount">
+            <summary>
+            Число дампов аварий на устройстве
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IDeviceDiagnostic.BadBlocks">
+            <summary>
+            Список адресов плохих блоков
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceDiagnostic.FirmwareVersion">
+            <summary>
+            Версия прошивки
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceDiagnostic.FaultLogsCount">
+            <summary>
+            Число дампов аварий на устройстве
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceDiagnostic.BadBlocks">
+            <summary>
+            Список адресов плохих блоков
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceDiagnostic.LostFRAM">
+            <summary>
+            Нет связи с FRAM
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceDiagnostic.LostNAND">
+            <summary>
+            Нет связи с NAND
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceDiagnostic.ErrorRpdMetersTableCRC">
+            <summary>
+            Ошибка контрольной суммы в таблице измерителей
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.DeviceDiagnostic.ErrorDumpTableCRC">
+            <summary>
+            Ошибка CRC16 таблицы дампов аварий
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.RpdChannel">
+            <summary>
+            Описывает 1 канал измерителя
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IRpdChannel">
+            <summary>
+            Описывает 1 канал измерителя
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdChannel.Name">
+            <summary>
+            Название канала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdChannel.Number">
+            <summary>
+            Некий номер канала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdChannel.IsEnabled">
+            <summary>
+            Флаг предконфигурирования канала (true - для канала задана конфигурация, false - канал не конфигурировался)
+            этот флаг записывается в таблицу измерителей, как бит двухбайтного числа таблицы (2 байта = 16 канало 0/1)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdChannel.IsService">
+            <summary>
+            Флаг того, что канал является служебным (например, у урана это каналы 8 и 16)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdChannel.CurrentValue">
+            <summary>
+            Текущее значение (которое предается в загаловке аварии), хз, всего скорее это не точка
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdChannel.OwnerMeter">
+            <summary>
+            Измеритель, которому принадлежит
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IRpdChannel.DumpCondition">
+            <summary>
+            Условие канала, при срабатывании которого производится дамп (нужно в основном для конфигурации)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.RpdChannel.CopyTrendToAnotherChannel(RPD.DAL.RpdChannel)">
+            <summary>
+            Перекидывает ссылку на тренд этого канала и взводит все необходимые флаги у другого канала
+            </summary>
+            <param name="anotherChannel">канал, в который будет произведено копирование ссылки на тренд</param>
+        </member>
+        <member name="M:RPD.DAL.RpdChannel.LoadTrendAsync(System.DateTime,System.DateTime,System.Action{RPD.EventArgs.OnCompleteEventArgs})">
+            <summary>
+            Загрузить тренд для определенного периода
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.Support.Log.Global">
+            <summary>
+            Представляет собой глобальный логгер библиотеки
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.IPsnLog">
+            <summary>
+            Лог магистрали ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnLog.DeviceConfig">
+            <summary>
+            Конфигурация устройства, которому принадлежит данный лог линии ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnLog.PsnMeters">
+            <summary>
+            Список изерителей линии ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnLog.Start">
+            <summary>
+            Начало лога
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnLog.End">
+            <summary>
+            Конец лога
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnLog.OwnerSection">
+            <summary>
+            Секция локомотива, которой принадлежит данный лог ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.IPsnLog.SavedToRepository">
+            <summary>
+            Флаг того, что лог сохранен в репозиторий
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.PsnLog.infoReaded">
+            <summary>
+            Признак того, что информация о логе была считана из файла PSN.BIN
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.PsnLog.#ctor(RPD.Device,System.Int32,System.Boolean)">
+            <summary>
+            Device-side конструктор
+            </summary>
+            <param name="owner">Девайс-владелец c прочитанной конфигурацией</param>
+            <param name="logNumberInPsnDotBin">Номер лога в файле PSN.BIN</param>
+            <param name="ignoreBytePause">Не используется межбайтовый интервал в страницах лога ПСН</param>
+        </member>
+        <member name="M:RPD.DAL.PsnLog.ReadInfoFromBinaryFile(System.IO.FileInfo)">
+            <summary>
+            Получает первичную информацию из бинарника, опираясь на OwnerDevice.DeviceConfig
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.PsnLog.ReadInfoFromFragmentFile(System.IO.FileInfo)">
+            <summary>
+            Читает информацию из фрагмента файла PSN.BIN (PSN000.BIN например), Модифицирует свойство this.BinFIlePath
+            </summary>
+            <param name="fragmentFileInfo">Инофрмация о фрагменте файла</param>
+            <returns>Результат операции (false - операция прошла неуспешно)</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnLog.SaveLog(System.IO.DirectoryInfo)">
+            <summary>
+            Сохранить лог
+            </summary>
+            <param name="saveToDi">Информация о директории назначения</param>
+        </member>
+        <member name="M:RPD.DAL.PsnLog.GetPsnLogByDateTime(System.Collections.Generic.IEnumerable{RPD.DAL.IPsnLog},System.DateTime,System.DateTime)">
+            <summary>
+            Получает ПСН лог по датам начала и конца
+            </summary>
+            <param name="start">Начало лога</param>
+            <param name="end">Конец лога</param>
+            <returns>Найденый ПСН лог или null</returns>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.DeviceConfig">
+            <summary>
+            Конфигурация устройства, которому принадлежит данный лог линии ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.PsnMeters">
+            <summary>
+            Список изерителей линии ПСН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.Start">
+            <summary>
+            Начало лога
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.End">
+            <summary>
+            Конец лога
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.OwnerSection">
+            <summary>
+            Секция владелец
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.OwnerDevice">
+            <summary>
+            Устройство владелец
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.SavedToRepository">
+            <summary>
+            Флаг того, что лог сохранен в репозиторий
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.BinFilePath">
+            <summary>
+            Путь к бинарнику, в котором хранится лог
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.LogNumberInPsnBin">
+            <summary>
+            Номер лога в файле ПСН.БИН
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.StartPageInPsnBin">
+            <summary>
+            Начальная страница в файле PSN.BIN
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.EndPageInPsnBin">
+            <summary>
+            Конечная страница в файле PSN.BIN
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.IgnoreBytePause">
+            <summary>
+            Игнорировать межбайтовый интервал?
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnLog.YearsOffset">
+            <summary>
+            Смещение лет добавлять даты лога (то есть в бинарнике хранится не 2010 год, например, а 0010 год)
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.ConfigReadWrite">
+            <summary>
+            Класс для тестирования
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.ConfigReadWrite.WriteReadConfig">
+            <summary>
+            ConditionToRuleAndBack
+            </summary>
+        </member>
+        <member name="T:RPD.Support.Tracer">
+            <summary>
+            Класс трассировки в файл (разработал давно, применяется, когда нужно трассировать события, которые я не в состоянии отследить по каким либо причинам)
+            </summary>
+        </member>
+        <member name="M:RPD.Support.Tracer.#ctor(System.String,System.Boolean,System.Int32)">
+            <summary>
+            Создает новый экземпляр класса
+            </summary>
+            <param name="fileName">Имя файла, в который будет производиться трасировка</param>
+            <param name="append">Флаг необходимости работы с файлом в режиме дозаписи</param>
+            <param name="logLevel">Уровень детализации трассировки (см. св-во Tracer.MaxLogLevel)</param>
+        </member>
+        <member name="M:RPD.Support.Tracer.Log(System.String,System.Int32)">
+            <summary>
+            Протоколирует текстовое сообщение с DateTimeStamp
+            </summary>
+            <param name="text">Текстовое сообщение</param>
+            <param name="logLevel">Уровень детализации</param>
+        </member>
+        <member name="M:RPD.Support.Tracer.Log(System.String,System.String,System.Int32)">
+            <summary>
+            Протоколирует текстовое сообщение от попределенного источника с DateTimeStamp
+            </summary>
+            <param name="source">Источник</param>
+            <param name="text">Сообщение</param>
+            <param name="logLevel">Уровень детализации</param>
+        </member>
+        <member name="P:RPD.Support.Tracer.MaxLogLevel">
+            <summary>
+            Уровень детализации лога. Если этот параметр меньше предаваемого в вызываемом методе Tracer.Log(), то трассировка не будет производиться.
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.RpdChannellDumpCondition.CopyFrom(RPD.DAL.IDumpCondition)">
+            <summary>
+            Копирует значения членов класса из другого объекта с интерфейсом IDumpCondition
+            </summary>
+            <param name="source">Условие-источник для копирования</param>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.ConnectionPointIndex">
+            <summary>
+            № точки подключения (индекс в массиве правил (1-47))
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.HighLimit">
+            <summary>
+            Верхний предел, при превышении которого будет дамп
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.UseHighLimit">
+            <summary>
+            Флаг, указывающий используется ли верхний предел в условии
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.LowLimit">
+            <summary>
+            Нижний предел, если значение уйдет ниже него - будет дамп
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.UseLowLimit">
+            <summary>
+            Флаг, указывающий используется ли нижний предел в условии
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.UseValueAbs">
+            <summary>
+            Флаг использования значения по модулю при сравнении с условием
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.UseLogicalAnd">
+            <summary>
+            Исользовать логическое И (то есть фактически услови дампа сработает, если значение не выйдет из диапазона, а войдет в него)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.ControlValue">
+            <summary>
+            Контролируемое значение
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.UseControlValue">
+            <summary>
+            Флаг ипользования условия дампа для данного канала
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.RpdChannellDumpCondition.IsUsed">
+            <summary>
+            Используется ли условие
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.PsnPage">
+            <summary>
+            Страница ПСН
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.PsnPage.HeaderLength">
+            <summary>
+            Длина заголовка страницы
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.PsnPage.Length">
+            <summary>
+            Длина всей страницы
+            </summary>
+        </member>
+        <member name="F:RPD.DAL.PsnPage.tracer">
+            <summary>
+            Трассировщик для отладки
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.PsnPage.CompareByCreateTime(RPD.DAL.PsnPage,RPD.DAL.PsnPage)">
+            <summary>
+            Сравнивает две страницы ПСН между собой по времени создания
+            </summary>
+            <param name="p1">Первая страница для сравнения</param>
+            <param name="p2">Вторая страница для сравнения</param>
+            <returns>1 если p1 больше p2, -1 если p1 меншье p2, 0 если страницы равны</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnPage.CompareByPageNumber(RPD.DAL.PsnPage,RPD.DAL.PsnPage)">
+            <summary>
+            Сравнивает две страницы ПСН между собой по номеру
+            </summary>
+            <param name="p1">Первая страница для сравнения</param>
+            <param name="p2">Вторая страница для сравнения</param>
+            <returns>1 если p1 больше p2, -1 если p1 меншье p2, 0 если страницы равны</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnPage.#ctor(System.Byte[],System.Boolean,System.Byte[],System.Byte[])">
+            <summary>
+            Создает новую страницу
+            </summary>
+            <param name="pageRaw">Страница в виде массива байт</param>
+            <param name="ignoreBytePause">Игнорировать межбайтовый интервал?</param>
+            <param name="prevUnusedValues">Импортируемые значения из предыдущей страницы</param>
+            <param name="prevUnusedPauses">Той же длины, что и prevUnusedValues!</param>
+        </member>
+        <member name="M:RPD.DAL.PsnPage.GetChannelValues(RPD.DAL.DeviceConfiguration,RPD.DAL.PsnCommandPart,RPD.DAL.CmdParameter)">
+            <summary>
+            Получает точки для канала из текущей страници
+            </summary>
+            <param name="devConf">Конфиг девайса (для получения протоколоа ПСН)</param>
+            <param name="cmdPartToSearch">Кусок команды (запрос или ответ) для поиска</param>
+            <param name="cmdPartParam">Параметр из тела куска команды</param>
+            <returns>Результат выполнения: неиспользованные байты текущей страницы (конец страницы) + точки канала ПСН</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnPage.GetPageByteTimeOffset(System.Int32)">
+            <summary>
+            Метод получает временное смещение конкретного байта страницы
+            </summary>
+            <param name="byteIndexZeroBased">Индекс байта, для которого требуется вычислить временное смещение</param>
+            <returns>Смещение байта, вычисленное по межбайтовым интервалам</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnPage.ScanCmdPart(System.Byte[],System.Int32,RPD.DAL.PsnCommandPart)">
+            <summary>
+            Проверяет команду на совпадение предопределенных значений команды с битами входного массива
+            </summary>
+            <param name="cmdPartData">Массив байтов, с которыми будут сравниваться нужная часть команды</param>
+            <param name="startByte">Start byte</param>
+            <param name="cmdPart">Кусок команды (запрос или ответ)</param>
+            <returns>Флаг истинности совпадения</returns>
+        </member>
+        <member name="P:RPD.DAL.PsnPage.Number">
+            <summary>
+            Номер страницы
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnPage.CreatedAt">
+            <summary>
+            Время создания страницы
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnPage.Data">
+            <summary>
+            Список данных
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnPage.MaxPageTimeLength">
+            <summary>
+            Вычисляемое поле "Максимальное время, занимаемое страницей (высчитывается по межбайтовым интервалам, если они присутствуют)
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnPage.TimeOffsetFromPreviousPage">
+            <summary>
+            Смещение в долях секунды от предыдущей страницы
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.GetChannelValuesResult">
+            <summary>
+            Представляет собой результат выполнения метода PsnPage.GetChannelValues()
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.GetChannelValuesResult.#ctor">
+            <summary>
+            Создает новый экземпляр класса с пустыми списками
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.GetChannelValuesResult.UnusedPreviousValues">
+            <summary>
+            Неиспользованные байты в конце страницы
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.GetChannelValuesResult.Points">
+            <summary>
+            Полученные точки для искомого канала (если они конечно были в странице)
+            </summary>
+        </member>
+        <member name="T:RPD.EventArgs.OnProgressChangeEventArgs">
+            <summary>
+            Аргументы изменения прогресса операции
+            </summary>
+        </member>
+        <member name="M:RPD.EventArgs.OnProgressChangeEventArgs.#ctor(System.Int32,System.Object)">
+            <summary>
+            Иницализирует новый экземпляр OnProgressChangeEventArgs
+            </summary>
+            <param name="progressPercent">Прогресс в процентах</param>
+            <param name="argument">Дополнительный аргумент</param>
+        </member>
+        <member name="M:RPD.EventArgs.OnProgressChangeEventArgs.#ctor(System.Int32)">
+            <summary>
+            Иницализирует новый экземпляр OnProgressChangeEventArgs
+            </summary>
+            <param name="progressPercent">Прогресс в процентах</param>
+        </member>
+        <member name="P:RPD.EventArgs.OnProgressChangeEventArgs.ProgressPercent">
+            <summary>
+            Прогресс в процентах
+            </summary>
+        </member>
+        <member name="P:RPD.EventArgs.OnProgressChangeEventArgs.Argument">
+            <summary>
+            Дополнительный аргумент
+            </summary>
+        </member>
+        <member name="T:RPD.EventArgs.OnDeviceReaderCompleteEventArgs">
+            <summary>
+            Аргументы события завершения опреации
+            </summary>
+        </member>
+        <member name="M:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.#ctor(RPD.DAL.IDeviceReader,RPD.EventArgs.OnDeviceReaderCompleteEventArgs.CompleteResult,System.String,RPD.DAL.ILocomotive)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="sender">IDeviceReader в контексте которого отправлен Callback</param>
+            <param name="resultCode">Результат операции</param>
+            <param name="message">Текстовое сообщение</param>
+            <param name="locomotive">Локомотив, над которым была завершена операция.</param>
+        </member>
+        <member name="M:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.#ctor(RPD.EventArgs.OnDeviceReaderCompleteEventArgs.CompleteResult,System.String)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+            <param name="resultCode">Результат операции</param>
+            <param name="message">Текстовое сообщение</param>
+        </member>
+        <member name="P:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.ResultCode">
+            <summary>
+            Результат операции
+            </summary>
+        </member>
+        <member name="P:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.Message">
+            <summary>
+            Текстовое сообщение
+            </summary>
+        </member>
+        <member name="P:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.Locomotive">
+            <summary>
+            Дополнительный аргумент
+            </summary>
+        </member>
+        <member name="P:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.Sender">
+            <summary>
+            IDeviceReader в контексте которого был инициирован Callback
+            </summary>
+        </member>
+        <member name="T:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.CompleteResult">
+            <summary>
+            Возможные результаты операции
+            </summary>
+        </member>
+        <member name="F:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.CompleteResult.Ok">
+            <summary>
+            Успех
+            </summary>
+        </member>
+        <member name="F:RPD.EventArgs.OnDeviceReaderCompleteEventArgs.CompleteResult.Error">
+            <summary>
+            Ошибка
+            </summary>
+        </member>
+        <member name="T:RPD.DAL.PsnCommandPart">
+            <summary>
+            Описывает кусок команды-перговоров (например, запрос или ответ)
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.PsnCommandPart.#ctor(RPD.DAL.PsnCommand)">
+            <summary>
+            Инициализирует новый экземпляр класса
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.PsnCommandPart.FillFromXmlNode(System.Xml.XmlNode)">
+            <summary>
+            Получить данные для объекта из XML
+            </summary>
+            <param name="node">XML узел</param>
+            <returns>Флаг успешного выполнения операции</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnCommandPart.GetDefVal(System.String)">
+            <summary>
+            Производит поиск предопределенного параметра по названию
+            </summary>
+            <param name="name">Название параметра</param>
+            <returns>Найденный параметр или null</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnCommandPart.GetVarVal(System.String)">
+            <summary>
+            Производит поиск параметра неизвестного значения по названию
+            </summary>
+            <param name="name">Название параметра</param>
+            <returns>Найденный параметр или null</returns>
+        </member>
+        <member name="M:RPD.DAL.PsnCommandPart.GetValueByName(System.String,System.Collections.Generic.List{RPD.DAL.CmdParameter})">
+            <summary>
+            Base-private method that works behind of public api
+            </summary>
+            <param name="name">Name of Value to sarch</param>
+            <param name="searchSource">Source, where to search</param>
+            <returns>Value if found, or null</returns>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.PartName">
+            <summary>
+            Название куска команды
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.DefValues">
+            <summary>
+            Список известных значений, встречающихся в данной части команды
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.VarValues">
+            <summary>
+            Список переменных, встречающихся в данной части команды
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.Lenght">
+            <summary>
+            Длина части
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.Offset">
+            <summary>
+            Смещение относительно начала команды
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.CommandOwner">
+            <summary>
+            Команда-владелец
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.Address">
+            <summary>
+            Адрес устройства
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.CommandCode">
+            <summary>
+            Код команды
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.CrcLow">
+            <summary>
+            Младший байт crc
+            </summary>
+        </member>
+        <member name="P:RPD.DAL.PsnCommandPart.CrcHigh">
+            <summary>
+            Старший байт crc
+            </summary>
+        </member>
+        <member name="M:RPD.DAL.TimeExtensions.EqualToEvenSecond(System.DateTime,System.DateTime)">
+            <summary>
+            Сравнивает даты с точностью до секунды, если совпадают - возвращает истину
+            (подумать, возможно реализация TimeSpan.FromTicks(dt.Ticks).TotalSeconds == -//- юудет быстрее)
+            </summary>
+            <param name="dt">Сам объект</param>
+            <param name="dateTimeToCompare">Дата для сравнения</param>
+            <returns>Истина, если даты совпадают</returns>
+        </member>
+    </members>
+</doc>

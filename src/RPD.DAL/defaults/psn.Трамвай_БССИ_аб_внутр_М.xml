@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="МСУТ Трамвая 71-407 с абонентами внутренней магистрали" Version="1" Description="Конфигурация обмена БС-СИ трамвая по внутренней линии" Id="bdbf1cb0-1541-4aff-bdad-5e511608d4ea" RpdId="45">
+  <PsnMeters>
+    <PsnMeter Address="0x01" Name="ТП" />
+    <PsnMeter Address="0x02" Name="БС-ТП1" />
+    <PsnMeter Address="0x06" Name="ИПБС" />
+    <PsnMeter Address="0x11" Name="БПС" />
+    <PsnMeter Address="0x21" Name="БВК" />
+    <PsnMeter Address="0x20" Name="Управление БВК" />
+  </PsnMeters>
+  <Commands>
+    <!--****************************************************************************************************************-->
+    <CmdMask Name="БС-СИ и ТП">
+      <Request Length="14" Position="0" CycleMsTime="200">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="775c2054-24a8-485b-8738-f0727d4866dc" />
+        <DefVal Position="1.0" Length="8" Value="0x01" Name="#NCMD" Id="26d32254-0098-46a0-acf9-0681a55a1654" />
+        <BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Направление движения (0 – вперед,1 – назад)" Id="8c65cc50-965f-488b-8fca-b9b989b8edee" />
+        <BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="1–авар.торможение без напряжения контактной сети, 0–штатная работа" Id="1877e351-0e8d-4272-a5b5-a956180b4b9e" />
+        <CpzPrm Name="Уставка позиции момента (-4...4) или тока якоря" Expression="[s3] * 1.0" Id="07bc017f-2db5-48a0-9b3e-02266c18969d" />
+        <VarVal Position="4.0" Length="8" Name="Резерв" Id="a347cddb-9d09-4ee1-9f6d-ab005e309674" />
+        <CpzPrm Name="Уставка позиции момента (-4...4) или тока якоря" Expression="[s5] * 1.0" Id="638eb927-2ce2-479f-afd8-6c45644d358e" />
+        <VarVal Position="6.0" Length="8" Name="Байт управления.0–уставка позиции,1–уставка тока якоря,используется на стенде" Multiplier="1.0" IsSigned="False" Id="a6fd6fbe-9aea-43e2-b6f8-5b94bc7c0c33" />
+        <VarVal Position="7.0" Length="8" Name="Данные из второго канала – скорость, 0xFF – признак таймаута с ТП 0x7F – с БПС" Multiplier="1.0" IsSigned="False" Id="35c7e585-fb32-487e-85ca-6ea86c822143" />
+        <VarVal Position="8.0" Length="8" Name="Данные из второго канала – позиция, 0x7F – признак таймаута по RS1" Multiplier="1.0" IsSigned="False" Id="11d23556-6985-4051-8f35-d2ade7fdf5b0" />
+        <VarVal Position="9.0" Length="8" Name="Данные из второго канала – флаги, 0xFF – признак таймаута по RS1" Multiplier="1.0" IsSigned="False" Id="8e801907-ab81-47d8-8a1d-739a898780b8" />
+        <VarVal Position="10.0" Length="8" Name="Данные из второго канала – статус, 0xFF – признак таймаута по RS1" Multiplier="1.0" IsSigned="False" Id="c8d4b407-5d7c-4f06-b808-001acc98b4f6" />
+        <VarVal Position="11.0" Length="8" Name="Признак боксования 0x01, признак юза 0х02 в текущем канале" Multiplier="1.0" IsSigned="False" Id="fba9763c-c8fb-44ea-94d6-22659cce2d8e" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="47eb1ddd-98db-4bd0-9f5d-95b8cbf05496" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="8b32ae26-68ee-437f-b62e-60912c2221db" />
+      </Request>
+      <Reply Length="28" Position="14">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="45f480df-bd7e-407c-b788-c33c8b3eb3e7" />
+        <DefVal Position="1.0" Length="8" Value="0x01" Name="#NCMD" Id="bfa0e5aa-308d-4d4a-834a-d9760afdec47" />
+        <CpzPrm Name="Ток возбуждения, А" Expression="([u3] + [u2]*256.0) * 1.0" Id="70b7923a-a326-4d73-80b0-1e6025fc6ddf" />
+        <CpzPrm Name="Температура" Expression="([u5] + [u4]*256.0) * 1.0" Id="1f479034-aa3f-4750-b9b6-53a27df54838" />
+        <CpzPrm Name="Момент расчетный" Expression="([u7] + [u6]*256.0) * 1.0" Id="0a7754e5-87b3-4b05-a7c8-5776633376d3" />
+        <CpzPrm Name="ШИМ ов(был Поток)" Expression="([u9] + [u8]*256.0) * 1.0" Id="4439bc3c-0e5a-4d82-8d70-d2a3f079e8dc" />
+        <CpzPrm Name="Ток якоря, А" Expression="([u11] + [u10]*256.0) * 1.0" Id="de8d4f1d-38c7-4445-a38d-446d3a7669db" />
+        <CpzPrm Name="Скорость" Expression="([u13] + [u12]*256.0) * 1.0" Id="748e1bf8-f065-441b-91bf-8d7083f6ea09" />
+        <CpzPrm Name="Напряжение двигателя, В" Expression="([u15] + [u14]*256.0) * 1.0" Id="d6528164-4d79-4022-b594-5a672580e22a" />
+        <CpzPrm Name="Уставка тока якоря, А" Expression="([u17] + [u16]*256.0) * 1.0" Id="c8b4aa19-070e-4f48-ac5c-b8f9d75a5475" />
+        <CpzPrm Name="ШИМ понижающий" Expression="([u19] + [u18]*256.0) * 1.0" Id="c138e14a-63e2-4fc3-97f3-4333a4dd8736" />
+        <CpzPrm Name="ШИМ повышающий" Expression="([u21] + [u20]*256.0) * 1.0" Id="da175e15-1156-44de-89d1-27900f170d7c" />
+        <CpzPrm Name="Напряжение входное, В" Expression="([u23] + [u22]*256.0) * 1.0" Id="08299fec-0a4e-445a-ba63-767d105c0a75" />
+        <VarVal Position="24.0" Length="8" Name="Флаги или признак драйвера при ошибке СС" Multiplier="1.0" IsSigned="False" Id="8010c900-3eec-4edd-89df-9effecba41a4" />
+        <VarVal Position="25.0" Length="8" Name="Статус 1-t, 2-SS, 4-Umax, 8-Umin, 10-Ij" Multiplier="1.0" IsSigned="False" Id="e34163dc-bf94-4b06-98d0-2d94b8e9c4d7" />
+        <VarVal Position="26.0" Length="8" Name="#CRCH" Id="f21b347c-2951-4bb2-bf05-d480dac4636b" />
+        <VarVal Position="27.0" Length="8" Name="#CRCL" Id="bb1f4376-98da-4934-8878-5a1b8d146aa7" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БС-СИ и БС-ТП1">
+      <Request Length="24" Position="0" CycleMsTime="200">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="9ea6022b-d4db-464d-80ae-ae183ff61dc7" />
+        <DefVal Position="1.0" Length="8" Value="0x02" Name="#NCMD" Id="16c8f9aa-c02c-4bd2-9bca-7bb415ce0a18" />
+        <CpzPrm Name="Мощность Pa" Expression="([u3] + [u2]*256.0) * 1.0" Id="45c8717c-8fad-4628-99d8-305a1cf95fa3" />
+        <CpzPrm Name="Температура" Expression="([u5] + [u4]*256.0) * 1.0" Id="cea1c250-4a67-4988-9d34-11d8de8e836e" />
+        <CpzPrm Name="Напряжение входное, В" Expression="([u7] + [u6]*256.0) * 1.0" Id="c7900485-4022-4649-b4ca-7c9a0810bbc2" />
+        <CpzPrm Name="Ток якоря, А" Expression="([u9] + [u8]*256.0) * 1.0" Id="59a877ad-243d-4942-9c25-3c25910a9afa" />
+        <CpzPrm Name="Момент" Expression="([u11] + [u10]*256.0) * 1.0" Id="5ab35c7c-9d0c-4558-9fbc-05d08659a989" />
+        <CpzPrm Name="Ток возбуждения, А" Expression="([u13] + [u12]*256.0) * 1.0" Id="ef7da83c-f4c1-4a8a-95fe-1d419a84af5e" />
+        <VarVal Position="14.0" Length="8" Name="Уставка от джойстика (Позиция)" Multiplier="1.0" IsSigned="False" Id="99292f03-269d-46e5-bb28-7da389639600" />
+        <CpzPrm Name="Скорость движения, км/ч" Expression="([u16] + [u15]*256.0) * 1.0" Id="4d9105d8-2710-4454-a084-8b6fb86d4ba4" />
+        <VarVal Position="17.0" Length="8" Name="Статус ТП" Multiplier="1.0" IsSigned="False" Id="c714e5d0-fe7e-4bb0-ac6c-6d1ad7d15696" />
+        <VarVal Position="18.0" Length="8" Name="Флаги ТП" Multiplier="1.0" IsSigned="False" Id="eb2272b5-f126-4cd2-a43f-29bfc94d880b" />
+        <VarVal Position="19.0" Length="8" Name="Таймауты по абонентам ТП, БПС, БВК, БСТП1" Multiplier="1.0" IsSigned="False" Id="7cba7662-fd4b-487b-b91a-08697db4f1f8" />
+        <VarVal Position="20.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="dbd9f0a9-932a-4e75-8b2d-a62bfccc866d" />
+        <VarVal Position="21.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="a1d554d0-1109-463a-9561-a7235cb4f960" />
+        <VarVal Position="22.0" Length="8" Name="#CRCH" Id="1b07e7a0-b6e4-47eb-b45d-c22ace3218ae" />
+        <VarVal Position="23.0" Length="8" Name="#CRCL" Id="6e59fca5-af70-41d8-9d34-c321e0e221d9" />
+      </Request>
+      <Reply Length="11" Position="24">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="2d2cd657-eb84-4751-a780-31a3066891f4" />
+        <DefVal Position="1.0" Length="8" Value="0x02" Name="#NCMD" Id="220631a0-014e-425d-a3ff-521ac6db35bb" />
+        <BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Команда БУ1:D7 – управление включением" Id="9427c371-cd42-4717-b639-1e12c271e9ef" />
+        <BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Команда БУ1:D6 – направление движения 0 -вперед" Id="a21ff555-30e7-4f2f-933d-a430817d9cba" />
+        <BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Команда БУ1:D5 – отключение вентиляторов" Id="071db617-771d-4642-af90-12c246e0fed8" />
+        <BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Команда БУ1:D4 –Резерв" Id="f206ab87-2340-465b-9f83-64ebbe42e15d" />
+        <BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Команда БУ1:D3 –Резерв" Id="3f35dbf5-1494-4d0f-a767-157b14ecc9e2" />
+        <BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Команда БУ1:D2 –рельсовый тормоз" Id="767b5065-905c-46e3-a47f-4c5e125d7fc0" />
+        <BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Команда БУ1:D1 –барабанный 100%" Id="3ac47221-6e18-454d-9382-5c7f4e025380" />
+        <BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Команда БУ1:D0 –барабанный 50%" Id="59b92d71-8fbe-4488-84df-1526977b1d0c" />
+        <BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Команда БУ2:D7 –ожидание" Id="91edb08a-d639-4b54-ac44-d7bed19aa9ec" />
+        <BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Команда БУ2:D6 –режим тяги" Id="8a0ad08e-ccb3-4286-9e7c-0016ad505867" />
+        <BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Команда БУ2:D5 –Резерв" Id="f5ddbffb-d6fb-414d-9768-0c939c492b45" />
+        <BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Команда БУ2:D4 –Резерв" Id="f27aeec3-4bbe-46d9-90f2-25bf85b313eb" />
+        <BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Команда БУ2:D3 –Резерв" Id="45c5dbf5-f08b-4241-bbfa-995a6cd923f1" />
+        <BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Команда БУ2:D2 –проезд стрелки с током" Id="b4ddafc3-d359-4322-b164-e3a1f7dbc577" />
+        <BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Команда БУ2:D1 –проезд стрелки без тока" Id="bc0c2e61-cb3d-4235-b54e-421482c305c3" />
+        <BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Команда БУ2:D0 –обточка колесных пар" Id="35cba338-463c-4ddd-a6ba-1acd29655821" />
+        <VarVal Position="4.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="d839992a-6795-4ff6-9e9f-c9c35194300a" />
+        <VarVal Position="5.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="b7e14e54-9eca-4343-8561-9a2227fca2e1" />
+        <VarVal Position="6.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="d4be8069-4346-4425-9276-9a96405cd0f2" />
+        <VarVal Position="7.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="0f62ad92-a071-4de6-a44e-548ce9ae3db2" />
+        <VarVal Position="8.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="33018678-7f08-4620-887d-cf572a5f6b7d" />
+        <VarVal Position="9.0" Length="8" Name="#CRCH" Id="63c2e858-127e-49bf-a763-d291f8f59553" />
+        <VarVal Position="10.0" Length="8" Name="#CRCL" Id="a74c3222-458b-498f-91bc-9135db58e9d2" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БС-СИ и ИПБС">
+      <Request Length="6" Position="0" CycleMsTime="200">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="04070ca1-8e70-4870-9838-8d08ad1672d4" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="fa6606a5-634a-47db-b1e0-0ea18b65c2eb" />
+        <VarVal Position="2.0" Length="8" Name="d1,расстояние между импульсами, см" Multiplier="1.0" IsSigned="False" Id="a9130df8-a33a-4998-a5c9-c22748ad90a4" />
+        <VarVal Position="3.0" Length="8" Name="d1,расстояние между импульсами, см" Multiplier="1.0" IsSigned="False" Id="3d9bd3a7-39d6-4057-81a5-bc1ca4b57eee" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="ca15d116-d7ed-4b05-a6f5-300dfd4e16b1" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="398ecb4e-9779-4b9e-8e67-2919869c572f" />
+      </Request>
+      <Reply Length="14" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="f8c12f8f-bf79-465a-820e-98032a5a20ba" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="847901d8-30e8-4ae6-af3f-8ecaa08e4788" />
+        <CpzPrm Name="V – скорость, км/ч" Expression="[u2] * 1.0" Id="20901666-fe9a-404d-bde5-e567cf59776c" />
+        <CpzPrm Name="S – пройденный путь, м" Expression="([u6] * 1.0 + [u5] * 256.0 + [u4] * 65536.0 + [u3] * 16777216.0 ) * 1.0" Id="7ed7d6c0-9a06-46ea-94cc-958244791e65" />
+        <CpzPrm Name="F – частота в 0.1 Гц " Expression="([u8] + [u7]*256.0) * 0.1" Id="d094cbf0-1c50-4985-912d-c241aa495eb8" />
+        <VarVal Position="9.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="7d58812a-b1dc-4b7a-9317-a0a910eb36f9" />
+        <VarVal Position="10.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="26b12a78-b831-4a5f-9a90-3d10273cab1c" />
+        <VarVal Position="11.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="5156c79f-7e12-4e2d-8302-14291eec2682" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="9a376ae0-6ca5-4eb8-aa1a-e8f7adb37b5e" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="89ce32e8-5976-4d6b-978e-68a60f0c6030" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="Обмен с блоком БПС">
+      <Request Length="4" Position="0" CycleMsTime="200">
+        <DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="faeaea4b-6249-4791-aa50-a01b60ebfb2e" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="e3a8dfc8-573d-4b06-8b61-7803879d1cb6" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="6547a749-aa53-4afe-b4e1-59850393583d" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="5c084ad2-cc7d-4953-9bc2-790113b8d8ae" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="4f35c615-b8c2-494b-8592-3cffb017414a" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="150bace2-e751-4365-b598-bbcb8f126ad4" />
+        <VarVal Position="2.0" Length="8" Name="Значение входа БПС" Multiplier="1.0" IsSigned="False" Id="9aea977b-2723-4c1f-aa1a-5b3d849198c8" />
+        <BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Состояние входа 16: Резерв" Id="49867366-0050-48f2-ab8c-f889981c808f" />
+        <BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Состояние входа 15: Резерв" Id="1491b37d-2569-4a6d-aa40-c04df09840ae" />
+        <BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Состояние входа 14: Резерв" Id="7125234a-19a4-45f0-855d-efd02a87b85e" />
+        <BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Состояние входа 13: Резерв" Id="d793ef15-312b-49c5-acab-bff6e53d6949" />
+        <BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Состояние входа 12: Резерв" Id="2d472564-c8ad-44fd-b887-21c58fc4da69" />
+        <BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Состояние входа 11: Резерв" Id="2b9fd178-2f23-4cdd-8b7c-57fa53f6adaf" />
+        <BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Состояние входа 10: Движение назад(активный сигнал-1, 0-вперед)" Id="35ee7967-6c06-4a4a-88f3-2c37b4adfca4" />
+        <BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Состояние входа 9: Стрелка (активный сигнал-1)" Id="8de1947c-5e49-4af9-bffb-0aa2bdb8ef6b" />
+        <BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Статус блока БПС: Сброс от монитора питания" Id="a7a0e814-290f-4d3a-a7ff-4247f15d1ea1" />
+        <BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Статус блока БПС: Сброс от внешнего входа " Id="aa8ae0db-a8ca-4224-b2a8-4a15e987d895" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="281beaa7-92fb-4080-a40e-dcb1fcafbbf1" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="b9a60723-ae89-4828-bb8a-41fb25502d80" />
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask Name="Обмен с блоком БВК">
+      <Request Length="4" Position="0" CycleMsTime="200">
+        <DefVal Position="0.0" Length="8" Value="0x21" Name="#ADDR" Id="2bb1dff3-0fa0-465c-b612-dd0abc465a99" />
+        <DefVal Position="1.0" Length="8" Value="0x02" Name="#NCMD" Id="67145ee3-6d42-486f-b2a2-e63c5dca0864" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="e8399d40-8a3f-4307-92c4-f571d7040e18" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="7e82a1cb-8ac3-47f9-8f92-de9db25a1337" />
+      </Request>
+      <Reply Length="8" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x21" Name="#ADDR" Id="7eb27e88-e94d-4c82-ba05-fa4d4a539a86" />
+        <DefVal Position="1.0" Length="8" Value="0x02" Name="#NCMD" Id="4679bc9f-2c67-4314-b38e-38c89d0dda86" />
+        <CpzPrm Name="Код неисправности ключа 8 БВК1" Expression="[4.7.1] * 4.0 + [3.7.1] * 2.0  + [2.7.1] * 1.0" Id="c19f4ea3-6d19-4fad-8442-1e7bdac8abff" />
+        <CpzPrm Name="Код неисправности ключа 7 БВК1" Expression="[4.6.1] * 4.0 + [3.6.1] * 2.0  + [2.6.1] * 1.0" Id="4f594b6a-12d1-4208-9205-fcdb92146fa6" />
+        <CpzPrm Name="Код неисправности ключа 6 БВК1" Expression="[4.5.1] * 4.0 + [3.5.1] * 2.0  + [2.5.1] * 1.0" Id="850ed4bd-0943-44b9-9891-927a973d8293" />
+        <CpzPrm Name="Код неисправности ключа 5 БВК1" Expression="[4.4.1] * 4.0 + [3.4.1] * 2.0  + [2.4.1] * 1.0" Id="16c79c8c-2954-4e3a-919a-85f9cffb3873" />
+        <CpzPrm Name="Код неисправности ключа 4 БВК1" Expression="[4.3.1] * 4.0 + [3.3.1] * 2.0  + [2.3.1] * 1.0" Id="1c9347a9-22db-4477-bb84-8caf68a00935" />
+        <CpzPrm Name="Код неисправности ключа 3 БВК1" Expression="[4.2.1] * 4.0 + [3.2.1] * 2.0  + [2.2.1] * 1.0" Id="0aa61673-2812-451f-94cc-492d6cc1b2d5" />
+        <CpzPrm Name="Код неисправности ключа 2 БВК1" Expression="[4.1.1] * 4.0 + [3.1.1] * 2.0  + [2.1.1] * 1.0" Id="e083c22f-1995-4dd6-8b41-88f184004eb0" />
+        <CpzPrm Name="Код неисправности ключа 1 БВК1" Expression="[4.0.1] * 4.0 + [3.0.1] * 2.0  + [2.0.1] * 1.0" Id="b9c32356-6887-47b8-b747-48704ed53904" />
+        <VarVal Position="5.0" Length="8" Name="Резерв" Multiplier="1.0" IsSigned="False" Id="364e8c03-fc78-48a1-8211-fc55fdb0abf2" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="17134c14-b3d6-4c9c-96d9-862bf0442a2f" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="322ec5a4-c548-44b2-8ed4-0a9c18298ced" />
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask Name="Управляющие команды для БВК">
+      <Request Length="14" Position="0" CycleMsTime="200">
+        <DefVal Position="0.0" Length="8" Value="0x20" Name="#ADDR" Id="24bf9008-8206-4b46-b4f7-d9ace20ff16b" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="47b4fce8-6346-4725-a1f8-7af9220a4d55" />
+        <VarVal Position="2.7" Length="1" Name="Выход БВК8:Включить реле К4(резерв)" Multiplier="1.0" IsSigned="False" Id="0fd6c5d8-8a56-47ae-b18c-d2ac33dc3c81" />
+        <VarVal Position="2.6" Length="1" Name="Выход БВК7:Включить реле К3(резерв)" Multiplier="1.0" IsSigned="False" Id="2c803aa2-5762-4c3e-b006-c7d2b9de5d4a" />
+        <VarVal Position="2.5" Length="1" Name="Выход БВК6:Включить реле К2(резерв)" Multiplier="1.0" IsSigned="False" Id="0020cfad-3bdf-4a9b-a791-c2796a4a59d0" />
+        <VarVal Position="2.4" Length="1" Name="Выход БВК5:Включить реле К1(выдавать при скорости менее 3 км/ч(уточнить))" Multiplier="1.0" IsSigned="False" Id="0605df1d-de9b-4fb5-9b60-92db09907134" />
+        <VarVal Position="2.3" Length="1" Name="Выход БВК4:Включить +600ПТ2" Multiplier="1.0" IsSigned="False" Id="65e2fa2b-9325-4650-bcd7-42832d034c44" />
+        <VarVal Position="2.2" Length="1" Name="Выход БВК3:Включить предзаряд ПТ2" Multiplier="1.0" IsSigned="False" Id="85116a86-5985-4e0d-8ab5-16472fbe519f" />
+        <VarVal Position="2.1" Length="1" Name="Выход БВК2:Включить +600ПТ1" Multiplier="1.0" IsSigned="False" Id="05eb43f0-ac22-4065-8505-9c7180b53e39" />
+        <VarVal Position="2.0" Length="1" Name="Выход БВК1:Включить предзаряд ПТ1" Multiplier="1.0" IsSigned="False" Id="fc09a69d-9477-4ecc-a4b2-dd385ee4a53b" />
+        <!--bytes 3-11 are reserved-->
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="3aee21a8-f206-4b34-aa8d-e20c9d9982de" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="a8ac3729-fb61-439f-8517-aac76948d1e3" />
+      </Request>
+      <Reply Length="0" Position="14" />
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+  </Commands>
+</PsnConfiguration>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="СОПР" Version="1" Description="СОПР и РПД" Id="7A0B8EEE-00B6-483B-8283-2719A796AD26" RpdId="24">
+  <PsnMeters>
+    <PsnMeter Address="0xCE" Name="СКВТ" />
+    <PsnMeter Address="0x01" Name="ПНКВ1" />
+    <PsnMeter Address="0x02" Name="ПНКВ2" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="РПД и ПНКВ1">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="fd6e2204-4354-4746-9ee3-9ce2c4b0f96d" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="c31687d8-49b3-49a7-88db-ebb25e009489" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="026c42af-7255-486b-8eca-4c7ad532a842" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="081ff9ed-5e52-404c-9027-45be764e5eba" />
+      </Request>
+      <Reply Length="5" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="815f3d84-e17c-4755-b5ae-e29862f0976d" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="3e5e18ec-7213-418d-b0bd-60fa30e2736e" />
+        <CpzPrm Name="Ток Iш" Expression="[s2] * 10.0" Id="878151c9-e322-4403-8940-5c47cfbdb775" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="299e267f-ace7-4e82-9b38-5c2dee56222f" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="341450e9-6f05-478a-b039-3180c3379872" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="РПД и ПНКВ2">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="5b28f675-1f19-4e28-a0a9-4080e0dc795a" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="fc060d88-dc0e-433b-b4df-f16f005d4d55" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="dfc3c406-8311-4208-aca4-b07ce4f8b645" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="69015a9b-97ac-48c5-a8c6-5b6a50404f09" />
+      </Request>
+      <Reply Length="5" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="360249c8-8001-49b5-a47e-2864bc3618b5" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="7bfd4ff0-5fc3-46f2-9560-986b1aa0e924" />
+        <CpzPrm Name="Напряжение UR, В" Expression="[s2] * 13.33" Id="75c767c7-11eb-4bcb-b7e2-d6c095108240" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="0d5e36c2-8e0e-4fd7-90b6-e3f518c0e948" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="3f54bb24-0579-4ab0-85ca-025153d03e92" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="РПД и СКВТ">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0xCE" Name="#ADDR" Id="f7031d4b-fdce-4d0a-907e-925aafe82885" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="1ae3ba8f-6459-4aa0-b6a2-138e00dbd592" />
+        <BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Управление включением (Формирует ФПМО)" Id="067b9a1d-98e0-4ede-9f49-135bc42a5a80" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="657c089f-9d68-4627-94e6-6acb8c0468a5" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="1d09cb72-1e6b-4b6d-8326-e7a8a3bad163" />
+      </Request>
+      <Reply Length="19" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0xCE" Name="#ADDR" Id="675a1681-10f8-4a15-881f-db948c4163f8" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="0f3504e2-5d6f-4ce0-8679-666c7393c568" />
+        <CpzPrm Name="E+, кВт" Expression="[3.4.4] * 1000000.0 + [3.0.4] * 100000.0  + [4.4.4] * 10000.0 + [4.0.4] * 1000.0  + [5.4.4] * 100.0  + [5.0.4] * 10.0  + [6.4.4] * 1.0" Id="52a5fcda-d16c-4b2f-b0d6-11f88e9d611a" />
+        <CpzPrm Name="Ток, А" Expression="([6.0.4] * 10000.0 + [7.4.4] * 1000.0  + [7.0.4] * 100.0 + [8.4.4] * 10.0  + [8.0.4] * 1.0) * (44.0 - [u15] * 1.0 )" Id="2e19dd6a-a827-4133-92c6-f8597dff69d5" />
+        <CpzPrm Name="Напряжение, В" Expression="[9.4.4] * 10000.0 + [9.0.4] * 1000.0  + [10.4.4] * 100.0 + [10.0.4] * 10.0  + [11.4.4] * 1.0" Id="eb280104-1b10-4a84-8b82-cc9c4d284d25" />
+        <CpzPrm Name="E-, кВт" Expression="[11.0.4] * 1000000.0 + [12.4.4] * 100000.0  + [12.0.4] * 10000.0 + [13.4.4] * 1000.0  + [13.0.4] * 100.0  + [14.4.4] * 10.0  + [14.0.4] * 1.0" Id="bc2affb8-622e-4490-9f26-bd36c6a1b3df" />
+        <VarVal Position="17.0" Length="8" Name="#CRCH" Id="22dbb590-a140-4e06-bfb2-1704bcd38942" />
+        <VarVal Position="18.0" Length="8" Name="#CRCL" Id="b1639946-55f6-4dad-85c2-11081ae4e15b" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+	<PsnMergedlDevices>
+		<PsnMergedlDevice Name="Виртуальное устройство">
+			<PsnMergedParameter Name="Мощность, кВт" Expression="[i] * [u] / 1000.0" IsMsIntegrated="False" Id="9935D9AD-51B9-4973-A51C-1B97CAE651F0">
+				<PsnMergedParameterPart RealId="878151c9-e322-4403-8940-5c47cfbdb775" ExpressionName="i"/>
+				<PsnMergedParameterPart RealId="75c767c7-11eb-4bcb-b7e2-d6c095108240" ExpressionName="u"/>
+			</PsnMergedParameter>
+			<PsnMergedParameter Name="Энергия +, кВт * ч" Expression="PositiveOrZero([i]) * [u] / 1000.0 / 3600000.0" IsMsIntegrated="True" Id="9E9B7774-8371-4DE9-B3B0-F09AD7EF5FC6">
+				<PsnMergedParameterPart RealId="878151c9-e322-4403-8940-5c47cfbdb775" ExpressionName="i"/>
+				<PsnMergedParameterPart RealId="75c767c7-11eb-4bcb-b7e2-d6c095108240" ExpressionName="u"/>
+			</PsnMergedParameter>
+			<PsnMergedParameter Name="Энергия -, кВт * ч" Expression="NegativeOrZero([i]) * [u] / 1000.0 / 3600000.0" IsMsIntegrated="True" Id="E636DE60-EBF8-45A7-ABF2-01B9CE5F9AA1">
+				<PsnMergedParameterPart RealId="878151c9-e322-4403-8940-5c47cfbdb775" ExpressionName="i"/>
+				<PsnMergedParameterPart RealId="75c767c7-11eb-4bcb-b7e2-d6c095108240" ExpressionName="u"/>
+			</PsnMergedParameter>
+			<PsnMergedParameter Name="Сопротивление, Ом" Expression="[u] / [i]" IsMsIntegrated="False" Id="7C908822-6F73-4956-89F3-3DF506AE680D">
+				<PsnMergedParameterPart RealId="878151c9-e322-4403-8940-5c47cfbdb775" ExpressionName="i"/>
+				<PsnMergedParameterPart RealId="75c767c7-11eb-4bcb-b7e2-d6c095108240" ExpressionName="u"/>
+			</PsnMergedParameter>
+		</PsnMergedlDevice>
+	</PsnMergedlDevices>
+</PsnConfiguration>

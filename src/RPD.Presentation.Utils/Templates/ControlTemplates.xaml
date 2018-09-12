@@ -1,0 +1,40 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:RPD.Presentation.Utils.ValueConverters">
+
+    <!--Шаблон элемента управления. Формула "U600вых > Значение или U1000вых < Значение",
+  где Значение - текст, задаваемый в свойстве Tag-->
+    <ControlTemplate x:Key="controlValueFormulaTemplate" TargetType="{x:Type ContentControl}">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <!--U600вых-->
+            <TextBlock VerticalAlignment="Center">U</TextBlock>
+            <StackPanel>
+                <TextBlock FontSize="10">600</TextBlock>
+                <TextBlock FontSize="10">вых</TextBlock>
+            </StackPanel>
+
+            <!-- > -->
+            <TextBlock VerticalAlignment="Center"
+                  xml:space="preserve"> &gt; </TextBlock>
+
+            <!--Текст из Tag-->
+            <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Tag}"/>
+
+            <!-- или U1000вых-->
+            <TextBlock VerticalAlignment="Center"
+                  xml:space="preserve"> или </TextBlock>
+
+            <TextBlock VerticalAlignment="Center">U</TextBlock>
+            <StackPanel>
+                <TextBlock FontSize="10"
+                    VerticalAlignment="Top">1000</TextBlock>
+                <TextBlock FontSize="10"
+                    VerticalAlignment="Bottom">вых</TextBlock>
+            </StackPanel>
+            <TextBlock VerticalAlignment="Center"
+                  FontSize="14"
+                  xml:space="preserve"> &lt;</TextBlock>
+            <TextBlock VerticalAlignment="Center" Text="{TemplateBinding Tag}"/>
+        </StackPanel>
+    </ControlTemplate>
+</ResourceDictionary>

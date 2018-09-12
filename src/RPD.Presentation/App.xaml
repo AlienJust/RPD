@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application x:Class="RPD.Presentation.App" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+             xmlns:viewModels="clr-namespace:RPD.Presentation.ViewModels" 
+             xmlns:dnvConverters="clr-namespace:Dnv.Utils.Converters;assembly=Dnv.Utils" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             d1p1:Ignorable="d" xmlns:d1p1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <Application.Resources>
+    <dnvConverters:BooleanToVisibilityConverter x:Key="visibleIfTrueConverter" />
+    <dnvConverters:BooleanToVisibilityConverter VisibleIfTrue="False" x:Key="visibleIfFalseConverter" />
+    <Style x:Key="listBoxWithTransparentItemStyle" TargetType="{x:Type ListBox}">
+      <Style.Resources>
+        <!-- Background of selected item when focussed -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+        <!-- Background of selected item when not focussed -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+      </Style.Resources>
+    </Style>
+    <Style x:Key="gridElement">
+      <Setter Property="Control.Margin" Value="5" />
+      <Setter Property="Control.VerticalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="dialogHeader2Style">
+      <Setter Property="Control.FontWeight" Value="Medium" />
+      <Setter Property="Control.FontSize" Value="13" />
+    </Style>
+    <Style x:Key="dialogButtonStyle">
+      <Setter Property="Button.Margin" Value="5" />
+      <Setter Property="Button.Padding" Value="5" />
+      <Setter Property="Button.Padding" Value="5" />
+    </Style>
+    <!--Отображает невидимый Control при DataContext.Progress == 100-->
+    <Style x:Key="showOnProgress100">
+      <Setter Property="Control.Visibility" Value="Collapsed" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding Path=Progress, UpdateSourceTrigger=PropertyChanged}" Value="100">
+          <Setter Property="Control.Visibility" Value="Visible" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+    <!--Скрывает видимый Control при DataContext.Progress == 100-->
+    <Style x:Key="hideOnProggress100">
+      <Setter Property="Control.Visibility" Value="Visible" />
+      <Style.Triggers>
+        <DataTrigger Binding="{Binding Path=Progress}" Value="100">
+          <Setter Property="Control.Visibility" Value="Collapsed" />
+        </DataTrigger>
+      </Style.Triggers>
+    </Style>
+    <viewModels:ViewModelLocator x:Key="Locator" />
+    </Application.Resources>
+</Application>

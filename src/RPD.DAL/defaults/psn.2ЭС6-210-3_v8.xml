@@ -1,0 +1,490 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Локомотив 2ЭС6-210-3" Version="8" Description="" Id="1DF30531-38EC-439F-970E-B6601CB49320" RpdId="10">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="РПМ" />
+		<PsnMeter Address="0x02" Name="МК2" />
+		<PsnMeter Address="0x03" Name="БС-УВ1 (СТПР1000)" />
+		<PsnMeter Address="0x04" Name="СТПР 600" />
+		<PsnMeter Address="0x05" Name="ПЧ ВО ТЭД 1-2" />
+		<PsnMeter Address="0x06" Name="КЧ (ПР 110В)" />
+		<PsnMeter Address="0x07" Name="БС-СМ" />
+		<PsnMeter Address="0x08" Name="БС-БФН" />
+		<PsnMeter Address="0x0A" Name="МГМ-2" />
+		<PsnMeter Address="0x13" Name="БС-УВ2" />
+		<PsnMeter Address="0x15" Name="ПЧ ТК" />
+		<PsnMeter Address="0x18" Name="БС-НВ" />
+		<PsnMeter Address="0x25" Name="ПЧ ВО ТЭД 3-4" />
+		<PsnMeter Address="0x31" Name="БСП" />
+		<PsnMeter Address="0x71" Name="БИ" />
+	</PsnMeters>
+	<Commands>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и МК2">
+			<Request Length="5" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="6c74d5ea-25da-46e4-b137-dbd4773d084d" />
+				<DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="58b09923-8425-4b82-b7ef-28b9aed46216" />
+				<VarVal Position="2.7" Length="1" Name="Диагностика МК1: Признак приема ответа от МК2" Id="5d225e02-7f77-4ae3-9bc4-17aa602c9493" />
+				<VarVal Position="2.0" Length="1" Name="Диагностика МК1: Нет связи МК1 с МПСУиД" Id="16176873-06e1-4711-abe5-31b319e0bdc3" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="21af7c90-f5fe-4d22-a1cb-6603cdc7d766" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="b8cf7402-18a6-4c05-bfbc-a37d9a21d6f1" />
+			</Request>
+			<Reply Length="16" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="9b6c71cc-4f75-43b0-a040-9092bc3f0eaf" />
+				<DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="2063906c-5f39-40f0-a3bd-d277d46de82b" />
+				<VarVal Position="2.7" Length="1" Name="Диагностика МК2: Команда Включение ПЧ ВО ТЭД 1-2" Id="4265b703-97e4-4f04-b014-98ed482c5f92" />
+				<VarVal Position="2.6" Length="1" Name="Диагностика МК2: Команда Включение ПЧ ВО ТЭД 3-4" Id="063f9a26-1a1b-4752-9519-0593cab1029c" />
+				<VarVal Position="2.5" Length="1" Name="Диагностика МК2: Команда Включение ПЧ ТК" Id="3fca9027-966a-4027-b1dd-6ff96d193f3b" />
+				<VarVal Position="2.4" Length="1" Name="Диагностика МК2: Признак приема аналоговой информации от МПСУиД" Id="e22d991b-905c-4286-9738-21ac40aa1a61" />
+				<VarVal Position="2.3" Length="1" Name="Диагностика МК2: Признак приема команды Включение ПЧ ВО ТЭД 1-2 от МПСУиД" Id="c066765b-75cd-45f8-aeda-4e274747603d" />
+				<VarVal Position="2.2" Length="1" Name="Диагностика МК2: Признак приема команды Включение ПЧ ВО ТЭД 3-4 от МПСУиД" Id="adfa04fb-4755-4987-9d28-5a3bea4a0679" />
+				<VarVal Position="2.1" Length="1" Name="Диагностика МК2: Признак приема команды Включение ПЧ ТК от МПСУиД" Id="6ec2e439-7aa9-49a1-833b-84173415aff5" />
+				<VarVal Position="2.0" Length="1" Name="Диагностика МК2: Нет связи МК2 с МПСУиД" Id="cab4ee82-27ea-434d-9d97-fb66a475c53c" />
+				<CpzPrm Name="Уставка по току возбуждения БС-УВ1, А" Expression="([u3] * 3.0)" Id="66c53192-0cf6-4ad0-b00e-93c1606d38ee" />
+				<CpzPrm Name="Коэффициент Кя в БС-УВ1" Expression="([u4] * 1.0)" Id="4fb0173b-10a5-4cee-9c7c-912bc6ee952d" />
+				<CpzPrm Name="Уставка по току возбуждения БС-УВ2, А" Expression="([u5] * 3.0)" Id="89d229ea-68ed-4b79-8db8-3c09c2b6a0ba" />
+				<CpzPrm Name="Коэффициент Кя в БС-УВ2" Expression="([u6] * 1.0)" Id="b9c90b55-d4c3-4252-9424-ad5520f74e5e" />
+				<CpzPrm Name="Уставка ПЧ ВО ТЭД 1-2, Гц" Expression="([u7] * 1.0)" Id="320a95d4-d8cb-44ff-8730-69ed93a0ec09" />
+				<CpzPrm Name="Уставка ПЧ ВО ТЭД 3-4, Гц" Expression="([u8] * 1.0)" Id="b7187412-e86b-4043-a6f7-8aaebf02ebef" />
+				<CpzPrm Name="Уставка ПЧ ТК, Гц" Expression="([u9] * 1.0)" Id="5f94faa0-0285-4fad-ab12-13b7e7c0d775" />
+				<CpzPrm Name="Байты данных БСП: №6, №8 (см. Приложение Е п.1)" Expression="([u10] * 1.0)" Id="75d20834-7277-4c5d-a6dc-d29508cc7bcd" />
+				<CpzPrm Name="Байты данных БСП: №6, №8 (см. Приложение Е п.1)" Expression="([u11] * 1.0)" Id="33243cdf-0b1c-4114-a4a9-b823c69a5558" />
+				<CpzPrm Name="Байты данных БСП: №6, №8 (см. Приложение Е п.1)" Expression="([u11] * 1.0)" Id="c99b74a4-f1e9-4cfa-8b53-3493bc294367" />
+				<CpzPrm Name="Номер позиции текущей секции от МПСУиД (см. Приложение Е п.2)" Expression="([u12.0.7] * 1.0)" Id="2bba6a0c-c22a-4bd2-bbde-f6d2047c57ee" />
+				<VarVal Position="13.7" Length="1" Name="Команда «Включение ИН 300 В (МГМ-2)»" Id="bc61e1a3-629e-471f-8c45-ec8fcb3ee124" />
+				<VarVal Position="13.6" Length="1" Name="Признак приема команды «Включение ИН 300 В (МГМ-2)» от МПСУиД" Id="425432a6-d6eb-4251-8667-fa1b1eb70388" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="8c1b9f8a-2655-46b7-b911-795793753fea" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="a479d712-3ea3-49af-942d-45fe47a600bd" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и БС-УВ1">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="8aec565b-9541-4629-b8ff-0c5eeac5f40a" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="972ab7dd-d3de-4766-b76c-8dadf1ebbdb8" />
+				<CpzPrm Name="Уставка по току возбуждения БС-УВ1, А" Expression="([u2] * 3.0)" Id="c78217c6-1b96-4815-bc44-772d72035d3a" />
+				<CpzPrm Name="Коэффициент Кя в БС-УВ1" Expression="([u3] * 1.0)" Id="8f111d93-28ce-4166-9a70-8f63be283d42" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="a4ff61de-b759-400c-9713-c6137339dfc6" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="a85625c5-6fec-4111-82be-f79316b02a13" />
+			</Request>
+			<Reply Length="8" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="43608da0-fa72-4055-9082-d44c126ac63e" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="89328d7d-0a6f-4b2c-9722-1f8f3c0bcf1e" />
+				<CpzPrm Name="Значение Iя УВ1, А" Expression="([s2] * 8.0)" Id="f61ab398-d53f-4d72-b213-d8a427375996" />
+				<CpzPrm Name="Значение Iв УВ1, А" Expression="([s3] * 8.0)" Id="6e50e0d4-859d-4b41-93a3-8b4814224edb" />
+				<VarVal Position="4.6" Length="1" FaultDefinition="0.6" Name="Статус БС-УВ1: Неуправляемый ток тиристоров УВ1" Id="dcda07dd-261c-407e-bab8-f81423a6d157" />
+				<VarVal Position="4.3" Length="1" FaultDefinition="0.3" Name="Статус БС-УВ1: Нет связи УУ УВ1 с ПНКВ Iя" Id="e464bd87-e605-4917-ba73-774a90eb0a64" />
+				<VarVal Position="4.2" Length="1" FaultDefinition="0.2" Name="Статус БС-УВ1: Нет связи УУ УВ1 с ПНКВ Iв" Id="fd18a781-313b-4669-b0ef-6e49854456d0" />
+				<VarVal Position="4.0" Length="1" FaultDefinition="0.0" Name="Статус БС-УВ1: Нет связи БС УВ1 с УУ УВ1" Id="99e70459-3b5c-426a-b98d-fa6d5404ed80" />
+				<CpzPrm Name="Уставка ШИМ УВ1" Expression="([u5] * 1.0)" Id="6cfe1a33-d4f3-4801-b4d1-3252205a5572" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="626b64dc-448e-4397-993c-36954aec1642" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="fbd3dc69-654c-4540-8268-03953eabc77f" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и БС-УВ2">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x13" Name="#ADDR" Id="553836d4-6fcb-4c5e-859d-66f616280479" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="580b2067-fb3f-45fb-8d1a-cc13641ac8fb" />
+				<CpzPrm Name="Уставка по току возбуждения БС-УВ2, А" Expression="([u2] * 3.0)" Id="a192cb83-b08e-4ffd-b30f-2f478b747372" />
+				<CpzPrm Name="Коэффициент Кя в БС-УВ2" Expression="([u3] * 1.0)" Id="2f966d38-2f07-4c63-8b8e-03f89052e9de" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="2d722f7c-242a-4b03-8dbb-b5ea69e63e15" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="3e86c9db-4de8-4214-b4e7-102e8522ca29" />
+			</Request>
+			<Reply Length="8" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x13" Name="#ADDR" Id="6b4a15ca-51e5-473a-9028-fd3afcb8f6e7" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="ed079b5b-9346-4128-bfbc-5a1a3c1b8839" />
+				<VarVal Position="2.0" Length="8" Name="Значение Iя УВ2, ЦМР=8А" Multiplier="8.0" IsSigned="True" Id="d614e645-6268-4cb6-9b0d-8b3d878c66c8" />
+				<VarVal Position="3.0" Length="8" Name="Значение Iв УВ2, ЦМР=8А" Multiplier="8.0" IsSigned="True" Id="c93972f9-9ed9-470d-9925-082baed1ea4d" />
+				<VarVal Position="4.0" Length="8" Name="Статус БС-УВ2" Id="77b2eee4-ff6b-4fbd-bfea-a579b9d1d3c4" />
+				<VarVal Position="4.0" Length="1" FaultDefinition="1.0" Name="Нет связи БС УВ2 с УУ УВ2" Id="8e5d41f6-bdaf-4db1-b171-cf81f1492813" />
+				<VarVal Position="4.2" Length="1" FaultDefinition="1.2" Name="Нет связи УУ УВ2 с ПНКВ Iв" Id="5c9868f6-ce81-4fef-ad0a-6fecb7f436f4" />
+				<VarVal Position="4.3" Length="1" FaultDefinition="1.3" Name="Нет связи УУ УВ2 с ПНКВ Iя" Id="6b3fd216-d412-49c9-9b7d-dcffa0cbf8bc" />
+				<VarVal Position="4.6" Length="1" FaultDefinition="1.6" Name="Неуправляемый ток тиристоров УВ2" Id="3caf064c-7474-44e7-a43a-6a75130f5b18" />
+				<VarVal Position="5.0" Length="8" Name="Уставка ШИМ УВ2, ЦМР=1" Id="dc4e1f39-9a2e-4fa1-9b2f-9e0b33392f2b" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="d32e50a3-808e-486d-bfca-3fea6f85cff8" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="ec11cbab-01a3-4dc9-976c-d05dfb78d425" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и СТПР600">
+			<Request Length="5" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="2d1a566a-c6ba-4b95-ba76-7567120411d4" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="0715771f-1bd8-40c5-aab6-0b496c88f8e0" />
+				<VarVal Position="2.0" Length="8" Name="Дискретные команды" Id="404aaf1d-c746-4227-a92c-668ab4bcd20c" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="6779c069-d286-444f-9bd9-f77d6b9c54d7" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="f32ac4d7-1ab7-4c7e-9044-d5c6a5edd969" />
+			</Request>
+			<Reply Length="11" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="c65a4577-5d17-4322-b8ce-7929c044552b" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="9f14895a-f272-4492-a524-bf333aa308c5" />
+				<VarVal Position="2.0" Length="8" Name="Диагностика 1 СТПР600" Id="8a3a5273-b717-46f6-9fe1-aa7c88acf104" />
+				<VarVal Position="3.0" Length="8" Name="Диагностика 2 СТПР600" Id="398d52ed-ae81-49d1-8c4d-9b857665c26d" />
+				<VarVal Position="3.0" Length="1" FaultDefinition="3.0" Name="Нет связи с ПНКВ Uвх" Id="dba1d7eb-6d8d-4e84-95c1-e69b9f59cec7" />
+				<VarVal Position="3.1" Length="1" FaultDefinition="3.1" Name="Нет связи с ПНКВ Uвых" Id="1339c271-50d4-4032-83e8-37ff41adee43" />
+				<VarVal Position="3.2" Length="1" FaultDefinition="3.2" Name="Защита по току" Id="cbc08174-d044-4aaf-b889-a36cd155402c" />
+				<VarVal Position="3.3" Length="1" FaultDefinition="3.3" Name="Переполнение количества срабатываний защиты по току" Id="887b9594-6b5a-440c-a463-48077fdf8c4c" />
+				<VarVal Position="3.4" Length="1" FaultDefinition="3.4" Name="Превышение температуры силовой сборки" Id="35c9dc44-0c43-4bd3-bd9e-835eebf05599" />
+				<VarVal Position="3.5" Length="1" FaultDefinition="3.5" Name="Превышение температуры корпуса" Id="889d08d8-35d8-4596-aa4f-3dd94d21d9ba" />
+				<VarVal Position="3.6" Length="1" FaultDefinition="3.6" Name="Отсутствие ответа от силовой сборки" Id="b6e6bb87-b4be-46bf-992e-0a82fd685d0f" />
+				<VarVal Position="3.7" Length="1" FaultDefinition="3.7" Name="Не включена блокировка контакторов" Id="ca5cbb0c-3677-459e-9144-cf7b7f6801e9" />
+				<VarVal Position="4.0" Length="8" Name="Диагностика 3 СТПР600" Id="ebc29d55-709b-4a08-bf8e-c61702bab4da" />
+				<VarVal Position="4.0" Length="1" FaultDefinition="4.0" Name="Отвод Т0 трансформатора СТПР600" Id="60a7a553-8d3d-4d8e-b800-6703d3fcfd7e" />
+				<VarVal Position="4.1" Length="1" FaultDefinition="4.1" Name="Отвод Т1 трансформатора СТПР600" Id="eb3930a8-fa91-49c1-97b2-8318b5272e87" />
+				<VarVal Position="4.2" Length="1" FaultDefinition="4.2" Name="Отвод Т2 трансформатора СТПР600" Id="af2b70ed-523a-4e85-bb42-342d13b9d030" />
+				<VarVal Position="4.3" Length="1" FaultDefinition="4.3" Name="Отвод Т3 трансформатора СТПР600" Id="20ada51a-202f-4fc1-a875-d4f0ba68efeb" />
+				<VarVal Position="4.4" Length="1" FaultDefinition="4.4" Name="Не включен регулятор СТПР600" Id="e358c995-ee9b-451a-b22a-92956bf6eb30" />
+				<VarVal Position="4.6" Length="1" FaultDefinition="4.6" Name="Перенапряжение по Uвх" Id="58e4de52-c477-46c2-8755-c420a2b7873f" />
+				<VarVal Position="4.7" Length="1" FaultDefinition="4.7" Name="Авария СТПР600" Id="da390f06-8402-442b-897d-308f7991ce04" />
+				<VarVal Position="5.0" Length="8" Name="Uвх СТПР600, ЦМР=32В" Multiplier="32.0" Id="e1c60399-1644-4d01-be59-e76a1bdf7947" />
+				<VarVal Position="6.0" Length="8" Name="Uвых СТПР600, ЦМР=32В" Multiplier="32.0" Id="1842ca3a-6a5e-423e-96f9-17764fe0a740" />
+				<VarVal Position="7.0" Length="8" Name="Скважность ШИМ СТПР600, ЦМР =1" Id="07aa26e2-b438-44b3-974e-4dd2462ce15f" />
+				<VarVal Position="8.0" Length="8" Name="Iвых СТПР600, ЦМР =1 А" Id="6d18c3ef-c628-4d77-9512-5a79b0b615b9" />
+				<VarVal Position="9.0" Length="8" Name="#CRCH" Id="059986f3-2dfc-42bb-8fe4-20bcf63e955b" />
+				<VarVal Position="10.0" Length="8" Name="#CRCL" Id="b68f662a-b1cf-4096-aebd-55874ea90db3" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и БС-СМ">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="7fe941ae-8d32-4b95-a799-ba82045206d8" />
+				<DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="82dd8e63-6c34-4b82-a572-ff073d0085be" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="1a8af0d5-1d8a-4529-ba5f-37a2e46f7411" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="dc5f7042-2c05-4084-bb6e-1c24a7d9d41d" />
+			</Request>
+			<Reply Length="20" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="b8afeb79-4f56-490a-b21a-04062b53304a" />
+				<DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="04b50999-1731-438f-a36b-44460e5387b5" />
+				<VarVal Position="2.0" Length="8" Name="Байт диагностики кондиционера и тепловых панелей. Позиционный код" Id="4377097a-2678-48a8-8080-679d9cc7fdeb" />
+				<VarVal Position="3.0" Length="8" Name="Уставка по температуре в помещении, ЦМР=1С" Multiplier="1.0" IsSigned="True" Id="0b0cacf0-1515-481d-a918-832cbea13ca0" />
+				<VarVal Position="4.0" Length="8" Name="Уставка по температуре приточного воздуха, ЦМР=1С" Multiplier="1.0" IsSigned="True" Id="1946072e-a598-4afa-a0bb-e99c5ca43ed7" />
+				<VarVal Position="5.0" Length="8" Name="Температура в помещении (калорифер1), ЦМР=1С" Multiplier="1.0" IsSigned="True" Id="3b57a90d-81ac-4f69-aa23-e4db2de3762a" />
+				<VarVal Position="6.0" Length="8" Name="Байт диагностики калорифера 1. Позиционный код" Id="7bd0bf9c-81b5-4a84-aca5-1ed236e8bca2" />
+				<VarVal Position="7.0" Length="8" Name="Состояние (калорифер1)" Id="bb44d7b2-1fb1-47a2-b628-b02b8618b91d" />
+				<VarVal Position="7.0" Length="1" FaultDefinition="8.0" Name="Состояние (калорифер1): Включена установка" Id="aba5b24f-c459-4d1d-9e62-c51c0abbaa84" />
+				<VarVal Position="7.1" Length="1" FaultDefinition="8.1" Name="Состояние (калорифер1): Включен ТЭН" Id="5218f657-00ef-4026-8284-238b9a36a7ba" />
+				<VarVal Position="7.5" Length="1" FaultDefinition="8.5" Name="Состояние (калорифер1): Неисправность калорифера 1" Id="5f7b5709-c1bc-42dc-a9cc-ef5f0deb7791" />
+				<VarVal Position="8.0" Length="8" Name="Диагностика ПЧ (калорифер1)" Id="5fdad50f-299e-44ea-8e57-b1d73d8edcdd" />
+				<VarVal Position="8.0" Length="1" FaultDefinition="9.0" Name="Диагностика ПЧ (калорифер1): Перегрузка по току (&gt;150%)" Id="5b31f46a-477a-43ed-b4c2-de3689e38770" />
+				<VarVal Position="8.1" Length="1" FaultDefinition="9.1" Name="Диагностика ПЧ (калорифер1): Повышенное входное напряжение" Id="166b5a82-734b-45b6-bf25-84b9e04772d6" />
+				<VarVal Position="8.2" Length="1" FaultDefinition="9.2" Name="Диагностика ПЧ (калорифер1): КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="06da411c-bbb7-47ee-bdf0-8dd7da48cb5e" />
+				<VarVal Position="8.3" Length="1" FaultDefinition="9.3" Name="Диагностика ПЧ (калорифер1): Пониженное/повышенное напряжение питания транзисторов (15В)" Id="853d67c7-44d2-4f43-89ce-c72e423e3186" />
+				<VarVal Position="8.4" Length="1" FaultDefinition="9.4" Name="Диагностика ПЧ (калорифер1): Защита по температуре (&gt; 110°C)" Id="862ea33e-f41f-4528-966a-a8901601ccdb" />
+				<VarVal Position="8.5" Length="1" FaultDefinition="9.5" Name="Диагностика ПЧ (калорифер1): Перегрузка по току (&gt;250%)" Id="888da3e0-a499-423b-bc42-0fd78963f491" />
+				<VarVal Position="9.0" Length="8" Name="Температура в помещении (калорифер2), ЦМР=1С" Multiplier="1.0" IsSigned="True" Id="b6d7da54-ea35-4f74-887b-01ec1a662bd3" />
+				<VarVal Position="10.0" Length="8" Name="Диагностика калорифера 2. Позиционный код" Id="7cdb007a-c685-4fcc-8871-d62be4628a8e" />
+				<VarVal Position="11.0" Length="8" Name="Состояние (калорифер2)" Id="630d65bb-c4d8-495d-8a53-b311c45f0e08" />
+				<VarVal Position="11.0" Length="1" FaultDefinition="10.0" Name="Состояние (калорифер2): Включена установка" Id="761cb307-3786-4486-9278-ec3c95663b50" />
+				<VarVal Position="11.1" Length="1" FaultDefinition="10.1" Name="Состояние (калорифер2): Включен ТЭН" Id="52fda30d-7b47-4f30-b58b-5e86073b14f0" />
+				<VarVal Position="11.5" Length="1" FaultDefinition="10.5" Name="Состояние (калорифер2): Неисправность калорифера 2" Id="b6042d1b-6ea0-4867-801b-852cda721833" />
+				<VarVal Position="12.0" Length="8" Name="Диагностика ПЧ (калорифер2)" Id="5a1c5fb3-c85d-4a55-af99-c8167e42cdff" />
+				<VarVal Position="12.0" Length="1" FaultDefinition="11.0" Name="Диагностика ПЧ (калорифер2): Перегрузка по току (&gt;150%)" Id="454f9b12-3982-4623-8884-dc06988b677c" />
+				<VarVal Position="12.1" Length="1" FaultDefinition="11.1" Name="Диагностика ПЧ (калорифер2): Повышенное входное напряжение" Id="b33c2a4a-1d30-4d79-a201-27ba83226e92" />
+				<VarVal Position="12.2" Length="1" FaultDefinition="11.2" Name="Диагностика ПЧ (калорифер2): КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="32963741-f4e2-46db-af92-91ee973fdccd" />
+				<VarVal Position="12.3" Length="1" FaultDefinition="11.3" Name="Диагностика ПЧ (калорифер2): Пониженное/повышенное напряжение питания транзисторов (15В)" Id="54b0fb91-53af-4b11-a46c-ae4cc22136bf" />
+				<VarVal Position="12.4" Length="1" FaultDefinition="11.4" Name="Диагностика ПЧ (калорифер2): Защита по температуре (&gt; 110°C)" Id="51f3fc0d-f9e2-4591-bed9-b0fd7af5b54c" />
+				<VarVal Position="12.5" Length="1" FaultDefinition="11.5" Name="Диагностика ПЧ (калорифер2): Перегрузка по току (&gt;250%)" Id="b9558150-8f49-4200-9e9f-8bbd0e87e62a" />
+				<VarVal Position="13.0" Length="8" Name="Диагностика приточной установки и МВП. Позиционный код" Id="db390ac7-2402-406b-a278-1842f9d8b015" />
+				<VarVal Position="14.0" Length="8" Name="Температура в канале приточного воздуха, ЦМР=1С" Multiplier="1.0" IsSigned="True" Id="b9f993b7-d294-4633-8b99-85010822a72f" />
+				<VarVal Position="15.0" Length="8" Name="Состояние приточной установки и МВП" Id="117d23ca-73e5-48ef-9f39-7b88196794a9" />
+				<VarVal Position="15.0" Length="1" FaultDefinition="12.0" Name="Состояние приточной установки и МВП: Включена установка" Id="6fcaefcb-d508-4d9c-86ce-74bc7fa0cfee" />
+				<VarVal Position="15.1" Length="1" FaultDefinition="12.1" Name="Состояние приточной установки и МВП: Включен ТЭН" Id="1528172c-479c-492d-87c8-37a6f35cac8d" />
+				<VarVal Position="15.5" Length="1" FaultDefinition="12.5" Name="Состояние приточной установки и МВП: Неисправность приточной установки и МВП" Id="29c88528-df5f-44e9-a68d-88c9ada1182c" />
+				<VarVal Position="15.6" Length="1" FaultDefinition="12.6" Name="Состояние приточной установки и МВП: Включен охладитель" Id="a6fd615b-9af4-43c5-96b6-9cef31a56257" />
+				<VarVal Position="16.0" Length="8" Name="Диагностика ПЧ приточной установки и МВП" Id="9d2fd46d-a3e8-446a-a3b1-6a6dd498e9d8" />
+				<VarVal Position="16.0" Length="1" FaultDefinition="13.0" Name="Диагностика ПЧ приточной установки и МВП: Перегрузка по току (&gt;150%)" Id="3314394f-f542-4c74-94b9-d7946d125b61" />
+				<VarVal Position="16.1" Length="1" FaultDefinition="13.1" Name="Диагностика ПЧ приточной установки и МВП: Повышенное входное напряжение" Id="ac30654c-49cc-4344-a595-3671ebbceffe" />
+				<VarVal Position="16.2" Length="1" FaultDefinition="13.2" Name="Диагностика ПЧ приточной установки и МВП: КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="96c280bf-88a1-48a1-a756-8e471c0ddfdf" />
+				<VarVal Position="16.3" Length="1" FaultDefinition="13.3" Name="Диагностика ПЧ приточной установки и МВП: Пониженное/повышенное напряжение питания транзисторов (15В)" Id="3de0a8eb-fe82-42c0-b591-3c3d963b63fb" />
+				<VarVal Position="16.4" Length="1" FaultDefinition="13.4" Name="Диагностика ПЧ приточной установки и МВП: Защита по температуре (&gt; 110°C)" Id="d4f5da03-b1c1-4421-adde-b0d2895dffce" />
+				<VarVal Position="16.5" Length="1" FaultDefinition="13.5" Name="Диагностика ПЧ приточной установки и МВП: Перегрузка по току (&gt;250%)" Id="5709ee9b-2bf2-486c-81b4-363d07ce6189" />
+				<VarVal Position="17.0" Length="8" Name="Диагностика ПЧ кондиционера и тепловых панелей" Id="0ba9602a-7b29-4e99-bd76-a94d80742ff5" />
+				<VarVal Position="17.0" Length="1" FaultDefinition="14.0" Name="Диагностика ПЧ кондиционера и тепловых панелей: Перегрузка по току (&gt;150%)" Id="392b6587-9fa6-432c-9c7d-1260c4b14c6f" />
+				<VarVal Position="17.1" Length="1" FaultDefinition="14.1" Name="Диагностика ПЧ кондиционера и тепловых панелей: Повышенное входное напряжение" Id="caa86979-424e-4d58-931d-c842794079f2" />
+				<VarVal Position="17.2" Length="1" FaultDefinition="14.2" Name="Диагностика ПЧ кондиционера и тепловых панелей: КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="321ff12a-b23a-46dc-a5f2-724e33f2a1b4" />
+				<VarVal Position="17.3" Length="1" FaultDefinition="14.3" Name="Диагностика ПЧ кондиционера и тепловых панелей: Пониженное/повышенное напряжение питания транзисторов (15В)" Id="6ebf4ded-ac68-4e0c-bf42-54250c0ac1ca" />
+				<VarVal Position="17.4" Length="1" FaultDefinition="14.4" Name="Диагностика ПЧ кондиционера и тепловых панелей: Защита по температуре (&gt; 110°C)" Id="d2b768ad-c743-4303-b8ef-cb7d32cbe45b" />
+				<VarVal Position="17.5" Length="1" FaultDefinition="14.5" Name="Диагностика ПЧ кондиционера и тепловых панелей: Перегрузка по току (&gt;250%)" Id="20208be8-c5b2-45e5-b9d0-ad6291ec8756" />
+				<VarVal Position="18.0" Length="8" Name="#CRCH" Id="e9dfbb32-5b59-4a1b-b82f-87d2ce0f16dd" />
+				<VarVal Position="19.0" Length="8" Name="#CRCL" Id="4400a99f-73e9-4102-87e0-9d82a5271309" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и БС-БФН">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="245feea6-ef0b-4d5d-8d3f-025bd58e1b56" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="8487a20d-2447-4a8b-923c-893c995122f6" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="598a5fd6-bb2a-414d-8ebd-c1ca2757ed0a" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="4453930b-007d-4dd0-b66a-2126b0ff8341" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="9e4d1add-3a41-4ea8-b424-4a5b75aaab7e" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="c0335359-eb13-48ad-8e9b-b7dba0bdb19a" />
+				<VarVal Position="2.0" Length="8" Name="Uвых 600, ЦМР=16В" Multiplier="16.0" Id="2558c924-7ef0-41c1-aa8e-f7a48de19e32" />
+				<VarVal Position="3.0" Length="8" Name="Iвых 600, ЦМР=16В" Multiplier="16.0" Id="fff7b196-7739-4d4e-a142-213fd9744cfc" />
+				<VarVal Position="4.0" Length="8" Name="Статус БС-БФН" Id="12ffe651-0cc3-4be0-b447-da6fe79375f2" />
+				<VarVal Position="4.0" Length="1" FaultDefinition="15.0" Name="Нет связи с ПНКВ Iвых" Id="0764b6ff-5964-4ec3-afa0-618ddb0748f0" />
+				<VarVal Position="4.1" Length="1" FaultDefinition="15.1" Name="Нет связи с ПНКВ Uвых" Id="602dfe72-e6df-40df-b6ee-3c4ece422525" />
+				<VarVal Position="4.2" Length="1" FaultDefinition="15.2" Name="Защита по току" Id="c1bcf4c2-a0e9-4bbb-918d-d52a0e7b63f7" />
+				<VarVal Position="4.3" Length="1" FaultDefinition="15.3" Name="Не норма Uвых" Id="3fb7cab5-94a3-4015-93c4-416e16bc173f" />
+				<VarVal Position="4.7" Length="1" FaultDefinition="15.7" Name="Нет связи БС-БФН с ЦКУ" Id="551f1456-e312-49cc-91d4-6453b480691a" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="12f84c22-efe6-4f15-8e52-455813b8e132" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="08b8bc91-a1d5-454b-9f5c-c39719b8f268" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и БС - НВ">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="741324ab-e91d-48a5-9305-dd42b05e0c3d" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="63cfa88f-1fc9-423f-b136-6aec272c285c" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="302f17e2-76b9-4bbf-8fd1-2097348b0afe" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="79a4c7f3-9989-494b-a4c2-618ad0ff7f8d" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="e01e624b-7a95-4fab-bc51-5dd85d97ccc2" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="1679352c-9806-4270-b358-0accc3b7e431" />
+				<VarVal Position="2.0" Length="8" Name="Iвх , ЦМР=1A" Id="210e3e70-7507-47c1-907a-c9fded5ef10a" />
+				<VarVal Position="3.0" Length="8" Name="Uвх, ЦМР=32В" Multiplier="32.0" Id="9fdd712a-3b7e-4bb0-a018-35e26c60e127" />
+				<VarVal Position="4.0" Length="8" Name="Статус БС – НВ" Id="0b0613b3-aa2b-4aa1-b322-e8be739f7e9c" />
+				<VarVal Position="4.0" Length="1" FaultDefinition="16.0" Name="Нет связи с ПНКВ Uвх" Id="24ab46d3-a0c3-4f65-be64-7e31f35fe98c" />
+				<VarVal Position="4.1" Length="1" FaultDefinition="16.1" Name="Защита по Т выпрямителя" Id="98fb1264-eb3f-4d1c-904f-e23020e89a16" />
+				<VarVal Position="4.2" Length="1" FaultDefinition="16.2" Name="Защита по току силовой сборки" Id="abf450b7-4d6a-444c-bbf1-e549640f1157" />
+				<VarVal Position="4.3" Length="1" FaultDefinition="16.3" Name="Защита по Т инвертора" Id="5b5e1fea-49b0-44f2-b811-daf314984f08" />
+				<VarVal Position="4.4" Length="1" FaultDefinition="16.4" Name="Защита по входному напряжению" Id="410cb0ff-8020-4d7f-9fcb-4874c8e44916" />
+				<VarVal Position="4.5" Length="1" FaultDefinition="16.5" Name="Защита по входному току" Id="2744ab0a-506a-499e-bb38-6c2e8a8b9c7a" />
+				<VarVal Position="4.6" Length="1" FaultDefinition="16.6" Name="Входное напряжение ниже нормы" Id="caf43399-69a8-453d-a041-6935635366bb" />
+				<VarVal Position="4.7" Length="1" FaultDefinition="16.7" Name="Нет связи БС-НВ с ЦКУ" Id="0d37841e-05a2-4721-a7af-1cb6af13c634" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="076569a6-7d1c-451c-bdf0-1066d0abf4bd" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="7c5990ae-294b-4bfc-8d09-247f6153848e" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и БС - НВ">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="fa4279a4-cabc-4392-8949-37963ae846c4" />
+				<DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="8e1f883d-b009-4a23-be9e-882cc1d80197" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="47faf858-2903-4b70-b3ef-7529a0cc405b" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="1f536275-6666-4313-b752-d86097c636b7" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="b3973671-f3f8-4dde-bbd3-29faa9d3255b" />
+				<DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="a9508310-25ec-49af-aeeb-daeddddaf0ae" />
+				<VarVal Position="2.0" Length="8" Name="Признак неисправности КО1" Id="a5ab0e86-6ae9-47ce-a253-7fd14fdba704" />
+				<VarVal Position="2.0" Length="1" FaultDefinition="17.0" Name="КО1: неисправен 0 драйвер силовой сборки инвертора" Id="534fe1dd-097c-457d-ac06-9f41c8cf9976" />
+				<VarVal Position="2.1" Length="1" FaultDefinition="17.1" Name="КО1: неисправен 1 драйвер силовой сборки инвертора" Id="0f2e426e-e54b-49ff-8416-12955dfc4489" />
+				<VarVal Position="2.2" Length="1" FaultDefinition="17.2" Name="КО1: неисправен 2 драйвер силовой сборки инвертора" Id="616d4f0f-710c-4dba-b448-dfa88c0ff783" />
+				<VarVal Position="2.3" Length="1" FaultDefinition="17.3" Name="КО1: неисправен 3 драйвер силовой сборки инвертора" Id="e9b3e32e-29f3-4e89-a973-6927b3004691" />
+				<VarVal Position="2.4" Length="1" FaultDefinition="17.4" Name="КО1: неисправен 4 драйвер силовой сборки инвертора" Id="e814c8e9-7b9d-4ffe-9a43-88ea9d28dc14" />
+				<VarVal Position="2.5" Length="1" FaultDefinition="17.5" Name="КО1: неисправен 5 драйвер силовой сборки инвертора" Id="90d408e7-e2b1-4697-8f09-af364452293e" />
+				<VarVal Position="2.6" Length="1" FaultDefinition="17.6" Name="КО1: неисправен 6 драйвер силовой сборки инвертора" Id="23e83753-5aa9-40ab-868b-074c475e651a" />
+				<VarVal Position="2.7" Length="1" FaultDefinition="17.7" Name="КО1: неисправен 7 драйвер силовой сборки инвертора" Id="585ce384-b5aa-47e8-b5e5-84ad24a552ae" />
+				<VarVal Position="3.0" Length="8" Name="Признак неисправности КО2" Id="bc27a4b3-ec7a-4e1e-a00c-0807831a904a" />
+				<VarVal Position="3.0" Length="1" FaultDefinition="18.0" Name="КО2: неисправен 0 драйвер силовой сборки инвертора" Id="b814b01a-291c-4c1f-a0b3-f18dbb3b48ce" />
+				<VarVal Position="3.1" Length="1" FaultDefinition="18.1" Name="КО2: неисправен 1 драйвер силовой сборки инвертора" Id="28dea798-6fe2-449d-af52-e98228464271" />
+				<VarVal Position="3.2" Length="1" FaultDefinition="18.2" Name="КО2: неисправен 2 драйвер силовой сборки инвертора" Id="d554af82-cb08-4072-a072-10f970b0241c" />
+				<VarVal Position="3.3" Length="1" FaultDefinition="18.3" Name="КО2: неисправен 3 драйвер силовой сборки инвертора" Id="aac4b301-63eb-44bf-8831-81b5d678f2bb" />
+				<VarVal Position="3.4" Length="1" FaultDefinition="18.4" Name="КО2: неисправен 4 драйвер силовой сборки инвертора" Id="1b96607c-387c-4a8c-ab33-d3aae14c28de" />
+				<VarVal Position="3.5" Length="1" FaultDefinition="18.5" Name="КО2: неисправен 5 драйвер силовой сборки инвертора" Id="c6629b27-4bba-4ee3-a23f-58d07253bf9c" />
+				<VarVal Position="3.6" Length="1" FaultDefinition="18.6" Name="КО2: неисправен 6 драйвер силовой сборки инвертора" Id="0979f2fb-ded3-453e-99c0-15a51516d855" />
+				<VarVal Position="3.7" Length="1" FaultDefinition="18.7" Name="КО2: неисправен 7 драйвер силовой сборки инвертора" Id="61d43abe-acea-4562-920d-3071c8256411" />
+				<VarVal Position="4.0" Length="8" Name="Признак неисправности КО3" Id="d468ac92-5c83-458c-b3d5-24975104f9d7" />
+				<VarVal Position="4.0" Length="1" FaultDefinition="19.0" Name="КО3: неисправен 0 драйвер силовой сборки инвертора" Id="dad82bea-89d5-4af8-9681-7e2919a8e87b" />
+				<VarVal Position="4.1" Length="1" FaultDefinition="19.1" Name="КО3: неисправен 1 драйвер силовой сборки инвертора" Id="c056d5a4-a551-487b-bd9a-1c21f23f367b" />
+				<VarVal Position="4.2" Length="1" FaultDefinition="19.2" Name="КО3: неисправен 2 драйвер силовой сборки инвертора" Id="d9415ee9-758d-497d-8513-62254e91c506" />
+				<VarVal Position="4.3" Length="1" FaultDefinition="19.3" Name="КО3: неисправен 3 драйвер силовой сборки инвертора" Id="c9157df7-df35-43b7-9325-f3d72e71bc78" />
+				<VarVal Position="4.4" Length="1" FaultDefinition="19.4" Name="КО3: неисправен 4 драйвер силовой сборки инвертора" Id="f654f384-5ce1-4b0b-8b26-34fda7881113" />
+				<VarVal Position="4.5" Length="1" FaultDefinition="19.5" Name="КО3: неисправен 5 драйвер силовой сборки инвертора" Id="595e51ce-6480-4641-8271-3e8777643ba8" />
+				<VarVal Position="4.6" Length="1" FaultDefinition="19.6" Name="КО3: неисправен 6 драйвер силовой сборки инвертора" Id="55ff06b7-6ac6-4b6f-90ab-5d1567e21c2a" />
+				<VarVal Position="4.7" Length="1" FaultDefinition="19.7" Name="КО3: неисправен 7 драйвер силовой сборки инвертора" Id="3a1dee70-7d75-480b-9896-a5d5e7ce1948" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="ac724c57-4e44-4403-9edc-5e769ef28082" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="e9c3cfe9-039a-4519-8111-c742672284b0" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и ПЧ ВО ТЭД 1-2">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="41c17abe-efa5-4dd6-930d-2d923980a3aa" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="4c76e64b-c5cb-435e-b58b-49885300d1fa" />
+				<VarVal Position="2.0" Length="8" Name="Уставка ПЧ ВО ТЭД 1-2, ЦМР=1Гц" Id="121af86d-ab3c-4331-9082-9f8164fd2703" />
+				<VarVal Position="3.7" Length="1" Name="Включение ПЧ ВО ТЭД 1-2" Id="d3e46656-91cd-4843-bff8-3c96288faa97" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="da7b2820-a20b-4591-8dc4-2698869dd37d" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="b4c232ca-064b-41d5-a46e-468e31333ca4" />
+			</Request>
+			<Reply Length="5" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="a667de91-b085-4650-8b7d-d4980c74785e" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="aa5641aa-75ec-4fa6-8daf-f0906952da0d" />
+				<VarVal Position="2.0" Length="8" Name="Статус ПЧ ВО ТЭД 1-2" Id="22dca0ae-7619-4b3c-a469-a65e0a59efea" />
+				<VarVal Position="2.7" Length="1" FaultDefinition="5.7" Name="Авария ВО ТЭД 1-2" Id="5ed82a3f-269e-4274-bd46-75982792ffc7" />
+				<VarVal Position="2.6" Length="1" FaultDefinition="5.6" Name="Неисправность кодовых связей ПЧ ВО ТЭД 1-2" Id="da68fd7d-7601-4812-a7c8-ee9ea0249894" />
+				<VarVal Position="2.5" Length="1" FaultDefinition="5.5" Name="Перегрузка по току (&gt;250%)" Id="d9bb6049-ce42-439b-9901-9a90f533e918" />
+				<VarVal Position="2.4" Length="1" FaultDefinition="5.4" Name="Защита по температуре (&gt; 110°C)" Id="8dff9b35-debc-4986-81ca-289164b11019" />
+				<VarVal Position="2.3" Length="1" FaultDefinition="5.3" Name="Пониженное/повышенное напряжение питания транзисторов (15В)" Id="48fd0680-86bb-4683-8c45-001e61ff9de9" />
+				<VarVal Position="2.2" Length="1" FaultDefinition="5.2" Name="КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="a49ad7a5-29d0-42a2-8ea0-89a63c2144ef" />
+				<VarVal Position="2.1" Length="1" FaultDefinition="5.1" Name="Повышенное/пониженное входное напряжение" Id="5b131bb3-ca37-41ce-b38d-82ac45fb6050" />
+				<VarVal Position="2.0" Length="1" FaultDefinition="5.0" Name="Перегрузка по току (&gt;150%)" Id="0dd6f666-7a70-40e7-8c0a-2535ae5f484f" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="fd9ad713-42fb-4246-9ddd-8ac45c63ab95" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="f87cdba0-3ead-4360-81cd-5fd9464fc09d" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и ПЧ ВО ТЭД 3-4">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x25" Name="#ADDR" Id="79823ee8-7660-49e2-ae04-787a14888729" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="487b362d-8cd6-4474-ac76-b9ae77888e7f" />
+				<VarVal Position="2.0" Length="8" Name="Уставка ПЧ ВО ТЭД 3-4, ЦМР=1Гц" Id="3e0950d5-38a6-4c4c-b5dc-fa86c6c52945" />
+				<VarVal Position="3.7" Length="1" Name="Включение ПЧ ВО ТЭД 3-4" Id="91252ba1-30e3-40a4-8c9f-608bfa042040" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="676ea999-fb22-4df3-a8fa-a0f0bdd8cdf7" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="08f35c7a-8030-4323-881d-0104fed23edb" />
+			</Request>
+			<Reply Length="5" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x25" Name="#ADDR" Id="3baa06b9-ad6c-4200-80b7-129338867d52" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="680e4afe-28fc-4a21-afb5-f5a813ac720d" />
+				<VarVal Position="2.0" Length="8" Name="Статус ПЧ ВО ТЭД 3-4" Id="efa3db9f-3ab9-4914-9756-01121b6fd61e" />
+				<VarVal Position="2.7" Length="1" FaultDefinition="7.7" Name="Авария ВО ТЭД 3-4" Id="055f9aef-4946-44e7-8f12-7cbc6e232e30" />
+				<VarVal Position="2.6" Length="1" FaultDefinition="7.6" Name="Неисправность кодовых связей ПЧ ВО ТЭД 3-4" Id="5816293a-473c-41b9-bb8f-03d69e742dfc" />
+				<VarVal Position="2.5" Length="1" FaultDefinition="7.5" Name="Перегрузка по току (&gt;250%)" Id="1d59c51c-ef3b-4661-b9f6-b4b6fefcd3b1" />
+				<VarVal Position="2.4" Length="1" FaultDefinition="7.4" Name="Защита по температуре (&gt; 110°C)" Id="6a4466e4-7d14-4104-897d-5efb90650aaf" />
+				<VarVal Position="2.3" Length="1" FaultDefinition="7.3" Name="Пониженное/повышенное напряжение питания транзисторов (15В)" Id="2bf2f96d-738f-48a3-b2d0-f8ac921de972" />
+				<VarVal Position="2.2" Length="1" FaultDefinition="7.2" Name="КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="de803181-9916-4b87-b32d-437568b2051e" />
+				<VarVal Position="2.1" Length="1" FaultDefinition="7.1" Name="Повышенное/пониженное входное напряжение" Id="8daf81b1-b37b-460c-a8e4-80e9aacbab8d" />
+				<VarVal Position="2.0" Length="1" FaultDefinition="7.0" Name="Перегрузка по току (&gt;150%)" Id="a5fb5189-f566-41e5-8c9f-f804479a92b0" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="1062e9c6-104e-4463-a708-21d7da98695b" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="c22f5242-87b5-4a2b-84ef-e1355e11211c" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и ПЧ ТК">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x15" Name="#ADDR" Id="7263427e-2fbe-41da-abd6-28b9fe63c399" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="04aac516-2608-4e93-a9b9-3a738318036c" />
+				<VarVal Position="2.0" Length="8" Name="Уставка ПЧ ТК, ЦМР=1Гц" Id="2bf72834-5cd2-4c49-8441-d5c69af03ab0" />
+				<VarVal Position="3.0" Length="8" Name="Дискретные команды" Id="1ce181b4-9da7-4056-9c84-1bf744a7f989" />
+				<VarVal Position="3.7" Length="1" Name="Включение ПЧ ТК" Id="29b89eda-6bf8-4d86-bf02-0ca677ecd3ee" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="14bd2ea5-353b-419a-b75e-122e732596bd" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="4a2f132e-600c-4fde-8f7e-840aa770370a" />
+			</Request>
+			<Reply Length="5" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x15" Name="#ADDR" Id="6c00dd7f-32cf-480a-ab0a-76fe3c4d0822" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="afc4f6e1-6ec9-4a45-a020-36649fae5866" />
+				<VarVal Position="2.0" Length="8" Name="Статус ПЧ ТК" Id="8d9c2dce-f2b7-48a5-b831-d98a1443b9b0" />
+				<VarVal Position="2.7" Length="1" FaultDefinition="6.7" Name="Авария ТК" Id="71fb5070-6f35-4e4a-badf-c7f75900544f" />
+				<VarVal Position="2.6" Length="1" FaultDefinition="6.6" Name="Неисправность кодовых связей ПЧ ТК" Id="7363b066-2b10-4711-ac45-e940bf44a01e" />
+				<VarVal Position="2.5" Length="1" FaultDefinition="6.5" Name="Перегрузка по току (&gt;250%)" Id="124ad93c-feae-4fb6-9413-1ff2525adbde" />
+				<VarVal Position="2.4" Length="1" FaultDefinition="6.4" Name="Защита по температуре (&gt; 110°C)" Id="c3d61e6e-1747-4b7c-85d5-4fd760cc52ee" />
+				<VarVal Position="2.3" Length="1" FaultDefinition="6.3" Name="Пониженное/повышенное напряжение питания транзисторов (15В)" Id="7fa77fbd-dc8b-47dc-b675-63b62eda872d" />
+				<VarVal Position="2.2" Length="1" FaultDefinition="6.2" Name="КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="7ddaf15a-559c-4c3a-bde7-cd4629cab4b7" />
+				<VarVal Position="2.1" Length="1" FaultDefinition="6.1" Name="Повышенное/пониженное входное напряжение" Id="4c72a687-b721-4393-b5ff-2a0b2c198f04" />
+				<VarVal Position="2.0" Length="1" FaultDefinition="6.0" Name="Перегрузка по току (&gt;150%)" Id="fd003b78-072f-4caa-9a96-eefdf41c3df5" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="7f2cd4ad-b5f3-4817-9412-78bf3fab2033" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="db5ad640-9429-485b-af59-ca15f1f81edd" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и КИ(ПР 110В)">
+			<Request Length="5" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="fbda4c40-c7a9-410d-a81b-02db1511fc5d" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="c5ee1011-8031-4b2f-91dc-36fa25fceab6" />
+				<VarVal Position="2.0" Length="8" Name="Уставка ПЧ ТК, ЦМР=1Гц" Id="b801fcae-4181-4c04-aa7f-a50699f36db3" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="901b408a-0a8c-4338-9395-76aca1d5e70c" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="d525a191-bb44-4cf0-9b40-43a6da60b075" />
+			</Request>
+			<Reply Length="10" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="d0a95cf4-6940-4bd2-93d0-f3a6e503785e" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="5d00f1cd-5b0b-4a2b-8639-b6ab4bbe1abf" />
+				<VarVal Position="2.0" Length="8" Name="Напряжение АБ, ЦМР=1В" Id="7e48b70c-0bcc-44ff-96bc-785d8584322a" />
+				<VarVal Position="3.0" Length="8" Name="Ток АБ, ЦМР=1А" Id="41df34fc-975f-406c-b1c5-38cb86188c80" />
+				<VarVal Position="4.0" Length="8" Name="Напряжение преобразователя 110В, ЦМР=1В" Id="c6556bd6-b44f-4704-9c52-fd616f9d25d9" />
+				<VarVal Position="5.0" Length="8" Name="Ток преобразователя 110В, ЦМР=1А" Id="3ddea497-8a4f-4ede-b15b-735e7641b4cd" />
+				<VarVal Position="6.0" Length="8" Name="Напряжение пропадающего питания, ЦМР=1В" Id="2fc5887e-28a8-4b26-88d7-692f1d1b16a3" />
+				<VarVal Position="7.0" Length="8" Name="Напряжение ИПЛЭ, ЦМР=1В" Id="a6e295aa-5462-4626-ad15-a52df57ebaf0" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="9c7e914d-e5aa-48d6-a1d3-53e2e3ccd0ec" />
+				<VarVal Position="9.0" Length="8" Name="#CRCL" Id="ba7bbbd7-4d41-4224-a77a-b04c571ce965" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и РПМ">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="3c0f9be0-557f-47f7-a658-3cfec5630603" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="24ef4ed8-83af-4523-87d3-17cdb38300d6" />
+				<VarVal Position="2.0" Length="16" Name="Байты данных БСП: №6, №8" Id="78b8d491-de2f-420e-ac0c-4e2cfa25b4ef" />
+				<DefVal Position="4.7" Length="1" Value="0" Name="" Id="99a0a988-c2e5-407e-b270-b25f7e47d67e" />
+				<VarVal Position="4.0" Length="7" Name="Номер позиции текущей секции от МПСУиД" Id="8870e5d2-fa80-40db-b60b-02028e7ab8ce" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="eb95b12b-e038-44af-a121-254b2d71c48e" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="ee8c8c6a-32e7-4580-bbfb-31ff04c0f939" />
+			</Request>
+			<Reply Length="0" Position="7"></Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="1-ый каналом МПСУиД и БСП">
+			<Request Length="11" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x31" Name="#ADDR" Id="7b911481-00c2-47c6-b4c0-dc5e76d41a0f" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="2693d3a8-0842-4059-afd8-a48392826196" />
+				<VarVal Position="2.0" Length="8" Name="Байт данных МПСУиД №1" Id="6604bc23-e24b-4e1a-a3da-a6f2ab1a5f1e" />
+				<VarVal Position="3.0" Length="8" Name="Байт данных МПСУиД №2" Id="3d1f4ef9-6235-41f8-a452-a2b938c9ee17" />
+				<VarVal Position="4.0" Length="8" Name="Байт данных МПСУиД №3" Id="73923c22-477c-408c-b91e-1023e57f48f7" />
+				<VarVal Position="5.0" Length="8" Name="Байт данных МПСУиД №4" Id="84ebcc17-57c6-4a23-b938-0cb545a02eca" />
+				<VarVal Position="6.0" Length="8" Name="Байт данных МПСУиД №5" Id="b5a4263a-ae35-4cb4-9140-603c212a2543" />
+				<VarVal Position="7.0" Length="8" Name="Байт данных МПСУиД №6" Id="30581b10-c07b-4470-a827-1c2c3890bba1" />
+				<VarVal Position="8.0" Length="8" Name="Байт данных МПСУиД №7" Id="5f7937d8-c447-4054-9b13-f7d87c48ee4a" />
+				<VarVal Position="9.0" Length="8" Name="#CRCH" Id="b629c207-5e91-4860-8f2c-9cf275ed601d" />
+				<VarVal Position="10.0" Length="8" Name="#CRCL" Id="2c408dd1-95b5-4bc0-b913-199e89de2122" />
+			</Request>
+			<Reply Length="12" Position="11">
+				<DefVal Position="0.0" Length="8" Value="0x31" Name="#ADDR" Id="814ff52c-05a2-4a0c-ac09-3ba7b9dd20c3" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="83866ffe-b3da-4e3d-b82e-3e529b0c5701" />
+				<VarVal Position="2.0" Length="8" Name="Байт данных МПСУиД №1" Id="7674e7e0-b095-4d8e-8770-e37b86d2dfe6" />
+				<VarVal Position="3.0" Length="8" Name="Байт данных МПСУиД №2" Id="5d92b16b-31de-4dbb-a0af-5ed4135f5bb8" />
+				<VarVal Position="4.0" Length="8" Name="Байт данных МПСУиД №3" Id="ffdbe4c1-087a-4461-9456-afac2ceb1fed" />
+				<VarVal Position="5.0" Length="8" Name="Байт данных МПСУиД №4" Id="24e479bb-61de-431d-91a9-21a1aac31e76" />
+				<VarVal Position="6.0" Length="8" Name="Байт данных МПСУиД №5" Id="9b02a77b-77d9-4832-b2c6-03f3fa8c909a" />
+				<VarVal Position="7.0" Length="6" Name="Байт данных МПСУиД №6 (Время hex-формат)" Id="23d86dd3-cd08-411b-9987-a5315dd3510f" />
+				<VarVal Position="8.5" Length="3" Name="Байт данных МПСУиД №7 (Указатель даты и времени)" Id="8e8bb4f8-2e8c-4900-a526-97ab04454c2c" />
+				<VarVal Position="10.0" Length="8" Name="#CRCH" Id="79200087-6867-4dc3-b88a-dc0e4f25f5eb" />
+				<VarVal Position="11.0" Length="8" Name="#CRCL" Id="f119b59d-9210-4bae-bf28-a3057ed0692a" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="1-ый каналом МПСУиД и БИ">
+			<Request Length="10" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x71" Name="#ADDR" Id="02d78df3-4051-4401-a466-1a7e86a76782" />
+				<DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="808294a2-7ede-4b23-a649-adb67d5147a2" />
+				<VarVal Position="2.0" Length="8" Name="Байт данных МПСУиД №1" Id="29a508f3-9f52-4bf7-a200-6d451dbcb5e4" />
+				<VarVal Position="3.0" Length="8" Name="Байт данных МПСУиД №2" Id="26fa30c5-249c-4e78-be7e-569f414d8347" />
+				<VarVal Position="4.0" Length="8" Name="Байт данных МПСУиД №3" Id="2befdfa1-f3ec-4bd9-b09a-d09359761ff5" />
+				<VarVal Position="5.0" Length="6" Name="Байт данных МПСУиД №4 (D5-D0) - номер текущей позиции секции" Id="a1e9517e-0283-4606-b2a3-ac1bc5aba08b" />
+				<VarVal Position="6.0" Length="8" Name="Байт данных МПСУиД №5" Id="380c2df9-be0f-4824-be21-0df9118b8d97" />
+				<VarVal Position="7.6" Length="2" Name="Байт данных МПСУиД №6 (D7-D6) - биты для номера позиции текущей секции" Id="c670cf1f-e6b5-433d-aca8-da35966ac353" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="e35cd001-f7f6-4d1a-9002-f001d0e054a5" />
+				<VarVal Position="9.0" Length="8" Name="#CRCL" Id="b0dda6d8-22bb-40d6-a415-d045f1adc1ba" />
+			</Request>
+			<Reply Length="5" Position="10">
+				<DefVal Position="0.0" Length="8" Value="0x71" Name="#ADDR" Id="d910c424-7d37-495a-8a8a-52a58f6309cb" />
+				<DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="846b4b79-c4a3-4c9d-92a6-3f3b864cfbee" />
+				<VarVal Position="2.0" Length="8" Name="Байты данных БИ №1" Id="65168318-5c84-44e2-8669-6d69c2efbf44" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="7d05b71d-8d01-41f9-8a82-927bfd9bd5d3" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="ea23c0bc-a618-49a2-8558-fc4a28bd3dde" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+		<CmdMask Name="МК1 и МГМ-2">
+			<Request Length="5" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="1638c9f0-ee8f-4683-b270-55cffa548795" />
+				<DefVal Position="1.0" Length="8" Value="0x4A" Name="#NCMD" Id="de6b06f6-b765-4451-ba79-f585f2bddd48" />
+				<VarVal Position="2.0" Length="8" Name="Включение ИН 300 В (МГМ-2)" Id="e98484a8-abb1-497c-9442-096ad6a5bedc" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="7466f7ab-eb34-4153-a0bb-45a6a956f92b" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="bf30f800-6468-4120-b04b-abbc70fcbd7c" />
+			</Request>
+			<Reply Length="6" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="14676bd1-5003-487b-a2f3-a74128a7bd53" />
+				<DefVal Position="1.0" Length="8" Value="0x4A" Name="#NCMD" Id="7c863ffa-8adf-4810-ab80-5deb166f1a50" />
+				<VarVal Position="2.7" Length="1" FaultDefinition="20.7" Name="Статус МГМ-2: Не включился ИН 300 В" Id="df6c9d4e-4b22-46f0-a089-25516c3af76a" />
+				<VarVal Position="2.6" Length="1" FaultDefinition="20.6" Name="Статус МГМ-2: ИН 300 В включен/отключен" Id="029877a5-5d33-4749-843d-b33102c43491" />
+				<VarVal Position="2.5" Length="1" FaultDefinition="20.5" Name="Статус МГМ-2: Нет достоверных данных по Iут  и/или U 300 В" Id="ad059ca3-80b8-4ef5-b957-987be7a5b7e8" />
+				<VarVal Position="2.4" Length="1" FaultDefinition="20.4" Name="Статус МГМ-2: Нет связи с модулем измерительным (МИ)" Id="6b44f4aa-25dc-4b3f-b6e4-185dd102a33a" />
+				<VarVal Position="3.0" Length="8" Name="Сопротивление изоляции (Rиз) трехфазных выходных цепей, ЦМР = 100 кОм" Multiplier="100.0" Id="d09d41bd-e463-4eed-b9b0-7a6d761c6a7e" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="8563d2de-c330-4190-bbea-99f7b1011597" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="dc5e3f6a-7cc8-4adf-b49e-e92fe3af9341" />
+			</Reply>
+		</CmdMask>
+		<!--****************************************************************************************************************-->
+	</Commands>
+</PsnConfiguration>

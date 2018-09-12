@@ -1,0 +1,590 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{019A9338-FB81-44C8-912A-269967EEC73F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RPD.Presentation</RootNamespace>
+    <AssemblyName>RPD</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <WarningLevel>4</WarningLevel>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20525.0</ExpressionBlendVersion>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\RPD\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;MP</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <DocumentationFile>
+    </DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\RPD\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2CC4E4BD1378A8D8CCEACBCBA5179B2FD7F22014</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>RPD.Presentation_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>rpd.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\bin\RPD\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>..\..\bin\RPD\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Abt.Controls.SciChart.Wpf.2.2, Version=2.2.5076.36477, Culture=neutral, PublicKeyToken=b55dd9efe817e823, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\Abt.Controls.SciChart.Wpf.2.2.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Adaptation.WindowsPresentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\AlienJust.Adaptation.WindowsPresentation.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Text, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\Refs\AlienJust.Support.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator, Version=2.0.1.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.1\lib\net40\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Dnv.Utils">
+      <HintPath>..\Refs\Dnv.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19038, Culture=neutral, PublicKeyToken=0e453835af4ee6ce, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=f46ff315b1088208, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\Refs\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\Refs\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.0.0-beta11\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.8.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.8.1\lib\net40\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="RPD.Presentation.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bin\RPD\Release\RPD.Presentation.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.2.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="ColorStorage.cs" />
+    <Compile Include="Extensions\RepositoryViewModelExtension.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Helpers\CheckAllHelper.cs" />
+    <Compile Include="Helpers\InteractiveCommand.cs" />
+    <Compile Include="InputBindingsManager.cs" />
+    <Compile Include="Messages\AddDataWindowMessages.cs" />
+    <Compile Include="Messages\AppMessages.cs" />
+    <Compile Include="Messages\CaptureNewFaultsMessage.cs" />
+    <Compile Include="Messages\NavigateMessage.cs" />
+    <Compile Include="Messages\Parameters\LogsParameters.cs" />
+    <Compile Include="Messages\Parameters\ExportLogsParametersBase.cs" />
+    <Compile Include="Messages\IsTrendOnPlotChangedMessage.cs" />
+    <Compile Include="Messages\MessageWithCallback.cs" />
+    <Compile Include="Messages\SetViewModelParametersMessage.cs" />
+    <Compile Include="Messages\ViewModelToViewMessage.cs" />
+    <Compile Include="Mocks\DAL\DataPointMock.cs" />
+    <Compile Include="Mocks\DAL\FaultLogMock.cs" />
+    <Compile Include="Mocks\DAL\LoaderMock.cs" />
+    <Compile Include="Mocks\DAL\LocomotiveMock.cs" />
+    <Compile Include="Mocks\DAL\PsnChannelMock.cs" />
+    <Compile Include="Mocks\DAL\PsnConfigurationMock.cs" />
+    <Compile Include="Mocks\DAL\PsnLogMock.cs" />
+    <Compile Include="Mocks\DAL\PsnMeterMock.cs" />
+    <Compile Include="Mocks\DAL\RepositoryMock.cs" />
+    <Compile Include="Mocks\DAL\SectionMock.cs" />
+    <Compile Include="Mocks\DAL\SignalMock.cs" />
+    <Compile Include="Mocks\DAL\UidMock.cs" />
+    <Compile Include="Model\FtpServer.cs" />
+    <Compile Include="Model\SeriesAdditionalData.cs" />
+    <Compile Include="Repositories\DeviceInfoRepository.cs" />
+    <Compile Include="Repositories\FtpServersRepository.cs" />
+    <Compile Include="Mocks\GeneratedDataType.cs" />
+    <Compile Include="Mocks\Helpers\LocomotiveGenerator.cs" />
+    <Compile Include="Model\DeviceInfo.cs" />
+    <Compile Include="Model\SelectionMasks\SelectionItem.cs" />
+    <Compile Include="Model\SelectionMasks\SelectionMask.cs" />
+    <Compile Include="Model\SelectionMasks\SelectionMasksCollection.cs" />
+    <Compile Include="Model\SelectionMasks\SelectionMasksStorage.cs" />
+    <Compile Include="Repositories\DeviceNumberToPsnConfigurationRepository.cs" />
+    <Compile Include="Settings\ApplicationSettings.cs" />
+    <Compile Include="Settings\Formats.cs" />
+    <Compile Include="Settings\SettingsPdo.cs" />
+    <Compile Include="Settings\TrendPdo.cs" />
+    <Compile Include="Settings\WorkspacePdo.cs" />
+    <Compile Include="ValueConverters\MeterTypeToStringConverter.cs" />
+    <Compile Include="ViewModels\AboutProgramViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\AddDataViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\DesignTime\AddDataDesignTime.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\DesignTime\AvailableFaultsDesignTime.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\DesignTime\SelectDataSourceDesignTime.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\DesignTime\SelectFtpServerDesignTime.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\DesignTime\SelectPsnConfigurationDesignTime.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\DeviceLocomotiveNameViewModel.cs" />
+    <Compile Include="ViewModels\DalViewModels\DesignTime\PsnChannelConfigDesignTime.cs" />
+    <Compile Include="ViewModels\DalViewModels\DesignTime\PsnMeterConfigDesignTime.cs" />
+    <Compile Include="ViewModels\DalViewModels\FtpRepositoryInfoViewModel.cs" />
+    <Compile Include="ViewModels\DalViewModels\FtpServerViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\ReadProgressViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectFtpDeviceViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectFtpServerViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectPathHelperViewModels\SelectExportImagePathHelper.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectPathHelperViewModels\SelectRpdDataDirectoryHelper.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectPathHelperViewModels\SelectZippedRepositoryPathHelper.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectPathViewModel.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectDataSourceViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\AvailableFaultsViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectUsbDeviceViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectPathHelperViewModels\ISelectPathHelperViewModel.cs" />
+    <Compile Include="ViewModels\AddDataViewModels\SelectPsnConfigurationViewModel.cs" />
+    <Compile Include="ViewModels\CopyProgressDesignTime.cs" />
+    <Compile Include="ViewModels\CopyProgressViewModel.cs" />
+    <Compile Include="ViewModels\DalViewModels\DesignTime\FaultDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\LocomotiveDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\PsnChannelDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\PsnLogDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\PsnMeterDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\RepositoryDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\RpdChannelDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\RpdMeterDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\SectionDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\SignalDesignTime.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\FaultViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\LocomotiveViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\PsnChannelConfigViewModel.cs" />
+    <Compile Include="ViewModels\DalViewModels\PsnChannelViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\DesignTime\PsnConfigurationDesignTime.cs" />
+    <Compile Include="ViewModels\DalViewModels\PsnConfigurationViewModel.cs" />
+    <Compile Include="ViewModels\DalViewModels\PsnLogViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\PsnMeterConfigViewModel.cs" />
+    <Compile Include="ViewModels\DalViewModels\PsnMeterViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\RepositoryViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\RepositoryViewModelFactory.cs" />
+    <Compile Include="ViewModels\DalViewModels\RpdChannelViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\RpdMeterViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\SectionViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\SignalViewModel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModels\DalViewModels\TreeItemViewModelBase.cs" />
+    <Compile Include="ViewModels\DefualtColorsViewModel.cs" />
+    <Compile Include="ViewModels\DeafultColorsDesignTime.cs" />
+    <Compile Include="ViewModels\ExportProgressViewModel.cs" />
+    <Compile Include="ViewModels\LogIntegrityViewModel.cs" />
+    <Compile Include="ViewModels\SciChartViewModelFactory.cs" />
+    <Compile Include="ViewModels\MainViewModelDesign.cs" />
+    <Compile Include="ViewModels\SciChartViewModel.cs" />
+    <Compile Include="ViewModels\ChangePsnConfigurationViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\TrendViewModelBase.cs" />
+    <Compile Include="Views\AboutProgramWindow.xaml.cs">
+      <DependentUpon>AboutProgramWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\AddDataWindow.xaml.cs">
+      <DependentUpon>AddDataWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\AvailableFaultsPage.xaml.cs">
+      <DependentUpon>AvailableFaultsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\DeviceLocomotiveNamePage.xaml.cs">
+      <DependentUpon>DeviceLocomotiveNamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\ReadProgressPage.xaml.cs">
+      <DependentUpon>ReadProgressPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\SelectFtpDevicePage.xaml.cs">
+      <DependentUpon>SelectFtpDevicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\SelectFtpServerPage.xaml.cs">
+      <DependentUpon>SelectFtpServerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\SelectPathPage.xaml.cs">
+      <DependentUpon>SelectPathPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\SelectDataSourcePage.xaml.cs">
+      <DependentUpon>SelectDataSourcePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\AddDataView\SelectUsbDevicePage.xaml.cs">
+      <DependentUpon>SelectUsbDevicePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddDataView\SelectPsnConfigurationPage.xaml.cs">
+      <DependentUpon>SelectPsnConfigurationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DefaultColorsView.xaml.cs">
+      <DependentUpon>DefaultColorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ExportProgressWindow.xaml.cs">
+      <DependentUpon>ExportProgressWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LogIntegrityStatWindow.xaml.cs">
+      <DependentUpon>LogIntegrityStatWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PsnFakeWindow.xaml.cs">
+      <DependentUpon>PsnFakeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangePsnConfigurationWindow.xaml.cs">
+      <DependentUpon>ChangePsnConfigurationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Views.cs" />
+    <Page Include="Views\AboutProgramWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\AddDataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\AvailableFaultsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\DeviceLocomotiveNamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\ReadProgressPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\SelectFtpDevicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\SelectFtpServerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\SelectPathPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\SelectPsnConfigurationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CopyProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DefaultColorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ExportProgressWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LogIntegrityStatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\CopyProgressWindow.xaml.cs">
+      <DependentUpon>CopyProgressWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\AddDataView\SelectDataSourcePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddDataView\SelectUsbDevicePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PsnFakeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ChangePsnConfigurationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <AppDesigner Include="Properties\" />
+    <None Include="RPD.Presentation_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\zoom_in.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\zoom_out.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\zoom.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\redo.ico" />
+    <Resource Include="Assets\icons\undo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\markers.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\chart_cursor.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\zoom_in_hor.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\zoom_out_hor.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\zoom_in_vert.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\icons\zoom_out_vert.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RPD.Presentation.Contracts\RPD.Presentation.Contracts.csproj">
+      <Project>{b15c2684-3c20-433e-9204-c503f496f7c1}</Project>
+      <Name>RPD.Presentation.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RPD.SciChartControl\RPD.SciChartControl.csproj">
+      <Project>{11D21FBE-D64A-43B9-8C95-A439A38C1A75}</Project>
+      <Name>RPD.SciChartControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RPD.DAL\RPD.DAL.csproj">
+      <Project>{e811c2b8-9a0b-420f-be2e-244b12418c1f}</Project>
+      <Name>RPD.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SciChartLicense.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaultlayout.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="rpd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Converters\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

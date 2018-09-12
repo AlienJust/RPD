@@ -1,0 +1,920 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Электровоз ПЭ2У, БУ с абонентами магистрали М3 RS-485 v21" Version="21" Description="Версия 21 от 26.04.2018" Id="166A3EB1-F32C-4E3D-8002-EF257EBA64ED" RpdId="61">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="БС-ТП1" />
+		<PsnMeter Address="0x02" Name="БС-ТП2" />
+		<PsnMeter Address="0x03" Name="БС-ТП3" />
+		<PsnMeter Address="0x11" Name="УЗАРД1" />
+		<PsnMeter Address="0x12" Name="УЗАРД2" />
+		<PsnMeter Address="0x13" Name="УЗАРД3" />
+		<PsnMeter Address="0x0D" Name="КПА" />
+		<PsnMeter Address="0x40" Name="РПД" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="БУ и БС-ТП1 0x45">
+			<Request Length="8" Position="0" CycleMsTime="200">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="e15406e5-c9ce-41c5-8661-47f620830152" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="5af388ad-4238-4b50-ba5f-ad85629ba39f" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="УВ1: Команда от БУ: Управление включением" Id="cfc5c06c-8b37-4680-b5f9-639884657e40" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="УВ1: Команда от БУ: Режим тяги (1)/Режим торможения (0)" Id="2e577343-e643-427e-8b15-c77ce17cb947" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="ТР1: Команда от БУ: Разряд" Id="692f1b69-3bf5-4d77-901c-8ff826cdbb24" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УВ1: Команда от БУ: Боксование" Id="9787cc80-2c42-405e-afc3-3c1cc40f486d" />
+				<CpzPrm Name="УВ1: Уставка тока якоря в % от номинала" Expression="[u3] * 1.0" Id="0ee294be-785b-45b2-a1a4-2a6509d2ddbd" />
+				<CpzPrm Name="УВ1: Среднее значение скорости состава, Vср, км/ч" Expression="[u4] * 0.25" Id="e31e2e37-abe2-4d7c-abba-940768373e58" />
+				<VarVal Position="5.0" Length="8" Name="Резерв" Id="fd31e7eb-56aa-4a8a-a0df-d14843f67c3c" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="ecb0fb4a-edec-41d9-bb98-589b91d552ee" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="2df20053-a1a0-48cf-82cf-f3cd60ede91e" />
+			</Request>
+			<Reply Length="28" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="d0d52c52-4def-4aba-ad74-b07782eeb0dd" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="2d4ae87f-e238-4bdb-8683-69f399947b0c" />
+				<CpzPrm Name="ТП1: Значение Iя1, А" Expression="[s2] * 8.0" Id="2cc39200-9120-4311-a6cb-98965e5aba2e" />
+				<CpzPrm Name="ТП2: Значение Iя2, А" Expression="[s3] * 8.0" Id="098a7562-03f1-4567-9204-e600cecdf4f4" />
+				<CpzPrm Name="УВ1: Значение Iв1,2, А" Expression="[u4] * 4.0" Id="f1532f10-83de-4458-b1f1-58479711a813" />
+				<CpzPrm Name="ТП1: Выходное напряжение (на якоре 1), В" Expression="[u5] * 16.0" Id="1afa6562-424d-4408-879c-c25e1d395ec2" />
+				<CpzPrm Name="ТП2: Выходное напряжение (на якоре 2), В" Expression="[u6] * 16.0" Id="284e3c89-3c97-4aaf-8aa6-0a9b89842848" />
+				<CpzPrm Name="УВ1: Температура радиатора, °С" Expression="[s7] * 1.0" Id="709e86cf-e5a6-4c79-881f-db32abfca0ba" />
+				<CpzPrm Name="ТП1: Скорость расчетная, км/ч" Expression="[u8] * 0.25" Id="cd4fcb1b-00f9-4466-b19a-6b2b5ad49f8b" />
+				<CpzPrm Name="ТП2: Скорость расчетная, км/ч" Expression="[u9] * 0.25" Id="d33ade55-f0e6-49ff-a965-f08f034bf4a0" />
+				<VarVal Position="10.6" Length="1" Name="УВ1: Режим: Ошибка" Id="5e2ac17c-b39b-41d7-9951-64fd1db52620" />
+				<VarVal Position="10.5" Length="1" Name="УВ1: Режим: Торможение" Id="5036965c-ffea-48be-9529-be812cfe9f44" />
+				<VarVal Position="10.4" Length="1" Name="УВ1: Режим: Тяга" Id="28f80f53-4f0d-4af4-9240-0693e6c4e74e" />
+				<VarVal Position="10.3" Length="1" Name="УВ1: Режим: Выбег" Id="b86eaf20-657e-4aa6-9b8b-3a237701e283" />
+				<VarVal Position="10.2" Length="1" Name="УВ1: Режим: Боксование/Юз (Тележка2)" Id="9bcb5c37-7123-49a2-b708-b01a98615433" />
+				<VarVal Position="10.1" Length="1" Name="УВ1: Режим: Боксование/Юз (Тележка1)" Id="9e013a3c-7f85-47a0-9788-dbaccf983df9" />
+				<VarVal Position="10.0" Length="1" Name="УВ1: Режим: Начальный пуск" Id="d1d6b190-1128-4233-a57a-c336397aed48" />
+				<VarVal Position="11.3" Length="1" Name="УВ1: драйвер, сработавший по току СС: драйвер 3" Id="8ffec998-0194-4337-8f38-4ebc88f1e889" />
+				<VarVal Position="11.2" Length="1" Name="УВ1: драйвер, сработавший по току СС: драйвер 2" Id="0ba34a42-997b-4461-bca2-2b1df5234871" />
+				<VarVal Position="11.1" Length="1" Name="УВ1: драйвер, сработавший по току СС: драйвер 1" Id="4f53a2c7-84df-4db7-86e1-2f88cebda487" />
+				<VarVal Position="11.0" Length="1" Name="УВ1: драйвер, сработавший по току СС: драйвер 0" Id="5368046d-d9f2-49ef-913d-26e058b39cf0" />
+				<VarVal Position="12.7" Length="1" Name="УВ1: Статус: Авария в нагрузке" Id="1d6a607c-3196-4fab-ac70-c42f1db7e21a" />
+				<VarVal Position="12.6" Length="1" Name="УВ1: Статус: Перегрузка по току " Id="f35664ab-9b9a-41de-984a-4a65d62c977c" />
+				<VarVal Position="12.3" Length="1" Name="УВ1: Статус: Пониженное входное напряжение" Id="af29e1ae-c191-4cc6-9f29-0d5e73115062" />
+				<VarVal Position="12.2" Length="1" Name="УВ1: Статус: Повышенное входное напряжение" Id="dcb8f4ae-721e-49da-8871-2044e9933efc" />
+				<VarVal Position="12.1" Length="1" Name="УВ1: Статус: Защита по току силовой сборки" Id="33c2db1f-3af1-4975-838f-0b4c5239561e" />
+				<VarVal Position="12.0" Length="1" Name="УВ1: Статус: Температура" Id="a0a2dc62-1f05-4c6d-a4aa-05d83baf85e9" />
+				<CpzPrm Name="ТП1: Значение Iя1, А" Expression="[s14] * 8.0" Id="62b953e9-ad08-4458-9c7a-707ef4ea254b" />
+				<CpzPrm Name="ТП1: Выходное напряжение (на якоре), В" Expression="[u15] * 16.0" Id="05ac122b-19b5-4f36-8667-69474c17721a" />
+				<CpzPrm Name="ТП1: Температура радиатора, °С" Expression="[s16] * 1.0" Id="8542724d-5c03-4b0f-9df1-d97d3b76479d" />
+				<VarVal Position="17.3" Length="1" Name="ТП1: Драйвер 3 сработал по току СС" Id="b7cefdad-afcc-4f47-8345-ac07ba0e3d35" />
+				<VarVal Position="17.2" Length="1" Name="ТП1: Драйвер 2 сработал по току СС" Id="15a98332-5099-44e0-8468-6e666a93aa59" />
+				<VarVal Position="17.1" Length="1" Name="ТП1: Драйвер 1 сработал по току СС" Id="28c20596-d6d1-4bef-a1f6-8be64306bb8f" />
+				<VarVal Position="17.0" Length="1" Name="ТП1: Драйвер 0 сработал по току СС" Id="47af5fc8-5db9-45c0-a7db-d639c9dcfa20" />
+				<VarVal Position="18.7" Length="1" Name="ТП1: Статус: Авария в нагрузке" Id="49605eb6-15f4-4b9d-94b1-19c50f550db2" />
+				<VarVal Position="18.6" Length="1" Name="ТП1: Статус: Перегрузка по току " Id="cefa4436-a464-4300-9abd-dd80db9970a7" />
+				<VarVal Position="18.4" Length="1" Name="ТП1: Статус: Таймаут по SPI" Id="30dc3c46-2dfe-4169-b018-c3cc6c539a8d" />
+				<VarVal Position="18.3" Length="1" Name="ТП1: Статус: Пониженное входное напряжение" Id="64f2a987-449a-4500-ad83-d9c044b63901" />
+				<VarVal Position="18.2" Length="1" Name="ТП1: Статус: Повышенное входное напряжение" Id="ed196a86-35e8-4291-8a6a-b642b85802ce" />
+				<VarVal Position="18.1" Length="1" Name="ТП1: Статус: Защита по току силовой сборки" Id="2025d5c2-5695-4245-a1d5-55c8441de489" />
+				<VarVal Position="18.0" Length="1" Name="ТП1: Статус: Температура" Id="4e7c7365-8608-4ff0-a4a6-a70a8343c8b7" />
+				<CpzPrm Name="УВ1: Напряжение полумоста вверху, В" Expression="[u19] * 16.0" Id="73051c1a-9f00-44a3-97d5-ef536e8102db" />
+				<CpzPrm Name="ТП2: Значение Iя2, А" Expression="[s20] * 8.0" Id="e8e458d7-35d4-4830-b938-d2de95925187" />
+				<CpzPrm Name="ТП2: Выходное напряжение (на якоре), В" Expression="[u21] * 16.0" Id="50e0a8d9-35ab-4cb6-81f9-46ed284e14db" />
+				<CpzPrm Name="ТП2: Температура радиатора, °С" Expression="[s22] * 1.0" Id="2831d3d8-703d-4a86-83ca-b06b678edeec" />
+				<VarVal Position="23.3" Length="1" Name="ТП2: Драйвер 3 сработал по току СС" Id="aa8cbb98-be84-45f6-a100-c7906479b9f8" />
+				<VarVal Position="23.2" Length="1" Name="ТП2: Драйвер 2 сработал по току СС" Id="4a68f889-e806-46f4-8df0-82e579c8f4a1" />
+				<VarVal Position="23.1" Length="1" Name="ТП2: Драйвер 1 сработал по току СС" Id="0d618537-acbb-4638-b931-8cddcf9f0698" />
+				<VarVal Position="23.0" Length="1" Name="ТП2: Драйвер 0 сработал по току СС" Id="72db9383-3618-4c6e-9f8b-0104c993beb4" />
+				<VarVal Position="24.7" Length="1" Name="ТП2: Статус: Авария в нагрузке" Id="05426274-921b-47e1-a462-0634f55a90de" />
+				<VarVal Position="24.6" Length="1" Name="ТП2: Статус: Перегрузка по току " Id="178507b0-cee4-4fdb-aa64-3ca588974175" />
+				<VarVal Position="24.4" Length="1" Name="ТП2: Статус: Таймаут по SPI" Id="a809d311-d55a-4f35-990a-4d3e1cee1426" />
+				<VarVal Position="24.3" Length="1" Name="ТП2: Статус: Пониженное входное напряжение" Id="7449d53a-cdb7-4657-9fd5-8689d5124d07" />
+				<VarVal Position="24.2" Length="1" Name="ТП2: Статус: Повышенное входное напряжение" Id="48e64795-4156-491b-a486-0d830c546a7c" />
+				<VarVal Position="24.1" Length="1" Name="ТП2: Статус: Защита по току силовой сборки" Id="bd376220-6e46-4bd4-93ac-3d6dc2590a1e" />
+				<VarVal Position="24.0" Length="1" Name="ТП2: Статус: Температура" Id="6ed7d61c-f7db-4bf9-9bec-566c07d94109" />
+				<CpzPrm Name="УВ1: Напряжение полумоста внизу, В" Expression="[u25] * 16.0" Id="8dd2f3ef-9a64-4c0b-a03c-79c213afaa42" />
+				<VarVal Position="26.0" Length="8" Name="#CRCH" Id="b40544ee-2960-42a0-b6f0-1bfaa1595f7a" />
+				<VarVal Position="27.0" Length="8" Name="#CRCL" Id="7cf55d63-6970-4e51-bf79-c16a6cea6a17" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС-ТП1 0x46">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="7e08ccf8-4b69-4759-8482-753cd2c3f699" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="68d05663-d112-46d1-a5bc-b0c88d3ed7ca" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УЗАРД №1: Команды от БУ: Взведение (№1)" Id="8919bd1a-2651-4a01-be3f-d3b029b2d9a3" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="5d9346f3-5ad1-4e86-8ecb-2b0106247c52" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="bb588c88-1125-440f-9dfd-1f8fd145ac83" />
+			</Request>
+			<Reply Length="19" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="d03953c2-41c3-4e04-bedd-582f96ba581e" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="7c90215b-3a58-4ed9-8a79-1c4461050001" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="УЗАРД №1: Байт состояния: Готовность (Взвод)" Id="02f13e7e-7e66-4917-b9ae-bffd7d8150ab" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УЗАРД №1: Байт состояния: Ключ включен (Драйвер готов)" Id="c90c0fdb-91d0-4839-9da8-49b25d401a17" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 1: err6" Id="108ad60b-f865-4fce-bcd7-1cfcb8e866b3" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 1: err5" Id="1c389657-2ac7-4577-a3cd-e119bda12ced" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 1: err4" Id="54f668b7-e270-45e5-95d5-ccf6e8ae7355" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 1: err3" Id="de376204-0799-435c-bfd1-7cac1e624461" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 1: err2" Id="c17637f4-91be-47c4-99bd-3c35b2a61b01" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 1: err1" Id="d8566a4c-b296-403f-ac7a-99559c48aa15" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 2: Отключение БВС" Id="aa4a51fe-8bf8-484f-9daf-10a47f7880a3" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 2: Отключение БВ" Id="59bdf8c5-2938-4b95-a95a-935c9019af56" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 2: Тестовый" Id="e01d285d-17c4-49f7-b9b9-50e89d7803b8" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 2: Выход на драйвер 2" Id="78a8677e-0c68-45a3-b377-fcfb0b1b82f9" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="УЗАРД №1: Байт диагностики 2: Выход на драйвер 1" Id="ac57ae81-35c7-404a-adc8-f6e46fa1f0b4" />
+				<VarVal Position="5.0" Length="8" Name="УЗАРД №1: Значение АЦП AD6" Id="bcc60aec-45ef-4728-869d-18cadf46d958" />
+				<VarVal Position="6.0" Length="8" Name="УЗАРД №1: Значение АЦП AD7" Id="e3fc576c-644f-4e95-8c01-4422ab4f32bc" />
+				<VarVal Position="7.0" Length="8" Name="УЗАРД №1: Значение АЦП AD2" Id="7c32b86b-feb4-4118-8a57-b97e7346d39c" />
+				<CpzPrm Name="ТР1: Значение Iтр1, А" Expression="[u8] * 8.0" Id="9e4d7e5a-56c6-4a49-81f0-d8dbaa564e79" />
+				<CpzPrm Name="ТР1: Выходное напряжение (на резисторе), В" Expression="[u9] * 16.0" Id="856df798-8320-435a-a845-68f3ccbdd74f" />
+				<CpzPrm Name="ТР1: Температура радиатора, °С" Expression="[s10] * 1.0" Id="244a8645-c9ec-4a00-8143-099649e2fd6e" />
+				<VarVal Position="11.3" Length="1" Name="ТР1: драйвер, сработавшего по току СС: Драйвер 3" Id="4b237e97-5900-4bf1-9d82-a63a4612554c" />
+				<VarVal Position="11.2" Length="1" Name="ТР1: драйвер, сработавшего по току СС: Драйвер 2" Id="c50011a4-8372-4bc0-94e5-b3e9fb7ed2ba" />
+				<VarVal Position="11.1" Length="1" Name="ТР1: драйвер, сработавшего по току СС: Драйвер 1" Id="1f00b0cb-6e52-4041-9231-f9155bbd33c8" />
+				<VarVal Position="11.0" Length="1" Name="ТР1: драйвер, сработавшего по току СС: Драйвер 0" Id="5ecc06e8-cdb0-4db0-b28f-586396dfae46" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="ТР1: Статус: Авария в нагрузке" Id="ccff1365-7be8-4f35-ace3-196d0a39bf39" />
+				<BitPrm Byte="12" Bit="1" IsValueInverted="False" Name="ТР1: Статус: Защита по току силовой сборки (СС)" Id="949f8e57-9b0b-44bf-83d7-cc09dffed61f" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="БС-ТП1: Диагностика НС: Нет связи с ТР1" Id="1e8c599a-6362-4f1b-9335-1ffc57db9fbc" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="БС-ТП1: Диагностика НС: Нет связи с УВ1" Id="f9bf8bd2-9e5b-44cc-b27e-728397594a15" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="БС-ТП1: Диагностика НС: Нет связи с УЗАРД1" Id="2a5ff6b6-b076-4cb4-bc13-bc7908313915" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="БС-ТП1: Диагностика НС: Нет связи с ТП2" Id="d6bd3a2f-c455-4efa-8ddb-0a3afa2a5057" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="БС-ТП1: Диагностика НС: Нет связи с ТП1" Id="f610d5ee-6014-4c7c-a4da-4652f3d49a29" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="БС-ТП1: Диагностика НС (в одном цикле): Нет связи с ТР1" Id="91c7c6e9-2f27-464a-90a8-de724559a6e4" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="БС-ТП1: Диагностика НС (в одном цикле): Нет связи с УВ1" Id="6730342c-b56a-4fa7-a052-150b9e0763c1" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="БС-ТП1: Диагностика НС (в одном цикле): Нет связи с УЗАРД1" Id="dd4f6a0a-26c2-42d8-b3c9-fdc3d7a94735" />
+				<BitPrm Byte="15" Bit="1" IsValueInverted="False" Name="БС-ТП1: Диагностика НС (в одном цикле): Нет связи с ТП2" Id="7f94c718-a4ec-4670-8cc4-ea86c68dce05" />
+				<BitPrm Byte="15" Bit="0" IsValueInverted="False" Name="БС-ТП1: Диагностика НС (в одном цикле): Нет связи с ТП1" Id="b4977232-0be7-4e92-a3f8-1eda778cdc4e" />
+				<VarVal Position="16.0" Length="8" Name="БС-ТП1: Номер версии ПО" Id="10223b97-3beb-41ed-a0f7-bd79a82773b0" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="8b2d1266-4673-4cd9-ae48-c0e31375d6e1" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="cf7937bd-7424-4578-85dd-ceade56076b8" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС-ТП2 0x45">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="c46fb7b5-a6e7-45be-bf88-17c3107df1d1" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="624e32d6-093f-4547-9878-e69a1cd2bfa3" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="УВ2: Команда от БУ: Управление включением" Id="13d2ca9a-a539-49c8-a1cf-cd294aef9ce1" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="УВ2: Команда от БУ: Режим тяги (1)/Режим торможения (0)" Id="f3d926b1-3474-4350-9abb-b7cff7d72f7e" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="ТР2: Команда от БУ: Разряд" Id="22956327-152b-4579-91c5-6e5c64020f90" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УВ2: Команда от БУ: Боксование" Id="f8bf3206-82a5-407a-93ac-a964d45b3ac7" />
+				<CpzPrm Name="УВ2: Уставка тока якоря в % от номинала" Expression="[u3] * 1.0" Id="3d5e86f3-a3c7-434b-93a4-10f7de036836" />
+				<CpzPrm Name="УВ2: Среднее значение скорости состава, Vср, км/ч" Expression="[u4] * 0.25" Id="ea4858d4-d6e2-43d5-b42b-74dcf4e1907e" />
+				<VarVal Position="5.0" Length="8" Name="Резерв" Id="d977d66e-c722-4810-9b26-71da2add383a" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="288b4659-58d7-4885-bcd4-cc8a137845b2" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="41c7ea26-6641-4615-87c8-e0453422496f" />
+			</Request>
+			<Reply Length="28" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="f8183a81-581c-4c70-8ff0-63594923001f" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="355153c3-ec01-40aa-8962-0be02d2ea975" />
+				<CpzPrm Name="ТП3: Значение Iя3, А" Expression="[s2] * 8.0" Id="7e0ed36f-0812-4044-9f3c-e88c71ebbebd" />
+				<CpzPrm Name="ТП4: Значение Iя4, А" Expression="[s3] * 8.0" Id="23045e1e-95a1-4ec7-9cec-2570ae4b14dc" />
+				<CpzPrm Name="УВ2: Значение Iв3,4, А" Expression="[u4] * 4.0" Id="c728120d-018d-4a60-b237-68a6b23709e6" />
+				<CpzPrm Name="ТП3: Выходное напряжение (на якоре 3), В" Expression="[u5] * 16.0" Id="42f04d31-d900-4951-8687-bead489ea178" />
+				<CpzPrm Name="ТП4: Выходное напряжение (на якоре 4), В" Expression="[u6] * 16.0" Id="e042f1ce-06a1-4d19-9fe8-bf3a6360110a" />
+				<CpzPrm Name="УВ2: Температура радиатора, °С" Expression="[s7] * 1.0" Id="a4a301ab-fa3e-45d9-a39c-851973c93e23" />
+				<CpzPrm Name="ТП3: Скорость расчетная, км/ч" Expression="[u8] * 0.25" Id="4e66853f-a89d-4135-a5ab-a9c25010274a" />
+				<CpzPrm Name="ТП4: Скорость расчетная, км/ч" Expression="[u9] * 0.25" Id="c0e53ee2-ea50-40bb-9a1c-f6629fe946af" />
+				<VarVal Position="10.6" Length="1" Name="УВ2: Режим: Ошибка" Id="3477867b-7462-4a47-b720-b76356d8aad7" />
+				<VarVal Position="10.5" Length="1" Name="УВ2: Режим: Торможение" Id="1600cae2-a104-4d63-aa64-3d2f208d599a" />
+				<VarVal Position="10.4" Length="1" Name="УВ2: Режим: Тяга" Id="46d1e9ff-23f5-4563-81c0-1f2aa27deb5d" />
+				<VarVal Position="10.3" Length="1" Name="УВ2: Режим: Выбег" Id="71e58276-37e6-4496-b4d7-2df856316c63" />
+				<VarVal Position="10.2" Length="1" Name="УВ2: Режим: Боксование/Юз (Тележка2)" Id="53da7747-16eb-440b-9e8c-cfda5acad089" />
+				<VarVal Position="10.1" Length="1" Name="УВ2: Режим: Боксование/Юз (Тележка1)" Id="06fbe450-257c-4933-861f-3ef472d63491" />
+				<VarVal Position="10.0" Length="1" Name="УВ2: Режим: Начальный пуск" Id="ba29bf1c-4dce-4ac9-986f-39375323d449" />
+				<VarVal Position="11.3" Length="1" Name="УВ2: Драйвер 3 сработал по току СС" Id="d76e09c4-630c-4900-9e10-7e0f462f803a" />
+				<VarVal Position="11.2" Length="1" Name="УВ2: Драйвер 2 сработал по току СС" Id="ba32d812-b886-414d-9bc9-6146f0d259e8" />
+				<VarVal Position="11.1" Length="1" Name="УВ2: Драйвер 1 сработал по току СС" Id="1ac230d6-3515-494a-98cd-4c4599e241bd" />
+				<VarVal Position="11.0" Length="1" Name="УВ2: Драйвер 0 сработал по току СС" Id="caa29e85-c026-4d16-95d7-624cdfd2504e" />
+				<VarVal Position="12.7" Length="1" Name="УВ2: Статус: Авария в нагрузке" Id="0663aa8f-af06-4050-a80c-7263410712cc" />
+				<VarVal Position="12.6" Length="1" Name="УВ2: Статус: Перегрузка по току " Id="326c6ddd-f25d-44f0-90a7-b1e6663aea8a" />
+				<VarVal Position="12.3" Length="1" Name="УВ2: Статус: Пониженное входное напряжение" Id="0959cf52-32eb-4782-96d5-7ed738060edd" />
+				<VarVal Position="12.2" Length="1" Name="УВ2: Статус: Повышенное входное напряжение" Id="6a07b7cc-5cdd-4dac-9930-98657271190f" />
+				<VarVal Position="12.1" Length="1" Name="УВ2: Статус: Защита по току силовой сборки" Id="de57425b-5fd6-4475-9c1a-b4d229eb581f" />
+				<VarVal Position="12.0" Length="1" Name="УВ2: Статус: Температура" Id="57e8e80a-e160-4b96-9e66-05e62634035e" />
+				<CpzPrm Name="ТП3: Значение Iя3, А" Expression="[s14] * 8.0" Id="da969c43-7112-4a52-8236-d5623f697aa6" />
+				<CpzPrm Name="ТП3: Выходное напряжение (на якоре), В" Expression="[u15] * 16.0" Id="a6f6d496-4dbd-42be-8dc4-45359d74a7c6" />
+				<CpzPrm Name="ТП3: Температура радиатора, °С" Expression="[s16] * 1.0" Id="0505ffc9-38c2-42eb-8dcf-77dcd670ebe6" />
+				<VarVal Position="17.3" Length="1" Name="ТП3: Драйвер 3 сработал по току СС" Id="5e108291-ae8d-4f07-86f7-864bfd0a803d" />
+				<VarVal Position="17.2" Length="1" Name="ТП3: Драйвер 2 сработал по току СС" Id="54ef31c0-34f6-4f52-84d9-34eb053c7599" />
+				<VarVal Position="17.1" Length="1" Name="ТП3: Драйвер 1 сработал по току СС" Id="beca09e8-87ba-41d0-8ddc-b63cd3b00c9a" />
+				<VarVal Position="17.0" Length="1" Name="ТП3: Драйвер 0 сработал по току СС" Id="4da27087-3cdd-4b5a-b5fa-650e799db7d8" />
+				<VarVal Position="18.7" Length="1" Name="ТП3: Статус: Авария в нагрузке" Id="0269adb9-0059-4cdc-bc6c-64544192a8e6" />
+				<VarVal Position="18.6" Length="1" Name="ТП3: Статус: Перегрузка по току " Id="1ec6412c-32ba-4f4a-8349-99050accd432" />
+				<VarVal Position="18.4" Length="1" Name="ТП3: Статус: Таймаут по SPI" Id="ef22de9d-12b9-46e2-84f4-6a482b214b37" />
+				<VarVal Position="18.3" Length="1" Name="ТП3: Статус: Пониженное входное напряжение" Id="9f516b25-47c6-4404-aace-40785f40faa7" />
+				<VarVal Position="18.2" Length="1" Name="ТП3: Статус: Повышенное входное напряжение" Id="08884233-6e52-4a4a-803b-b539758a4966" />
+				<VarVal Position="18.1" Length="1" Name="ТП3: Статус: Защита по току силовой сборки" Id="9706479c-de7d-4fc4-b956-d3206a5e6a8a" />
+				<VarVal Position="18.0" Length="1" Name="ТП3: Статус: Температура" Id="80bfd4b7-8987-4b22-9b42-16266734c174" />
+				<CpzPrm Name="УВ2: Напряжение полумоста вверху, В" Expression="[u19] * 16.0" Id="c42c694f-c568-4f99-b12b-51c936d21a30" />
+				<CpzPrm Name="ТП4: Значение Iя4, А" Expression="[s20] * 8.0" Id="4e53e5d5-5df2-4ea6-ad01-48b10ea7af08" />
+				<CpzPrm Name="ТП4: Выходное напряжение (на якоре), В" Expression="[u21] * 16.0" Id="16205a99-bbbd-490d-8653-245a85d7645c" />
+				<CpzPrm Name="ТП4: Температура радиатора, °С" Expression="[s22] * 1.0" Id="5810a748-a1a2-49c5-8b36-9b163770b6a1" />
+				<VarVal Position="23.3" Length="1" Name="ТП4: Драйвер 3 сработал по току СС" Id="74b69b3c-7678-41a4-a992-54dbff9d63bf" />
+				<VarVal Position="23.2" Length="1" Name="ТП4: Драйвер 2 сработал по току СС" Id="9479fdb2-7d0c-4d80-84c0-e7670395f85a" />
+				<VarVal Position="23.1" Length="1" Name="ТП4: Драйвер 1 сработал по току СС" Id="ae5175b9-f5ff-4ae1-8550-892fb5c9b2d2" />
+				<VarVal Position="23.0" Length="1" Name="ТП4: Драйвер 0 сработал по току СС" Id="1ad9f8ee-5aa7-48ad-b7be-895b7d437c7b" />
+				<VarVal Position="24.7" Length="1" Name="ТП4: Статус: Авария в нагрузке" Id="85e41c19-9dad-456a-9154-dbabc746aba4" />
+				<VarVal Position="24.6" Length="1" Name="ТП4: Статус: Перегрузка по току " Id="0e4197bf-d5dd-4b70-aa32-b088f11122da" />
+				<VarVal Position="24.4" Length="1" Name="ТП4: Статус: Таймаут по SPI" Id="fbd3b23f-9ac8-4558-bc14-551c57a78435" />
+				<VarVal Position="24.3" Length="1" Name="ТП4: Статус: Пониженное входное напряжение" Id="1f44a5f2-3575-48d3-8c21-457ca9c28d27" />
+				<VarVal Position="24.2" Length="1" Name="ТП4: Статус: Повышенное входное напряжение" Id="299068be-7b73-49d9-9cbc-5c360028d14a" />
+				<VarVal Position="24.1" Length="1" Name="ТП4: Статус: Защита по току силовой сборки" Id="d190f441-7934-4109-a255-228fa1bc29b5" />
+				<VarVal Position="24.0" Length="1" Name="ТП4: Статус: Температура" Id="70cf370a-4c34-4557-ab8a-b861e9f06549" />
+				<CpzPrm Name="УВ2: Напряжение полумоста внизу, В" Expression="[u25] * 16.0" Id="469458bb-c99f-4bd6-bde0-278d6245ae97" />
+				<VarVal Position="26.0" Length="8" Name="#CRCH" Id="4e47b698-9728-4043-bb1f-031982e5c169" />
+				<VarVal Position="27.0" Length="8" Name="#CRCL" Id="58135cbb-55db-4e07-929b-1b2daaca851a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС-ТП2 0x46">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="7ff37c1b-9402-42ff-abd7-2f540bfe03c2" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="c881eb9d-7d9d-433e-94fd-58039287926a" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УЗАРД №2: Команды от БУ: Взведение (№2)" Id="144699e1-67cf-425f-bd99-bd0b39d909fa" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="792d92c4-e5b2-42d8-aa51-04eef017f453" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="88e1703d-2dde-4d16-81f1-741aad02d276" />
+			</Request>
+			<Reply Length="19" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="ae0f7c9f-3a19-44f0-ba38-4ad1875f9fa5" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="7dd787a8-8a45-4f8c-a8bf-b8e0507ffaf4" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="УЗАРД №2: Байт состояния: Готовность (Взвод)" Id="6fee8148-9e2c-417f-b0e3-e6c87ec339e6" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УЗАРД №2: Байт состояния: Ключ включен (Драйвер готов)" Id="ca6c1f8e-bb36-4e38-8ac0-79d113f6e3bd" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 1: err6" Id="8187f5e9-abd9-432e-9772-bce0efa8db65" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 1: err5" Id="c34e6fb1-2908-4fd5-8e33-af2547b14eae" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 1: err4" Id="f875d916-0530-4139-a883-0f9d355ee5ec" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 1: err3" Id="562fe4fb-a747-4665-b0f4-971d601d5b2e" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 1: err2" Id="0951aa3e-782c-4f51-91aa-a3612a5c4c1a" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 1: err1" Id="73c9cfd9-e601-46d0-b7cd-415bb72af982" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 2: Отключение БВС" Id="f7ad522d-7958-415a-9a8c-af57b315162e" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 2: Отключение БВ" Id="ba1d127f-fe37-470d-8c63-d1863fe237e5" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 2: Тестовый" Id="dd454cc1-fd2f-4577-8b6f-59daf7cfcd8e" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 2: Выход на драйвер 2" Id="7c72bbb5-620c-4ad2-a17a-53a2372422d7" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="УЗАРД №2: Байт диагностики 2: Выход на драйвер 1" Id="d0586b65-40bd-45f7-b696-97cb3a993975" />
+				<VarVal Position="5.0" Length="8" Name="УЗАРД №2: Значение АЦП AD6" Id="f1771808-0184-423d-b6ff-65e1439b030f" />
+				<VarVal Position="6.0" Length="8" Name="УЗАРД №2: Значение АЦП AD7" Id="91227d11-65d0-42bd-9737-cb112e02d290" />
+				<VarVal Position="7.0" Length="8" Name="УЗАРД №2: Значение АЦП AD2" Id="56f80ba6-9fa1-41ec-b428-19c436fbae26" />
+				<CpzPrm Name="ТР2: Значение Iтр2, А" Expression="[u8] * 8.0" Id="61eac6c4-0964-4fe0-ab11-ee0f5e8f7576" />
+				<CpzPrm Name="ТР2: Выходное напряжение (на резисторе), В" Expression="[u9] * 16.0" Id="b6ea440f-f620-41a7-a632-13e9a381d7ed" />
+				<CpzPrm Name="ТР2: Температура радиатора, °С" Expression="[s10] * 1.0" Id="67953e78-f1d0-494c-8664-85506960d31f" />
+				<VarVal Position="11.3" Length="1" Name="ТР2: Драйвер 3 сработал по току СС" Id="7dc55546-158e-4c2a-ac0e-c896f77d49ab" />
+				<VarVal Position="11.2" Length="1" Name="ТР2: Драйвер 2 сработал по току СС" Id="aad8ed16-f5da-470f-b074-e70892bfbd6c" />
+				<VarVal Position="11.1" Length="1" Name="ТР2: Драйвер 1 сработал по току СС" Id="726ac76f-acb9-4a1f-b28e-2820af8bb574" />
+				<VarVal Position="11.0" Length="1" Name="ТР2: Драйвер 0 сработал по току СС" Id="800c6f68-34ba-4991-ae52-70ccb5842436" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="ТР2: Статус: Авария в нагрузке" Id="5af8a4e5-60c6-4352-b5b7-7106e12e837b" />
+				<BitPrm Byte="12" Bit="1" IsValueInverted="False" Name="ТР2: Статус: Защита по току силовой сборки (СС)" Id="d876abe7-fba9-4381-baed-6bb9c664500f" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="БС-ТП2: Диагностика НС: Нет связи с ТР2" Id="9a5968f3-fa60-475a-b54f-f73e66f5774d" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="БС-ТП2: Диагностика НС: Нет связи с УВ2" Id="44bcb104-4860-4635-a5bb-96e2502f112f" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="БС-ТП2: Диагностика НС: Нет связи с УЗАРД2" Id="eb9c7121-7b11-47ce-b5b8-01c24e3ce957" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="БС-ТП2: Диагностика НС: Нет связи с ТП4" Id="e59d4dc7-f58c-4706-9f92-36a3c8b299b0" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="БС-ТП2: Диагностика НС: Нет связи с ТП3" Id="85c10b3a-2984-47f1-a564-d3ec9192170a" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="БС-ТП2: Диагностика НС (в одном цикле): Нет связи с ТР2" Id="869168d2-52cc-4ee0-a286-45f513986bdb" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="БС-ТП2: Диагностика НС (в одном цикле): Нет связи с УВ2" Id="46a9c587-6393-4885-8067-3c05f8f46d43" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="БС-ТП2: Диагностика НС (в одном цикле): Нет связи с УЗАРД2" Id="7df24191-a7f5-4ebb-85e3-9104e4b81e06" />
+				<BitPrm Byte="15" Bit="1" IsValueInverted="False" Name="БС-ТП2: Диагностика НС (в одном цикле): Нет связи с ТП4" Id="3cb8ce1f-5c10-4914-bee1-dbe239e6d67b" />
+				<BitPrm Byte="15" Bit="0" IsValueInverted="False" Name="БС-ТП2: Диагностика НС (в одном цикле): Нет связи с ТП3" Id="957c2e0a-e656-4e23-bb32-0e0a5d4337b5" />
+				<VarVal Position="16.0" Length="8" Name="БС-ТП2: Номер версии ПО" Id="f1c22fdd-4120-4172-ab9d-681f261680fd" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="25eba07b-b4d0-4278-bb6f-3d62d9268b78" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="7e58f8ce-4b9c-4c03-8e76-a4290cf4d865" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС-ТП3 0x45">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="b2e16003-de15-47bb-a628-bbcc707a19a5" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="4c0f3b2e-2505-4b97-baea-4b376a0bee11" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="УВ3: Команда от БУ: Управление включением" Id="d3f1df0f-df5f-4bcb-9dde-4b0a5f58fa83" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="УВ3: Команда от БУ: Режим тяги (1)/Режим торможения (0)" Id="02e4b20f-00db-4510-b80e-8f344cc2b179" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="ТР3: Команда от БУ: Разряд" Id="e6a42dee-3d75-4171-bfd2-676a4514d8b4" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УВ3: Команда от БУ: Боксование" Id="d893ea3f-9401-47a3-a244-a6ea1a25d871" />
+				<CpzPrm Name="УВ3: Уставка тока якоря в % от номинала" Expression="[u3] * 1.0" Id="c041b3f6-1244-4839-860b-5650069a6279" />
+				<CpzPrm Name="УВ3: Среднее значение скорости состава, Vср, км/ч" Expression="[u4] * 0.25" Id="0ac6bfd6-bd70-45cf-bf29-e4055f2d39ec" />
+				<VarVal Position="5.0" Length="8" Name="Резерв" Id="f3273082-42c7-4c96-a84a-14790240942b" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="79b4766c-1c95-40c0-b5d0-94cc24ac3efe" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="39357e70-7003-4cd2-a49d-8f4c929fc287" />
+			</Request>
+			<Reply Length="28" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="fe30fd7b-94c1-4299-a12d-9d52acb3c5f2" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="55c6a11e-1fc8-4b6f-8bc5-80c3bc5a1e21" />
+				<CpzPrm Name="ТП5: Значение Iя5, А" Expression="[s2] * 8.0" Id="0905e750-a24e-4be9-91bc-e68c7c275d52" />
+				<CpzPrm Name="ТП6: Значение Iя6, А" Expression="[s3] * 8.0" Id="9508c669-034a-41db-968d-22183e2666fa" />
+				<CpzPrm Name="УВ3: Значение Iв5,6, А" Expression="[u4] * 4.0" Id="97190238-a9e9-4581-addc-65636e0cc2eb" />
+				<CpzPrm Name="ТП5: Выходное напряжение (на якоре 5), В" Expression="[u5] * 16.0" Id="7dd7014d-8030-40ff-85a7-16affefb4da6" />
+				<CpzPrm Name="ТП6: Выходное напряжение (на якоре 6), В" Expression="[u6] * 16.0" Id="512b755c-ec64-4fb4-809a-b26f34182479" />
+				<CpzPrm Name="УВ3: Температура радиатора, °С" Expression="[s7] * 1.0" Id="b5c63927-801c-4066-83dd-a1afd27dccbc" />
+				<CpzPrm Name="ТП5: Скорость расчетная, км/ч" Expression="[u8] * 0.25" Id="e5f081a9-6e61-4509-90c5-efabefa2f4bb" />
+				<CpzPrm Name="ТП6: Скорость расчетная, км/ч" Expression="[u9] * 0.25" Id="b4e2d839-f7c5-4daa-af76-b44161a14148" />
+				<VarVal Position="10.6" Length="1" Name="УВ3: Режим: Ошибка" Id="d9e79a8b-0a4f-42db-976a-b9ec6bebe793" />
+				<VarVal Position="10.5" Length="1" Name="УВ3: Режим: Торможение" Id="032a6a2a-0610-44cd-abc1-7d2a60300095" />
+				<VarVal Position="10.4" Length="1" Name="УВ3: Режим: Тяга" Id="8745f215-167f-4f8b-9ff6-6f1632bd3269" />
+				<VarVal Position="10.3" Length="1" Name="УВ3: Режим: Выбег" Id="513c2ebd-f664-49d7-9409-e06d72678b12" />
+				<VarVal Position="10.2" Length="1" Name="УВ3: Режим: Боксование/Юз (Тележка2)" Id="b1199c88-b805-4b8c-a826-81c3a1c28834" />
+				<VarVal Position="10.1" Length="1" Name="УВ3: Режим: Боксование/Юз (Тележка1)" Id="8942909f-4e20-4dba-9713-75cf40bb280b" />
+				<VarVal Position="10.0" Length="1" Name="УВ3: Режим: Начальный пуск" Id="c4de0493-becc-4226-a9f1-afb0d4a471ba" />
+				<VarVal Position="11.3" Length="1" Name="УВ3: Драйвер 3 сработал по току СС" Id="335fb700-9a68-4d10-9195-306d4715d6ac" />
+				<VarVal Position="11.2" Length="1" Name="УВ3: Драйвер 2 сработал по току СС" Id="f5d7f76e-9918-4073-a405-123f0dda97a4" />
+				<VarVal Position="11.1" Length="1" Name="УВ3: Драйвер 1 сработал по току СС" Id="84445cdb-428e-4f5b-b933-030906214bba" />
+				<VarVal Position="11.0" Length="1" Name="УВ3: Драйвер 0 сработал по току СС" Id="024ef539-b7f9-4d36-a2bd-62430d87d6e2" />
+				<VarVal Position="12.7" Length="1" Name="УВ3: Статус: Авария в нагрузке" Id="c8d81df1-d100-4f49-b5ff-1e59fdfffbdb" />
+				<VarVal Position="12.6" Length="1" Name="УВ3: Статус: Перегрузка по току " Id="75b2e441-1a9e-45d1-991b-147bc5dbc4a6" />
+				<VarVal Position="12.3" Length="1" Name="УВ3: Статус: Пониженное входное напряжение" Id="76cefdd3-f480-4158-90bc-8a8965fc05df" />
+				<VarVal Position="12.2" Length="1" Name="УВ3: Статус: Повышенное входное напряжение" Id="d0a6c02d-d47e-4030-bcd1-cd40b8b00da7" />
+				<VarVal Position="12.1" Length="1" Name="УВ3: Статус: Защита по току силовой сборки" Id="b9ef945f-803d-45f1-863f-6e3795425d86" />
+				<VarVal Position="12.0" Length="1" Name="УВ3: Статус: Температура" Id="cab09230-3909-45a3-a321-01ba04ee25bf" />
+				<CpzPrm Name="ТП5: Значение Iя5, А" Expression="[s14] * 8.0" Id="c2fb07cc-24dd-41fc-b807-764c7a9a2725" />
+				<CpzPrm Name="ТП5: Выходное напряжение (на якоре), В" Expression="[u15] * 16.0" Id="972504ae-f9c5-40bb-a5b0-b50b70cded2a" />
+				<CpzPrm Name="ТП5: Температура радиатора, °С" Expression="[s16] * 1.0" Id="cae652d0-39ef-4c59-800d-837c2dcc2879" />
+				<VarVal Position="17.3" Length="1" Name="ТП5: Драйвер 3 сработал по току СС" Id="a6962209-8a88-4eac-a302-ee6e75d7c8ed" />
+				<VarVal Position="17.2" Length="1" Name="ТП5: Драйвер 2 сработал по току СС" Id="a4c0e59a-a6cd-4fc1-94bd-31e0ce84124f" />
+				<VarVal Position="17.1" Length="1" Name="ТП5: Драйвер 1 сработал по току СС" Id="ef271794-e521-414c-8f11-5a92a15dd0ae" />
+				<VarVal Position="17.0" Length="1" Name="ТП5: Драйвер 0 сработал по току СС" Id="559ea4d1-17b8-40ab-9187-22c75a7b1973" />
+				<VarVal Position="18.7" Length="1" Name="ТП5: Статус: Авария в нагрузке" Id="b6da232b-f436-463b-aacd-6a43bcef529a" />
+				<VarVal Position="18.6" Length="1" Name="ТП5: Статус: Перегрузка по току " Id="322b38db-c72a-4605-be7f-f39df13905cc" />
+				<VarVal Position="18.4" Length="1" Name="ТП5: Статус: Таймаут по SPI" Id="4b270994-c383-4dd3-b9c6-3e820b92c7ac" />
+				<VarVal Position="18.3" Length="1" Name="ТП5: Статус: Пониженное входное напряжение" Id="351a88e2-3074-4f5c-a79e-fd82265d100e" />
+				<VarVal Position="18.2" Length="1" Name="ТП5: Статус: Повышенное входное напряжение" Id="4f10b64d-4029-4116-9e5d-cb72f101b50e" />
+				<VarVal Position="18.1" Length="1" Name="ТП5: Статус: Защита по току силовой сборки" Id="429731b7-37ab-40dc-b4a0-34f7c6ae85ac" />
+				<VarVal Position="18.0" Length="1" Name="ТП5: Статус: Температура" Id="8dd6fabd-4c52-479c-a015-4d9a7227ba11" />
+				<CpzPrm Name="УВ3: Напряжение полумоста вверху, В" Expression="[u19] * 16.0" Id="95cafd3d-086d-48b5-829e-b56c685b99d5" />
+				<CpzPrm Name="ТП6: Значение Iя6, А" Expression="[s20] * 8.0" Id="6c76ee5e-6523-4f05-b759-b392a58d324b" />
+				<CpzPrm Name="ТП6: Выходное напряжение (на якоре), В" Expression="[u21] * 16.0" Id="2b5c503f-9457-4cba-95f8-ff1832efed2a" />
+				<CpzPrm Name="ТП6: Температура радиатора, °С" Expression="[s22] * 1.0" Id="bb9a88e1-01c4-4fdf-8e0f-16f8400b0fcc" />
+				<VarVal Position="23.3" Length="1" Name="ТП6: Драйвер 3 сработал по току СС" Id="e59d2500-516a-484a-b576-4feb52941c1e" />
+				<VarVal Position="23.2" Length="1" Name="ТП6: Драйвер 2 сработал по току СС" Id="35dfc1d5-e329-4863-9899-0dbf3c02eff7" />
+				<VarVal Position="23.1" Length="1" Name="ТП6: Драйвер 1 сработал по току СС" Id="6f66cd71-e3f0-4c18-935a-b776c927995d" />
+				<VarVal Position="23.0" Length="1" Name="ТП6: Драйвер 0 сработал по току СС" Id="961b3283-cfca-4c3d-a7f6-a8dd3eaf41da" />
+				<VarVal Position="24.7" Length="1" Name="ТП6: Статус: Авария в нагрузке" Id="5fe60d13-f418-40c0-bbf8-8f94190896b3" />
+				<VarVal Position="24.6" Length="1" Name="ТП6: Статус: Перегрузка по току " Id="54599bf0-2b27-4c50-ab9e-1f2dddcb0478" />
+				<VarVal Position="24.4" Length="1" Name="ТП6: Статус: Таймаут по SPI" Id="0534f5f5-0ccf-469e-94ca-2b8553a0aeec" />
+				<VarVal Position="24.3" Length="1" Name="ТП6: Статус: Пониженное входное напряжение" Id="64f97bf0-d816-4f98-9db7-57ba78f7d179" />
+				<VarVal Position="24.2" Length="1" Name="ТП6: Статус: Повышенное входное напряжение" Id="1cf2b07b-e47f-4074-a56b-aa651549ff20" />
+				<VarVal Position="24.1" Length="1" Name="ТП6: Статус: Защита по току силовой сборки" Id="7068bbd6-fd65-4e0a-ac9f-e25a4f3e8317" />
+				<VarVal Position="24.0" Length="1" Name="ТП6: Статус: Температура" Id="2ecc1e96-61e3-4b34-88b7-58ef0c46dc46" />
+				<CpzPrm Name="УВ3: Напряжение полумоста внизу, В" Expression="[u25] * 16.0" Id="43a690d7-71a4-457d-9045-4fadb82d90d6" />
+				<VarVal Position="26.0" Length="8" Name="#CRCH" Id="9ac1d526-4e22-4b54-8027-aceba8e74114" />
+				<VarVal Position="27.0" Length="8" Name="#CRCL" Id="33328d1b-a12f-44e1-8eff-6e7ee2af8339" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС-ТП3 0x46">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="7090af20-c825-4bd1-a7d5-a90486d406c4" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УЗАРД №3: Команды от БУ: Взведение (№3)" Id="50b2d5c3-5d6f-4c76-9f14-bb42a4ba372c" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="a789a9ec-772f-40db-a83f-3b1725ce5415" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="15895ee0-5fd1-439f-b686-ce32497a16f5" />
+			</Request>
+			<Reply Length="19" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="96bcea34-979b-49a7-8658-09cd27b29a23" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="909c151e-fa6d-4e2c-9f63-285a0062d683" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="УЗАРД №3: Байт состояния: Готовность (Взвод)" Id="e63d0dff-0864-4bd0-89f5-2b75e302a72b" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УЗАРД №3: Байт состояния: Ключ включен (Драйвер готов)" Id="0906f57b-8c1a-44ef-8592-a52c52993fb9" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 1: err6" Id="73cc6034-8f4e-4153-9602-28619b4ba7b6" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 1: err5" Id="6a6f3551-09f2-45e7-a381-a68986aea031" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 1: err4" Id="aaac4545-78c3-49da-9d40-fbc8574e28b2" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 1: err3" Id="e147c298-8586-493c-a845-bb547000360b" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 1: err2" Id="4684e047-7315-48e9-b5e9-622162aff348" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 1: err1" Id="d3d87977-3b63-44c8-9605-0e091784da61" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 2: отключение БВС" Id="706c2cc2-a663-4b62-b029-c000a88437ec" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 2: отключение БВ" Id="dd5d54e3-85fa-461e-81db-739d6ba56406" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 2: тестовый" Id="4831eb55-c1d6-4678-8b9f-1729bec19c0d" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 2: выход на драйвер 2" Id="fe3fb04a-0384-4d22-9b71-bcedb7899b33" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="УЗАРД №3: Байт диагностики 2: выход на драйвер 1" Id="2014234a-da47-4c02-a839-f57c1b48e49f" />
+				<VarVal Position="5.0" Length="8" Name="УЗАРД №3: Значение АЦП AD6" Id="39d4f36a-dd89-43cf-82d7-e71e78fba8c8" />
+				<VarVal Position="6.0" Length="8" Name="УЗАРД №3: Значение АЦП AD7" Id="fd61c284-eb92-4f34-9e40-87f977a12014" />
+				<VarVal Position="7.0" Length="8" Name="УЗАРД №3: Значение АЦП AD2" Id="aae73de7-59b2-4848-a555-2d51606934b9" />
+				<CpzPrm Name="ТР3: Значение Iтр3, А" Expression="[u8] * 8.0" Id="129cd987-31c9-42fb-a01b-59d6806f7565" />
+				<CpzPrm Name="ТР3: Выходное напряжение (на резисторе), В" Expression="[u9] * 16.0" Id="ac2a4fe8-fbf8-4966-8632-621fc78cd96d" />
+				<CpzPrm Name="ТР3: Температура радиатора, °С" Expression="[s10] * 1.0" Id="4443885d-5bbd-427f-8cf8-3c0b37c8ea84" />
+				<VarVal Position="11.3" Length="1" Name="ТР3: Драйвер 3 сработал по току СС" Id="cf918b43-8ec3-42c5-b482-aeb2ff8e4666" />
+				<VarVal Position="11.2" Length="1" Name="ТР3: Драйвер 2 сработал по току СС" Id="046e3c23-290a-4840-8094-9bdbb9f3a289" />
+				<VarVal Position="11.1" Length="1" Name="ТР3: Драйвер 1 сработал по току СС" Id="a3a63235-3b61-450a-ae6f-b42400a02b14" />
+				<VarVal Position="11.0" Length="1" Name="ТР3: Драйвер 0 сработал по току СС" Id="d11c9b92-b9bd-47ed-b365-31ea9cea48fc" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="ТР3: Статус: Авария в нагрузке" Id="d1c9c180-0600-48f0-87a3-ea96df81072b" />
+				<BitPrm Byte="12" Bit="1" IsValueInverted="False" Name="ТР3: Статус: Защита по току силовой сборки (СС)" Id="943d1748-a082-4a5a-958a-e22397c5dda7" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="БС-ТП3: Диагностика НС: Нет связи с ТР3" Id="2a843342-7fd8-49c3-99f1-814a50586cc7" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="БС-ТП3: Диагностика НС: Нет связи с УВ3" Id="68ab15eb-19b4-4e06-82b1-5d331f998c40" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="БС-ТП3: Диагностика НС: Нет связи с УЗАРД3" Id="b30a8326-ba77-435b-a6d7-4bb43a16c740" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="БС-ТП3: Диагностика НС: Нет связи с ТП6" Id="1b42cb96-6b14-4f7b-8ec0-9d09390c24e5" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="БС-ТП3: Диагностика НС: Нет связи с ТП5" Id="276bbb0d-d25e-4a91-8603-07c36b51b582" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="БС-ТП3: Диагностика НС (в одном цикле): Нет связи с ТР3" Id="98a674da-d1ee-4680-a8f9-b76b9040ecb6" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="БС-ТП3: Диагностика НС (в одном цикле): Нет связи с УВ3" Id="0a608717-d5fa-4131-b3af-ad89e304f626" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="БС-ТП3: Диагностика НС (в одном цикле): Нет связи с УЗАРД3" Id="aefa1957-5243-4041-afbd-8cc0396f0e8d" />
+				<BitPrm Byte="15" Bit="1" IsValueInverted="False" Name="БС-ТП3: Диагностика НС (в одном цикле): Нет связи с ТП6" Id="f741742a-d58d-4416-9273-2679b9b7b033" />
+				<BitPrm Byte="15" Bit="0" IsValueInverted="False" Name="БС-ТП3: Диагностика НС (в одном цикле): Нет связи с ТП5" Id="1da083d1-862d-4b33-ace7-c3ac5e997b41" />
+				<VarVal Position="16.0" Length="8" Name="БС-ТП3: Номер версии ПО" Id="7763403e-d466-4b5a-9942-a471c22cebc7" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="f6b36061-cc1d-4936-9baa-9db1203bbd2f" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="318b3485-c05c-485c-81c5-2734662989ad" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УЗАРД4 0x41">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="291074ee-f768-44ab-9b39-1748a328e9e5" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="d6b1a3ea-9601-4f61-9175-3f6c3ef80107" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Команды от БУ: Взведение (№4)" Id="32e7111c-7632-4cae-b260-908a04ea2d41" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="87f02a86-140c-4f7a-9763-77d44c803dcc" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="56cfb25e-d469-426e-9578-6947ab0bbc84" />
+			</Request>
+			<Reply Length="12" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="d3934481-04ad-4a1f-b76b-61712fbe92f2" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="b6fc466d-9690-4604-a212-d99aa08e2568" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Байт состояния: Готовность (Взвод)" Id="167909cb-7f6c-493a-a3e2-608144423766" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Байт состояния: Ключ включен (Драйвер готов)" Id="18c3c78c-5f96-4985-bed2-4f678ba58e0d" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Байт диагностики 1: err6" Id="28548dda-cb1f-4638-a577-65cbba4ecfe9" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Байт диагностики 1: err5" Id="0cde718c-b2e4-404a-a2d8-3d1363599d4d" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Байт диагностики 1: err4" Id="f898d1bc-6563-4823-a497-db8a1ea606ed" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Байт диагностики 1: err3" Id="667f8477-80cf-439a-bd09-a0f1229bcdd7" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Байт диагностики 1: err2" Id="48b7d9e4-780b-403d-b866-50dcbbae650f" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Байт диагностики 1: err1" Id="c58654e4-220a-479f-9bbe-63c1df57d742" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Байт диагностики 2: Отключение БВС" Id="74902065-9179-4c3d-a37d-2dc0af7d8cde" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Байт диагностики 2: Отключение БВ" Id="b72b7072-8022-4d81-adc9-b53f4489c952" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Байт диагностики 2: Тестовый" Id="a09e4e62-09aa-4631-848f-17f66882c7c0" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Байт диагностики 2: Выход на драйвер 2" Id="5f858ccc-c33d-4809-83c0-cb6dbf595964" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Байт диагностики 2: Выход на драйвер 1" Id="076375db-433c-4c41-a8a3-5d78a3cfc284" />
+				<CpzPrm Name="Входное напряжение на ТП1,2" Expression="[u5] * 16.0" Id="c7445dc3-2b92-4b9f-a27e-f31c7a2d1a63" />
+				<CpzPrm Name="Температура радиатора" Expression="[s6] * 1.0" Id="c08cc790-34e5-4dc5-9cc2-5ed2d13dff6a" />
+				<CpzPrm Name="Дифференциальное напряжение 1 на ТП1,2" Expression="[u7] * 8.0" Id="7173dcbe-e1f8-48b0-9083-2a856035649d" />
+				<CpzPrm Name="Входной ток" Expression="[s8] * 16.0" Id="2eaede84-e087-4bf8-a105-7754bc86c137" />
+				<CpzPrm Name="Дифференциальное напряжение 2 на ТП1,2" Expression="[u9] * 8.0" Id="1e4db1c4-bdc5-43d2-94c8-66618336e10c" />
+				<VarVal Position="10.0" Length="8" Name="#CRCH" Id="61cc2cd8-0e1c-4ed7-8bd3-a747fee1a81e" />
+				<VarVal Position="11.0" Length="8" Name="#CRCL" Id="83be2c9c-725b-4148-a40d-4917a73c5376" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УЗАРД5 0x41">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="dd0dfe47-b75f-4a6b-9338-2c38b57f3e54" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="69e8084f-f073-487f-92b6-a5d31fc3f867" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Команды от БУ: Взведение (№4)" Id="71c59dfd-f28a-411a-ae7f-ad3758338d12" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="578bc8eb-bdfb-496b-b756-e4a7a80daad7" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="3c3ea81f-035e-40c6-b773-a3e93b8598a8" />
+			</Request>
+			<Reply Length="12" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="f39f37d0-5820-4bd5-8f5a-6b53ca573326" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="5bc034a0-0e89-4dd9-88e1-648fd024c529" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Байт состояния: Готовность (Взвод)" Id="6762d764-a82b-42c2-b7cb-d54d17a487a5" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Байт состояния: Ключ включен (Драйвер готов)" Id="e5eb1912-dab9-4eb9-9aef-43e8333c5ce9" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Байт диагностики 1: err6" Id="027b56c7-f66c-4e27-ba3e-340eadf4bbe8" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Байт диагностики 1: err5" Id="ed3c4e4e-74ae-4747-9a8f-9aaae3bf1bd0" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Байт диагностики 1: err4" Id="6f628ef2-fdc3-47c6-b592-50e22015550f" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Байт диагностики 1: err3" Id="6b0c5fb7-3c53-4cab-ba54-1ed65420e084" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Байт диагностики 1: err2" Id="c029d012-c089-484a-88ec-b83b1e7d5cb3" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Байт диагностики 1: err1" Id="b3b5bf43-2595-431b-a874-15caadaa32ed" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Байт диагностики 2: Отключение БВС" Id="443abdf9-2c19-405b-b28f-bb262254be8f" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Байт диагностики 2: Отключение БВ" Id="393194fd-c0b4-4553-a825-1f1f78ea0853" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Байт диагностики 2: Тестовый" Id="f38c2d68-9f19-49e8-bbec-366514bef147" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Байт диагностики 2: Выход на драйвер 2" Id="cd5dfe65-2ae1-4576-8bac-f0c9f53bd0d8" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Байт диагностики 2: Выход на драйвер 1" Id="7da7aec1-19e4-4aec-bffd-6acd23c5bd7b" />
+				<CpzPrm Name="Входное напряжение на ТП3,4" Expression="[u5] * 16.0" Id="d1a1ed70-1308-4bf7-8f52-a5cedf6eb981" />
+				<CpzPrm Name="Температура радиатора" Expression="[s6] * 1.0" Id="2f3a2d6b-e8d0-4fb9-8b61-fe590936ec0e" />
+				<CpzPrm Name="Дифференциальное напряжение 1 на ТП3,4" Expression="[u7] * 8.0" Id="73a3622b-c70c-4d5d-9ab2-a291f4126d91" />
+				<CpzPrm Name="Входной ток" Expression="[s8] * 16.0" Id="56408661-98cc-4dce-a319-dbaa67096f39" />
+				<CpzPrm Name="Дифференциальное напряжение 2 на ТП3,4" Expression="[u9] * 8.0" Id="00fae8f2-e194-45c0-809c-7a498808e933" />
+				<VarVal Position="10.0" Length="8" Name="#CRCH" Id="523fdfb0-8eaf-4a60-8ef8-3c3334d271aa" />
+				<VarVal Position="11.0" Length="8" Name="#CRCL" Id="5f47cb09-7e78-4c13-9173-818806a75677" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УЗАРД6 0x41">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x13" Name="#ADDR" Id="21920736-1b9d-464f-9902-3d6f2a417891" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="82454e54-2afd-41fd-bb4d-0b3a245e701a" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Команды от БУ: Взведение (№4)" Id="88b40039-8d67-4652-b4e7-2445ff94855a" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="1261ac28-ac73-4720-9da9-e4018995e170" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="1981c9ed-38e5-4ef1-ad95-e6e4382f50dc" />
+			</Request>
+			<Reply Length="12" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x13" Name="#ADDR" Id="df34789e-845b-47f2-a011-df25dc8c0940" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="54334e45-4781-48c2-97e1-2d1dc3cad75c" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Байт состояния: Готовность (Взвод)" Id="5aee946a-a24b-42cf-85bd-af7b6f980fcf" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Байт состояния: Ключ включен (Драйвер готов)" Id="d217b08f-0a7f-49d0-abde-96259ff3c787" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Байт диагностики 1: err6" Id="12de22b7-2e37-4009-9bef-bcc30c9df457" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Байт диагностики 1: err5" Id="ca46376d-0316-4339-9550-6df8831616cc" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Байт диагностики 1: err4" Id="75a2fda3-2177-4295-9bfc-1989ddcec90c" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Байт диагностики 1: err3" Id="874f7f38-fa4c-44b4-90f5-fdafd1c324f7" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Байт диагностики 1: err2" Id="50e38398-23bf-410c-b940-fd7e35647c8d" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Байт диагностики 1: err1" Id="fd17cd0a-a5fd-43cc-ad96-422af86d91a4" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Байт диагностики 2: отключение БВС" Id="b567c91c-f2a6-463f-874d-79848486ebd7" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Байт диагностики 2: отключение БВ" Id="cd7c5d63-f051-4a74-96dd-dbb5609c8b54" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Байт диагностики 2: тестовый" Id="53539b3d-5bb6-49d3-b213-2be8347e9267" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Байт диагностики 2: выход на драйвер 2" Id="d57e4379-966b-41b0-b19d-9ea2b7de52ce" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Байт диагностики 2: выход на драйвер 1" Id="9cf37097-ce76-4e70-a09e-13ff84231893" />
+				<CpzPrm Name="Входное напряжение на ТП5,6" Expression="[u5] * 16.0" Id="36dce699-9aac-4321-b16f-676b5306b32c" />
+				<CpzPrm Name="Температура радиатора" Expression="[s6] * 1.0" Id="5525f35b-45e4-4cb0-bc9d-ba4ddabe0530" />
+				<CpzPrm Name="Дифференциальное напряжение 1 на ТП5,6" Expression="[u7] * 8.0" Id="a28e2f2b-c5c6-4bec-a04d-946d059bda75" />
+				<CpzPrm Name="Входной ток" Expression="[s8] * 16.0" Id="cf883db5-03c8-41c9-b9e1-1373d010bd98" />
+				<CpzPrm Name="Дифференциальное напряжение 2 на ТП5,6" Expression="[u9] * 8.0" Id="819c8426-edfa-4c03-aadd-78dc50e6919d" />
+				<VarVal Position="10.0" Length="8" Name="#CRCH" Id="eb16badc-5352-4837-8704-4c43bd747bae" />
+				<VarVal Position="11.0" Length="8" Name="#CRCL" Id="2123658a-6dc5-4fac-9722-c374a0283ca4" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name=" БУ и РПД (1.1)">
+			<Request Length="9" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="d0e1c1e4-adfd-4e8b-a00b-020c73627647" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="927a3e41-aec5-475f-8cb5-f9978632af6d" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС1(Р1)" Id="f2e22cfe-d2ad-49ee-88df-24c9200640ee" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС2(Р3)" Id="32e91f40-45d8-43ef-94ae-ac93091f0aa4" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС3(Р5)" Id="82cfd07f-8a4d-4d63-a6b9-7be5353a704b" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС4(Р7)" Id="244e1bea-1cdb-4604-ae94-388296184cc7" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК1(Р9)" Id="8e26a339-07f0-497f-813a-8fc2bbd9317c" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК2(Р11)" Id="3588d725-6a5d-422e-938b-e685039aeef9" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК3(Р13)" Id="1d13a596-a261-44f8-8d24-b326b7d19db3" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК4(Р15)" Id="e61bcb8d-f563-4a66-9172-a656a16f3df1" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с Дж1(Р17)" Id="2abcbb88-f9fe-4d35-b48f-07035ff2e63e" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с Дж2(Р19)" Id="9f97c17f-6190-4e53-969e-0ef517eeafea" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС5(Р21)" Id="d8980504-e9f7-4112-ae09-7020df060640" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС6(Р23)" Id="a1ffbcb0-d1ef-41b4-a572-3028a1de654f" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС7(Р25)" Id="e54c1b1f-7318-42ae-bc80-9d8dbe0221d6" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК5(Р27)" Id="61ae08f3-1732-426c-836d-830e85e363c8" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Наличие связи М3: Нет связи с БС-ТП1(Р33)" Id="b79ced57-f440-4053-b002-a1a8241bc7e0" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Наличие связи М3: Нет связи с БС-ТП2(Р35)" Id="4aeb1a07-178e-4aa7-882f-c1931238d41d" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Наличие связи М3: Нет связи с БС-ТП3(Р37)" Id="53bf209a-fee5-4eef-8f7d-8903547e3141" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Наличие связи М3: Нет связи с УЗАРД4(Р39)" Id="9f2dab7b-a7a1-4919-8db0-daeda13d029a" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Наличие связи М3: Нет связи с УЗАРД5(Р41)" Id="d152b8cc-6f51-4ff8-8d46-bdc2cf3152b9" />
+				<BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Наличие связи М3: Нет связи с УЗАРД6(Р43)" Id="08d5915c-a4a9-4b4f-b9ec-88ce20288c89" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Наличие связи М4: Нет связи с БС-СН(Р49)" Id="836c28f5-cb8f-45df-9524-74b8509a0bd6" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Наличие связи М4: Нет связи с СКВТ(Р51)" Id="d9b448ad-e590-4317-a6fa-7bbcd95c8c5f" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Наличие связи М4: Нет связи с БС-СМ(Р53)" Id="2409c3df-1aa4-4daa-8f3c-efa7f3fc27f9" />
+				<VarVal Position="6.0" Length="8" Name="Резерв" Id="9dbe3f9b-dc01-4892-96f7-63a849c814ba" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="33de90f7-3285-4014-8dbf-b7d08bbaf96f" />
+				<VarVal Position="8.0" Length="8" Name="#CRCL" Id="f2eb09aa-1e5f-4c22-82e5-2f36ba35971d" />
+			</Request>
+			<Reply Length="0" Position="9" />
+		</CmdMask>
+		<CmdMask Name=" БУ и РПД (1.2)">
+			<Request Length="12" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="55b87071-eb35-4305-b82c-fe44895a28ad" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="03e9ca91-4831-4407-918a-473f62fd1fd4" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС1 в одном цикле(Р2)" Id="8e6e0499-35e6-403a-8124-be29697a954f" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС2 в одном цикле(Р4)" Id="33f46791-2298-4fae-aaa7-0c59037d641a" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС3 в одном цикле(Р6)" Id="702654ae-0b1e-4664-a2f7-ab77f48b6e40" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС4 в одном цикле(Р8)" Id="905d1112-657e-473b-b4a2-8a9684f2aa02" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК1 в одном цикле(Р10)" Id="c46d429b-de97-4b5e-a3b0-88f1c5ee716c" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК2 в одном цикле(Р12)" Id="674d5125-f3dc-4f3c-b581-c2b0ff507253" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК3 в одном цикле(Р14)" Id="3d74f313-6a83-4211-aff6-cf9712f3a581" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК4 в одном цикле(Р16)" Id="4d08e2f2-abd7-4bdd-825d-a0afdfad6b1c" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с Дж1 в одном цикле(Р18)" Id="37b91377-8273-451b-bf3f-9f2f06d18a89" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с Дж2 в одном цикле(Р20)" Id="4c55de92-dd07-4d3d-be18-a12bc5247e36" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС5 в одном цикле(Р22)" Id="8a6cf818-63d7-4a38-bca4-ea26a73827ce" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС6 в одном цикле(Р24)" Id="4953fbbf-f068-4667-ba12-d575c520adb7" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БВС7 в одном цикле(Р26)" Id="2041dd99-f6eb-4e08-a296-ae935065c923" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Наличие связи М1,М2: Нет связи с БУК5 в одном цикле(Р28)" Id="ea3503e4-16a8-454c-90c4-153a828c89e6" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="БС-СИ1/БС-СИ2 (1/0)" Id="d5373f68-d856-49a9-975c-2b6bac7d0538" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Перегрузка цикла обмена" Id="7352c59b-a24c-4658-b483-858add09cf3a" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Наличие связи М3: Нет связи с БС-ТП1 в одном цикле(Р34)" Id="aac22155-5716-44d6-8530-cab86859078c" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Наличие связи М3: Нет связи с БС-ТП2 в одном цикле(Р36)" Id="fa2b01c4-c7b8-4533-887b-f029c8b55cbe" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Наличие связи М3: Нет связи с БС-ТП3 в одном цикле(Р38)" Id="a37fedc4-8d1d-4997-969b-d8291241c42b" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Наличие связи М3: УЗАРД4(Р40)" Id="531e6525-406d-4713-9063-e43ca5f99b56" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Наличие связи М3: УЗАРД4(Р42)" Id="9df43d62-53cb-4cd6-9abf-c232fd668951" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Наличие связи М3: УЗАРД4(Р44)" Id="5c4a3f48-0bd3-4be5-af4d-c18839bc261f" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Наличие связи М4: Нет связи с БС-СН в одном цикле(Р50)" Id="76708042-05e3-4c8f-8acc-bbe76da05ed9" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Наличие связи М4: Нет связи с СКВТ в одном цикле(Р52)" Id="540101ab-ce5f-487e-a7cd-55a1fa2f3136" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Наличие связи М4: Нет связи с БС-СМ в одном цикле(Р54)" Id="5ef69220-2f3a-4282-853f-44372c2cfba5" />
+				<CpzPrm Name="Минимальное свободное время в цикле обмена, мс" Expression="[u7] * 0.278" Id="cf77e656-8bc6-4d18-b675-bb8f6b6ffc2c" />
+				<VarVal Position="8.0" Length="8" Name="Номер версии ПО БУ" Id="e4e181b0-57bd-419a-bc15-a8c37714e571" />
+				<VarVal Position="10.0" Length="8" Name="#CRCH" Id="83abee1d-3e44-4f5f-bc8d-3a35f0a784e7" />
+				<VarVal Position="11.0" Length="8" Name="#CRCL" Id="6bc0319f-0590-45a4-b4f8-e18b54af5d73" />
+			</Request>
+			<Reply Length="0" Position="12" />
+		</CmdMask>
+		<CmdMask Name=" БУ и РПД (1.3)">
+			<Request Length="32" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="86f4ae79-01d6-4916-92f7-d6d1d4b85b53" />
+				<DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="5df9b8b6-49f8-4944-b052-e50c60217df0" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа 8 БВС1: БВ включено" Id="89a492fc-d180-4812-9637-e0abec43fea5" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа 7 БВС1: Хвост поезда (Назад) - ПЭ2У №1, Резерв – ПЭ2У №2" Id="3fb74ee5-4d31-4f45-81d8-d71bcbe5aa83" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа 6 БВС1: Хвост поезда (Вперед) - ПЭ2У №1, Резерв – ПЭ2У №2" Id="bf89cb9a-3de1-4569-abdb-a75cfef44e9f" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа 5 БВС1: Компрессор 2" Id="b8e617c0-a323-4bb9-8ef4-5cb60ac6eecf" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа 4 БВС1: Компрессор 1" Id="21c170ba-4382-428b-bec8-559a585b983f" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа 3 БВС1: Эл. тормоз" Id="cfacde3e-6bb4-4136-aa43-e1a8e3445cde" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа 2 БВС1: БВ1" Id="a220dcdf-97e3-42cd-95bd-6a13f8d9ae34" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа 1 БВС1: БВ2" Id="75c12242-2e03-4fe9-bcbe-b5ec3742c05d" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Состояние входа 16 БВС1: Вентиляторы Д2" Id="3598491a-8f92-4dac-81fa-b6080978aa03" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Состояние входа 15 БВС1: Вентиляторы Д1" Id="1bb19a35-ee81-46d2-ad9e-83f97d960aea" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Состояние входа 14 БВС1: Вентиляторы Э" Id="c0193ba3-893d-4e51-ae44-2a0a834f26a4" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Состояние входа 13 БВС1: Жалюзи" Id="00beb8a2-a4aa-4ad3-84e4-061c609334ad" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Состояние входа 12 БВС1: Вентиляция БПТРД2" Id="8429e0f5-e405-4b5e-be18-932f3c063752" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Состояние входа 11 БВС1: Вентиляция БПТРД1" Id="45ee9736-9f3d-4374-be4c-99de7011b6a3" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Состояние входа 10 БВС1: Вентиляция БПТРЭ" Id="194082fa-b2d5-461e-bfa9-fd23571a58dc" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Статус БВС1: Сброс от монитора питания (БВС1)" Id="06d6a174-1580-4d4c-a6a5-080a6e54118b" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Статус БВС1: Сброс от внешнего входа (БВС1)" Id="b6bc5d49-d415-4d1b-a5d3-83d64deb6cab" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Состояние входа 8 БВС2: БВ включено" Id="3bc5e681-525a-4f4e-b235-6e078dedecfa" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Состояние входа 7 БВС2: Хвост поезда (Назад) - ПЭ2У №1, Резерв – ПЭ2У №2" Id="be267e3f-7f95-4aae-92cc-49f3a62d9703" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Состояние входа 6 БВС2: Хвост поезда (Вперед) - ПЭ2У №1, Резерв – ПЭ2У №2" Id="1cdbd8b2-28ff-4363-af45-cfbb2b84b1b0" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Состояние входа 5 БВС2: Компрессор 2" Id="f1eeaf54-37bb-487d-9aaa-327bf0f2b502" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Состояние входа 4 БВС2: Компрессор 1" Id="bfd65e93-76ed-47e1-b9f7-fe6113057fa6" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Состояние входа 3 БВС2: Эл. тормоз" Id="46d7dfe9-1be8-45b0-9533-690e11ff2d75" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Состояние входа 2 БВС2: БВ1" Id="45bb8640-dfcf-4545-89dc-fb691f51d233" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Состояние входа 1 БВС2: БВ2" Id="bac363de-5b40-482b-831e-594f3cfeb0b8" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Состояние входа 16 БВС2: Вентиляторы Д2" Id="eb5b7cf5-4d6e-439c-85f2-53dda195bcde" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Состояние входа 15 БВС2: Вентиляторы Д1" Id="37ba13ec-ba7c-485a-b678-ac1f5ad44d9a" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Состояние входа 14 БВС2: Вентиляторы Э" Id="3f42f0d2-3308-4ff3-8575-6c198b3c49ed" />
+				<BitPrm Byte="6" Bit="4" IsValueInverted="False" Name="Состояние входа 13 БВС2: Жалюзи" Id="fddd7070-7638-46a2-a451-869ee50f1ccf" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Состояние входа 12 БВС2: Вентиляция БПТРД2" Id="33cedd4d-aab9-4853-b974-6fafa304080d" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Состояние входа 11 БВС2: Вентиляция БПТРД1" Id="22e6ca93-1a3f-4c2e-a8ae-b10755d8054f" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Состояние входа 10 БВС2: Вентиляция БПТРЭ" Id="65f21e0f-64c9-44c7-987e-43a7289ea2eb" />
+				<BitPrm Byte="7" Bit="1" IsValueInverted="False" Name="Статус БВС2: Сброс от монитора питания (БВС2)" Id="996bcbf9-2ff4-4d0a-9995-9ec566ba1caf" />
+				<BitPrm Byte="7" Bit="0" IsValueInverted="False" Name="Статус БВС2: Сброс от внешнего входа (БВС2)" Id="0eeb097b-12b6-4d7d-86d2-7ac13ad73051" />
+				<BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="Состояние входа 7 БВС3: Возврат БВ2" Id="c91a2b8e-7e7b-4b8b-b777-f69ee8b51b40" />
+				<BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="Состояние входа 6 БВС3: Возврат БВ1" Id="7c338530-8c39-4c60-8dce-380767e1affd" />
+				<BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="Состояние входа 5 БВС3: Фонари сигнальные" Id="0ec22fe5-ff4a-4209-ab25-cfda6da80ce2" />
+				<BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="Состояние входа 4 БВС3: Выбег" Id="3a32c981-8ff4-46fb-9dda-328b018bd0c9" />
+				<BitPrm Byte="8" Bit="2" IsValueInverted="False" Name="Состояние входа 3 БВС3: Направление движения назад" Id="acd64282-49ec-40f8-9ab6-695eac228217" />
+				<BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="Состояние входа 2 БВС3: Направление движения вперед" Id="0d5eeda9-bc3e-4f8d-9aea-640c2400eccb" />
+				<BitPrm Byte="9" Bit="7" IsValueInverted="False" Name="Состояние входа 16 БВС3: Вкл. пульта" Id="5c41516a-b9da-4786-a726-9a8e640c5b70" />
+				<BitPrm Byte="9" Bit="6" IsValueInverted="False" Name="Состояние входа 15 БВС3: Груженный" Id="b3a6c127-2621-43b0-914b-6b67ca00f735" />
+				<BitPrm Byte="9" Bit="5" IsValueInverted="False" Name="Состояние входа 14 БВС3: Порожний" Id="809a22ca-a011-4763-953a-b8dc241f7503" />
+				<BitPrm Byte="9" Bit="4" IsValueInverted="False" Name="Состояние входа 13 БВС3: Отключение ТЭД Д-ра2(ТП5, ТП6)" Id="7854dbfc-ecc3-4073-8fe8-1c260f2bc766" />
+				<BitPrm Byte="9" Bit="2" IsValueInverted="False" Name="Состояние входа 11 БВС3: Отключение ТЭД Д-ра1(ТП3, ТП4)" Id="11047dff-d30d-4ece-b094-ba315dc908e4" />
+				<BitPrm Byte="9" Bit="0" IsValueInverted="False" Name="Состояние входа 9 БВС3: Отключение ТЭД Эл-за(ТП1, ТП2)" Id="17297238-672c-433b-b362-04d7fea0dfaf" />
+				<BitPrm Byte="10" Bit="1" IsValueInverted="False" Name="Статус БВС3: Сброс от монитора питания (БВС3)" Id="65d6c055-2bde-4cc0-bb67-24a2aa0b8845" />
+				<BitPrm Byte="10" Bit="0" IsValueInverted="False" Name="Статус БВС3: Сброс от внешнего входа (БВС3)" Id="385636e6-563a-489c-8fdf-18c00471a6fa" />
+				<BitPrm Byte="11" Bit="6" IsValueInverted="False" Name="Состояние входа 7 БВС4: Возврат БВ2" Id="13ce6ab1-d269-47ac-82d3-5b9fbc243245" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="Состояние входа 6 БВС4: Возврат БВ1" Id="b76d1c69-9da4-47e8-8f60-d8eace0abdf7" />
+				<BitPrm Byte="11" Bit="4" IsValueInverted="False" Name="Состояние входа 5 БВС4: Фонари сигнальные" Id="15571340-7526-405d-98c0-af5521b9a9eb" />
+				<BitPrm Byte="11" Bit="3" IsValueInverted="False" Name="Состояние входа 4 БВС4: Выбег" Id="9f500ca0-394a-4b7c-9e92-680489ba8feb" />
+				<BitPrm Byte="11" Bit="2" IsValueInverted="False" Name="Состояние входа 3 БВС4: Направление движения назад" Id="af791d58-50f8-4cb2-98ee-8cca0975ab5e" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="Состояние входа 2 БВС4: Направление движения вперед" Id="4efdb07c-e7f0-49a9-b3af-8cef319f6e36" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="Состояние входа 16 БВС4: Вкл. пульта" Id="c48cb0c3-55f4-430e-b884-a4f97ecf57d8" />
+				<BitPrm Byte="12" Bit="6" IsValueInverted="False" Name="Состояние входа 15 БВС4: Груженный" Id="847a1cf9-fe5e-4cce-80bb-084ac0e26354" />
+				<BitPrm Byte="12" Bit="5" IsValueInverted="False" Name="Состояние входа 14 БВС4: Порожний" Id="5781a80f-3686-42d1-acf6-2a721b68332d" />
+				<BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="Состояние входа 13 БВС4: Отключение ТЭД Д-ра 2 (ТП5, ТП6)" Id="08d77c7b-5dd4-4159-b9c4-37b19a626f1f" />
+				<BitPrm Byte="12" Bit="2" IsValueInverted="False" Name="Состояние входа 11 БВС4: Отключение ТЭД Д-ра 1 (ТП3, ТП4)" Id="7cd92267-afd0-49c7-91a6-8b61cc194173" />
+				<BitPrm Byte="12" Bit="0" IsValueInverted="False" Name="Состояние входа 9 БВС4: Отключение ТЭД Эл-за (ТП1, ТП2)" Id="a2f6d941-f27b-4fcd-a509-49f8c4364d7e" />
+				<BitPrm Byte="13" Bit="1" IsValueInverted="False" Name="Статус БВС4: Сброс от монитора питания (БВС4)" Id="0e4fb9f7-435e-47c8-b33c-aa14e214ae86" />
+				<BitPrm Byte="13" Bit="0" IsValueInverted="False" Name="Статус БВС4: Сброс от внешнего входа (БВС4)" Id="7b832698-57fc-4fce-8d82-06ad2f4253c6" />
+				<BitPrm Byte="14" Bit="6" IsValueInverted="False" Name="Команды БУК1: Лампа вентиляция эл-за" Id="9774eb75-bdc2-4fa3-98be-ed80b51aeed5" />
+				<BitPrm Byte="14" Bit="5" IsValueInverted="False" Name="Команды БУК1: Песок эл-за" Id="661d363e-8497-4682-bf2f-403f44973690" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="Команды БУК1: КР1Н" Id="b274e3e3-fa40-4cb9-bcda-e1862fff070b" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="Команды БУК1: КР1В" Id="27d071d3-2755-4ec5-a1da-c8c97f8f3126" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="Команды БУК1: КЛМЭ" Id="0cb74d1c-3ffe-48aa-820c-1e33b63a02bf" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="Команды БУК1: КЛ2" Id="6dbfc189-8025-474c-874e-e531671c4ee4" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="Команды БУК1: КЛ1" Id="10b15247-379d-4662-9199-146c5a983449" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="Команды БУК2: КН1" Id="95dd6d9a-1dd7-4359-94b3-50a1fe5e4aca" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="Команды БУК2: Лампа вентиляция д-ра 1" Id="03b7946a-ecb3-4045-9a2b-7d2d34ea293e" />
+				<BitPrm Byte="15" Bit="5" IsValueInverted="False" Name="Команды БУК2: Песок д-ра 1" Id="ecc9e67d-fbcd-4ff0-8402-bafb0bdc0fe8" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="Команды БУК2: КР2Н" Id="67b174aa-d779-4653-b200-902dae496504" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="Команды БУК2: КР2В" Id="11fb8b34-a494-488c-9c5b-78e6e25cedb8" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="Команды БУК2: КЛМД1" Id="6f0f0973-e882-4467-a837-8bde6c0b8197" />
+				<BitPrm Byte="15" Bit="1" IsValueInverted="False" Name="Команды БУК2: КЛ5" Id="3586ef1c-de3f-4f39-b77c-5bb2b5d16560" />
+				<BitPrm Byte="15" Bit="0" IsValueInverted="False" Name="Команды БУК2: КЛ4" Id="81ba6130-515e-404b-96e0-8efcf7050c16" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="Команды БУК3: КОС" Id="781ae184-eb54-4697-8a33-fd6c1a18100b" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="Команды БУК3: Лампа вентиляция д-ра 2" Id="a2bec229-4c73-4d5e-94ae-3cb95e78160a" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="Команды БУК3: Песок д-ра 2" Id="099ddbdd-3bff-491a-a17e-7f6ae27534c0" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="Команды БУК3: КР3Н" Id="cb593f1e-6760-4543-828d-5814ee936835" />
+				<BitPrm Byte="16" Bit="3" IsValueInverted="False" Name="Команды БУК3: КР3В" Id="64e9fa20-1937-4967-a795-3ae55ecff1ab" />
+				<BitPrm Byte="16" Bit="2" IsValueInverted="False" Name="Команды БУК3: КЛМД2" Id="dbe8f0a6-2658-4c3a-8f31-d067bcf5ce2b" />
+				<BitPrm Byte="16" Bit="1" IsValueInverted="False" Name="Команды БУК3: КЛ8" Id="005d6d8d-f04f-49ac-8759-1d87fe5e26af" />
+				<BitPrm Byte="16" Bit="0" IsValueInverted="False" Name="Команды БУК3: КЛ7" Id="6a76dd58-e814-47be-a6d9-c59200592546" />
+				<BitPrm Byte="17" Bit="7" IsValueInverted="False" Name="Команды БУК4: Ф3" Id="99a5c488-aaea-43e5-a212-6187efa3af0b" />
+				<BitPrm Byte="17" Bit="6" IsValueInverted="False" Name="Команды БУК4: Ф2" Id="8760ab58-4426-4edc-8bc9-da9e7def7a35" />
+				<BitPrm Byte="17" Bit="5" IsValueInverted="False" Name="Команды БУК4: Ф1" Id="0c39f95f-c7df-43da-b7ce-6c94b45f9cf8" />
+				<BitPrm Byte="17" Bit="4" IsValueInverted="False" Name="Команды БУК4: КН2" Id="85df36f5-48f1-4e82-8e97-ef125993f437" />
+				<BitPrm Byte="17" Bit="3" IsValueInverted="False" Name="Команды БУК4: КОН1" Id="cd17f46e-6cc3-4252-9f97-15734ff56975" />
+				<BitPrm Byte="17" Bit="2" IsValueInverted="False" Name="Команды БУК4: КБ1" Id="88b34c28-0f7f-4031-be9f-e0354ef37e1c" />
+				<BitPrm Byte="17" Bit="0" IsValueInverted="False" Name="Команды БУК4: БПС1" Id="34b333ef-5e0f-4f7e-a408-06291dc26e59" />
+				<BitPrm Byte="18" Bit="2" IsValueInverted="False" Name="Команды БУК5: КБ3" Id="eda0a9eb-6d3f-4249-884e-17100d523c94" />
+				<BitPrm Byte="18" Bit="1" IsValueInverted="False" Name="Команды БУК5: КБ2" Id="df2a05e8-c399-4cad-bf77-56708afbd22a" />
+				<BitPrm Byte="18" Bit="0" IsValueInverted="False" Name="Команды БУК5: КА1" Id="6d71d423-c2f3-4f43-bfa9-83b03cf1eff8" />
+				<BitPrm Byte="24" Bit="7" IsValueInverted="False" Name="Контроллер скорости джойстик №1: Ошибка данных рукоятки с (err_dat_v)" Id="8a178c61-4916-4706-ab1c-c0918ea6f94f" />
+				<BitPrm Byte="24" Bit="6" IsValueInverted="False" Name="Контроллер скорости джойстик №1: Ошибка диапазона рукоятки с (err_diap_v)" Id="ecbfd282-2f47-4280-8d4f-0afefd7fa24c" />
+				<BitPrm Byte="24" Bit="2" IsValueInverted="False" Name="Контроллер скорости джойстик №1: «-1» (com3)" Id="5b84a81e-9175-47e5-b868-b2dfc1b8ae41" />
+				<BitPrm Byte="24" Bit="1" IsValueInverted="False" Name="Контроллер скорости джойстик №1: «Н» (com2)" Id="fcfabf62-1b5f-454d-b8e9-4a3116ce9774" />
+				<BitPrm Byte="24" Bit="0" IsValueInverted="False" Name="Контроллер скорости джойстик №1: «+1» (com1)" Id="38694941-36c8-4ee4-bcf3-8b9859e0b2f4" />
+				<BitPrm Byte="26" Bit="2" IsValueInverted="False" Name="Статус Джойстика №1: Ошибка контроллера скорости" Id="7f258ca5-450d-4af9-a87e-9169d086c2a6" />
+				<BitPrm Byte="27" Bit="7" IsValueInverted="False" Name="Контроллер скорости джойстик №2: Ошибка данных рукоятки с (err_dat_v)" Id="4fb94624-ed8f-4370-962d-817805443e07" />
+				<BitPrm Byte="27" Bit="6" IsValueInverted="False" Name="Контроллер скорости джойстик №2: Ошибка диапазона рукоятки с (err_diap_v)" Id="70357181-6448-4281-92de-dd9ca175f402" />
+				<BitPrm Byte="27" Bit="2" IsValueInverted="False" Name="Контроллер скорости джойстик №2: «-1» (com3)" Id="ecc6498d-31ba-4a11-9881-ff093022e4e9" />
+				<BitPrm Byte="27" Bit="1" IsValueInverted="False" Name="Контроллер скорости джойстик №2: «Н» (com2)" Id="b319ea52-06e4-4162-a6b6-4c4b189c4f35" />
+				<BitPrm Byte="27" Bit="0" IsValueInverted="False" Name="Контроллер скорости джойстик №2: «+1» (com1)" Id="67294c41-96ab-434a-90ca-09c8a30517fe" />
+				<BitPrm Byte="29" Bit="2" IsValueInverted="False" Name="Статус Джойстика №2: Ошибка контроллера скорости" Id="0b50978c-177b-4438-be40-f2f73bbd90e9" />
+				<VarVal Position="30.0" Length="8" Name="#CRCH" Id="2e8281ff-c4d3-41e1-b16e-695cfaef0da4" />
+				<VarVal Position="31.0" Length="8" Name="#CRCL" Id="96eb0e0d-88ab-4316-9d55-58dab95c0b61" />
+			</Request>
+			<Reply Length="0" Position="32" />
+		</CmdMask>
+		<CmdMask Name="БУ и РПД (1.4) (Д-ка БУК)">
+			<Request Length="20" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="4b4a0f24-39e4-417f-8afb-2ca310f6f9d5" />
+				<DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="86c9e34e-76d0-4251-b86c-f407d8003c13" />
+				<CpzPrm Name="Код неисправности ключа 8 БУК1" Expression="[4.7.1] * 4.0 + [3.7.1] * 2.0  + [2.7.1] * 1.0" Id="f72aa2a0-f1d6-43f1-bc7b-d6ea2a0f80da" />
+				<CpzPrm Name="Код неисправности ключа 7 БУК1" Expression="[4.6.1] * 4.0 + [3.6.1] * 2.0  + [2.6.1] * 1.0" Id="e8ce1262-ea82-4cb7-8336-eae8f112d9eb" />
+				<CpzPrm Name="Код неисправности ключа 6 БУК1" Expression="[4.5.1] * 4.0 + [3.5.1] * 2.0  + [2.5.1] * 1.0" Id="0f1452a8-a1b9-4fee-9454-cd35eef3f9e4" />
+				<CpzPrm Name="Код неисправности ключа 5 БУК1" Expression="[4.4.1] * 4.0 + [3.4.1] * 2.0  + [2.4.1] * 1.0" Id="8f35732d-3899-4859-a0bf-264e8bfe28ce" />
+				<CpzPrm Name="Код неисправности ключа 4 БУК1" Expression="[4.3.1] * 4.0 + [3.3.1] * 2.0  + [2.3.1] * 1.0" Id="8f779f56-ab7e-4aa1-b0c1-f666341f9624" />
+				<CpzPrm Name="Код неисправности ключа 3 БУК1" Expression="[4.2.1] * 4.0 + [3.2.1] * 2.0  + [2.2.1] * 1.0" Id="c07a4837-c1c7-4225-9fa1-71894ad8eed8" />
+				<CpzPrm Name="Код неисправности ключа 2 БУК1" Expression="[4.1.1] * 4.0 + [3.1.1] * 2.0  + [2.1.1] * 1.0" Id="41acd8ab-1c84-4ffb-9c7d-2b08c63904a7" />
+				<CpzPrm Name="Код неисправности ключа 1 БУК1" Expression="[4.0.1] * 4.0 + [3.0.1] * 2.0  + [2.0.1] * 1.0" Id="bf706c34-fa37-4b76-a369-aa05a48dbe00" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Статус блока БУК1: Сброс от монитора питания" Id="a24543bf-0b16-4006-b52e-fb8b901ea3cd" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Статус блока БУК1: Сброс от внешнего входа" Id="8bd1ec81-e5f4-4443-b546-7169e035658e" />
+				<CpzPrm Name="Код неисправности ключа 8 БУК2" Expression="[8.7.1] * 4.0 + [7.7.1] * 2.0  + [6.7.1] * 1.0" Id="001020d7-3500-4408-baf5-f486156a28c8" />
+				<CpzPrm Name="Код неисправности ключа 7 БУК2" Expression="[8.6.1] * 4.0 + [7.6.1] * 2.0  + [6.6.1] * 1.0" Id="affec8f7-becf-450f-ba4c-1836c5078509" />
+				<CpzPrm Name="Код неисправности ключа 6 БУК2" Expression="[8.5.1] * 4.0 + [7.5.1] * 2.0  + [6.5.1] * 1.0" Id="4beb3963-7bf4-473d-8ae1-5ecc4d438bf8" />
+				<CpzPrm Name="Код неисправности ключа 5 БУК2" Expression="[8.4.1] * 4.0 + [7.4.1] * 2.0  + [6.4.1] * 1.0" Id="8595a4fb-2f08-4189-b292-4a08b0e8917d" />
+				<CpzPrm Name="Код неисправности ключа 4 БУК2" Expression="[8.3.1] * 4.0 + [7.3.1] * 2.0  + [6.3.1] * 1.0" Id="efbc32b4-c2ea-4516-b3e5-c71a32f94348" />
+				<CpzPrm Name="Код неисправности ключа 3 БУК2" Expression="[8.2.1] * 4.0 + [7.2.1] * 2.0  + [6.2.1] * 1.0" Id="a5763510-83ec-4576-b6f0-91236aa6e06c" />
+				<CpzPrm Name="Код неисправности ключа 2 БУК2" Expression="[8.1.1] * 4.0 + [7.1.1] * 2.0  + [6.1.1] * 1.0" Id="cdf3bd96-49d4-4002-8286-ff7648c598f6" />
+				<CpzPrm Name="Код неисправности ключа 1 БУК2" Expression="[8.0.1] * 4.0 + [7.0.1] * 2.0  + [6.0.1] * 1.0" Id="b34cc6f8-7b45-4e76-be9c-d8db0fb8e521" />
+				<BitPrm Byte="9" Bit="1" IsValueInverted="False" Name="Статус блока БУК2: Сброс от монитора питания" Id="41b365a2-ecba-4ea5-876e-555d80f28e9e" />
+				<BitPrm Byte="9" Bit="0" IsValueInverted="False" Name="Статус блока БУК2: Сброс от внешнего входа" Id="1e2ac677-476e-4f03-ac03-a0d46f0cebae" />
+				<CpzPrm Name="Код неисправности ключа 8 БУК3" Expression="[12.7.1] * 4.0 + [11.7.1] * 2.0  + [10.7.1] * 1.0" Id="9cc66a56-db9e-4027-aad9-cab74837442c" />
+				<CpzPrm Name="Код неисправности ключа 7 БУК3" Expression="[12.6.1] * 4.0 + [11.6.1] * 2.0  + [10.6.1] * 1.0" Id="7fb301f1-9256-4d8c-87ef-69c3dfdf8593" />
+				<CpzPrm Name="Код неисправности ключа 6 БУК3" Expression="[12.5.1] * 4.0 + [11.5.1] * 2.0  + [10.5.1] * 1.0" Id="bcf98d9e-bb6e-4517-8b2c-b48fc070c155" />
+				<CpzPrm Name="Код неисправности ключа 5 БУК3" Expression="[12.4.1] * 4.0 + [11.4.1] * 2.0  + [10.4.1] * 1.0" Id="0d4a91a7-00ed-43d1-bcf0-7e4bda75c823" />
+				<CpzPrm Name="Код неисправности ключа 4 БУК3" Expression="[12.3.1] * 4.0 + [11.3.1] * 2.0  + [10.3.1] * 1.0" Id="99762346-d8b2-4da9-8fed-b5e9028aa372" />
+				<CpzPrm Name="Код неисправности ключа 3 БУК3" Expression="[12.2.1] * 4.0 + [11.2.1] * 2.0  + [10.2.1] * 1.0" Id="efe6ef66-65a9-4b8d-aeb9-a8f57e360b2c" />
+				<CpzPrm Name="Код неисправности ключа 2 БУК3" Expression="[12.1.1] * 4.0 + [11.1.1] * 2.0  + [10.1.1] * 1.0" Id="cede5319-ec4d-4bc7-9872-ae9ff54eeb7b" />
+				<CpzPrm Name="Код неисправности ключа 1 БУК3" Expression="[12.0.1] * 4.0 + [11.0.1] * 2.0  + [10.0.1] * 1.0" Id="f19d986a-44c9-4af0-b642-24ab43f65994" />
+				<BitPrm Byte="13" Bit="1" IsValueInverted="False" Name="Статус блока БУК3: Сброс от монитора питания" Id="3284e918-bd05-4c10-871a-131fed4ad66a" />
+				<BitPrm Byte="13" Bit="0" IsValueInverted="False" Name="Статус блока БУК3: Сброс от внешнего входа" Id="1f45b22d-bd66-458d-8bd2-dd3fac116d21" />
+				<CpzPrm Name="Код неисправности ключа 8 БУК4" Expression="[16.7.1] * 4.0 + [15.7.1] * 2.0  + [14.7.1] * 1.0" Id="c1f6ab62-ef40-407b-9a7f-d621c8c40998" />
+				<CpzPrm Name="Код неисправности ключа 7 БУК4" Expression="[16.6.1] * 4.0 + [15.6.1] * 2.0  + [14.6.1] * 1.0" Id="5ffc7994-70c8-4a91-a076-72b187c29e41" />
+				<CpzPrm Name="Код неисправности ключа 6 БУК4" Expression="[16.5.1] * 4.0 + [15.5.1] * 2.0  + [14.5.1] * 1.0" Id="589d4910-cf5f-4de6-a946-03cd8769c066" />
+				<CpzPrm Name="Код неисправности ключа 5 БУК4" Expression="[16.4.1] * 4.0 + [15.4.1] * 2.0  + [14.4.1] * 1.0" Id="81081582-4c86-4764-85b9-82aaeea405c9" />
+				<CpzPrm Name="Код неисправности ключа 4 БУК4" Expression="[16.3.1] * 4.0 + [15.3.1] * 2.0  + [14.3.1] * 1.0" Id="bad9ad46-a179-4747-8996-de45fb41b162" />
+				<CpzPrm Name="Код неисправности ключа 3 БУК4" Expression="[16.2.1] * 4.0 + [15.2.1] * 2.0  + [14.2.1] * 1.0" Id="45158d75-4e63-43ee-acbd-e91e7ac7da08" />
+				<CpzPrm Name="Код неисправности ключа 2 БУК4" Expression="[16.1.1] * 4.0 + [15.1.1] * 2.0  + [14.1.1] * 1.0" Id="08e55960-d4d0-4227-919f-30f73d36098a" />
+				<CpzPrm Name="Код неисправности ключа 1 БУК4" Expression="[16.0.1] * 4.0 + [15.0.1] * 2.0  + [14.0.1] * 1.0" Id="9ba82e1f-0d0c-4d48-865f-1935882e963a" />
+				<BitPrm Byte="17" Bit="1" IsValueInverted="False" Name="Статус блока БУК4: Сброс от монитора питания" Id="722b860d-6529-45df-9829-1530d06e3ade" />
+				<BitPrm Byte="17" Bit="0" IsValueInverted="False" Name="Статус блока БУК4: Сброс от внешнего входа" Id="32338209-5828-46b9-9355-acf31b672d0c" />
+				<VarVal Position="18.0" Length="8" Name="#CRCH" Id="38a056b9-a206-411b-837b-7962b168403d" />
+				<VarVal Position="19.0" Length="8" Name="#CRCL" Id="b81d2e3a-c530-4d54-8059-3cb355395bfe" />
+			</Request>
+			<Reply Length="0" Position="20" />
+		</CmdMask>
+		<CmdMask Name=" БУ и РПД (1.5) (SPI)">
+			<Request Length="13" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="9f6fe17e-24b1-459d-acd7-760e91088a40" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="64459eba-5048-4938-be3a-e2653d50dba1" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Байт диагностики блоков: Авария в нагрузке ИПЗУ2" Id="ec9b6fb3-8618-44d3-9c7a-94447399258f" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Байт диагностики блоков: Авария в нагрузке ИПЗУ1" Id="978e4cc3-bcd4-4398-a069-6fb1ae037202" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Байт диагностики блоков: Авария в нагрузке ИПБС2" Id="0dc5956e-7c5c-4000-af7a-ecb9810273bf" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Байт диагностики блоков: Авария в нагрузке ИПБС1" Id="6a7aacdf-cc49-46eb-91e5-c8817b6f2d8a" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Байт диагностики блоков: Авария в нагрузке ПСН-ПЭ2ум2" Id="f6ed7aa1-adff-40da-8c3a-b3cbb37cf110" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Байт диагностики блоков: Авария в нагрузке ПСН-ПЭ2ум1" Id="904b768e-fe87-466e-9b9c-f1ff59b82508" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Байт НС: Нет связи по SPI" Id="44c497ca-365d-4e7e-8e55-ddd58944fb0c" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Байт НС: Нет связи ИПЗУ2" Id="7d3cc2f6-3992-44ef-a2b9-41f9f435d47a" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Байт НС: Нет связи ИПЗУ1" Id="69bd306a-8e34-4f54-b8ff-d479e91d7ca5" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Байт НС: Нет связи ИПБС2" Id="d37aaa18-817d-44c0-83d0-48a397db17f9" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Байт НС: Нет связи ИПБС1" Id="08804c73-f809-45a6-936e-ed4272143d24" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Байт НС: Нет связи с ПСН-ПЭ2ум2" Id="29890e9d-37d7-457a-86eb-2040ba8750bf" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Байт НС: Нет связи с ПСН-ПЭ2ум1" Id="8b8faccd-aa89-417c-9c9e-426b8e03891f" />
+				<CpzPrm Name="Напряжения контактной сети СКВТ. Uкс,В" Expression="[u5] * 256.0 + [u4]" Id="09184c29-cd4a-4ab5-9cfd-a3d55112e0f0" />
+				<CpzPrm Name="Напряжения на входе ПСН-ПЭ2У1,В" Expression="[u7] * 256.0 + [u6]" Id="e6b1582c-d3a8-47a2-a593-77bd83183c1a" />
+				<CpzPrm Name="Напряжения на входе ПСН-ПЭ2У2,В" Expression="[u9] * 256.0 + [u8]" Id="1068a62b-6b85-47d2-be28-9793028425bb" />
+				<VarVal Position="11.0" Length="8" Name="#CRCH" Id="facf66f9-1ba0-4a04-935f-5eb51a4b8276" />
+				<VarVal Position="12.0" Length="8" Name="#CRCL" Id="1e3a11ac-4529-4852-aaf5-0a0e698c7985" />
+			</Request>
+			<Reply Length="0" Position="13" />
+		</CmdMask>
+		<CmdMask Name="БУ и РПД (1.6) (ФПМО)">
+			<Request Length="28" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="1d49daef-a366-43a7-a87d-ca84b74b66e8" />
+				<DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="f87ec185-8b93-40d5-88a3-4b0f0718f357" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Процесс сброса уставки в БС-ТП3 (P108)" Id="999c3d42-dc76-42cf-89b6-a40dda8ee247" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Сброс уставки в БС-ТП3 (P107)" Id="60137cec-a67b-4e49-99d7-76ba13f21293" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Процесс сброса уставки в БС-ТП2 (P106)" Id="ad23a70c-659a-409c-b9c3-c071e956afde" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Сброс уставки в БС-ТП2 (P105)" Id="8564387a-fc43-49f0-8408-56fb62a58fea" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Процесс сброса уставки в БС-ТП1 (P104)" Id="7a2e2723-8df1-424e-b6ba-1157c3a33b53" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Сброс уставки в БС-ТП1 (P103)" Id="d402c2bc-4853-4394-a467-a495c6783c96" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Сброс режима Тяга (P102)" Id="ca8ebb62-886d-40b7-8180-edd03ee21e08" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Напряжение СКВТ в норме (P101)" Id="4bb9b8df-8bc3-4f31-a9c2-896b2ffac62e" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Готовность Тяга (Схема) (P116)" Id="09582da5-6e0b-4f48-8616-a12838c3c36f" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Готовность Тяга (Преобразователь и ТЭД) (P115)" Id="05fbec38-a97f-4042-91e6-3a911412e048" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Движение назад (P114)" Id="9769ca60-d0e5-4a91-bca3-2e6a4e06b3d1" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Движение вперед (P113)" Id="4858c544-368f-4ed0-9a7b-1cb86727ca68" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Реверсор назад (P112)" Id="34039d4d-4eea-4e34-81e8-afc4a947d044" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Реверсор вперед (P111)" Id="7b3818bd-80bb-44e7-a20b-32dbf32785ee" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Включен пульт №2 (P110)" Id="9cb30da6-85e4-45bd-886d-f9df57e9580c" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Включен пульт №1 (P109)" Id="810ea1d1-e785-496b-8c33-04c054f14e3c" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Отключен электровоз (P124)" Id="018ba04d-12a4-46ac-a5c8-647630d00cb2" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Режим Электрическое торможение (P123)" Id="05d7cb58-d7c5-4e25-a611-53ce682f85be" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Режим Тяга (P122)" Id="6200721d-1183-4fb4-a608-2cea7eff6b24" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Отклонение рукоятки джойстика назад (P121)" Id="6589045e-6cbe-4bb9-848c-124f7ad3fdbc" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Отклонение рукоятки джойстика вперед (P120)" Id="245d750f-817d-4efd-82b3-aa4bdc9273a7" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Готовность Тяга (Пульт) (P118)" Id="aa8d52ba-8bf6-4264-9c30-d15cbdf8ef56" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Готовность Тяга (Реверсор) (P117)" Id="246ca497-2fd4-44bd-a3d4-ef01211c8b91" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Контроль отключенного думкара №2 (P132)" Id="e63b849c-4de5-4c97-a48c-077d392d02c9" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Контроль отключенного думкара №1 (P131)" Id="237c6abe-3482-432a-b293-a3d2d93350d0" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Контроль отключенного электровоза (P130)" Id="26b81cc3-b21c-49e4-adf9-2f7564e7a2d3" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Отключены контактора думкара №2 (P129)" Id="ea2237f8-0692-43fc-9536-19bfa88f4dbc" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Отключены контактора думкара №1 (P128)" Id="9e094ab0-8cfd-432f-9086-a8b8763b590f" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Отключены контактора электровоза (P127)" Id="c6bc880f-064f-48a3-b2a1-d7568bb82b06" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Отключен думкар №2 (P126)" Id="baf46595-02e2-4e39-86e7-27784c42f30f" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Отключен думкар №1 (P125)" Id="ec7ca827-3639-42ac-90e5-e6b4bb4bd9be" />
+				<CpzPrm Name="Уставка тока якоря в % от номинала" Expression="[u6] * 1.0" Id="ce6447b4-031b-4362-a57e-5627d2ff0ac2" />
+				<CpzPrm Name="Среднее значение скорости состава. Vср., км/ч" Expression="[u7] * 1.0" Id="38c655b7-418b-406f-822c-c5281f307241" />
+				<BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="Процесс авар. торможения (P140)" Id="b63168d2-6e9b-4c20-96ee-e07bb51f995c" />
+				<BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="Пониженное напряжение на СКВТ (P139)" Id="426afa06-341a-4e79-b344-cb3895c15ce6" />
+				<BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="КОН1 (P138)" Id="68ba11f1-62f2-462d-80c9-698cf473f2f1" />
+				<BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="Уставка тока якоря (P137)" Id="6535f1df-86ed-4b3e-81ee-0576948a8426" />
+				<BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="Разряд (P136)" Id="af7e6708-14fe-4025-9af6-a08e1371087b" />
+				<BitPrm Byte="8" Bit="2" IsValueInverted="False" Name="Движение ТПС (P135)" Id="f362bde7-02a8-48f9-ab91-370f3866de07" />
+				<BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="Uипбс2 в норме (P134)" Id="b5bd8172-982a-4bd5-b1b1-bea7e5fd1b70" />
+				<BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="Uипбс1 в норме (P133)" Id="56e60d82-86df-48f7-b0f0-bca45c6403b5" />
+				<CpzPrm Name="Выходное напряжение (половинное) ИПБС (1), В" Expression="[u10] * 1.0" Id="638ec67d-594e-4c8a-ae8c-055469d94d54" />
+				<CpzPrm Name="Выходное напряжение (половинное) ИПБС (2), В" Expression="[u11] * 1.0" Id="ad14faa8-e6de-4e28-aeea-2a4b08b916ea" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="Отказ контакторов реверсора вперед (невкл.) эл-за (Р200)" Id="5c1b5e04-c7b0-4712-b50e-d526c3aa328e" />
+				<BitPrm Byte="12" Bit="6" IsValueInverted="False" Name="Отказ контакторов реверсора вперед (невыкл.) эл-за (Р201)" Id="e39f2650-989b-4993-96d4-7d3b6f97dacd" />
+				<BitPrm Byte="12" Bit="5" IsValueInverted="False" Name="Отказ контакторов реверсора назад (невкл.) эл-за (Р202)" Id="f4988ba6-961f-4f58-8931-df730176c3b7" />
+				<BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="Отказ контакторов реверсора назад (невыкл.) эл-за (Р203)" Id="873d5e22-b532-4152-908b-4a5b59e7cfda" />
+				<BitPrm Byte="12" Bit="3" IsValueInverted="False" Name="Отказ контакторов реверсора вперед (невкл.) д-ра1 (Р204)" Id="bdfab308-e9d0-4557-884f-3f21b9370eb2" />
+				<BitPrm Byte="12" Bit="2" IsValueInverted="False" Name="Отказ контакторов реверсора вперед (невыкл.) д-ра1 (Р205)" Id="54f88a3a-c207-476f-9079-f235213d0800" />
+				<BitPrm Byte="12" Bit="1" IsValueInverted="False" Name="Отказ контакторов реверсора назад (невкл.) д-ра1 (Р206)" Id="2c18f107-e098-4e29-bd44-edcd00e72509" />
+				<BitPrm Byte="12" Bit="0" IsValueInverted="False" Name="Отказ контакторов реверсора назад (невыкл.) д-ра1 (Р207)" Id="bcf57ba4-e726-4552-8d16-a06eeabf6868" />
+				<BitPrm Byte="13" Bit="7" IsValueInverted="False" Name="Отказ контакторов реверсора вперед (невкл.) д-ра2 (Р208)" Id="fb2d19cd-909e-42bc-a772-5fc1bd1d506e" />
+				<BitPrm Byte="13" Bit="6" IsValueInverted="False" Name="Отказ контакторов реверсора вперед (невыкл.) д-ра2 (Р209)" Id="3f9731d7-c454-4fd4-937f-52c0fa8bf1b5" />
+				<BitPrm Byte="13" Bit="5" IsValueInverted="False" Name="Отказ контакторов реверсора назад (невкл.) д-ра2 (Р210)" Id="9b15adfc-b21d-4d98-bfee-ddc01ce1dde4" />
+				<BitPrm Byte="13" Bit="4" IsValueInverted="False" Name="Отказ контакторов реверсора назад (невыкл.) д-ра2 (Р211)" Id="d5e3459a-2aef-451b-918f-8a205151b1f2" />
+				<BitPrm Byte="13" Bit="3" IsValueInverted="False" Name="Отказ контактора КЛ1 эл-за (невкл.) (Р212)" Id="5f5cc90b-d548-4bba-9916-7bfb5cf4494a" />
+				<BitPrm Byte="13" Bit="2" IsValueInverted="False" Name="Отказ контактора КЛ1 эл-за (невыкл.) (Р213)" Id="6a095b1b-42c4-4c3d-be96-31b21e14059d" />
+				<BitPrm Byte="13" Bit="1" IsValueInverted="False" Name="Отказ контактора КЛ2 эл-за (невкл.) (Р214)" Id="aadcdcdd-09f5-4610-bb4c-c80af3d3c881" />
+				<BitPrm Byte="13" Bit="0" IsValueInverted="False" Name="Отказ контактора КЛ2 эл-за (невыкл.) (Р215)" Id="d0aeb321-764e-4aad-bf58-2c9f539e5998" />
+				<BitPrm Byte="14" Bit="7" IsValueInverted="False" Name="Отказ контактора КЛ3 эл-за (невкл.) (Р216)" Id="983867b6-6fef-486f-8dd1-8924a07c18d9" />
+				<BitPrm Byte="14" Bit="6" IsValueInverted="False" Name="Отказ контактора КЛ3 эл-за (невыкл.) (Р217)" Id="b29102a9-4ad8-4d1c-964d-36a96a639b54" />
+				<BitPrm Byte="14" Bit="5" IsValueInverted="False" Name="Отказ контактора КЛ4 д-ра1 (невкл.) (Р218)" Id="ac884334-19bd-45a2-9464-c522c77e196a" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="Отказ контактора КЛ4 д-ра1 (невыкл.) (Р219)" Id="1a81f4ef-0cd7-4bc2-90e5-8f3c1d3ee559" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="Отказ контактора КЛ5 д-ра1 (невкл.) (Р220)" Id="956b50f6-8217-432d-a42d-ebd9ca96fbe6" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="Отказ контактора КЛ5 д-ра1 (невыкл.) (Р221)" Id="85dd5d8e-92c5-446d-bfee-989e039b53a2" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="Отказ контактора КЛ6 д-ра1 (невкл.) (Р222)" Id="e09fdd47-f7d5-4b4d-ae77-d7c07079213f" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="Отказ контактора КЛ6 д-ра1 (невыкл.) (Р223)" Id="06dc6a97-1126-4c64-a35f-c84282780511" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="Отказ контактора КЛ7 д-ра2 (невкл.) (Р224)" Id="405d3adf-52a4-465b-808c-1e4a6f458e94" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="Отказ контактора КЛ7 д-ра2 (невыкл.) (Р225)" Id="5120670b-62ce-49d5-9970-346aa951e258" />
+				<BitPrm Byte="15" Bit="5" IsValueInverted="False" Name="Отказ контактора КЛ8 д-ра2 (невкл.) (Р226)" Id="70fe6d93-841c-461e-8542-fd48072f4e13" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="Отказ контактора КЛ8 д-ра2 (невыкл.) (Р227)" Id="27e66495-3a1c-4db3-85e2-cf83c03ae7e0" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="Отказ контактора КЛ9 д-ра2 (невкл.) (Р228)" Id="ae4484a5-d1f6-4ea5-bb82-3904bc172b7d" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="Отказ контактора КЛ9 д-ра2 (невыкл.) (Р229)" Id="cb9b42d1-ee64-4725-b348-6bccac171f6d" />
+				<BitPrm Byte="15" Bit="1" IsValueInverted="False" Name="Отказ контактора КЛМЭ М1, М2 (невкл.) (Р230)" Id="72567f9d-9dcd-4bd7-aaa7-2489e0b24383" />
+				<BitPrm Byte="15" Bit="0" IsValueInverted="False" Name="Отказ контактора КЛМЭ М1, М2 (невыкл.) (Р231)" Id="b664af17-4d78-42aa-93d9-f9587b21041a" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="Отказ контактора КЛМЭ М4, М3 (невкл.) (Р232)" Id="a52e613e-6a74-4472-833e-3bbebdb240e2" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="Отказ контактора КЛМЭ М4, М3 (невыкл.) (Р233)" Id="fbe38847-7554-4533-8171-f364b1916429" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="Отказ контактора КЛМД1 М1, М2 (невкл.) (Р234)" Id="1667fb70-7181-4099-945f-7628e006ff08" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="Отказ контактора КЛМД1 М1, М2 (невыкл.) (Р235)" Id="49b1dce8-921f-4dfb-9a69-17b7658555d8" />
+				<BitPrm Byte="16" Bit="3" IsValueInverted="False" Name="Отказ контактора КЛМД1 М4, М3 (невкл.) (Р236)" Id="c0d89fd8-89ed-41c5-9c81-47c0ebd19f62" />
+				<BitPrm Byte="16" Bit="2" IsValueInverted="False" Name="Отказ контактора КЛМД1 М4, М3 (невыкл.) (Р237)" Id="374e6d2f-45c6-479b-9be1-72693b5edc52" />
+				<BitPrm Byte="16" Bit="1" IsValueInverted="False" Name="Отказ контактора КЛМД2 М1, М2 (невкл.) (Р238)" Id="9552763c-1c00-4290-8a79-68f858d298fd" />
+				<BitPrm Byte="16" Bit="0" IsValueInverted="False" Name="Отказ контактора КЛМД2 М1, М2 (невыкл.) (Р239)" Id="40b2b375-9835-495a-85f7-98d9dc625986" />
+				<BitPrm Byte="17" Bit="7" IsValueInverted="False" Name="Отказ контактора КЛМД2 М4, М3 (невкл.) (Р240)" Id="0a7b91b3-627b-45be-95ff-41f8d1ca60f8" />
+				<BitPrm Byte="17" Bit="6" IsValueInverted="False" Name="Отказ контактора КЛМД2 М4, М3 (невыкл.) (Р241)" Id="a2e5e08c-8cdd-40d4-bb73-0914f465e958" />
+				<BitPrm Byte="17" Bit="5" IsValueInverted="False" Name="Отказ контактора КА1 (невкл.) (Р242)" Id="3ed07df5-4b38-4547-908c-18d1113e1597" />
+				<BitPrm Byte="17" Bit="4" IsValueInverted="False" Name="Отказ контактора КА1 (Р243)" Id="be2d9d1c-54ea-43a6-ae24-a9a273b5c7e4" />
+				<VarVal Position="26.0" Length="8" Name="#CRCH" Id="9d101c77-2f35-4376-b3af-8ddeefbacccd" />
+				<VarVal Position="27.0" Length="8" Name="#CRCL" Id="d8ce6c15-218d-4eea-8528-11af3f057d83" />
+			</Request>
+			<Reply Length="0" Position="28" />
+		</CmdMask>
+		<CmdMask Name="БУ и РПД (1.7) (Резерв)">
+			<Request Length="22" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="bbb2f2e1-c7b4-4661-b44f-b6194472bb1f" />
+				<DefVal Position="1.0" Length="8" Value="0x50" Name="#NCMD" Id="635ad74c-40f3-4930-a511-0e3c9d89a750" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входов 7 БВС5: ВКЛ М1, М2 Эл-за" Id="6e9b739c-105b-41f2-be1e-2b0c9902cace" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входов 6 БВС5: ВКЛ М4, М3 Эл-за" Id="71e3f5be-8272-499d-b9f3-f2d150aca265" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входов 5 БВС5: КЛ3" Id="605668dc-94bf-45d2-97ef-4786d8543f4c" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входов 4 БВС5: КЛ2" Id="9b006b41-a3b1-4292-af24-cbace6cb4d03" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входов 3 БВС5: КЛ1" Id="839c1599-ee3f-40cd-9309-ac36976a60e0" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входов 2 БВС5: ПРЭ Назад" Id="1ebb3e2a-72ca-4be9-886a-58522a74d5a1" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входов 1 БВС5: ПРЭ Вперёд" Id="1854f139-6ff2-4ca7-9116-99361985845d" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Статус блока БВС5: Сброс от монитора питания" Id="16d19691-471a-46ab-a5dc-2a678c155977" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Статус блока БВС5: Сброс от внешнего входа" Id="d29a11af-c645-40f0-bea6-aa30cd1e7c5c" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Состояние входов 7 БВС6: ВКЛ М4, М3 Д-ра1" Id="58e0026a-67a7-45bb-911d-28fa8e22ad35" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Состояние входов 6 БВС6: ВКЛ М1, М2 Д-ра1" Id="f529828a-1bd2-46c8-997f-3f4e6ed9f830" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Состояние входов 5 БВС6: КЛ6" Id="0a7be1e4-6ede-4d83-8c95-d98dad366fdc" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Состояние входов 4 БВС6: КЛ5" Id="87f60078-2bc6-4c92-8f9d-8622a0be1a9d" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Состояние входов 3 БВС6: КЛ4" Id="d9238fa6-f4bb-4753-a5a4-095774bc902f" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Состояние входов 2 БВС6: ПРД1 Назад" Id="1b9a7971-2765-4e62-87a8-34761b8af9a6" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Состояние входов 1 БВС6: ПРД1 Вперёд" Id="a350e2cb-6bb8-43a3-9705-54d24d75785b" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Состояние входов 12 БВС6: Контроль свистка – ПЭ2У №2, резерв – ПЭ2У №1" Id="5f8bc9a3-fadd-47c4-ad10-e170b9a592c3" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Состояние входов 11 БВС6: Контроль свистка - ПЭ2У №2, резерв – ПЭ2У №1" Id="99b3b336-2767-4a49-a673-1830887c92f9" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Состояние входов 10 БВС6: Контроль конца поезда  - ПЭ2У №2, резерв – ПЭ2У №1" Id="c646c9ff-b94c-4f11-a2ce-1a71a8a70246" />
+				<BitPrm Byte="6" Bit="0" IsValueInverted="False" Name="Состояние входов 9 БВС6: Контроль конца поезда - ПЭ2У №2, резерв – ПЭ2У №1" Id="3b6a9e9d-26e6-42a6-8701-0df287c3dab8" />
+				<BitPrm Byte="7" Bit="1" IsValueInverted="False" Name="Статус блока БВС6: Сброс от монитора питания" Id="c4043cfd-10f4-4a5a-a2bd-ea1243823ee0" />
+				<BitPrm Byte="7" Bit="0" IsValueInverted="False" Name="Статус блока БВС6: Сброс от внешнего входа" Id="aab51700-55d2-4e6f-b5db-8caa5dc97abc" />
+				<BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="Состояние входов 8 БВС7: Вкл. ЭДТ" Id="214be425-3b06-444f-8e8e-0b86131da2a4" />
+				<BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="Состояние входов 7 БВС7: ВКЛ М4, М3 Д-ра2" Id="302fa25a-57dd-48cd-a4d8-bc9c1391033d" />
+				<BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="Состояние входов 6 БВС7: ВКЛ М1, М2 Д-ра2" Id="59919356-914b-4dab-acb1-102395c1343a" />
+				<BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="Состояние входов 5 БВС7: КЛ9" Id="eccba201-f06d-469a-aebc-5e22f216c614" />
+				<BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="Состояние входов 4 БВС7: КЛ8" Id="593fe3ef-8ecb-4f42-8de6-60b1708dcdc1" />
+				<BitPrm Byte="8" Bit="2" IsValueInverted="False" Name="Состояние входов 3 БВС7: КЛ7" Id="3b9f241b-a8e6-4c0f-958a-990ca51942d3" />
+				<BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="Состояние входов 2 БВС7: ПРД2 Назад" Id="2e5a3aec-9da8-464b-b0c3-8f8554e7369d" />
+				<BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="Состояние входов 1 БВС7: ПРД2 Вперёд" Id="d352c296-cb86-40c1-846d-616d96612816" />
+				<BitPrm Byte="10" Bit="1" IsValueInverted="False" Name="Статус блока БВС7: Сброс от монитора питания" Id="2da01f4e-ae34-4e90-ae7c-e7af9870b5e5" />
+				<BitPrm Byte="10" Bit="0" IsValueInverted="False" Name="Статус блока БВС7: Сброс от внешнего входа" Id="0f3cfffb-e4b7-42b5-993d-b8b8f43796df" />
+				<CpzPrm Name="Код неисправности ключа 8 БУК5" Expression="[13.7.1] * 4.0 + [12.7.1] * 2.0  + [11.7.1] * 1.0" Id="9312965a-0b91-4932-b210-01c9c397dd9e" />
+				<CpzPrm Name="Код неисправности ключа 7 БУК5" Expression="[13.6.1] * 4.0 + [12.6.1] * 2.0  + [11.6.1] * 1.0" Id="07802474-a30d-4d19-b978-60df48683f3a" />
+				<CpzPrm Name="Код неисправности ключа 6 БУК5" Expression="[13.5.1] * 4.0 + [12.5.1] * 2.0  + [11.5.1] * 1.0" Id="6f58454c-552c-4f9e-8f3f-e429596d6f17" />
+				<CpzPrm Name="Код неисправности ключа 5 БУК5" Expression="[13.4.1] * 4.0 + [12.4.1] * 2.0  + [11.4.1] * 1.0" Id="235a8713-7986-4404-997e-76af53bd6860" />
+				<CpzPrm Name="Код неисправности ключа 4 БУК5" Expression="[13.3.1] * 4.0 + [12.3.1] * 2.0  + [11.3.1] * 1.0" Id="8fdc74d8-e0d3-4c39-ab46-57b119d9f616" />
+				<CpzPrm Name="Код неисправности ключа 3 БУК5" Expression="[13.2.1] * 4.0 + [12.2.1] * 2.0  + [11.2.1] * 1.0" Id="7c609ea3-b4a7-4dca-a53a-00860f4431a7" />
+				<CpzPrm Name="Код неисправности ключа 2 БУК5" Expression="[13.1.1] * 4.0 + [12.1.1] * 2.0  + [11.1.1] * 1.0" Id="8833591c-79ed-447d-8b4b-1450c6cc0423" />
+				<CpzPrm Name="Код неисправности ключа 1 БУК5" Expression="[13.0.1] * 4.0 + [12.0.1] * 2.0  + [11.0.1] * 1.0" Id="23a6e066-6029-41d7-9f0a-7e1b8666965f" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="Статус блока БУК5: Сброс от монитора питания" Id="29a9d778-c7b2-4946-8d04-09688b796d2d" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="Статус блока БУК5: Сброс от внешнего входа" Id="0a112002-baff-4ff4-bf64-d87875f4fc7b" />
+				<VarVal Position="20.0" Length="8" Name="#CRCH" Id="24c52946-e107-4190-b758-a2a010f9e21f" />
+				<VarVal Position="21.0" Length="8" Name="#CRCL" Id="75c242a9-c162-4730-8614-eefbcf0aa246" />
+			</Request>
+			<Reply Length="0" Position="22" />
+		</CmdMask>
+		<CmdMask Name="БУ и КПА">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0D" Name="#ADDR" Id="963aec25-c473-4caa-bbcb-2f668d17db32" />
+				<DefVal Position="1.0" Length="8" Value="0x0D" Name="#NCMD" Id="baced7a8-3f75-4b3d-a119-f2776363d22c" />
+				<VarVal Position="2.0" Length="8" Name="Директивы РО БУ" Id="e7dc04bd-f4b7-4781-b8bc-a7b9652f9ed2" />
+				<VarVal Position="3.0" Length="8" Name="Значение байта РО БУ" Id="aa9fd8b4-753f-408c-ae06-ccffa5c57d14" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="cf0c2293-7725-4fb8-98ef-c36220005752" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="ef709da2-cdf0-4e2a-9d9c-bfc8651f6ae8" />
+			</Request>
+			<Reply Length="9" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x0D" Name="#ADDR" Id="7bb0525d-1e66-40a9-b854-b9fb5f666705" />
+				<DefVal Position="1.0" Length="8" Value="0x0D" Name="#NCMD" Id="8b04bff8-20e9-46ce-a906-a786cd33ea69" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Байт команд тестового режима: Режим программирования по RS-485" Id="bc2cb9c8-ff83-4601-bbb0-e54eebb6bd1c" />
+				<CpzPrm Name="Адрес РО БУ" Expression="[u3] * 256.0 + [u4]" Id="fabdafde-8b6d-4210-b988-6d0e3fba107a" />
+				<CpzPrm Name="Значение байта РО БУ" Expression="[u5] * 1.0" Id="68bd0c9d-a373-43e0-bfdf-44fe16110591" />
+				<CpzPrm Name="Директивы РО БУ" Expression="[u6] * 1.0" Id="26616a09-2c49-425f-9a07-f63eefe9074b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="5a82d6e0-521a-4b7b-8cea-164b931673c8" />
+				<VarVal Position="8.0" Length="8" Name="#CRCL" Id="5d7fb351-4c42-4240-9bae-abd62d9277b8" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

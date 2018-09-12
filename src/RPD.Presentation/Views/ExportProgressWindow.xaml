@@ -1,0 +1,44 @@
+﻿<Window x:Class="RPD.Presentation.Views.ExportProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding Path=WindowTitle}" 
+        Height="119" 
+        Width="426"
+        DataContext="{Binding Path=ExportProgress, Source={StaticResource Locator}}">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Прогресс бар. Исчезает после достижения прогресса 100-->
+        <ProgressBar Grid.Row="0" 
+                     Style="{StaticResource hideOnProggress100}"
+                     Value="{Binding Path=Progress}"  
+                     Minimum="{Binding Path=Minimum}"
+                     Maximum="{Binding Path=Maximum}"
+                     Margin="5" />
+
+        <Border Grid.Row="0" 
+                Style="{StaticResource showOnProgress100}" 
+                BorderThickness="1" 
+                BorderBrush="Gray" 
+                Margin="5"
+                VerticalAlignment="Stretch">
+            <TextBlock VerticalAlignment="Center"
+                       TextWrapping="WrapWithOverflow"
+                       Margin="5"
+                       Text="{Binding Path=Header}"
+                       Style="{StaticResource showOnProgress100}"/>
+        </Border>
+
+        <!--Кнопка изначально невидима. Становится видимой когда прогресс достигает 100.-->
+        <Button Grid.Row="1" 
+                Style="{StaticResource showOnProgress100}"                
+                Command="{Binding Path=Close}"
+                HorizontalAlignment="Right" 
+                Margin="5" 
+                Padding="3">Закрыть</Button>
+    </Grid>
+</Window>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="СКВТ-М" Version="1" Description="Счётчик СКВТ-М" Id="07B31573-FCE6-4C09-806C-C1AF4F62659E" RpdId="22">
+  <PsnMeters>
+    <PsnMeter Address="0xC0" Name="СКВТ-М без перемычек" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="ВУ и СКВТ-М">
+      <Request Length="8" Position="0" CycleMsTime="222">
+        <DefVal Position="0.0" Length="8" Value="0xC0" Name="#ADDR" Id="e6d0511d-4b6d-4fc9-bc89-a404b70aabd5" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="e7d78308-c155-4077-a2d0-9bd1390b9f42" />
+        <VarVal Position="2.7" Length="1" Name="Управление включением (Формирует ФПМО)" multiplier="1.0" signed="False" Id="a98c7da2-6bac-43a7-995f-274e0f627ad4" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="ac591a42-d72b-4ce2-9f43-6f601152082c" />
+        <VarVal Position="7.0" Length="8" Name="#CRCH" Id="d25791df-e18b-49af-95c0-9e452c59906e" />
+      </Request>
+      <Reply Length="19" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0xC0" Name="#ADDR" Id="c82510c2-5591-48d6-98ca-4ecaefbb55c7" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="2cb318e5-b221-415f-aac5-4f53b169450d" />
+        <CpzPrm Name="E+, кВт" Expression="[3.4.4] * 1000000.0 + [3.0.4] * 100000.0  + [4.4.4] * 10000.0 + [4.0.4] * 1000.0  + [5.4.4] * 100.0  + [5.0.4] * 10.0  + [6.4.4] * 1.0" Id="5bc020d1-57bd-4783-9559-fbdee4adfdd2" />
+        <CpzPrm Name="Ток, А" Expression="([6.0.4] * 10000.0 + [7.4.4] * 1000.0  + [7.0.4] * 100.0 + [8.4.4] * 10.0  + [8.0.4] * 1.0) * (44.0 - [u15] * 1.0 )" Id="cd6c175c-1a70-4212-abfc-10beaa1ab525" />
+        <CpzPrm Name="Напряжение, В" Expression="[9.4.4] * 10000.0 + [9.0.4] * 1000.0  + [10.4.4] * 100.0 + [10.0.4] * 10.0  + [11.4.4] * 1.0" Id="873bf25f-9d74-4b6c-8ac3-0d8b2b05e5a1" />
+        <CpzPrm Name="E-, кВт" Expression="[11.0.4] * 1000000.0 + [12.4.4] * 100000.0  + [12.0.4] * 10000.0 + [13.4.4] * 1000.0  + [13.0.4] * 100.0  + [14.4.4] * 10.0  + [14.0.4] * 1.0" Id="f24b3b06-885b-48a1-adf7-a81db5f529b5" />
+        <VarVal Position="17.0" Length="8" Name="#CRCL" Id="3a3ec379-50cd-4af4-8275-bcc1564dbc59" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="52734c67-31b6-492f-8b59-b1380a8910c1" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

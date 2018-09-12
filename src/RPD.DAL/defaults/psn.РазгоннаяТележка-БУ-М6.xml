@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Разгонная тележка, БУ и ПЭВМ по М6" Version="1" Description="Конфигурация обмена БУ с ПЭВМ по Магистрили 6" Id="1C2E687A-1FF3-4F56-86B8-F353AE7E761C" RpdId="44">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="БС КПО1" />
+		<PsnMeter Address="0x02" Name="БС КПО2" />
+		<PsnMeter Address="0x03" Name="БС МО" />
+		<PsnMeter Address="0xFF" Name="Broadcast" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="Обмен с БС КПО1, Режим «ПОДГОТОВКА К ПУСКУ»">
+			<Request Length="9" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="ce4b1158-f2fa-4ee6-88df-c5c52f1b87e2" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="26f708a7-df56-426d-b38a-3916077944ef" />
+				<CpzPrm Name="Уставка частоты, Гц" Expression="([u2] + [s3] * 256.0) 0.1" Id="3904e7be-b744-473d-8ef4-f8693a3e7c24" />
+				<CpzPrm Name="Уставка тока, А" Expression="([u4] + [s5] * 256.0) 1.0" Id="c20457fb-3767-4235-a254-0822d1cfeee9" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Байт дискретных сигналов: D7 – команда сброса ошибок" Id="0e66a4bc-791a-490d-b720-59c70f77ec65" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Байт дискретных сигналов: D6 – включение/выключение" Id="8f925822-ae67-4486-a237-943c8c187956" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Байт дискретных сигналов: D5 – резерв" Id="dba22f31-050b-482b-94d1-9c0027becaf1" />
+				<BitPrm Byte="6" Bit="4" IsValueInverted="False" Name="Байт дискретных сигналов: D4 – резерв" Id="92445fd7-6b56-400c-822c-a64bc0f59920" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Байт дискретных сигналов: D3 – резерв" Id="63ee91ed-1968-4c23-8814-1aa078d7227f" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Байт дискретных сигналов: D2 – резерв" Id="51957a14-8211-4849-9803-9b1dbd1ffebc" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Байт дискретных сигналов: D1 – резерв" Id="51c6be2b-513b-4c30-b945-62149bee6aaa" />
+				<BitPrm Byte="6" Bit="0" IsValueInverted="False" Name="Байт дискретных сигналов: D0 – Разгон/Торможение (1/0)" Id="da6cca60-f7a7-453f-bf33-ff7ddd648909" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="d349f29e-3393-418d-bd49-b68b86e9ce3d" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="180fb346-d97b-4ea5-86b8-377ccf33b422" />
+			</Request>
+			<Reply Length="19" Position="9">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="147325d1-6ca5-4272-af38-449f5e21f9ab" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="dbbc0d20-1595-4b74-8263-4ed0b7059cdc" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО1 с КПО1.ПЧ1" Id="b9fe8675-b7f4-4c42-885d-c880c303952b" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Нет связи БС КПО1 с КПО1.ПЧ2" Id="466933d5-ebb7-433c-942e-1c109668a7a0" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Нет связи БС КПО1 с КПО1.ПЧ3" Id="9225849e-595a-4460-9d96-9ca3b04d0aba" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Авария ПЧ" Id="94cac467-b5c6-4a5f-b392-7cbee29f0472" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Перегрев преобразователя" Id="15ed39b8-edfe-4acd-b263-f307feac73f9" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Аппаратная защита" Id="49d6a35b-44d5-4f25-a176-69b4d6bd03cd" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Повышенное входное напряжение" Id="40784dbe-b164-481c-a79b-d01629eeaedb" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Пониженное входное напряжение" Id="629990dd-8409-42f9-8d86-b24d987b73be" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Готовность ПЧ" Id="1a599b91-5cd6-4a0e-bbb2-358e56e0b5fa" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Признак режима МТ" Id="f50a5fc7-ad77-4574-a9cc-f99570cb6be4" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Рассинхронизация" Id="de67886c-7c2c-4a18-9df4-87140865f27c" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Перегрузка по току" Id="bec35bc5-28d4-473d-8f9d-4f193d988aea" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Обрыв фазы преобразователя" Id="163c5b56-23d6-48af-b5e7-8276f11d8daa" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Повышенная скорость двигателя" Id="dd0337eb-d8c2-479f-9235-895b4d3579f4" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Работа" Id="4add6411-06ba-4b79-8735-4c6b71e240ca" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Нет связи с ведомым 2" Id="5eb97172-f088-4e3b-b9bb-e9411254a47a" />
+				<BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Нет связи с ведомым 1 (ведущим)" Id="9bc145bc-2093-4c37-b762-82a0e41d9ec7" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Номер зоны ШИМ (частота работы)" Id="026748a4-9144-4360-b511-a1bd3c236fc9" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ1: Номер зоны ШИМ (частота работы)" Id="83230c67-54c6-458e-b93a-4eb3af5d1d65" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Авария ПЧ" Id="dc4e209b-7124-4dc5-97ee-7e905acb6376" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Перегрев преобразователя" Id="97679057-80d6-46ed-bd6b-b5b68ddfcfe8" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Аппаратная защита" Id="72d5a13d-a215-4441-863e-1bc315be3e44" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Повышенное входное напряжение" Id="0ced0ab9-7a15-4668-b5fc-3d02fafd1268" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Пониженное входное напряжение" Id="61b51b82-0241-4916-a8e4-2506f9c29322" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Готовность ПЧ" Id="4a516543-c201-4d67-bd0a-bae72a024aad" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Признак режима МТ" Id="d55c8a98-22ff-4fd9-b516-a4f6d8d30d1b" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Рассинхронизация" Id="88da8d69-7d32-4c72-adbc-a592f17d840f" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Перегрузка по току" Id="0d53b6d6-dfd2-4e86-964e-8c09be68c934" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Обрыв фазы преобразователя" Id="8abf31be-b6a2-48c2-b197-9cd07f68de97" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Повышенная скорость двигателя" Id="51f2388e-6a65-4143-b588-33c7f13c8c30" />
+				<BitPrm Byte="6" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Работа" Id="d1ee549a-7769-4443-854c-3009e1812266" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Нет связи с ведомым 2" Id="28d4af6c-a75f-48a8-8b1f-b4fd3720f37e" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Нет связи с ведомым 1 (ведущим)" Id="382e3acc-7e67-4772-b22b-2e2a7c118f82" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Номер зоны ШИМ (частота работы)" Id="87239998-5081-4ea0-b4d2-cc5f72223b93" />
+				<BitPrm Byte="6" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ2: Номер зоны ШИМ (частота работы)" Id="2cc0e561-0510-426b-b120-841ef7c1a8cd" />
+				<BitPrm Byte="7" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Авария ПЧ" Id="8ab0352f-41fc-496d-a614-d116a87b68f2" />
+				<BitPrm Byte="7" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Перегрев преобразователя" Id="f13a4f4c-fd9b-4018-a431-2d2a70bfe8b5" />
+				<BitPrm Byte="7" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Аппаратная защита" Id="043ab5f6-d524-48c6-b940-4ea6fe755524" />
+				<BitPrm Byte="7" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Повышенное входное напряжение" Id="a2b632e1-cd8d-4872-9eb6-f6187b7ab966" />
+				<BitPrm Byte="7" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Пониженное входное напряжение" Id="c8b30848-7271-4888-8124-de52609a90ff" />
+				<BitPrm Byte="7" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Готовность ПЧ" Id="7c132ca6-3da3-41b1-a250-5f7eb289ab7f" />
+				<BitPrm Byte="7" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Признак режима МТ" Id="e9074654-fade-4c99-a687-8f526fae6327" />
+				<BitPrm Byte="7" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Рассинхронизация" Id="d1b1ac1c-8920-4320-9a22-7dc80f6df2fc" />
+				<BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Перегрузка по току" Id="2172e24e-caef-4f1b-84ce-01ca8e1a79e0" />
+				<BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Обрыв фазы преобразователя" Id="bbf1a4d3-eb13-4e37-ad7a-a49016c6a682" />
+				<BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Повышенная скорость двигателя" Id="072cd04a-b958-413a-b71c-628b0bc6bfee" />
+				<BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Работа" Id="b6c6cc1a-9a02-45e8-ab50-32262bf1076b" />
+				<BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Нет связи с ведомым 2" Id="42792d87-bb91-4a86-9e8a-712a490eb1d4" />
+				<BitPrm Byte="8" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Нет связи с ведомым 1 (ведущим)" Id="8d0c43ef-d096-46a4-a92e-dc16ec09a5c4" />
+				<BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Номер зоны ШИМ (частота работы)" Id="ed7f7667-7e2c-450b-88f0-088dabb99a65" />
+				<BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО1.ПЧ3: Номер зоны ШИМ (частота работы)" Id="742b347d-d694-460d-9045-5d2636a51d6d" />
+				<CpzPrm Name="Температура преобразователя КПО1.ПЧ1, ℃" Expression="[u9] * 2.0" Id="57eef715-97b5-4a8e-bbb3-7cf7a279261e" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО1.ПЧ1, В" Expression="[u10] * 10.0" Id="7ee767a6-1cca-4863-9907-3a761cf4a108" />
+				<CpzPrm Name="Температура преобразователя КПО1.ПЧ2, ℃" Expression="[u11] * 2.0" Id="d51eec03-9ba1-4946-b61f-fad9f5803c17" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО1.ПЧ2, В" Expression="[u12] * 10.0" Id="adb8a15b-bb3d-4a4b-a74d-2830e03f1e94" />
+				<CpzPrm Name="Температура преобразователя КПО1.ПЧ3, ℃" Expression="[u13] * 2.0" Id="dec722bf-368c-49ec-bb68-d1d0476b4819" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО1.ПЧ3, В" Expression="[u14] * 10.0" Id="653f120e-9c35-4b84-b759-4a5cc75cf1b7" />
+				<VarVal Position="17.0" Length="8" Name="#CRCL" Id="292085fb-e104-41de-8d18-549ea7a46bf7" />
+				<VarVal Position="18.0" Length="8" Name="#CRCH" Id="868a48e0-3e96-49a6-a45a-2038fa5dd1e1" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="Обмен с БС КПО2, Режим «ПОДГОТОВКА К ПУСКУ»">
+			<Request Length="9" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="ee7e03fd-c2cc-48bb-8015-1b2ba1a96091" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="e06fc02c-a776-4be1-83a2-3608d9ef7480" />
+				<CpzPrm Name="Уставка частоты, Гц" Expression="([u2] + [s3] * 256.0) 0.1" Id="55809138-de54-4112-8bb1-5e7bc7e29e92" />
+				<CpzPrm Name="Уставка тока, А" Expression="([u4] + [s5] * 256.0) 1.0" Id="cd234475-bf93-46e5-b94b-f0bd03174f82" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Байт дискретных сигналов: D7 – команда сброса ошибок" Id="b18962bc-ba73-413f-b05d-d9d96e56f915" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Байт дискретных сигналов: D6 – включение/выключение" Id="79b96752-e427-4920-a882-6bc27f930c3e" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Байт дискретных сигналов: D5 – синхронизация" Id="d9bd9e1f-dc19-4dfb-8a33-0bec338aad2a" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="faefeb43-46c8-42b5-bd7b-e71794b60cc6" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="61bfeda8-4942-443e-ac17-878ee388ee07" />
+			</Request>
+			<Reply Length="19" Position="9">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="ae6c316c-05be-4eb3-a462-c636e5a39b25" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="361b7871-8175-4d93-95a5-430217fe6328" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО2 с КПО2.ПЧ1" Id="efdedbe4-1fbb-4246-8c5f-5abe04dfb1a7" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Нет связи БС КПО2 с КПО2.ПЧ2" Id="d0e23794-23c9-4de7-befe-fa7c60694478" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Нет связи БС КПО2 с КПО2.ПЧ3" Id="0c877222-68b4-4f08-93dd-333aafaecd31" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Авария ПЧ" Id="5621f4d5-b1a7-46e5-b1b1-c5c15181721c" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Перегрев преобразователя" Id="f1663983-cc7b-4fae-92f2-321e775d8c05" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Аппаратная защита" Id="d4ddf127-6b0d-4584-a7b4-cb6e4863c768" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Повышенное входное напряжение" Id="6499c7e4-e98b-4eb2-abdb-6e46f4469514" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Пониженное входное напряжение" Id="25ac641d-cfb3-4d78-a416-a9599d7fe429" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Готовность ПЧ" Id="32ac2c14-0e9b-41bd-aa0d-c8c94fef6833" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Признак режима МТ" Id="62b7c9d2-e86c-4c9f-91c0-9732d51b9395" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Рассинхронизация" Id="0a4f480b-501a-40cd-8871-c2dfe602595e" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Перегрузка по току" Id="07026bf5-60d2-4c3a-bfe5-85c59bdc1d2e" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Обрыв фазы преобразователя" Id="e6c79885-36f7-4a67-8644-0f7bdc92071e" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Повышенная скорость двигателя" Id="cf74811a-1ecb-41e4-bc16-75d467476406" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Работа" Id="f28e5390-7434-4e9d-a426-4075e0df274d" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Нет связи с ведомым 2" Id="32b58c84-4ccd-4e92-a8a3-0cc1ec67af8f" />
+				<BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Нет связи с ведомым 1 (ведущим)" Id="d200d28f-5c17-4358-9b9a-d6333f02a988" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Номер зоны ШИМ (частота работы)" Id="7ab37433-c065-4436-842d-87a0152be03d" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ1: Номер зоны ШИМ (частота работы)" Id="86e5ef00-8653-49f3-bd6f-f8e6778c8dfd" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Авария ПЧ" Id="01726be1-d1e2-4517-b384-04242ff9d5ef" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Перегрев преобразователя" Id="f6f6462f-6f48-436a-a1db-95425e5b127a" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Аппаратная защита" Id="800dcaf2-bf65-41bc-846f-9e44fcb5f7c5" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Повышенное входное напряжение" Id="dbdac86f-4e20-46dd-92e3-258561c27794" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Пониженное входное напряжение" Id="3b41a2f0-2b23-4e81-8158-6c3b4b5575e0" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Готовность ПЧ" Id="414c4056-0f8d-43e2-a1ae-aebedd6b47a9" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Признак режима МТ" Id="fe2cd044-258e-4572-a858-16424d555a1d" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Рассинхронизация" Id="99c18868-cb0f-4db5-8e6b-832762e495f7" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Перегрузка по току" Id="09498850-6860-4b3e-91c9-3e6679c7d74f" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Обрыв фазы преобразователя" Id="24b0b1fd-605d-4723-8c47-975b8a5c4e75" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Повышенная скорость двигателя" Id="30429496-3c4d-4ccc-9fc4-696fe82f5f7b" />
+				<BitPrm Byte="6" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Работа" Id="aafd18c3-2f7b-4035-8db0-3ecf19355cd6" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Нет связи с ведомым 2" Id="ea95ee72-ae7c-492c-bf0f-12a88d2c5538" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Нет связи с ведомым 1 (ведущим)" Id="7c0411ea-8bcf-4831-9aec-5e16f6cf3665" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Номер зоны ШИМ (частота работы)" Id="59d669ee-05ba-47f1-8268-8bbe1bf8a594" />
+				<BitPrm Byte="6" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ2: Номер зоны ШИМ (частота работы)" Id="10e6404d-7dd3-4770-a9a9-30d70f4114a3" />
+				<BitPrm Byte="7" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Авария ПЧ" Id="30f6ef95-4809-4815-a67f-b9b9cbd35b80" />
+				<BitPrm Byte="7" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Перегрев преобразователя" Id="1512d910-64c5-4752-80b8-63450019164a" />
+				<BitPrm Byte="7" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Аппаратная защита" Id="1eb42b5a-b70f-442e-94de-9600d3b9b237" />
+				<BitPrm Byte="7" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Повышенное входное напряжение" Id="34dcb88c-8ba3-44d5-8a4f-1eb073ac9c13" />
+				<BitPrm Byte="7" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Пониженное входное напряжение" Id="c347594b-5fc0-4b73-9c37-9dec62b58b62" />
+				<BitPrm Byte="7" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Готовность ПЧ" Id="6aea0f1e-0d2c-4789-9cd8-471c7bc0670f" />
+				<BitPrm Byte="7" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Признак режима МТ" Id="15b6cb95-48ad-4ffe-bc61-bbc8c0dba914" />
+				<BitPrm Byte="7" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Рассинхронизация" Id="2d0d106a-dcbf-4bd0-b4aa-fb614af60b20" />
+				<BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Перегрузка по току" Id="c9075be5-9f0d-4f1f-bbc5-9614d82b21df" />
+				<BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Обрыв фазы преобразователя" Id="0062615c-6d64-428f-9d53-c67f739e37ae" />
+				<BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Повышенная скорость двигателя" Id="1481d00e-2843-4d23-9462-ee844fcf590d" />
+				<BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Работа" Id="0a5c0dc7-1513-482c-93a6-59286e4a1d5e" />
+				<BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Нет связи с ведомым 2" Id="1a41eb90-b5d0-4ae9-8a51-cbce7910ecf2" />
+				<BitPrm Byte="8" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Нет связи с ведомым 1 (ведущим)" Id="3c3d716e-4568-4c76-98a9-32c50cd07eeb" />
+				<BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Номер зоны ШИМ (частота работы)" Id="270923a3-0dfd-48d0-b264-3cada8638a59" />
+				<BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО2.ПЧ3: Номер зоны ШИМ (частота работы)" Id="34b1401e-1f41-4eb7-b2d2-9b93160d161a" />
+				<CpzPrm Name="Температура преобразователя КПО2.ПЧ1, ℃" Expression="[u9] * 2.0" Id="ec5d80bf-7a81-4b36-8605-1c834d1afe53" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО2.ПЧ1, В" Expression="[u10] * 10.0" Id="a1c94193-42ad-422a-a2fc-fa45860dd35d" />
+				<CpzPrm Name="Температура преобразователя КПО2.ПЧ2, ℃" Expression="[u11] * 2.0" Id="e221e0f3-a0bc-4e7a-acc2-f573951fd0cf" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО2.ПЧ2, В" Expression="[u12] * 10.0" Id="df26c483-21c7-43c8-bedf-525659473354" />
+				<CpzPrm Name="Температура преобразователя КПО2.ПЧ3, ℃" Expression="[u13] * 2.0" Id="2f2b52c8-1263-43ff-8741-5f75376574bc" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО2.ПЧ3, В" Expression="[u14] * 10.0" Id="7283d67e-4493-4e91-955c-d97e88167501" />
+				<VarVal Position="17.0" Length="8" Name="#CRCL" Id="6b5613f1-bc90-4ad7-bb43-44d596a3d54b" />
+				<VarVal Position="18.0" Length="8" Name="#CRCH" Id="e3071de0-5f97-439a-8646-3681e4bd989a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="Обмен с БС МО, Режим «ПОДГОТОВКА К ПУСКУ»">
+			<Request Length="6" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="01c5efe8-cd8e-40a1-b969-25bcc954407d" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="41b28558-c880-4d04-a0fc-411776322648" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Команда сброса ошибок" Id="75a2d92a-95e0-433c-95a3-1a9cab61ebf0" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="e8fb9630-ada5-4f52-92a3-3a2a6f06a153" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="c951bc8c-3411-43ac-b4f7-99064fa3ac59" />
+			</Request>
+			<Reply Length="11" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="4a0ac045-9a3e-4e68-b89e-24a7f535a27e" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="2b471f56-3c74-497d-8d21-08e6267424c2" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС МО с МО" Id="d6cafb74-5e4b-4f70-afea-8fd7cd411ac9" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Диагностика МО: Авария МО" Id="ac130e9a-385d-45bc-9bec-e08d7f138def" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Диагностика МО: Перегрев МО" Id="2acd85c2-8bdb-4900-9b08-f84713bfbde8" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Диагностика МО: Пониженный уровень охлаждающей жидкости" Id="72895ad0-6c00-4365-bfb5-7510f4f57a67" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Диагностика МО: Нет протока жидкости" Id="9e4bba3f-37dc-4242-8441-94846a7b020a" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Диагностика МО: Неисправность вентилятора" Id="482b8807-19b4-4b1c-8d7b-c19e15818cee" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Диагностика МО: Неисправность питания вентиляторов" Id="a9303d57-67d0-4d09-89c9-327d24c8a7c9" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Диагностика МО: Неисправность датчика температуры" Id="e19b2ed2-04cf-43f5-9334-e1b2ad13658f" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Диагностика МО: Включение  вентилятора" Id="66d96785-27d7-4586-b6ff-f14897d6e0d0" />
+				<CpzPrm Name="Давление охлаждающей жидкости, кПа" Expression="[u4] * 4.0" Id="54a34578-314b-4d73-a170-9626e0c563d2" />
+				<CpzPrm Name="Скорость вращения вентилятора, об/мин" Expression="[u5] * 10.0" Id="ab9b8e2b-5366-4c34-9067-b11fdd5bd452" />
+				<CpzPrm Name="Температура охлаждающей жидкости, ℃" Expression="[u6] * 2.0" Id="957749a3-411d-4d15-89ec-894d19303c77" />
+				<VarVal Position="9.0" Length="8" Name="#CRCL" Id="fa4ede8c-0fde-4c42-8ecd-40ae93f5857a" />
+				<VarVal Position="10.0" Length="8" Name="#CRCH" Id="7604d151-7db9-42cf-9e05-f8b9a7087e05" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="Обмен с БС КПО 1,2 по магистрали 6, Режим «ПУСК»">
+			<Request Length="9" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0xFF" Name="#ADDR" Id="0b1f28d0-a92f-47ef-a0c6-67912ec9c7b1" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="e08e7f3a-937a-46b7-8fc7-122adf0d47a7" />
+				<CpzPrm Name="Уставка частоты, Гц" Expression="([u2] + [s3]* 256.0) * 0.1" Id="82db73d8-ad72-4d57-b1ec-0090fd5d0ea7" />
+				<CpzPrm Name="Уставка тока, А" Expression="([u4] + [s5]* 256.0) * 1.0" Id="879d5535-84dc-48d9-8e0b-5730761b1e13" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Команда сброса ошибок" Id="5cf22c87-bd05-4755-8f08-7cf581417474" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Включение/выключение" Id="ce2ea00c-c554-4476-b81d-c970f2627b80" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Синхронизация" Id="1dcf06ab-af00-430c-9e92-6b2ea8796ad6" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="1c0ae0d8-1b1c-42c8-888e-a4b569aa9957" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="7f4a9f2c-0f0f-472d-bb4a-afade373d04f" />
+			</Request>
+			<Reply Length="0" Position="9" />
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

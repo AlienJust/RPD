@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Локомотив ТЭМ31М 006" Version="9" Description="" Id="080E1A9E-AF07-4D1F-9C37-17070F40B10B" RpdId="2">
+  <PsnMeters>
+    <PsnMeter Address="0x11" Name="БВС1" />
+    <PsnMeter Address="0x12" Name="БВС2" />
+    <PsnMeter Address="0x14" Name="БВС3" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="БУ и БВС1">
+      <Request Length="4" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="95043c57-d2ff-403b-b053-a15b552ebc74" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="c4e5d3b7-db48-4d11-a87b-3de00d598618" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="bb7fe214-821a-4853-8314-4b55d112064c" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="8241f910-a586-4991-92aa-1ef7b76d7fc7" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="4d1b0feb-7670-4cfc-abba-781ff9a0f9e7" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="8cee07d0-aeab-4ba9-a4e2-db883ac55a1d" />
+        <VarVal Position="2.7" Length="1" Name="Состояние входа 8: Экстренное торможение" Id="61efdf1e-c5c6-45e2-a780-da4cadd8bad1" />
+        <VarVal Position="2.6" Length="1" Name="Состояние входа 7: Свисток" Id="fa00a465-b487-4127-badc-27a7fe36f8d3" />
+        <VarVal Position="2.5" Length="1" Name="Состояние входа 6: Автоматическая подача свистка" Id="98180366-5ea5-4ef6-9f70-29094c4b37b9" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Автоматическая подача песка" Id="fd77ac13-f7b0-442e-ae80-2d459cbbaaf6" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Тифон" Id="791d2885-7717-4aa8-9352-8d3442cca618" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Автосцепка задняя" Id="14d2a972-dfa1-4b65-accd-6503c7ad69bc" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Автосцепка передняя" Id="5efe1e73-7797-4500-a9ef-5d2f3a7eb1ce" />
+        <VarVal Position="2.0" Length="1" Name="Состояние входа 1: Песок" Id="f0d39cbd-0bb6-4c77-ae0d-50e6604bab35" />
+        <VarVal Position="3.3" Length="1" Name="Состояние входа 12: РВ1 АЛСН" Id="9216ceb2-0029-4c34-b75d-d0eba811d5b5" />
+        <VarVal Position="3.2" Length="1" Name="Состояние входа 11: Р1 АЛСН" Id="7dc01c81-9b0e-47e3-93af-b6745ec8d8b2" />
+        <VarVal Position="3.0" Length="1" Name="Состояние входа 9: Автомат вентилятора ТЭД" Id="cf75dedf-0716-4ac9-9549-8998ced0d2ed" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="ec4aa78e-309f-467b-ae3d-5147eb9c5df1" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="aea7f155-dce2-428c-86c6-5afdef599bb0" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="7a37eb06-fc48-4a08-92f2-6d915e1d03b7" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="e8e81b48-ad3c-4144-84da-2bf912596a31" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БВС2">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="17f306fc-21e9-4ae2-b20c-6768b7c22aa5" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="565b0f72-945a-41e8-b24d-bdc3425250ff" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="4b0a7d8e-1276-48ca-8cb1-f4011bb68691" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="929be09e-0c53-49f4-ab61-1e814017924e" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="5eba80b3-4ffe-4928-9aea-eb9217465d8a" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="43282dc5-1a98-4362-b095-edd8a97857a0" />
+        <VarVal Position="2.7" Length="1" Name="Состояние входа 8: Экстренное торможение" Id="e43457e1-6f16-43bb-b5f7-efde59774f27" />
+        <VarVal Position="2.6" Length="1" Name="Состояние входа 7: Свисток" Id="ac13ad83-ce7c-4158-9f56-311357d56360" />
+        <VarVal Position="2.5" Length="1" Name="Состояние входа 6: Автоматическая подача свистка" Id="86a8c65c-ffce-4cb4-bbc8-b262fe020be5" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Автоматическая подача песка" Id="ad2c9091-be60-4ea9-8e52-08e9da700b5b" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Тифон" Id="b4aa7883-94bd-4ba3-80af-026b2d186756" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Автосцепка задняя" Id="ac9d209a-c8cc-49fe-871b-81959ff570ff" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Автосцепка передняя" Id="fa9f84ea-35c7-400b-b812-868c6bca467c" />
+        <VarVal Position="2.0" Length="1" Name="Состояние входа 1: Песок" Id="8b016556-bd4c-43da-a708-ca07422f1c06" />
+        <VarVal Position="3.0" Length="1" Name="Состояние входа 9: Дистанционное управление" Id="44fade6b-b98b-451f-b321-6dc7bf0819fb" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="8d22ff52-b787-406f-a303-b8748928344f" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="788b794c-97a7-481c-8382-16649b57983e" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="2706fd7d-f39e-4aad-958c-95274cf86346" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="c63fa5d0-88d1-4d5d-b97c-28da38592750" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БВС3">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="1e2b7a27-0d88-4a60-869c-c1a63b9905bd" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="0f601f5c-f2c8-4cd8-9c29-338489d9912a" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="22869911-6ec9-4c56-a8fc-a95814706569" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="d79107fc-c1e6-4d37-a516-2cce1d098520" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="c96d7e1b-59a0-41bb-9af3-8288c3ef0b16" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="9b563acc-2cd2-4184-b549-139987c6c854" />
+        <VarVal Position="2.7" Length="1" Name="Состояние входа 8: Прожектор ярко" Id="13403d5f-fb0a-494e-9864-130a3cfe111d" />
+        <VarVal Position="2.6" Length="1" Name="Состояние входа 7: Прожектор тускло" Id="0e000e55-7963-4c5e-bcfb-00656e145246" />
+        <VarVal Position="2.5" Length="1" Name="Состояние входа 6: Направление движения назад" Id="24c6064c-933d-4b03-9f59-ab97367ccc7d" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Направление движения вперед" Id="971b0f29-dc4b-4ea6-b768-c4a1256c3a83" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Останов дизеля" Id="df7e64a9-d273-4b41-b139-dc6ebef1f038" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Сброс тяги" Id="73c77cbb-1de5-41f2-9408-e9fd593af57c" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Включение подогрева топлива" Id="62b41ecf-1585-4c1e-890c-84aad043761d" />
+        <VarVal Position="3.7" Length="1" Name="Состояние входа 16: Управление общее" Id="c8c88f2b-a0aa-47eb-9a12-cbf906f7898a" />
+        <VarVal Position="3.6" Length="1" Name="Состояние входа 15: Тормозной компрессор" Id="c8f7a9c7-b67a-45bf-8197-81022ce2a987" />
+        <VarVal Position="3.5" Length="1" Name="Состояние входа 14: Вентилятор ТЭД" Id="6e7ac7c4-e329-489d-94a5-9e1f74943aa1" />
+        <VarVal Position="3.4" Length="1" Name="Состояние входа 13: Запуск дизеля" Id="f4ad45a8-5d28-4fcc-92cc-386ad9dd1462" />
+        <VarVal Position="3.3" Length="1" Name="Состояние входа 12: Управление по СМЕ (Ведомая секция)" Id="3b74fbc7-2152-43b6-9bff-ebe6597a6dbb" />
+        <VarVal Position="3.2" Length="1" Name="Состояние входа 11: Блокировка управления" Id="92b4f85f-785d-47c2-8b94-3e2acfa84d2c" />
+        <VarVal Position="3.1" Length="1" Name="Состояние входа 10: Управление с ВПУ" Id="f4a74a9a-d684-4f4f-88f1-789e676caa0e" />
+        <VarVal Position="3.0" Length="1" Name="Состояние входа 9: Управление с ОПУ" Id="20f3439f-f3cf-481f-93d9-faaca41e7fdf" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="4f3af781-087c-4e56-9f82-5366e87c4c86" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="ae54a83e-737c-4687-9de0-388e0710e072" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="ee15f2be-518d-417b-934e-c9cc4086536d" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="0ffb9d00-e61b-4e5a-a7cc-8b3400b5a51a" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

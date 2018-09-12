@@ -1,0 +1,24 @@
+﻿<Window x:Class="PsnProtocolPossibilityTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="541" Width="414">
+    <Grid>
+        <Label Content="Possible addresses (hex):" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="192,10,10,0" TextWrapping="Wrap" Text="{Binding Path=Addresses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+        
+        
+        <Label Content="Possible commands (hex):" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="192,38,10,0" TextWrapping="Wrap" Text="{Binding Path=CommandCodes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+        
+        <Button Content="Analyze file" Margin="321,118,10,0" VerticalAlignment="Top" Command="{Binding Path=SelectFile, Mode=OneTime}"/>
+        
+        <ListBox Height="229" Margin="10,145,10,0" VerticalAlignment="Top" ItemsSource="{Binding Path=FoundCommands, Mode=OneTime}"/>
+        
+        <Label Content="Current position: " HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="117,381,10,0" TextWrapping="Wrap" Text="{Binding Path=Position, Mode=OneWay}" VerticalAlignment="Top" TextAlignment="Right" IsReadOnly="True"/>
+        
+        <Label Content="Maximum command length:" HorizontalAlignment="Left" Margin="10,67,0,0" VerticalAlignment="Top"/>
+        <TextBox Height="23" Margin="192,69,10,0" TextWrapping="Wrap" Text="40" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

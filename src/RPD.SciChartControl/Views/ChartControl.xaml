@@ -1,0 +1,1240 @@
+﻿<UserControl
+	x:Class="RPD.SciChartControl.Views.ChartControl"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:s="http://schemas.abtsoftware.co.uk/scichart"
+	xmlns:SciChart="clr-namespace:Abt.Controls.SciChart;assembly=Abt.Controls.SciChart.Wpf.2.2"
+	xmlns:Axes="clr-namespace:Abt.Controls.SciChart.Visuals.Axes;assembly=Abt.Controls.SciChart.Wpf.2.2"
+	xmlns:ChartModifiers="clr-namespace:Abt.Controls.SciChart.ChartModifiers;assembly=Abt.Controls.SciChart.Wpf.2.2"
+	xmlns:Annotations="clr-namespace:Abt.Controls.SciChart.Visuals.Annotations;assembly=Abt.Controls.SciChart.Wpf.2.2"
+	xmlns:System="clr-namespace:System;assembly=mscorlib"
+	xmlns:Numerics="clr-namespace:Abt.Controls.SciChart.Numerics;assembly=Abt.Controls.SciChart.Wpf.2.2"
+	xmlns:dnvConverters="clr-namespace:Dnv.Utils.Converters;assembly=Dnv.Utils"
+	xmlns:SciChartControl="clr-namespace:RPD.SciChartControl"
+	xmlns:Mouse="clr-namespace:Abt.Controls.SciChart.Utility.Mouse;assembly=Abt.Controls.SciChart.Wpf.2.2"
+	xmlns:localModifiers="clr-namespace:RPD.SciChartControl.ChartModifiers"
+	xmlns:localConverters="clr-namespace:RPD.SciChartControl.Converters"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:binding="clr-namespace:Dnv.Utils.Binding;assembly=Dnv.Utils"
+	xmlns:exportChartDataModifier="clr-namespace:RPD.SciChartControl.ChartModifiers.ExportChartDataModifier"
+	mc:Ignorable="d"
+	d:DesignHeight="307"
+	d:DesignWidth="1032"
+	x:Name="_this">
+	<UserControl.Resources>
+
+		<!-- #Region: Converters-->
+		<SciChart:ColorToBrushConverter
+			x:Key="ColorToBrushConverter" />
+		<localConverters:SetSeriesColorCommandParameterConverter
+			x:Key="SeriesColorCommandParameterConverter" />
+		<localConverters:MoveSignalToYAxisCommandParameterConverter
+			x:Key="MoveSignalToYAxisCommandParameterConverter" />
+		<dnvConverters:BooleanToVisibilityConverter
+			x:Key="BooleanToVisibilityConverter" />
+		<dnvConverters:BooleanToVisibilityConverter
+			x:Key="VisibleIfFalseConverter"
+			VisibleIfTrue="False" />
+		<dnvConverters:InverseBooleanConverter
+			x:Key="InverseBooleanConverter" />
+		<dnvConverters:EnumToBooleanConverter
+			x:Key="EnumToBooleanConverter" />
+		<dnvConverters:ColorToSolidColorBrushConverter
+			x:Key="ColorToSolidColorConverter" />
+		<localConverters:TestConverter
+			x:Key="TestConverter" />
+		<localConverters:SeriesInfoToRpdChartSeriesViewModelConverter
+			x:Key="SeriesInfoToRpdChartSeriesViewModelConverter" />
+		<localConverters:BoolToXDirectionConverter
+			x:Key="BoolToXDirectionConverter" />
+		<localConverters:ChartControlVmToDataPositionConverter
+			x:Key="ChartControlVmToDataPositionConverter" />
+		<localConverters:ChartControlVmToCommandDataConverter
+			x:Key="ChartControlVmToCommandDataConverter" />
+		
+		<!-- #EndRegion -->
+
+		<!-- #Region: Стили динамических аннотаций (линии, квадраты, текст). -->
+		<!--Создаются в коде. При создании аннотации название стиля формируется на основе названия аннотации-->
+		<Style
+			x:Key="TextAnnotationStyle"
+			TargetType="Annotations:TextAnnotation">
+			<Setter
+				Property="Background"
+				Value="#22B22020" />
+			<Setter
+				Property="BorderThickness"
+				Value="0" />
+			<Setter
+				Property="Foreground"
+				Value="#666666" />
+		</Style>
+
+		<Style
+			x:Key="LabelsAnnotationStyle">
+			<Setter
+				Property="s:TextAnnotation.BorderThickness"
+				Value="0 0 0 2" />
+			<Setter
+				Property="s:TextAnnotation.BorderBrush"
+				Value="Orange" />
+			<Setter
+				Property="s:TextAnnotation.Foreground"
+				Value="Black" />
+			<Setter
+				Property="s:TextAnnotation.FontSize"
+				Value="12" />
+		</Style>
+
+		<Style
+			x:Key="LabelArrowAnnotationStyle">
+			<Setter
+				Property="s:LineArrowAnnotation.Stroke"
+				Value="Orange" />
+			<Setter
+				Property="s:LineArrowAnnotation.StrokeThickness"
+				Value="2" />
+		</Style>
+
+		<Style
+			x:Key="BoxAnnotationStyle"
+			TargetType="Annotations:BoxAnnotation">
+			<Setter
+				Property="BorderBrush"
+				Value="#279B27" />
+			<Setter
+				Property="Background"
+				Value="#551964FF" />
+			<Setter
+				Property="BorderThickness"
+				Value="1" />
+		</Style>
+
+		<Style
+			x:Key="AxisMarkerAnnotationStyle"
+			TargetType="Annotations:AxisMarkerAnnotation">
+			<Setter
+				Property="Background"
+				Value="#FF6600" />
+			<Setter
+				Property="FontSize"
+				Value="11" />
+			<Setter
+				Property="FontWeight"
+				Value="Bold" />
+			<Setter
+				Property="Foreground"
+				Value="#EEE" />
+		</Style>
+
+		<Style
+			x:Key="HorizontalLineAnnotationStyle"
+			TargetType="Annotations:HorizontalLineAnnotation">
+			<Setter
+				Property="Stroke"
+				Value="#FFFF6600" />
+			<Setter
+				Property="StrokeThickness"
+				Value="2" />
+			<Setter
+				Property="ShowLabel"
+				Value="True" />
+			<Setter
+				Property="LabelPlacement"
+				Value="Axis" />
+			<Setter
+				Property="HorizontalAlignment"
+				Value="Stretch" />
+		</Style>
+
+		<Style
+			x:Key="VerticalLineAnnotationStyle"
+			TargetType="Annotations:VerticalLineAnnotation">
+			<Setter
+				Property="Stroke"
+				Value="#FFFF6600" />
+			<Setter
+				Property="StrokeThickness"
+				Value="2" />
+			<Setter
+				Property="ShowLabel"
+				Value="True" />
+			<Setter
+				Property="LabelPlacement"
+				Value="Axis" />
+			<Setter
+				Property="LabelTextFormatting"
+				Value="HH:mm:ss.fff" />
+			<Setter
+				Property="VerticalAlignment"
+				Value="Stretch" />
+		</Style>
+		<!-- #EndRegion: -->
+
+		<!--Прокси для биндинга элементов в ModifierGroup и DataTemplate-->
+		<binding:BindingProxy
+			x:Key="_bindingProxy"
+			Data="{Binding Path=ViewModel, ElementName=_this}" />
+
+		<!--Перечисление ResamplingMode-->
+		<ObjectDataProvider
+			x:Key="resamplingModeData"
+			MethodName="GetValues"
+			ObjectType="{x:Type System:Enum}">
+			<ObjectDataProvider.MethodParameters>
+				<x:Type
+					TypeName="Numerics:ResamplingMode" />
+			</ObjectDataProvider.MethodParameters>
+		</ObjectDataProvider>
+
+		<Style
+			x:Key="annotTextStyle"
+			TargetType="TextBlock">
+			<Setter
+				Property="VerticalAlignment"
+				Value="Center" />
+			<Setter
+				Property="FontWeight"
+				Value="Regular" />
+			<Setter
+				Property="FontSize"
+				Value="9" />
+		</Style>
+
+		<Style
+			x:Key="currentValueTextStyle"
+			BasedOn="{StaticResource annotTextStyle}"
+			TargetType="TextBlock">
+			<Setter
+				Property="Foreground"
+				Value="{Binding Path=SeriesColor, Converter={StaticResource ColorToSolidColorConverter}}" />
+		</Style>
+
+		<Style
+			x:Key="legendItemBorderStyle">
+			<Setter
+				Property="Border.BorderBrush"
+				Value="Transparent" />
+			<Setter
+				Property="Border.BorderThickness"
+				Value="0" />
+			<Setter
+				Property="Border.ToolTip"
+				Value="{Binding Path=SeriesName}" />
+		</Style>
+
+		<!--Шаблон для отдельного элемента списка легенды-->
+		<DataTemplate
+			x:Key="legendItemTemplate">
+			<!--DataContext у Border имеет тип SeriesInfo, который достался от SciChartLegend.-->
+			<Border
+				Style="{StaticResource legendItemBorderStyle}">
+				<Grid
+					HorizontalAlignment="Left"
+					Height="14">
+					<!--Преобразование SeriesInfo в IRpdChartSeriesViewModel-->
+					<Grid.DataContext>
+						<MultiBinding
+							Converter="{StaticResource SeriesInfoToRpdChartSeriesViewModelConverter}"
+							Mode="OneTime">
+							<Binding
+								Path="DataContext"
+								RelativeSource="{RelativeSource AncestorType=Border}" />
+							<Binding
+								Path="Data"
+								Source="{StaticResource _bindingProxy}" />
+						</MultiBinding>
+					</Grid.DataContext>
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition
+							Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<!--Кнопка закрыть-->
+					<Button
+						Grid.Column="0"
+						Width="{Binding Path=ActualHeight, ElementName=visibilityCheckbox}"
+						Height="{Binding Path=ActualHeight, ElementName=visibilityCheckbox}"
+						FontSize="10"
+						Content="x"
+						FontFamily="Verdana"
+						Padding="0,-3,0,0"
+						VerticalContentAlignment="Center"
+						VerticalAlignment="Center"
+						HorizontalContentAlignment="Center"
+						Command="{Binding Data.ChartCloseCommand, Source={StaticResource _bindingProxy}}"
+						CommandParameter="{Binding DataContext, RelativeSource={x:Static RelativeSource.Self}}"
+						ToolTip="Закрыть">
+					</Button>
+
+					<CheckBox
+						Grid.Column="1"
+						Margin="1,0,0,0"
+						Name="visibilityCheckbox"
+						IsChecked="{Binding Path=DataContext.IsVisible, RelativeSource={RelativeSource AncestorType=Border}}"
+						VerticalAlignment="Center" />
+
+					<!--Кнопка вызова контекстного меню-->
+					<SciChartControl:DropDownButton
+						Grid.Column="3"
+						Margin="1,0,0,0"
+						Width="{Binding Path=ActualHeight, ElementName=visibilityCheckbox}"
+						Height="{Binding Path=ActualHeight, ElementName=visibilityCheckbox}"
+						VerticalContentAlignment="Center"
+						VerticalAlignment="Center"
+						HorizontalContentAlignment="Center">
+						<SciChartControl:DropDownButton.Content>
+							<Image
+								Source="../Assets/menu.png"
+								Stretch="None" />
+						</SciChartControl:DropDownButton.Content>
+						<SciChartControl:DropDownButton.DropDown>
+							<ContextMenu>
+								<ContextMenu.ItemsSource>
+									<CompositeCollection>
+										<!--Отображает диалог выбора цвета-->
+										<MenuItem
+											Header="Выбрать цвет..."
+											Command="{Binding Path=Data.ShowSelectColorWindowCommand, Source={StaticResource _bindingProxy}}"
+											CommandParameter="{Binding}" />
+										<MenuItem
+											Header="Поместить на отдельную ось ординат"
+											IsEnabled="{Binding Path=IsOnMainYAxis}"
+											Command="{Binding Path=Data.MoveToOwnYAxis,Source={StaticResource _bindingProxy}}"
+											CommandParameter="{Binding}"
+											Visibility="{Binding Path=CanMoveBetweenYAxes, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<MenuItem
+											Header="Поместить на основную ось ординат"
+											IsEnabled="{Binding Path=IsOnMainYAxis, Converter={StaticResource InverseBooleanConverter}}"
+											Command="{Binding Path=Data.MoveToMainYAxis, Source={StaticResource _bindingProxy}}"
+											CommandParameter="{Binding}"
+											Visibility="{Binding Path=CanMoveBetweenYAxes, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+										<MenuItem
+											Header="Поместить на Ось"
+											ItemsSource="{Binding Path=Data.YAxes, Source={StaticResource _bindingProxy}}">
+											<MenuItem.ItemTemplate>
+												<DataTemplate>
+													<MenuItem
+														Header="{Binding Path=AxisTitle}"
+														Command="{Binding Data.MoveSignalToYAxisCommand, Source={StaticResource _bindingProxy}}">
+														<MenuItem.CommandParameter>
+															<MultiBinding
+																Converter="{StaticResource MoveSignalToYAxisCommandParameterConverter}">
+																<Binding
+																	Path="DataContext"
+																	RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}" />
+																<Binding
+																	Path="DataContext"
+																	RelativeSource="{x:Static RelativeSource.Self}" />
+															</MultiBinding>
+														</MenuItem.CommandParameter>
+													</MenuItem>
+												</DataTemplate>
+											</MenuItem.ItemTemplate>
+										</MenuItem>
+										<Separator />
+										<!--Коллекция доступных цветов-->
+										<CollectionContainer
+											Collection="{Binding Path=Data.ColorsBrush, 
+                                                Source={StaticResource _bindingProxy}}" />
+									</CompositeCollection>
+								</ContextMenu.ItemsSource>
+								<ContextMenu.ItemContainerStyle>
+									<Style>
+										<Setter
+											Property="MenuItem.Background"
+											Value="{Binding}" />
+										<Setter
+											Property="MenuItem.Margin"
+											Value="3" />
+										<Setter
+											Property="MenuItem.IsCheckable"
+											Value="False" />
+										<Setter
+											Property="MenuItem.Header"
+											Value="" />
+										<Setter
+											Property="MenuItem.Command"
+											Value="{Binding Data.SeriesColorCommand, Source={StaticResource _bindingProxy}}" />
+										<Setter
+											Property="MenuItem.CommandParameter">
+											<Setter.Value>
+												<MultiBinding
+													Converter="{StaticResource SeriesColorCommandParameterConverter}">
+													<Binding
+														Path="DataContext"
+														RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}" />
+													<Binding
+														Path="Background"
+														RelativeSource="{x:Static RelativeSource.Self}" />
+												</MultiBinding>
+											</Setter.Value>
+										</Setter>
+									</Style>
+								</ContextMenu.ItemContainerStyle>
+							</ContextMenu>
+						</SciChartControl:DropDownButton.DropDown>
+					</SciChartControl:DropDownButton>
+
+					<TextBlock
+						Grid.Column="4"
+						Margin="1,0,0,0"
+						Style="{StaticResource annotTextStyle}"
+						Foreground="{Binding Path=ChartSeries.RenderSeries.SeriesColor, Converter={StaticResource ColorToSolidColorConverter}}"
+						Text="{Binding Path=ChartSeries.DataSeries.SeriesName}" />
+				</Grid>
+			</Border>
+		</DataTemplate>
+
+		<!--Шаблон контрола отображающего легенду-->
+		<ControlTemplate
+			x:Key="legendControlTemplate"
+			TargetType="s:SciChartLegend">
+			<Border
+				x:Name="PART_Border"
+				HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+				VerticalAlignment="{TemplateBinding VerticalAlignment}"
+				Background="{TemplateBinding Background}"
+				BorderBrush="{TemplateBinding BorderBrush}"
+				BorderThickness="{TemplateBinding BorderThickness}"
+				Padding="{TemplateBinding Padding}">
+				<ItemsControl
+					DataContext="{TemplateBinding LegendData}"
+					ItemsSource="{Binding SeriesInfo}"
+					ItemTemplate="{StaticResource legendItemTemplate}">
+				</ItemsControl>
+			</Border>
+		</ControlTemplate>
+
+		<!--Шаблон легенды - отображение текущих значений сигнала на графике (X: 12.12.2012 435 Y: 34534)-->
+		<DataTemplate
+			x:Key="legendCurrentValuesTemplate">
+			<Border
+				Style="{StaticResource legendItemBorderStyle}">
+				<Grid
+					HorizontalAlignment="Left"
+					Height="14">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<StackPanel
+						Grid.Column="0"
+						Orientation="Horizontal"
+						VerticalAlignment="Center">
+						<TextBlock
+							Margin="5,0,0,0"
+							Style="{StaticResource currentValueTextStyle}"
+							Text="X: " />
+						<TextBlock
+							Style="{StaticResource currentValueTextStyle}"
+							Text="{Binding Path=XValue, StringFormat='{}{0:HH:mm:ss.fff}'}" />
+					</StackPanel>
+
+					<StackPanel
+						Grid.Column="1"
+						Orientation="Horizontal"
+						VerticalAlignment="Center">
+						<TextBlock
+							Style="{StaticResource currentValueTextStyle}"
+							Margin="5,0,0,0"
+							Text="Y: " />
+						<TextBlock
+							Style="{StaticResource currentValueTextStyle}"
+							Text="{Binding YValue, StringFormat=\{0:0.00\}}" />
+					</StackPanel>
+
+					<StackPanel
+						Grid.Column="2"
+						Orientation="Horizontal"
+						VerticalAlignment="Center">
+						<TextBlock
+							Style="{StaticResource currentValueTextStyle}"
+							Margin="5,0,0,0"
+							Text="Data: " />
+						<TextBlock
+							Style="{StaticResource currentValueTextStyle}"
+							Text="{Binding Converter={StaticResource ChartControlVmToDataPositionConverter}, ConverterParameter={StaticResource _bindingProxy}}" />
+						<TextBlock Margin="5,0,0,0"
+						           Style="{StaticResource currentValueTextStyle}"
+						           Text="{Binding Converter={StaticResource ChartControlVmToCommandDataConverter}, ConverterParameter={StaticResource _bindingProxy}}" />
+					</StackPanel>
+				</Grid>
+			</Border>
+		</DataTemplate>
+
+		<!--Дискретный график для одного сигнала-->
+		<DataTemplate
+			x:Key="DiscreteChartItemTemplate">
+			<Grid
+				Height="44">
+				<s:SciChartSurface
+					BorderThickness="0"
+					HorizontalAlignment="Stretch"
+					Padding="0"
+					Margin="0"
+					SciChart:ThemeManager.Theme="{Binding ElementName=ThemeCombo, Path=SelectedItem}"
+					RenderableSeries="{Binding Path=RenderableSeries}">
+					<s:SciChartSurface.ChartModifier>
+						<ChartModifiers:ModifierGroup
+							Mouse:MouseManager.MouseEventGroup="MySharedMouseGroup">
+							<localModifiers:RubberBandXyZoomModifierEx
+								IsXAxisOnly="True" />
+
+							<localModifiers:RolloverModifierExt
+								IsEnabled="{Binding Path=Data.IsAnnotationsVisible, Mode=TwoWay, Source={StaticResource ResourceKey=_bindingProxy}}"
+								ReceiveHandledEvents="True"
+								x:Name="roll">
+								<!--Отключаем всплывающую подсказку, чтобы не мешалась-->
+								<localModifiers:RolloverModifierExt.TooltipLabelTemplate>
+									<ControlTemplate />
+								</localModifiers:RolloverModifierExt.TooltipLabelTemplate>
+							</localModifiers:RolloverModifierExt>
+
+							<ChartModifiers:ZoomExtentsModifier />
+							<ChartModifiers:MouseWheelZoomModifier />
+
+							<s:LegendModifier
+								x:Name="legendModifier"
+								GetLegendDataFor="AllSeries" />
+
+						</ChartModifiers:ModifierGroup >
+					</s:SciChartSurface.ChartModifier>
+
+					<!--У всех XAxis общий VisibleRange, поэтому графики синхронизированы-->
+					<s:SciChartSurface.XAxis>
+						<Axes:DateTimeAxis
+							DrawMajorGridLines="False"
+							AutoRange="{Binding Path=Data.AutoRange, Mode=OneWay, Source={StaticResource _bindingProxy}}"
+							VisibleRange="{Binding Path=Data.SharedXVisibleRange, Mode=TwoWay, Source={StaticResource ResourceKey=_bindingProxy}}"
+							SubDayTextFormatting="HH:mm:ss.fff"
+							Visibility="Collapsed" />
+					</s:SciChartSurface.XAxis>
+
+					<s:SciChartSurface.YAxis>
+						<Axes:NumericAxis
+							AutoRange="Never"
+							VisibleRange="-0.2, 1.8"
+							
+							DrawMajorBands="True"
+							DrawMajorGridLines="False"
+							DrawLabels="True"
+							DrawMinorTicks="True"
+
+							VisibleRangeChanged="VisibleRangeChanged"
+							Visibility="Visible"
+							AutoTicks="True"
+							AxisAlignment="Left"
+							AxisTitle="Y"
+							IsPrimaryAxis="True"
+							Width="50" />
+					</s:SciChartSurface.YAxis>
+				</s:SciChartSurface>
+
+				<!--Легенда-->
+				<Grid
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Margin="0"
+					Height="16">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<s:SciChartLegend
+						BorderThickness="0"
+						Grid.Column="0"
+						Padding="0,-4,0,0"
+						LegendData="{Binding Path=LegendData, ElementName=legendModifier}"
+						Template="{StaticResource legendControlTemplate}" />
+
+					<!--Отображение текущих значений-->
+					<ListBox
+						BorderThickness="0"
+						Margin="0"
+						ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+						Grid.Column="1"
+						Visibility="{Binding Path=Data.IsAnnotationsVisible, Mode=TwoWay, Source={StaticResource ResourceKey=_bindingProxy}, Converter={StaticResource BooleanToVisibilityConverter}}"
+						Background="#77FFFFFF"
+						Padding="0,-1,0,0"
+						ItemsSource="{Binding Path=SeriesData.SeriesInfo, ElementName=roll}"
+						ItemTemplate="{StaticResource legendCurrentValuesTemplate}"
+						HorizontalContentAlignment="Stretch">
+						<ListBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel
+									Orientation="Vertical" />
+							</ItemsPanelTemplate>
+						</ListBox.ItemsPanel>
+						<ItemsControl.ItemContainerStyle>
+							<Style>
+								<Setter
+									Property="Border.BorderThickness"
+									Value="0" />
+								<Setter
+									Property="Control.Margin"
+									Value="0" />
+								<Setter
+									Property="Control.Padding"
+									Value="0" />
+							</Style>
+						</ItemsControl.ItemContainerStyle>
+					</ListBox>
+				</Grid>
+			</Grid>
+		</DataTemplate>
+
+		<Style
+			x:Key="toolbarTextStyle">
+			<Setter
+				Property="Control.VerticalAlignment"
+				Value="Center" />
+			<Setter
+				Property="Control.Margin"
+				Value="3,0,3,0" />
+		</Style>
+
+		<Style
+			x:Key="toolbarStackPanelStyle">
+			<Setter
+				Property="StackPanel.Orientation"
+				Value="Horizontal" />
+			<Setter
+				Property="StackPanel.VerticalAlignment"
+				Value="Center" />
+		</Style>
+	</UserControl.Resources>
+
+	<UserControl.InputBindings>
+		<KeyBinding
+			Command="{Binding Path=ViewModel.AddBookmark, ElementName=_this}"
+			Gesture="CTRL+B" />
+		<KeyBinding
+			Command="{Binding Path=ViewModel.GoToNextBookmark, ElementName=_this}"
+			Gesture="CTRL+E" />
+		<KeyBinding
+			Command="{Binding Path=ViewModel.GoToPreviousBookmark, ElementName=_this}"
+			Gesture="CTRL+W" />
+		<KeyBinding
+			Command="{Binding Path=ViewModel.DeleteCurrentBookmark, ElementName=_this}"
+			Gesture="CTRL+D" />
+
+		<KeyBinding
+			Command="{Binding Path=ViewModel.MoveRight, ElementName=_this}"
+			Key="Right"
+			Modifiers="Control" />
+		<KeyBinding
+			Command="{Binding Path=ViewModel.MoveLeft, ElementName=_this}"
+			Key="Left"
+			Modifiers="Control" />
+	</UserControl.InputBindings>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<!--Панель управления графиком-->
+		<ToolBar
+			Grid.Row="0"
+			Grid.ColumnSpan="3"
+			Name="ToolBar">
+			<Button
+				Command="{Binding Path=ViewModel.ShowHelpWindowCommand, ElementName=_this}">Справка</Button>
+			<Separator />
+			<Menu>
+				<MenuItem
+					Header="Закладки">
+					<MenuItem.ItemsSource>
+						<CompositeCollection>
+							<MenuItem
+								Header="Добавить..."
+								Command="{Binding Path=Data.AddBookmark, Source={StaticResource _bindingProxy}}"
+								InputGestureText="CTRL+B" />
+							<Separator />
+							<MenuItem
+								Header="Следующая"
+								Command="{Binding Path=Data.GoToNextBookmark, Source={StaticResource _bindingProxy}}"
+								InputGestureText="CTRL+E" />
+							<MenuItem
+								Header="Предыдущая"
+								Command="{Binding Path=Data.GoToPreviousBookmark, Source={StaticResource _bindingProxy}}"
+								InputGestureText="CTRL+W" />
+							<Separator />
+							<MenuItem
+								Header="Удалить текущую"
+								Command="{Binding Path=Data.DeleteCurrentBookmark, Source={StaticResource _bindingProxy}}"
+								InputGestureText="CTRL+D" />
+							<MenuItem
+								Header="Удалить все"
+								Command="{Binding Path=Data.DeleteAllBookmarks, Source={StaticResource _bindingProxy}}" />
+							<Separator />
+							<!--Коллекция доступных закладок-->
+							<CollectionContainer
+								Collection="{Binding Path=Data.Bookmarks, Source={StaticResource _bindingProxy}}" />
+						</CompositeCollection>
+					</MenuItem.ItemsSource>
+					<MenuItem.ItemContainerStyle>
+						<Style>
+							<Setter
+								Property="MenuItem.Header"
+								Value="{Binding Path=Title}" />
+							<Setter
+								Property="MenuItem.IsChecked"
+								Value="{Binding Path=IsCurrent}" />
+							<Setter
+								Property="MenuItem.Command"
+								Value="{Binding Path=Data.GoToBookmark, Source={StaticResource _bindingProxy}}" />
+							<Setter
+								Property="MenuItem.CommandParameter"
+								Value="{Binding}" />
+						</Style>
+					</MenuItem.ItemContainerStyle>
+				</MenuItem>
+			</Menu>
+
+			<ToggleButton
+				Name="modifiersButton"
+				IsHitTestVisible="{Binding ElementName=modifiersPopup, Path=IsOpen, Mode=OneWay, Converter={dnvConverters:InverseBooleanConverter}}">
+				<TextBlock>Модификаторы...</TextBlock>
+			</ToggleButton>
+			<Popup
+				IsOpen="{Binding IsChecked, ElementName=modifiersButton}"
+				StaysOpen="False"
+				AllowsTransparency="True"
+				x:Name="modifiersPopup"
+				PlacementTarget="{Binding ElementName=modifiersButton}">
+				<Popup.Resources>
+					<Style
+						x:Key="seriesNameStyle"
+						TargetType="ListBox">
+						<Setter
+							Property="BorderThickness"
+							Value="0 0 1 1" />
+						<Setter
+							Property="ItemTemplate">
+							<Setter.Value>
+								<DataTemplate>
+									<TextBlock
+										Height="20"
+										Margin="1"
+										Padding="1"
+										Text="{Binding Path=ChartSeries.DataSeries.SeriesName}"
+										Foreground="{Binding Path=ChartSeries.RenderSeries.SeriesColor}" />
+								</DataTemplate>
+							</Setter.Value>
+						</Setter>
+					</Style>
+
+					<Style
+						x:Key="seriesModifierStyle"
+						TargetType="ListBox">
+						<Setter
+							Property="BorderThickness"
+							Value="0 0 0 1" />
+						<Setter
+							Property="ItemTemplate">
+							<Setter.Value>
+								<DataTemplate>
+									<TextBox
+										Height="20"
+										Margin="1"
+										Padding="1"
+										MinWidth="50"
+										Text="{Binding Path=MathFunc}" />
+								</DataTemplate>
+							</Setter.Value>
+						</Setter>
+					</Style>
+				</Popup.Resources>
+				<Border
+					Background="{Binding Path=Background, ElementName=ToolBar}"
+					BorderBrush="{Binding Path=BorderBrush, ElementName=ToolBar}"
+					Margin="3"
+					BorderThickness="0.5">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition
+								Width="Auto" />
+							<ColumnDefinition
+								Width="Auto"
+								MinWidth="50" />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+							<RowDefinition
+								Height="Auto" />
+						</Grid.RowDefinitions>
+
+						<ListBox
+							Grid.Column="0"
+							Grid.Row="0"
+							Visibility="{Binding Path=ViewModel.IsAnalogSeriesItemsCountZero, ElementName=_this,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Converter={StaticResource VisibleIfFalseConverter}}"
+							ItemsSource="{Binding Path=ViewModel.RpdAnalogSeriesViewModels, ElementName=_this}"
+							Style="{StaticResource seriesNameStyle}" />
+						<ListBox
+							Grid.Column="0"
+							Grid.Row="1"
+							Visibility="{Binding Path=ViewModel.IsDiscreteSeriesItemsCountZero, ElementName=_this,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Converter={StaticResource VisibleIfFalseConverter}}"
+							ItemsSource="{Binding Path=ViewModel.RpdDiscreteSeriesViewModels, ElementName=_this}"
+							Style="{StaticResource seriesNameStyle}" />
+
+						<ListBox
+							Grid.Column="1"
+							Grid.Row="0"
+							Visibility="{Binding Path=ViewModel.IsAnalogSeriesItemsCountZero, ElementName=_this,
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Converter={StaticResource VisibleIfFalseConverter}}"
+							ItemsSource="{Binding Path=ViewModel.RpdAnalogSeriesViewModels, ElementName=_this}"
+							Style="{StaticResource seriesModifierStyle}" />
+						<ListBox
+							Grid.Column="1"
+							Grid.Row="1"
+							Visibility="{Binding Path=ViewModel.IsDiscreteSeriesItemsCountZero, ElementName=_this, 
+                                    UpdateSourceTrigger=PropertyChanged,
+                                    Converter={StaticResource VisibleIfFalseConverter}}"
+							ItemsSource="{Binding Path=ViewModel.RpdDiscreteSeriesViewModels, ElementName=_this}"
+							Style="{StaticResource seriesModifierStyle}" />
+
+						<DockPanel
+							Grid.Column="0"
+							Grid.ColumnSpan="2"
+							Grid.Row="2">
+							<Button
+								Margin="3"
+								DockPanel.Dock="Right"
+								HorizontalAlignment="Right"
+								Command="{Binding Path=Data.ApplyMathFunCommand, 
+                                    Source={StaticResource _bindingProxy}}">Применить</Button>
+						</DockPanel>
+					</Grid>
+				</Border>
+			</Popup>
+
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}"
+				Visibility="{Binding Path=ViewModel.IsMultipleYAxes, ElementName=_this, Converter={dnvConverters:BooleanToVisibilityConverter}}">
+				<CheckBox
+					Style="{StaticResource toolbarTextStyle}"
+					IsChecked="{Binding Path=ViewModel.CombineYAxesZeroes, ElementName=_this}"
+					Margin="0,0,0,1"
+					VerticalAlignment="Bottom"
+					ToolTip="Совместить нули осей Y">
+					Совместить нули по Y
+				</CheckBox>
+			</StackPanel>
+			<Separator />
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}">
+				<CheckBox
+					Style="{StaticResource toolbarTextStyle}"
+					IsChecked="{Binding Path=ViewModel.IsMarkersVisible, Mode=TwoWay, ElementName=_this}">Маркеры</CheckBox>
+			</StackPanel>
+
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}">
+				<CheckBox
+					Style="{StaticResource toolbarTextStyle}"
+					IsChecked="{Binding Path=ViewModel.IsToZoomXAxisOnly, Mode=TwoWay, ElementName=_this}">Зум только по X</CheckBox>
+			</StackPanel>
+
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}"
+				Visibility="{Binding Path=ViewModel.IsToZoomXAxisOnly, ElementName=_this, Converter={dnvConverters:BooleanToVisibilityConverter}}">
+				<CheckBox
+					Style="{StaticResource toolbarTextStyle}"
+					IsChecked="{Binding Path=ViewModel.ZoomExtentsY, Mode=TwoWay, ElementName=_this}">Растягивать Y при зуме по X</CheckBox>
+			</StackPanel>
+
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}">
+				<CheckBox
+					Style="{StaticResource toolbarTextStyle}"
+					IsChecked="{Binding Path=ViewModel.IsAnnotationsVisible, Mode=TwoWay, ElementName=_this}"
+					ToolTip="Отображать текущие значения">Значения</CheckBox>
+			</StackPanel>
+
+			<Separator />
+
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}">Толщина линии:</TextBlock>
+				<ComboBox
+					ItemsSource="{Binding Path=ViewModel.StrokeThicknesses, ElementName=_this}"
+					SelectedItem="{Binding Path=ViewModel.StrokeThickness, Mode=TwoWay, ElementName=_this}" />
+			</StackPanel>
+
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}">Тема:</TextBlock>
+				<ComboBox
+					x:Name="ThemeCombo"
+					ItemsSource="{Binding Path=ViewModel.AllThemes, ElementName=_this}"
+					SelectedItem="{Binding Path=ViewModel.SelectedTheme, Mode=TwoWay,ElementName=_this}" />
+			</StackPanel>
+
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}">
+				<CheckBox
+					Style="{StaticResource toolbarTextStyle}"
+					IsChecked="{Binding Path=ViewModel.IsAntialiasingEnabled, ElementName=_this, Mode=TwoWay}">Сглаживание</CheckBox>
+			</StackPanel>
+
+			<Separator />
+			<Button
+				Click="SaveAsPngClick">Сохранить...</Button>
+			<Button
+				Click="PrintClick">Печать...</Button>
+			<Button
+				Visibility="Collapsed"
+				Command="{Binding Path=ViewModel.TestCommand, ElementName=_this}">Тест</Button>
+
+			<StackPanel
+				Style="{StaticResource toolbarStackPanelStyle}">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}">
+					<TextBlock.ToolTip>
+						<StackPanel
+							Orientation="Vertical">
+							<TextBlock
+								Text="Тип выборки определяет алгоритм,"></TextBlock>
+							<TextBlock
+								Text="который применяется для улучшения производительности программы, " />
+							<TextBlock
+								Text="когда количество точек графика превышает количество точек дисплея." />
+							<TextBlock
+								Text="Рекомендуемый алгоритм MinMax." />
+						</StackPanel>
+					</TextBlock.ToolTip>
+					Тип выборки:
+				</TextBlock>
+				<ComboBox
+					ItemsSource="{Binding Source={StaticResource resamplingModeData}}"
+					SelectedItem="{Binding Path=ViewModel.SelectedResamplingMode, ElementName=_this}" />
+			</StackPanel>
+		</ToolBar>
+
+		<!--Панель управления аннотациями графика (фигуры на графике)-->
+		<ToolBar
+			Grid.Row="1">
+
+			<ToggleButton
+				x:Name="pointerButton"
+				Checked="OnEditingEnabled"
+				Unchecked="OnEditDisabled"
+				SciChart:ToggleButtonExtensions.GroupName="Modifiers"
+				Tag="LineAnnotation">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}"
+					Text="Указатель" />
+			</ToggleButton>
+
+			<Separator />
+			<ToggleButton
+				Checked="OnAnnotationTypeChanged"
+				SciChart:ToggleButtonExtensions.GroupName="Modifiers"
+				Tag="VerticalLineAnnotation">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}"
+					Text="Вертикальная линия" />
+			</ToggleButton>
+
+			<ToggleButton
+				Checked="OnAnnotationTypeChanged"
+				SciChart:ToggleButtonExtensions.GroupName="Modifiers"
+				Tag="HorizontalLineAnnotation">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}"
+					Text="Горизонтальная линия" />
+			</ToggleButton>
+
+			<ToggleButton
+				Checked="OnAnnotationTypeChanged"
+				SciChart:ToggleButtonExtensions.GroupName="Modifiers"
+				Tag="TextAnnotation">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}"
+					Text="Текст" />
+			</ToggleButton>
+
+			<ToggleButton
+				Checked="OnAnnotationTypeChanged"
+				SciChart:ToggleButtonExtensions.GroupName="Modifiers"
+				Tag="BoxAnnotation">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}"
+					Text="Прямоугольник" />
+			</ToggleButton>
+
+			<ToggleButton
+				Checked="OnAnnotationTypeChanged"
+				SciChart:ToggleButtonExtensions.GroupName="Modifiers"
+				Tag="AxisMarkerAnnotation">
+				<TextBlock
+					Style="{StaticResource toolbarTextStyle}"
+					Text="Метка оси Y" />
+			</ToggleButton>
+
+			<Separator />
+
+			<Button
+				Click="OnDeleteSelectedAnnotationsClick">
+				<TextBlock
+					Text="Удалить"
+					ToolTip="Выберите (нажмите) на метку (аннотацию), затем нажмите Удалить" />
+			</Button>
+
+			<Separator />
+
+			<ToggleButton
+				Name="ExportDataRangeButton"
+				IsChecked="{Binding Path=IsExportMode, ElementName=ExportChartDataModifier}">
+				<TextBlock
+					Text="Экспорт..."
+					ToolTip="Экспорт диапазона данных в EXEL" />
+			</ToggleButton>
+			<Popup
+				PlacementTarget="{Binding ElementName=ExportDataRangeButton}"
+				IsOpen="{Binding Path=IsChecked, ElementName=ExportDataRangeButton}"
+				AllowsTransparency="True">
+				<Border
+					BorderThickness="1"
+					BorderBrush="Black">
+					<TextBlock
+						Background="LightYellow"
+						FontSize="16"
+						Padding="10">Выберите диапазон данных для экспорта, для этого сначала нажмите на графике в месте, где должно быть начало диапазона, затем в месте где должен быть конец диапазона.</TextBlock>
+				</Border>
+			</Popup>
+
+		</ToolBar>
+
+		<!--Аналоговые графики-->
+		<s:SciChartSurface
+			Margin="0"
+			Padding="0"
+			BorderThickness="0"
+			Grid.Row="2"
+			Name="sciChart"
+			SciChart:ThemeManager.Theme="{Binding ElementName=ThemeCombo, Path=SelectedItem, Mode=TwoWay}"
+			SeriesSource="{Binding Path=ViewModel.AnalogSeries, ElementName=_this}"
+			YAxes="{Binding Path=ViewModel.YAxes, ElementName=_this}"
+			MouseRightButtonUp="SciChartMouseRightButtonUp"
+			MouseRightButtonDown="SciChart_OnMouseRightButtonDown">
+			<s:SciChartSurface.ContextMenu>
+				<ContextMenu>
+					<TextBlock
+						MouseUp="UIElement_OnMouseUp">Добавить метку</TextBlock>
+				</ContextMenu>
+			</s:SciChartSurface.ContextMenu>
+
+			<s:SciChartSurface.XAxis>
+				<Axes:DateTimeAxis
+					AutoRange="Once"
+					VisibleRange="{Binding Path=ViewModel.SharedXVisibleRange, ElementName=_this, Mode=TwoWay}"
+					SubDayTextFormatting="HH:mm:ss.fff" />
+			</s:SciChartSurface.XAxis>
+
+			<s:SciChartSurface.ChartModifier>
+				<ChartModifiers:ModifierGroup
+					Mouse:MouseManager.MouseEventGroup="MySharedMouseGroup">
+
+					<localModifiers:BookmarkAnnotationModifier
+						AnnotationsSource="{Binding Path=Data.Bookmarks, Source={StaticResource ResourceKey=_bindingProxy}}" />
+
+					<ChartModifiers:AnnotationCreationModifier
+						x:Name="annotationCreation"
+						AnnotationCreated="OnAnnotationCreated"
+						YAxisId="mainYAxis" />
+					<!--Модификаторы не могут биндится напрямую, т.к. не являются элементами Visual Tree, поэтому биндимся через прокси.-->
+					<localModifiers:RubberBandXyZoomModifierEx
+						ZoomExtentsY="{Binding Path=Data.ZoomExtentsY, Mode=TwoWay, Source={StaticResource ResourceKey=_bindingProxy}}"
+						IsXAxisOnly="{Binding Path=Data.IsToZoomXAxisOnly, Mode=TwoWay, Source={StaticResource ResourceKey=_bindingProxy}}"
+						ReceiveHandledEvents="True" />
+					<localModifiers:ZoomPanModifierEx />
+
+					<s:LegendModifier
+						x:Name="legendModifier"
+						GetLegendDataFor="AllSeries" />
+
+					<ChartModifiers:MouseWheelZoomModifier
+						XyDirection="{Binding Path=Data.IsToZoomXAxisOnly, Converter={StaticResource BoolToXDirectionConverter}, Mode=TwoWay, Source={StaticResource ResourceKey=_bindingProxy}}" />
+
+					<!--Отображает вертикальную линию с текущими названиями графика-->
+					<localModifiers:RolloverModifierExt
+						x:Name="rolloverModifier"
+						AnnotationStyle="{StaticResource TextAnnotationStyle}"
+						Test="popo"
+						ShowTooltipOn="MouseOver"
+						IsEnabled="{Binding Path=Data.IsAnnotationsVisible, Mode=TwoWay, Source={StaticResource ResourceKey=_bindingProxy}}"
+						ReceiveHandledEvents="True" />
+
+					<exportChartDataModifier:ExportChartDataModifier
+						x:Name="ExportChartDataModifier"
+						ReceiveHandledEvents="True" />
+
+					<!--DragModifier позволяют передвигать график, зажав указатель мыши на оси-->
+					<localModifiers:YAxisDragModifierEx
+						AxisId="mainYAxis" />
+
+					<!--Модификаторы для следующих 10 отдельных осей ординат. Работают когда пользователь помещает график на отдельную ось ординат. AxisId совпадает с форматом наименования осей.-->
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis0" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis1" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis2" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis3" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis4" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis5" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis6" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis7" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis8" />
+					<localModifiers:YAxisDragModifierEx
+						AxisId="axis9" />
+
+					<localModifiers:XAxisDragModifierEx />
+					<ChartModifiers:ZoomExtentsModifier />
+				</ChartModifiers:ModifierGroup>
+			</s:SciChartSurface.ChartModifier>
+		</s:SciChartSurface>
+
+		<!--Легенда аналоговых графиков-->
+		<Border
+			HorizontalAlignment="Left"
+			VerticalAlignment="Top"
+			Grid.Row="2"
+			Height="Auto"
+			Width="Auto"
+			BorderThickness="1"
+			BorderBrush="#88AAAAAA"
+			Background="#55FFFFFF">
+			<Expander>
+				<Expander.Header>
+					<TextBlock
+						Text="Загруженные сигналы:" />
+				</Expander.Header>
+
+				<Grid
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					Margin="5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<!--Контролы управления и названия сигналов-->
+					<s:SciChartLegend
+						BorderThickness="0"
+						Grid.Column="0"
+						LegendData="{Binding LegendData, ElementName=legendModifier}"
+						Padding="4,4,0,4"
+						Margin="0"
+						Background="#55FFFFFF"
+						Template="{StaticResource legendControlTemplate}" />
+
+					<!--Отображение текущих значений-->
+					<ListBox
+						BorderThickness="0"
+						Padding="0,4,4,2"
+						ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+						Grid.Column="1"
+						Visibility="{Binding Path=Data.IsAnnotationsVisible, Mode=TwoWay, Source={StaticResource ResourceKey=_bindingProxy}, Converter={StaticResource BooleanToVisibilityConverter}}"
+						Background="#55FFFFFF"
+						ItemsSource="{Binding Path=SeriesData.SeriesInfo, ElementName=rolloverModifier}"
+						ItemTemplate="{StaticResource legendCurrentValuesTemplate}"
+						HorizontalContentAlignment="Stretch">
+						<ListBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel
+									Orientation="Vertical" />
+							</ItemsPanelTemplate>
+						</ListBox.ItemsPanel>
+						<ItemsControl.ItemContainerStyle>
+							<Style>
+								<Setter
+									Property="Border.BorderThickness"
+									Value="0" />
+								<Setter
+									Property="Control.Margin"
+									Value="0" />
+								<Setter
+									Property="Control.Padding"
+									Value="0" />
+							</Style>
+						</ItemsControl.ItemContainerStyle>
+					</ListBox>
+				</Grid>
+			</Expander>
+		</Border>
+		<!--Дискретные графики-->
+		<ListBox
+			Grid.Row="3"
+			Name="discreteChartsList"
+			Background="{Binding ElementName=sciChart, Path=Background}"
+			Foreground="{Binding ElementName=sciChart, Path=Foreground}"
+			BorderThickness="0"
+			Padding="0"
+			Margin="0"
+			ItemsSource="{Binding Path=ViewModel.RpdDiscreteSeriesViewModels, ElementName=_this}"
+			ItemTemplate="{StaticResource DiscreteChartItemTemplate}"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			HorizontalContentAlignment="Stretch">
+			<ListBox.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel
+						Orientation="Vertical" />
+				</ItemsPanelTemplate>
+			</ListBox.ItemsPanel>
+			<ItemsControl.ItemContainerStyle>
+				<Style>
+					<Setter
+						Property="Border.BorderThickness"
+						Value="0" />
+					<Setter
+						Property="Control.Margin"
+						Value="0" />
+					<Setter
+						Property="Control.Padding"
+						Value="0" />
+				</Style>
+			</ItemsControl.ItemContainerStyle>
+		</ListBox>
+	</Grid>
+</UserControl>

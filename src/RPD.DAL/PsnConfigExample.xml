@@ -1,0 +1,484 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PsnConfiguratuion>
+  <PsnMeters>
+    <PsnMeter address="0x02" name="МК2"/>
+    <PsnMeter address="0x03" name="БС-УВ1"/>
+    <PsnMeter address="0x13" name="БС-УВ2"/>
+    <PsnMeter address="0x04" name="СТПР 600"/>
+    <PsnMeter address="0x05" name="ПЧ ВО ТЭД 1-2"/>
+    <PsnMeter address="0x25" name="ПЧ ВО ТЭД 3-4"/>
+    <PsnMeter address="0x15" name="ПЧ ТК"/>
+    <PsnMeter address="0x07" name="БС СМ"/>
+    <PsnMeter address="0x08" name="БС-БФН"/>
+    <PsnMeter address="0x06" name="КЧ (ПР 110В)"/>
+    <PsnMeter address="0x01" name="РПМ"/>
+    <PsnMeter address="0x18" name="БС-НВ"/>
+  </PsnMeters>
+ <!--
+ Описание команд:
+ При таком подходе поиск и выделение команд в тренде превращается в поиск по маскам DefVal
+ Набор значений VarVal превращается в часть списка PsnMeter.Channels[] (с полями Name, PosInCmd, Lenght, Type(Incoming/Outgoing))
+ родительский измеритель выбирается по адресу в команде. После парсинга всех команд получаем список измерителей ПСН и их сигналов с "координатной" привязкой сигнала к позиции в теле команды
+  - поэтому можно будет определять всю конфигурацию ПСН в этом файле, без необходимости перекомпиляции кода при её изменении.
+ 
+ Модель зависимостей данных будет примерно следующая
+ 1. PSN.bin 
+ 2. Выделение страниц PsnPages (2048кб, тип страницы 0x80): интересует дата создания, значения (2048 - 10) / 2 (если в конфиге указан, что межбайтовый интервал не сохраняется, количество выборок = 2038)
+ 3. Выделение переговоров PsnCommands (Например при помощи метода PsnCommand[] PsnLog.GetPsnCommands(PsnPages[]);) 
+    Выделение (запросов/ответов) производится по маске DefVal, Request.len + Reply.len, возможно с расчетами CRC16
+ 4. Определение измерителя ПСН, к которому относится команда и параметры внутри неё (по DefVal.Name=="#ADDR" && DefVal.Name=="#NCMD")
+ 
+ Алгоритм выделения тренда с т.з. программы
+ 1. Запрос от Данилы: "дай тренд для канала X измерителя Y за промежуток времени(T1;T2))
+ 2. Поиск страниц, попадающих в нужный интервал
+ 3. Виделение команд обмена с адресом измерителя Y.Address
+ 4. Получение из команд конкретных значений + позиционирование значения внутри тренда путем расчета: Дата создания страницы + сумма межбайтовых интервалов (если они есть и нету overflow)
+ 5. Возвращение тренда Даниле
+ -->
+  <Commands>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и МК2">
+      <Request len="5" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x02" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x42" name="#NCMD"/>
+        
+        <VarVal pos="2.0" len="8" fDef="False" name="Диагностика МК1"/>
+        <VarVal pos="2.0" len="1" fDef="False" name="Нет связи МК1 с МПСУиД"/>
+        <VarVal pos="2.7" len="1" fDef="False" name="Признак приема ответа от МК2"/>
+        
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="15" pos="5">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x02" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x42" name="#NCMD"/>
+        
+        <VarVal pos="2.0" len="8" fDef="False" name="Диагностика МК2"/>
+        <VarVal pos="2.0" len="1" fDef="True" name="Нет связи МК2 с МПСУиД"/>
+        <VarVal pos="2.1" len="1" fDef="True" name="Признак приема команды Включение ПЧ ТК от МПСУиД"/>
+        <VarVal pos="2.2" len="1" fDef="True" name="Признак приема команды Включение ПЧ ВО ТЭД 3-4 от МПСУиД"/>
+        <VarVal pos="2.3" len="1" fDef="True" name="Признак приема команды Включение ПЧ ВО ТЭД 1-2 от МПСУиД"/>
+        <VarVal pos="2.4" len="1" fDef="True" name="Признак приема аналоговой информации от МПСУиД"/>
+        <VarVal pos="2.5" len="1" fDef="True" name="Команда Включение ПЧ ТК"/>
+        <VarVal pos="2.6" len="1" fDef="True" name="Команда Включение ПЧ ВО ТЭД 3-4"/>
+        <VarVal pos="2.7" len="1" fDef="True" name="Команда Включение ПЧ ВО ТЭД 1-2"/>
+        
+        <VarVal pos="3.0" len="8" fDef="False" name="Уставка по току возбуждения БС-УВ1, ЦМР = 3А"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="Коэффициент Кя в БС-УВ1"/>
+        <VarVal pos="5.0" len="8" fDef="False" name="Уставка по току возбуждения БС-УВ2, ЦМР = 3А"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="Коэффициент  Кя  в БС-УВ2"/>
+        <VarVal pos="7.0" len="8" fDef="False" name="Уставка ПЧ ВО ТЭД 1-2, ЦМР = 1Гц"/>
+        <VarVal pos="8.0" len="8" fDef="False" name="Уставка ПЧ ВО ТЭД 3-4, ЦМР = 1Гц"/>
+        <VarVal pos="9.0" len="8" fDef="False" name="Уставка ПЧ ТК, ЦМР = 1Гц"/>
+        <VarVal pos="10.0" len="8" fDef="False" name="Байты данных БСП: №6, №8 (см. Приложение Е п.1)"/>
+        <VarVal pos="11.0" len="8" fDef="False" name="Байты данных БСП: №6, №8 (см. Приложение Е п.1)"/>
+        
+        
+        <VarVal pos="12.0" len="7" fDef="False" name="Номер позиции текущей секции от МПСУиД (см. Приложение Е п.2)"/>
+        <DefVal pos="12.7" len="1" fDef="False" name="" value="0"/>
+        
+        <VarVal pos="13.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="14.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и БС-УВ1">
+      <Request len="6" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x03" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x43" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Уставка по току возбуждения БС-УВ1, ЦМР=3А"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Коэффициент Кя, в БС-УВ1"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="8" pos="6">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x03" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x43" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Значение Iя УВ1, ЦМР=8А"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Значение Iв УВ1, ЦМР=8А"/>
+
+        <VarVal pos="4.0" len="8" fDef="False" name="Статус БС-УВ1"/>
+        <VarVal pos="4.0" len="1" fDef="True" name="Нет связи БС УВ1 с УУ УВ1"/>
+        <VarVal pos="4.2" len="1" fDef="True" name="Нет связи УУ УВ1 с ПНКВ Iв"/>
+        <VarVal pos="4.3" len="1" fDef="True" name="Нет связи УУ УВ1 с ПНКВ Iя"/>
+        <VarVal pos="4.6" len="1" fDef="True" name="Неуправляемый ток тиристоров УВ1"/>
+
+        <VarVal pos="5.0" len="8" fDef="False" name="Уставка ШИМ УВ1, ЦМР=1"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="7.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и БС-УВ2">
+      <Request len="6" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x03" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x43" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Уставка по току возбуждения БС-УВ2, ЦМР=3А"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Коэффициент Кя, в БС-УВ2"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="8" pos="6">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x03" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x43" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Значение Iя УВ2, ЦМР=8А"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Значение Iв УВ2, ЦМР=8А"/>
+
+        <VarVal pos="4.0" len="8" fDef="False" name="Статус БС-УВ2"/>
+        <VarVal pos="4.0" len="1" fDef="True" name="Нет связи БС УВ2 с УУ УВ2"/>
+        <VarVal pos="4.2" len="1" fDef="True" name="Нет связи УУ УВ2 с ПНКВ Iв"/>
+        <VarVal pos="4.3" len="1" fDef="True" name="Нет связи УУ УВ2 с ПНКВ Iя"/>
+        <VarVal pos="4.6" len="1" fDef="True" name="Неуправляемый ток тиристоров УВ2"/>
+
+        <VarVal pos="5.0" len="8" fDef="False" name="Уставка ШИМ УВ2, ЦМР=1"/>
+        
+        <VarVal pos="6.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="7.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и СТПР600">
+      <Request len="5" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x04" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x44" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Дискретные команды"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="11" pos="5">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x04" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x44" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Диагностика 1 СТПР600"/>
+        
+        <VarVal pos="3.0" len="8" fDef="False" name="Диагностика 2 СТПР600"/>
+        <VarVal pos="3.0" len="1" fDef="True" name="Нет связи с ПНКВ Uвх"/>
+        <VarVal pos="3.1" len="1" fDef="True" name="Нет связи с ПНКВ Uвых"/>
+        <VarVal pos="3.2" len="1" fDef="True" name="Защита по току"/>
+        <VarVal pos="3.3" len="1" fDef="True" name="Переполнение количества срабатываний защиты по току"/>
+        <VarVal pos="3.4" len="1" fDef="True" name="Превышение температуры силовой сборки"/>
+        <VarVal pos="3.5" len="1" fDef="True" name="Превышение температуры корпуса"/>
+        <VarVal pos="3.6" len="1" fDef="True" name="Отсутствие ответа от силовой сборки"/>
+        <VarVal pos="3.7" len="1" fDef="True" name="Не включена блокировка контакторов"/>
+
+        <VarVal pos="4.0" len="8" fDef="False" name="Диагностика 3 СТПР600"/>
+        <VarVal pos="4.0" len="1" fDef="True" name="Отвод Т0 трансформатора СТПР600"/>
+        <VarVal pos="4.1" len="1" fDef="True" name="Отвод Т1 трансформатора СТПР600"/>
+        <VarVal pos="4.2" len="1" fDef="True" name="Отвод Т2 трансформатора СТПР600"/>
+        <VarVal pos="4.3" len="1" fDef="True" name="Отвод Т3 трансформатора СТПР600"/>
+        <VarVal pos="4.4" len="1" fDef="True" name="Не включен регулятор СТПР600"/>
+        <VarVal pos="4.6" len="1" fDef="True" name="Перенапряжение по Uвх"/>
+        <VarVal pos="4.7" len="1" fDef="True" name="Авария СТПР600"/>
+
+        <VarVal pos="5.0" len="8" fDef="False" name="Uвх СТПР600, ЦМР=32В"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="Uвых СТПР600, ЦМР=32В"/>
+        <VarVal pos="7.0" len="8" fDef="False" name="Скважность ШИМ СТПР600, ЦМР =1"/>
+        <VarVal pos="8.0" len="8" fDef="False" name="Iвых СТПР600, ЦМР =1 А"/>
+
+        <VarVal pos="6.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="7.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и БС СМ">
+      <Request len="4" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x07" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x47" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="11" pos="4">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x07" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x47" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Байт диагностики кондиционера и тепловых панелей. Позиционный код"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Уставка по температуре в помещении, ЦМР=1С"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="Уставка по температуре приточного воздуха, ЦМР=1С"/>
+        <VarVal pos="5.0" len="8" fDef="False" name="Температура в помещении (калорифер1), ЦМР=1С"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="Байт диагностики калорифера 1. Позиционный код"/>
+
+        <VarVal pos="7.0" len="8" fDef="False" name="Байт состояния (калорифер1)"/>
+        <VarVal pos="7.0" len="1" fDef="True" name="Включена установка"/>
+        <VarVal pos="7.1" len="1" fDef="True" name="Включен ТЭН"/>
+        <VarVal pos="7.5" len="1" fDef="True" name="Неисправность калорифера 1"/>
+
+        <VarVal pos="8.0" len="8" fDef="False" name="Байт диагностики ПЧ (калорифер1)"/>
+        <VarVal pos="8.0" len="1" fDef="True" name="Перегрузка по току (>150%)"/>
+        <VarVal pos="8.1" len="1" fDef="True" name="Повышенное входное напряжение"/>
+        <VarVal pos="8.2" len="1" fDef="True" name="КЗ нижних транзисторов или перекрытие управляющих сигналов"/>
+        <VarVal pos="8.3" len="1" fDef="True" name="Пониженное/повышенное напряжение питания транзисторов (15В)"/>
+        <VarVal pos="8.4" len="1" fDef="True" name="Защита по температуре (> 110°C)"/>
+        <VarVal pos="8.5" len="1" fDef="True" name="Перегрузка по току (>250%)"/>
+
+        <VarVal pos="9.0" len="8" fDef="False" name="Температура в помещении (калорифер2), ЦМР=1С"/>
+        <VarVal pos="10.0" len="8" fDef="False" name="Байт диагностики калорифера 2. Позиционный код"/>
+        
+        <VarVal pos="11.0" len="8" fDef="False" name="Байт состояния (калорифер2)"/>
+        <VarVal pos="11.0" len="1" fDef="True" name="Включена установка"/>
+        <VarVal pos="11.1" len="1" fDef="True" name="Включен ТЭН"/>
+        <VarVal pos="11.5" len="1" fDef="True" name="Неисправность калорифера 2"/>
+
+        <VarVal pos="12.0" len="8" fDef="False" name="Байт диагностики ПЧ (калорифер2)"/>
+        <VarVal pos="12.0" len="1" fDef="True" name="Перегрузка по току (>150%)"/>
+        <VarVal pos="12.1" len="1" fDef="True" name="Повышенное входное напряжение"/>
+        <VarVal pos="12.2" len="1" fDef="True" name="КЗ нижних транзисторов или перекрытие управляющих сигналов"/>
+        <VarVal pos="12.3" len="1" fDef="True" name="Пониженное/повышенное напряжение питания транзисторов (15В)"/>
+        <VarVal pos="12.4" len="1" fDef="True" name="Защита по температуре (> 110°C)"/>
+        <VarVal pos="12.5" len="1" fDef="True" name="Перегрузка по току (>250%)"/>
+        
+        <VarVal pos="13.0" len="8" fDef="False" name="Байт диагностики приточной установки и МВП. Позиционный код"/>
+        <VarVal pos="14.0" len="8" fDef="False" name="Температура в канале приточного воздуха, ЦМР=1С"/>
+
+        <VarVal pos="15.0" len="8" fDef="False" name="Байт состояния приточной установки и МВП"/>
+        <VarVal pos="15.0" len="1" fDef="True" name="Включена установка"/>
+        <VarVal pos="15.1" len="1" fDef="True" name="Включен ТЭН"/>
+        <VarVal pos="15.5" len="1" fDef="True" name="Неисправность приточной установки и МВП"/>
+        <VarVal pos="15.6" len="1" fDef="True" name="Включен охладитель"/>
+
+        <VarVal pos="16.0" len="8" fDef="False" name="Байт диагностики ПЧ приточной установки и МВП"/>
+        <VarVal pos="16.0" len="1" fDef="True" name="Перегрузка по току (>150%)"/>
+        <VarVal pos="16.1" len="1" fDef="True" name="Повышенное входное напряжение"/>
+        <VarVal pos="16.2" len="1" fDef="True" name="КЗ нижних транзисторов или перекрытие управляющих сигналов"/>
+        <VarVal pos="16.3" len="1" fDef="True" name="Пониженное/повышенное напряжение питания транзисторов (15В)"/>
+        <VarVal pos="16.4" len="1" fDef="True" name="Защита по температуре (> 110°C)"/>
+        <VarVal pos="16.5" len="1" fDef="True" name="Перегрузка по току (>250%)"/>
+
+        <VarVal pos="17.0" len="8" fDef="False" name="Байт диагностики ПЧ кондиционера и тепловых панелей"/>
+        <VarVal pos="17.0" len="1" fDef="True" name="Перегрузка по току (>150%)"/>
+        <VarVal pos="17.1" len="1" fDef="True" name="Повышенное входное напряжение"/>
+        <VarVal pos="17.2" len="1" fDef="True" name="КЗ нижних транзисторов или перекрытие управляющих сигналов"/>
+        <VarVal pos="17.3" len="1" fDef="True" name="Пониженное/повышенное напряжение питания транзисторов (15В)"/>
+        <VarVal pos="17.4" len="1" fDef="True" name="Защита по температуре (> 110°C)"/>
+        <VarVal pos="17.5" len="1" fDef="True" name="Перегрузка по току (>250%)"/>
+
+        <VarVal pos="18.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="19.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и БС-БФН">
+      <Request len="4" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x08" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x48" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="7" pos="4">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x08" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x48" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Uвых 600, ЦМР=16В"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Iвых 600, ЦМР=16В"/>
+
+        <VarVal pos="4.0" len="8" fDef="False" name="Статус БС-БФН"/>
+        <VarVal pos="4.0" len="1" fDef="True" name="Нет связи с ПНКВ Iвых"/>
+        <VarVal pos="4.1" len="1" fDef="True" name="Нет связи с ПНКВ Uвых"/>
+        <VarVal pos="4.2" len="1" fDef="True" name="Защита по току"/>
+        <VarVal pos="4.3" len="1" fDef="True" name="Не норма Uвых"/>
+        <VarVal pos="4.7" len="1" fDef="True" name="Нет связи БС-БФН с ЦКУ"/>
+
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и БС - НВ">
+      <Request len="4" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x18" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x48" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="7" pos="4">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x18" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x48" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Iвх , ЦМР=1A"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Uвх, ЦМР=32В"/>
+
+        <VarVal pos="4.0" len="8" fDef="False" name="Статус БС – НВ"/>
+        <VarVal pos="4.0" len="1" fDef="True" name="Нет связи с ПНКВ Uвх"/>
+        <VarVal pos="4.1" len="1" fDef="True" name="Защита по Т выпрямителя"/>
+        <VarVal pos="4.2" len="1" fDef="True" name="Защита по току силовой сборки"/>
+        <VarVal pos="4.3" len="1" fDef="True" name="Защита по Т инвертора"/>
+        <VarVal pos="4.4" len="1" fDef="True" name="Защита по входному напряжению"/>
+        <VarVal pos="4.5" len="1" fDef="True" name="Защита по входному току"/>
+        <VarVal pos="4.6" len="1" fDef="True" name="Входное напряжение ниже нормы"/>
+        <VarVal pos="4.7" len="1" fDef="True" name="Нет связи БС-НВ с ЦКУ"/>
+
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и БС - НВ">
+      <Request len="4" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x18" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x49" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="7" pos="4">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x18" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x49" name="#NCMD"/>
+        
+        <VarVal pos="2.0" len="8" fDef="False" name="Признак неисправности КО1"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Статус БС – НВ"/>
+        <VarVal pos="2.0" len="1" fDef="True" name="Неисправен 0 драйвер силовой сборки инвертора"/>
+        <VarVal pos="2.1" len="1" fDef="True" name="Неисправен 1 драйвер силовой сборки инвертора"/>
+        <VarVal pos="2.2" len="1" fDef="True" name="Неисправен 2 драйвер силовой сборки инвертора"/>
+        <VarVal pos="2.3" len="1" fDef="True" name="Неисправен 3 драйвер силовой сборки инвертора"/>
+        <VarVal pos="2.4" len="1" fDef="True" name="Неисправен 4 драйвер силовой сборки инвертора"/>
+        <VarVal pos="2.5" len="1" fDef="True" name="Неисправен 5 драйвер силовой сборки инвертора"/>
+        <VarVal pos="2.6" len="1" fDef="True" name="Неисправен 6 драйвер силовой сборки инвертора"/>
+        <VarVal pos="2.7" len="1" fDef="True" name="Неисправен 7 драйвер силовой сборки инвертора"/>
+        
+        <VarVal pos="3.0" len="8" fDef="False" name="Признак неисправности КО2"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Статус БС – НВ"/>
+        <VarVal pos="3.0" len="1" fDef="True" name="Неисправен 0 драйвер силовой сборки инвертора"/>
+        <VarVal pos="3.1" len="1" fDef="True" name="Неисправен 1 драйвер силовой сборки инвертора"/>
+        <VarVal pos="3.2" len="1" fDef="True" name="Неисправен 2 драйвер силовой сборки инвертора"/>
+        <VarVal pos="3.3" len="1" fDef="True" name="Неисправен 3 драйвер силовой сборки инвертора"/>
+        <VarVal pos="3.4" len="1" fDef="True" name="Неисправен 4 драйвер силовой сборки инвертора"/>
+        <VarVal pos="3.5" len="1" fDef="True" name="Неисправен 5 драйвер силовой сборки инвертора"/>
+        <VarVal pos="3.6" len="1" fDef="True" name="Неисправен 6 драйвер силовой сборки инвертора"/>
+        <VarVal pos="3.7" len="1" fDef="True" name="Неисправен 7 драйвер силовой сборки инвертора"/>
+
+        <VarVal pos="4.0" len="8" fDef="False" name="Признак неисправности КО3"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="Статус БС – НВ"/>
+        <VarVal pos="4.0" len="1" fDef="True" name="Неисправен 0 драйвер силовой сборки инвертора"/>
+        <VarVal pos="4.1" len="1" fDef="True" name="Неисправен 1 драйвер силовой сборки инвертора"/>
+        <VarVal pos="4.2" len="1" fDef="True" name="Неисправен 2 драйвер силовой сборки инвертора"/>
+        <VarVal pos="4.3" len="1" fDef="True" name="Неисправен 3 драйвер силовой сборки инвертора"/>
+        <VarVal pos="4.4" len="1" fDef="True" name="Неисправен 4 драйвер силовой сборки инвертора"/>
+        <VarVal pos="4.5" len="1" fDef="True" name="Неисправен 5 драйвер силовой сборки инвертора"/>
+        <VarVal pos="4.6" len="1" fDef="True" name="Неисправен 6 драйвер силовой сборки инвертора"/>
+        <VarVal pos="4.7" len="1" fDef="True" name="Неисправен 7 драйвер силовой сборки инвертора"/>
+
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и ПЧ ВО ТЭД 1-2">
+      <Request len="6" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x05" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x45" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Уставка ПЧ ВО ТЭД 1-2, ЦМР=1Гц"/>
+        <VarVal pos="3.7" len="1" fDef="False" name="Включение ПЧ ВО ТЭД 1-2"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="5" pos="6">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x05" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x45" name="#NCMD"/>
+        
+        <VarVal pos="2.0" len="8" fDef="False" name="Статус ПЧ ВО ТЭД 1-2"/>
+        <VarVal pos="2.7" len="1" fDef="True" name="Авария ВО ТЭД 1-2"/>
+        <VarVal pos="2.6" len="1" fDef="True" name="Неисправность кодовых связей ПЧ ВО ТЭД 1-2"/>
+        <VarVal pos="2.5" len="1" fDef="True" name="Перегрузка по току (>250%)"/>
+        <VarVal pos="2.4" len="1" fDef="True" name="Защита по температуре (> 110°C)"/>
+        <VarVal pos="2.3" len="1" fDef="True" name="Пониженное/повышенное напряжение питания транзисторов (15В)"/>
+        <VarVal pos="2.2" len="1" fDef="True" name="КЗ нижних транзисторов или перекрытие управляющих сигналов"/>
+        <VarVal pos="2.1" len="1" fDef="True" name="Повышенное/пониженное входное напряжение"/>
+        <VarVal pos="2.0" len="1" fDef="True" name="Перегрузка по току (>150%)"/>
+        
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и ПЧ ВО ТЭД 3-4">
+      <Request len="6" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x25" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x45" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Уставка ПЧ ВО ТЭД 3-4, ЦМР=1Гц"/>
+        <VarVal pos="3.7" len="1" fDef="False" name="Включение ПЧ ВО ТЭД 3-4"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="5" pos="6">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x25" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x45" name="#NCMD"/>
+        
+        <VarVal pos="2.0" len="8" fDef="False" name="Статус ПЧ ВО ТЭД 3-4"/>
+        <VarVal pos="2.7" len="1" fDef="True" name="Авария ВО ТЭД 3-4"/>
+        <VarVal pos="2.6" len="1" fDef="True" name="Неисправность кодовых связей ПЧ ВО ТЭД 3-4"/>
+        <VarVal pos="2.5" len="1" fDef="True" name="Перегрузка по току (>250%)"/>
+        <VarVal pos="2.4" len="1" fDef="True" name="Защита по температуре (> 110°C)"/>
+        <VarVal pos="2.3" len="1" fDef="True" name="Пониженное/повышенное напряжение питания транзисторов (15В)"/>
+        <VarVal pos="2.2" len="1" fDef="True" name="КЗ нижних транзисторов или перекрытие управляющих сигналов"/>
+        <VarVal pos="2.1" len="1" fDef="True" name="Повышенное/пониженное входное напряжение"/>
+        <VarVal pos="2.0" len="1" fDef="True" name="Перегрузка по току (>150%)"/>
+        
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и ПЧ ТК">
+      <Request len="6" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x15" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x45" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Уставка ПЧ ТК, ЦМР=1Гц"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Дискретные команды"/>
+        <VarVal pos="3.7" len="1" fDef="False" name="Включение ПЧ ТК"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="5" pos="6">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x15" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x45" name="#NCMD"/>
+
+        <VarVal pos="2.0" len="8" fDef="False" name="Статус ПЧ ТК"/>
+        <VarVal pos="2.7" len="1" fDef="True" name="Авария ТК"/>
+        <VarVal pos="2.6" len="1" fDef="True" name="Неисправность кодовых связей ПЧ ТК"/>
+        <VarVal pos="2.5" len="1" fDef="True" name="Перегрузка по току (>250%)"/>
+        <VarVal pos="2.4" len="1" fDef="True" name="Защита по температуре (> 110°C)"/>
+        <VarVal pos="2.3" len="1" fDef="True" name="Пониженное/повышенное напряжение питания транзисторов (15В)"/>
+        <VarVal pos="2.2" len="1" fDef="True" name="КЗ нижних транзисторов или перекрытие управляющих сигналов"/>
+        <VarVal pos="2.1" len="1" fDef="True" name="Повышенное/пониженное входное напряжение"/>
+        <VarVal pos="2.0" len="1" fDef="True" name="Перегрузка по току (>150%)"/>
+
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и КИ(ПР 110В)">
+      <Request len="5" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x06" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x46" name="#NCMD"/>
+        <VarVal pos="2.0" len="8" fDef="False" name="Уставка ПЧ ТК, ЦМР=1Гц"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="10" pos="5">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x06" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x46" name="#NCMD"/>
+
+        <VarVal pos="2.0" len="8" fDef="False" name="Напряжение АБ, ЦМР=1В"/>
+        <VarVal pos="3.0" len="8" fDef="False" name="Ток АБ, ЦМР=1А"/>
+        <VarVal pos="4.0" len="8" fDef="False" name="Напряжение преобразователя 110В, ЦМР=1В"/>
+        <VarVal pos="5.0" len="8" fDef="False" name="Ток преобразователя 110В, ЦМР=1А"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="Напряжение пропадающего питания, ЦМР=1В"/>
+        <VarVal pos="7.0" len="8" fDef="False" name="Напряжение ИПЛЭ, ЦМР=1В"/>
+
+        <VarVal pos="8.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="9.0" len="8" fDef="False" name="#CRCH"/>
+      </Reply>
+    </CmdMask>
+    <!--****************************************************************************************************************-->
+    <CmdMask name="МК1 и РПМ">
+      <Request len="7" pos="0">
+        <DefVal pos="0.0" len="8" fDef="False" value="0x01" name="#ADDR"/>
+        <DefVal pos="1.0" len="8" fDef="False" value="0x41" name="#NCMD"/>
+        <VarVal pos="2.0" len="16" fDef="False" name="Байты данных БСП: №6, №8"/>
+        
+        <DefVal pos="4.7" len="1" fDef="False" value="0" name=""/>
+        <VarVal pos="4.0" len="7" fDef="False" name="Номер позиции текущей секции от МПСУиД"/>
+        
+        <VarVal pos="5.0" len="8" fDef="False" name="#CRCL"/>
+        <VarVal pos="6.0" len="8" fDef="False" name="#CRCH"/>
+      </Request>
+      <Reply len="0" pos="7">
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguratuion>

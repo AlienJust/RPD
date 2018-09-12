@@ -1,0 +1,16 @@
+﻿<Page x:Class="RPD.Presentation.Views.AddDataView.ReadProgressPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d" 
+      d:DesignHeight="390" d:DesignWidth="599"      
+      Title="ReadProgressPage">
+    <Grid>
+        <StackPanel Grid.Row="0" VerticalAlignment="Center">
+            <ProgressBar Height="50" Margin="10" Minimum="0" Maximum="100" Value="{Binding ReadProgress.Progress, Mode=OneWay}"/>
+            <TextBlock HorizontalAlignment="Center"
+                       Text="{Binding ReadProgress.MessageText}"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="ГТВ2" Version="0" Description="Протокол ГТВ2, версия неизвестна" Id="AD53C098-44DA-435A-A456-E7D8AACA4537" RpdId="18">
+  <PsnMeters></PsnMeters>
+  <Commands></Commands>
+</PsnConfiguration>

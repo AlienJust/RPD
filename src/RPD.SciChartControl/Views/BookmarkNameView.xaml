@@ -1,0 +1,30 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="RPD.SciChartControl.Views.BookmarkNameView"
+        Title="Название закладки" 
+        d:DesignWidth="408" 
+        d:DesignHeight="95"
+        Height="95"
+        Width="300" x:ClassModifier="internal">
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding Close}"/>
+    </Window.InputBindings>
+    <Grid FocusManager.FocusedElement="{Binding ElementName=BookmarkNameTextBox}">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBox Name="BookmarkNameTextBox"  Grid.Row="0" Text="{Binding Path=Bookmark.Name, UpdateSourceTrigger=PropertyChanged}" 
+                 MinWidth="100" Margin="3"/>
+
+        <Button x:Name="CloseButton" Grid.Row="1"               
+			Command="{Binding Close}"
+			HorizontalAlignment="Right" 
+			Margin="0 0 5 5" 
+			Padding="3"
+			MinWidth="50" Content="OK"/>
+    </Grid>
+</Window>

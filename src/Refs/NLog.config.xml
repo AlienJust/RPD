@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<nlog xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!--<variable name="brief" value="${longdate} | ${level} | ${logger} | ${message}"/>
+	<variable name="verbose" value="${longdate} | ${machine} | ${processid} | ${processname} | ${level} | ${logger}"/>
+	
+	<variable name="mycontext" value="${gdc:item=appname} , ${mdc:item=threadprop}"/>
+	<variable name="fmt1withcontext" value="${longdate} | ${level} | ${logger} | [${mycontext}] |${message}"/>
+	<variable name="fmt2withcontext" value="${shortdate} | ${level} | ${logger} | [${mycontext}] |${message}"/>
+	-->
+	<variable name="vvv" value="${longdate} > ${stacktrace:format=Flat:topFrames=2:separator=>} > ${message}"/>
+	<variable name="xxx" value="${longdate} > ${threadid} > ${message}"/>
+	<targets>
+		<target name="file" xsi:type="File" layout="${vvv}" fileName="${basedir}/${shortdate}.txt" />-->
+		<target name="console" xsi:type="ColoredConsole" layout="${xxx}" />
+	</targets>
+	<rules>
+		<!--<logger name="*" minLevel="Info" writeTo="console" />-->
+		<logger name="AlienJust.Adaptation.SampleApp.Program" minlevel="Info" writeTo="console, file" />
+		<!--
+		<logger name="Name.Space.Class1" levels="Debug,Error" writeTo="f1" />
+		<logger name="Name.Space.*" writeTo="f3,f4" />
+		<logger name="Name.Space.*" minlevel="Debug" maxlevel="Error" final="true" />
+		-->
+	</rules>
+</nlog>

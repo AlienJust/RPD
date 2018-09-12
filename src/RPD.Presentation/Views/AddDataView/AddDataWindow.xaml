@@ -1,0 +1,11 @@
+﻿<Window x:Class="RPD.Presentation.Views.AddDataView.AddDataWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="562" Width="661"
+        TextOptions.TextFormattingMode="Display"
+        WindowStartupLocation="CenterOwner"
+        DataContext="{Binding Path=AddDataViewModel, Source={StaticResource Locator}}"
+        Title="{Binding Path=Title}">    
+    <Frame NavigationUIVisibility="Hidden" x:Name="frame" Source="SelectDataSourcePage.xaml" Navigated="FrameNavigated">
+    </Frame>
+</Window>

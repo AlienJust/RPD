@@ -1,0 +1,21 @@
+﻿<Window x:Class="SampleApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sampleApp="clr-namespace:SampleApp"
+        Title="{Binding Path=WindowTitle, Mode=OneWay}" Height="650" Width="825">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<ScrollViewer>
+		<ListBox ScrollViewer.CanContentScroll="False"  ItemsSource="{Binding Locomotives, Mode=OneTime}" HorizontalContentAlignment="Stretch">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<sampleApp:LocomotiveView Margin="1,1,1,1"/>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+			</ScrollViewer>
+	</Grid>
+</Window>

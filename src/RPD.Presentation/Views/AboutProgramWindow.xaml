@@ -1,0 +1,32 @@
+﻿<Window x:Class="RPD.Presentation.Views.AboutProgramWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="О программе РПД" Height="167" Width="357"        
+        WindowStartupLocation="CenterOwner"
+        DataContext="{Binding Path=AboutProgram, Source={StaticResource Locator}}">
+    <Window.Resources>
+        <Style x:Key="stackPanelStyle">
+            <Setter Property="StackPanel.Orientation" Value="Horizontal"/>
+        </Style>
+    </Window.Resources>
+    <StackPanel Margin="10">
+
+        <TextBlock>РПД</TextBlock>
+        <TextBlock>Copyright © ООО ГОРИЗОНТ 2010-2018</TextBlock>
+        
+        <StackPanel Style="{StaticResource stackPanelStyle}" Margin="0,20,0,0">
+            <TextBlock xml:space="preserve">Версия программы RPD.Presentation: </TextBlock>
+            <TextBlock Text="{Binding Path=PresentationVersion}"/>
+            <TextBlock xml:space="preserve"> от </TextBlock>
+            <TextBlock Text="{Binding Path=PresentationDate}"/>
+        </StackPanel>
+        <StackPanel Style="{StaticResource stackPanelStyle}">
+            <TextBlock xml:space="preserve">Версия библиотеки RPD.DAL: </TextBlock>
+            <TextBlock Text="{Binding Path=DalVersion}"/>
+            <TextBlock xml:space="preserve"> от </TextBlock>
+            <TextBlock Text="{Binding Path=DalDate}"/>
+        </StackPanel>
+    </StackPanel>
+    
+    
+</Window>

@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E811C2B8-9A0B-420F-BE2E-244B12418C1F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RPD.DAL</RootNamespace>
+    <AssemblyName>RPD.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\AJ01\Application Data\ICSharpCode/SharpDevelop4.0\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <RunSourceAnalysis>False</RunSourceAnalysis>
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugType>None</DebugType>
+    <WarningLevel>4</WarningLevel>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>..\..\bin\RPD\Release\RPD.DAL.XML</DocumentationFile>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <OutputPath>..\..\bin\RPD\Release\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <OutputPath>..\..\bin\RPD\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>..\..\bin\RPD\Debug\RPD.DAL.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AlienJust.Adaptation.WindowsPresentation">
+      <HintPath>..\Refs\AlienJust.Adaptation.WindowsPresentation.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Concurrent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Refs\AlienJust.Support.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Concurrent.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Refs\AlienJust.Support.Concurrent.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Identy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\AlienJust.Support.Identy.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Identy.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\AlienJust.Support.Identy.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.IO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\AlienJust.Support.IO.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Loggers">
+      <HintPath>..\Refs\AlienJust.Support.Loggers.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Loggers.Contracts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\AlienJust.Support.Loggers.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Reflection">
+      <HintPath>..\Refs\AlienJust.Support.Reflection.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Text">
+      <HintPath>..\Refs\AlienJust.Support.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="AlienJust.Support.Text.Contracts">
+      <HintPath>..\Refs\AlienJust.Support.Text.Contracts.dll</HintPath>
+    </Reference>
+    <Reference Include="DBreeze, Version=1.89.2017.829, Culture=neutral, PublicKeyToken=174b57f1c155f3c6, processorArchitecture=MSIL">
+      <HintPath>..\packages\DBreeze.1.89.0\lib\net40\DBreeze.dll</HintPath>
+    </Reference>
+    <Reference Include="NCalc, Version=1.3.8.0, Culture=neutral, PublicKeyToken=973cde3f1cafed03, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\NCalc.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.FtpClient, Version=1.0.5281.14405, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Refs\System.Net.FtpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InternalSources\Common\SimpleRelease\UidStringToLower.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnChannelConfigSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnMeterConfigSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnConfigurationSimple.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\AllThresholds.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\Calibrations.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\ChannelCalibration.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\RegSetupRpd.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\Threshold.cs" />
+    <Compile Include="InternalSources\Common\Contracts\IBuilder.cs" />
+    <Compile Include="InternalSources\WholeDeviceConfiguration\Contracts\Internal\IDevConf.cs" />
+    <Compile Include="InternalSources\WholeDeviceConfiguration\Contracts\Internal\ILineMeter.cs" />
+    <Compile Include="InternalSources\WholeDeviceConfiguration\Contracts\Internal\ILineMeterChannel.cs" />
+    <Compile Include="InternalSources\WholeDeviceConfiguration\SimpleReleaseAndExtensions\DeviceConfigurationExtensions.cs" />
+    <Compile Include="InternalSources\WholeDeviceConfiguration\SimpleReleaseAndExtensions\DeviceDiagnosticExtensions.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\RelayOnLowLevel\PsnCommandPartTypeBuilderFromLowLevel.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IDeviceDiagnostic.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnChannelConfig.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnMeterConfig.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnConfiguration.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnCommandInfoSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\RelayOnLowLevel\PsnProtocolConfigBuilderFromLowLevel.cs" />
+    <Compile Include="InternalSources\RpdConfiguration\RpdLogInfoExtensions.cs" />
+    <Compile Include="InternalSources\RpdConfiguration\RpdLogInfoOnLowLevel.cs" />
+    <Compile Include="InternalSources\WholeDeviceConfiguration\RelayOnLowLevel\PsnLogFragmentInfoOnLowLevel.cs" />
+    <Compile Include="InternalSources\KeyValueStorageHolders\Contracts\IKeyValueStorageHolder.cs" />
+    <Compile Include="InternalSources\PsnDataExtraction\Contracts\IPsnChannelTrendLoader.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IPsnLogFragmentInfo.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IRpdLogInfo.cs" />
+    <Compile Include="InternalSources\KeyValueStorageHolders\Xml\KeyValueStorageHolderXml.cs" />
+    <Compile Include="InternalSources\KeyValueStorageHolders\Memory\KeyValueStorageHolderMemory.cs" />
+    <Compile Include="InternalSources\PsnDataExtraction\BasedOnLowLevel\PsnChannelTrendLoaderMerged.cs" />
+    <Compile Include="InternalSources\PsnDataExtraction\BasedOnLowLevel\PsnChannelTrendLoaderSimple.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnVirtualDevice.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnVirtualParameter.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnVirtualParameterPart.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnVirtualParameterPartSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnVirtualParameterSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnVirtualDeviceSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\CyclePsnCmdPartInfoSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\RelayOnLowLevel\DefinedPsnParameterInfoBasedOnLowCfg.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\DefinedPsnParameterInfoExtensions.cs" />
+    <Compile Include="InternalSources\LibraryLoader\SimpleRelease\FtpRepositoryInfoSimple.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\ICyclePsnCmdPartInfo.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IDefinedPsnParameterInfo.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IFtpRepositoryInfo.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnCommandInfo.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnCommandPartInfo.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\Contracts\Internal\IPsnConfigurationInformation.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnDeviceConfiguration.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\Contracts\Internal\IPsnChannelConfiguration.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IPsnParameterConfiguration.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnSignalAddress.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IPsnSignalConfiguration.cs" />
+    <Compile Include="PublicSources\PsnConfiguration\Contracts\IVariablePsnParameterInfo.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\Contracts\Internal\IPsnChannelInfo.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\Contracts\Internal\PsnChannelTrendDataType.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnCommandPartInfoSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\Contracts\Internal\PsnCommandPartType.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnConfigurationInformationSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnDeviceConfigurationSimple.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\SimpleReleaseAndExtensions\PsnMeterExtensions.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\RelayOnLowLevel\PsnParameterConfigurationBasedOnLowLevel.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnParameterExtensions.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\RelayOnLowLevel\PsnCommandPartInfoBuilderFromLowLevel.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnSignalAddressSimple.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\PsnSignalConfigurationSimple.cs" />
+    <Compile Include="InternalSources\RpdConfiguration\RpdMeterType.cs" />
+    <Compile Include="InternalSources\RpdConfiguration\RpdProtocolMeterTypeBuilderFromHighLevel.cs" />
+    <Compile Include="InternalSources\RpdConfiguration\RpdProtocolMeterTypeExt.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\RelayOnLowLevel\VariablePsnParameterInfoBasedOnLowCfg.cs" />
+    <Compile Include="InternalSources\PsnConfiguration\SimpleReleaseAndExtensions\VariablePsnParameterInfoExtensions.cs" />
+    <Compile Include="InternalSources\DataExtraction\SimpleRelease\DataPointSimple.cs" />
+    <Compile Include="PublicSources\DataExtraction\Contracts\IDataPoint.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IDeviceConfiguration.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\CommandConfiguration\ChannelConfigVerificationStatus.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\CommandConfiguration\CommandConfigurationBuilderFromBinadyFile.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\CommandConfiguration\CommandConfigurationSimple.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\CommandConfiguration\CommandConfigurationBuilderDefault.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\CommandConfiguration\ICommandConfiguration.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\CommandConfiguration\ICommandConfigurationBuilder.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\CommandConfiguration\IMetersChannelsConfigurationVerificationStatus.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\CommandConfiguration\MetersChannelsConfigurationVerificationStatusSimple.cs" />
+    <Compile Include="InternalSources\WholeDeviceConfiguration\RelayOnLowLevel\CustomConfigurationBuilderFromHighDeviceConfig.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\RpdDumpRuleBuilderFromDumpCondition.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\DeviceConfigurationSaverToStorage.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\IPsnLogInfoSaver.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\InterfaceRpdDumpRuleExtensions.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\PsnLogFragmentInfoSaverToStream.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\RpdMeterSystemInformationBuilderFromRpdMeterSystem.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\RpdMeterSystemInformationBuilderFromVoid.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\FaultLogTableRecord.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\RpdDumpRule.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\RpdMeterTableRecord.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\IDeviceConfigurationSaver.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\DeviceConfigurationSaverToXml.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\DeviceDiagnosticSimple.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\PsnMeterSimple.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\RpdChannelSimple.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\RpdMeterSimple.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\Contracts\IEditablePsnLog.cs" />
+    <Compile Include="PublicSources\Common\Contracts\IObjectWithId.cs" />
+    <Compile Include="PublicSources\Common\Contracts\IUid.cs" />
+    <Compile Include="InternalSources\Common\SimpleRelease\ObjectWithIdSimple.cs" />
+    <Compile Include="InternalSources\DataExtraction\BasedOnLowLevel\StreamReadableDataBasedOnObject.cs" />
+    <Compile Include="InternalSources\DataExtraction\BasedOnLowLevel\StreamReadableObjectBasedOnData.cs" />
+    <Compile Include="PublicSources\DataExtraction\Contracts\IStreamReadableObject.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\Relay\PsnLogTypeBuilderFromLowLevel.cs" />
+    <Compile Include="PublicSources\RepositorySystem\Contracts\PsnLogType.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\Relay\PsnDataFragmentTypeBuilderFromHighLevel.cs" />
+    <Compile Include="InternalSources\LibraryLoader\Contracts\Internal\IReposetoryOpenedResult.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\Relay\RelayRepository.cs" />
+    <Compile Include="InternalSources\LibraryLoader\SimpleRelease\ReposetoryOpenedResultSimple.cs" />
+    <Compile Include="PublicSources\RepositorySystem\Contracts\IPsnLog.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\Relay\PsnChannelRelay.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\SimpleReleaseAndExtensions\PsnMeterSimple.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\Relay\PsnLogRelay.cs" />
+    <Compile Include="PublicSources\RepositorySystem\Contracts\PsnLogIntegrity.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\RpdMeterBuilderFromRpdMeterInfo.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\DumpConditionBuilderFromRpdDumpRule.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd.Contracts\IDumpConditionBuilder.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd.Contracts\IRpdMeterBuilder.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\DeviceConfigAsyncReader.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\IDeviceConfigurationLoader.cs" />
+    <Compile Include="InternalSources\_DalRelease\DumpConditionExtensions.cs" />
+    <Compile Include="PublicSources\LibraryLoader\Contracts\ILoader.cs" />
+    <Compile Include="InternalSources\_DalRelease.Shared\FaultReason.cs" />
+    <Compile Include="InternalSources\_DalRelease.Shared\ChannelCurrentData.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\ITrendFragment.cs" />
+    <Compile Include="InternalSources\_DalRelease\RpdMeterExtensions.cs" />
+    <Compile Include="InternalSources\WholeDeviceConfiguration\RelayOnLowLevel\SystemConfigurationBuilderFromHighLevelDeviceConfiguration.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\TrendType.cs" />
+    <Compile Include="InternalSources\Common\SimpleRelease\UidString.cs" />
+    <Compile Include="InternalSources\InternalContracts\IApproximator.cs" />
+    <Compile Include="InternalSources\_Supports\EventHandlerExtensions.cs" />
+    <Compile Include="InternalSources\_Supports\Support.cs" />
+    <Compile Include="InternalSources\_Supports\Usefull.cs" />
+    <Compile Include="InternalSources\_DalRelease.Configuration\DeviceConfiguration.cs" />
+    <Compile Include="InternalSources\_DalRelease\DeviceDiagnostic.cs" />
+    <Compile Include="InternalSources\_DalRelease\DeviceFlasher.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\ReadChannelTrendResult.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\RpdChannellDumpCondition.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IDumpCondition.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IRpdChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PublicSources\DataExtraction\Contracts\ILazyTrendData.cs" />
+    <Compile Include="PublicSources\RepositorySystem\Contracts\ILocomotive.cs" />
+    <Compile Include="PublicSources\RepositorySystem\Contracts\IPsnChannel.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IPsnMeter.cs" />
+    <Compile Include="PublicSources\RepositorySystem\Contracts\IRepository.cs" />
+    <Compile Include="PublicSources\RepositorySystem\Contracts\ISection.cs" />
+    <Compile Include="InternalSources\_EventArgs\OnCompleteEventArgs.cs" />
+    <Compile Include="InternalSources\_EventArgs\OnProgressChangeEventArgs.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\Relay\LocomotiveBasedOnLowLevelStorage.cs" />
+    <Compile Include="InternalSources\RepostirorySystem\Relay\SectionBasedOnLowLevelStorage.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\RpdChannel.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\FaultLog.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IFaultLog.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\IRpdMeter.cs" />
+    <Compile Include="PublicSources\_UnsortedContractsTODO\PsnConfiguration\ISignal.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\RpdMeter.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\Signal.cs" />
+    <Compile Include="InternalSources\_DalRelease.Rpd\FaultPage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="InternalSources\_Supports\DalSettings.cs" />
+    <Compile Include="InternalSources\_Supports\DTHasher.cs" />
+    <Compile Include="InternalSources\_Supports\Log.cs" />
+    <Compile Include="InternalSources\_Supports\Tracer.cs" />
+    <Compile Include="PublicSources\ConnectionPoints\Release\ConnectionPoint.cs" />
+    <Compile Include="PublicSources\ConnectionPoints\Release\ConnectionPointsDescription.cs" />
+    <Compile Include="PublicSources\ConnectionPoints\Release\ConnectionPointsGroup.cs" />
+    <Compile Include="PublicSources\LibraryLoader\Release\Loader.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.11103_v1.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ТЭМ31м_006_v09.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.11103_v2.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ТЭМ31м_006_магистраль М2_v16.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ТЭМ31м_006_v17.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.11103_v3.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Микроклимат_v1.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭУ_v1.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ТЭМ31Г_v11.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.2ЭС6-210-3_v8.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.УЗАРД_v1.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ТЭМ31м_006_v16.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\DalSettings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.ТЭМ31м_006_v19.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.ТЭМ31м_004_v25.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.ТЭМ31м_004_v36.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.2ЭС10.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.ГТВ.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.ГТВ2.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.ВЛ11.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.ТЭМ31м_006_v21.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.11103_v4.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.СКВТ_М.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.ТЭМ31м_006_v35.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.СОРП.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAbstractionLevel.Low\DataAbstractionLevel.Low.csproj">
+      <Project>{c8d3716f-7112-4aba-8a5a-69c664696ae8}</Project>
+      <Name>DataAbstractionLevel.Low</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RpdCommandSystem.Contracts\RpdCommandSystem.Contracts.csproj">
+      <Project>{074a1969-3a8c-4758-be95-bdc7816c3881}</Project>
+      <Name>RpdCommandSystem.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RpdCommandSystem.FileSystemRelease\RpdCommandSystem.FileSystemRelease.csproj">
+      <Project>{a4a4a275-e247-429f-a123-fd51ea203032}</Project>
+      <Name>RpdCommandSystem.FileSystemRelease</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.Лифт.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="defaults\psn.11103_v5.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Буровая.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Буровая.HighSpeed.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Буровая.АИН1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Буровая.АИН3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Буровая.АИН2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Буровая.HighSpeed.Ведущий.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Микроклимат-ЭС2ГП-кабина.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Микроклимат-ЭС2ГП-салон.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.РазгоннаяТележка-БС-ДМРТУ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.РазгоннаяТележка-БУ-М6-c-Ethernet-ИУС-ДМРТУ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БС-СН-М8.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БС-ТП-М5-М6-М7_v11.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БУ-М3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БУ-М4.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭУ_БУ_М1-М2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БС-СН-М8_v08.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭУ_БУ_М1-М2_v10.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БУ-М3_v10.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БУ-М4_v10.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v14_М4.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v14_М3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v14_М1-М2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v17a_М3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БУ-М3_v18.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_БС-ТП-М5-М6-М7.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Альстом_v1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.Брянск-2ТЭ25км.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v21_М1-М2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v21_М3.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v21_М4.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v21_М5-М6-М7_БС-ТП.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="defaults\psn.ПЭ2У_v21_М8_БС-СН.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="defaults\psn.РазгоннаяТележка-БУ-М7.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="defaults\psn.РазгоннаяТележка-БУ-М6.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="defaults\psn.РазгоннаяТележка-БУ-ПЭВМ-М1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="defaults\psn.РазгоннаяТележка-БУ-УСДП-М5.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="defaults\psn.Трамвай_БССИ_аб_внутр_М.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="defaults\psn.ТЭМ31м_004_v37.xml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="defaults\psn.УЗАРД_v2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

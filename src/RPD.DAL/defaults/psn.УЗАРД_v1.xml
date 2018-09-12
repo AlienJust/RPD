@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="УЗАРД" Version="1" Description="Конфигурация УЗАРД" Id="ED6A5BA4-7A61-42B8-B6DE-4EEBAD5E0AA5" RpdId="11">
+  <PsnMeters>
+    <PsnMeter Address="0x01" Name="УЗАРД" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="МК и УЗАРД">
+      <Request Length="6" Position="0" CycleMsTime="50">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="4a59f5b4-dfc5-4c79-8ad2-bb3d7756697e" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="2de85f8b-4957-442f-ab9d-75a1aa7efa62" />
+        <CpzPrm Name="Байт управления" Expression="([u2] * 1.0)" Id="0ea0b550-bbe3-4f8c-9bcf-b68aa2d97f8e" />
+        <VarVal Position="3.3" Length="1" Name="Режим работы: принудительное отключение БК" Id="502777c3-3b5b-4a87-8298-45f4c9de3b1e" />
+        <VarVal Position="3.1" Length="2" Name="Режим работы: режим отключения БК по скорости изменения тока (0 – не отключать, 1 – соединение П, 2 – СП, 3 - П)" IsSigned="False" Id="6168fd90-dbee-47de-8919-5c9d8477a211" />
+        <VarVal Position="3.0" Length="1" Name="Режим работы: разрешение отключения БК по превышению тока" Id="9b772099-b29a-470b-9c3b-b2fbf56cede1" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="bcfbac86-8b78-404a-aa56-f39188736ea5" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="cf521dc4-7d6c-48ba-973a-c125206e1197" />
+      </Request>
+      <Reply Length="10" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="67f92e0f-c481-402a-99ae-95e073d5eb1d" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="b09007e6-6e51-4a56-b135-d64236791e4c" />
+        <VarVal Position="2.3" Length="1" Name="Байт состояния: режим пост аварии" Id="d7b00e30-f9e9-4fff-a3c6-cabd026c8358" />
+        <VarVal Position="2.2" Length="1" Name="Байт состояния: режим аварии" Id="8e557c14-c5be-4012-a42f-61e7485ddf6f" />
+        <VarVal Position="2.1" Length="1" Name="Байт состояния: режим включения" Id="58ba85ac-917a-4a05-a73e-585a310336b9" />
+        <VarVal Position="2.0" Length="1" Name="Байт состояния: режим ожидания" Id="0dbedbb2-d3aa-47a1-80bb-dced08701a0b" />
+        <VarVal Position="3.5" Length="1" Name="Байт диагностики 1: err6" Id="f5108b0f-4f04-430b-86e4-7d14f0b5fd56" />
+        <VarVal Position="3.4" Length="1" Name="Байт диагностики 1: err5" Id="865f7a67-5765-440e-af57-0cc8a3c02a75" />
+        <VarVal Position="3.3" Length="1" Name="Байт диагностики 1: err4" Id="68313423-60b9-4b2e-8cad-ef624a98da3b" />
+        <VarVal Position="3.2" Length="1" Name="Байт диагностики 1: err3" Id="11aeb4a2-f0ec-477f-9265-dce1563ff68a" />
+        <VarVal Position="3.1" Length="1" Name="Байт диагностики 1: err2" Id="444d96f7-fb5a-482e-9a5a-e8f9d675cfc0" />
+        <VarVal Position="3.0" Length="1" Name="Байт диагностики 1: err1" Id="baf5a159-cade-4b90-8da2-ec14a851660c" />
+        <VarVal Position="4.5" Length="1" Name="Байт диагностики 2: отключение в БВС" Id="46c7c2b0-c75f-4f8b-ab6c-087fe7dfdd0a" />
+        <VarVal Position="4.4" Length="1" Name="Байт диагностики 2: отключение БВ" Id="7291d114-3cd1-4050-a5c1-fd941fdea270" />
+        <VarVal Position="4.3" Length="1" Name="Байт диагностики 2: тестовый" Id="744a9c8a-c32f-4dd3-8c8e-2aa7a2ca4653" />
+        <VarVal Position="4.2" Length="1" Name="Байт диагностики 2: выход на УЗАРД 2-ой тележки" Id="c68ddfaa-db10-43e6-9230-7b175eb05c4b" />
+        <VarVal Position="4.1" Length="1" Name="Байт диагностики 2: выход на драйвер 2" Id="78e2b6a6-a9c1-4bd8-9c33-ec91c4759e7f" />
+        <VarVal Position="4.0" Length="1" Name="Байт диагностики 2: выход на драйвер 1" Id="4fd945a3-0a6e-4036-b0f8-b73242bf9a19" />
+        <CpzPrm Name="Значение АЦП AD6" Expression="([u5] * 1.0)" Id="1d5a58d2-09f3-4cb7-ad11-e7255d740237" />
+        <CpzPrm Name="Значение АЦП AD7" Expression="([u6] * 1.0)" Id="1775f591-cfc7-4a52-b08f-63671335bf45" />
+        <CpzPrm Name="Значение АЦП AD2" Expression="([u7] * 1.0)" Id="9e9eb076-7f7c-4765-b259-f9b83b9db989" />
+        <VarVal Position="8.0" Length="8" Name="#CRCH" Id="956d962f-e0af-40c7-a490-6daba178d803" />
+        <VarVal Position="9.0" Length="8" Name="#CRCL" Id="819f4b13-0ed5-4b79-b043-1989ef3071d9" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

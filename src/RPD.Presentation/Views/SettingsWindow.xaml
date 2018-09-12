@@ -1,0 +1,124 @@
+﻿<Window
+	x:Class="RPD.Presentation.Views.SettingsWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Настройки"
+	Height="207"
+	Width="328"
+	DataContext="{Binding Path=Settings, Source={StaticResource Locator}}"
+	Topmost="True"
+	TextOptions.TextFormattingMode="Display"
+	WindowStartupLocation="CenterOwner">
+	<Window.Resources>
+		<!--Стиль придает красный цвет рамке, если путь к хранилищу не установлен-->
+		<Style
+			x:Key="borderStyle">
+			<Style.Triggers>
+				<DataTrigger
+					Binding="{Binding Path=IsRepositoryPathSetted}"
+					Value="False">
+					<Setter
+						Property="Border.BorderThickness"
+						Value="3" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+
+		<!--Стиль прячет строку статуса-->
+		<Style
+			x:Key="statusBarStyle">
+			<Setter
+				Property="StatusBar.Visibility"
+				Value="Collapsed" />
+			<Style.Triggers>
+				<DataTrigger
+					Binding="{Binding Path=IsStatusStringVisible}"
+					Value="True">
+					<Setter
+						Property="StatusBar.Visibility"
+						Value="Visible" />
+				</DataTrigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="Auto"></RowDefinition>
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="*" />
+			<RowDefinition
+				Height="Auto" />
+			<RowDefinition
+				Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition
+				Width="Auto"></ColumnDefinition>
+			<ColumnDefinition
+				Width="*"></ColumnDefinition>
+			<ColumnDefinition
+				Width="Auto"></ColumnDefinition>
+		</Grid.ColumnDefinitions>
+
+		<Label
+			Style="{StaticResource gridElement}"
+			Grid.Row="1"
+			Grid.Column="0">Хранилище:</Label>
+
+		<Border
+			Grid.Row="1"
+			Grid.Column="1"
+			Style="{StaticResource borderStyle}"
+			BorderBrush="Red">
+			<TextBox
+				Style="{StaticResource gridElement}"
+				Text="{Binding Path=RepositoryPath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+		</Border>
+
+		<Button
+			Style="{StaticResource gridElement}"
+			Grid.Row="1"
+			Grid.Column="2"
+			Command="{Binding Path=BrowseRepositoryPath, Mode=TwoWay}">Обзор...</Button>
+
+		<TextBlock
+			Grid.Row="2"
+			Grid.Column="0"
+			Grid.ColumnSpan="3"
+			Style="{StaticResource gridElement}"
+			Text="Хранилище - это папка, в которой программа хранит считанные записи . Папка должна быть доступна для записи пользователю, от имени которого запущена программа."
+			TextWrapping="Wrap"
+			Background="AntiqueWhite" />
+
+		<Button
+			Style="{StaticResource gridElement}"
+			Grid.Row="4"
+			Grid.Column="1"
+			HorizontalAlignment="Right"
+			MinWidth="50"
+			Command="{Binding Path=OK}">ОК</Button>
+
+		<Button
+			Style="{StaticResource gridElement}"
+			Grid.Row="4"
+			Grid.Column="2"
+			Command="{Binding Path=Cancel}">Отмена</Button>
+
+		<StatusBar
+			Grid.Row="5"
+			Grid.Column="0"
+			Grid.ColumnSpan="3"
+			Style="{StaticResource statusBarStyle}">
+			<StatusBarItem>
+				<TextBlock
+					Text="{Binding Path=StatusString}"
+					Foreground="Red" />
+			</StatusBarItem>
+		</StatusBar>
+	</Grid>
+</Window>

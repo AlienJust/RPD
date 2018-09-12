@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="ВЛ11" Version="0" Description="Протокол ВЛ11, версия неизвестна" Id="9FE36173-B4FA-4260-A4E1-638D00C4A346" RpdId="19">
+  <PsnMeters></PsnMeters>
+  <Commands></Commands>
+</PsnConfiguration>

@@ -1,0 +1,47 @@
+﻿<Page x:Class="RPD.Presentation.Views.AddDataView.SelectFtpDevicePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="SelectDeviceInFtpPage">
+
+    <xctk:BusyIndicator IsBusy="{Binding Path=SelectFtpDeviceIsBusy}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Style="{StaticResource dialogHeader2Style}" 
+                           Margin="5">Выберите одно из устройств доступных на сервере:</TextBlock>
+            
+            <ListBox Grid.Row="1" ItemsSource="{Binding Path=SelectFtpDevice.Items}"
+                         SelectedItem="{Binding Path=SelectFtpDevice.SelectedItem}"
+                         Margin="5,0,5,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5,0,0,0">
+                            <TextBlock Text="{Binding Path=DeviceNumber}" FontWeight="Medium"/>
+                            <TextBlock FontWeight="Light"                                            
+                                           Text="{Binding Path=LocomotiveAndSectionString}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <DockPanel Grid.Row="2" >
+                <Button DockPanel.Dock="Right"
+                        Style="{StaticResource dialogButtonStyle}" 
+                        Command="{Binding Path=SelectFtpDevice.NextCommand}">Далее &gt;</Button>
+
+                <Button DockPanel.Dock="Right"
+                        Style="{StaticResource dialogButtonStyle}"
+                        HorizontalAlignment="Right"
+                        Command="{Binding Path=SelectFtpDevice.BackCommand}">&lt; Назад</Button>
+            </DockPanel>
+        </Grid>
+    </xctk:BusyIndicator>
+</Page>

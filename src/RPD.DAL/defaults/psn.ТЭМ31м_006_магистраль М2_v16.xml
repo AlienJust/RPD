@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Локомотив ТЭМ31М 006 М2" Version="9" Description="Конфигурация второй магистрали" Id="180079A2-627E-4F49-8288-749A0C7E96E6" RpdId="4">
+  <PsnMeters>
+    <PsnMeter Address="0x06" Name="КИ-ППУ" />
+    <PsnMeter Address="0x01" Name="ПНКВ 1" />
+    <PsnMeter Address="0x02" Name="ПНКВ 2" />
+    <PsnMeter Address="0x03" Name="ПНКВ 3" />
+    <PsnMeter Address="0x04" Name="ПНКВ 4" />
+    <PsnMeter Address="0x07" Name="ТП 1" />
+    <PsnMeter Address="0x08" Name="ТП 1" />
+    <PsnMeter Address="0x05" Name="ПЧ-СГ (обм.возб.тэд)" />
+    <PsnMeter Address="0x0A" Name="Инвертор 180" />
+    <PsnMeter Address="0x38" Name="БКО 1" />
+    <PsnMeter Address="0x48" Name="БКО 2" />
+    <PsnMeter Address="0x18" Name="БГР" />
+    <PsnMeter Address="0x09" Name="ПЧ-СГ" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="БУ и КИ-ППУ">
+      <Request Length="5" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="1866e13b-0c2a-4bc5-83a4-922d81db3375" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="c849bc0a-dccd-46bf-a426-94c91beb1dbc" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="13052afc-9064-4895-927a-df544e7e7a9e" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="c573edad-3187-400a-82bb-eced7c10091c" />
+      </Request>
+      <Reply Length="10" Position="5">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="7f95779f-6099-4973-a6f2-6c7523613d03" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="c4b07d04-acc0-4d72-b55a-9d3be022e17a" />
+        <CpzPrm Name="Напряжение  АБ, В" Expression="[s2] * 1.0" Id="ac7142ff-f2c0-4fa0-971a-aef5d001111b" />
+        <CpzPrm Name="Ток заряда АБ, А" Expression="[s3] * 1.0" Id="48ff392b-c89d-4985-9ac1-99a7cb17f290" />
+        <CpzPrm Name="Напряжение непропадающее, В" Expression="[s4] * 1.0" Id="eae355c1-f011-44b0-b7cc-c185e76c732a" />
+        <CpzPrm Name="Ток бортовой цепи, А" Expression="[s5] * 1.0" Id="510a8543-21d1-4440-8be2-22bab4da3fd1" />
+        <CpzPrm Name="Напряжение пропадающее, В" Expression="[s6] * 1.0" Id="6cdeac92-f4c1-463e-b3bf-ae5828bcccb7" />
+        <VarVal Position="8.0" Length="8" Name="#CRCH" Id="85919507-ab54-4ddd-9daf-900f3a819035" />
+        <VarVal Position="9.0" Length="8" Name="#CRCL" Id="4aeec51d-f75b-49f9-ac02-f86254a71377" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и ПНКВ1">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="f0718bc3-354e-48cf-8994-702af61d1d0f" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="24fef271-efa0-4ae4-b506-c2f3e0b5af3a" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="b353c654-f093-44c4-80db-dc0eb9fd58f3" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="88cc73e4-0870-4ddf-afc6-b26fb839ce2c" />
+      </Request>
+      <Reply Length="5" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="f273195c-7724-4cd7-8adb-731bc7be0703" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="0d2922a4-4780-42bc-bc0b-7ab5e108fd59" />
+        <CpzPrm Name="Напряжение выпрямитель-корпус, В" Expression="[s2] * 10.0" Id="f5369b0d-6f64-4989-ad1c-bfe4a3e226c6" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="cdbaa357-fe34-4593-8815-e915f4fdbabc" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="198915d9-834c-4257-a0a3-f21b8f805297" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и ПНКВ2">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="14f85608-50f3-4f77-95ac-3dce99cdd293" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="1485b523-8d26-4d3d-9e0f-dbc6b7d329e6" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="380c5694-3f89-448b-8264-e578f9015e22" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="78021d08-3fa4-445a-b58d-88727d31feca" />
+      </Request>
+      <Reply Length="5" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="6986ccb6-7436-4ff2-803f-bb306996ff38" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="ed5e3e07-77c1-4ade-aacc-e06376c67dd6" />
+        <CpzPrm Name="Напряжение АБ-корпус, В" Expression="[s2] * 10.0" Id="bd25b173-7780-41f7-8a8e-381012f6331c" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="a13c1aa1-86dd-4a52-ba78-d49389f75147" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="9672a9e5-f3a2-4a44-a1d4-fae29e8a1e95" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и ПНКВ3">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="9f36773b-632e-4399-8282-e831cd8edd76" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="44e5cd51-e6fd-452f-8293-c1a3f9ec58e2" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="35a57458-c724-4b8e-95f8-727908e6ab66" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="3704d133-e360-431d-9229-f33bdfaa1e17" />
+      </Request>
+      <Reply Length="5" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="984e8d16-2f0e-4a30-8659-c0262621d8b9" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="cb7066d2-c2e5-47da-a248-fd574a13c04a" />
+        <CpzPrm Name="Напряжение стартерной АБ, В" Expression="[s2] * 0.4" Id="3e3da3aa-1767-40f5-944c-c2e29b153f90" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="3f4022df-4df1-4318-ab0f-893714b59493" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="c37b5fc6-eb73-4759-9078-cc6da008b458" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и ПНКВ4">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="d6eb2ce4-740e-4690-9dd7-09ef14857499" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="40a4c241-fd22-4fca-8d8f-5340ac3159e6" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="f39cab05-3970-44e7-b438-1143c7c1cb25" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="8ad39f14-58db-497d-9659-7ac094ca68f7" />
+      </Request>
+      <Reply Length="5" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="0cce8fa7-541f-40a5-bb8b-3278670d8b3f" />
+        <DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="01875919-8d52-42d6-9aca-39845288e0bd" />
+        <CpzPrm Name="Давление газов в картере дизеля (напряжение с ДД), 1мВ (15мВ=0Па; 75мВ= 400,2Па)" Expression="[s2] * 1.0" Id="632769c6-8bf2-48bc-ad18-fcc4dbc6fb9b" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="fa84df22-e3ae-4e62-9ba2-505537eabda9" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="0c151d25-1296-4b46-9924-80ace5e6788d" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и ТП 1">
+      <Request Length="8" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="5c1cdd82-2b5f-4c98-8449-6654ee4d1483" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="1d2e8335-459a-47cc-9043-2c97367bcdae" />
+        <VarVal Position="2.7" Length="1" Name="Управление включением" Multiplier="1.0" IsSigned="False" Id="3bc5a4e8-f111-4df4-8fb7-5f6682400998" />
+        <VarVal Position="2.6" Length="1" Name="Режим тяги (1) / Режим торможения (0)" Multiplier="1.0" IsSigned="False" Id="8bad798c-655c-4a39-a81f-43dcacdf54b6" />
+        <CpzPrm Name="Уставка по току, А" Expression="[u3] * 4.0" Id="ae9f0c81-37db-4699-8338-6eb17aebce76" />
+        <CpzPrm Name="Уставка по напряжению, В" Expression="[u4] * 4.0" Id="6442114c-c1e3-41a5-901a-132f4f163feb" />
+        <CpzPrm Name="Ограничение по мощности, кВт" Expression="[u5] * 1.0" Id="17225532-2c03-4516-a20c-42bf7ae8c43f" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="0baf806d-956f-48db-945e-f51fafb8717a" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="2075695c-7d3a-4961-8955-1b3712f45177" />
+      </Request>
+      <Reply Length="20" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="ebf2973f-0e9b-4745-8bcd-db8aedb55000" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="6b1a6c06-d01d-4084-b279-48ce3675bb82" />
+        <CpzPrm Name="Выходное напряжение (на якоре), В" Expression="[u2] + [u3]*256.0" Id="8398e6e2-3397-4cd5-a3b1-bc65ee9f9d6a" />
+        <CpzPrm Name="Выходной ток фаза А, действующее значение, А" Expression="[u4] + [s5]*256.0" Id="434f806b-00f9-4d61-a58f-41b77b224fe3" />
+        <CpzPrm Name="Выходной ток фаза B, действующее значение, А" Expression="[u6] + [s7]*256.0" Id="fb356075-b4d0-4bfa-b994-b8dae182e38b" />
+        <CpzPrm Name="Выходной ток фаза C, действующее значение, А" Expression="[u8] + [s9]*256.0" Id="3d563172-22eb-483c-9de2-3b739f2c968c" />
+        <CpzPrm Name="Температура, °С" Expression="[u10] + [s11]*256.0" Id="2b82656c-d1e5-4143-bb64-6311a52b5bf7" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u12] + [u13]*256.0" Id="395e8ea5-7c6b-4c96-a44c-6c0a715f75e3" />
+        <VarVal Position="14.7" Length="1" Name="Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="cd856937-c8c6-4ca6-a8e1-01809486e51d" />
+        <VarVal Position="14.6" Length="1" Name="Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="384fe5ff-ad72-4067-9891-85a171b66054" />
+        <VarVal Position="14.5" Length="1" Name="Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="cae2cac3-5800-4b8e-86a2-4715fc1779bc" />
+        <VarVal Position="14.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Multiplier="1.0" IsSigned="False" Id="94f2b11b-bfd1-4a60-93b5-8728f8334a75" />
+        <VarVal Position="14.3" Length="1" Name="Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="9ebba88c-3b4b-45aa-a742-0081afcde7b0" />
+        <VarVal Position="14.2" Length="1" Name="Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="88cffee4-b695-4929-b9a3-d86ae88dac89" />
+        <VarVal Position="14.0" Length="1" Name="Диагностика: Ошибка EEPROM" Multiplier="1.0" IsSigned="False" Id="c4e65e82-7c2a-4044-96d2-14f21e896eab" />
+        <VarVal Position="15.7" Length="1" Name="Диагностика: Уставка не достигнута" Multiplier="1.0" IsSigned="False" Id="a636b703-66a4-4dc9-86be-ee58002ab89e" />
+        <VarVal Position="15.6" Length="1" Name="Диагностика: Ограничение по мощности" Multiplier="1.0" IsSigned="False" Id="f7d785e4-060c-4fb9-8598-981a1fa7265d" />
+        <VarVal Position="15.5" Length="1" Name="Диагностика: Отключение торможения по повышенному напряжению" Multiplier="1.0" IsSigned="False" Id="b42413a2-1b66-43e2-b669-817c74770738" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="33a33568-c52e-43b1-9a4c-facc8bf637e7" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="97869792-6475-4b63-8bb3-daefff37ab2c" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и ТП 2">
+      <Request Length="8" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="6ff9a06b-d0e7-46e8-bec4-0a3d6a3c1381" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="0d65422b-4140-42dc-8c6d-6640072c27b9" />
+        <VarVal Position="2.7" Length="1" Name="Управление включением" Multiplier="1.0" IsSigned="False" Id="51b1c218-e8b4-435d-a60a-765030b5b084" />
+        <VarVal Position="2.6" Length="1" Name="Режим тяги (1) / Режим торможения (0)" Multiplier="1.0" IsSigned="False" Id="83f832d0-af50-4d61-ba46-4589c9109a4e" />
+        <CpzPrm Name="Уставка по току, А" Expression="[u3] * 4.0" Id="29953d93-b77f-4730-8f95-de1c95b80519" />
+        <CpzPrm Name="Уставка по напряжению, В" Expression="[u4] * 4.0" Id="15e4e308-0d2f-4a9a-b130-f92e1aba0ff3" />
+        <CpzPrm Name="Ограничение по мощности, кВт" Expression="[u5] * 1.0" Id="901ddd8d-1e64-46ec-8dfc-a360b91630d3" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="1917ff1e-137b-48ce-8e70-35e805a62a2a" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="01ff578f-ce04-4548-a160-abebefcbcf33" />
+      </Request>
+      <Reply Length="20" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="5e6acf04-68a4-4d0a-ad89-3b8495041ddc" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="de8252a9-f040-40ac-ae2f-39adfdc17e8a" />
+        <CpzPrm Name="Выходное напряжение (на якоре), В" Expression="[u2] + [u3]*256.0" Id="de6c9db4-4904-4c76-9ef6-a57f618335f5" />
+        <CpzPrm Name="Выходной ток фаза А, действующее значение, А" Expression="[u4] + [s5]*256.0" Id="091e5a04-964d-4481-aace-b6b0a0099d4d" />
+        <CpzPrm Name="Выходной ток фаза B, действующее значение, А" Expression="[u6] + [s7]*256.0" Id="ceb77153-7c70-40b8-a502-4c6ed34b1835" />
+        <CpzPrm Name="Выходной ток фаза C, действующее значение, А" Expression="[u8] + [s9]*256.0" Id="f240683f-116e-40ee-b6ba-628aa07b8870" />
+        <CpzPrm Name="Температура, °С" Expression="[u10] + [s11]*256.0" Id="c02ed3f4-e0db-43ad-94fa-932677a7cac3" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u12] + [u13]*256.0" Id="0778f0ca-ba03-49fe-bccf-7a7c87690dd8" />
+        <VarVal Position="14.7" Length="1" Name="Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="e73b1be3-2e6a-41cb-ae36-cf43bcde11f9" />
+        <VarVal Position="14.6" Length="1" Name="Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="6ca38659-ffdc-4992-8b6b-a6dd90388766" />
+        <VarVal Position="14.5" Length="1" Name="Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="66109011-1c6e-43be-bdd4-7d8a26e5e8cc" />
+        <VarVal Position="14.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Multiplier="1.0" IsSigned="False" Id="5482841c-6fa2-4546-8c4e-e5f0bd3105f6" />
+        <VarVal Position="14.3" Length="1" Name="Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="5808d9ea-9530-419c-aa57-56ed826505d3" />
+        <VarVal Position="14.2" Length="1" Name="Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="de179888-126c-424b-a6a2-9cfb7c419d7d" />
+        <VarVal Position="14.0" Length="1" Name="Диагностика: Ошибка EEPROM" Multiplier="1.0" IsSigned="False" Id="41051b3f-542f-42e3-8961-c58a613d8b25" />
+        <VarVal Position="15.7" Length="1" Name="Диагностика: Уставка не достигнута" Multiplier="1.0" IsSigned="False" Id="44abeade-28c0-4726-91d5-c106e06aa70e" />
+        <VarVal Position="15.6" Length="1" Name="Диагностика: Ограничение по мощности" Multiplier="1.0" IsSigned="False" Id="cb592fc2-75b0-4849-8e74-9aa504ccb951" />
+        <VarVal Position="15.5" Length="1" Name="Диагностика: Отключение торможения по повышенному напряжению" Multiplier="1.0" IsSigned="False" Id="393677c1-d07c-432a-9db7-3d75ca671816" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="a0615766-2016-4367-97ea-a9430179d4e4" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="b8fbbb16-acfa-44e7-b698-3c395a270b56" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и ПЧ-СГ (обм.возб.тэд)">
+      <Request Length="8" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="affc3ae7-63ba-4318-a1b7-148b8289ce49" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="a4287134-5771-4fa5-a155-1376b2ff77ad" />
+        <VarVal Position="2.7" Length="1" Name="Управление включением" Multiplier="1.0" IsSigned="False" Id="55996ce4-02d2-46d4-b7a5-1f087e8567d4" />
+        <VarVal Position="2.6" Length="1" Name="Режим тяги (1) / Режим торможения (0)" Multiplier="1.0" IsSigned="False" Id="c78259e9-ef93-4f9b-9c2c-0f592edd2260" />
+        <CpzPrm Name="Уставка по току, А" Expression="([u3] + [u4])* 4.0" Id="9a83aa1b-9ab1-4c9b-b06f-900f551f55dc" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="031244ab-9431-47ad-8128-d88142399aa8" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="94d3cca6-1ea9-432e-8c39-895d2ba3844f" />
+      </Request>
+      <Reply Length="20" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="629892d6-cf15-4977-968b-326cf15b4ec6" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="547d1a12-fe3d-410b-94ec-296f172ea67c" />
+        <CpzPrm Name="Выходное напряжение (на якоре), В" Expression="[u2] + [u3]*256.0" Id="fceee99a-b6c8-4c2d-b004-0591cbf8ddcc" />
+        <CpzPrm Name="Выходной ток фаза А, действующее значение, А" Expression="[u4] + [s5]*256.0" Id="664247ab-debd-4097-8b6a-e9dc0696a7b4" />
+        <CpzPrm Name="Выходной ток фаза B, действующее значение, А" Expression="[u6] + [s7]*256.0" Id="173ce664-0843-4247-bfc7-01aa69b391f1" />
+        <CpzPrm Name="Выходной ток фаза C, действующее значение, А" Expression="[u8] + [s9]*256.0" Id="7f8d2d9e-20ad-4c33-954d-379541031e55" />
+        <CpzPrm Name="Температура, °С" Expression="[u10] + [s11]*256.0" Id="b4d1fda4-6769-40aa-ae7b-1785005b56db" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u12] + [u13]*256.0" Id="140f83e1-7793-4dc4-a46b-2ec133858d3d" />
+        <VarVal Position="14.7" Length="1" Name="Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="1456e162-82ce-47e3-b616-6426d1317e93" />
+        <VarVal Position="14.6" Length="1" Name="Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="7e2f9799-2eb5-46af-b146-4d59829856ae" />
+        <VarVal Position="14.5" Length="1" Name="Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="7141d248-8180-49da-8858-73e5c2e44fc7" />
+        <VarVal Position="14.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Multiplier="1.0" IsSigned="False" Id="5bd7692a-c35d-4629-b72b-80b9c510bb47" />
+        <VarVal Position="14.3" Length="1" Name="Диагностика: Повышенное выходное напряжение" Multiplier="1.0" IsSigned="False" Id="b63f1a88-2932-45f6-9d07-432685503ae2" />
+        <VarVal Position="14.2" Length="1" Name="Диагностика: Пониженное выходное напряжение" Multiplier="1.0" IsSigned="False" Id="9503aa55-3975-4f59-9929-203ca3ebe96f" />
+        <VarVal Position="14.0" Length="1" Name="Диагностика: Ошибка EEPROM" Multiplier="1.0" IsSigned="False" Id="9891c3b7-1aea-4fb1-84ce-aa8364c99ae4" />
+        <VarVal Position="15.7" Length="1" Name="Диагностика: Уставка не достигнута" Multiplier="1.0" IsSigned="False" Id="59419885-41ae-4fd5-80bc-fd92c43b1cc9" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="241c4a0f-a568-40b9-b353-87ef19a6f4f5" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="f6cb2b63-6f70-4782-bada-ebe13d3e7d09" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и Инвертор 180">
+      <Request Length="8" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="29f6cbf8-7866-459a-b01a-a7bd423651dc" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="06a3fa09-7661-4f4d-913f-7e6d4992c31e" />
+        <VarVal Position="2.7" Length="1" Name="Управление включением" Multiplier="1.0" IsSigned="False" Id="564031c9-e811-4051-a126-44b9ad67400e" />
+        <VarVal Position="2.6" Length="1" Name="Режим тяги (1) / Режим торможения (0)" Multiplier="1.0" IsSigned="False" Id="cf46830c-67dc-4af8-aaab-a05ad28ba67e" />
+        <CpzPrm Name="Уставка по частоте, Гц" Expression="[u3] * 1.0" Id="d9de89e6-fa80-43e0-b3db-9335126a3876" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="516641cf-7437-4580-841a-ac1e55147a29" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="53b9fbba-964a-4b0d-9a3c-346bfe1a8b88" />
+      </Request>
+      <Reply Length="20" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="918fd3ba-931a-42bb-8388-2b2f242cb17c" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="1648f909-c82f-4057-9924-84639deb78de" />
+        <CpzPrm Name="Выходное напряжение (на якоре), В" Expression="[u2] + [u3]*256.0" Id="b875feae-5fa0-4b19-aa5b-39d687c75ac4" />
+        <CpzPrm Name="Выходной ток фаза А, действующее значение, А" Expression="[u4] + [s5]*256.0" Id="d92430da-4ec2-47c7-909f-328b4d790314" />
+        <CpzPrm Name="Выходной ток фаза B, действующее значение, А" Expression="[u6] + [s7]*256.0" Id="72b5dee8-28e2-40e1-9df0-f289b78f9903" />
+        <CpzPrm Name="Выходной ток фаза C, действующее значение, А" Expression="[u8] + [s9]*256.0" Id="cdbe16c4-02a1-4c42-95a4-d457b6f95928" />
+        <CpzPrm Name="Температура, °С" Expression="[u10] + [s11]*256.0" Id="7da04cfe-6a74-4cd9-851d-ce5b49cdc80f" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u12] + [u13]*256.0" Id="e26c0b89-b311-4d72-8350-ac28ea69c811" />
+        <VarVal Position="14.7" Length="1" Name="Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="4784da9f-8378-4280-9a59-14d9422f7f93" />
+        <VarVal Position="14.6" Length="1" Name="Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="18315f46-407d-45d6-b802-90a6c476ca27" />
+        <VarVal Position="14.5" Length="1" Name="Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="3d8b66e7-13b7-4a44-a5c8-7044daa23c71" />
+        <VarVal Position="14.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Multiplier="1.0" IsSigned="False" Id="a04c53d7-bdbb-4fcd-adf7-c9dfd9fe0224" />
+        <VarVal Position="14.3" Length="1" Name="Диагностика: Повышенное выходное напряжение" Multiplier="1.0" IsSigned="False" Id="5d5afa4b-f3df-4499-ad0e-87fe7153991a" />
+        <VarVal Position="14.2" Length="1" Name="Диагностика: Пониженное выходное напряжение" Multiplier="1.0" IsSigned="False" Id="6d6e142c-5eb1-40d0-a2b1-d2816bd5f78f" />
+        <VarVal Position="14.0" Length="1" Name="Диагностика: Ошибка EEPROM" Multiplier="1.0" IsSigned="False" Id="547e765a-d32d-44a6-995a-bef2a381291c" />
+        <VarVal Position="15.7" Length="1" Name="Диагностика: Уставка не достигнута" Multiplier="1.0" IsSigned="False" Id="006462ca-8fb4-49a1-a459-674ab99bb75a" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="5724bad0-70d7-4863-9d2c-ac2d385086ca" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="2a619075-2b3a-4a7f-b559-063e56f1eb6a" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БКО 1">
+      <Request Length="6" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x38" Name="#ADDR" Id="6fa87d87-73ce-4700-acab-393e639a8588" />
+        <DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="64731392-2e7e-4ff4-881c-d7ee9f214299" />
+        <VarVal Position="2.7" Length="1" Name="Команда БУ: Управление выключением (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="aec42d26-b23a-4357-93b4-3597ef45a65b" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="be18594d-d7cc-4772-bde3-9910b8d514d2" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="a8b40e5b-51be-4660-bf64-f8ec9b057528" />
+      </Request>
+      <Reply Length="14" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x38" Name="#ADDR" Id="9b99c148-18e8-44e4-9e72-12dfcfcf3bfb" />
+        <DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="0dbe74bc-f8bb-4903-a84a-c33d0517aeba" />
+        <CpzPrm Name="Входное напряжение, В" Expression="[u2] * 4.0" Id="79024b46-af1f-4ef4-a1d0-d987c5f8c7da" />
+        <CpzPrm Name="Выходное напряжение, В" Expression="[u3] * 4.0" Id="649ab833-aa0f-4301-b10e-1fe0a4af619b" />
+        <CpzPrm Name="Выходной ток, А" Expression="[u4] * 4.0" Id="70209e41-c06c-488a-8225-19642e3798bd" />
+        <CpzPrm Name="Температура, °С" Expression="[u5] + [s6]*256.0" Id="024cdbfd-e72e-4808-9392-0b79620f33c5" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u7] * 1.0" Id="49916c8d-d47b-4a0b-8910-f1f50465e8cf" />
+        <VarVal Position="8.7" Length="1" Name="Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="f387da95-ce94-4a77-85d1-33404591481a" />
+        <VarVal Position="8.6" Length="1" Name="Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="b10a4530-ab67-4770-9419-7ce4c00fb062" />
+        <VarVal Position="8.5" Length="1" Name="Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="662903db-fb5f-40ee-9e55-de1af03e7116" />
+        <VarVal Position="8.4" Length="1" Name="Диагностика: Защита по току силовой сборки инвертора" Multiplier="1.0" IsSigned="False" Id="032c53c7-64f9-411c-b38a-9c666fbd9a34" />
+        <VarVal Position="8.3" Length="1" Name="Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="365ce2e2-5b05-49ba-a3bb-8fd2744cd853" />
+        <VarVal Position="8.2" Length="1" Name="Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="6617bbaf-ed78-4e60-a3c6-ea4c207f7771" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="5f1a08e2-4af7-4e7f-8b43-b873fdc0a4f6" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="b3eb2867-1c3f-4416-a212-9bfd3ae6c5e5" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БКО 2">
+      <Request Length="6" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x48" Name="#ADDR" Id="25f0e47d-a55c-4cce-a0a2-c3195640d33e" />
+        <DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="50b8745e-4d62-4423-9b33-ce6a48a41d0d" />
+        <VarVal Position="2.7" Length="1" Name="Команда БУ: Управление выключением (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="a0420485-edc2-4cf6-ac3f-3a09b617dbe9" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="53314510-d04d-42ae-8797-26c24b031f3e" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="654d0127-f9ef-4a56-a062-2c11b8d74f98" />
+      </Request>
+      <Reply Length="14" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x48" Name="#ADDR" Id="3aa96dab-7f08-4d46-a877-17ed1d68e3d7" />
+        <DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="ffe67960-7571-4972-a478-1f6cf6fc494b" />
+        <CpzPrm Name="Входное напряжение, В" Expression="[u2] * 4.0" Id="f6b4700d-e1a2-4be2-af5f-a232a5d7a4dc" />
+        <CpzPrm Name="Выходное напряжение, В" Expression="[u3] * 4.0" Id="a77b93bf-8a3c-403b-bac2-31b518b1ffb5" />
+        <CpzPrm Name="Выходной ток, А" Expression="[u4] * 4.0" Id="7ee427d8-24db-4430-b685-a8a6b09f864a" />
+        <CpzPrm Name="Температура, °С" Expression="[u5] + [s6]*256.0" Id="32c46c5e-23e5-48c4-9080-e3c8f5a95e5b" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u7] * 1.0" Id="77a11488-bab5-42b8-b9f0-44d320f70e02" />
+        <VarVal Position="8.7" Length="1" Name="Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="b375b338-de24-405a-a5bf-4037d43bf9ea" />
+        <VarVal Position="8.6" Length="1" Name="Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="169430a9-4082-4735-9353-a417c31c9aa7" />
+        <VarVal Position="8.5" Length="1" Name="Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="b099bc41-dea7-4644-8c19-8fd8d625ec25" />
+        <VarVal Position="8.4" Length="1" Name="Диагностика: Защита по току силовой сборки инвертора" Multiplier="1.0" IsSigned="False" Id="df8eaa2a-d911-42c0-b013-e2dcf4719879" />
+        <VarVal Position="8.3" Length="1" Name="Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="19b81b27-385c-4e97-b524-7b27dc8e3961" />
+        <VarVal Position="8.2" Length="1" Name="Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="1de960a3-d2d1-4230-b20e-566fca1ca8d8" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="e4f2ae99-d5ba-4827-9037-da879d353e92" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="7febca9d-67cb-4eb5-9cd7-45f8f04c321b" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БГР">
+      <Request Length="6" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="022e6d36-8788-4275-95ba-70ab9f5629a4" />
+        <DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="7cf4fed3-6061-43ef-a875-092faa556d1f" />
+        <VarVal Position="2.7" Length="1" Name="Команда БУ: Управление выключением" Multiplier="1.0" IsSigned="False" Id="3f903135-6984-4ca9-9962-799427fd324c" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="f6babe58-1fec-404e-a503-a145d99cdbe9" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="82c7d1d9-d540-45dc-94f9-187181635ee4" />
+      </Request>
+      <Reply Length="14" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="eddcbc7e-fc18-4786-bc9e-e1b83927da0d" />
+        <DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="a35acdb1-f996-4e51-ba95-196569c3a3c5" />
+        <CpzPrm Name="Входное напряжение, В" Expression="[u2] * 4.0" Id="e14eebbc-6184-48bf-b0d5-7ac075cb5969" />
+        <CpzPrm Name="Выходное напряжение, В" Expression="[u3] * 4.0" Id="4bb0524d-ae01-4f7a-bd0a-622cbcf30fa4" />
+        <CpzPrm Name="Выходной ток, А" Expression="[u4] * 4.0" Id="c4561f8b-6a17-4fe2-be92-91ab7bdb6a9b" />
+        <CpzPrm Name="Температура, °С" Expression="[u5] + [s6]*256.0" Id="63a753a5-7f35-49f3-bd8e-d2d31d41c326" />
+        <CpzPrm Name="Величина ШИМ" Expression="[u7] * 1.0" Id="6d4acd0e-91da-4ce2-8e83-f830f2fc310f" />
+        <VarVal Position="8.7" Length="1" Name="Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="48e606bf-edf2-4945-9839-2a019b09473a" />
+        <VarVal Position="8.6" Length="1" Name="Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="f26e6fc5-4b03-4f06-8ccc-a66c3757006d" />
+        <VarVal Position="8.5" Length="1" Name="Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="4995e5eb-bd89-45df-bf14-c411f8e33ce8" />
+        <VarVal Position="8.4" Length="1" Name="Диагностика: Защита по току силовой сборки инвертора" Multiplier="1.0" IsSigned="False" Id="45db203a-06cd-41eb-a847-c998f5c6b02d" />
+        <VarVal Position="8.3" Length="1" Name="Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="2823b32b-be37-4002-b8a3-053f4536bf28" />
+        <VarVal Position="8.2" Length="1" Name="Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="62ca2983-ff10-4b7f-b990-08ad56654e53" />
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="11b299bd-2e4d-4988-a7f1-b75e004817fd" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="fef43cb1-198b-4720-9896-e9e7d861ead5" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и ПЧ-СГ">
+      <Request Length="6" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x09" Name="#ADDR" Id="6f0b0a48-45c0-41b2-ab52-524faa6a4496" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="283bfca9-dfb7-4afb-9172-dc405491f51f" />
+        <CpzPrm Name="Температура  ЭМСГ максимальная (Формирует ФПМО), °С" Expression="[s2] * 2.0" Id="55004b5e-0bcc-494a-a6b7-5e2cc16bc428" />
+        <VarVal Position="3.7" Length="1" Name="Команда БУ: Команда «Прокрутка дизеля» (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="3667c0bf-0147-4bd2-8975-49a3c5219050" />
+        <VarVal Position="3.6" Length="1" Name="Команда БУ: Команда «Останов дизеля в ПЧ-СГ» (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="3df3bf17-9083-4766-9af0-b45319582fac" />
+        <VarVal Position="3.5" Length="1" Name="Команда БУ: Команда «Сброс аварии в ПЧ-СГ» (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="f8b30b78-f227-4978-ad51-fa1b31a47c32" />
+        <VarVal Position="3.4" Length="1" Name="Команда БУ: Выпрямитель (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="246d3308-a7ee-45a7-a751-c329c554c0d8" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="d813e619-e306-4b6c-8157-d3ea4a6c5677" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="e88343e3-6a3c-4a53-a705-4260ecd3bb63" />
+      </Request>
+      <Reply Length="24" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x09" Name="#ADDR" Id="f91fd3c1-5dd3-4939-afa0-7d7153dfd7a4" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="5eef0979-de53-4ea6-a5b5-f3777ebe33b5" />
+        <CpzPrm Name="ПЧ-СГ: Частота вращения ротора ЭМСГ, об/мин" Expression="([u2] + [s3]*256.0) * 0.1" Id="8409e977-15d2-467e-b131-0dc2adac8eaf" />
+        <CpzPrm Name="ПЧ-СГ: Измеренный ток Iq, A" Expression="([u4] + [s5]*256.0) * 0.1" Id="b606a5a3-ecab-4eb3-b498-7ebc4bcb91d2" />
+        <CpzPrm Name="ПЧ-СГ: Измеренный ток Id, A" Expression="([u6] + [s7]*256.0) * 0.1" Id="294ab310-fd9f-430a-8e78-78605c6a8643" />
+        <CpzPrm Name="ПЧ-СГ: Входное/выходное напряжение, В" Expression="([u8] + [u9]*256.0) * 0.1" Id="88e81f89-1c4b-447d-89ae-78d93f01804a" />
+        <CpzPrm Name="ПЧ-СГ: Мощность на валу ЭМСГ, кВт" Expression="[u10] + [u11]*256.0" Id="6c9966b5-42c3-4ee9-a751-589903442556" />
+        <CpzPrm Name="ПЧ-СГ: Напряжение по оси q, %" Expression="[s12] * 1.0" Id="ab37289f-f67a-4cd3-ab69-8c5634a8a3d3" />
+        <CpzPrm Name="ПЧ-СГ: Напряжение по оси d, %" Expression="[s13] * 1.0" Id="24de6df9-7fad-4a62-bab4-464d0c8bf8b9" />
+        <CpzPrm Name="ПЧ-СГ: Температура преобразователя, °С" Expression="[s14] * 2.0" Id="316241a4-c1f4-45f8-9251-87100f2cb1c7" />
+        <CpzPrm Name="ПЧ-СГ: Угол поворота ротора, %" Expression="[u15] * 0.5" Id="fb8850d1-251b-45a1-86dc-997010a16778" />
+        <VarVal Position="16.7" Length="1" Name="Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="b50ff851-76fd-4f1d-9dd7-ad368a9fb69d" />
+        <VarVal Position="16.6" Length="1" Name="Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="f599e77b-fb3d-44ac-a969-3ebda336549a" />
+        <VarVal Position="16.5" Length="1" Name="Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="9fb9c477-2c86-4a95-9d9a-2955f69be363" />
+        <VarVal Position="16.4" Length="1" Name="Диагностика: Защита по току силовой сборки" Multiplier="1.0" IsSigned="False" Id="1c943f9c-a3c0-4bec-9414-6b063f732941" />
+        <VarVal Position="16.3" Length="1" Name="Диагностика: Повышенное выходное напряжение (&gt; 648В)" Multiplier="1.0" IsSigned="False" Id="e1f60711-2f46-43c4-884f-ec0a2fa831c7" />
+        <VarVal Position="16.3" Length="1" Name="Диагностика: Пониженное входное напряжение (&lt; 448В)" Multiplier="1.0" IsSigned="False" Id="d393c605-b5b1-4ef4-97a9-c0398078eb71" />
+        <VarVal Position="16.1" Length="1" Name="Диагностика: Готовность" Multiplier="1.0" IsSigned="False" Id="310e01c6-d75d-4c07-9f7e-b68c7d12e114" />
+        <VarVal Position="16.0" Length="1" Name="Диагностика: Ошибка состояния ДХ" Multiplier="1.0" IsSigned="False" Id="d1f0d9df-1b62-4796-9a32-396ccac47777" />
+        <VarVal Position="19.7" Length="1" Name="Диагностика ЭМСГ: Режим работы «генератор»" Multiplier="1.0" IsSigned="False" Id="3b99d702-5888-4374-8748-dacaafbbf10c" />
+        <VarVal Position="19.6" Length="1" Name="Диагностика ЭМСГ: Скорость выше нормы" Multiplier="1.0" IsSigned="False" Id="a37ebdb2-04ce-480e-8f76-296258834f9b" />
+        <VarVal Position="19.5" Length="1" Name="Диагностика ЭМСГ: Защита по температуре ЭМСГ" Multiplier="1.0" IsSigned="False" Id="9b5d4f16-98dd-427f-aee7-f0bb473402ce" />
+        <VarVal Position="19.4" Length="1" Name="Диагностика ЭМСГ: Превышение времени ожидания скорости" Multiplier="1.0" IsSigned="False" Id="4a896513-c28f-450b-aef8-8be5a0106ad4" />
+        <CpzPrm Name="Счетчик МС" Expression="([u18] + [u19]*256.0) * 1.0" Id="d8c2173d-bb91-440e-aa75-28da64e5a848" />
+        <VarVal Position="22.0" Length="8" Name="#CRCH" Id="2d2c5c83-dcaa-423a-b837-875004d3fc8e" />
+        <VarVal Position="23.0" Length="8" Name="#CRCL" Id="e9648db6-0e1f-4742-8a0a-4d0c98b48475" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

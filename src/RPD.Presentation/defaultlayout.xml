@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutRoot xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <RootPanel Orientation="Horizontal">
+    <LayoutAnchorablePane Id="4913fcc7-eeff-4f16-87bf-391257607903" DockWidth="250">
+      <LayoutAnchorable CanHide="False" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="ПСН" ContentId="psnLayoutAnchorable" CanClose="False" LastActivationTimeStamp="12/11/2013 17:17:16" />
+      <LayoutAnchorable CanHide="False" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="ПСН по включению" IsSelected="True" ContentId="psnPowerOnLayoutAnchorable" CanClose="False" LastActivationTimeStamp="12/11/2013 17:17:17" />
+      <LayoutAnchorable CanHide="False" AutoHideMinWidth="100" AutoHideMinHeight="100" Title="РПД" ContentId="rpdLayoutAnchorable" CanClose="False" LastActivationTimeStamp="12/11/2013 17:17:17" />
+    </LayoutAnchorablePane>
+    <LayoutDocumentPane>
+      <LayoutDocument Title="Магистраль ПСН" IsSelected="True" IsLastFocusedDocument="True" ContentId="psnLayoutDocument" CanClose="False" LastActivationTimeStamp="12/11/2013 17:17:42" />
+      <LayoutDocument Title="РПД" ContentId="rpdLayoutDocument" CanClose="False" LastActivationTimeStamp="12/11/2013 17:17:26" />
+      <LayoutDocument Title="Авари ПСН" ContentId="psnFaultLayoutDocument" CanClose="False" LastActivationTimeStamp="12/11/2013 17:17:26" />
+    </LayoutDocumentPane>
+  </RootPanel>
+  <TopSide />
+  <RightSide />
+  <LeftSide />
+  <BottomSide />
+  <FloatingWindows />
+  <Hidden>
+    <LayoutAnchorable AutoHideMinWidth="100" AutoHideMinHeight="100" IsSelected="True" LastActivationTimeStamp="12/11/2013 17:17:41" PreviousContainerId="4913fcc7-eeff-4f16-87bf-391257607903" PreviousContainerIndex="0" />
+  </Hidden>
+</LayoutRoot>

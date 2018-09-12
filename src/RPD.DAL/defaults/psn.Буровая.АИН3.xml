@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Буровая, АИН3" Version="1" Description="Конфигурация для буровой. Обмен с компютером, АИН3" Id="a24434cf-e816-4067-9ac9-ce0305d24e8b" RpdId="35">
+	<PsnMeters>
+		<PsnMeter Address="0x03" Name="АИН-3" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="БС-Ethernet и АИН-3. Чтение телеметрии">
+			<Request Length="8" Position="0" CycleMsTime="550">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="0c4443f7-a97e-4c6c-ac98-b9c7c32de64f" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="0d1bc7de-6cd1-4400-b668-f7909725ad91" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="0f2b6267-ca1b-4eb5-868c-cbf10981988e" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="6b4a490e-7c9b-43f7-bfa0-b24429875fa7" />
+			</Request>
+			<Reply Length="73" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="58856106-7a31-4315-9f1f-872fc691e8a6" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="16556f74-a4c7-4fe6-b148-34696234f45f" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 0.1" Name="Fe, Вычисленная частота вращения, Гц" Id="ac84e18f-e147-4edd-bef2-b58942bf4634" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Uout, Коэффициент модуляции ШИМ, %" Id="6e9848c1-f27a-4056-bc34-6c4a61ae500c" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="IQset,Задание моментного тока, А" Id="6fc71678-4180-4d4e-9d03-711bc409c20c" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0)  1.0" Name="T, Температура радиатора, град" Id="60bb535b-8814-4402-b437-ebd05597f6d8" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Udc, Напряжение шины DC, В" Id="c87256fd-1553-4bdb-aeee-3f9b006a6a50" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Isum, Амплитуда огибающей тока по всем трем фазам, А" Id="5b8ac037-7567-464a-bbcc-59e85d1fb34b" />
+				<CpzPrm Expression="([u15] + [s16] * 256.0) * 0.001" Name="Ud, Выход регулятора тока D" Id="21fe8292-02a3-435b-a2f0-0baacc3084a5" />
+				<CpzPrm Expression="([u17] + [s18] * 256.0) * 0.001" Name="Uq, Выход регулятора тока Q" Id="ff3e36b7-241f-4cba-82d4-21c9050052cf" />
+				<CpzPrm Expression="([u19] + [s20] * 256.0) * 0.1" Name="Fout, Выход задатчика интенсивности частоты (электрической), Гц" Id="ef8144b7-fae5-44a4-90a5-3e3f74fd6d1f" />
+				<CpzPrm Expression="([u21] + [s22] * 256.0) * 1.0" Name="FIset, Уставка потока, мВб" Id="0ba0e8dc-a61d-429b-b9f2-5b0da89d8954" />
+				<CpzPrm Expression="([u23] + [s24] * 256.0) * 1.0" Name="Torq, Измеренный момент, Нм" Id="829dd89a-7021-4cb1-8779-34e5e03ff5ec" />
+				<CpzPrm Expression="([u25] + [s26] * 256.0) * 1.0" Name="Mout, Выход регулятора скорости или уставка момента, Нм" Id="66b8be4f-bebb-4866-aced-eae70a48de30" />
+				<CpzPrm Expression="([u27] + [s28] * 256.0) * 1.0" Name="FImag, Измеренный поток, мВб" Id="65a80f35-5ade-429c-8e45-084667986619" />
+				<CpzPrm Expression="([u29] + [s30] * 256.0) * 1.0" Name="IDset, Задание тока возбуждения, А" Id="47c723d9-dec5-422b-9c66-67078eefee8c" />
+				<CpzPrm Expression="([u31] + [s32] * 256.0) * 1.0" Name="RUNMODE, Текущий режим работы" Id="e93164fc-05b2-4d83-8586-d0b54ccb1474" />
+				<CpzPrm Expression="([u33] + [s34] * 256.0) * 1.0" Name="STATUS, Биты ошибок" Id="fc3aa2f7-44a9-4805-9a20-2239079e3b57" />
+				<CpzPrm Expression="([u35] + [s36] * 256.0) * 1.0" Name="Fm, Частота вращения, измеренная ДЧВ (электрическая)" Id="f7de43a2-0448-499d-a0d4-ac1cf7967efd" />
+				<CpzPrm Expression="([u37] + [s38] * 256.0) * 1.0" Name="Ffb_f, Частота на ОС регулятора скорости после фильтра" Id="99b99148-5db6-4d7f-9cbc-6f5712ddb09c" />
+				<CpzPrm Expression="([u39] + [s40] * 256.0) * 1.0" Name="FImag_f, FImag после фильтра" Id="f422edcf-8cd5-471d-a2ad-51647deadb2d" />
+				<CpzPrm Expression="([u41] + [s42] * 256.0) * 1.0" Name="Id, Измеренная составляющая тока D" Id="4f06e8e3-8302-4c50-900e-d15c5b3dbf44" />
+				<CpzPrm Expression="([u43] + [s44] * 256.0) * 1.0" Name="Iq, Измеренная составляющая тока Q" Id="d4b1c8ce-e03d-4bf6-a8e6-683105818ed0" />
+				<CpzPrm Expression="([u45] + [s46] * 256.0) * 1.0" Name="Fset_f, Fset после фильтра" Id="16aefc37-2e1a-4ca1-a0f4-37fb65c47a83" />
+				<CpzPrm Expression="([u47] + [s48] * 256.0) * 1.0" Name="Torq_f, Torq после фильтра" Id="a5f597c5-2372-4252-acb7-e3a2a447e560" />
+				<CpzPrm Expression="([u49] + [s50] * 256.0) * 1.0" Name="Text, Температура внешняя" Id="3236a798-f6e5-4171-8a17-b3e09436dd0b" />
+				<CpzPrm Expression="([u51] + [s52] * 256.0) * 1.0" Name="Ed, Пропорциональная часть регулятора тока D, А" Id="94cd5027-e0aa-4d70-bfc1-33df5cf35935" />
+				<CpzPrm Expression="([u53] + [s54] * 256.0) * 1.0" Name="Eq, Пропорциональная часть регулятора тока Q, А" Id="d9f8272c-88eb-41b8-a666-4634b56310e0" />
+				<CpzPrm Expression="([u55] + [s56] * 256.0) * 0.1" Name="Ef, Пропорциональная часть регулятора скорости, Гц" Id="7b9081cc-e597-46a2-ad2e-0baaf23e687f" />
+				<CpzPrm Expression="([u57] + [s58] * 256.0) * 1.0" Name="Efi, Пропорциональная часть регулятора потока, мВб" Id="af0a96fb-fc9f-49f8-8e2e-0d2b13297390" />
+				<CpzPrm Expression="([u59] + [s60] * 256.0) * 0.01" Name="Ucomp_D, Выход регулятора компенсатора вычислителя потока D, В" Id="8f78722c-1270-4aab-9a5b-5cab937ccdc7" />
+				<CpzPrm Expression="([u61] + [s62] * 256.0) * 0.01" Name="Ucomp_Q, Выход регулятора компенсатора вычислителя потока Q, В" Id="9303a3f0-8534-405b-9d6b-50bf5e9e12af" />
+				<CpzPrm Expression="([u63] + [s64] * 256.0) * 1.0" Name="AUX1, Вспомогательная ячейка 1" Id="069eaf24-01f4-41f2-8118-c162ab668308" />
+				<CpzPrm Expression="([u65] + [s66] * 256.0) * 1.0" Name="AUX2, Вспомогательная ячейка 2" Id="ccaddfdf-aae8-44d0-859a-1baa037b96ba" />
+				<CpzPrm Expression="([u67] + [s68] * 256.0) * 1.0" Name="PVER, Версия ПО" Id="cbca9457-9804-4a76-a13e-ee1a28d01330" />
+				<CpzPrm Expression="([u69] + [s70] * 256.0) * 1.0" Name="PVDATE, Дата билда ПО" Id="5c94ef89-42b0-4593-83c1-7462a0662127" />
+				<!--<CpzPrm Expression="[u] * 1.0 + [u] * 256.0" Name=""/>-->
+				<VarVal Position="71.0" Length="8" Name="#CRCL" Id="a2ce432a-c312-4f26-b23c-9942abce23fe" />
+				<VarVal Position="72.0" Length="8" Name="#CRCH" Id="8560127e-812a-40b5-bf28-350e39362190" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

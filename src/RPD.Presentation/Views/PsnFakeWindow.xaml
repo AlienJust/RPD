@@ -1,0 +1,8 @@
+﻿<Window x:Class="RPD.Presentation.Views.PsnFakeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Данные ПСН" Height="504" Width="488">
+    <Grid>
+        
+    </Grid>
+</Window>

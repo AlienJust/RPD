@@ -1,0 +1,639 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Брянск 2ТЭ25км" Version="1" Description="Версия от 05.03.2018" Id="7B6AF439-DE73-43B8-9E63-D437B7F2EF0F" RpdId="59">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="ПВД" />
+		<PsnMeter Address="0x02" Name="УПП 1-4" />
+		<PsnMeter Address="0x03" Name="И-ПТПТ 1-5" />
+		<PsnMeter Address="0x04" Name="БКИ" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="БЦУ – ПВД 0x11 0x12">
+			<Request Length="4" Position="0" CycleMsTime="200">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="043d8cb7-50b4-4eaf-89cf-958732f6e773" />
+				<DefVal Position="1.0" Length="8" Value="0x11" Name="#NCMD" Id="e44ddbcb-8a02-4a36-a4b5-426ff1df0040" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="56c1dd29-149d-4fe9-9947-b3742472f6f2" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="be5dcee0-3baa-4a9d-b910-d23f2fac714b" />
+			</Request>
+			<Reply Length="10" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="4378fefd-660d-45f1-868a-e0c8583371bf" />
+				<DefVal Position="1.0" Length="8" Value="0x12" Name="#NCMD" Id="c5162fc8-abfc-45ce-b653-e65a3b97d440" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="Заводской номер устройства" Id="81dc3903-38e6-47c7-88e5-8026fff62495" />
+				<CpzPrm Expression="[u4] * 1.0" Name="Версия ПО верхнего контроллера" Id="2ddb3fd3-73de-4d7d-88a2-406e33566a9f" />
+				<CpzPrm Expression="[u5] * 1.0" Name="Версия ПО конвертора М" Id="3727c57d-f875-48ff-a373-3999e8b67420" />
+				<CpzPrm Expression="[u6] * 1.0" Name="Версия ПО конвертора S" Id="1638ffaa-6ff3-45c8-b5b9-f9d7e6e258eb" />
+				<CpzPrm Expression="[u7] * 1.0" Name="Версия ПО инвертора" Id="95301087-bf8c-49a8-9478-53327269e280" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="31443a85-00ec-41dd-a860-2f93d5c9ea14" />
+				<VarVal Position="9.0" Length="8" Name="#CRCL" Id="f2d0bb6c-4a89-41ab-926a-340524b3a1bd" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – ПВД 0x13 0x14">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="2a9c676c-c61b-4ac0-8ce7-a6174922e63f" />
+				<DefVal Position="1.0" Length="8" Value="0x13" Name="#NCMD" Id="eb3939a7-9b5b-4ffc-9e95-51cd97acbb4b" />
+				<CpzPrm Expression="[u2] * 1.0" Name="Задание на выходную частоту компрессора, Гц" Id="1a6f71aa-e687-42e1-895d-f5b0ab61c27b" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Control commands: D1 – включение компрессора" Id="16e8ed0e-ff2f-461b-a2e6-f8778fcc9a2a" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Control commands: D0 – включение выхода 600В" Id="cd4b6e7f-ee2d-4d97-8368-760ca6a761c8" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="ccf89d54-4510-4af2-abaf-d8e8a8425e30" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="d11d7803-e81d-40fe-a27c-86da8b513b3f" />
+			</Request>
+			<Reply Length="24" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="87904f0a-8844-4553-aa88-88adf30995d2" />
+				<DefVal Position="1.0" Length="8" Value="0x14" Name="#NCMD" Id="f098a15f-9380-4319-a8c4-198b8a85a02e" />
+				<CpzPrm Expression="[u2] * 1.0" Name="Состояние" Id="a0fe5658-c704-4c1e-a92a-0f5416477d31" />
+				<CpzPrm Expression="[u3] * 4.0" Name="Входной ток, А" Id="1439c7e6-42a9-45a6-8bcb-46b1387ed00f" />
+				<CpzPrm Expression="[u4] * 1.0" Name="Выходной ток компрессора, фаза U, А" Id="dd66c323-29d6-405e-9fb4-fb8af299abcc" />
+				<CpzPrm Expression="[u5] * 1.0" Name="Выходной ток компрессора, фаза V, А" Id="8df7d3fa-0a98-4397-a4ec-68eaaa753e71" />
+				<CpzPrm Expression="[u6] * 1.0" Name="Выходной ток компрессора, фаза W, А" Id="a7bd0b28-9a2d-4715-ac50-23276b5152ab" />
+				<CpzPrm Expression="[u7] * 1.0" Name="Входное напряжение, В" Id="5a10d3b2-6621-43cf-89bc-66a9f699ddac" />
+				<CpzPrm Expression="[u8] * 4.0" Name="Выходное напряжение в звене 600 В" Id="634dbdd6-2327-478a-a204-a6e8a420965c" />
+				<CpzPrm Expression="[u9] * 1.0" Name="Заданная выходная частота компрессора, Гц" Id="5c2786a9-6cc3-48bb-a326-137caa2973f4" />
+				<CpzPrm Expression="[u10] * 1.0" Name="Текущая выходная частота компрессора, Гц" Id="7475e6cd-61ea-40e6-b490-cb870a8c1d2c" />
+				<CpzPrm Expression="[u11] * 0.5" Name="Активная мощность компрессора, кВт " Id="64a0e26c-f8c1-4250-9c3a-76bba1ed7e60" />
+				<CpzPrm Expression="[u12] * 1.0" Name="Счетчик автоматических повторных включений" Id="80506aeb-8833-49d0-8c20-fdd298a550e8" />
+				<CpzPrm Expression="[s13] * 1.0" Name="Максимальная температура радиатора, °C" Id="d62f1631-207a-44ff-ba14-335126b7552a" />
+				<CpzPrm Expression="[u14] * 1.0" Name="Номер радиатора с максимальной температурой" Id="b8224e2d-5038-43c4-9a42-93bcc75fb4a9" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ1: D7 – КЗ по фазе U" Id="68cda23b-d20e-4c52-9f63-548597897e74" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ1: D6 – КЗ по фазе V" Id="da63d256-1612-4dd7-a32c-03a935bc8ec6" />
+				<BitPrm Byte="15" Bit="5" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ1: D5 – КЗ по фазе W" Id="6ca27eca-8a4a-4994-b75a-ff0a6c95e438" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ1: D4 – Перегрев" Id="2f36bd90-58d4-4bbb-9cf7-acaaefe2eb0e" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ1: D3 – МТЗ выходного тока компрессора" Id="72a0a815-a223-4020-a879-da1ea70ddfcd" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ1: D2 – Асимметрия выходного тока компрессора" Id="97c28e5b-ee33-4335-bfe1-dd8c2f607248" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ1: Высокое входное напряжение" Id="de9af941-088c-424e-92d1-9ec10b5a0480" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ1: Низкое входное напряжение" Id="2e6d4801-7bd4-4a58-8c8a-c162c73f7b75" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ1: Ошибка EEPROM" Id="a4977073-c520-4504-bc13-400cae9ddaad" />
+				<BitPrm Byte="17" Bit="7" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ2: D7 – КЗ по фазе U" Id="e0199d3c-89d3-43fd-95f7-ad004e039f85" />
+				<BitPrm Byte="17" Bit="6" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ2: D6 – КЗ по фазе V" Id="ae8ff5ad-423b-41c8-8563-811a2d9fd9bb" />
+				<BitPrm Byte="17" Bit="5" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ2: D5 – КЗ по фазе W" Id="ca176b68-327b-4460-acce-d830aeea2254" />
+				<BitPrm Byte="17" Bit="4" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ2: D4 – Перегрев" Id="f280da12-b24d-4a83-8bbd-3eebb5876943" />
+				<BitPrm Byte="17" Bit="3" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ2: D3 – МТЗ входного тока" Id="6f50aba3-6020-4817-b65f-116eff6b2683" />
+				<BitPrm Byte="18" Bit="7" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ2: D7 – Ошибка EEPROM" Id="2fb86c74-0e32-4310-bfc7-ea9c3a618d24" />
+				<BitPrm Byte="18" Bit="6" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ2: D6 – Нет синхронизации ШИМ" Id="03b90fd4-bf61-45de-92c2-84591cdba432" />
+				<BitPrm Byte="18" Bit="5" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ2: D5 – Ошибка связи по SCI2" Id="10301d58-7404-4813-b28d-54e805d08f58" />
+				<BitPrm Byte="19" Bit="7" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ3: D7 – КЗ по фазе U" Id="1e3252e1-9a74-4963-b4b7-168796f40237" />
+				<BitPrm Byte="19" Bit="6" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ3: D6 – КЗ по фазе V" Id="a5dd6bfa-0f2c-441d-b1c3-e46e9cd8945f" />
+				<BitPrm Byte="19" Bit="5" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ3: D5 – КЗ по фазе W" Id="39f826ec-596d-49c0-949f-99173571d177" />
+				<BitPrm Byte="19" Bit="4" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ3: D4 – Перегрев" Id="2b43bcc6-d976-4b73-8bd7-b65171005317" />
+				<BitPrm Byte="19" Bit="3" IsValueInverted="False" Name="Состояние сигналов 1 ПЧ3: D3 – МТЗ входного тока" Id="a5870470-6dc3-436b-8f35-7f850e2cdb46" />
+				<BitPrm Byte="20" Bit="7" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ3: D7 – Ошибка EEPROM" Id="62b5cd4b-a9d8-4957-b340-db436e31c342" />
+				<BitPrm Byte="20" Bit="6" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ3: D6 – Нет синхронизации ШИМ" Id="1e3ee859-1770-4975-942f-b1ff73774d9b" />
+				<BitPrm Byte="20" Bit="5" IsValueInverted="False" Name="Состояние сигналов 2 ПЧ3: D5 – Ошибка связи по SCI2" Id="7f5ac074-f6e1-4859-942e-6d46ad86a34f" />
+				<BitPrm Byte="21" Bit="7" IsValueInverted="False" Name="Дискретные сигналы: D7 – Вентиляторы охлаждения включены" Id="1e1c4d96-8d2b-43f1-a517-befc60b8aeb4" />
+				<BitPrm Byte="21" Bit="6" IsValueInverted="False" Name="Дискретные сигналы: D6 – Состояние датчика съемной панели" Id="e6772f6c-a670-4a59-a3d3-9e7abb23f27f" />
+				<BitPrm Byte="21" Bit="5" IsValueInverted="False" Name="Дискретные сигналы: D5 – Внешний сигнал «Работа_1»" Id="2c04ab82-9705-4300-9190-7076795a4ecf" />
+				<BitPrm Byte="21" Bit="4" IsValueInverted="False" Name="Дискретные сигналы: D4 – Внешний сигнал «Работа_2»" Id="1f345aa5-e7c4-47d9-a7e1-82d09c8f038e" />
+				<VarVal Position="22.0" Length="8" Name="#CRCH" Id="e8aa42a0-d911-4f4a-8931-5d360fe0c616" />
+				<VarVal Position="23.0" Length="8" Name="#CRCL" Id="36d7db24-a68c-4d1e-9419-a7cdb251d932" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – УПП1 0x11 0x12">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="96ba1165-549d-452b-a34f-04e343d62e30" />
+				<DefVal Position="1.0" Length="8" Value="0x11" Name="#NCMD" Id="cf7332ac-6723-4b5c-93b8-25bd8daf0af3" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="4b00bc90-889d-4fc7-b304-c4023fa3cd17" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="8be95ea4-6f91-42c8-b62c-ae2df26d2b67" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="3ef7da73-c97f-48df-8c79-2823f7922f6b" />
+				<DefVal Position="1.0" Length="8" Value="0x12" Name="#NCMD" Id="6aa934f2-0b46-438e-877e-52af7fc13ba8" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="УПП1: Заводской номер устройства" Id="4cbd18c3-e30c-421a-b140-7273b5e7efaa" />
+				<CpzPrm Expression="[u4] * 1.0" Name="УПП1: Версия ПО" Id="7b7e5455-b2e5-4f6a-a330-53e7b7685030" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="71f29480-4531-45e3-8fd3-67d164bfdf9a" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="6bf38473-e7c4-4182-99ce-176deedc9926" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – УПП1 0x13 0x14">
+			<Request Length="5" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="4fcea765-92cc-4ec1-b5f1-d3cff4fe4201" />
+				<DefVal Position="1.0" Length="8" Value="0x13" Name="#NCMD" Id="608cb4df-f926-4235-b265-f42bbd26d51a" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УПП1: Control commands: D0 – включение" Id="738ccc77-a8eb-4b89-9b85-faf8afc829c0" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="a8c41d02-9b15-42ee-9f0b-b3067ee494f0" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="d6aa9f33-ada9-4ebb-b5bd-f993bf95235d" />
+			</Request>
+			<Reply Length="15" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="d9b93f55-b4c5-4768-a167-a1bcde37f8f8" />
+				<DefVal Position="1.0" Length="8" Value="0x14" Name="#NCMD" Id="7c0f4ee1-84ae-41a5-b237-0d392b200ebf" />
+				<CpzPrm Expression="[u2] * 1.0" Name="УПП1: Состояние" Id="16331095-607b-496a-8169-6bc10c228a4a" />
+				<CpzPrm Expression="[u3] * 2.0" Name="УПП1: Выходной ток компрессора, фаза U, А" Id="6d3f5b8b-7338-497e-ad2a-a5aec0afb7a4" />
+				<CpzPrm Expression="[u4] * 2.0" Name="УПП1: Выходной ток компрессора, фаза V, А" Id="a404b3ff-6c46-49a7-9f87-6353aa6c4df7" />
+				<CpzPrm Expression="[u5] * 2.0" Name="УПП1: Выходной ток компрессора, фаза W, А" Id="5d25e186-e243-4184-abfa-6a7994735485" />
+				<CpzPrm Expression="[u6] * 4.0" Name="УПП1: Входное напряжение, В" Id="ef8ca25b-3d50-4fa2-967c-716c32e8a858" />
+				<CpzPrm Expression="[u7] * 1.0" Name="УПП1: Текущая выходная частота, Гц" Id="9ffcd8d4-a267-491c-a66b-9852411eb298" />
+				<CpzPrm Expression="[s8] * 1.0" Name="УПП1: Температура радиатора, °C" Id="bc3db0ff-4807-49cd-9f98-6c194d418f56" />
+				<CpzPrm Expression="[u9] * 1.0" Name="УПП1: Процент открытия тиристоров, %" Id="7ba4eb41-c164-430b-a10b-b2f35a0635d1" />
+				<CpzPrm Expression="[u10] * 1.0" Name="УПП1: Счетчик автоматических повторных включений" Id="e4f0159d-7559-4e56-b0b7-f70d4f1b81b6" />
+				<BitPrm Byte="11" Bit="7" IsValueInverted="False" Name="УПП1: Diagnostic: D7 – КЗ по фазе U" Id="3a55fece-7c9d-4c4c-87dc-96aa2840e16d" />
+				<BitPrm Byte="11" Bit="6" IsValueInverted="False" Name="УПП1: Diagnostic: D6 – КЗ по фазе V" Id="d031d665-c2df-49f0-a6e3-978a6e864e76" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="УПП1: Diagnostic: D5 – КЗ по фазе W" Id="0b01e2eb-bb22-45d3-b79a-fb66194572e9" />
+				<BitPrm Byte="11" Bit="4" IsValueInverted="False" Name="УПП1: Diagnostic: D4 – Перегрев" Id="f8f4380c-9d0b-4c80-8841-783066df739f" />
+				<BitPrm Byte="11" Bit="3" IsValueInverted="False" Name="УПП1: Diagnostic: D3 – МТЗ выходного тока" Id="4352bc1e-6e4b-4115-bf0f-b1859ec1bfa0" />
+				<BitPrm Byte="11" Bit="2" IsValueInverted="False" Name="УПП1: Diagnostic: D2 – Асимметрия выходного тока" Id="b0387edf-bd7a-499b-b260-5c0d7611ab34" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="УПП1: Diagnostic: D1 – Превышено время пуска" Id="6a1ec54f-e76a-438e-9216-3523320a31e2" />
+				<BitPrm Byte="11" Bit="0" IsValueInverted="False" Name="УПП1: Diagnostic: D0 – Неуправляемый ток" Id="90cd0df6-2708-4f7f-b558-673ec802dbdc" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="УПП1: Discrete: D7 – Вентилятор охлаждения включен" Id="ef1f666d-5c5a-42ec-a271-8c00b98fe3ce" />
+				<BitPrm Byte="12" Bit="6" IsValueInverted="False" Name="УПП1: Discrete: D6 – Порядок чередования фаз" Id="666fe688-b88e-4734-90e7-234b85a2acf0" />
+				<BitPrm Byte="12" Bit="5" IsValueInverted="False" Name="УПП1: Discrete: D5 – Состояние шунтирующего контактора" Id="891d9eac-e5d7-4644-965f-947ff3828cf7" />
+				<BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="УПП1: Discrete: D4 – Неисправность шунтирующего контактора" Id="ce50e06c-ee92-4fea-947c-2a15c1a90f64" />
+				<BitPrm Byte="12" Bit="3" IsValueInverted="False" Name="УПП1: Discrete: D3 – «Работа»" Id="0e4367ab-3b04-41df-b300-243745aaae81" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="ae1ee627-908c-4587-adc4-1c936254290e" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="bdb2c04f-b9f6-44cd-8dfc-e857e29694d0" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – УПП2 0x21 0x22">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="c30caf1a-82dd-4487-a8c1-0b516902d47c" />
+				<DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="ae7d9478-9861-47c6-b0e2-53a52901acad" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="9733554e-7d62-43f4-b0d3-6c1ef0d78db0" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="25469949-3524-4604-a35e-eefd4db3adf7" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="c6f2c4c8-8471-47bc-95f3-67c19939db1b" />
+				<DefVal Position="1.0" Length="8" Value="0x22" Name="#NCMD" Id="dbd8e1d3-faed-4b0c-8fc9-353813f864ad" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="УПП2: Заводской номер устройства" Id="93b6eca1-b6c7-47c2-ac8f-800d9855f099" />
+				<CpzPrm Expression="[u4] * 1.0" Name="УПП2: Версия ПО" Id="c0d6f301-843f-4c6d-86c9-a98dc12bef3d" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="6b8178d3-56d9-4be5-8ef2-05cc196b0047" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="0c43638d-3d49-4f02-930c-19df112b9568" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – УПП2 0x23 0x24">
+			<Request Length="5" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="5223df71-ea7f-4373-baf1-35ff71ba8104" />
+				<DefVal Position="1.0" Length="8" Value="0x23" Name="#NCMD" Id="0c9eb04d-d822-45f1-ae55-cfbb42a555a2" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УПП2: Control commands: D0 – включение" Id="6a2ff68f-70a2-4678-a460-d38683b9143c" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="96b251d8-a339-46b1-b766-eb2ee0b6eb46" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="52eb7cb8-4a2d-466b-97b8-33d83d5c496f" />
+			</Request>
+			<Reply Length="15" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="1e6327ac-fbde-4fd7-ad44-9b8b599f33f6" />
+				<DefVal Position="1.0" Length="8" Value="0x24" Name="#NCMD" Id="fe43920f-81c8-43b8-9fd3-fe3ecad97665" />
+				<CpzPrm Expression="[u2] * 1.0" Name="УПП2: Состояние" Id="bf7d32a6-4aee-4e0e-b824-101d59c48a25" />
+				<CpzPrm Expression="[u3] * 2.0" Name="УПП2: Выходной ток компрессора, фаза U, А" Id="fc1bb440-7685-4dd4-bbaa-8d8ac738499c" />
+				<CpzPrm Expression="[u4] * 2.0" Name="УПП2: Выходной ток компрессора, фаза V, А" Id="4ad3c2f9-f8f4-4c4b-b14d-4f4839dc0dd6" />
+				<CpzPrm Expression="[u5] * 2.0" Name="УПП2: Выходной ток компрессора, фаза W, А" Id="dbdac3ee-3e75-4957-bc8c-37bffa3c3d02" />
+				<CpzPrm Expression="[u6] * 4.0" Name="УПП2: Входное напряжение, В" Id="32322efd-f6e9-437a-8a2d-396fd26a02b4" />
+				<CpzPrm Expression="[u7] * 1.0" Name="УПП2: Текущая выходная частота, Гц" Id="9093f032-f339-47ee-a420-22c7ea7dca6c" />
+				<CpzPrm Expression="[s8] * 1.0" Name="УПП2: Температура радиатора, °C" Id="cc007261-868b-4ad8-8ec6-57c915f4cd4b" />
+				<CpzPrm Expression="[u9] * 1.0" Name="УПП2: Процент открытия тиристоров, %" Id="dc015ce2-2461-4fe4-9018-036754a8b4a4" />
+				<CpzPrm Expression="[u10] * 1.0" Name="УПП2: Счетчик автоматических повторных включений" Id="35ba8dec-329d-4230-a74a-13d90b3a79f5" />
+				<BitPrm Byte="11" Bit="7" IsValueInverted="False" Name="УПП2: Diagnostic: D7 – КЗ по фазе U" Id="6c3ef7e2-027e-45b8-a12e-0a6db7566ab5" />
+				<BitPrm Byte="11" Bit="6" IsValueInverted="False" Name="УПП2: Diagnostic: D6 – КЗ по фазе V" Id="ffd8df53-9b7c-4e16-83f2-c27fa35c9c3d" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="УПП2: Diagnostic: D5 – КЗ по фазе W" Id="57b1bd4d-8d89-44d6-9dbc-6eef6d3dbf3e" />
+				<BitPrm Byte="11" Bit="4" IsValueInverted="False" Name="УПП2: Diagnostic: D4 – Перегрев" Id="9ec242ce-2826-44a0-a803-606be62c8c21" />
+				<BitPrm Byte="11" Bit="3" IsValueInverted="False" Name="УПП2: Diagnostic: D3 – МТЗ выходного тока" Id="42639526-fa3e-4323-860d-801e30d24adb" />
+				<BitPrm Byte="11" Bit="2" IsValueInverted="False" Name="УПП2: Diagnostic: D2 – Асимметрия выходного тока" Id="e9ef7cbc-4cd3-498b-8fb3-8ff880153592" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="УПП2: Diagnostic: D1 – Превышено время пуска" Id="4f6d0216-f1f4-4717-9b24-0e1e571910bc" />
+				<BitPrm Byte="11" Bit="0" IsValueInverted="False" Name="УПП2: Diagnostic: D0 – Неуправляемый ток" Id="74b5bcf5-1f43-4d59-9f4a-83738de09153" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="УПП2: Discrete: D7 – Вентилятор охлаждения включен" Id="bbccad33-a718-4e4f-b911-45d9e616a92d" />
+				<BitPrm Byte="12" Bit="6" IsValueInverted="False" Name="УПП2: Discrete: D6 – Порядок чередования фаз" Id="26c974ce-1bdf-46d1-a3c1-711eda54e776" />
+				<BitPrm Byte="12" Bit="5" IsValueInverted="False" Name="УПП2: Discrete: D5 – Состояние шунтирующего контактора" Id="4fed19a2-f981-4739-9205-5c4e3293cbac" />
+				<BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="УПП2: Discrete: D4 – Неисправность шунтирующего контактора" Id="974c42fe-cd45-46ff-902b-174b128d79a5" />
+				<BitPrm Byte="12" Bit="3" IsValueInverted="False" Name="УПП2: Discrete: D3 – «Работа»" Id="2a104a03-64db-4408-ae24-c0e920c9f280" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="f74622ed-a8f6-4e45-9621-d3d10e7cc081" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="92a06244-7eb8-464d-b3ee-8bc9312b996d" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – УПП3 0x31 0x32">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="1ab80c08-6f19-4c15-b1bc-733b399dc6cc" />
+				<DefVal Position="1.0" Length="8" Value="0x31" Name="#NCMD" Id="b9dac62b-e86e-4b72-b073-0833c070f0a9" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="ef366980-69aa-48a1-b52d-e8f6c575fd4a" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="0bde3ce1-eec8-45b2-8a14-4cc1500a8ef1" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="7f8c3565-1aa7-487d-bff0-86c72c399d20" />
+				<DefVal Position="1.0" Length="8" Value="0x32" Name="#NCMD" Id="65cbe5d9-ce90-409b-be1b-0927df3be4ed" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="УПП3: Заводской номер устройства" Id="fd5782a0-4297-445f-813a-684a9d1073b8" />
+				<CpzPrm Expression="[u4] * 1.0" Name="УПП3: Версия ПО" Id="a7819cb6-0ffe-42a1-b4df-004a2a1971c8" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="747d5263-44f6-45c8-91df-cdd0a84f677c" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="421375d3-b997-47cb-8cc4-7bcf5ff9fc83" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – УПП3 0x33 0x34">
+			<Request Length="5" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="1cddc35f-a22a-4f6c-a011-23bc7d5540fb" />
+				<DefVal Position="1.0" Length="8" Value="0x33" Name="#NCMD" Id="e170a381-8127-40c4-bd9f-0cb035588e40" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УПП3: Control commands: D0 – включение" Id="2d5a98f8-71d6-4b78-a1eb-30cd1d42634d" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="5006e5a4-1903-42ea-8dca-c11cd7de2104" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="4ed78fdd-fc66-4f47-b179-da8d05e63159" />
+			</Request>
+			<Reply Length="15" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="248995a9-947c-4faa-b580-9ba268f23558" />
+				<DefVal Position="1.0" Length="8" Value="0x34" Name="#NCMD" Id="03760c41-dfb3-48c3-89a6-afc1f69061b5" />
+				<CpzPrm Expression="[u2] * 1.0" Name="УПП3: Состояние" Id="7b973430-805d-4900-b7a4-7e39e5d05639" />
+				<CpzPrm Expression="[u3] * 2.0" Name="УПП3: Выходной ток компрессора, фаза U, А" Id="9f9fe0b3-9552-4235-8e78-dc7277ac1e0e" />
+				<CpzPrm Expression="[u4] * 2.0" Name="УПП3: Выходной ток компрессора, фаза V, А" Id="702f7b91-a882-4291-a8db-337c0466c740" />
+				<CpzPrm Expression="[u5] * 2.0" Name="УПП3: Выходной ток компрессора, фаза W, А" Id="9e436793-1003-4bca-a47d-d636dd228b4b" />
+				<CpzPrm Expression="[u6] * 4.0" Name="УПП3: Входное напряжение, В" Id="562df647-9974-4dfd-8345-2eacc3277feb" />
+				<CpzPrm Expression="[u7] * 1.0" Name="УПП3: Текущая выходная частота, Гц" Id="3506aecf-92cb-444c-9d4e-1fa06ada9191" />
+				<CpzPrm Expression="[s8] * 1.0" Name="УПП3: Температура радиатора, °C" Id="cd6afaa8-1593-41ca-8cb6-9c3b6cff3790" />
+				<CpzPrm Expression="[u9] * 1.0" Name="УПП3: Процент открытия тиристоров, %" Id="354f9840-281e-4b0f-b9df-d5dfa7ecf616" />
+				<CpzPrm Expression="[u10] * 1.0" Name="УПП3: Счетчик автоматических повторных включений" Id="ad5a9cf0-7b57-44fb-9339-6b4fc715ef25" />
+				<BitPrm Byte="11" Bit="7" IsValueInverted="False" Name="УПП3: Diagnostic: D7 – КЗ по фазе U" Id="934b184b-d6e4-4b8c-ac84-63f30e67d9ff" />
+				<BitPrm Byte="11" Bit="6" IsValueInverted="False" Name="УПП3: Diagnostic: D6 – КЗ по фазе V" Id="ee3d83e6-9f53-4a20-8f52-19e6f2710ccc" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="УПП3: Diagnostic: D5 – КЗ по фазе W" Id="4bc94cef-828b-4508-8210-a5e180f74926" />
+				<BitPrm Byte="11" Bit="4" IsValueInverted="False" Name="УПП3: Diagnostic: D4 – Перегрев" Id="a8f27f87-ac86-4bfa-9939-9e06144eb805" />
+				<BitPrm Byte="11" Bit="3" IsValueInverted="False" Name="УПП3: Diagnostic: D3 – МТЗ выходного тока" Id="4ca9254c-5aa1-405a-b9c4-d1a9e9adabeb" />
+				<BitPrm Byte="11" Bit="2" IsValueInverted="False" Name="УПП3: Diagnostic: D2 – Асимметрия выходного тока" Id="011549ad-9020-4146-b13d-ec0a4345b4b3" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="УПП3: Diagnostic: D1 – Превышено время пуска" Id="1de313d7-aa56-4498-baab-615bfe2c3a07" />
+				<BitPrm Byte="11" Bit="0" IsValueInverted="False" Name="УПП3: Diagnostic: D0 – Неуправляемый ток" Id="22c44239-bdbb-41ac-9d53-1d1c27024732" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="УПП3: Discrete: D7 – Вентилятор охлаждения включен" Id="ecf86d43-a748-46ab-973a-78ef34caaebe" />
+				<BitPrm Byte="12" Bit="6" IsValueInverted="False" Name="УПП3: Discrete: D6 – Порядок чередования фаз" Id="dfa00a14-69d9-4c9b-a087-5303c8320603" />
+				<BitPrm Byte="12" Bit="5" IsValueInverted="False" Name="УПП3: Discrete: D5 – Состояние шунтирующего контактора" Id="14153c13-f103-4477-827a-55accaeb38e9" />
+				<BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="УПП3: Discrete: D4 – Неисправность шунтирующего контактора" Id="3b3faf7c-0f20-4b6e-ba25-0825bb84eaa7" />
+				<BitPrm Byte="12" Bit="3" IsValueInverted="False" Name="УПП3: Discrete: D3 – «Работа»" Id="7bba636b-1e2f-4472-a0e2-c34c7e29e25e" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="fd2552a3-2561-4072-8897-90db9b31bd9b" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="abcaaa11-9ef4-46b9-be8a-c6298c7d043b" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – УПП4 0x41 0x42">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="e9e9c156-5d18-4d01-bec7-bc9fe3a34ce4" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="77bedc46-1e99-44a5-8fb7-24c66c31434d" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="4a9f9f32-09e9-4320-aa9e-f95b3de23cbf" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="162a4876-d7ef-44a9-8546-c711676402b3" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="a085a26d-ee7f-43af-82ed-caf7b27cb9d5" />
+				<DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="2bffc90b-c63f-4c2e-a663-2b72646b2bb0" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="УПП4: Заводской номер устройства" Id="937f661d-8b2f-4836-a570-5a66ec6efd0d" />
+				<CpzPrm Expression="[u4] * 1.0" Name="УПП4: Версия ПО" Id="bac7bc62-d6f8-433c-ac50-22a7305cadd6" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="e654dbc4-be19-4e88-8afb-44e277dc9ff1" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="31dc6c9c-b863-4302-aef2-52821a65a4a6" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – УПП4 0x43 0x44">
+			<Request Length="5" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="847037ea-9a3e-4f38-85a4-c4212b8ccd88" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="f7092de5-cf57-4629-b7e8-b3f902084a76" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="УПП4: Control commands: D0 – включение" Id="b3e9165a-955c-4f59-b1b7-3fe927e71765" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="72250c42-8a5a-444f-a627-30ebc3f8a88a" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="75bf99fe-2b2e-4595-8a25-e7e11ef18e6d" />
+			</Request>
+			<Reply Length="15" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="0d06e8d5-a18b-4475-af25-42ba273ad046" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="301e3ffa-7537-4f5b-9a37-80340d9c6d5d" />
+				<CpzPrm Expression="[u2] * 1.0" Name="УПП4: Состояние" Id="5f9efc6d-48f9-4a6d-aa52-e5d366fad380" />
+				<CpzPrm Expression="[u3] * 2.0" Name="УПП4: Выходной ток компрессора, фаза U, А" Id="188cc886-8773-419a-b61d-9668c2ccd389" />
+				<CpzPrm Expression="[u4] * 2.0" Name="УПП4: Выходной ток компрессора, фаза V, А" Id="a951ce41-eaea-43cb-9524-347f650fe2ed" />
+				<CpzPrm Expression="[u5] * 2.0" Name="УПП4: Выходной ток компрессора, фаза W, А" Id="dfd839ee-12bd-4c3a-a357-486be64572cd" />
+				<CpzPrm Expression="[u6] * 4.0" Name="УПП4: Входное напряжение, В" Id="bc0f444a-9378-4ed8-bd0c-2b235a35b8f2" />
+				<CpzPrm Expression="[u7] * 1.0" Name="УПП4: Текущая выходная частота, Гц" Id="3dd62b8a-f00b-45e5-9b77-d1d5c741b0e3" />
+				<CpzPrm Expression="[s8] * 1.0" Name="УПП4: Температура радиатора, °C" Id="c5daeb4d-1af6-42cd-916e-71ae2b22f8e2" />
+				<CpzPrm Expression="[u9] * 1.0" Name="УПП4: Процент открытия тиристоров, %" Id="0ae30841-5eaa-42cb-87c5-4ea6cb5dabd7" />
+				<CpzPrm Expression="[u10] * 1.0" Name="УПП4: Счетчик автоматических повторных включений" Id="1a6a7c6a-9b5e-47a6-88e8-f7105c6f2f3f" />
+				<BitPrm Byte="11" Bit="7" IsValueInverted="False" Name="УПП4: Diagnostic: D7 – КЗ по фазе U" Id="7b50b35c-4e49-4c3b-be02-ee2cfdaf75d9" />
+				<BitPrm Byte="11" Bit="6" IsValueInverted="False" Name="УПП4: Diagnostic: D6 – КЗ по фазе V" Id="e019e4d7-c54e-4b17-ba0b-496b3fe400e0" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="УПП4: Diagnostic: D5 – КЗ по фазе W" Id="69816e9b-81b0-4c16-80a7-12f9d22b2abf" />
+				<BitPrm Byte="11" Bit="4" IsValueInverted="False" Name="УПП4: Diagnostic: D4 – Перегрев" Id="48bf58a8-faeb-4b44-8982-248ee2b647b1" />
+				<BitPrm Byte="11" Bit="3" IsValueInverted="False" Name="УПП4: Diagnostic: D3 – МТЗ выходного тока" Id="4c5788bf-4bdf-453f-a42f-3cbffb16c9bc" />
+				<BitPrm Byte="11" Bit="2" IsValueInverted="False" Name="УПП4: Diagnostic: D2 – Асимметрия выходного тока" Id="ef7ff4f2-c518-441c-b57f-51313c703df3" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="УПП4: Diagnostic: D1 – Превышено время пуска" Id="a969595f-7269-40a3-b22e-dc2e789e95bb" />
+				<BitPrm Byte="11" Bit="0" IsValueInverted="False" Name="УПП4: Diagnostic: D0 – Неуправляемый ток" Id="a5a9c0f9-52d3-4081-bb10-395cd5f50997" />
+				<BitPrm Byte="12" Bit="7" IsValueInverted="False" Name="УПП4: Discrete: D7 – Вентилятор охлаждения включен" Id="b4a67816-76c1-4267-9fd8-6f7efb630ad4" />
+				<BitPrm Byte="12" Bit="6" IsValueInverted="False" Name="УПП4: Discrete: D6 – Порядок чередования фаз" Id="5a112c6f-f760-44f3-9142-4f3975ecf8e1" />
+				<BitPrm Byte="12" Bit="5" IsValueInverted="False" Name="УПП4: Discrete: D5 – Состояние шунтирующего контактора" Id="0d638f56-4702-434a-9349-137c25b2e84b" />
+				<BitPrm Byte="12" Bit="4" IsValueInverted="False" Name="УПП4: Discrete: D4 – Неисправность шунтирующего контактора" Id="8048fd27-99a5-44c3-b4d8-99711271fd92" />
+				<BitPrm Byte="12" Bit="3" IsValueInverted="False" Name="УПП4: Discrete: D3 – «Работа»" Id="def9c8ae-7289-4a35-b0e6-77bbece1d1ce" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="2589bd88-55e9-4e29-931b-1e14c6748a3b" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="3d4f9707-b72f-4582-8e95-db4a0668a3a1" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ1 0x11 0x12">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="6f554617-127a-4021-881b-285685e7f73b" />
+				<DefVal Position="1.0" Length="8" Value="0x11" Name="#NCMD" Id="9fb6f73d-a4a9-482a-a4ac-52815e183ea5" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="0450a9e2-813a-4014-a9f4-e41aa63250a2" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="ebb97994-3f99-4f80-932c-d322e1fd2c6b" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="42e5daa2-8884-40b4-9828-bc5d57619f26" />
+				<DefVal Position="1.0" Length="8" Value="0x12" Name="#NCMD" Id="6b71c1e5-4b2a-4a68-912e-1add1bc4a9ee" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="И-ПТПТ1: Заводской номер устройства" Id="97e65eff-17bb-4a10-886b-0adc99ea15e4" />
+				<CpzPrm Expression="[u4] * 1.0" Name="И-ПТПТ1: Версия ПО верхнего контроллера" Id="011442d3-944d-4893-a027-5b8fbe96d5e5" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="e959f0b1-f755-4a72-9bc2-4b206d8d8873" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="4800f4f3-007d-4d98-a5d5-ebff29b33b78" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ1 0x13 0x14">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="29b475d4-f792-4952-8329-3fcd5cba618a" />
+				<DefVal Position="1.0" Length="8" Value="0x13" Name="#NCMD" Id="57e35a1d-efe0-4414-9182-9debc1a062e4" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ1: Задание на выходную частоту, Гц" Id="891492d0-3086-4dc3-a8e1-0009b277f77b" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="И-ПТПТ1: Control commands: D1 – Реверс" Id="296465e0-21bd-4e46-957c-f420ce4f566e" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="И-ПТПТ1: Control commands: D0 – Включение" Id="0b5312b9-12c3-4ac0-9254-fe72ebc9720a" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="1bc81a6c-f074-4b88-ab50-af75dce94877" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="3f5fa2e7-7278-4262-89f4-b030d29b5d6a" />
+			</Request>
+			<Reply Length="19" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="ea6009b8-482a-442e-ad1d-43cf04f828ef" />
+				<DefVal Position="1.0" Length="8" Value="0x14" Name="#NCMD" Id="4cb16495-e086-431f-981a-51ce90e81388" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ1: Состояние" Id="36b8d70d-1d73-41e6-9493-9892d552b344" />
+				<CpzPrm Expression="[u3] * 0.1" Name="И-ПТПТ1: Входной ток, А" Id="46c3449b-28c9-4952-83d8-f17d694306f0" />
+				<CpzPrm Expression="[u4] * 0.1" Name="И-ПТПТ1: Выходной ток, фаза U, А" Id="3d95a4bf-481e-4939-87da-d61e0127fde1" />
+				<CpzPrm Expression="[u5] * 0.1" Name="И-ПТПТ1: Выходной ток, фаза V, А" Id="7a4073e6-6aab-47fd-a188-578026a51c08" />
+				<CpzPrm Expression="[u6] * 0.1" Name="И-ПТПТ1: Выходной ток, фаза W, А" Id="a027466d-9159-4960-ad0e-47263c28f700" />
+				<CpzPrm Expression="[u7] * 4.0" Name="И-ПТПТ1: Входное напряжение, В" Id="989a9ac4-bebe-42ea-860f-b8b8ff2972e7" />
+				<CpzPrm Expression="[u8] * 4.0" Name="И-ПТПТ1: Выходное напряжение, В" Id="b5a5a373-1400-4cc9-b392-5f1e88fa1ff4" />
+				<CpzPrm Expression="[u9] * 1.0" Name="И-ПТПТ1: Заданная выходная частота, Гц" Id="e0c9972e-75bc-42c2-8443-0b23ec4b5f0d" />
+				<CpzPrm Expression="[u10] * 1.0" Name="И-ПТПТ1: Текущая выходная частота, Гц" Id="9d36b412-4387-4ba4-9cac-05a7502e2d43" />
+				<CpzPrm Expression="[u11] * 0.05" Name="И-ПТПТ1: Выходная активная мощность, кВт" Id="ff3c6b6f-6dae-4e3b-8aff-962add73f98c" />
+				<CpzPrm Expression="[s12] * 1.0" Name="И-ПТПТ1: Температура радиатора, °C" Id="67788cd6-71df-4c56-856b-6796ea1f8f46" />
+				<CpzPrm Expression="[u13] * 1.0" Name="И-ПТПТ1: Счетчик автоматических повторных включений" Id="aaabd166-0983-43c4-8bfd-5d3b2195edce" />
+				<BitPrm Byte="14" Bit="7" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 1: D7 – КЗ по фазе U" Id="f1e3fe94-4f4f-423c-9ecc-f96f68f41008" />
+				<BitPrm Byte="14" Bit="6" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 1: D6 – КЗ по фазе V" Id="2186012a-13fb-4bf2-81a1-4768f77c9b5e" />
+				<BitPrm Byte="14" Bit="5" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 1: D5 – КЗ по фазе W" Id="b4315276-2732-4ba6-a937-844fd40b28b5" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 1: D4 – Перегрев" Id="9f8ba5d1-cbe9-4a3e-a733-5c05fa7c8553" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 1: D3 – МТЗ выходного тока" Id="ec01b9b5-dede-4781-8ef1-a1ba498f85dd" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 1: D2 – Асимметрия выходного тока" Id="7da39c99-9e1c-4175-b5f3-aa302023936a" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 1: D1 – Высокое рабочее напряжение в звене постоянного тока" Id="a980cd1f-0ef7-4f85-b5ab-97169a1418e4" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 1: D0 – Низкое рабочее напряжение в звене постоянного тока" Id="05e2af05-e541-4fd1-8f5a-eb5757f7af03" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 2: D7 – Перегрузка по току от 100 до 150 % больше минуты" Id="37122b13-9b4f-4728-b2fd-2dd9f396c8f9" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="И-ПТПТ1: Diagnostic 2: D6 – Ошибка EEPROM" Id="4944489c-1b60-41cb-8d3a-3712559bc609" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="И-ПТПТ1: Discrete: D7 – Вентилятор охлаждения включен" Id="90f47f4e-474e-4ac1-b894-1af30cb7b34a" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="И-ПТПТ1: Discrete: D6 – Порядок чередования фаз" Id="0cb2f6a3-070a-4d37-a826-8d9047aba70f" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="И-ПТПТ1: Discrete: D5 – сигнал «Работа»" Id="d0bc0769-b6db-4e65-bb79-3794866f391d" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="И-ПТПТ1: Discrete: D4 – сигнал «Реверс»" Id="09f62e3a-5886-44ca-ac38-65a50ab33e88" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="120d8cd9-c3e0-443f-86d5-e3afdcd6bfe6" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="35ee5a2d-d0a1-4671-9d3a-c2ce0040ddff" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ2 0x21 0x22">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="fe030a7c-b15f-4ef8-831a-d06048b900d9" />
+				<DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="62df0334-c654-443e-a510-3fdc5c999548" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="e010bb72-408c-4cdc-b75d-f6828a0cf55e" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="ffdc9773-7a55-45c1-90b0-3a5a0a35270f" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="4e460ee4-ffef-4293-afbe-45e4b1888a8f" />
+				<DefVal Position="1.0" Length="8" Value="0x22" Name="#NCMD" Id="e11f696a-0b9b-41a0-addc-dc629360e81a" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="И-ПТПТ2: Заводской номер устройства" Id="97446244-f6ea-4240-9fb3-58f7f1f1ae8a" />
+				<CpzPrm Expression="[u4] * 1.0" Name="И-ПТПТ2: Версия ПО верхнего контроллера" Id="fec4a322-1112-44b1-a644-7e411fbb1781" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="d01799ed-d141-4b65-a40a-d32528c8d5d7" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="c585f840-924f-465d-8c22-f86dcf81a3ae" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ2 0x23 0x24">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="3d32b313-500b-43de-9346-73bcb060e169" />
+				<DefVal Position="1.0" Length="8" Value="0x23" Name="#NCMD" Id="2a25c1b5-4ce7-4f2f-bc80-0686364e3572" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ2: Задание на выходную частоту, Гц" Id="1bee1093-7004-4b38-968f-7c7ee33cd6ac" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="И-ПТПТ2: Control commands: D1 – Реверс" Id="ac53b5fe-9e7b-4ca3-8ed0-0b5d61d14256" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="И-ПТПТ2: Control commands: D0 – Включение" Id="b8ccef5b-48a8-4b13-835b-2fd0a72e5a7e" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="877da845-3e9b-4eff-a5d9-37b79c898491" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="7fe6fdf8-0fb8-48ad-828b-bc137d044c63" />
+			</Request>
+			<Reply Length="19" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="26446798-333e-44b9-843b-685cd1e7158b" />
+				<DefVal Position="1.0" Length="8" Value="0x24" Name="#NCMD" Id="adecd4ab-4775-46c2-a819-afc98f5317c5" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ2: Состояние" Id="cd3b8a98-ba28-4eb1-8f6b-3e6814d1b4d9" />
+				<CpzPrm Expression="[u3] * 0.1" Name="И-ПТПТ2: Входной ток, А" Id="ce38816f-6b6d-4993-8b3b-b2a4a1c3fe1d" />
+				<CpzPrm Expression="[u4] * 0.1" Name="И-ПТПТ2: Выходной ток, фаза U, А" Id="e95f35e2-1ecc-43f9-8c5f-694c89e7bd47" />
+				<CpzPrm Expression="[u5] * 0.1" Name="И-ПТПТ2: Выходной ток, фаза V, А" Id="82aa6e48-ac49-44c0-8037-d3fc86d329f1" />
+				<CpzPrm Expression="[u6] * 0.1" Name="И-ПТПТ2: Выходной ток, фаза W, А" Id="3b72a695-36ea-4a6d-a430-1f8bd5ceaa91" />
+				<CpzPrm Expression="[u7] * 4.0" Name="И-ПТПТ2: Входное напряжение, В" Id="e4e057b3-195e-4a25-9511-0b78b1a8211c" />
+				<CpzPrm Expression="[u8] * 4.0" Name="И-ПТПТ2: Выходное напряжение, В" Id="0a90ddad-4ec2-4eb3-896e-935c04941dd5" />
+				<CpzPrm Expression="[u9] * 1.0" Name="И-ПТПТ2: Заданная выходная частота, Гц" Id="d46b70d3-f9fb-47af-bd09-373384c8d53f" />
+				<CpzPrm Expression="[u10] * 1.0" Name="И-ПТПТ2: Текущая выходная частота, Гц" Id="ec279c58-6ecd-4ed8-b78a-be230595f479" />
+				<CpzPrm Expression="[u11] * 0.05" Name="И-ПТПТ2: Выходная активная мощность, кВт" Id="51690b4a-ab43-4e25-8386-0b73cdccbdb4" />
+				<CpzPrm Expression="[s12] * 1.0" Name="И-ПТПТ2: Температура радиатора, °C" Id="1f471bcf-e334-4cdc-973a-19b4a2d90476" />
+				<CpzPrm Expression="[u13] * 1.0" Name="И-ПТПТ2: Счетчик автоматических повторных включений" Id="4b291f89-002c-42b9-8378-afe07493e804" />
+				<BitPrm Byte="14" Bit="7" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 1: D7 – КЗ по фазе U" Id="ec5d2578-8ce7-45a3-b068-3bc8fba40e22" />
+				<BitPrm Byte="14" Bit="6" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 1: D6 – КЗ по фазе V" Id="9ac7ec75-b447-46fb-bd3a-9e2d362c14ff" />
+				<BitPrm Byte="14" Bit="5" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 1: D5 – КЗ по фазе W" Id="cd33a794-0e22-4bbe-919a-af8f11b15d3a" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 1: D4 – Перегрев" Id="5d647995-4a5b-4183-95a6-86b1eee6b425" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 1: D3 – МТЗ выходного тока" Id="dfc47aaf-b3f9-4a30-8e0f-a1a185db1abd" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 1: D2 – Асимметрия выходного тока" Id="1146a1f1-ec5b-4be1-bd73-1716a88d6ef1" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 1: D1 – Высокое рабочее напряжение в звене постоянного тока" Id="8a684fcd-8159-4513-b7ba-b0ca442cb7df" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 1: D0 – Низкое рабочее напряжение в звене постоянного тока" Id="b4270077-80bd-4860-b204-3dd1f7261aa1" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 2: D7 – Перегрузка по току от 100 до 150 % больше минуты" Id="70072395-b2c2-4979-96c9-29d88b2354f2" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="И-ПТПТ2: Diagnostic 2: D6 – Ошибка EEPROM" Id="92ba0676-8944-4cbd-88de-2ea053df26ad" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="И-ПТПТ2: Discrete: D7 – Вентилятор охлаждения включен" Id="5ccbfc5c-9f89-4b22-b797-77a0cd6c5242" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="И-ПТПТ2: Discrete: D6 – Порядок чередования фаз" Id="f958cb91-a8f7-44d9-8e31-ae490c0584e2" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="И-ПТПТ2: Discrete: D5 – сигнал «Работа»" Id="bc472c44-a1ed-49b1-816b-192f15cd7b1b" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="И-ПТПТ2: Discrete: D4 – сигнал «Реверс»" Id="a5d43310-a0e0-442c-9cc1-e45e72b3c2e4" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="01131baf-e4bb-409c-a154-486897f8cef4" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="6ffb43e2-ec8d-4116-a0aa-7c8a73f0d8d5" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ3 0x31 0x32">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="e89fdb87-069d-44ed-b273-8a27127d4db5" />
+				<DefVal Position="1.0" Length="8" Value="0x31" Name="#NCMD" Id="586e5d60-0142-47e6-9296-93c216549306" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="61755fee-9fe2-498d-8825-6bc72d985222" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="649e8f84-b888-4114-99fd-4401850109c5" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="2a889a15-e732-46bb-afc6-995235be5671" />
+				<DefVal Position="1.0" Length="8" Value="0x32" Name="#NCMD" Id="cac99220-5b7b-40aa-a22b-d6d878a2e087" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="И-ПТПТ3: Заводской номер устройства" Id="826c7d72-8da8-45ee-9712-babf8cb2da40" />
+				<CpzPrm Expression="[u4] * 1.0" Name="И-ПТПТ3: Версия ПО верхнего контроллера" Id="07aefce3-e748-46e2-b9fa-de5df3cd9b6c" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="a2d8f5f2-dd80-4437-b5b3-709de23c8576" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="71ffb8a0-b6bd-4ce8-b408-978b7b70f80e" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ3 0x33 0x34">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="6f86e272-948d-4243-86fd-4b15a0419f1c" />
+				<DefVal Position="1.0" Length="8" Value="0x33" Name="#NCMD" Id="044834b4-0c92-4003-bd33-caf183060c43" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ3: Задание на выходную частоту, Гц" Id="c721cfb3-bbbe-41b9-8d4f-957455400401" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="И-ПТПТ3: Control commands: D1 – Реверс" Id="46dcd515-4138-40a7-9fbe-a05b8508ff28" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="И-ПТПТ3: Control commands: D0 – Включение" Id="ce1df80a-6eaf-49a3-a004-c4bf39fec2ed" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="ec72b4ff-4f10-4f3f-9178-d2437541373d" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="3a71c9c7-e101-4471-ba56-1afc63163d93" />
+			</Request>
+			<Reply Length="19" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="73eb2350-1b79-4c6e-ab5c-89ba409a3939" />
+				<DefVal Position="1.0" Length="8" Value="0x34" Name="#NCMD" Id="86d1eb07-eb41-4d7b-807c-fef26287aad2" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ3: Состояние" Id="270dd2c8-dcd0-4393-ae17-cd89979d68c7" />
+				<CpzPrm Expression="[u3] * 0.1" Name="И-ПТПТ3: Входной ток, А" Id="bdd78a09-3610-4086-a9d5-e895fb3531f4" />
+				<CpzPrm Expression="[u4] * 0.1" Name="И-ПТПТ3: Выходной ток, фаза U, А" Id="2c71fcf8-f2f5-4311-a487-b14df682f302" />
+				<CpzPrm Expression="[u5] * 0.1" Name="И-ПТПТ3: Выходной ток, фаза V, А" Id="a64cdfac-7e0d-4567-a5eb-3eb5ec791801" />
+				<CpzPrm Expression="[u6] * 0.1" Name="И-ПТПТ3: Выходной ток, фаза W, А" Id="837d9445-c79f-40c1-afe4-f243e3a05e43" />
+				<CpzPrm Expression="[u7] * 4.0" Name="И-ПТПТ3: Входное напряжение, В" Id="5719bb74-f428-48d9-a004-2b6a76c13ff0" />
+				<CpzPrm Expression="[u8] * 4.0" Name="И-ПТПТ3: Выходное напряжение, В" Id="7f27638b-d723-4a04-96cb-20b365dc05c5" />
+				<CpzPrm Expression="[u9] * 1.0" Name="И-ПТПТ3: Заданная выходная частота, Гц" Id="6b0a392d-8cdf-4a41-a517-712aff3247cc" />
+				<CpzPrm Expression="[u10] * 1.0" Name="И-ПТПТ3: Текущая выходная частота, Гц" Id="61473f15-f4f4-46cd-bc0f-efb6ced18d03" />
+				<CpzPrm Expression="[u11] * 0.05" Name="И-ПТПТ3: Выходная активная мощность, кВт" Id="3e9a39e3-fdf6-4101-9908-fc986b6bca4d" />
+				<CpzPrm Expression="[s12] * 1.0" Name="И-ПТПТ3: Температура радиатора, °C" Id="7683f4b5-ba7d-4d87-aa47-b15fedac930f" />
+				<CpzPrm Expression="[u13] * 1.0" Name="И-ПТПТ3: Счетчик автоматических повторных включений" Id="f9b7d60b-8300-4d2b-974a-966c63126800" />
+				<BitPrm Byte="14" Bit="7" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 1: D7 – КЗ по фазе U" Id="b6759380-1ca8-4cfc-a6df-5489a1b815ab" />
+				<BitPrm Byte="14" Bit="6" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 1: D6 – КЗ по фазе V" Id="4b3ebe80-4cc5-4759-b8c1-60d37a27806b" />
+				<BitPrm Byte="14" Bit="5" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 1: D5 – КЗ по фазе W" Id="1ec1c0e5-6526-48e5-94f6-fd0be15ff40a" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 1: D4 – Перегрев" Id="f2fcf01d-1aad-46d8-81e4-6b81e3f62d18" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 1: D3 – МТЗ выходного тока" Id="b24b316e-63d0-4712-bbf4-ee0c72fbbcf6" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 1: D2 – Асимметрия выходного тока" Id="e545fb5a-8f53-4623-828d-54b6c4ac8a84" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 1: D1 – Высокое рабочее напряжение в звене постоянного тока" Id="32985c65-61fa-4dd2-b650-6c630c43bd3c" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 1: D0 – Низкое рабочее напряжение в звене постоянного тока" Id="234ac06a-9e69-411b-8bfe-742fb9ae5c54" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 2: D7 – Перегрузка по току от 100 до 150 % больше минуты" Id="18497d3f-e1ab-4d0f-b0b6-0666742b4776" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="И-ПТПТ3: Diagnostic 2: D6 – Ошибка EEPROM" Id="42d41c91-ee35-4b8f-b0f6-5c4327938b32" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="И-ПТПТ3: Discrete: D7 – Вентилятор охлаждения включен" Id="58785b4e-9965-4fae-9a26-79a5c3cddc44" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="И-ПТПТ3: Discrete: D6 – Порядок чередования фаз" Id="644bbaac-212f-4eec-8909-79c96ca491f2" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="И-ПТПТ3: Discrete: D5 – сигнал «Работа»" Id="d3aae096-887b-4aa5-90b5-85ab20f9366f" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="И-ПТПТ3: Discrete: D4 – сигнал «Реверс»" Id="1c4c83c2-cabf-45db-a302-d9f10dbc9843" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="396597e9-ea13-4802-abc0-854fa0b1f58d" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="56a2fd8d-ccbd-41e5-b7f4-e0d2b06847c3" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ4 0x41 0x42">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="19f069ea-ea9c-4dfb-ba9b-fe364228dc34" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="fa6ca2d2-eea9-4d3e-882e-60258c968dda" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="39a70dd0-801e-4e8d-aca0-d5a06d9768e0" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="11eeeb24-23a4-44d9-ae68-e7deb47ae32b" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="e0908165-f489-406d-9287-742829c2cde4" />
+				<DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="d6321cf9-308c-4bbd-9bdb-e3582af770b1" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="И-ПТПТ4: Заводской номер устройства" Id="58d3e673-43e6-4e5a-9ab1-214a61f384de" />
+				<CpzPrm Expression="[u4] * 1.0" Name="И-ПТПТ4: Версия ПО верхнего контроллера" Id="d8e985b1-886d-40d7-ad1b-7a2bf0ab2edd" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="b3e49914-e98d-4ab3-9fd7-940e3dc86628" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="d73913d1-10c0-46f3-bbdf-8c90f6df7385" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ4 0x43 0x44">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="40402cf3-6532-4fe8-a991-a8c1f2fd26c4" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="3dccad72-0575-44ee-9bd2-3e04ffd78b1a" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ4: Задание на выходную частоту, Гц" Id="8cedf29d-84f2-4a3e-9ff4-6c6db5f38c8a" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="И-ПТПТ4: Control commands: D1 – Реверс" Id="b9d8ad2e-cd11-4242-aca6-1b3ea71d7fb1" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="И-ПТПТ4: Control commands: D0 – Включение" Id="c21fd8d2-9880-4d6e-9d33-8ed8a3ec3ab3" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="a0e632c2-ee8c-4559-81e4-44422e9e433b" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="aa817e25-2699-46ac-a40d-aedff2192ec3" />
+			</Request>
+			<Reply Length="19" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="cdebde61-0dae-4e32-af6e-04ba987c8a7d" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="e3e04951-e178-4aba-bffc-62be2f55d1a4" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ4: Состояние" Id="92d5d335-2b04-48f6-bdeb-f597a77fdc6b" />
+				<CpzPrm Expression="[u3] * 0.1" Name="И-ПТПТ4: Входной ток, А" Id="3235cb8a-ecf3-433a-948c-d9be454552af" />
+				<CpzPrm Expression="[u4] * 0.1" Name="И-ПТПТ4: Выходной ток, фаза U, А" Id="2eae7112-92a3-4d6d-b440-41f04943e253" />
+				<CpzPrm Expression="[u5] * 0.1" Name="И-ПТПТ4: Выходной ток, фаза V, А" Id="c4a5f6ee-afac-417b-b271-92a297edeab8" />
+				<CpzPrm Expression="[u6] * 0.1" Name="И-ПТПТ4: Выходной ток, фаза W, А" Id="7f6905e3-8650-4295-9681-f70897c13fd6" />
+				<CpzPrm Expression="[u7] * 4.0" Name="И-ПТПТ4: Входное напряжение, В" Id="4460afa8-f0a7-4e44-9bb8-ddd5d535d6e5" />
+				<CpzPrm Expression="[u8] * 4.0" Name="И-ПТПТ4: Выходное напряжение, В" Id="b9bb0a42-8281-40cb-9939-c5589b88ded1" />
+				<CpzPrm Expression="[u9] * 1.0" Name="И-ПТПТ4: Заданная выходная частота, Гц" Id="524a77c6-b8f0-48a6-a679-acf736ebc1e7" />
+				<CpzPrm Expression="[u10] * 1.0" Name="И-ПТПТ4: Текущая выходная частота, Гц" Id="7b05d5b3-f84f-48fe-9d36-d15ff6a02e8c" />
+				<CpzPrm Expression="[u11] * 0.05" Name="И-ПТПТ4: Выходная активная мощность, кВт" Id="b7e0a740-cd46-421c-b6d1-65866fe8c415" />
+				<CpzPrm Expression="[s12] * 1.0" Name="И-ПТПТ4: Температура радиатора, °C" Id="5f60e8d5-e945-49ca-9591-c885046341c7" />
+				<CpzPrm Expression="[u13] * 1.0" Name="И-ПТПТ4: Счетчик автоматических повторных включений" Id="4a2ea2bd-3317-4ffb-88c1-82a528681ea2" />
+				<BitPrm Byte="14" Bit="7" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 1: D7 – КЗ по фазе U" Id="6ac4e050-fe97-44d5-a957-22a5c54bc0b8" />
+				<BitPrm Byte="14" Bit="6" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 1: D6 – КЗ по фазе V" Id="f4d10a1d-ff88-4551-b484-8c9f4f16392f" />
+				<BitPrm Byte="14" Bit="5" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 1: D5 – КЗ по фазе W" Id="5268d0d7-c59a-4945-9145-7da941ef2bd0" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 1: D4 – Перегрев" Id="7a18cff8-cee4-4f8c-90d4-89428101f57d" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 1: D3 – МТЗ выходного тока" Id="6d9e694d-8be1-463d-8480-32e20c267e62" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 1: D2 – Асимметрия выходного тока" Id="f1e6c3a6-f978-4e05-b1a3-6c0b183041de" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 1: D1 – Высокое рабочее напряжение в звене постоянного тока" Id="f3fb7860-1626-48f7-9b1a-215069419897" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 1: D0 – Низкое рабочее напряжение в звене постоянного тока" Id="55c7b5f8-6bbb-4a04-87e8-1c133740f624" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 2: D7 – Перегрузка по току от 100 до 150 % больше минуты" Id="e2f587ba-b8d5-47b4-b6db-b5359f9c590e" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="И-ПТПТ4: Diagnostic 2: D6 – Ошибка EEPROM" Id="99b1a323-90a2-4ebb-9c0e-918270317226" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="И-ПТПТ4: Discrete: D7 – Вентилятор охлаждения включен" Id="8be72867-d9a8-4240-a70c-ca80c9b64ec1" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="И-ПТПТ4: Discrete: D6 – Порядок чередования фаз" Id="0667f3f0-ca45-4ac5-b6eb-cc553ac48a5f" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="И-ПТПТ4: Discrete: D5 – сигнал «Работа»" Id="79f95b82-bc76-44e3-b1a4-492f3c9bcbae" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="И-ПТПТ4: Discrete: D4 – сигнал «Реверс»" Id="1d5961e6-30a1-44e8-b4a8-f21226c2d066" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="33c2efff-24ae-4a0d-977f-87b2e609232b" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="f66681c5-c9f0-43f0-926c-89289d3fa05f" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ5 0x51 0x52">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="86a436aa-973c-4564-815c-613457471da8" />
+				<DefVal Position="1.0" Length="8" Value="0x51" Name="#NCMD" Id="3a406cb2-2b5d-4fa5-afb2-99a917fa89c9" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="d02c5e82-6bfd-49be-a906-3f50efb7fb53" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="c98a4c95-104c-4a60-9914-e442fcefefcc" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="89102708-1311-4e62-ab79-5a3392ed9213" />
+				<DefVal Position="1.0" Length="8" Value="0x52" Name="#NCMD" Id="38ef512a-4f4c-4503-b087-539a80dcfb75" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="И-ПТПТ5: Заводской номер устройства" Id="ce36b1c4-60dc-4277-bc16-0beb6051893c" />
+				<CpzPrm Expression="[u4] * 1.0" Name="И-ПТПТ5: Версия ПО верхнего контроллера" Id="70b47d22-b13b-45ec-8875-6322ac36bdba" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="e19715cd-d40b-4064-b898-cb816602844b" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="65b54def-e242-47df-8120-e8059e17df62" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – И-ПТПТ5 0x53 0x54">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="94f939fd-164e-4761-be35-1f4953e88a06" />
+				<DefVal Position="1.0" Length="8" Value="0x53" Name="#NCMD" Id="e94450c8-9e6e-4080-a0d6-643a968141fe" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ5: Задание на выходную частоту, Гц" Id="1ce06e44-7379-4191-8bd2-c7c9becd8b73" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="И-ПТПТ5: Control commands: D1 – Реверс" Id="101ca817-61a9-4dab-a837-6fcbade392f0" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="И-ПТПТ5: Control commands: D0 – Включение" Id="bf188802-fd44-4658-b6a6-97570ceec692" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="e10fc578-239f-4d44-bd24-3d4f57b12bf1" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="82646af9-93bb-45f2-9091-95b0e5b57c19" />
+			</Request>
+			<Reply Length="19" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="0bd7736a-b6ff-400e-a72d-7c75880af288" />
+				<DefVal Position="1.0" Length="8" Value="0x54" Name="#NCMD" Id="8c2b61a1-9ca9-4048-80d8-d993a8518076" />
+				<CpzPrm Expression="[u2] * 1.0" Name="И-ПТПТ5: Состояние" Id="230ea134-0a27-461b-a8af-858998a836d8" />
+				<CpzPrm Expression="[u3] * 0.1" Name="И-ПТПТ5: Входной ток, А" Id="8e785244-d058-4a45-9ce6-69dcee772c94" />
+				<CpzPrm Expression="[u4] * 0.1" Name="И-ПТПТ5: Выходной ток, фаза U, А" Id="fb08a8c1-5125-4bbe-bed8-97939f2d7449" />
+				<CpzPrm Expression="[u5] * 0.1" Name="И-ПТПТ5: Выходной ток, фаза V, А" Id="d7612dba-a50b-4b38-a694-29faef933c1d" />
+				<CpzPrm Expression="[u6] * 0.1" Name="И-ПТПТ5: Выходной ток, фаза W, А" Id="a378aa3f-7c8a-40dc-8461-9e2f80a7c646" />
+				<CpzPrm Expression="[u7] * 4.0" Name="И-ПТПТ5: Входное напряжение, В" Id="bf60abeb-1242-4453-b7b2-71261f7cd73c" />
+				<CpzPrm Expression="[u8] * 4.0" Name="И-ПТПТ5: Выходное напряжение, В" Id="0e58262e-9f1e-4897-988f-52284f772a4e" />
+				<CpzPrm Expression="[u9] * 1.0" Name="И-ПТПТ5: Заданная выходная частота, Гц" Id="96c1864c-e3b2-47ae-9b51-9bc11cf669af" />
+				<CpzPrm Expression="[u10] * 1.0" Name="И-ПТПТ5: Текущая выходная частота, Гц" Id="5c40f6c5-d8f5-48e5-a803-a5c660279a07" />
+				<CpzPrm Expression="[u11] * 0.05" Name="И-ПТПТ5: Выходная активная мощность, кВт" Id="fbaf0a3e-6127-4318-9794-85395263408d" />
+				<CpzPrm Expression="[s12] * 1.0" Name="И-ПТПТ5: Температура радиатора, °C" Id="1690c0de-c7ec-40c6-b280-580e868647a6" />
+				<CpzPrm Expression="[u13] * 1.0" Name="И-ПТПТ5: Счетчик автоматических повторных включений" Id="02585954-222e-4336-a0db-f10d663971a9" />
+				<BitPrm Byte="14" Bit="7" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 1: D7 – КЗ по фазе U" Id="acc1ff8a-4ac0-4543-8c1f-12a5a5957e43" />
+				<BitPrm Byte="14" Bit="6" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 1: D6 – КЗ по фазе V" Id="f8b05196-49a4-40a8-9a6d-be9f08ae26a1" />
+				<BitPrm Byte="14" Bit="5" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 1: D5 – КЗ по фазе W" Id="6685e387-d5d8-4237-aa85-2898bf618030" />
+				<BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 1: D4 – Перегрев" Id="86585fd0-1512-42bd-a1bd-53c74fc35f04" />
+				<BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 1: D3 – МТЗ выходного тока" Id="6f054dbb-1050-47d9-8d58-1fe7d0662bb9" />
+				<BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 1: D2 – Асимметрия выходного тока" Id="832b284c-f1ff-4cbb-a86b-5660300562fd" />
+				<BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 1: D1 – Высокое рабочее напряжение в звене постоянного тока" Id="4d015aac-9edb-4156-9f91-c05925ce63ef" />
+				<BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 1: D0 – Низкое рабочее напряжение в звене постоянного тока" Id="6f24f93e-7cd5-420a-94d3-a8e7130ad455" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 2: D7 – Перегрузка по току от 100 до 150 % больше минуты" Id="c8711cd3-7b53-44bd-9494-d07b6c8efae5" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="И-ПТПТ5: Diagnostic 2: D6 – Ошибка EEPROM" Id="662a9a14-2c3a-42b0-9b10-ac579adb1d42" />
+				<BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="И-ПТПТ5: Discrete: D7 – Вентилятор охлаждения включен" Id="627aee0e-ec22-4588-80d9-9ed992373d5a" />
+				<BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="И-ПТПТ5: Discrete: D6 – Порядок чередования фаз" Id="0efa8310-e20e-428a-b791-d78a125fae79" />
+				<BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="И-ПТПТ5: Discrete: D5 – сигнал «Работа»" Id="619641d2-fbcd-425c-a33e-15de8f865866" />
+				<BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="И-ПТПТ5: Discrete: D4 – сигнал «Реверс»" Id="c28652ef-0b3c-4e42-b155-9a972b922f63" />
+				<VarVal Position="17.0" Length="8" Name="#CRCH" Id="25c30b4d-364f-4ef7-af63-aa7a153cb628" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="7d9ecaef-41dd-4f67-a322-051c68d91c0a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – БКИ 0x11 0x12">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="4861114a-29d3-4ab9-9291-0a48b635184e" />
+				<DefVal Position="1.0" Length="8" Value="0x11" Name="#NCMD" Id="d87ef9ff-11b8-4638-b516-c8ddc8119aa0" />
+				<VarVal Position="2.0" Length="8" Name="#CRCH" Id="17e7f0d7-2c66-434c-af67-43e3b5ae38d4" />
+				<VarVal Position="3.0" Length="8" Name="#CRCL" Id="7c6c2f5e-3d58-4bdf-b68c-327e71ad91ce" />
+			</Request>
+			<Reply Length="7" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="393e5f4a-a8bf-4637-a28f-d8f59b7a6ad7" />
+				<DefVal Position="1.0" Length="8" Value="0x12" Name="#NCMD" Id="2c1fad0c-69e0-4742-a0d9-4ee024a50971" />
+				<CpzPrm Expression="[u2] + [u3] * 256.0" Name="Заводской номер устройства" Id="18eeb7fc-a6f4-4d88-bb6c-735eee92940e" />
+				<CpzPrm Expression="[u4] * 1.0" Name="Версия ПО" Id="8360ef94-27d9-410f-8a4a-4cbd3f9cb19e" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="c2595446-fb7d-48e2-9667-66523e9589e2" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="651b3421-dfaf-4539-8772-c891de15e82b" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БЦУ – БКИ 0x13 0x14">
+			<Request Length="5" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="bc43069e-bd4c-4f35-a6ae-b80fbe9d1f79" />
+				<DefVal Position="1.0" Length="8" Value="0x13" Name="#NCMD" Id="1193b8b9-a9c6-4c0c-bb72-490166592972" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Control commands: D0 – Сброс реле" Id="a9c51a54-d796-4929-aaf5-fb1b036ee39b" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="bcde43df-093b-4d58-b666-769a682c525f" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="c21c8b8f-9d73-4716-a0fd-cc33646df12c" />
+			</Request>
+			<Reply Length="8" Position="5">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="1a8ee456-1b9c-4854-9006-d3bd2abf8b55" />
+				<DefVal Position="1.0" Length="8" Value="0x14" Name="#NCMD" Id="ca2c638e-9848-4ba5-bd5e-931a3cbbc383" />
+				<CpzPrm Expression="[u2] * 1.0" Name="Состояние" Id="81730099-24fd-4df1-b6e1-fc585569b59f" />
+				<CpzPrm Expression="[s3] * 2.0" Name="Температура блока БКИ, °C" Id="1063aa26-e1f9-4054-a841-0637018de109" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Diagnostic 1: D7 – Пониженная изоляция (+) - менее 1000 кОм" Id="49cc2cf7-5af9-477f-a59e-27c0cfefb7bc" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Diagnostic 1: D6 – Пониженная изоляция (+) - менее 100 кОм" Id="4b4666de-d5a6-4eac-8e95-6ceb47efc6a2" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Diagnostic 1: D5 – Пониженная изоляция (-) - менее 1000 кОм" Id="2143fe8e-396c-4426-b0a8-a8e8da7850af" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Diagnostic 1: D4 – Пониженная изоляция (-) - менее 100 кОм" Id="543c0dac-588a-4c84-a2f9-2b270fcd5469" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Diagnostic 1: D3 – Круговой огонь" Id="d13a364f-d8bc-4348-9da5-bf69b1edfd7e" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Diagnostic 2: D7 – Пониженная изоляция (+) - менее 1000 кОм" Id="d38ac78c-e8f9-409d-b1ad-0bef8c0e0ee4" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Diagnostic 2: D6 – Пониженная изоляция (+) - менее 100 кОм" Id="bbde7d4a-b603-414c-ae98-ed0bea5562f5" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Diagnostic 2: D5 – Пониженная изоляция (-) - менее 1000 кОм" Id="916feb7a-b40b-4cf1-9aa6-9e19c42301f9" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Diagnostic 2: D4 – Пониженная изоляция (-) - менее 100 кОм" Id="c99e4426-e937-44ed-9633-8e24bd8ba919" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Diagnostic 2: D3 – Круговой огонь" Id="34289518-aeef-418f-8207-8d9f8e495a1c" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="12233f24-3bde-4fbb-9f8c-754114cdfc6b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="656d8aa8-3729-448d-82ce-686128d0184f" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

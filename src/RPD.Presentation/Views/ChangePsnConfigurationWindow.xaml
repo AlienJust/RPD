@@ -1,0 +1,48 @@
+﻿<Window x:Class="RPD.Presentation.Views.ChangePsnConfigurationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Конфигурация ПСН" Height="305" Width="437"
+        DataContext="{Binding Path=ChangePsnConfiguration, Source={StaticResource Locator}}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Style="{StaticResource dialogHeader2Style}" Margin="5">Выберите конфигурацию ПСН</TextBlock>
+
+        <!--Список конфигураций-->
+        <ListBox Grid.Row="1" 
+                 Style="{StaticResource listBoxWithTransparentItemStyle}"
+                 BorderBrush="Transparent"
+                 Background="Transparent"
+                 SelectedItem="{Binding Path=SelectedConfiguration}"
+                 ItemsSource="{Binding Path=AvailableConfigurations}"
+                 Margin="5,0,5,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Margin="5">
+                        <RadioButton.IsChecked>
+                            <Binding Path="IsSelected" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}"/>
+                        </RadioButton.IsChecked>
+                        <StackPanel Margin="5,0,0,0">
+                            <TextBlock Text="{Binding Path=Name}" FontWeight="Medium"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontWeight="Light" Text="{Binding Path=DescriptionAndVersionString}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </RadioButton>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--Кнопки навигации-->
+        <DockPanel Grid.Row="2">
+            <Button DockPanel.Dock="Right"
+                    Style="{StaticResource dialogButtonStyle}"
+                    HorizontalAlignment="Right"
+                    Command="{Binding Path=ApplyCommand}">Применить</Button>
+        </DockPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,886 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Микроклимат салона сегмент 1 ЭС2ГП" Version="10" Description="Конфигурация микроклимата салона ЭС2ГП" Id="fcd85556-80bb-4fbf-bd1c-4a520191f5ea" RpdId="53">
+  <PsnMeters>
+    <PsnMeter Address="0x01" Name="КСМ" />
+    <PsnMeter Address="0x02" Name="МУК заслонки наружного воздуха" />
+    <PsnMeter Address="0x03" Name="МУК вентилятора испарителя" />
+    <PsnMeter Address="0x04" Name="МУК вентилятора конденсатора" />
+    <PsnMeter Address="0x06" Name="МУК вытяжного вентилятора" />
+    <PsnMeter Address="0x07" Name="МУК заслонки рециркуляционного воздуха" />
+    <PsnMeter Address="0x08" Name="МУК заслонки лето зима" />
+    <PsnMeter Address="0x0A" Name="БС-СМ" />
+    <PsnMeter Address="0x1E" Name="БВС1" />
+    <PsnMeter Address="0x1D" Name="БВС2" />
+    <!--<PsnMeter Address="0x01" Name="РПД" />-->
+    <PsnMeter Address="0x14" Name="Технический абонент" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="между КСМ и МУК заслонки наружного воздуха 03">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="ce11abf3-470a-459a-8e7a-b3e523034274" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="e2facd39-9008-4976-8dc2-bcdf5250315b" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="eccfb390-2157-440c-b3ef-e81e89f154ad" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="de1a65d1-ba50-4b38-9d9e-60eb201e1fe8" />
+      </Request>
+      <Reply Length="47" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="8de866bd-ac41-40e3-8f85-0546bb159ea5" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="b44d0096-f5a1-41db-b91a-21065de0dd5c" />
+        <DefVal Position="2.0" Length="8" Value="0x2A" Name="количество байт данных" Id="5f566cb6-520c-4e53-9ea4-8e9c0cefefaa" />
+        <!-- Байт №2 (считая с нуля) - содержит количество байт посылки (не забывать про него)-->
+        <CpzPrm Name="Положение заслонки" Expression="[s3] * 256.0 + [u4]" Id="f03e8614-0ba9-44d1-abbb-977d77c0bd18" />
+        <CpzPrm Name="Температура 1w адрес 1" Expression="[s5] * 256.0 + [u6]" Id="94565c71-4c3a-4483-b90a-616e211c5215" />
+        <CpzPrm Name="Температура 1w адрес 2" Expression="[s7] * 256.0 + [u8]" Id="1e9f30c8-56f6-49b8-990f-bb1e39e0fb06" />
+        <BitPrm Byte="10" Bit="6" IsValueInverted="False" Name="Дискретный сигнал на включение Emerson1" Id="a9641b05-63be-4cd3-a5fc-017cd938822c" />
+        <BitPrm Byte="10" Bit="7" IsValueInverted="False" Name="Дискретный сигнал на включение Emerson2" Id="aaba04c4-0792-4c50-b738-d616f3a8fb32" />
+        <CpzPrm Name="Байт выходных сигналов" Expression="[s11] * 256.0 + [u12]" Id="79a65d5f-3a41-41dc-bc98-22fa16140f00" />
+        <CpzPrm Name="Аналоговый вход" Expression="([s13] * 256.0 + [u14]) * 0.1" Id="8c3ff706-a607-4fb2-b90b-236342f7c9c9" />
+        <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s15] * 256.0 + [u16]" Id="3b53147a-7853-448c-bd1b-08116a8332d6" />
+        <BitPrm Byte="18" Bit="4" IsValueInverted="False" Name="нет ответа от контроллера Emerson" Id="75b941b0-0379-430c-8a71-91f117c06d1c" />
+        <BitPrm Byte="18" Bit="6" IsValueInverted="False" Name="ошибка датчика 1w №1" Id="5d96faa2-1146-4476-85bc-cfc27e80586c" />
+        <BitPrm Byte="18" Bit="7" IsValueInverted="False" Name="ошибка датчика 1w №2" Id="5ed4e13a-bc9b-45f0-bf5c-caf5a7614887" />
+        <BitPrm Byte="20" Bit="0" IsValueInverted="False" Name="ненормальное значение давление контур 1" Id="74178ab2-f204-4948-b2a9-2c8457ac9ef4" />
+        <BitPrm Byte="20" Bit="1" IsValueInverted="False" Name="ненормальное значение температура контур 1" Id="33e21943-79ee-4ff4-93e0-8f90c88c41d8" />
+        <BitPrm Byte="20" Bit="2" IsValueInverted="False" Name="ненормальное значение давление контур 2" Id="afa83968-eef8-40f1-b8a9-97b60cf0bcda" />
+        <BitPrm Byte="20" Bit="3" IsValueInverted="False" Name="ненормальное значение температура контур 2" Id="99f0df77-f109-491f-a453-d73ed4916e8b" />
+        <BitPrm Byte="20" Bit="5" IsValueInverted="False" Name="ОС показывает, что заслонка не встает в крайние положения" Id="e6bf3089-a953-4237-b06d-a4756f6a6b71" />
+        <BitPrm Byte="20" Bit="6" IsValueInverted="False" Name=" ОС показывает, что заслонка не проходит 50% диапазона" Id="362797d6-00f1-45dd-878b-a8feeb16867a" />
+        <CpzPrm Name="Диагностика 3 (1w адрес 1)" Expression="[s21] * 256.0 + [u22]" Id="e8d819e8-726e-43aa-bf88-3a4de298bd6b" />
+        <CpzPrm Name="Диагностика 4 (1w адрес 2)" Expression="[s23] * 256.0 + [u24]" Id="efa1831a-f701-44a6-862f-cedfb12a7f13" />
+        <BitPrm Byte="26" Bit="0" IsValueInverted="False" Name="Emerson диагн., контур1:N/A" Id="db32fc60-66bf-44a8-a1e5-287b4a9083ab" />
+        <BitPrm Byte="26" Bit="1" IsValueInverted="False" Name="Emerson диагн., контур1:низкое давление" Id="55e3c97a-c26e-4c14-9478-04852c5979e8" />
+        <BitPrm Byte="26" Bit="2" IsValueInverted="False" Name="Emerson диагн., контур1:высокий перегрев" Id="dcc157b2-2764-4c1f-96ba-6f0d5767cbbc" />
+        <BitPrm Byte="26" Bit="3" IsValueInverted="False" Name="Emerson диагн., контур1:низкий перегрев" Id="4beb9da8-329d-4861-938c-15943c116fa5" />
+        <BitPrm Byte="26" Bit="4" IsValueInverted="False" Name="Emerson диагн., контур1:замерзание" Id="768d15f8-a50f-46af-ba43-53307cb87355" />
+        <BitPrm Byte="26" Bit="5" IsValueInverted="False" Name="Emerson диагн., контур1:макс. температура" Id="db47f2fb-a323-4d14-bedc-458e2aeb75c2" />
+        <BitPrm Byte="26" Bit="6" IsValueInverted="False" Name="Emerson диагн., контур1:мин. температура" Id="9d85cf19-91b5-4268-830e-f8095a64f01a" />
+        <CpzPrm Name="Emerson температура, контур 1" Expression="([s27] * 256.0 + [u28]) * 0.01" Id="cf5d99be-c27f-4a23-9428-617b3ec48183" />
+        <CpzPrm Name="Emerson давление, контур 1" Expression="([s29] * 256.0 + [u30]) * 0.1" Id="1d313d90-a449-4f2e-a3f4-79e0299d0c5e" />
+        <CpzPrm Name="Emerson уставка на клапан, контур 1" Expression="[s31] * 256.0 + [u32]" Id="a66a9b3c-007c-495c-a664-40b7827f2801" />
+        <BitPrm Byte="34" Bit="0" IsValueInverted="False" Name="Emerson диагн., контур2:N/A" Id="17b3cac2-0436-457c-8494-a1f897986871" />
+        <BitPrm Byte="34" Bit="1" IsValueInverted="False" Name="Emerson диагн., контур2:низкое давление" Id="f1933450-f03e-4631-a3a7-2f06ef0c6cfe" />
+        <BitPrm Byte="34" Bit="2" IsValueInverted="False" Name="Emerson диагн., контур2:высокий перегрев" Id="87be0b6a-c64c-49bd-9474-4dd54e308a47" />
+        <BitPrm Byte="34" Bit="3" IsValueInverted="False" Name="Emerson диагн., контур2:низкий перегрев" Id="2a626192-39e8-4f98-a948-53ccdaf6b5c8" />
+        <BitPrm Byte="34" Bit="4" IsValueInverted="False" Name="Emerson диагн., контур2:замерзание" Id="78bcbf7c-568d-4a29-9d19-0a9ba6a52a0c" />
+        <CpzPrm Name="Emerson температура канала 2" Expression="([s35] * 256.0 + [u36]) * 0.01" Id="e91bc02b-c20d-48b9-aeb1-4f707e4ad6e9" />
+        <CpzPrm Name="Emerson давление канала 2" Expression="([s37] * 256.0 + [u38]) * 0.1" Id="e5ff6c9d-66df-4b85-906e-680ace1a1534" />
+        <CpzPrm Name="Emerson уставка на клапан канала 2" Expression="[s39] * 256.0 + [u40]" Id="1aad4eb9-70de-4a41-94b9-037321613d07" />
+        <CpzPrm Name="Номер версии ПО МУК заслонки" Expression="[s41] * 256.0 + [u42]" Id="f0173279-3fe4-4152-8284-522ed7a96cbc" />
+        <CpzPrm Name="Резерв" Expression="[s43] * 256.0 + [u44]" Id="49ebb9f6-a0a3-48d2-9b12-c481a08101e2" />
+        <VarVal Position="45.0" Length="8" Name="#CRCH" Id="4a4dde36-cdba-4338-b490-ea18c1fb6586" />
+        <VarVal Position="46.0" Length="8" Name="#CRCL" Id="a180e0a1-1415-4513-9e3c-6b1ea5515aef" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК вентилятора испарителя 03">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="f6d1067a-203b-4d99-8eed-f193a6cccc69" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="d2f99b8c-b1e8-4000-a654-22fd9c7f0bf9" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="dd8790ee-4f3a-4564-a5fc-710cbeb1b8d8" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="a8e275d8-c5dd-4b40-be7a-462377a341df" />
+      </Request>
+      <Reply Length="41" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="3352927a-29be-4ee4-a306-f05a2464383b" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="2fbdbe48-337f-49d4-bd73-50f359ac7378" />
+        <CpzPrm Name="ШИМ вентилятора" Expression="[s3] * 256.0 + [u4]" Id="ee2259ad-313f-41bb-9477-e9f0657bee39" />
+        <CpzPrm Name="Температура 1w адрес 1" Expression="[s5] * 256.0 + [u6]" Id="3a45e3f3-c71f-4b03-9e9d-2e2f09ab30da" />
+        <CpzPrm Name="Температура 1w адрес 2" Expression="[s7] * 256.0 + [u8]" Id="5b839bd6-c800-4054-ad63-e1153aa7d656" />
+        <CpzPrm Name="Байт входных сигналов" Expression="[s9] * 256.0 + [u10]" Id="897cd777-a730-4595-8252-c57d05e94997" />
+        <CpzPrm Name="Байт выходных сигналов" Expression="[s11] * 256.0 + [u12]" Id="a27ee5f6-693a-4691-85d1-961119d9de7c" />
+        <CpzPrm Name="Аналоговый вход" Expression="[s13] * 256.0 + [u14]" Id="6291e0ab-64cc-46a6-9054-e9a5f3aff258" />
+        <CpzPrm Name="ШИМ обогрев (PID рег.)" Expression="[s15] * 256.0 + [u16]" Id="61ecbf3f-9e15-4860-a973-bde39a4d115a" />
+        <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s17] * 256.0 + [u18]" Id="d9f9a71c-097d-436d-b222-43822913078c" />
+        <BitPrm Byte="20" Bit="2" IsValueInverted="False" Name="Режим рег.T:  1–«охлаждение», иначе-«нагрев». " Id="cb0ce912-d9ee-41a5-b533-6f0c2a2ef808" />
+        <BitPrm Byte="20" Bit="5" IsValueInverted="False" Name="Режим ограничения охл./нагрева по внешней T" Id="e85282b3-b278-4e54-ae4c-23eb31e2735d" />
+        <CpzPrm Name="Рассчитанная уставка температуры" Expression="([s21] * 256.0 + [u22]) * 0.01" Id="05f36fe1-e9a5-4bbd-88f0-c342bcb782cb" />
+        <CpzPrm Name="Обороты вентилятора" Expression="[s23] * 256.0 + [u24]" Id="262a5688-690f-40c7-9dcc-9b8d0532636c" />
+        <BitPrm Byte="26" Bit="4" IsValueInverted="False" Name="отсутствие обмена с контроллером вент-ра." Id="a503a5ce-1edb-4391-969c-2ba96bcf2e47" />
+        <BitPrm Byte="26" Bit="5" IsValueInverted="False" Name="ошибка вент-ра (по дискретному входу)" Id="5c6c7f2a-f0e0-4d33-b4e5-1b9d69cd0160" />
+        <BitPrm Byte="26" Bit="6" IsValueInverted="False" Name="ошибка датчика 1w №1" Id="b26d48b6-4d97-489d-a10a-fafdab79e2c2" />
+        <BitPrm Byte="26" Bit="7" IsValueInverted="False" Name="ошибка датчика 1w №2" Id="4988e3d2-cdd2-468e-a600-0357833afeb1" />
+        <BitPrm Byte="28" Bit="0" IsValueInverted="False" Name="Контр. вентилятора:ошибка фазы или отсутствие питание." Id="a79e8aa1-45dd-46d1-b947-a1deb32c8939" />
+        <BitPrm Byte="28" Bit="1" IsValueInverted="False" Name="Контр. вентилятора:резерв" Id="aab8f1c5-9adf-4f4e-a7b0-875d7e45b5f9" />
+        <BitPrm Byte="28" Bit="2" IsValueInverted="False" Name="Контр. вентилятора:перегрев силового блока" Id="c943de7e-0329-4771-868c-8e2773a49946" />
+        <BitPrm Byte="28" Bit="3" IsValueInverted="False" Name="Контр. вентилятора:резерв" Id="6d4a1c10-ddd9-496c-9f59-3da76210c6d5" />
+        <BitPrm Byte="28" Bit="4" IsValueInverted="False" Name="Контр. вентилятора:признак аварии" Id="70b7c796-0e32-4296-b4b6-7fc3e3d36b67" />
+        <BitPrm Byte="28" Bit="5" IsValueInverted="False" Name="Контр. вентилятора:перегрев мотора" Id="df731cb2-6a16-4488-a66c-02dd1b138cbd" />
+        <BitPrm Byte="28" Bit="6" IsValueInverted="False" Name="Контр. вентилятора:ошибка датчика Холла" Id="18a00b42-f044-4253-94d5-f5d9605170a7" />
+        <BitPrm Byte="28" Bit="7" IsValueInverted="False" Name="Контр. вентилятора:блокировка мотора" Id="5d331227-7a9a-4d34-a91a-31e84cdc5266" />
+        <BitPrm Byte="30" Bit="0" IsValueInverted="False" Name="МУК выдает включение на Emerson" Id="a2dec797-b398-434a-ba99-76ff367b408c" />
+        <BitPrm Byte="30" Bit="1" IsValueInverted="False" Name="МУК выдерживает таймаут включение Emerson " Id="0bce5eb3-7f1d-492f-a4a6-c416f664a0b7" />
+        <BitPrm Byte="30" Bit="2" IsValueInverted="False" Name="МУК выдерживает таймаут выключения Emerson" Id="7418f677-3332-4c32-9029-d619dd666a28" />
+        <CpzPrm Name="Диагностика 4 (1w адрес 1)" Expression="[s31] * 256.0 + [u32]" Id="1f78ecb6-e344-4e91-b2fb-4e3ff992987b" />
+        <CpzPrm Name="Диагностика 5 (1w адрес 2)" Expression="[s33] * 256.0 + [u34]" Id="601f8c4e-0452-4ed1-adcb-f00342eda21b" />
+        <CpzPrm Name="Номер версии ПО" Expression="[s35] * 256.0 + [u36]" Id="bad6547d-8b56-41d9-8eed-889c8aadec37" />
+        <CpzPrm Name="Температура 1w адрес 3" Expression="([s37] * 256.0 + [u38]) * 0.01" Id="1c33ba03-4f73-4938-aded-b5cb52837821" />
+        <VarVal Position="39.0" Length="8" Name="#CRCH" Id="88a6012a-0a4c-4aff-bc55-74d8b90e4adf" />
+        <VarVal Position="40.0" Length="8" Name="#CRCL" Id="bd5cdc04-b0a6-4818-bd66-80d3e33e27f0" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК вентилятора конденсатора 03">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="aa2231b6-6e35-4586-bd4f-8e73564e4ed4" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="ec6d70a2-e086-41fa-b62c-d489c0a614c1" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="379b84a8-05bc-40d6-a789-60101e63e15f" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="2500df77-0c39-497a-8d10-8e52c9d7b0b0" />
+      </Request>
+      <Reply Length="29" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="affd773c-e6eb-4702-81fc-cf56423c046c" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="7db239c8-5647-4930-a84b-be11c1bee34d" />
+        <CpzPrm Name="ШИМ вентилятора" Expression="[s3] * 256.0 + [u4]" Id="1362c8a2-ed8d-4e1f-bb72-62f1db841679" />
+        <CpzPrm Name="Давление конденсации" Expression="[s5] * 256.0 + [u6]" Id="0c7ab35d-9400-4916-b472-37fdc2bafc7e" />
+        <CpzPrm Name="Байт входных сигналов" Expression="[s7] * 256.0 + [u8]" Id="5cb8e7d5-871d-4bd3-9a49-5f0b29b77b03" />
+        <BitPrm Byte="10" Bit="0" IsValueInverted="False" Name="Включение ступени 1" Id="03ece89b-9dc9-4d9e-993d-9ab278ee2e26" />
+        <BitPrm Byte="10" Bit="1" IsValueInverted="False" Name="включение ступени 2" Id="fa980ec3-7a00-4a0c-8ba1-9a7f501db196" />
+        <CpzPrm Name="Аналоговый вход" Expression="[s11] * 256.0 + [u12]" Id="5d15478b-a0f8-4b39-b9c4-20ed58b23834" />
+        <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s13] * 256.0 + [u14]" Id="cf1152f7-43a2-4f6f-ad51-a08418afd4e2" />
+        <BitPrm Byte="16" Bit="0" IsValueInverted="False" Name="регулятор работает" Id="593406ce-8cbe-4ecd-b3b0-ef4654eb3eae" />
+        <BitPrm Byte="16" Bit="1" IsValueInverted="False" Name="регулятор работает с ограничением D2 ШИМ мах стоянка" Id="611b7526-fd36-46d7-9869-7fbd5f03e66f" />
+        <BitPrm Byte="16" Bit="3" IsValueInverted="False" Name="мойка (ШИМ =0)" Id="9d58ed27-3bdb-4c11-89cb-dc9e1ae76ab2" />
+        <BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="вент вкл мах (ШИМ мах)" Id="991563f2-e9b5-4ca1-95c1-ed6c935f50f0" />
+        <BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="вент выкл (ШИМ =0)" Id="7b9c24f8-99eb-4b29-a991-dc537ab7f212" />
+        <BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="ручной режим" Id="85b8007c-0a70-4880-982e-522d29e573ea" />
+        <BitPrm Byte="16" Bit="7" IsValueInverted="False" Name="обрыв датчика (ШИМ=50 %)" Id="ad9fa6d4-f4ed-4c65-9207-fd0ef639b0e1" />
+        <BitPrm Byte="18" Bit="2" IsValueInverted="False" Name="обрыв датчика 2 по давлению" Id="a3504763-e695-41ee-ae49-89bed3c2cec7" />
+        <BitPrm Byte="18" Bit="3" IsValueInverted="False" Name="обрыв датчика 1 по давлению" Id="2c170232-b95f-447c-bfc7-1fc7888bd4e1" />
+        <BitPrm Byte="18" Bit="4" IsValueInverted="False" Name="отсутствие обмена с контроллером вент-ра." Id="a96280df-1123-437b-93b1-3aab743fed18" />
+        <BitPrm Byte="18" Bit="5" IsValueInverted="False" Name="ошибка вент-ра (по дискретному входу)" Id="3c4ac18e-ec9e-4ec9-a270-758fa53090ef" />
+        <BitPrm Byte="20" Bit="0" IsValueInverted="False" Name="Диагн. вент.:ошибка фазы или отсутствие питание" Id="5a10aca9-8aed-450a-b6d8-e1c968323b51" />
+        <BitPrm Byte="20" Bit="1" IsValueInverted="False" Name="Диагн. вент.:резерв" Id="70829e8d-3226-4d69-bdd7-ffe018f19d43" />
+        <BitPrm Byte="20" Bit="2" IsValueInverted="False" Name="Диагн. вент.:перегрев силового блока" Id="de5bbab0-f864-4ce0-97ec-c3b56cefb87a" />
+        <BitPrm Byte="20" Bit="3" IsValueInverted="False" Name="Диагн. вент.:резерв" Id="00eb617b-65f4-468a-ab71-5cdb5364c9d8" />
+        <BitPrm Byte="20" Bit="4" IsValueInverted="False" Name="Диагн. вент.:признак аварии" Id="e98766aa-682f-4dab-b882-18f3dda0dfee" />
+        <BitPrm Byte="20" Bit="5" IsValueInverted="False" Name="Диагн. вент.:перегрев мотора" Id="9ed87a2a-c6a7-4541-af03-fef2623ddda2" />
+        <BitPrm Byte="20" Bit="6" IsValueInverted="False" Name="Диагн. вент.:ошибка датчика Холла" Id="56ac3f41-5d37-411b-9ff0-dffb18e3e6e7" />
+        <BitPrm Byte="20" Bit="7" IsValueInverted="False" Name="Диагн. вент.:блокировка мотора" Id="c2139641-41b5-4592-a1d3-0daf580362e6" />
+        <CpzPrm Name="Обороты вентилятора" Expression="[s21] * 256.0 + [u22]" Id="ff025d41-715e-4e16-a34c-5bcbc4fe5344" />
+        <CpzPrm Name="Номер версии ПО" Expression="[s23] * 256.0 + [u24]" Id="e4b18fc0-a3f9-47aa-bdc2-e315a9a14f4b" />
+        <CpzPrm Name="Давление конденсации 2" Expression="[s25] * 256.0 + [u26]" Id="02003709-3d7c-4741-b834-2dc62af8c784" />
+        <VarVal Position="27.0" Length="8" Name="#CRCH" Id="6366a594-3ce4-484d-8b81-a24c4c8e1260" />
+        <VarVal Position="28.0" Length="8" Name="#CRCL" Id="c7792e9a-a25a-4515-a78b-f3517c2e1062" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК вытяжного вентилятора 03">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="498a6d89-2d81-43e3-8eb5-c67bcd565b43" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="9475134b-18a0-4d8c-a3ba-aa5555f4c28c" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="05a599a1-c79a-40c1-ba01-e47f8286d4ac" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="f192b8c8-b01f-4ea2-bbfc-d2aa7c92011f" />
+      </Request>
+      <Reply Length="31" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="04bf3d09-8eaa-4b7e-8505-01141070dc12" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="e0cfb877-dfb4-4b1a-aab9-290409bb7697" />
+        <CpzPrm Name="ШИМ вентилятора" Expression="[s3] * 256.0 + [u4]" Id="c64c3268-c600-438c-bb88-d78316cc9e28" />
+        <CpzPrm Name="Температура 1w адрес 1" Expression="([s5] * 256.0 + [u6]) * 1.0" Id="55338d97-fb39-48ec-9446-90dfedde53ed" />
+        <CpzPrm Name="Байт входных сигналов" Expression="[s7] * 256.0 + [u8]" Id="9cd2b523-c99b-4095-a384-3637bb41364e" />
+        <CpzPrm Name="Байт выходныхсигналов" Expression="[s9] * 256.0 + [u10]" Id="f3f5ead5-c7b1-4a78-9348-d46f42d74dde" />
+        <CpzPrm Name="Аналоговый вход CO2" Expression="([s11] * 256.0 + [u12]) * 10.0" Id="3c6c59ba-0d1f-43c5-b768-b9f68248cd5f" />
+        <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s13] * 256.0 + [u14]" Id="e15b611e-04de-4dcd-82fc-51de654a5263" />
+        <CpzPrm Name="Обороты вент-ра" Expression="[s15] * 256.0 + [u16]" Id="ba0e9e81-1b38-4d10-8f41-accd101e5567" />
+        <CpzPrm Name="Диагностика 1 (плата МУК, обмен)" Expression="[s17] * 256.0 + [u18]" Id="ed6e2f09-059f-4f0e-96b1-f973cd45e1c5" />
+        <BitPrm Byte="18" Bit="4" IsValueInverted="False" Name="отсутствие обмена с контроллером вент-ра." Id="24f528ce-0e59-452a-b337-4595e2c5ce74" />
+        <BitPrm Byte="18" Bit="5" IsValueInverted="False" Name="ошибка вент-ра (по дискретному входу)" Id="8c231d22-54d8-4c50-8006-8f2d4feb1794" />
+        <CpzPrm Name="Диагностика 2 (вентилятор)" Expression="[s19] * 256.0 + [u20]" Id="aaefe6a5-9b8b-4388-81c6-4833c215bdf7" />
+        <CpzPrm Name="Диагностика 3 (1w адрес 1)" Expression="[s21] * 256.0 + [u22]" Id="98946b9d-b44e-4fd6-8baf-1707673fc305" />
+        <CpzPrm Name="Номер версии ПО" Expression="[s23] * 256.0 + [u24]" Id="29b6eb06-f447-4e3f-b5d0-13b76245b287" />
+        <CpzPrm Name="Резерв" Expression="[s25] * 256.0 + [u26]" Id="5be39da9-b18f-40df-897a-c8ba207af569" />
+        <CpzPrm Name="Резерв" Expression="[s27] * 256.0 + [u28]" Id="4fc4b865-4764-4f0c-a69a-536a3fbf1bf0" />
+        <VarVal Position="29.0" Length="8" Name="#CRCH" Id="53113e14-306c-4606-8318-21a9001f384d" />
+        <VarVal Position="30.0" Length="8" Name="#CRCL" Id="d3912f4e-383d-481c-a4a2-c8db08331f61" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК заслонки рециркуляционного воздуха 03">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="ea1bc643-86d5-4bec-a4f1-acce5d2770c0" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="900e02a4-2cfe-409e-bbc6-3412b0446d01" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="e6dfc2ed-457d-43b1-b881-16ceecb1e912" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="edee9398-479b-4a6f-ae06-ef3c631f7fd7" />
+      </Request>
+      <Reply Length="43" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="1ddd9e9b-788f-411a-a473-305a3fb6c1fd" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="1fdd0f94-c509-43aa-97b2-831dc0f73707" />
+        <CpzPrm Name="Уставка ШИМ на заслонку" Expression="[s3] * 256.0 + [u4]" Id="8e44ced7-0da1-4e52-a233-c0fb00cead4d" />
+        <CpzPrm Name="Температура 1w адрес 1" Expression="[s5] * 256.0 + [u6]" Id="c8552988-c299-4d08-8308-9ce221ca612e" />
+        <CpzPrm Name="Температура 1w адрес 2" Expression="[s7] * 256.0 + [u8]" Id="e6d5245f-a940-4f1b-b24f-97327f92a815" />
+        <CpzPrm Name="Байт входных сигналов" Expression="[s9] * 256.0 + [u10]" Id="d07aecd4-9596-40c2-9f9b-ad2236abe3f5" />
+        <CpzPrm Name="Байт выходных сигналов" Expression="[s11] * 256.0 + [u12]" Id="9fa4b352-4e0e-4ca5-8876-5d9ea9a5e891" />
+        <CpzPrm Name="Аналоговый вход от заслонки" Expression="([s13] * 256.0 + [u14]) * 0.1" Id="efa0acf5-0397-46b2-b63b-68e14d53566a" />
+        <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s15] * 256.0 + [u16]" Id="f18964d4-9b9b-4b30-89b4-6df41948d8b8" />
+        <BitPrm Byte="18" Bit="6" IsValueInverted="False" Name="ошибка датчика 1w №1" Id="6610f5ed-a615-40c3-8bbc-a8981dfcecfe" />
+        <BitPrm Byte="18" Bit="7" IsValueInverted="False" Name="ошибка датчика 1w №2" Id="fc24bdc2-42f2-43a6-ab6e-c332fabdf9ba" />
+        <BitPrm Byte="20" Bit="5" IsValueInverted="False" Name="ОС показывает, что заслонка не встает в крайние положения" Id="ab2abdce-7115-4c85-8882-3bb14d6b93ff" />
+        <BitPrm Byte="20" Bit="6" IsValueInverted="False" Name="ОС показывает, что заслонка не проходит 50% диапазона" Id="26905f62-6001-4956-9a0d-9efa3eda8749" />
+        <CpzPrm Name="Диагностика 3 (1w адрес 1)" Expression="[s21] * 256.0 + [u22]" Id="924f58f4-fcea-43b5-995b-d023bea86b70" />
+        <CpzPrm Name="Диагностика 4 (1w адрес 2)" Expression="[s23] * 256.0 + [u24]" Id="e8f4c255-daf9-4a5c-b0e8-0997410708f8" />
+        <CpzPrm Name="Концентратор, статус" Expression="[s25] * 256.0 + [u26]" Id="d8bece03-1f75-47fd-ae90-2fd3c088b781" />
+        <CpzPrm Name="Концентратор, драйвера" Expression="[s27] * 256.0 + [u28]" Id="90c522ea-f910-4d18-b09e-95cb2fa8a330" />
+        <CpzPrm Name="Концентратор, напряжение" Expression="[s29] * 256.0 + [u30]" Id="4a0d215f-bd1b-4fc1-a757-abc6da70ca5b" />
+        <CpzPrm Name="резерв" Expression="[s31] * 256.0 + [u32]" Id="949ee0e5-b064-4815-860c-eb50133f21be" />
+        <CpzPrm Name="резерв" Expression="[s33] * 256.0 + [u34]" Id="3df24483-c2c4-442f-a980-4d2800b4a81e" />
+        <CpzPrm Name="Номер версии ПО" Expression="[s35] * 256.0 + [u36]" Id="e82175e1-8066-4d95-a2e8-ce30e1be41f3" />
+        <CpzPrm Name="резерв" Expression="[s37] * 256.0 + [u38]" Id="de0f7c9a-e626-4539-b548-a44982d415f7" />
+        <CpzPrm Name="резерв" Expression="[s39] * 256.0 + [u40]" Id="038757c4-4f99-4c5f-adeb-6c89ed467aba" />
+        <VarVal Position="41.0" Length="8" Name="#CRCH" Id="32d23bd9-bde7-42e8-80a8-e2006b01f03d" />
+        <VarVal Position="42.0" Length="8" Name="#CRCL" Id="c8abdf28-e4d5-4864-af56-f905ca3bc908" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК заслонки зима лето 03">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="866cb03c-807c-476f-9701-adfcd64218fd" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="bd48d7d3-0f08-47f0-ac03-3c8e1661736c" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="3dea3310-df15-43af-a287-a54d9f5f5312" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="3adead80-5aee-420e-b123-265e0b4218c2" />
+      </Request>
+      <Reply Length="47" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="2bb4da1a-157e-49b2-8a6b-f9be9fb01fd4" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="74293683-b988-4d30-837b-8e2910a759dc" />
+        <CpzPrm Name="Положение заслонки" Expression="[s3] * 256.0 + [u4]" Id="77a21bed-2765-4b17-9d61-673c866833bc" />
+        <CpzPrm Name="Температура 1w адрес 1" Expression="[s5] * 256.0 + [u6]" Id="e295eba6-8b51-41f3-8b77-13757485d212" />
+        <CpzPrm Name="Температура 1w адрес 2" Expression="[s7] * 256.0 + [u8]" Id="c5960fd7-24f4-4142-b5cd-8eea2c27c7ce" />
+        <CpzPrm Name="Байт входных сигналов" Expression="[s9] * 256.0 + [u10]" Id="6705792d-d9a1-467b-aee1-4de49bf45f96" />
+        <CpzPrm Name="Байт выходных сигналов" Expression="[s11] * 256.0 + [u12]" Id="cf42f49e-b8a2-4e0a-84d5-5450e002269f" />
+        <CpzPrm Name="Аналоговый вход" Expression="([s13] * 256.0 + [u14]) * 0.1" Id="65a8938a-3bc9-4ac7-96f7-80511189cfba" />
+        <CpzPrm Name="Этап работы в автоматическом режиме" Expression="[s15] * 256.0 + [u16]" Id="f1f57bf4-8d47-4249-93cb-da9dc325cc02" />
+        <BitPrm Byte="18" Bit="6" IsValueInverted="False" Name="ошибка датчика 1w №1" Id="c3a31101-aaa6-4d5b-9bbe-65ba46a825d5" />
+        <BitPrm Byte="18" Bit="7" IsValueInverted="False" Name="ошибка датчика 1w №2" Id="5304ce67-2d37-4c30-9e7a-93e61d3add3b" />
+        <BitPrm Byte="20" Bit="5" IsValueInverted="False" Name="ОС показывает, что заслонка не встает в крайние положения" Id="c5f33ba9-9bdd-45c8-ade2-afd03e24a689" />
+        <BitPrm Byte="20" Bit="6" IsValueInverted="False" Name="ОС показывает, что заслонка не проходит 50% диапазона" Id="195307e4-f7c5-4dcc-872f-6073758dcac8" />
+        <CpzPrm Name="Диагностика 3 (1w адрес 1)" Expression="[s21] * 256.0 + [u22]" Id="d9cb08e0-f793-4a9b-8982-7be2f962f1fb" />
+        <CpzPrm Name="Диагностика 4 (1w адрес 2)" Expression="[s23] * 256.0 + [u24]" Id="e05b322b-90dd-4c95-bbea-dea2eae35ca4" />
+        <CpzPrm Name="резерв" Expression="[s25] * 256.0 + [u26]" Id="185e3962-f700-415b-92c4-244eedaddad3" />
+        <CpzPrm Name="резерв" Expression="[s27] * 256.0 + [u28]" Id="959912c9-c5a1-40b5-8288-a699321f6d86" />
+        <CpzPrm Name="резерв" Expression="[s29] * 256.0 + [u30]" Id="941f9456-d7c9-4ae6-ac5b-6e7a7d33ff33" />
+        <CpzPrm Name="резерв" Expression="[s31] * 256.0 + [u32]" Id="7d94bc18-34f0-4bf7-b5f5-757c5ef0a9ca" />
+        <CpzPrm Name="резерв" Expression="[s33] * 256.0 + [u34]" Id="5701cf88-4164-4bf5-a0e0-6b1b6b24f773" />
+        <CpzPrm Name="резерв" Expression="[s35] * 256.0 + [u36]" Id="053c760e-22cd-4ebc-991c-a2353c6162b3" />
+        <CpzPrm Name="резерв" Expression="[s37] * 256.0 + [u38]" Id="83ac7f16-fc98-4e35-be75-dbdf196d477e" />
+        <CpzPrm Name="резерв" Expression="[s39] * 256.0 + [u40]" Id="221ba55a-91ba-4d85-9e7f-4f512bf4dc5e" />
+        <CpzPrm Name="Номер версии ПО" Expression="[s41] * 256.0 + [u42]" Id="137ddf88-6e14-477b-8be7-9631de69de4d" />
+        <CpzPrm Name="резерв" Expression="[s43] * 256.0 + [u44]" Id="9263594d-4df9-455d-9589-31300416283e" />
+        <VarVal Position="45.0" Length="8" Name="#CRCH" Id="99e86e62-ba8c-4a71-a7bd-258fe9943f36" />
+        <VarVal Position="46.0" Length="8" Name="#CRCL" Id="83b8ad12-ba51-4aba-b5bd-74f58ba5c149" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК заслонки наружного воздуха 10">
+      <Request Length="21" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="d84b2deb-07ad-4c49-b040-34cdd2fb2b39" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="1310a0e2-ce55-4378-bfab-d83ef9351a2c" />
+        <CpzPrm Name="Полученная от КСМ команда-режим работы" Expression="[s7] * 256.0 + [u8]" Id="ec088750-74a8-4c9c-a343-b876cf8d12cc" />
+        <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="8f4158bc-e6c0-4b98-80cd-bfd57b06518d" />
+        <CpzPrm Name="Температура в помещении" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="222fce7b-378f-42bb-bb98-622d94c7b8c3" />
+        <CpzPrm Name="Уставка по уровню вентилирования" Expression="[s13] * 256.0 + [u14]" Id="f245446b-4bcb-4b15-a983-e5f9412c75da" />
+        <BitPrm Byte="16" Bit="0" IsValueInverted="False" Name="Битовый регистр:если 1 то салон, иначе кабина" Id="b0881b34-61e4-4fba-879f-9af389dbf204" />
+        <CpzPrm Name="Резерв" Expression="[s17] * 256.0 + [u18]" Id="d61f8089-4c81-4d69-bc53-4e8bbaa81dba" />
+        <VarVal Position="19.0" Length="8" Name="#CRCH" Id="9da0fb6f-2b56-46f3-8dee-abcaa5825ace" />
+        <VarVal Position="20.0" Length="8" Name="#CRCL" Id="6963bf44-3222-4dab-ba98-2af4b34140d6" />
+      </Request>
+      <Reply Length="8" Position="21">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="1891ed74-b3e5-4d95-a2cb-8fb34f39f18b" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="0b1db7cd-429b-4e8b-9cf6-d48f7acd8c75" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="ae1e22cb-d3a5-4c1b-a90c-54cc0f812c30" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="dad0f404-f44e-4e77-9dc8-7f851e0ab865" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК вентилятора испарителя 0x10">
+      <Request Length="21" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="cc6eaac2-66d1-4c5c-9afc-f852c4a7a735" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="c201f752-d45e-433e-b09c-555973896746" />
+        <BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="автоматич режим  (МУК работает в режиме охлаждения или нагрева)" Id="1423327f-0cf2-4125-8a65-822403d0d047" />
+        <BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="регулятор обогрев принудительно" Id="7b2a1cf0-014c-4dbd-933c-4bb3173816a2" />
+        <BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="режим обогрева принудительно, ШИМ обогрева  =100%" Id="4a9702fc-b975-4a4e-8a50-9134aababa5f" />
+        <BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="режим охлаждение принудительно" Id="8f545181-5f20-499c-b583-be7cf08f2761" />
+        <BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="выкл обогрев и охл" Id="5b6d6a2f-2f2e-453d-9f55-93ee9e2c51fd" />
+        <BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="ручной режим" Id="ee23d16a-6d2e-4d0c-9557-2fbffd7277b7" />
+        <BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="режим обогрева принудительно, ШИМ обогрева=50%" Id="49b03174-b0b4-417b-9203-bbb2574f4a12" />
+        <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="f396e43c-66ac-4726-ba44-d99518d9141f" />
+        <CpzPrm Name="Температура в помещении" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="5837e12c-7929-482e-9a08-0efedb8316a1" />
+        <CpzPrm Name="Уставка по уровню вентилирования" Expression="[s13] * 256.0 + [u14]" Id="38ddb319-cebb-47de-8f78-bf1aea4077f7" />
+        <CpzPrm Name="Дельта Т" Expression="[s15] * 256.0 + [u16]" Id="71f60208-c2fa-45fc-a4ab-526dd423c15f" />
+        <CpzPrm Name="Резерв" Expression="[s17] * 256.0 + [u18]" Id="b0f35b5f-bb0e-4c96-82e5-7511704cad74" />
+        <VarVal Position="19.0" Length="8" Name="#CRCH" Id="c8b053a0-a4c1-4a26-855f-94cb56237a38" />
+        <VarVal Position="20.0" Length="8" Name="#CRCL" Id="658f3e53-bc88-4cac-9d78-35b87e79b33a" />
+      </Request>
+      <Reply Length="8" Position="21">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="2dec3982-f2fc-4e21-94e0-faadd4ad3a2a" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="0f949433-fdde-49b7-8d4a-eb184ca9cc7b" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="511f539f-a73a-4f7c-a11d-709e41df9250" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="1c03343b-75ef-40ee-bb19-60126204df64" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК вентилятора конденсатора 0x10">
+      <Request Length="15" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="93390543-f0b9-43cc-be74-d4834c483e70" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="87fe75a1-bc0d-4305-932c-f9be7dec5b13" />
+        <BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="работа (регулятор работает)" Id="c694f048-3938-42d8-bc2e-4e4cef5d4f78" />
+        <BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="стоянка (регулятор работает с ограничением D2 ШИМ мах стоянка)" Id="30b8f035-8dd2-449a-8fce-ec5262bb17c5" />
+        <BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="мойка (ШИМ =0)" Id="dcea7419-ae5e-4210-b780-8373a982d84f" />
+        <BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="вент вкл мах (ШИМ мах)" Id="675d1174-e60e-49b7-8036-38fb0853bc5b" />
+        <BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="вент выкл (ШИМ =0)" Id="3ea2ec83-d1aa-4ae1-be56-5ff0e6ec9c12" />
+        <BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="ручной режим" Id="52abafa1-7507-4dca-bd4c-729f21657c2c" />
+        <BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="включение только второй ступени принудительно" Id="4ceb7ff5-a162-4dc5-8b96-bd02cf1d1e8d" />
+        <CpzPrm Name="Уставка по давлению" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="5f75b48e-1b0e-4c34-aeb1-b9dc105218c7" />
+        <CpzPrm Name="Резерв" Expression="[s11] * 256.0 + [u12]" Id="adb3ced1-a32c-4f76-8a7d-4c68e1e80100" />
+        <VarVal Position="13.0" Length="8" Name="#CRCH" Id="bb665e93-bddb-4e07-bc7b-3c05deff5d62" />
+        <VarVal Position="14.0" Length="8" Name="#CRCL" Id="9ac10948-f290-475c-b5c5-61922d9a6e24" />
+      </Request>
+      <Reply Length="8" Position="15">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="f03adbe1-5d14-482a-8a2c-e0a6ae389a75" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="e572f97d-9a57-44af-a3af-232a0acc8e40" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="b74325ad-1747-4914-81c4-1187b3671720" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="92e9a194-50ac-494d-8592-a9e43068a7f9" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК вытяжного вентилятора 0x10">
+      <Request Length="21" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="2fd9d1e2-25bd-443e-89ff-c8e132c39c1a" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="20fba33e-0af8-4e8e-860a-b070cdea9f71" />
+        <BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="работа (регулятор работает)" Id="bf3309b1-9b29-4038-a47c-228637881727" />
+        <CpzPrm Name="Температура наружного воздуха;" Expression="[s9] * 256.0 + [u10]" Id="e2bd6074-6b37-4f94-a293-24db8a853546" />
+        <BitPrm Byte="12" Bit="0" IsValueInverted="False" Name="Регистр признаков: = 1 салон - мастер" Id="dff5e38e-1210-4de3-b85b-6c03bfbf8e82" />
+        <CpzPrm Name="Уставка по уровню вентилирования" Expression="[s13] * 256.0 + [u14]" Id="48c57478-8f6f-4b78-8ee0-86d794fe2fd3" />
+        <CpzPrm Name="резерв" Expression="[s15] * 256.0 + [u16]" Id="81fa25e4-fd4e-4de8-9784-47ad6fa55ee9" />
+        <CpzPrm Name="Резерв" Expression="[s17] * 256.0 + [u18]" Id="59584781-7445-44bd-92f0-8eab1a9e13aa" />
+        <VarVal Position="19.0" Length="8" Name="#CRCH" Id="ae77b3f5-22a6-4d23-bb32-dcae9012771b" />
+        <VarVal Position="20.0" Length="8" Name="#CRCL" Id="026793b5-eccd-4364-a0f8-67051584e458" />
+      </Request>
+      <Reply Length="8" Position="21">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="8a9a1a77-5fea-47d0-bfd5-99cb71b13f11" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="d84f4b19-2a44-4975-87d9-45f36c0e006e" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="68412e28-865b-4a6e-8f8d-2a5daed832c7" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="e835c1a2-468e-42a2-a86e-e98ab0cdd7b4" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК заслонки рециркуляционного воздуха 0x10">
+      <Request Length="21" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="05974561-6bf9-4630-8bad-3213922593a9" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="165d8bcf-e234-470b-8b2f-1ba5e418c263" />
+        <CpzPrm Name="КСМ: команда-режим работы" Expression="[s7] * 256.0 + [u8]" Id="eb700f73-fc0a-47ec-a675-ecf2f9494814" />
+        <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="966f57f5-cc73-45f9-995e-b95ef9b7439e" />
+        <CpzPrm Name="Температура в помещении" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="071e51a4-661a-40b8-9815-75c3f11f6205" />
+        <CpzPrm Name="Уставка по уровню вентилирования" Expression="[s13] * 256.0 + [u14]" Id="81418cb6-c3bb-4808-b5a6-131087c24f32" />
+        <CpzPrm Name="резерв" Expression="[s15] * 256.0 + [u16]" Id="cc250992-d20a-4e69-9dea-07e08e92d42a" />
+        <CpzPrm Name="Резерв" Expression="[s17] * 256.0 + [u18]" Id="d7c965c6-55e7-4d67-adc4-f985dea6c192" />
+        <VarVal Position="19.0" Length="8" Name="#CRCH" Id="32ccfceb-85f0-4d8a-b5e7-6a2bdf161750" />
+        <VarVal Position="20.0" Length="8" Name="#CRCL" Id="7e07b055-a13c-4152-95b7-9d6c85ea3043" />
+      </Request>
+      <Reply Length="8" Position="21">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="92ea1f68-16d9-4e68-b3c5-abaae4e478a4" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="b4cac2f2-c6f6-4a7c-a32b-62a1bee9890a" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="54bfebde-f953-4919-aa3f-788082648418" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="5a80f8a4-37b3-4346-8fa4-909f1bac209f" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и МУК заслонки зима лето 0x10">
+      <Request Length="21" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="460abb7e-d5cf-41ef-b6ef-754f90594e19" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="f9a4fdc6-7245-4f03-ae61-622fa5384136" />
+        <CpzPrm Name="КСМ: команда-режим работы" Expression="[s7] * 256.0 + [u8]" Id="e2a861f6-3278-4cb5-9827-3de3b765fc25" />
+        <CpzPrm Name="Температура наружного воздуха" Expression="([s9] * 256.0 + [u10]) * 1.0" Id="633f40ca-e1ab-4257-b890-32b0baf5f406" />
+        <CpzPrm Name="Температура в помещении" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="03ac2bdd-336f-40c0-b800-cdc2580d7b77" />
+        <CpzPrm Name="Уставка по уровню вентилирования" Expression="[s13] * 256.0 + [u14]" Id="19ea5f17-b4f6-4c89-a206-6915e9d7657e" />
+        <CpzPrm Name="Битовый регистр" Expression="[s15] * 256.0 + [u16]" Id="d87fdc58-2530-4464-a6f1-0d843fb09486" />
+        <CpzPrm Name="Резерв" Expression="[s17] * 256.0 + [u18]" Id="c34adc8d-cc4b-40ba-a73b-06f114c47da0" />
+        <VarVal Position="19.0" Length="8" Name="#CRCH" Id="6c7015a4-423f-4cf7-9156-928c0b6c2b68" />
+        <VarVal Position="20.0" Length="8" Name="#CRCL" Id="afe4a25e-195d-4f65-bfef-fd0422629067" />
+      </Request>
+      <Reply Length="8" Position="21">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="c1467d70-cca9-44b6-bbfc-9857a0b50455" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="5faed9e5-bfb2-406d-b622-783e5fb98018" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="cd374c62-593b-4955-8860-9597ad892a32" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="b46df588-f0e2-45b6-a696-22e8c405c91c" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и БС-СМ">
+      <Request Length="27" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="bf223917-cda8-4caf-be52-11381484ec5b" />
+        <DefVal Position="1.0" Length="8" Value="0x20" Name="#NCMD" Id="ef95e137-3d4a-4057-aa0c-858712256c81" />
+        <!--<DefVal Position="2.0" Length="8" Value="0x16" Name="Количество байт данных = 22 " />   -->
+        <VarVal Position="3.0" Length="8" Name="Текущая расчетная max Р по 380В" Id="cc3a53ab-2c2d-4647-9491-b75088f1c366" />
+        <VarVal Position="4.0" Length="8" Name="Температура в салоне" Id="7ace0485-2615-4046-bd39-0c8a5eb538af" />
+        <VarVal Position="5.0" Length="8" Name="Температура наружного воздуха" Id="27584b52-3b50-45ae-ac38-cb33b635ce1a" />
+        <VarVal Position="6.0" Length="8" Name="Разница между требуемой и текущей T в салоне" Id="fc3a251a-faf9-4516-91e3-2870d8138bab" />
+        <BitPrm Byte="7" Bit="0" IsValueInverted="False" Name="Нагреватель 3кВ включен" Id="a90d5725-31db-467f-971a-ce3d3c9775a6" />
+        <BitPrm Byte="7" Bit="1" IsValueInverted="False" Name="Запрос на включение компрессора" Id="dc8973b9-2a6a-4d81-b4f5-3c47b7e3a7f1" />
+        <BitPrm Byte="7" Bit="2" IsValueInverted="False" Name="Режим обогрева" Id="b8913f76-6cde-4e00-9cca-6e1447ed4d14" />
+        <BitPrm Byte="7" Bit="3" IsValueInverted="False" Name="Режим охлаждения" Id="48d38bd1-fc50-46ad-8469-caaedb431b50" />
+        <BitPrm Byte="7" Bit="4" IsValueInverted="False" Name="Режим 'станция'" Id="6fed75a5-7764-4057-b3fd-e6ecb7d54ad9" />
+        <BitPrm Byte="7" Bit="5" IsValueInverted="False" Name="Режим 'тоннель'" Id="f3b20a09-175b-437a-98d0-1f7ffaa7e947" />
+        <BitPrm Byte="7" Bit="6" IsValueInverted="False" Name="Режим 'дальнее сообщение'" Id="3317de53-5e8d-46b7-b316-049f54e7bd64" />
+        <BitPrm Byte="7" Bit="7" IsValueInverted="False" Name="Резерв" Id="d55739ab-8492-4ab6-b5d6-889d8519bb1e" />
+        <CpzPrm Name="Текущий режим работы климатической системы" Expression="[8.0.4] * 1.0 " Id="91d83d71-25dc-405e-a00d-537dd35e171e" />
+        <BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="вкл. режима обогрева или охлаждения у мастера на 100%" Id="f2c3b137-43a5-4af0-a33d-002e3c161548" />
+        <CpzPrm Name="Резерв" Expression="[8.5.3] * 1.0 " Id="d180c492-8d3a-4f1c-af79-b7c7073a64df" />
+        <VarVal Position="9.0" Length="8" Name="Величина мощности 1 ступени" Id="91e09553-a814-432d-8c4c-d05101e8743d" />
+        <VarVal Position="10.0" Length="8" Name="Величина мощности 2 ступени" Id="c5ad15cf-49f1-4fc2-88a1-de4ffbb51cc7" />
+        <VarVal Position="11.0" Length="8" Name="Величина мощности 3 ступени" Id="eb8150e6-5bfb-43a6-8610-0f6fd5c81d1c" />
+        <CpzPrm Name="Неисправность 1" Expression="[u12] + [u13] * 256.0" Id="7a62ce0f-be76-4035-bd4f-f0dadb14e739" />
+        <CpzPrm Name="Неисправность 2" Expression="[u14] + [u15] * 256.0" Id="50bfab01-40bd-4d9c-9088-6c489e413ec8" />
+        <CpzPrm Name="Неисправность 3" Expression="[u16] + [u17] * 256.0" Id="c9621822-eaa6-4288-87e6-37112197ac1d" />
+        <CpzPrm Name="Неисправность 4" Expression="[u18] + [u19] * 256.0" Id="99d7110a-fc91-4156-ac17-9f3d12293d33" />
+        <CpzPrm Name="Неисправность 5" Expression="[u20] + [u21] * 256.0" Id="f6fcca6b-aa50-4290-bfef-e7d15e80a43d" />
+        <VarVal Position="22.0" Length="8" Name="усредненное значение температуры" Id="9f63b28a-3255-4e24-9392-c13d3fb2561f" />
+        <VarVal Position="23.0" Length="8" Name="Уровень CO2" Id="624c2a74-bf7d-45d1-bebc-5efabe71d2e8" />
+        <VarVal Position="24.0" Length="8" Name="резерв" Id="8b571d73-8f13-4886-b2be-f49a2b59f0ff" />
+        <VarVal Position="25.0" Length="8" Name="#CRCH" Id="2c4e5618-ce1e-4e7a-9526-1aed7bd14da6" />
+        <VarVal Position="26.0" Length="8" Name="#CRCL" Id="8583aec6-1b29-4be5-bffb-ffe51215cfce" />
+      </Request>
+      <Reply Length="47" Position="27">
+        <DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="fbb27ec9-c0f6-4d65-9abd-7fe422615862" />
+        <DefVal Position="1.0" Length="8" Value="0x20" Name="#NCMD" Id="84588c00-c80b-4a77-a0bd-592102167851" />
+        <DefVal Position="2.0" Length="8" Value="0x2A" Name="Количество байт данных = 42" Id="85167bbc-d6d8-4c65-a3bc-b9547bc8be39" />
+        <VarVal Position="3.0" Length="8" Name="Астрономическое время D7 – D0" Id="11b78166-26b2-4ef0-aef2-753124be1751" />
+        <VarVal Position="4.0" Length="8" Name="Астрономическое время D15 – D8" Id="eb3757b5-fcb0-4584-a229-7dbeb77f33d2" />
+        <VarVal Position="5.0" Length="8" Name="Астрономическое время D23 – D16" Id="685a1043-9bca-4ffd-a5e6-ac2447b347e7" />
+        <VarVal Position="6.0" Length="8" Name="Астрономическое время D31 – D24" Id="b02c4745-9464-4571-954b-956bac88e82a" />
+        <VarVal Position="7.0" Length="8" Name="Время отложенного старта D7 – D0" Id="300f160c-650f-4be1-8bcc-4650afc341ef" />
+        <VarVal Position="8.0" Length="8" Name="Время отложенного старта D15 – D8" Id="18c2bac3-36a3-4cba-b2f6-2b0e2a31965a" />
+        <VarVal Position="9.0" Length="8" Name="Время отложенного старта D23 – D16" Id="4f237213-5122-4cb2-9064-704ba20dd599" />
+        <VarVal Position="10.0" Length="8" Name="Время отложенного старта D31 – D24" Id="1d4a7505-b7c8-4f03-adbf-42a874e5cc77" />
+        <VarVal Position="11.0" Length="8" Name="Температура наружного воздуха" Id="830b2c50-60d8-4f81-8733-7a810ec2dee2" />
+        <CpzPrm Name="Тип вагона" Expression="[12.0.4] * 1.0 " Id="c6e82c83-88d4-43be-8341-bf1c36201775" />
+        <CpzPrm Name="Резерв" Expression="[12.4.4] * 1.0 " Id="5edc7d34-2c09-49e4-9bbf-0555cea92f0c" />
+        <CpzPrm Name="Целевая температура в пассажирском салоне" Expression="[13.0.4] * 1.0 " Id="84b80632-5d23-434f-a122-787dbff7cb54" />
+        <CpzPrm Name="Режим работы климатической системы" Expression="[13.4.4] * 1.0 " Id="4a7edbee-4c8f-4050-8228-0b1ec534df40" />
+        <BitPrm Byte="14" Bit="0" IsValueInverted="False" Name="Признак достоверности" Id="54daec6f-8837-4026-b03e-037a3e494a21" />
+        <BitPrm Byte="14" Bit="1" IsValueInverted="False" Name="Режим ограниченной мощности" Id="993f837c-853a-42ef-b5a5-2751dd94d4e1" />
+        <BitPrm Byte="14" Bit="2" IsValueInverted="False" Name="Режим 'станция'" Id="127a30b9-75e4-4e4c-9bab-6145c70a293c" />
+        <BitPrm Byte="14" Bit="3" IsValueInverted="False" Name="Режим 'тоннель'" Id="b7709da0-cfad-4749-95c9-8f6598daa8de" />
+        <BitPrm Byte="14" Bit="4" IsValueInverted="False" Name="Режим 'дальнее сообщение'" Id="e6ff498a-1460-4470-b292-851e82fd708a" />
+        <BitPrm Byte="14" Bit="5" IsValueInverted="False" Name="Наличие 3 кВ" Id="fc822000-278c-4a57-a173-60e4e3a46e3e" />
+        <BitPrm Byte="14" Bit="6" IsValueInverted="False" Name="Наличие 380 В" Id="fc13c763-1f5c-4472-9cd7-f255040185c2" />
+        <BitPrm Byte="14" Bit="7" IsValueInverted="False" Name="Разрешение на включение компрессора" Id="1da06f79-ad58-4d39-b587-43efaf79060b" />
+        <VarVal Position="15.0" Length="8" Name="Допустимая потребляемая мощность от 380В" Id="fc9c806d-33b8-49ea-a5e1-bb82000aff4e" />
+        <VarVal Position="16.0" Length="8" Name="Резерв" Id="8e16ff36-1df6-406d-9be6-0bf2df4f088c" />
+        <VarVal Position="17.0" Length="8" Name="Резерв" Id="3dc0efac-0fee-4a17-8812-4d36a78d9fa1" />
+        <VarVal Position="18.0" Length="8" Name="Сег. В: Текущая расчетная max P по 380В" Id="52065bb6-ba6e-46f7-ac91-d26583452b5b" />
+        <VarVal Position="19.0" Length="8" Name="Сег. В: Температура в салоне" Id="156871ff-dfad-4856-8180-e9d14db38450" />
+        <VarVal Position="20.0" Length="8" Name="Сег. В: Температура наружного воздуха" Id="444dc61d-3b60-4d53-9bad-962d4e1691e5" />
+        <VarVal Position="21.0" Length="8" Name="Сег. В: Разница между требуемой и текущ. Т в салоне" Id="841c7863-77c8-4e04-a7e2-ece89bb726bc" />
+        <BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Сег. В: Нагреватель 3кВ включен" Id="eb69b110-2427-4e17-b1e2-04707e46438a" />
+        <BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Сег. В: Запрос на включение компрессора" Id="8c3ce58f-919f-4331-8a09-9e973b91d08e" />
+        <BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Сег. В: Режим обогрева" Id="10cda10a-8c9e-4a69-ae59-1204b726d70f" />
+        <BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Сег. В: Режим охлаждения" Id="7276b4ba-c443-4d5b-884e-61bb7bb0e600" />
+        <BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="Сег. В: Режим 'станция'" Id="863cfcca-ab6f-4c92-8515-f83b57e3ca68" />
+        <BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="Сег. В: Режим 'тоннель'" Id="f3ae9be0-70f7-4ef8-8d5f-bc9d699a868a" />
+        <BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="Сег. В: Режим 'дальнее сообщение'" Id="38de3db5-2802-498b-a8b8-9c8827d72d00" />
+        <BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="Сег. В: Резерв" Id="88ad9b44-1110-4560-b7ec-2357339f5026" />
+        <CpzPrm Name="Сег. В: Текущий режим работы клим.системы" Expression="[23.0.4] * 1.0 " Id="bcc77713-fa1d-4f4f-b708-d2dea0d9f9e2" />
+        <BitPrm Byte="23" Bit="4" IsValueInverted="False" Name="Сег. В: вкл. реж. обогрева или охлаждения у мастера на 100%" Id="fc57091e-234d-48cb-9481-7f289b4a7aac" />
+        <CpzPrm Name="Сег. В: Резерв" Expression="[23.5.3] * 1.0 " Id="1a3db8db-42e2-4a5e-9128-24c167ec1039" />
+        <VarVal Position="24.0" Length="8" Name="Сег. В:Величина мощности 1 ступени" Id="d9d929d7-845e-4280-8989-7ecf98aa614f" />
+        <VarVal Position="25.0" Length="8" Name="Сег. В:Величина мощности 2ступени" Id="5f95188b-574b-4501-b06b-4452a1f6f86d" />
+        <VarVal Position="26.0" Length="8" Name="Сег. В:Величина мощности 3ступени" Id="4ef09a06-fd6c-4bbe-b28d-9212e301eb9d" />
+        <VarVal Position="27.0" Length="8" Name="Сег. В:Неисправность 1младший байт" Id="b0890bf6-da29-467e-a6bb-870a6d2ef18b" />
+        <VarVal Position="28.0" Length="8" Name="Сег. В:Неисправность 1старший байт" Id="278012c2-a419-48e8-b4fc-6e21e8c34e04" />
+        <VarVal Position="29.0" Length="8" Name="Сег. В:Неисправность 2младший байт" Id="94d4cf83-267d-41ae-8e1d-ea309aa286f8" />
+        <VarVal Position="30.0" Length="8" Name="Сег. В:Неисправность 2 старший байт" Id="83c8a7a7-76ef-4be4-8857-351d0ef53c2e" />
+        <VarVal Position="31.0" Length="8" Name="Сег. В:Неисправность 3 младший байт" Id="1d207c98-fdfa-45b7-92a7-adc05952afab" />
+        <VarVal Position="32.0" Length="8" Name="Сег. В:Неисправность 3 старший байт" Id="8726abd4-7a1d-4e35-8a13-e0135b7f89f6" />
+        <VarVal Position="33.0" Length="8" Name="Сег. В:Неисправность 4 младший байт" Id="f83d944f-13bf-4820-9d5b-6242bc33bb0e" />
+        <VarVal Position="34.0" Length="8" Name="Сег. В:Неисправность 4 старший байт" Id="737aba1b-dd77-4166-9d4b-25fcd9a7b8a0" />
+        <VarVal Position="35.0" Length="8" Name="Сег. В:Неисправность 5 младший байт" Id="b8497e51-0eb3-4f9d-8e37-f20318de3453" />
+        <VarVal Position="36.0" Length="8" Name="Сег. В:Неисправность 5 старший байт" Id="b75c2092-e414-4354-a245-5e1634d1f81d" />
+        <VarVal Position="37.0" Length="8" Name="Сег. В:Усредненное значение температуры" Id="07aee69e-b855-4b8d-a5c0-b9028b11e5b9" />
+        <VarVal Position="38.0" Length="8" Name="Сег. В:CO2 уровень в данном сегменте" Id="e664e41c-51c6-41e4-bdd9-f24fd5c2cf70" />
+        <VarVal Position="39.0" Length="8" Name="Сег. В:резерв" Id="81d48b63-b5ac-43cb-9f5d-a8e458715bee" />
+        <BitPrm Byte="40" Bit="0" IsValueInverted="False" Name="Нет связи МК1 с МПСУиД (период формирования 200 мс)" Id="688efbe9-ae70-40b9-a674-b7b8f1ab6cc7" />
+        <BitPrm Byte="40" Bit="1" IsValueInverted="False" Name="Нет связи МК2 с МПСУиД2 (период формирования 200 мс)" Id="11c4dc7d-297f-4d26-beb2-8f803f5a8c7b" />
+        <BitPrm Byte="40" Bit="2" IsValueInverted="False" Name="Бит достоверности от МПСУиД1" Id="f48b0dc1-2a59-4216-8672-1debb1343a28" />
+        <BitPrm Byte="40" Bit="3" IsValueInverted="False" Name="Бит достоверности от МПСУиД2" Id="63c74875-4893-4cac-8113-df3b8ca2a012" />
+        <BitPrm Byte="40" Bit="4" IsValueInverted="False" Name="Сбой номера квитанции МПСУиД1" Id="2def88aa-8c70-4b09-9afa-9d0889860804" />
+        <BitPrm Byte="40" Bit="5" IsValueInverted="False" Name="Сбой номера квитанции МПСУиД2" Id="ae7adf89-5055-4046-92ac-a24e4511992d" />
+        <BitPrm Byte="40" Bit="6" IsValueInverted="False" Name="Нет связи в МК1/МК2 по SPI (период формирования 3 секунды)" Id="ec304514-f699-4c54-a64f-f1810ab027cd" />
+        <BitPrm Byte="40" Bit="7" IsValueInverted="False" Name="Нет связи с КСМ2/КСМ1 (период формирования 10 секунд)" Id="a9072a3d-122e-4c5b-9486-433beb14b1fc" />
+        <VarVal Position="41.0" Length="8" Name="Вер. ПО БС- СМ" Id="d0ae9110-859f-4882-a1a9-de7119126fd5" />
+        <VarVal Position="42.0" Length="8" Name="Резерв" Id="556abdae-4248-4e67-9219-7756d299dafa" />
+        <VarVal Position="43.0" Length="8" Name="Резерв" Id="d25b8389-1b8f-455c-82cb-09bd19cc07a6" />
+        <VarVal Position="44.0" Length="8" Name="Резерв" Id="97b6546f-e4fa-481a-8b26-b8f65a150902" />
+        <VarVal Position="45.0" Length="8" Name="#CRCH" Id="f9b58119-ba32-48d7-bd4e-b111103e8691" />
+        <VarVal Position="46.0" Length="8" Name="#CRCL" Id="05fcaea4-5492-4c2b-af42-a6f3603bf44b" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и БВС1 0x41 (cmd: 65 dec)">
+      <Request Length="4" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x1E" Name="#ADDR" Id="ec662fc6-5a9a-4ebc-b6c7-dc56e2b3056e" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="9cdfe93c-6a7d-4a44-a0c1-caa0f70ed243" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="a81784e7-0404-427e-a71c-72c1222fa5f1" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="562d1efb-6a65-4ee9-a26e-2a56630ed5cd" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x1E" Name="#ADDR" Id="e208d4a7-b01f-467a-8b24-f26776ac86da" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="e166ed45-ac19-408c-80c6-8655bb686d54" />
+        <BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="наличие U 380 в" Id="30650ee6-066e-4963-b746-65fc72823557" />
+        <BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="ав. реле max P компрессора 1" Id="025a51c1-f0e1-4dc4-abe0-257713a42697" />
+        <BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="авар. реле min P компрессора 1" Id="07aa3d95-c72f-4fbe-b22c-deb26778c36c" />
+        <BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="термостат max T компрессора1" Id="45938ee6-8388-4fb5-8d39-a1e6c7e531d8" />
+        <BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="разрешение работы компрессора1" Id="223d3ac7-05c6-41d7-8793-b06179abbaee" />
+        <BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="включения контактора 380 в компрессора1" Id="d3e75699-89a9-41b7-a226-e1a5c67eca61" />
+        <BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="срабатывание контактора питания калорифера 380 в" Id="0bc9a63a-f45a-4fe0-9028-626dcb04afa0" />
+        <BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="срабатывание контактора питания рециркуляционного нагревателя" Id="4b75e3fd-f7d3-42e4-9720-2d491dfe7e2c" />
+        <BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="автомат 380 В компрессора1" Id="e3dad91c-4ee4-4c29-a311-99d80f2db6a2" />
+        <BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="автомат 380 В вентилятора конденсатора" Id="c69bb15c-bb75-411d-bb66-f8e487b70763" />
+        <BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="автомат 380 В калорифера" Id="d3c782f6-8c13-4717-a2d6-5fc4652e9129" />
+        <BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="автомат 380 В рециркуляционных нагревателей" Id="e7cd4f87-271f-4196-866e-5cab657bc3cc" />
+        <BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="автомат 110 В вентилятора испарителя 1" Id="49aca62c-fcb8-4a9f-992e-debb595ed514" />
+        <BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="max T калорифера 380 в" Id="c6e80d38-69b2-495a-801c-6c3e503ffd70" />
+        <BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="max T калорифера 3 кВ" Id="e4b0b5c5-30a6-4b22-aea0-94ec736d5e31" />
+        <BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="резерв" Id="432c8397-e4b5-4a0e-8db9-2cd449f34e98" />
+        <BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="сброс от внешнего входа" Id="4ded2c2b-9686-4686-b021-71f7bb2048d2" />
+        <BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="сброс от монитора питания" Id="51e3e8fd-f103-49c2-92b8-1a13434da8d1" />
+        <BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="резерв" Id="3bd6e8b5-e357-48b9-8524-7c6bb04aa60e" />
+        <BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="резерв" Id="405736f4-a8e0-4cc5-95b4-4f5204537675" />
+        <BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="резерв" Id="57f43484-96e3-4949-861e-1c893e9224ec" />
+        <BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="резерв" Id="dd68b32e-b145-474a-bb22-f9a56ac56b3f" />
+        <BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="резерв" Id="63181622-7688-469d-82ec-59eabfb103b9" />
+        <BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="резерв" Id="68db9806-f404-43e7-a03d-8dc0c6cc5823" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="789f5ceb-f923-46f4-a4c0-fe6b728a6ee3" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="c4be41ac-bf0c-4760-b3b7-e63f28bb210e" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и БВС2 0x41 (cmd: 65 dec)">
+      <Request Length="4" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x1D" Name="#ADDR" Id="20603541-3e31-4508-8da7-755621ec3848" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="13f6a17c-de5a-48be-bdd9-83aefd5f5d49" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="ad66ab2c-8c44-46a3-8676-3d705d9cce63" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="996c8270-317e-4c87-b727-2a7a680c7668" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x1D" Name="#ADDR" Id="2331b43a-fced-499c-9bcd-e7b7cd67bdcc" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="4c3a5cf7-2399-4dc8-b34a-39dfa7a9dc60" />
+        <BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="резерв" Id="aff8f2f0-3794-493d-befa-f081c6dfe458" />
+        <BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="ав. реле max P компрессора2" Id="60e723fd-5c73-40ca-852c-0bc12c55b07e" />
+        <BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="ав. реле min P компрессора2" Id="3581be8b-90ad-4e9d-bcf1-2fe7f556a069" />
+        <BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="термостат max T компрессора2" Id="acac5e86-9ae7-4044-bb5a-819f7baf413e" />
+        <BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="разрешение работы компрессора2 (реле)" Id="869127bf-cc6f-46d3-ac4b-7abe600d96e3" />
+        <BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="срабатывание контактора питания компрессора2" Id="fd40f906-a920-48a9-8a4f-935a15d39623" />
+        <BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="защитный автомат 380 в УОВ" Id="a7cc3393-2710-4a10-9c99-1cea7af7f9c3" />
+        <BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="срабатывание контактора 380 В УОВ" Id="fec027a8-c868-43b8-9336-8b8b4511ee6f" />
+        <BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="автомат 380 В компрессора2" Id="7326e11e-ff2c-4dac-99ee-b6ee495865ac" />
+        <BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="автомат 110 В вытяжных вентиляторов" Id="4df2b03e-aee0-43ac-ad9f-33e9a96f6910" />
+        <BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="max T в модуле ламп УОВ" Id="97eece23-a7a5-40f1-a58c-89ac054c69c2" />
+        <BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="max T в блоке розжига ЭПРА 1 УФ ламп в УОВ." Id="aafca662-1802-4d7b-98a3-5dcdf2e07dbe" />
+        <BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="автомат 110 В вентилятора испарителя2" Id="edda5108-4616-43e0-b251-6267cfa2d446" />
+        <BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="max T в блоке розжига ЭПРА 2 УФ ламп в УОВ." Id="1654c150-1052-4165-917d-623252dae521" />
+        <BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="max T в блоке розжига ЭПРА 3 УФ ламп в УОВ" Id="ee7766f0-8ac1-40b6-8138-0f4a43e49772" />
+        <BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="max T в блоке розжига ЭПРА 4 УФ ламп в УОВ" Id="369ac210-336d-43b5-8c96-f5907ef9e01e" />
+        <BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="сброс от внешнего входа" Id="c8fd7fad-20a0-4987-b5ff-313e802c9bf4" />
+        <BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="сброс от монитора питания" Id="4950f16e-2a8c-42bf-86a7-9a71300b12d6" />
+        <BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="резерв" Id="a893345d-897b-4980-979d-816b3d2cc9c3" />
+        <BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="резерв" Id="237e78df-8cf2-4d1e-9182-eff120a3cf53" />
+        <BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="резерв" Id="d8dd5f39-e61a-4cb6-8d1b-bee8805b1a7d" />
+        <BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="резерв" Id="41cc90ae-65d7-490e-9f30-753fa01792c0" />
+        <BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="резерв" Id="985f356c-0568-4725-a3d4-b135d337ff37" />
+        <BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="резерв" Id="b953d750-3b3e-4532-b1f9-f941f16509d3" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="0d767cfe-79c9-4efc-b2a8-788e1e8560b1" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="c9529f7d-9198-4779-9c8a-88fb19be2716" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и РПД 03">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="020875f4-3e3b-43aa-842c-2cba98ad722d" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="4b3d1be2-70c2-4723-beb2-b13c238cc6ae" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="f8960b97-dfe2-4a3a-a414-1d4f0e987711" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="a2429745-e8c4-41e5-a0bc-1d03d4cdb375" />
+      </Request>
+      <Reply Length="69" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="2278fb5b-085f-4d04-b047-aeae4ee56a67" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="5ce5ba74-3521-4157-bf7f-a8ee3e1872c3" />
+        <DefVal Position="2.0" Length="8" Value="0x40" Name="количество байт данных" Id="b6fa1e1d-d82c-4f24-ad79-78a2b54927d1" />
+        <BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Регистр наличия связи 1: D0 - Связь с Emerson" Id="732e3fc3-8aa4-4191-94ad-00a59ed33347" />
+        <BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Регистр наличия связи 1: D1 - Связь с МУК заслонки наружного воздуха" Id="4b1d8472-3f75-4ccb-bbc8-f80d64d0de85" />
+        <BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Регистр наличия связи 1: D2 - Связь с МУК испарителя" Id="7120fcdd-4a94-41d5-830b-1551ab420f2b" />
+        <BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Регистр наличия связи 1: D3 - Связь с МУК конденсатора" Id="5657c7c6-4e2c-40b7-9fef-ffe134e9ec4b" />
+        <BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Регистр наличия связи 1: D4 - Связь с МУК вытяжного вентилятора" Id="63532952-cf16-488c-9b93-3937a23f9d14" />
+        <BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Регистр наличия связи 1: D5 - Связь с МУК рециркуляционной заслонки" Id="8e4cffca-eda8-401f-b32a-8223feb7b6af" />
+        <BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Регистр наличия связи 1: D6 - Связь с МУК заслонки зима-лето" Id="acfe56b2-b37e-466c-9de6-d43bcebeb59a" />
+        <BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Регистр наличия связи 1: D7 - Связь с БВС1" Id="1d464de7-bb20-44a7-b313-4951109d0858" />
+        <BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Регистр наличия связи 2: D0 - Связь с БВС2" Id="d2efa3d3-42c6-434c-b53a-3cb04b5e88aa" />
+        <BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Регистр наличия связи 2: D1 - Связь с контроллером вентилятора испарителя" Id="bc3b1f2f-abc5-4d48-8c02-31216095eb07" />
+        <BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Регистр наличия связи 2: D2 - Связь с МПСУиД" Id="90cb8210-e62b-4368-9ba6-863f7fdaebdb" />
+        <BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Регистр наличия связи 2: D3 - резерв" Id="895fce56-a856-4aea-8d67-b2c4d0e052a6" />
+        <BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Регистр наличия связи 2: D4 - резерв" Id="5d679735-6156-409e-b8dc-834aefdf3cc6" />
+        <BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Регистр наличия связи 2: D5 - резерв" Id="36411e7e-c86b-4104-a682-8374d5426a13" />
+        <BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Регистр наличия связи 2: D6 - резерв" Id="f4719a45-5602-4bc4-8923-dd3798c01fe4" />
+        <BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Регистр наличия связи 2: D7 - резерв" Id="5d4f1aa1-30f4-44b8-bb0a-7a1a3f389114" />
+        <BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Статус Emerson: D0 - 1 канал, низкое давление" Id="7886a6b5-81c4-4d14-b9b6-94fbe2d83dcd" />
+        <BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Статус Emerson: D1 - 2 канал, низкое давление" Id="a9516264-8f64-4914-8d14-7c9119a72b9c" />
+        <BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Статус Emerson: D2 - 1 канал, высокий перегрев" Id="17c63fbc-3ceb-4c31-a38e-e007584d6387" />
+        <BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Статус Emerson: D3 - 2 канал, высокий перегрев" Id="79353d08-3975-4e87-86d6-19141b6668c5" />
+        <BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Статус Emerson: D4 - 1 канал, низкий перегрев" Id="86155ad1-9f67-417b-99c7-8131ca751492" />
+        <BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Статус Emerson: D5 - 2 канал, низкий перегрев" Id="68b0a6d9-caa6-47cf-a2fb-a9b895c16df7" />
+        <BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Статус Emerson: D6 - 1 канал, замерзание" Id="b71ce3bb-4b56-4301-bdf1-84f5e100e363" />
+        <BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Статус Emerson: D7 - 2 канал, замерзание" Id="bcd2e33c-a7be-45de-bbea-a4977d4874b9" />
+        <CpzPrm Name="Версия ПО КСМ" Expression="[u6] * 256.0 + [u7]" Id="6eb2c3a3-51e4-4047-920b-5575b26a4608" />
+        <CpzPrm Name="Версия ПО МУК испарителя" Expression="[u8] * 1.0" Id="f1bd2719-b890-4429-a4a3-5bda63831ff8" />
+        <CpzPrm Name="Температура наружного воздуха МУК 3" Expression="([s9] * 256.0 + [u10]) * 0.01" Id="d7272b3e-3301-48a0-93b2-c1226fd8a22b" />
+        <CpzPrm Name="Температура рециркуляционного воздуха МУК 3" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="aad7729d-79f4-4d17-8bd1-d75fe9e5ad5b" />
+        <CpzPrm Name="Температура подаваемого воздуха МУК 3" Expression="([s13] * 256.0 + [u14]) * 0.01" Id="56e7bf4d-fc07-4b97-ac3b-6da35a01fbc4" />
+        <CpzPrm Name="Температура воздуха в салоне 1 АМК" Expression="([s15] * 256.0 + [u16]) * 0.01" Id="50569a86-d5c8-4775-91b6-15e6f99ff1d1" />
+        <CpzPrm Name="Температура воздуха в салоне 2 АМК" Expression="([s17] * 256.0 + [u18]) * 0.01" Id="757ba6e3-16e8-4a9f-9693-882b9d8450d8" />
+        <CpzPrm Name="Давление Emerson 1 канал" Expression="([u19] * 256.0 + [u20]) * 0.01" Id="ec875a87-29a9-47cf-a5ad-1ef9d7a725be" />
+        <CpzPrm Name="Давление Emerson 2 канал" Expression="([u21] * 256.0 + [u22]) * 0.01" Id="0a6fae83-f61e-48af-8a6e-f9ff754f7938" />
+        <CpzPrm Name="Температура Emerson 1 канал" Expression="([s23] * 256.0 + [u24]) * 0.01" Id="1a80415f-a88e-4966-9af5-a8e22113b167" />
+        <CpzPrm Name="Температура Emerson 2 канал" Expression="([s25] * 256.0 + [u26]) * 0.01" Id="cdbfb786-d0b4-4391-be5c-0f36ef4bc9c5" />
+        <CpzPrm Name="Давление конденсатора 1 канал " Expression="[u27] * 0.01" Id="6b803561-794b-44f2-97c4-0b563b0e8ad2" />
+        <CpzPrm Name="Давление конденсатора 2 канал " Expression="[u28] * 0.01" Id="30264644-58bb-41a5-a56e-de9f0f63612f" />
+        <BitPrm Byte="29" Bit="0" IsValueInverted="False" Name="Регистр дискретных сигналов 1: D0 - Аварийное отключение" Id="9b7223d2-89df-454e-8c9f-66baafa8c67b" />
+        <BitPrm Byte="29" Bit="1" IsValueInverted="False" Name="Регистр дискретных сигналов 1: D1 - Ручной режим из салона" Id="a8bfc406-692d-4dd0-94b3-7d977362b4b9" />
+        <BitPrm Byte="29" Bit="2" IsValueInverted="False" Name="Регистр дискретных сигналов 1: D2 - Работа концентратора" Id="38b310b5-bae3-4f05-b6eb-bbe592f28eb2" />
+        <BitPrm Byte="29" Bit="3" IsValueInverted="False" Name="Регистр дискретных сигналов 1: D3 - Наличие 3 КВ на ключе" Id="19f2b352-ab9c-4daa-936c-59fc932af426" />
+        <BitPrm Byte="29" Bit="4" IsValueInverted="False" Name="Регистр дискретных сигналов 1: D4 - Авария вентилятора конденсатора (по дискретному входу)" Id="3f1de79b-283c-45cc-862e-b799167cd885" />
+        <BitPrm Byte="29" Bit="5" IsValueInverted="False" Name="Регистр дискретных сигналов 1: D5 - Авария вентилятора испарителя (по дискретному входу)" Id="2cf0e1fc-a3a0-4ffc-81a7-c8b96c9c032c" />
+        <BitPrm Byte="29" Bit="6" IsValueInverted="False" Name="Регистр дискретных сигналов 1: D6 - Авария вытяжного вентилятора (по дискретному входу)" Id="c18ab5db-ea73-4bb1-8e84-b840a6f83cf8" />
+        <BitPrm Byte="29" Bit="7" IsValueInverted="False" Name="Регистр дискретных сигналов 1: D7 - резерв" Id="50dc6eff-0765-4077-9456-9f008dd42d6d" />
+        <CpzPrm Name="ШИМ на калорифер 380 вольт" Expression="[u30] * 1.0" Id="d8335d94-915e-45cb-86ac-1c0451d4bb29" />
+        <BitPrm Byte="31" Bit="0" IsValueInverted="False" Name="Статус вентилятора конденсатора: D0 - Ошибка фазы или отсутствие питание" Id="388ffdde-c365-4757-9d41-0f8b4dbd9dee" />
+        <BitPrm Byte="31" Bit="1" IsValueInverted="False" Name="Статус вентилятора конденсатора: D1 - Перегрев силового блока" Id="46a67fb7-412a-4e13-b9da-adb84b57ab74" />
+        <BitPrm Byte="31" Bit="2" IsValueInverted="False" Name="Статус вентилятора конденсатора: D2 - Авария" Id="bf0d08d0-3111-45b5-afdf-4ccf9e3269e3" />
+        <BitPrm Byte="31" Bit="3" IsValueInverted="False" Name="Статус вентилятора конденсатора: D3 - Перегрев мотора" Id="85b25d4a-1f45-4fb5-93fa-23b59e641e95" />
+        <BitPrm Byte="31" Bit="4" IsValueInverted="False" Name="Статус вентилятора конденсатора: D4 - Ошибка датчика Холла" Id="ee1e733c-aa0b-4ef5-8ac2-78f3f59df063" />
+        <BitPrm Byte="31" Bit="5" IsValueInverted="False" Name="Статус вентилятора конденсатора: D5 - Блокировка мотора" Id="2db25fd0-0193-44dd-af9a-2f3b15faeebb" />
+        <BitPrm Byte="31" Bit="6" IsValueInverted="False" Name="Статус вентилятора конденсатора: D6 - Обрыв датчика 1 по давлению" Id="75ce1498-4347-4832-9b4a-77f1d7359355" />
+        <BitPrm Byte="31" Bit="7" IsValueInverted="False" Name="Статус вентилятора конденсатора: D7 - Обрыв датчика 2 по давлению" Id="3634947a-c044-4593-bc12-35a528906ddb" />
+        <CpzPrm Name="Доп. Код неисправности 1" Expression="[u32] * 1.0" Id="dba289e8-523d-4aa4-aad3-a1dbc04e1505" />
+        <CpzPrm Name="Доп. Код неисправности 2" Expression="[u33] * 1.0" Id="c53f3c6d-0e5d-4222-af01-bba3d6164fa2" />
+        <CpzPrm Name="Доп. Код неисправности 3" Expression="[u34] * 1.0" Id="aced4fe1-19cc-40e3-9745-584d9e040d46" />
+        <CpzPrm Name="Доп. Код неисправности 4" Expression="[u35] * 1.0" Id="4dd0549b-533a-403a-a379-4f20c1169f63" />
+        <CpzPrm Name="Доп. Код неисправности 5" Expression="[u36] * 1.0" Id="6b3c2aae-8ea4-4de9-adb7-688b5eee1e4e" />
+        <CpzPrm Name="Доп. Код неисправности 6" Expression="[u37] * 1.0" Id="e976e027-b390-4473-a584-17af53368d91" />
+        <CpzPrm Name="Доп. Код неисправности 7" Expression="[u38] * 1.0" Id="94173a52-1500-46e1-8c28-d3565de716cf" />
+        <CpzPrm Name="Доп. Код неисправности 8" Expression="[u39] * 1.0" Id="f2f27ce5-688e-4b2d-b859-2188eeb81421" />
+        <CpzPrm Name="Доп. Код неисправности 9" Expression="[u40] * 1.0" Id="ad413880-e5ad-456f-b8ce-7f89b6041ab1" />
+        <CpzPrm Name="Доп. Код неисправности 10" Expression="[u41] * 1.0" Id="cc0a927f-33dd-4e6d-9511-6fcd78027bb6" />
+        <CpzPrm Name="ШИМ клапана Emerson канал 1" Expression="[u42] * 1.0" Id="318a2620-f853-46f2-bf83-5b6c778d9a29" />
+        <CpzPrm Name="ШИМ клапана Emerson канал 2" Expression="[u43] * 1.0" Id="ee708b83-8659-4092-8970-5de9ee458881" />
+        <BitPrm Byte="44" Bit="0" IsValueInverted="False" Name="Регистр дискретных сигналов 2: D0 - Связь с контроллером вентилятора конденсатора" Id="8779842a-ec4f-4244-94b2-d749fa9fccd8" />
+        <BitPrm Byte="44" Bit="1" IsValueInverted="False" Name="Регистр дискретных сигналов 2: D1 - Входная команда Emerson канал 1" Id="14b1b0b4-1bb8-486d-85c0-25f0a3cc670e" />
+        <BitPrm Byte="44" Bit="2" IsValueInverted="False" Name="Регистр дискретных сигналов 2: D2 - Входная команда Emerson канал 2" Id="fe4b67cd-863c-4a95-92b3-56ee8ba9aae0" />
+        <BitPrm Byte="44" Bit="3" IsValueInverted="False" Name="Регистр дискретных сигналов 2: D3 - Ошибка датчика давления 1 контура 1 Emerson" Id="c0a2accb-c456-4639-b923-f5e40a35597b" />
+        <BitPrm Byte="44" Bit="4" IsValueInverted="False" Name="Регистр дискретных сигналов 2: D4 - Ошибка датчика темп-ры 1 контура 1 Emerson" Id="40621348-187f-4466-a769-d104159bf3fc" />
+        <BitPrm Byte="44" Bit="5" IsValueInverted="False" Name="Регистр дискретных сигналов 2: D5 - Ошибка датчика давления 2 контура 2 Emerson" Id="e478128a-db93-48c4-8cf9-e71abc10cf1c" />
+        <BitPrm Byte="44" Bit="6" IsValueInverted="False" Name="Регистр дискретных сигналов 2: D6 - Ошибка датчика темп-ры 2 контура 2 Emerson" Id="a877f860-9ba0-4e53-ac81-148ebfcde423" />
+        <BitPrm Byte="44" Bit="7" IsValueInverted="False" Name="Регистр дискретных сигналов 2: D7 - резерв" Id="52e22aac-f4ba-4000-a1ed-2678a6b74e1b" />
+        <CpzPrm Name="Этап работы" Expression="[u45] * 1.0" Id="951c9e6a-b14b-4d6d-bcb7-19a7b1a5b786" />
+        <VarVal Position="67.0" Length="8" Name="#CRCH" Id="d1b3853c-f8e4-4f52-9c9f-ab3fad03126f" />
+        <VarVal Position="68.0" Length="8" Name="#CRCL" Id="0d48e80e-bf0c-4700-85b7-a80239195847" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и техническим абонентом (cmd: 33 dec)">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="dbaaca4e-d84e-4b99-8116-31a3ebbf22b5" />
+        <DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="02ea4b41-55ba-4a51-9a79-45aa5891ceac" />
+        <VarVal Position="2.0" Length="8" Name="Адрес параметра, hi" Id="dcf28b92-c7b5-4ef0-aa91-8948973b87ff" />
+        <VarVal Position="3.0" Length="8" Name="Адрес параметра, lo" Id="baf23108-4980-45bd-9ba4-548c64b8b7d3" />
+        <VarVal Position="4.0" Length="8" Name="Значение параметра, hi" Id="1c2041ed-ecae-4a4e-8fe0-2fc8f6149250" />
+        <VarVal Position="5.0" Length="8" Name="Значение параметра, lo" Id="82318c22-5888-43c4-b848-e1e31c0b43b7" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="972f1f10-e089-4b4e-9ef4-d3a830b2c707" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="58f0a3b0-619b-42c6-a823-cc6b216c4020" />
+      </Request>
+      <Reply Length="8" Position="8">
+        <!--TODO: -->
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="c4175f2d-44b4-4112-af4d-5890cd09bf05" />
+        <DefVal Position="1.0" Length="8" Value="0x21" Name="#NCMD" Id="850a5829-03a1-432e-9523-1d7444ed068b" />
+        <VarVal Position="2.0" Length="8" Name="Адрес параметра, hi" Id="dddeb06d-ee89-4e1d-b201-ff578a1591d2" />
+        <VarVal Position="3.0" Length="8" Name="Адрес параметра, lo" Id="ae7934f5-8984-4c5d-aea7-8a033e49f677" />
+        <VarVal Position="4.0" Length="8" Name="Значение параметра, hi" Id="d3cf7e6b-e077-4883-b116-d6efa56b15b3" />
+        <VarVal Position="5.0" Length="8" Name="Значение параметра, lo" Id="1f47e03f-7ba7-456e-b29a-564ff3e2a0e9" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="95431962-dc8b-4859-b8b0-fa3a3177d738" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="417d9b64-1f8c-4088-b192-aa1df8586d87" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="между КСМ и техническим абонентом (cmd: 16 dec)">
+      <Request Length="129" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="f13364bd-891c-43f1-a746-496a2354b56e" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="d06ffe7a-204b-469c-99ad-e15785c26593" />
+        <VarVal Position="2.0" Length="8" Name="Стартовый адрес, hi" Id="846392b5-9f91-482f-a5db-f15da888d78d" />
+        <VarVal Position="3.0" Length="8" Name="Стартовый адрес, lo" Id="69f44633-0af7-42fd-bdf5-2e79d4af930a" />
+        <VarVal Position="4.0" Length="8" Name="Количество слов, старший байт" Id="c21041d6-8f83-490b-8864-b7ae3de916ad" />
+        <VarVal Position="5.0" Length="8" Name="Количество слов, младший байт" Id="97fb4944-820a-41e0-af78-c69ee3a9e6dc" />
+        <VarVal Position="6.0" Length="8" Name="Количество байт" Id="94b931a6-4963-4e65-8bd0-ff2cd39adc0a" />
+        <CpzPrm Name="Датчик 1wire №1" Expression="([s7] * 256.0 + [u8]) * 0.01" Id="d42fa5c2-0fbe-4a62-80d0-1bb5a204e954" />
+        <CpzPrm Name="Датчик 1wire №2" Expression="([s9] * 256.0 + [u10]) * 0.01" Id="487b789e-cd00-4afd-950f-9ddadb6b5cff" />
+        <CpzPrm Name="резерв" Expression="[s11] * 256.0 + [u12]" Id="a2a8c525-803e-4ebb-b496-a0e9918bfc32" />
+        <CpzPrm Name="резерв" Expression="[s13] * 256.0 + [u14]" Id="e6ac19f1-d6ac-4650-aad2-2937328903df" />
+        <BitPrm Byte="16" Bit="0" IsValueInverted="False" Name="PB.0 = 0: сегмент — мастер, иначе слейв." Id="141966d9-2244-4ca5-9662-8e754a825bd2" />
+        <BitPrm Byte="16" Bit="1" IsValueInverted="False" Name="PB.1 = 0: пожар" Id="4642ed55-8c1a-46e5-b8c1-252abcb6719e" />
+        <BitPrm Byte="16" Bit="2" IsValueInverted="False" Name="PB.2 = 0: 100% нагрев калорифера 380 в и 3 кВ с вкл. вент. испарителя" Id="8557a6ab-e236-4761-a3bc-3d9c227d557b" />
+        <BitPrm Byte="16" Bit="3" IsValueInverted="False" Name="PB.3 = 0: 50 % нагрев 3 кВ калорифера" Id="f10c1017-3087-43c0-9774-3dfc45bbce22" />
+        <BitPrm Byte="16" Bit="4" IsValueInverted="False" Name="PB.4 = 0: 100% расход вентилятора испарителя" Id="768fcaf5-a1a8-446e-8683-dedcdd9863b1" />
+        <BitPrm Byte="16" Bit="5" IsValueInverted="False" Name="PB.5 = 0: 50 % охлаждение (30 кВт компрессора) с вкл. вентиляторов испарителя и конденсатора" Id="b59cff87-5e2c-476d-8c59-67cf1730f0bf" />
+        <BitPrm Byte="16" Bit="6" IsValueInverted="False" Name="PB.6 = 0: 100 % охлаждение (20 кВт и 30 кВт компрессоров) с вкл. вент. испарителя и конденсатора" Id="fce9f4e2-4b8e-4ac5-a0ff-3403b07abdd0" />
+        <BitPrm Byte="18" Bit="4" IsValueInverted="False" Name="PA.4 = 0: Подогрев картера, включение" Id="e7c60a5b-0fdc-4ac1-bcb4-f05c2fe2189d" />
+        <BitPrm Byte="20" Bit="2" IsValueInverted="False" Name="PC.2 = 0: Клапан разгрузки кондиционера, включение." Id="dcdc8a30-c20f-4e26-97d0-1945964d42e9" />
+        <BitPrm Byte="20" Bit="6" IsValueInverted="False" Name="PC.6 = 0:  Вкл. реле разрешения подачи питания на компрессор 1 (20 кВ)" Id="00c0dcaf-f539-4e95-8120-ba449e4e41f8" />
+        <BitPrm Byte="20" Bit="7" IsValueInverted="False" Name="PC.7 = 0: Включение обеззараживателя" Id="5d7d5324-5881-4c62-97e6-81f2a54ea19f" />
+        <CpzPrm Name="Диагностика контроллера (ErrorsFlags)" Expression="[s21] * 256.0 + [u22]" Id="79afbebc-002a-45e0-a41e-40bd35df9869" />
+        <CpzPrm Name="Этап работы" Expression="[s23] * 256.0 + [u24]" Id="2e7a98eb-423e-4caf-8e47-31b6977b584e" />
+        <BitPrm Byte="26" Bit="0" IsValueInverted="False" Name="вкл.:резерв" Id="289340fb-9342-40a1-a1a0-8475b9a48eb1" />
+        <BitPrm Byte="26" Bit="1" IsValueInverted="False" Name="вкл.:не пройден тест заслонки зим лето." Id="f44cca91-d493-4d99-906e-d48de2d4ec61" />
+        <BitPrm Byte="26" Bit="2" IsValueInverted="False" Name="вкл.:не пройден тест заслонки рециркул-онного воздуха." Id="64cf0635-6e05-42c2-b535-79e6f6d23a96" />
+        <BitPrm Byte="26" Bit="3" IsValueInverted="False" Name="вкл.:не пройден тест выт-жного вентил." Id="c41a45a1-20c7-4640-98f3-5ec58c1fccb1" />
+        <BitPrm Byte="26" Bit="4" IsValueInverted="False" Name="вкл.:не пройден тест вентил. конденсатора." Id="a8ccd1f6-bedb-4a62-9a83-db6c05b0d973" />
+        <BitPrm Byte="26" Bit="5" IsValueInverted="False" Name="вкл.:не пройден тест вентил. испарит." Id="d2d7e6f8-de50-4e55-9604-4190c8648629" />
+        <BitPrm Byte="26" Bit="6" IsValueInverted="False" Name="вкл.:не пройден тест заслонки наружного воздуха" Id="c6ae172e-322d-4305-81fd-c5d74c8741a2" />
+        <BitPrm Byte="26" Bit="7" IsValueInverted="False" Name="вкл.:нет 380 вольт" Id="73fac4ad-5749-44bb-acb0-f230caa4c3ff" />
+        <BitPrm Byte="28" Bit="0" IsValueInverted="False" Name="вкл.:резерв" Id="1bcc3c84-2b14-480f-9887-3735c22f8adc" />
+        <BitPrm Byte="28" Bit="1" IsValueInverted="False" Name="вкл.:резерв" Id="b91f8af9-5375-4208-bac4-75b262618ea1" />
+        <BitPrm Byte="28" Bit="2" IsValueInverted="False" Name="вкл.:не пройден контроль контактора компрессора 2" Id="68150f4e-339b-4d9a-8431-a5b3811c394c" />
+        <BitPrm Byte="28" Bit="3" IsValueInverted="False" Name="вкл.:не пройден контроль контактора компрессора 1" Id="a211d2da-598a-4119-808d-3313d0b2bc03" />
+        <BitPrm Byte="28" Bit="4" IsValueInverted="False" Name="вкл.:автомат 380 в. выключен компрессора 2" Id="8664e0fe-a47d-4ef5-b7ce-b34f53020035" />
+        <BitPrm Byte="28" Bit="5" IsValueInverted="False" Name="вкл.:автомат 380 в. выключен компрессора 1" Id="acea58b3-ef57-4b4c-a1ff-bf6771423d61" />
+        <BitPrm Byte="28" Bit="6" IsValueInverted="False" Name="вкл.: датчик высокого давлен. МУКа конденсатора не в диапазоне" Id="c61be9b4-79cc-46ff-a1d8-48e0d3b8f576" />
+        <BitPrm Byte="28" Bit="7" IsValueInverted="False" Name="вкл.:датчик низкого давлен. и температуры от Emerson не в диапазоне." Id="8715c3d0-c61c-4fd8-81e6-1c0dbf35a5ae" />
+        <BitPrm Byte="30" Bit="0" IsValueInverted="False" Name="вкл.:срабатывание аппаратного отключение компрессора 2 по Pmax." Id="5197278b-3703-4750-b03b-fabd0fe153c4" />
+        <BitPrm Byte="30" Bit="1" IsValueInverted="False" Name="вкл.:срабатывание аппаратного отключение компрессора 2 по Pmin." Id="ff10eebe-9f9e-46a4-819f-f78b1c4c74eb" />
+        <BitPrm Byte="30" Bit="2" IsValueInverted="False" Name="вкл.:срабатывание термостата компрессора 2" Id="5cda5d78-e280-4e4e-9e2f-11531640d4ea" />
+        <BitPrm Byte="30" Bit="3" IsValueInverted="False" Name="вкл.:не пройден контроль разрешение работы компрессора 2" Id="a2eabd75-1f7a-4b88-b885-6782904d69ac" />
+        <BitPrm Byte="30" Bit="4" IsValueInverted="False" Name="вкл.:срабатывание аппаратного отключение компрессора 1 по Pmax" Id="5852d729-87e0-47e8-916e-90e9b26f96dc" />
+        <BitPrm Byte="30" Bit="5" IsValueInverted="False" Name="вкл.:срабатывание аппаратного отключение компрессора 1 по Pmin." Id="1234d106-5b49-4685-97f4-f6a723a6f5ae" />
+        <BitPrm Byte="30" Bit="6" IsValueInverted="False" Name="вкл.:срабатывание термостата компрессора 1" Id="79460851-c0b2-482a-b102-05117896887f" />
+        <BitPrm Byte="30" Bit="7" IsValueInverted="False" Name="вкл.:не пройден контроль разрешение работы компрессора 1" Id="c95c18cb-830c-4a85-8125-b7e42f3853cb" />
+        <BitPrm Byte="32" Bit="0" IsValueInverted="False" Name="резерв:" Id="09766dd0-4ab2-4eb2-b1ac-e99ad275f0d4" />
+        <BitPrm Byte="32" Bit="1" IsValueInverted="False" Name="резерв:" Id="6772efda-6ef6-49fb-b10a-1f597c139e53" />
+        <BitPrm Byte="32" Bit="2" IsValueInverted="False" Name="резерв:" Id="0df149cd-faa3-4c64-a1c2-8e0e9b26c486" />
+        <BitPrm Byte="32" Bit="3" IsValueInverted="False" Name="резерв:" Id="7c6b5683-fdd4-43c4-a726-9b2c893932d1" />
+        <BitPrm Byte="32" Bit="4" IsValueInverted="False" Name="резерв:" Id="e332dc0c-6ae4-4aa0-a7b8-11c5237e125f" />
+        <BitPrm Byte="32" Bit="5" IsValueInverted="False" Name="резерв:" Id="81bf710d-c046-43fa-a9d9-d8ffb08012da" />
+        <BitPrm Byte="32" Bit="6" IsValueInverted="False" Name="резерв:" Id="c2032553-1c9f-4fbe-9e7e-c3fcfb537d7c" />
+        <BitPrm Byte="32" Bit="7" IsValueInverted="False" Name="резерв:" Id="03717d2e-b2c7-4746-9a65-5bec7891611d" />
+        <BitPrm Byte="34" Bit="0" IsValueInverted="False" Name="отстой:резерв" Id="7f31c7de-eb8a-419b-a0e3-9f1c923f6cc9" />
+        <BitPrm Byte="34" Bit="1" IsValueInverted="False" Name="отстой:не пройден тест заслонки зим лето." Id="441ba916-8bd9-4009-859f-eeb56ca3508e" />
+        <BitPrm Byte="34" Bit="2" IsValueInverted="False" Name="отстой:не пройден тест заслонки рециркул-онного воздуха." Id="4c4c2dd2-2cd3-4683-b4ef-2ee04af8fdd9" />
+        <BitPrm Byte="34" Bit="3" IsValueInverted="False" Name="отстой:не пройден тест выт-жного вентил." Id="c047d5bd-9fe8-4be2-aff0-4ae7b482d483" />
+        <BitPrm Byte="34" Bit="4" IsValueInverted="False" Name="отстой:не пройден тест вентил. конденсатора." Id="0e108202-e2d9-48e1-b590-0a89765ea6e1" />
+        <BitPrm Byte="34" Bit="5" IsValueInverted="False" Name="отстой:не пройден тест вентил. испарит." Id="1bdcc836-2355-4902-895e-b263f040d0de" />
+        <BitPrm Byte="34" Bit="6" IsValueInverted="False" Name="отстой:не пройден тест заслонки наружного воздуха" Id="c4fcff41-bbb2-47a0-b8e4-b18b2bb43aa2" />
+        <BitPrm Byte="34" Bit="7" IsValueInverted="False" Name="отстой:нет 380 вольт" Id="fc402174-6c47-42c7-9a94-2ed3d0443f47" />
+        <BitPrm Byte="36" Bit="0" IsValueInverted="False" Name="обслуж.:резерв" Id="fb69401d-7e8d-46e3-b013-5db420ec67cd" />
+        <BitPrm Byte="36" Bit="1" IsValueInverted="False" Name="обслуж.:не пройден тест заслонки зим лето." Id="b9198ce5-fe3e-4c5d-97e7-7a21f536ae28" />
+        <BitPrm Byte="36" Bit="2" IsValueInverted="False" Name="обслуж.:не пройден тест заслонки рециркул-онного воздуха." Id="1de9171f-7a54-4ed6-8876-6dcb57b5e15b" />
+        <BitPrm Byte="36" Bit="3" IsValueInverted="False" Name="обслуж.:не пройден тест выт-жного вентил." Id="c4f8c277-c780-4caa-8d00-875177979265" />
+        <BitPrm Byte="36" Bit="4" IsValueInverted="False" Name="обслуж.:не пройден тест вентил. конденсатора." Id="cd0a7d58-ae54-4cb1-9c53-cbdfda0faf32" />
+        <BitPrm Byte="36" Bit="5" IsValueInverted="False" Name="обслуж.:не пройден тест вентил. испарит." Id="f3cca693-03dd-454d-ae84-c769c95a7ae8" />
+        <BitPrm Byte="36" Bit="6" IsValueInverted="False" Name="обслуж.не пройден тест заслонки наружного воздуха" Id="a06d8952-15a2-4e93-bfba-e08fca0de1e7" />
+        <BitPrm Byte="36" Bit="7" IsValueInverted="False" Name="обслуж.:нет 380 вольт" Id="d988be51-dad4-4054-afd5-fc25c86fd34d" />
+        <BitPrm Byte="38" Bit="0" IsValueInverted="False" Name="обслуж.:резерв" Id="0ab1bc53-7802-4c44-8041-ef9d34e23973" />
+        <BitPrm Byte="38" Bit="1" IsValueInverted="False" Name="обслуж.:резерв" Id="b94efb5d-09d8-40cd-bacc-1a5af83308e0" />
+        <BitPrm Byte="38" Bit="2" IsValueInverted="False" Name="обслуж.:не пройден контроль контактора компрессора 2" Id="39398148-1fdd-4d27-9963-985b84d2bd44" />
+        <BitPrm Byte="38" Bit="3" IsValueInverted="False" Name="обслуж.:не пройден контроль контактора компрессора 1" Id="ef000531-e657-44ce-ac0a-d64df9b3939f" />
+        <BitPrm Byte="38" Bit="4" IsValueInverted="False" Name="обслуж.:автомат 380 в. выключен компрессора 2" Id="747c2771-bcec-4b9a-a591-742965dc81ed" />
+        <BitPrm Byte="38" Bit="5" IsValueInverted="False" Name="обслуж.:автомат 380 в. выключен компрессора 1" Id="43937b8a-ea94-4b61-a14c-2206a49ddbd1" />
+        <BitPrm Byte="38" Bit="6" IsValueInverted="False" Name="обслуж.: датчик высокого давлен. МУКа конденсатора не в диапазоне" Id="35fd0336-97f4-4da4-acc5-588dac24ccff" />
+        <BitPrm Byte="38" Bit="7" IsValueInverted="False" Name="обслуж.:датчик низкого давлен. и температуры от Emerson не в диапазоне." Id="608a2529-0a90-48e0-b390-eefe695ee718" />
+        <BitPrm Byte="40" Bit="0" IsValueInverted="False" Name="обслуж.:срабатывание аппаратного отключение компрессора 2 по Pmax." Id="e63d6338-4144-4452-a366-99e336932d70" />
+        <BitPrm Byte="40" Bit="1" IsValueInverted="False" Name="обслуж.:срабатывание аппаратного отключение компрессора 2 по Pmin." Id="bb7df96b-0d1a-41cf-9ac1-8d703aa785a8" />
+        <BitPrm Byte="40" Bit="2" IsValueInverted="False" Name="обслуж.:срабатывание термостата компрессора 2" Id="805483a3-afb4-4a52-81ff-d5901dbeeae1" />
+        <BitPrm Byte="40" Bit="3" IsValueInverted="False" Name="обслуж.:не пройден контроль разрешение работы компрессора 2" Id="e90214bf-ff9e-4792-bf65-8a2902b04a79" />
+        <BitPrm Byte="40" Bit="4" IsValueInverted="False" Name="обслуж.:срабатывание аппаратного отключение компрессора 1 по Pmax" Id="d06b0b4e-c586-482e-a2c5-1309f18ec777" />
+        <BitPrm Byte="40" Bit="5" IsValueInverted="False" Name="обслуж.:срабатывание аппаратного отключение компрессора 1 по Pmin." Id="9b7ed7d5-89f3-49cd-a332-43368b9f2490" />
+        <BitPrm Byte="40" Bit="6" IsValueInverted="False" Name="обслуж.:срабатывание термостата компрессора 1" Id="208f0f52-600a-4059-ac91-6880e8eb45f4" />
+        <BitPrm Byte="40" Bit="7" IsValueInverted="False" Name="обслуж.:не пройден контроль разрешение работы компрессора 1" Id="ebf1a6c6-fe6b-42e8-bfe5-fb094f21518f" />
+        <BitPrm Byte="42" Bit="0" IsValueInverted="False" Name="мойка:" Id="761b01f2-ba9e-48d5-91a4-1f6dca5a2fad" />
+        <BitPrm Byte="42" Bit="1" IsValueInverted="False" Name="мойка:" Id="31543a01-5e30-413a-a7f6-c4d9e528f417" />
+        <BitPrm Byte="42" Bit="2" IsValueInverted="False" Name="мойка:" Id="c64d1100-523b-4024-b47c-b1bb295d8609" />
+        <BitPrm Byte="42" Bit="3" IsValueInverted="False" Name="мойка:" Id="1b94d93b-39b7-4eba-a9c4-df6ec7d35049" />
+        <BitPrm Byte="42" Bit="4" IsValueInverted="False" Name="мойка:" Id="7e80c20d-0476-43c1-8e19-c9c4ccb929e2" />
+        <BitPrm Byte="42" Bit="5" IsValueInverted="False" Name="мойка:" Id="dc81cff6-d977-4958-bd67-574eab0a3536" />
+        <BitPrm Byte="42" Bit="6" IsValueInverted="False" Name="мойка:" Id="52168009-edc7-4eb0-98db-6663437c6dd8" />
+        <BitPrm Byte="42" Bit="7" IsValueInverted="False" Name="мойка:" Id="377c221a-3740-4718-a954-ec25a6118245" />
+        <BitPrm Byte="44" Bit="0" IsValueInverted="False" Name="ручной:резерв" Id="e52d92c4-2861-4ced-96a5-8ba42e6d15a3" />
+        <BitPrm Byte="44" Bit="1" IsValueInverted="False" Name="ручной:не пройден тест заслонки зим лето." Id="ce146be1-91f7-4512-8ee7-3fbedcc00ee5" />
+        <BitPrm Byte="44" Bit="2" IsValueInverted="False" Name="ручной:не пройден тест заслонки рециркул-онного воздуха." Id="fe22c02b-520c-40be-ad3a-2f9502047ead" />
+        <BitPrm Byte="44" Bit="3" IsValueInverted="False" Name="ручной:не пройден тест выт-жного вентил." Id="d2ee8e44-9bf7-4dc2-9143-835e8d22ea04" />
+        <BitPrm Byte="44" Bit="4" IsValueInverted="False" Name="ручной:не пройден тест вентил. конденсатора." Id="339e234d-856a-4e04-96b1-7efe5c11db7c" />
+        <BitPrm Byte="44" Bit="5" IsValueInverted="False" Name="ручной:не пройден тест вентил. испарит." Id="f911e133-552d-4222-b563-5209c651e85b" />
+        <BitPrm Byte="44" Bit="6" IsValueInverted="False" Name="ручной:не пройден тест заслонки наружного воздуха" Id="69198f9b-0ada-4f1a-9e46-e36ffe16af54" />
+        <BitPrm Byte="44" Bit="7" IsValueInverted="False" Name="ручной:нет 380 вольт" Id="ae098e17-33c0-4d4d-ae42-1ea1ee7bcba2" />
+        <BitPrm Byte="46" Bit="0" IsValueInverted="False" Name="ручной:резерв" Id="c6f7fdfa-80da-420d-a6f6-8eec42d59e6b" />
+        <BitPrm Byte="46" Bit="1" IsValueInverted="False" Name="ручной:резерв" Id="3fdf48a6-168b-4a78-8a11-a0f9e8214d8b" />
+        <BitPrm Byte="46" Bit="2" IsValueInverted="False" Name="ручной:не пройден контроль контактора компрессора 2" Id="6fc5382c-e872-4c14-8876-0dfeeff43c1a" />
+        <BitPrm Byte="46" Bit="3" IsValueInverted="False" Name="ручной:не пройден контроль контактора компрессора 1" Id="7e111607-e330-4d56-8431-cc0db20755c3" />
+        <BitPrm Byte="46" Bit="4" IsValueInverted="False" Name="ручной:автомат 380 в. выключен компрессора 2" Id="e9a05928-fbc0-4723-9d3c-b35b933d6cf0" />
+        <BitPrm Byte="46" Bit="5" IsValueInverted="False" Name="ручной:автомат 380 в. выключен компрессора 1" Id="d2b1783d-0991-4dff-abad-24de8ba3c75a" />
+        <BitPrm Byte="46" Bit="6" IsValueInverted="False" Name="ручной: датчик высокого давлен. МУКа конденсатора не в диапазоне" Id="746fcdb8-b40e-48ba-9b49-ae14204493be" />
+        <BitPrm Byte="46" Bit="7" IsValueInverted="False" Name="ручной:датчик низкого давлен. и температуры от Emerson не в диапазоне." Id="aa83f9f5-ba51-4b2e-aa83-04e1bb4e5ebf" />
+        <BitPrm Byte="48" Bit="0" IsValueInverted="False" Name="ручной:срабатывание аппаратного отключение компрессора 2 по Pmax." Id="42a84ace-fe6f-43c5-a162-5b5d1ead9a29" />
+        <BitPrm Byte="48" Bit="1" IsValueInverted="False" Name="ручной:срабатывание аппаратного отключение компрессора 2 по Pmin." Id="a2165273-fddf-4442-83b0-4bbf2f22f3db" />
+        <BitPrm Byte="48" Bit="2" IsValueInverted="False" Name="ручной:срабатывание термостата компрессора 2" Id="a89593bd-93a9-40dd-b8fc-05703296991d" />
+        <BitPrm Byte="48" Bit="3" IsValueInverted="False" Name="ручной:не пройден контроль разрешение работы компрессора 2" Id="0ff97dca-8415-41cc-ab2d-4894a7dc3053" />
+        <BitPrm Byte="48" Bit="4" IsValueInverted="False" Name="ручной:срабатывание аппаратного отключение компрессора 1 по Pmax" Id="ef2440ec-dc67-48eb-8be6-ab3559f93644" />
+        <BitPrm Byte="48" Bit="5" IsValueInverted="False" Name="ручной:срабатывание аппаратного отключение компрессора 1 по Pmin." Id="218ed491-f26f-459c-8db7-54bf13610789" />
+        <BitPrm Byte="48" Bit="6" IsValueInverted="False" Name="ручной:срабатывание термостата компрессора 1" Id="b040609d-ff97-486e-a984-87c717ebc503" />
+        <BitPrm Byte="48" Bit="7" IsValueInverted="False" Name="ручной:не пройден контроль разрешение работы компрессора 1" Id="490018bd-431b-4f02-a725-7b6df4d6fe33" />
+        <BitPrm Byte="50" Bit="1" IsValueInverted="False" Name="выкл.:УОВ не отключен от 380 в." Id="7d74626a-e995-49aa-8944-10ddce5dec64" />
+        <BitPrm Byte="50" Bit="2" IsValueInverted="False" Name="выкл.:рециркуляционный нагреватель не отключен" Id="d76ca67a-c419-4997-88e6-cf304dc41042" />
+        <BitPrm Byte="50" Bit="3" IsValueInverted="False" Name="выкл.:калорифер 380 не отключен от 380 в" Id="fade05fd-356b-42fc-8559-97717bc58feb" />
+        <BitPrm Byte="50" Bit="4" IsValueInverted="False" Name="выкл.:не прошел запрет работы компрессора 1 со стороны АМК" Id="5472c850-f9a9-457a-9c65-8f77fcd31192" />
+        <BitPrm Byte="50" Bit="5" IsValueInverted="False" Name="выкл.:компрессор 1 не отключен от 380 в." Id="95294372-c5c2-4a3e-b33a-b25d8f6883eb" />
+        <BitPrm Byte="50" Bit="6" IsValueInverted="False" Name="выкл.:не прошел запрет работы компрессора 2 со стороны АМК" Id="547791aa-cf73-4cc6-884c-19c97283d5c7" />
+        <BitPrm Byte="50" Bit="7" IsValueInverted="False" Name="выкл.:компрессор 2 не отключен от 380 в" Id="83ff629b-6baf-428f-b062-1211cdb53c3d" />
+        <BitPrm Byte="52" Bit="0" IsValueInverted="False" Name="вычитка текущих данных из МУК заслонки наружного воздуха" Id="90c361ff-e1ff-4cb2-88eb-3885cc9ca198" />
+        <BitPrm Byte="52" Bit="1" IsValueInverted="False" Name="запись команд в МУК заслонки наружного воздуха" Id="044b79b1-110e-4912-bc23-3049bfa8b01e" />
+        <BitPrm Byte="52" Bit="2" IsValueInverted="False" Name="вычитка текущих данных из МУК испарителя" Id="f9919bd4-3bc1-45b2-a33c-1317a9064990" />
+        <BitPrm Byte="52" Bit="3" IsValueInverted="False" Name="запись команд в МУК испарителя" Id="cde6e714-c5f0-4e57-a14f-31a227b99ef3" />
+        <BitPrm Byte="52" Bit="4" IsValueInverted="False" Name="вычитка текущих данных из МУК конденсатора" Id="3060fae3-e175-4541-8304-bd660d2297c2" />
+        <BitPrm Byte="52" Bit="5" IsValueInverted="False" Name="запись команд в МУК конденсатора" Id="80f2a852-71f1-44f8-9179-887fd8eff2c8" />
+        <BitPrm Byte="52" Bit="6" IsValueInverted="False" Name="вычитка текущих данных из МУК вытяжного вентилятора" Id="ffa38ea1-a141-473a-b673-df81f8681ad5" />
+        <BitPrm Byte="52" Bit="7" IsValueInverted="False" Name="запись команд в МУК вытяжного вентилятора" Id="de3a4f37-ec80-40d3-afad-e17ac36885f3" />
+        <BitPrm Byte="54" Bit="0" IsValueInverted="False" Name="вычитка текущих данных из МУК рециркуляционной заслонки" Id="806acd06-91f9-47cf-8e88-e5cf4945cea5" />
+        <BitPrm Byte="54" Bit="1" IsValueInverted="False" Name="запись команд в МУК рециркуляционной заслонки" Id="24575e5b-9746-4ad2-9630-74e84e248641" />
+        <BitPrm Byte="54" Bit="2" IsValueInverted="False" Name="вычитка текущих данных из МУК заслонки зима-лето" Id="b7c4e1cc-75e3-477c-96c2-50cd10d38a24" />
+        <BitPrm Byte="54" Bit="3" IsValueInverted="False" Name="запись команд в МУК заслонки зима-лето" Id="2a959f4c-ef7b-463c-a6cd-c51707313ab6" />
+        <BitPrm Byte="54" Bit="4" IsValueInverted="False" Name="обмен с БС-СМ" Id="c15e1e63-351a-4b83-8e1c-659e8f2629cd" />
+        <BitPrm Byte="54" Bit="5" IsValueInverted="False" Name="обмен с БВС" Id="1ad01971-6edb-4f8d-b97a-b252c81a83d6" />
+        <BitPrm Byte="54" Bit="6" IsValueInverted="False" Name="обмен с БВС2" Id="b157fce4-7fd1-4887-ba35-05c321a63066" />
+        <BitPrm Byte="54" Bit="7" IsValueInverted="False" Name="запись данных в РПД" Id="7ce90e43-5c46-449d-b750-000f5b124881" />
+        <BitPrm Byte="56" Bit="0" IsValueInverted="False" Name="вычитка корректируемого параметра из программы технического абонента" Id="ada60e98-c6d7-4f2d-91b0-750f0140e781" />
+        <BitPrm Byte="56" Bit="1" IsValueInverted="False" Name="отсылка текущих данных техническому абоненту" Id="53dfe113-662e-432d-83ac-eda47796e481" />
+        <CpzPrm Name="Уставка ШИМ на клапан разгрузки" Expression="[s57] * 256.0 + [u58]" Id="8f16052b-1ba4-4e85-ada8-1e2e336f5d5c" />
+        <CpzPrm Name="Ручной принудительный режим" Expression="[s59] * 256.0 + [u60]" Id="a9499f58-bc36-481b-be29-d9e7950b3db5" />
+        <CpzPrm Name="Параметр 27" Expression="[s61] * 256.0 + [u62]" Id="02a40d59-f200-409b-966f-bbdaca4db1cd" />
+        <CpzPrm Name="Параметр 28" Expression="[s63] * 256.0 + [u64]" Id="01678dd2-7046-4592-ab50-e36d8940b890" />
+        <CpzPrm Name="Параметр 29" Expression="[s65] * 256.0 + [u66]" Id="33fe9923-da75-4c0e-b9f1-e5ea230ca181" />
+        <CpzPrm Name="Параметр 30" Expression="[s67] * 256.0 + [u68]" Id="1367f02f-a4ff-4787-b007-0f2b53f3636c" />
+        <CpzPrm Name="Параметр 31" Expression="[s69] * 256.0 + [u70]" Id="a82a7d42-952b-4c8a-ba9c-8e9a4afcddd4" />
+        <CpzPrm Name="Параметр 32" Expression="[s71] * 256.0 + [u72]" Id="4645b933-0e38-46c7-8686-6fa5d980e9e3" />
+        <CpzPrm Name="Параметр 33" Expression="[s73] * 256.0 + [u74]" Id="87f3b833-8e6d-47b9-8f79-5532a83360d4" />
+        <CpzPrm Name="Версия ПО" Expression="[s75] * 256.0 + [u76]" Id="abd7b38e-8f1a-493f-90fa-6598657a4473" />
+        <CpzPrm Name="Максимальный ШИМ (PWMmax_cool)" Expression="[s77] * 256.0 + [u78]" Id="e5bbc60e-b9ae-4b8b-b4ad-878d0c89495d" />
+        <CpzPrm Name="Минимальный ШИМ (PWMmin_cool)" Expression="[s79] * 256.0 + [u80]" Id="4637c43f-4003-4bc3-af86-935a7b19375e" />
+        <CpzPrm Name="Дельта + (plus_cool)" Expression="[s81] * 256.0 + [u82]" Id="6e7eef7c-0e9e-4c1b-a707-9c1f07005852" />
+        <CpzPrm Name="Дельта - (minus_cool)" Expression="[s83] * 256.0 + [u84]" Id="9811258e-812f-49d9-aec6-5eadf044bc09" />
+        <CpzPrm Name="Обеззараживатель, часовой счетчик работы (CounterCleaner)" Expression="[s85] * 256.0 + [u86]" Id="b0836479-5852-4a28-9e3b-50fb68dc5593" />
+        <CpzPrm Name="Параметр 40" Expression="[s87] * 256.0 + [u88]" Id="9355966a-4aa9-4b92-8e61-e6d61576c25a" />
+        <CpzPrm Name="Параметр 41" Expression="[s89] * 256.0 + [u90]" Id="d369a405-792d-4394-bc03-eb0b28e35bb0" />
+        <CpzPrm Name="Параметр 42" Expression="[s91] * 256.0 + [u92" Id="483f357e-c270-4bb6-b06a-c10f78a74f53" />
+        <CpzPrm Name="Параметр 43" Expression="[s93] * 256.0 + [u94]" Id="11923b6b-659f-4d74-90aa-c46222d7e409" />
+        <CpzPrm Name="Параметр 44" Expression="[s95] * 256.0 + [u96]" Id="f40baa90-a8e4-4f31-8ae1-c592b06aef7f" />
+        <CpzPrm Name="Параметр 45" Expression="[s97] * 256.0 + [u98]" Id="7ee228fa-1835-439f-830e-1ed869a19631" />
+        <CpzPrm Name="Параметр 46" Expression="[s99] * 256.0 + [u100]" Id="1a9b7951-d33c-40ef-840e-86995e740c3f" />
+        <CpzPrm Name="Параметр 47" Expression="[s101] * 256.0 + [u102]" Id="db8250f7-b5cb-4643-8d2c-cd8c54a00694" />
+        <CpzPrm Name="Параметр 48" Expression="[s103] * 256.0 + [u104]" Id="dc401b2e-207c-4f99-984e-7681b27ba142" />
+        <CpzPrm Name="Параметр 49" Expression="[s105] * 256.0 + [u106]" Id="30c760a6-02dd-4196-ad96-759bffcafe47" />
+        <CpzPrm Name="Параметр 50" Expression="[s107] * 256.0 + [u108]" Id="b3faac4b-5721-4505-8083-0cf6dc4c95c7" />
+        <CpzPrm Name="Параметр 51" Expression="[s109] * 256.0 + [u110]" Id="f45cceff-4d28-4804-9478-0593666da1be" />
+        <CpzPrm Name="Параметр 52" Expression="[s111] * 256.0 + [u112]" Id="52973426-98af-411c-b101-65a302bbd1d1" />
+        <CpzPrm Name="Параметр 53" Expression="[s113] * 256.0 + [u114]" Id="1be9aebe-f5ca-4788-ac53-17e949a899b4" />
+        <CpzPrm Name="Параметр 54" Expression="[s115] * 256.0 + [u116]" Id="8c9c4163-dd34-4b78-88fc-648df3c9697c" />
+        <CpzPrm Name="Параметр 55" Expression="[s117] * 256.0 + [u118]" Id="9748e6fa-7545-4a3a-b43d-3062fce971b3" />
+        <CpzPrm Name="Параметр 56" Expression="[s119] * 256.0 + [u120]" Id="7ce687f1-befd-48ea-9d63-85b7cd4588d9" />
+        <CpzPrm Name="Параметр 57" Expression="[s121] * 256.0 + [u122]" Id="96f6b84b-e073-43be-9e8d-2cfc26b56846" />
+        <CpzPrm Name="Параметр 58" Expression="[s123 * 256.0 + [u124]" Id="4f31c3f8-9d14-4212-8533-c2db28724b07" />
+        <CpzPrm Name="Параметр 59" Expression="[s125] * 256.0 + [u126]" Id="8201bfc4-6588-43e5-b416-db542b39a99d" />
+        <VarVal Position="127.0" Length="8" Name="#CRCH" Id="3bed3b55-993b-4f75-b1fd-9f35e882b6b5" />
+        <VarVal Position="128.0" Length="8" Name="#CRCL" Id="958f6f63-479f-47e2-b4f2-001bfa73c27e" />
+      </Request>
+      <Reply Length="8" Position="129">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="a200bb06-b307-4757-80cd-4febb55648c6" />
+        <DefVal Position="1.0" Length="8" Value="0x10" Name="#NCMD" Id="bc43d074-662c-4f58-a688-1c0a7925db5b" />
+        <VarVal Position="2.0" Length="8" Name="Стартовый адрес, hi" Id="9f0f6d7c-e71f-482e-860f-c9e84e19cf1d" />
+        <VarVal Position="3.0" Length="8" Name="Стартовый адрес, lo" Id="b4cae16d-b766-4a84-9f70-88a1eefb1eb2" />
+        <VarVal Position="4.0" Length="8" Name="Количество слов, старший байт" Id="ddac7cc1-f382-434d-8767-be837d5eba32" />
+        <VarVal Position="5.0" Length="8" Name="Количество слов, младший байт" Id="9fca6dfa-a641-4560-9361-e43dacac5e8f" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="f7de9a2b-a54f-4fd0-9734-07ea0d8d0407" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="bb0481d8-111e-4ac3-bf01-4de24ce7e28a" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

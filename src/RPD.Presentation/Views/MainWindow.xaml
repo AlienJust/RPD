@@ -1,0 +1,1161 @@
+﻿<Window
+	x:Class="RPD.Presentation.Views.MainWindow"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+	xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+	xmlns:DalViewModels="clr-namespace:RPD.Presentation.ViewModels.DalViewModels"
+	xmlns:Binding="clr-namespace:Dnv.Utils.Binding;assembly=Dnv.Utils"
+	xmlns:dnvConverters="clr-namespace:Dnv.Utils.Converters;assembly=Dnv.Utils"
+	xmlns:selectors="clr-namespace:Dnv.Utils.TemplateSelectors;assembly=Dnv.Utils"
+	xmlns:xcad="http://schemas.xceed.com/wpf/xaml/avalondock"
+	xmlns:sciChart="clr-namespace:RPD.SciChartControl.Views;assembly=RPD.SciChartControl"
+	xmlns:command="http://www.galasoft.ch/mvvmlight"
+	xmlns:dalViewModels="clr-namespace:RPD.Presentation.Contracts.ViewModels.DalViewModels;assembly=RPD.Presentation.Contracts"
+	xmlns:helpers="clr-namespace:RPD.Presentation.Helpers"
+	xmlns:behaviors="clr-namespace:Dnv.Utils.Behaviors;assembly=Dnv.Utils"
+	xmlns:contracts="clr-namespace:RPD.Presentation.Contracts;assembly=RPD.Presentation.Contracts"
+	xmlns:presentation="clr-namespace:RPD.Presentation"
+	xmlns:converters="clr-namespace:AlienJust.Adaptation.WindowsPresentation.Converters;assembly=AlienJust.Adaptation.WindowsPresentation"
+	Title="РПД"
+	Width="950"
+	Height="580"
+	AllowsTransparency="False"
+	DataContext="{Binding Path=Main, Source={StaticResource Locator}}"
+	TextOptions.TextFormattingMode="Display"
+	WindowStartupLocation="CenterScreen"
+	Loaded="DockManagerLoaded"
+	KeyDown="MainWindow_OnKeyDown"
+	KeyUp="MainWindow_OnKeyUp"
+	x:Name="_this">
+	<Window.Resources>
+		<ResourceDictionary>
+
+			<dnvConverters:InverseBooleanConverter
+				x:Key="InverseBooleanConverter" />
+			<BooleanToVisibilityConverter x:Key="BtvConverter"></BooleanToVisibilityConverter>
+			<converters:BooleanToVisibilityConverter x:Key="BtiConverter" InvertVisibility="True"></converters:BooleanToVisibilityConverter>
+			<dnvConverters:DictionaryConverter
+				x:Key="dictionaryConverter" />
+
+			<Binding:BindingProxy
+				x:Key="_mainViewModelProxy"
+				Data="{Binding Path=DataContext, ElementName=_this}" />
+
+			<Style
+				x:Key="repoHeaderStyle">
+				<Setter
+					Property="TextBlock.Padding"
+					Value="10,3,3,3" />
+			</Style>
+
+			<!--Рамка вокруг аварии, которую только что добавили в репозиторий (новая)-->
+			<Style
+				x:Key="logBorderStyle"
+				TargetType="Border">
+				<Setter
+					Property="BorderThickness"
+					Value="0" />
+				<Setter
+					Property="Margin"
+					Value="0" />
+				<Setter
+					Property="CornerRadius"
+					Value="2" />
+				<Style.Triggers>
+					<DataTrigger
+						Binding="{Binding Path=IsNew}"
+						Value="True">
+						<Setter
+							Property="BorderThickness"
+							Value="1" />
+						<Setter
+							Property="Margin"
+							Value="-2 1 1 1" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+
+			<Style
+				x:Key="logCheckBoxStyle"
+				TargetType="CheckBox">
+				<Setter
+					Property="BorderBrush"
+					Value="Red" />
+				<Setter
+					Property="VerticalAlignment"
+					Value="Center" />
+				<Setter
+					Property="Margin"
+					Value="0,0,3,0" />
+				<Setter
+					Property="IsChecked"
+					Value="{Binding Path=IsChecked}" />
+				<Style.Triggers>
+					<DataTrigger
+						Binding="{Binding Path=IsNew}"
+						Value="True">
+						<Setter
+							Property="Margin"
+							Value="1,0,3,0" />
+					</DataTrigger>
+				</Style.Triggers>
+			</Style>
+
+			<!--Прогресбар для индикации процесса загрузки данных сигнала на график-->
+			<Style
+				x:Key="progressBarSignalLoadingStyle">
+				<Setter
+					Property="Control.Margin"
+					Value="0,0,3,0" />
+				<Setter
+					Property="ProgressBar.Width"
+					Value="20" />
+				<Setter
+					Property="ProgressBar.Height"
+					Value="8" />
+				<Setter
+					Property="ProgressBar.IsIndeterminate"
+					Value="True" />
+			</Style>
+
+			<Style
+				x:Key="borderStyle">
+				<Setter
+					Property="Border.BorderThickness"
+					Value="1" />
+				<Setter
+					Property="Border.CornerRadius"
+					Value="5" />
+				<Setter
+					Property="Border.BorderBrush">
+					<Setter.Value>
+						<SolidColorBrush
+							Color="{x:Static SystemColors.ActiveBorderColor}" />
+					</Setter.Value>
+				</Setter>
+				<Setter
+					Property="Border.Margin"
+					Value="0" />
+				<Setter
+					Property="Border.Padding"
+					Value="0" />
+			</Style>
+
+			<Style
+				x:Key="repoButtonStyle">
+				<Setter
+					Property="Button.Margin"
+					Value="3" />
+			</Style>
+
+			<Style
+				x:Key="UncheckAllSignalsButtonStyle">
+				<Setter
+					Property="Button.Margin"
+					Value="3" />
+				<Setter
+					Property="Button.Visibility"
+					Value="{Binding Path=IsDataSelectMode, Converter={StaticResource visibleIfTrueConverter}}" />
+				<Setter
+					Property="Button.ToolTip"
+					Value="Снять выделение со всех сигналов" />
+				<Setter
+					Property="Button.Command"
+					Value="{Binding Path=UncheckAllSignalsCommand}" />
+				<Setter
+					Property="Button.Content"
+					Value="Снять выделение" />
+			</Style>
+
+			<Style
+				x:Key="repoStackPanelStyle">
+				<Setter
+					Property="StackPanel.Orientation"
+					Value="Horizontal" />
+				<Setter
+					Property="StackPanel.FlowDirection"
+					Value="RightToLeft" />
+			</Style>
+
+			<Style
+				x:Key="channelTreeViewItemStyle">
+				<Setter
+					Property="Control.Margin"
+					Value="-20,0,0,0" />
+			</Style>
+
+			<Style
+				x:Key="repoBusyIndicatorStyle"
+				BasedOn="{StaticResource borderStyle}">
+				<Setter
+					Property="xctk:BusyIndicator.IsBusy"
+					Value="{Binding Path=IsRepositoryLoaded, 
+                            Converter={StaticResource InverseBooleanConverter}, 
+                            UpdateSourceTrigger=PropertyChanged,
+                            Mode=OneWay}" />
+				<Setter
+					Property="xctk:BusyIndicator.Content">
+					<Setter.Value>
+						<StackPanel>
+							<TextBlock
+								TextWrapping="Wrap">Инициализация архива. Пожалуйста, подождите...</TextBlock>
+						</StackPanel>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style
+				x:Key="enabledIfRepoLoadedStyle"
+				TargetType="Control">
+				<Setter
+					Property="IsEnabled"
+					Value="{Binding Path=IsRepositoryLoaded}" />
+			</Style>
+
+			<Style
+				x:Key="ToggleButtonPopupStyle">
+				<Setter
+					Property="TextBlock.Background"
+					Value="LightYellow" />
+				<Setter
+					Property="TextBlock.TextWrapping"
+					Value="WrapWithOverflow" />
+				<Setter
+					Property="TextBlock.MaxWidth"
+					Value="500" />
+				<Setter
+					Property="TextBlock.FontSize"
+					Value="16" />
+				<Setter
+					Property="TextBlock.Padding"
+					Value="10" />
+			</Style>
+
+			<!-- #Region Контекстное меню заголовка лога ПСН-->
+
+			<!-- Контекстное меню лога -->
+			<ContextMenu
+				x:Key="LogContextMenu">
+				<MenuItem
+					Header="Информация о целостности лога..."
+					Command="{Binding Path=Data.ShowIntegrityErrorsStatistics, 
+                                Source={StaticResource _mainViewModelProxy}}" />
+				<MenuItem
+					Header="Переименовать"
+					Command="{Binding Path=Data.RenamePsnLogCmd, 
+                                Source={StaticResource _mainViewModelProxy}}" />
+			</ContextMenu>
+
+
+			<!--Треугольник рядом с названием лога, появляется когда на 
+                заголовок лога наводится указатель мыши-->
+			<ControlTemplate
+				x:Key="LogDropDownItemTemplate">
+				<Border
+					BorderThickness="1"
+					BorderBrush="Transparent">
+					<Canvas
+						Width="12"
+						Height="10"
+						Background="Transparent"
+						VerticalAlignment="Center"
+						ContextMenu="{StaticResource LogContextMenu}">
+						<Canvas.Triggers>
+							<!-- При нажатии мыши отображаем меню-->
+							<EventTrigger
+								RoutedEvent="MouseDown">
+								<EventTrigger.Actions>
+									<BeginStoryboard>
+										<Storyboard>
+											<BooleanAnimationUsingKeyFrames
+												Storyboard.TargetProperty="ContextMenu.IsOpen">
+												<DiscreteBooleanKeyFrame
+													KeyTime="0:0:0"
+													Value="True" />
+											</BooleanAnimationUsingKeyFrames>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger.Actions>
+							</EventTrigger>
+						</Canvas.Triggers>
+						<!-- По клику запоминаем во вью модели на каком логе нажали -->
+						<i:Interaction.Triggers>
+							<i:EventTrigger
+								EventName="MouseDown">
+								<command:EventToCommand
+									Command="{Binding Path=DataContext.SetContextMenuPsnLogCommand, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+									CommandParameter="{Binding}" />
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+						<Polygon
+							Points="3,0 6,3 9,0 3,0"
+							Fill="Black"
+							Stroke="Black"
+							StrokeThickness="1" />
+					</Canvas>
+				</Border>
+			</ControlTemplate>
+			<!-- #EndRegion -->
+
+
+			<!-- #Region Контекстное меню измерителя -->
+
+			<!--Контекстное меню измерителя для сохранения выделенных шаблонов выделения графиков 
+                (шаблон выделения это понятие программы РПД)-->
+			<ContextMenu
+				x:Key="selectableItemsContextMenu">
+				<MenuItem
+					Header="Загрузить всё"
+					Command="{Binding Path=Data.LoadAllTrendsCommand, 
+                                Source={StaticResource _mainViewModelProxy}}" />
+				<Separator />
+				<MenuItem
+					Header="Сохранить шаблон выделения"
+					Command="{Binding Path=Data.SaveSelectionMaskCommand, 
+                                Source={StaticResource _mainViewModelProxy}}" />
+				<MenuItem
+					Header="Загрузить шаблон выделения">
+					<MenuItem.ItemsSource>
+						<MultiBinding
+							Converter="{StaticResource dictionaryConverter}"
+							ConverterParameter="Items"
+							UpdateSourceTrigger="PropertyChanged">
+							<!--Словарь-->
+							<Binding
+								Path="Data.SelectionMasksStorage.SelectionMasks"
+								Source="{StaticResource _mainViewModelProxy}" />
+							<!--Ключ словаря-->
+							<Binding
+								Path="Data.ContextMenuTrendsContainer.Name"
+								Source="{StaticResource _mainViewModelProxy}" />
+						</MultiBinding>
+					</MenuItem.ItemsSource>
+					<MenuItem.ItemContainerStyle>
+						<Style>
+							<Setter
+								Property="MenuItem.Header"
+								Value="{Binding Path=Name}" />
+							<Setter
+								Property="MenuItem.Command"
+								Value="{Binding Path=Data.LoadSelectionMaskCommand, 
+                                Source={StaticResource _mainViewModelProxy}}" />
+							<Setter
+								Property="MenuItem.CommandParameter"
+								Value="{Binding}" />
+						</Style>
+					</MenuItem.ItemContainerStyle>
+				</MenuItem>
+			</ContextMenu>
+
+
+			<!--Треугольничек рядом с названием измерителя, появляется когда на измеритель наводят мышку, по клику отображает контекстное меню-->
+			<ControlTemplate
+				x:Key="dropDownItem">
+				<Border
+					BorderThickness="1"
+					BorderBrush="Transparent">
+					<Canvas
+						Width="12"
+						Height="10"
+						Background="Transparent"
+						ContextMenu="{StaticResource selectableItemsContextMenu}">
+						<Canvas.Triggers>
+							<!--По клику показываем контекстное меню-->
+							<EventTrigger
+								RoutedEvent="MouseDown">
+								<EventTrigger.Actions>
+									<BeginStoryboard>
+										<Storyboard>
+											<BooleanAnimationUsingKeyFrames
+												Storyboard.TargetProperty="ContextMenu.IsOpen">
+												<DiscreteBooleanKeyFrame
+													KeyTime="0:0:0"
+													Value="True" />
+											</BooleanAnimationUsingKeyFrames>
+										</Storyboard>
+									</BeginStoryboard>
+								</EventTrigger.Actions>
+							</EventTrigger>
+						</Canvas.Triggers>
+						<i:Interaction.Triggers>
+							<!--Устанавливаем ContextMenuTrendsContainer в модели представления, 
+                                чтобы в контекстном меню знать на каком элементе оно было вызвано.
+                                DataContext это MainViewModel-->
+							<i:EventTrigger
+								EventName="MouseDown">
+								<command:EventToCommand
+									Command="{Binding Path=DataContext.SetContextMenuTrendsContainerCommand, 
+                                        RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}}"
+									CommandParameter="{Binding}" />
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+						<Polygon
+							Points="3,0 6,3 9,0 3,0"
+							Fill="Black"
+							Stroke="Black"
+							StrokeThickness="1" />
+					</Canvas>
+				</Border>
+			</ControlTemplate>
+
+			<!--Стрелка при нажатии на которую выпадает контекстное меню selectableItemsContextMenu-->
+			<Style
+				x:Key="ShowOnMouseOverStyle"
+				TargetType="Control">
+				<Setter
+					Property="VerticalAlignment"
+					Value="Center" />
+				<Setter
+					Property="Margin"
+					Value="0,0,0,0" />
+				<Setter
+					Property="Visibility">
+					<Setter.Value>
+						<Binding
+							Path="IsMouseOver"
+							RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}"
+							Mode="OneWay"
+							Converter="{StaticResource visibleIfTrueConverter}" />
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<!-- #EndRegion -->
+
+
+			<!-- Общий стиль для TreeViewItem архива-->
+			<Style
+				x:Key="archiveTreeViewItemStyle"
+				TargetType="{x:Type TreeViewItem}">
+				<Setter
+					Property="Margin"
+					Value="-25,0,0,0" />
+					<Setter
+						Property="IsExpanded"
+					Value="{Binding IsTreeViewExpanded, Mode=TwoWay}">
+					</Setter>
+			</Style>
+
+			<!-- Общий стиль TreeViewItem локомотива-->
+			<Style
+				x:Key="locomotiveTreeViewItemStyle"
+				TargetType="{x:Type TreeViewItem}"
+				BasedOn="{StaticResource archiveTreeViewItemStyle}">
+				<Setter
+					Property="Header"
+					Value="{Binding Path=Name}" />
+				<Setter
+					Property="ItemsSource"
+					Value="{Binding Path=Sections}" />
+				<!--<Setter
+					Property="IsExpanded"
+					Value="{Binding Path=IsTreeViewExpanded}" />-->
+			</Style>
+
+			<!--Заголовок аварии или лога ПСН, при нажатии на кнопку экспорта данных отображает чекбокс-->
+			<Style
+				x:Key="exportHeaderTreeViewItemStyle"
+				TargetType="{x:Type TreeViewItem}"
+				BasedOn="{StaticResource archiveTreeViewItemStyle}">
+				<Setter
+					Property="HeaderTemplate">
+					<Setter.Value>
+						<DataTemplate>
+							<Border
+								DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type TreeViewItem}}}"
+								BorderBrush="Green"
+								Style="{StaticResource logBorderStyle}">
+								<StackPanel
+									Orientation="Horizontal">
+									<CheckBox
+										Style="{StaticResource logCheckBoxStyle}"
+										Name="LogCheckBoxExport"
+										Checked="TreeViewLogCheckBox_OnChecked"
+										IsEnabled="{Binding Path=Data.IsExportDataMode, Source={StaticResource _mainViewModelProxy}}" Visibility="{Binding Path=Data.IsExportDataMode, Source={StaticResource _mainViewModelProxy}, Converter={StaticResource visibleIfTrueConverter}}" />
+									<CheckBox
+										Style="{StaticResource logCheckBoxStyle}"
+										Name="LogCheckBoxRemove"
+										Checked="TreeViewLogCheckBox_OnChecked"
+										IsEnabled="{Binding Path=Data.IsRemoveDataMode, Source={StaticResource _mainViewModelProxy}}" Visibility="{Binding Path=Data.IsRemoveDataMode, Source={StaticResource _mainViewModelProxy}, Converter={StaticResource visibleIfTrueConverter}}" />
+									<CheckBox
+										Style="{StaticResource logCheckBoxStyle}"
+										Name="LogCheckBoxConfig"
+										Checked="TreeViewLogCheckBox_OnChecked"
+										IsEnabled="{Binding Path=Data.IsChangeConfigurationMode, Source={StaticResource _mainViewModelProxy}}"
+										Visibility="{Binding Path=Data.IsChangeConfigurationMode, Source={StaticResource _mainViewModelProxy}, Converter={StaticResource visibleIfTrueConverter}}" />
+									<TextBlock
+										xml:space="preserve"
+										Foreground="Red"
+										Visibility="{Binding Path=HasIntegrityErrors, Converter={StaticResource visibleIfTrueConverter}}"
+										VerticalAlignment="Center"
+										FontWeight="Bold"
+										ToolTip="Ошибка потоковой обработки страниц">!</TextBlock>
+									<TextBlock
+										Text="{Binding Path=Name}"
+										VerticalAlignment="Center"
+										ToolTip="{Binding Path=Hint}" />
+									<TextBlock
+										Margin="4,0,0,0"
+										Text="{Binding Path=Label}"
+										VerticalAlignment="Center"
+										ToolTip="{Binding Path=Hint}"
+										Visibility="{Binding Path=IsInEditLabelMode, Converter={StaticResource BtiConverter}}" />
+									<TextBox
+										Margin="2,0,0,0" MinWidth="50"
+										Text="{Binding Path=Label, UpdateSourceTrigger=Explicit}"
+										presentation:InputBindingsManager.UpdatePropertySourceWhenEnterPressed="TextBox.Text"
+										VerticalAlignment="Center"
+										ToolTip="{Binding Path=Hint}" 
+										AcceptsTab="False"
+										AcceptsReturn="False"
+										Visibility="{Binding Path=IsInEditLabelMode, Converter={StaticResource BtvConverter}}" />
+									<Control
+										Template="{StaticResource LogDropDownItemTemplate}"
+										Style="{StaticResource ShowOnMouseOverStyle}" />
+								</StackPanel>
+							</Border>
+						</DataTemplate>
+					</Setter.Value>
+
+				</Setter>
+			</Style>
+
+			<Style
+				x:Key="isOnPlotCheckBoxStyle"
+				TargetType="CheckBox">
+				<Setter
+					Property="IsChecked"
+					Value="{Binding Path=IsOnPlot, Mode=TwoWay}" />
+				<Setter
+					Property="IsEnabled"
+					Value="{Binding Path=Data.IsExportDataMode, Source={StaticResource _mainViewModelProxy}, Converter={StaticResource InverseBooleanConverter}}" />
+			</Style>
+
+			<!-- Селектор шаблонов для TreeView Архива-->
+			<selectors:MutlipleInterfaceDataTemplateSelector
+				x:Key="baseRepositoryDataTemplateSelector">
+				<selectors:MutlipleInterfaceDataTemplateSelector.Items>
+					<selectors:DataTemplateItem
+						InterfaceName="IPsnLogViewModel"
+						DataTemplateName="psnLogViewModelDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="IPsnMeterViewModel"
+						DataTemplateName="psnMeterViewModelDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="IPsnChannelViewModel"
+						DataTemplateName="psnChannelViewModelDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="IFaultViewModel"
+						DataTemplateName="rpdFaultDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="IRpdMeterViewModel"
+						DataTemplateName="rpdMeterDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="IRpdChannelViewModel"
+						DataTemplateName="rpdChannelDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="ISignalViewModel"
+						DataTemplateName="rpdSignalDataTemplate" />
+				</selectors:MutlipleInterfaceDataTemplateSelector.Items>
+			</selectors:MutlipleInterfaceDataTemplateSelector>
+
+			<!-- Общий стиль для TreeViewItem секции локомотива-->
+			<Style
+				x:Key="sectionTreeViewItemStyle"
+				TargetType="{x:Type TreeViewItem}"
+				BasedOn="{StaticResource archiveTreeViewItemStyle}">
+				<Setter
+					Property="Header"
+					Value="{Binding Path=Name}" />
+				<!--<Setter
+					Property="IsExpanded"
+					Value="{Binding Path=IsTreeViewExpanded}" />-->
+				<Setter
+					Property="ItemTemplateSelector"
+					Value="{StaticResource baseRepositoryDataTemplateSelector}" />
+			</Style>
+
+			<!-- #Region: Templates for "Архив ПСН по включению" -->
+
+			<!--Селектор шаблонов для TreeView "Архив ПСН по включению"-->
+			<selectors:MutlipleInterfaceDataTemplateSelector
+				x:Key="archivePsnPowerOnDataTemplateSelector"
+				BasedOn="{StaticResource baseRepositoryDataTemplateSelector}">
+				<selectors:MutlipleInterfaceDataTemplateSelector.Items>
+					<selectors:DataTemplateItem
+						InterfaceName="ILocomotiveViewModel"
+						DataTemplateName="psnPowerOnLocomotiveDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="ISectionViewModel"
+						DataTemplateName="psnPowerOnSectionDataTemplate" />
+				</selectors:MutlipleInterfaceDataTemplateSelector.Items>
+			</selectors:MutlipleInterfaceDataTemplateSelector>
+
+			<!-- Шаблон локомотива во вкладке "Архив ПСН по включению"  -->
+			<DataTemplate
+				x:Key="psnPowerOnLocomotiveDataTemplate"
+				DataType="{x:Type dalViewModels:ILocomotiveViewModel}">
+				<TreeViewItem
+					Style="{StaticResource locomotiveTreeViewItemStyle}"
+					ItemTemplateSelector="{StaticResource archivePsnPowerOnDataTemplateSelector}" />
+			</DataTemplate>
+
+			<!-- Шаблон секции во вкладке "Архив ПСН по включению"-->
+			<DataTemplate
+				x:Key="psnPowerOnSectionDataTemplate"
+				DataType="{x:Type dalViewModels:ISectionViewModel}">
+				<TreeViewItem
+					Style="{StaticResource sectionTreeViewItemStyle}"
+					ItemsSource="{Binding Path=PsnPowerOnLogs}" />
+			</DataTemplate>
+			<!-- #EndRegion: Templates for "Архив ПСН по включению" -->
+
+
+			<!-- Region: Templates for "Архив ПСН"-->
+			<!--Селектор шаблонов для TreeView "Архив ПСН"-->
+			<selectors:MutlipleInterfaceDataTemplateSelector
+				x:Key="archivePsnDataTemplateSelector"
+				BasedOn="{StaticResource baseRepositoryDataTemplateSelector}">
+				<selectors:MutlipleInterfaceDataTemplateSelector.Items>
+					<selectors:DataTemplateItem
+						InterfaceName="ILocomotiveViewModel"
+						DataTemplateName="psnLocomotiveDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="ISectionViewModel"
+						DataTemplateName="psnSectionDataTemplate" />
+				</selectors:MutlipleInterfaceDataTemplateSelector.Items>
+			</selectors:MutlipleInterfaceDataTemplateSelector>
+
+			<!-- Шаблон локомотива во вкладке "Архив ПСН" -->
+			<DataTemplate
+				x:Key="psnLocomotiveDataTemplate"
+				DataType="{x:Type dalViewModels:ILocomotiveViewModel}">
+				<TreeViewItem
+					Style="{StaticResource locomotiveTreeViewItemStyle}"
+					ItemTemplateSelector="{StaticResource archivePsnDataTemplateSelector}" />
+			</DataTemplate>
+
+			<!-- Шаблон секции во вкладке "Архив ПСН"-->
+			<DataTemplate
+				x:Key="psnSectionDataTemplate"
+				DataType="{x:Type dalViewModels:ISectionViewModel}">
+				<TreeViewItem
+					Style="{StaticResource sectionTreeViewItemStyle}"
+					ItemsSource="{Binding Path=PsnLogs}" />
+			</DataTemplate>
+			<!-- EndRegion: Templates for "Архив ПСН"-->
+
+
+			<!--Region: Templates for "Архив РПД"-->
+			<!--Селектор шаблонов для TreeView "Архив РПД"-->
+			<selectors:MutlipleInterfaceDataTemplateSelector
+				x:Key="archiveRpdDataTemplateSelector"
+				BasedOn="{StaticResource baseRepositoryDataTemplateSelector}">
+				<selectors:MutlipleInterfaceDataTemplateSelector.Items>
+					<selectors:DataTemplateItem
+						InterfaceName="ILocomotiveViewModel"
+						DataTemplateName="rpdLocomotiveDataTemplate" />
+					<selectors:DataTemplateItem
+						InterfaceName="ISectionViewModel"
+						DataTemplateName="rpdSectionDataTemplate" />
+				</selectors:MutlipleInterfaceDataTemplateSelector.Items>
+			</selectors:MutlipleInterfaceDataTemplateSelector>
+
+			<!-- Шаблон локомотива во вкладке "Архив РПД" -->
+			<DataTemplate
+				x:Key="rpdLocomotiveDataTemplate"
+				DataType="{x:Type dalViewModels:ILocomotiveViewModel}">
+				<TreeViewItem
+					Style="{StaticResource locomotiveTreeViewItemStyle}"
+					ItemTemplateSelector="{StaticResource archiveRpdDataTemplateSelector}" />
+			</DataTemplate>
+
+			<!-- Шаблон секции во вкладке "Архив РПД"-->
+			<DataTemplate
+				x:Key="rpdSectionDataTemplate"
+				DataType="{x:Type dalViewModels:ISectionViewModel}">
+				<TreeViewItem
+					Style="{StaticResource sectionTreeViewItemStyle}"
+					ItemsSource="{Binding Path=Faults}"
+					ItemTemplateSelector="{StaticResource baseRepositoryDataTemplateSelector}" />
+			</DataTemplate>
+
+			<!--  Измеритель РПД  -->
+			<DataTemplate
+				x:Key="rpdMeterDataTemplate"
+				DataType="{x:Type dalViewModels:IRpdMeterViewModel}">
+				<TreeViewItem
+					Header="{Binding Path=Name}"
+					Style="{StaticResource archiveTreeViewItemStyle}"
+					ItemsSource="{Binding Path=Channels}"
+					ItemTemplateSelector="{StaticResource baseRepositoryDataTemplateSelector}" />
+			</DataTemplate>
+
+			<!--  Канал РПД -->
+			<DataTemplate
+				x:Key="rpdChannelDataTemplate"
+				DataType="{x:Type dalViewModels:IRpdChannelViewModel}">
+				<StackPanel
+					IsEnabled="{Binding Path=IsEnabled}"
+					Orientation="Horizontal"
+					Style="{StaticResource channelTreeViewItemStyle}">
+					<ProgressBar
+						Style="{StaticResource progressBarSignalLoadingStyle}"
+						Visibility="{Binding Path=IsTrendLoading, Converter={StaticResource visibleIfTrueConverter}}" />
+					<CheckBox
+						Style="{StaticResource isOnPlotCheckBoxStyle}">
+						<TextBlock
+							Text="{Binding Path=Name}" />
+					</CheckBox>
+				</StackPanel>
+			</DataTemplate>
+
+			<!--  Сигнал  -->
+			<DataTemplate
+				x:Key="rpdSignalDataTemplate"
+				DataType="{x:Type dalViewModels:ISignalViewModel}">
+				<StackPanel
+					Orientation="Horizontal"
+					Style="{StaticResource channelTreeViewItemStyle}">
+					<CheckBox
+						Style="{StaticResource isOnPlotCheckBoxStyle}">
+						<TextBlock
+							Text="{Binding Path=Name}" />
+					</CheckBox>
+				</StackPanel>
+			</DataTemplate>
+
+			<!--  Авария отображает 3 списка с элементами разного типа: сигналы и каналы.  -->
+			<DataTemplate
+				x:Key="rpdFaultDataTemplate"
+				DataType="{x:Type dalViewModels:IFaultViewModel}">
+				<Border
+					BorderBrush="Green"
+					Style="{StaticResource logBorderStyle}">
+					<TreeViewItem
+						Style="{StaticResource exportHeaderTreeViewItemStyle}"
+						ToolTipService.ShowDuration="60000">
+						<TreeViewItem.ToolTip>
+							<StackPanel>
+								<TextBlock
+									FontWeight="Bold">Причина аварии</TextBlock>
+								<TextBlock
+									Text="{Binding Path=LogReason}" />
+							</StackPanel>
+						</TreeViewItem.ToolTip>
+
+						<TreeViewItem
+							Header="Измерители РПД"
+							ItemsSource="{Binding Path=RpdMeters}"
+							ItemTemplateSelector="{StaticResource baseRepositoryDataTemplateSelector}" />
+						<TreeViewItem
+							Header="Измерители ПСН"
+							ItemsSource="{Binding Path=PsnLog.PsnMeters}"
+							ItemTemplateSelector="{StaticResource baseRepositoryDataTemplateSelector}" />
+						<TreeViewItem
+							Header="Сигналы"
+							ItemsSource="{Binding Path=Signals}"
+							ItemTemplateSelector="{StaticResource baseRepositoryDataTemplateSelector}" />
+					</TreeViewItem>
+				</Border>
+			</DataTemplate>
+			<!--EndRegion: Templates for "Архив РПД"-->
+
+
+			<!--  ПСН Лог -->
+			<DataTemplate
+				x:Key="psnLogViewModelDataTemplate"
+				DataType="{x:Type dalViewModels:IPsnLogViewModel}">
+				<!--<Border BorderBrush="Green" Style="{StaticResource logBorderStyle}">-->
+				<TreeViewItem
+					Style="{StaticResource exportHeaderTreeViewItemStyle}"
+					ItemsSource="{Binding Path=PsnMeters}"
+					ItemTemplateSelector="{StaticResource baseRepositoryDataTemplateSelector}">
+				</TreeViewItem>
+				<!--</Border>-->
+			</DataTemplate>
+
+			<!--  Измеритель ПСН  -->
+			<DataTemplate
+				x:Key="psnMeterViewModelDataTemplate"
+				DataType="{x:Type dalViewModels:IPsnMeterViewModel}">
+				<TreeViewItem
+					Style="{StaticResource archiveTreeViewItemStyle}"
+					ItemsSource="{Binding Path=PsnChannels}"
+					ItemTemplateSelector="{StaticResource baseRepositoryDataTemplateSelector}">
+					<TreeViewItem.Header>
+						<StackPanel
+							Orientation="Horizontal">
+							<TextBlock
+								Text="{Binding Path=Name}"
+								VerticalAlignment="Center" />
+							<Control
+								Template="{StaticResource dropDownItem}"
+								Style="{StaticResource ShowOnMouseOverStyle}" />
+						</StackPanel>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+			</DataTemplate>
+
+			<!--  Канал ПСН  -->
+			<DataTemplate
+				x:Key="psnChannelViewModelDataTemplate"
+				DataType="{x:Type dalViewModels:IPsnChannelViewModel}">
+				<StackPanel
+					IsEnabled="{Binding Path=IsEnabled}"
+					Orientation="Horizontal"
+					Style="{StaticResource channelTreeViewItemStyle}">
+					<ProgressBar
+						Style="{StaticResource progressBarSignalLoadingStyle}"
+						Visibility="{Binding Path=IsTrendLoading, Converter={StaticResource visibleIfTrueConverter}}" />
+					<CheckBox
+						Style="{StaticResource isOnPlotCheckBoxStyle}"
+						ToolTip="{Binding Path=Name}">
+						<TextBlock
+							Text="{Binding Path=Name}" />
+					</CheckBox>
+				</StackPanel>
+			</DataTemplate>
+
+		</ResourceDictionary>
+	</Window.Resources>
+
+
+
+	<!--  Преобразователь события в команду. -->
+	<i:Interaction.Triggers>
+		<i:EventTrigger
+			EventName="Loaded">
+			<command:EventToCommand
+				Command="{Binding Initialize}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition
+				Height="24" />
+			<RowDefinition
+				Height="24" />
+			<RowDefinition
+				Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- Главное меню -->
+
+		<Menu
+			IsEnabled="True"
+			Grid.Row="0">
+			<MenuItem
+				Header="_Файл">
+				<Separator />
+				<MenuItem
+					Command="{Binding Path=Close}"
+					Header="В_ыход" />
+			</MenuItem>
+			<MenuItem
+				Header="_Настройки">
+				<MenuItem
+					Command="{Binding Path=ShowSettings}"
+					Header="Настройки программы..." />
+				<MenuItem
+					Command="{Binding Path=ShowDefaultColorSettings}"
+					Header="Настройки цветов по умолчанию..." />
+				<MenuItem
+					Command="{Binding Path=ShowRpdConfigurator}"
+					Header="Конфигурация РПД..." />
+			</MenuItem>
+			<MenuItem
+				Header="_Вид">
+				<MenuItem
+					Header="Расположение окон по умолчанию"
+					Click="DefaultLayout" />
+			</MenuItem>
+			<MenuItem
+				Header="_Справка">
+				<MenuItem
+					Command="{Binding Path=ShowHelpWindow}"
+					Header="Прос_мотреть справку" />
+				<Separator />
+				<MenuItem
+					Command="{Binding Path=ShowAboutProgramWindow}"
+					Header="_О программе" />
+			</MenuItem>
+			<MenuItem
+				Header="Тест"
+				Command="{Binding TestCommand}"
+				Visibility="{Binding IsDebugMode, Converter={dnvConverters:BooleanToVisibilityConverter}}" />
+		</Menu>
+
+		<ToolBar
+			Grid.Row="1">
+			<Button
+				Style="{StaticResource enabledIfRepoLoadedStyle}"
+				Command="{Binding Path=ShowAddDataCommand}">Добавить данные...</Button>
+			<ToggleButton
+				Style="{StaticResource enabledIfRepoLoadedStyle}"
+				Name="exportDataButton"
+				IsChecked="{Binding Path=IsExportDataMode}"
+				IsEnabled="{Binding Path=IsExportDataModeAvailable}"
+				Command="{Binding Path=ExportDataCommand}">
+				Экспортировать данные...</ToggleButton>
+			<ToggleButton
+				Style="{StaticResource enabledIfRepoLoadedStyle}"
+				Name="removeDataButton"
+				IsChecked="{Binding Path=IsRemoveDataMode}"
+				IsEnabled="{Binding Path=IsRemoveDataModeAvailable}"
+				Command="{Binding Path=RemoveDataCommand}">
+				Удалить данные...</ToggleButton>
+			<ToggleButton
+				Style="{StaticResource enabledIfRepoLoadedStyle}"
+				Name="changeConfigurationButton"
+				IsChecked="{Binding Path=IsChangeConfigurationMode}"
+				IsEnabled="{Binding Path=IsChangeConfigurationModeAvailable}"
+				Command="{Binding Path=ChangeConfigurationCommand}">
+				Сменить конфигурацию...</ToggleButton>
+			<Popup
+				PlacementTarget="{Binding ElementName=exportDataButton}"
+				IsOpen="{Binding Path=IsChecked, ElementName=exportDataButton}"
+				AllowsTransparency="True">
+				<Border
+					BorderThickness="1"
+					BorderBrush="Black">
+					<TextBlock
+						Style="{StaticResource ToggleButtonPopupStyle}">
+                        Отметьте данные для экспорта (аварии или записи ПСН) в архиве, затем снова нажмите кнопку "Экспортировать данные...". 
+                        <LineBreak />Для выбора множества значений зажмите клавишу SHIFT после выбора первого значения и нажмите на последний элемент в диапазоне.</TextBlock>
+				</Border>
+			</Popup>
+			<Popup
+				PlacementTarget="{Binding ElementName=removeDataButton}"
+				IsOpen="{Binding Path=IsChecked, ElementName=removeDataButton}"
+				AllowsTransparency="True">
+				<Border
+					BorderThickness="1"
+					BorderBrush="Black">
+					<TextBlock
+						Style="{StaticResource ToggleButtonPopupStyle}">
+                        Отметьте данные для удаления (аварии или записи ПСН) в архиве, затем снова нажмите кнопку "Удалить данные..."
+                        <LineBreak />Для выбора множества значений зажмите клавишу SHIFT после выбора первого значения и нажмите на последний элемент в диапазоне.</TextBlock>
+				</Border>
+			</Popup>
+			<Popup
+				PlacementTarget="{Binding ElementName=changeConfigurationButton}"
+				IsOpen="{Binding Path=IsChecked, ElementName=changeConfigurationButton}"
+				AllowsTransparency="True">
+				<Border
+					BorderThickness="1"
+					BorderBrush="Black">
+					<TextBlock
+						Style="{StaticResource ToggleButtonPopupStyle}">
+                        Отметьте записи ПСН у которых нужно сменить конфигурацию в архиве, затем снова нажмите кнопку "Сменить конфигурацию..."
+                        <LineBreak />Для выбора множества значений зажмите клавишу SHIFT после выбора первого значения и нажмите на последний элемент в диапазоне.</TextBlock>
+				</Border>
+			</Popup>
+		</ToolBar>
+
+		<xcad:DockingManager
+			x:Name="dockingManager"
+			Grid.Row="2">
+			<xcad:DockingManager.Theme>
+				<xcad:GenericTheme />
+			</xcad:DockingManager.Theme>
+			<xcad:LayoutRoot>
+				<xcad:LayoutPanel
+					Orientation="Horizontal">
+					<xcad:LayoutAnchorablePane
+						DockWidth="250">
+						<!--Пустая панелька нужна для устранения бага AvalonDock из-за которого 
+                            первый в списке LayoutAnchorable  теряет биндинги-->
+						<xcad:LayoutAnchorable
+							x:Name="layoutAnchorableStub"
+							IsVisible="False" />
+						<xcad:LayoutAnchorable
+							Title="ПСН"
+							ContentId="psnLayoutAnchorable"
+							CanClose="False"
+							CanHide="False"
+							IsSelected="True">
+							<xctk:BusyIndicator
+								IsBusy="False">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition
+											Height="Auto" />
+										<RowDefinition
+											Height="*" />
+										<RowDefinition
+											Height="Auto" />
+									</Grid.RowDefinitions>
+
+									<TextBlock
+										Grid.Row="0"
+										Style="{StaticResource repoHeaderStyle}">Архив магистрали ПСН</TextBlock>
+
+									<TreeView
+										Grid.Row="1"
+										Name="PsnTreeView"
+										ItemsSource="{Binding Path=Repository.Locomotives}"
+										ItemTemplateSelector="{StaticResource archivePsnDataTemplateSelector}">
+										<TreeView.Resources>
+											<SolidColorBrush
+												x:Key="{x:Static SystemColors.HighlightBrushKey}"
+												Color="Transparent" />
+										</TreeView.Resources>
+									</TreeView>
+									<StackPanel
+										Grid.Row="2"
+										Style="{StaticResource repoStackPanelStyle}">
+										<Button
+											Style="{StaticResource repoButtonStyle}"
+											ToolTip="Сворачивает дерево архива"
+											Command="{Binding CollapseTreeCmd, Mode=OneTime}">Свернуть дерево</Button>
+										<Button
+											Style="{StaticResource repoButtonStyle}"
+											ToolTip="Убрать с графика все сигналы"
+											Command="{Binding RemoveAllPsnSignalsFromChart}">Убрать все сигналы</Button>
+										<Button
+											Style="{StaticResource UncheckAllSignalsButtonStyle}"
+											Command="{Binding UncheckAllSignalsCommand}" />
+									</StackPanel>
+								</Grid>
+							</xctk:BusyIndicator>
+						</xcad:LayoutAnchorable>
+						<xcad:LayoutAnchorable
+							Title="ПСН по включению"
+							ContentId="psnPowerOnLayoutAnchorable"
+							CanClose="False"
+							CanHide="False">
+							<xctk:BusyIndicator
+								Style="{StaticResource repoBusyIndicatorStyle}">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition
+											Height="Auto" />
+										<RowDefinition
+											Height="*" />
+										<RowDefinition
+											Height="Auto" />
+									</Grid.RowDefinitions>
+
+									<TextBlock
+										Grid.Row="0"
+										Style="{StaticResource repoHeaderStyle}">Архив магистрали ПСН по включению</TextBlock>
+									<TreeView
+										Grid.Row="1"
+										Name="PsnPowerOnTreeView"
+										ItemsSource="{Binding Path=Repository.Locomotives}"
+										ItemTemplateSelector="{StaticResource archivePsnPowerOnDataTemplateSelector}">
+										<TreeView.Resources>
+											<SolidColorBrush
+												x:Key="{x:Static SystemColors.HighlightBrushKey}"
+												Color="Transparent" />
+										</TreeView.Resources>
+									</TreeView>
+									<StackPanel
+										Grid.Row="2"
+										Style="{StaticResource repoStackPanelStyle}">
+										<Button
+											Style="{StaticResource repoButtonStyle}"
+											ToolTip="Сворачивает дерево архива"
+											Command="{Binding CollapsePowerOnTreeCmd, Mode=OneTime}">Свернуть дерево</Button>
+										<Button
+											Style="{StaticResource repoButtonStyle}"
+											Command="{Binding RemoveAllPsnPowerOnSignalsFromChart}">Убрать все сигналы</Button>
+										<Button
+											Style="{StaticResource UncheckAllSignalsButtonStyle}"
+											Command="{Binding UncheckAllSignalsCommand}" />
+									</StackPanel>
+								</Grid>
+							</xctk:BusyIndicator>
+						</xcad:LayoutAnchorable>
+						<xcad:LayoutAnchorable
+							Title="РПД"
+							ContentId="rpdLayoutAnchorable"
+							CanClose="False"
+							CanHide="False">
+							<xctk:BusyIndicator
+								Style="{StaticResource repoBusyIndicatorStyle}">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition
+											Height="Auto" />
+										<RowDefinition
+											Height="*" />
+										<RowDefinition
+											Height="Auto" />
+									</Grid.RowDefinitions>
+
+									<TextBlock
+										Grid.Row="0"
+										Style="{StaticResource repoHeaderStyle}">Архив аварий РПД</TextBlock>
+
+									<TreeView
+										Grid.Row="1"
+										Name="RpdTreeView"
+										ItemsSource="{Binding Path=Repository.Locomotives}"
+										ItemTemplateSelector="{StaticResource archiveRpdDataTemplateSelector}">
+										<TreeView.Resources>
+											<SolidColorBrush
+												x:Key="{x:Static SystemColors.HighlightBrushKey}"
+												Color="Transparent" />
+										</TreeView.Resources>
+									</TreeView>
+
+									<StackPanel
+										Grid.Row="2"
+										Style="{StaticResource repoStackPanelStyle}">
+										<Button
+											Style="{StaticResource repoButtonStyle}"
+											ToolTip="Сворачивает дерево архива"
+											Command="{Binding CollapseTreeCmd, Mode=OneTime}">Свернуть дерево</Button>
+										<Button
+											Command="{Binding RemoveAllRpdSignalsFromChart}"
+											Style="{StaticResource repoButtonStyle}">
+											Убрать все сигналы
+										</Button>
+										<Button
+											Style="{StaticResource UncheckAllSignalsButtonStyle}"
+											Command="{Binding UncheckAllSignalsCommand}" />
+									</StackPanel>
+								</Grid>
+							</xctk:BusyIndicator>
+						</xcad:LayoutAnchorable>
+					</xcad:LayoutAnchorablePane>
+					<xcad:LayoutDocumentPane>
+						<xcad:LayoutDocument
+							Title="Графики"
+							ContentId="psnLayoutDocument"
+							CanClose="False">
+							<sciChart:ChartControl
+								x:Name="Chart"
+								behaviors:MoveInputBindingsToParentWindowBehavior.Move="True"
+								AnalogSeries="{Binding Path=MainChart.AnalogSeries}"
+								DiscreteSeries="{Binding Path=MainChart.DiscreteSeries}"
+								Annotations="{Binding Path=MainChart.Annotations}"
+								AnalogSeriesAdditionalData="{Binding Path=MainChart.AnalogSeriesAdditionalData}"
+								DiscreteSeriesAdditionalData="{Binding Path=MainChart.DiscreteSeriesAdditionalData}">
+								<i:Interaction.Triggers>
+									<i:EventTrigger
+										EventName="SeriesColorChanged">
+										<command:EventToCommand
+											Command="{Binding Mode=OneWay, Path=Main.SeriesColorChangedEventCommand, Source={StaticResource Locator}}"
+											PassEventArgsToCommand="True" />
+									</i:EventTrigger>
+									<i:EventTrigger
+										EventName="MouseRightButtonUp">
+										<command:EventToCommand
+											Command="{Binding Path=MainChart.MouseRightButtonUpCommand}"
+											PassEventArgsToCommand="True" />
+									</i:EventTrigger>
+								</i:Interaction.Triggers>
+							</sciChart:ChartControl>
+						</xcad:LayoutDocument>
+					</xcad:LayoutDocumentPane>
+				</xcad:LayoutPanel>
+			</xcad:LayoutRoot>
+		</xcad:DockingManager>
+	</Grid>
+</Window>

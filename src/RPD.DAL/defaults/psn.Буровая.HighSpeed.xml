@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Буровая, высокоскоростная" Version="1" Description="Конфигурация для буровой. Обмен с ультра высокой скоростью" Id="37446302-ab3d-4249-bbec-7f945e6085f5" RpdId="37">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="АИН-1" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="БС-Ethernet и АИН-1. Чтение телеметрии">
+			<Request Length="20" Position="0" CycleMsTime="10">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="75cb873c-79ee-4674-972a-3fadc25e5297" />
+				<DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="2a815df5-b992-4cb2-9bf4-6b0c340d49fe" />
+				<!-- 2 3 4 5 skipped -->
+				<CpzPrm Expression="([u6] + [s13] * 256.0) * 0.1" Name="MODESET" Id="6e65240a-3e3e-49e2-8523-db03021b0229" />
+				<CpzPrm Expression="([u8] + [s13] * 256.0) * 0.1" Name="Fset" Id="c1b7f3b2-0638-4dd2-b9ca-7a0a000233c2" />
+				<CpzPrm Expression="([u10] + [s13] * 256.0) * 0.1" Name="Mset" Id="6ea9d359-b1b5-46ed-a785-2bf2429b4ce5" />
+				<CpzPrm Expression="([u12] + [s13] * 256.0) * 0.1" Name="Mout_ведомого" Id="37b8898e-4292-4852-8928-1ebc3cf6c516" />
+				<CpzPrm Expression="([u14] + [s15] * 256.0) * 0.1" Name="Mmin" Id="ad59c220-b019-46f0-bff6-0a1efc8ddcaf" />
+				<CpzPrm Expression="([u16] + [s17] * 256.0) * 0.1" Name="Mmax" Id="201b6599-5997-4d83-aede-7368d6f1d746" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="8a8573ef-7fb3-4dc9-a7ba-fc63319b35dc" />
+				<VarVal Position="19.0" Length="8" Name="#CRCH" Id="777e960c-f806-4ec4-a61b-850d8415b6e9" />
+			</Request>
+			<Reply Length="8" Position="20">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="c268754c-3ddc-4a54-a1d1-9bc843e94b9d" />
+				<DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="8d612b69-2a33-47cf-8119-809c044ae603" />
+				<CpzPrm Expression="([u2] + [s3] * 256.0) * 0.1" Name="Mout_ведущего" Id="0bfb217e-fb8c-4122-8a29-7c4e400cbc7a" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="4624d963-a42a-44ec-b15f-25e1aa5c4057" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="9e4dc9f7-af4f-479d-8e2e-cbbfad3627cc" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

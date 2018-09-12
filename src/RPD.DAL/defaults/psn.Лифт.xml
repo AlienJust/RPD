@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Лифт" Version="1" Description="Для отладки лифта" Id="8995F728-C9BB-45D3-B778-454122499893" RpdId="25">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="ПВДЛ" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="РПД и ПВДЛ">
+			<Request Length="26" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="00d74d7b-c246-490e-9a7b-7c77a0556436" />
+				<DefVal Position="1.0" Length="8" Value="0x01" Name="#NCMD" Id="416fd54f-00c3-45e8-89f0-2be964df825e" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Блокировка" Id="dce2613c-73c9-4cab-85ac-8dbe24c74c59" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Работа" Id="f5335cf2-e602-4cd5-a843-67ed00f32005" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Готов" Id="f84ce9aa-76db-4539-845d-ea0dd2a9df02" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Скорость дотягивания" Id="a5277a23-4958-499e-be0c-4d5fb547df73" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Скорость в режиме Равизия" Id="562f973a-2447-4412-b6dc-9082c396c04b" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Скорость номинальная" Id="102fc119-263a-4b88-a574-33d1e615cb78" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Вниз" Id="f03cd7c3-f6fc-4812-9346-a5698789a012" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Вверх" Id="a35a2179-a608-4f1b-9f7a-33273c2a6da2" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="CL - признак превышения пикового тока ПВДЛ" Id="e7d9f250-f8da-4753-be76-f0e5f3f3d4bc" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="FO3 - признак срабатывания защиты по перегреву силовой части" Id="523ece57-e97f-42cf-a3da-bafdbb03a2ad" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="FO2 - признак срабатывания защиты по ненорме питающего сборку напряжения" Id="21b7a39a-cc1f-478e-b71b-404ea89d73f5" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="FO1 - признак срабатывания защиты от КЗ нижних транзисторов" Id="e836eb74-88bc-48dd-980b-6b5eb17d01a9" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Защита по Imax" Id="939b2de3-8940-437e-8675-5fc13d46de12" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Защита по Umin" Id="64621435-e8b0-4f4e-ae2b-091d2b968753" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Защита по Umax" Id="c8206297-8866-4e50-96e1-fe7b2f59cde7" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Защита по Wmax" Id="24d2762e-5133-4b7c-9025-23d298ec9896" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Защита по ошибке скорости" Id="fc583cab-f5cf-4e26-8ac3-7d8942332ba7" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Защита по монотонности угла" Id="5b7f03ad-a9b5-4021-ab60-14e95d6337e7" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Защита по Tmax" Id="96829238-0e88-4c2a-a0d5-f8c6d2fe9a96" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Авария при задании двух направлений одновременно direct_err" Id="a96b82c9-5d80-448f-9f5d-f390a3b07e2c" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Обрыв фазы двигателя" Id="3c73c015-579f-40f4-b069-f1a1537718bf" />
+				<BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Авария при пропадание Блокировки disable_err" Id="ea4980ca-3dad-4730-ba41-a1ecb7917261" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Авария, не обеспечивается момент для удержания кабины retention_force_error" Id="3b4cb68e-e99d-496e-816c-bd805413c4ae" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Резерв" Id="a5033bf2-e056-42b8-8deb-ed293565da85" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Режим Эвакуация" Id="dd4da108-fba1-466b-b10d-eda6c1071427" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Чтение параметров из ЭСПЗУ завершено успешно=1, сбой=0" Id="14a83b97-b2c0-46ba-a65f-dff908eba2da" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Авария по длительно допустимому току фазы C" Id="f9ed6d0a-81a1-4ba7-b58c-97c2b0e0b158" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Авария по длительно допустимому току фазы B" Id="824b63bd-25cf-4240-a213-ee9a701b7514" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Авария по длительно допустимому току фазы A" Id="e79685f5-7702-4ea8-b3c0-9c9537dff952" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Тормозной резистор" Id="bcd30bf0-3b60-4f41-98da-2a84df7b7922" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Пусковой резистор" Id="dadd6d4a-265f-41d7-bff7-da57086a3886" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Тормоз механический brake" Id="5a22a48f-efa0-4a38-bdf0-034f41364774" />
+				<CpzPrm Name="w, об/мин" Expression="([u6] * 1.0 + [s7] * 256.0) * 0.0048" Id="dfe012fc-0610-493e-a392-3869e2dc2637" />
+				<CpzPrm Name="wzi_out, об/мин" Expression="[s8] * 0.48" Id="1d19b530-3aa1-40a4-85fa-bade52e137a2" />
+				<CpzPrm Name="Iq, А" Expression="[s9] * 0.26" Id="f2dad93e-ebce-4ad1-a92c-9b79cd0b10b0" />
+				<CpzPrm Name="Id, А" Expression="[s10] * 0.26" Id="d01bb5c8-9025-4a6d-a7ba-5d0210eeb4e2" />
+				<CpzPrm Name="Uqz, В" Expression="[s11] * 3.67" Id="0c71578f-4882-434e-a425-e743113ed65a" />
+				<CpzPrm Name="Udz, В" Expression="[s12] * 3.67" Id="35728f09-9a0f-42de-abc6-27af83c769bd" />
+				<CpzPrm Name="Iqz, А" Expression="[s13] * 0.26" Id="e52da146-fbd7-4c61-841c-364d1a88d672" />
+				<CpzPrm Name="fi, эл. гр." Expression="([u14] * 1.0 + [u15] * 256.0) * 0.036" Id="2563f692-b30d-49f7-9d5a-d6cc7b15fe71" />
+				<CpzPrm Name="Udc, В" Expression="([u16] * 1.0 + [u17] * 256.0) * 0.08" Id="f2df9241-a902-45de-b1e0-bc3276228e94" />
+				<CpzPrm Name="Tf_dv, С" Expression="[s18] * 1.2" Id="4ed10c3a-d696-4618-9b3d-9f26a0756210" />
+				<CpzPrm Name="Ia, А" Expression="[s19] * 0.26" Id="4115ec78-c753-4195-a3b4-e8ab88319673" />
+				<CpzPrm Name="Ib, А" Expression="[s20] * 0.26" Id="05281e9a-3cc6-491f-8a72-efa0b3d2bafb" />
+				<CpzPrm Name="Ic, А" Expression="[s21] * 0.26" Id="9079bb6f-33c1-4563-9214-7243603e1914" />
+				<CpzPrm Name="Count - счётчик прерываний" Expression="[s23] * 0.003" Id="97961dbe-9731-41c3-ac2c-835d7c77e70c" />
+				<VarVal Position="24.0" Length="8" Name="#CRCH" Id="e935eeb8-aa05-4207-8e56-b1c17782b7c6" />
+				<VarVal Position="25.0" Length="8" Name="#CRCL" Id="7c984470-b64f-46cf-80c9-d3102aeabd0a" />
+			</Request >
+			<Reply Length="0" Position="26"/>
+		</CmdMask>
+	</Commands>
+	<PsnMergedlDevices></PsnMergedlDevices>
+</PsnConfiguration>

@@ -1,0 +1,446 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Система микроклимата" Version="1" Description="Конфигурация системы микроклимата" Id="3F8C0AB9-20C3-4B74-94D9-95AF81AE1315" RpdId="7">
+  <PsnMeters>
+    <PsnMeter Address="0x01" Name="КСМ" />
+    <PsnMeter Address="0x02" Name="КТВ1" />
+    <PsnMeter Address="0x03" Name="КТВ2" />
+    <PsnMeter Address="0x04" Name="КВУ" />
+    <PsnMeter Address="0x05" Name="ПЧ1" />
+    <PsnMeter Address="0x06" Name="ПЧ2" />
+    <PsnMeter Address="0x07" Name="ПЧ3 (общий) (МВП)" />
+    <PsnMeter Address="0x08" Name="ПЧ4 (кондиционер)" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="Чтение ПЧ1">
+      <Request Length="6" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="8c1496aa-7431-4d86-b41f-45485c01495e" />
+        <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="e6b28d37-9025-41ac-9c76-96040eb8f923" />
+        <VarVal Position="3.7" Length="1" Name="Устройство включено" Id="be3eeee9-482a-4acb-9fef-0af2bfc8ae15" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="84e29729-e9e5-48cc-becf-f4b30aefddbf" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="451435e0-1de5-425b-bef4-38b4bc1388e5" />
+      </Request>
+      <Reply Length="20" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="37c3a0be-32db-4106-9f8c-dc40a4f96543" />
+        <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="bb76c7c3-9dc5-473a-b87d-5f9e2d4ee6de" />
+        <VarVal Position="2.5" Length="1" Name="Перегрузка по току (&gt; 250 %)" Id="e456b846-80fe-42d8-bab7-0799c67ba3b5" />
+        <VarVal Position="2.4" Length="1" Name="Защита по температуре (&gt; 110 °C)" Id="e638629f-9a90-4c56-9c32-6e217ce47bcd" />
+        <VarVal Position="2.3" Length="1" Name="Повышенное/пониженное напряжение питания транзисторов (15 В)" Id="9abb44e2-026c-48f5-b837-35223040b067" />
+        <VarVal Position="2.2" Length="1" Name="КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="a6e26a63-af70-4e70-be92-3dc3a0d254fb" />
+        <VarVal Position="2.1" Length="1" Name="Повышенное входное напряжение" Id="e304259a-948c-46bb-a1f4-59070efacda0" />
+        <VarVal Position="2.0" Length="1" Name="Перегрузка по току (&gt; 150 %)" Id="04076e4e-7ff6-4dd6-bf59-c1008c2b95be" />
+        <VarVal Position="3.1" Length="1" Name="Выходное напряжение включено" Id="4008bf16-18f2-417b-84c9-ec44676e55d5" />
+        <CpzPrm Name="Заданная выходная частота, Гц" Expression="([s4] * 256.0 + [u5]) * 0.1" Id="f8aa3116-f5f4-4f32-a662-e76b036e3e2b" />
+        <CpzPrm Name="Текущая выходная частота, Гц" Expression="([s6] * 256.0 + [u7]) * 0.1" Id="26470c12-f5f9-477c-b05d-35f37f3cd2cf" />
+        <CpzPrm Name="Ток фазы A, A" Expression="([s8] * 256.0 + [u9]) * 1.0" Id="60a829cc-95b3-41b8-b7a3-be7e00ec1e37" />
+        <CpzPrm Name="Ток фазы B, A" Expression="([s10] * 256.0 + [u11]) * 1.0" Id="3259176f-ccb7-4fb2-bdc6-ef601d20b0bd" />
+        <CpzPrm Name="Ток фазы C, A" Expression="([s12] * 256.0 + [u13]) * 1.0" Id="adadb71a-d841-4884-a073-5f06ddcf9d25" />
+        <CpzPrm Name="Напряжение цепи постоянного тока, В" Expression="([u14] * 256.0 + [u15]) * 6.8 / 6.0" Id="f949426b-6b44-490e-8564-e0c46ed83d60" />
+        <VarVal Position="16.0" Length="1" Name="Включен инвертор" Id="93bb5a39-14fd-498f-8d1a-8d739c8150b1" />
+        <VarVal Position="17.7" Length="1" Name="Состояние инвертора: отказ" Id="97e5cdd5-8de1-43c3-bf36-96b83b4997f9" />
+        <VarVal Position="17.5" Length="1" Name="Состояние инвертора: наличие диагностической информации" Id="472b2f88-d62f-4c1b-a70f-a8e076984eac" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="3f64dbe7-9251-4a87-ae51-0599e8075bad" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="f7b75e5b-e7a7-432d-89d2-2447ef9b0c19" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="Чтение ПЧ2">
+      <Request Length="6" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="619d7a55-3f20-436c-8374-f5ec844dc37b" />
+        <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="083e4100-b434-4330-b023-8a0796e86e62" />
+        <VarVal Position="3.7" Length="1" Name="Устройство включено" Id="350894ef-1e28-44d5-9416-e375d6c0aa8f" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="feb36a48-8bb3-43f1-a2f2-7a70a8171268" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="528a3cf2-22bb-449d-b36a-e83baa2cbd4a" />
+      </Request>
+      <Reply Length="20" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="9b5d5d3e-38a9-4bfc-95ea-a2bb29b7e376" />
+        <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="9c09c4be-5706-41c8-9d77-97ea9e478fcf" />
+        <VarVal Position="2.5" Length="1" Name="Перегрузка по току (&gt; 250 %)" Id="0e655844-0ef2-46d0-b85d-3a153e21525c" />
+        <VarVal Position="2.4" Length="1" Name="Защита по температуре (&gt; 110 °C)" Id="eac83128-fabb-4075-ac68-386c16f1333b" />
+        <VarVal Position="2.3" Length="1" Name="Повышенное/пониженное напряжение питания транзисторов (15 В)" Id="57c08ef7-8117-48b0-b647-bee449b5de3b" />
+        <VarVal Position="2.2" Length="1" Name="КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="0ebe10d2-4432-481a-9b49-eab2921bc8f3" />
+        <VarVal Position="2.1" Length="1" Name="Повышенное входное напряжение" Id="f30bc0b9-05fe-4865-b4b3-0ccbef90da15" />
+        <VarVal Position="2.0" Length="1" Name="Перегрузка по току (&gt; 150 %)" Id="cc1e70d6-f593-44a1-9bf1-36edacf2ef5e" />
+        <VarVal Position="3.1" Length="1" Name="Выходное напряжение включено" Id="135d3dd1-5544-4cad-9a86-19ef89b0d3d8" />
+        <CpzPrm Name="Заданная выходная частота, Гц" Expression="([s4] * 256.0 + [u5]) * 0.1" Id="d67c7a9d-7637-4727-b55e-bdeea0172628" />
+        <CpzPrm Name="Текущая выходная частота, Гц" Expression="([s6] * 256.0 + [u7]) * 0.1" Id="bc46ffb4-83ef-4895-bf13-f749881f9b04" />
+        <CpzPrm Name="Ток фазы A, A" Expression="([s8] * 256.0 + [u9]) * 0.1" Id="b2bd05a4-cabd-46f0-b20d-35d41283a92a" />
+        <CpzPrm Name="Ток фазы B, A" Expression="([s10] * 256.0 + [u11]) * 0.1" Id="11d1fff0-616b-4ac1-967c-95534a55f1c2" />
+        <CpzPrm Name="Ток фазы C, A" Expression="([s12] * 256.0 + [u13]) * 0.1" Id="0a182141-4467-4452-a72f-8b58c5ccdc59" />
+        <CpzPrm Name="Напряжение цепи постоянного тока, В" Expression="([u14] * 256.0 + [u15]) * 6.8 / 6.0" Id="fb3dfcb9-dbf9-45ac-8893-151c993c1479" />
+        <VarVal Position="16.0" Length="1" Name="Включен инвертор" Id="56ec14be-f81a-4b98-b4b1-12181dca1fcd" />
+        <VarVal Position="17.7" Length="1" Name="Состояние инвертора: отказ" Id="4c1c27eb-9467-43e1-b89e-b700d8d5941c" />
+        <VarVal Position="17.5" Length="1" Name="Состояние инвертора: наличие диагностической информации" Id="1caa1e32-b5e9-4e58-b552-1b5ac164b510" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="ea862236-fbf0-449c-a1c8-3ff96608b62c" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="d1e631c0-614a-4803-8664-08245065e434" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="Чтение ПЧ3">
+      <Request Length="6" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="04bc8d39-45ff-42ec-b4a0-91fea9bf0554" />
+        <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="18d0f231-5cc2-4422-ac8a-56765a1c7761" />
+        <VarVal Position="3.7" Length="1" Name="Устройство включено" Id="6139b41e-4475-4334-b8c9-3bd90cd9352d" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="0ea42fb7-c3c3-4177-aa52-c9dc158e302c" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="50c1a6af-9eb3-43d0-a551-525b37bbb2cc" />
+      </Request>
+      <Reply Length="20" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="336f7c25-be55-4c3f-9343-8490bad5b2df" />
+        <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="d340736c-20e3-42a4-8fe5-31e15859cebb" />
+        <VarVal Position="2.5" Length="1" Name="Перегрузка по току (&gt; 250 %)" Id="32c462b2-4508-4534-b6ba-bde4396ecaa6" />
+        <VarVal Position="2.4" Length="1" Name="Защита по температуре (&gt; 110 °C)" Id="1dcba319-c929-445d-86d0-5e639941fdd2" />
+        <VarVal Position="2.3" Length="1" Name="Повышенное/пониженное напряжение питания транзисторов (15 В)" Id="65fd0307-ed0e-4f93-903e-2bdac674591d" />
+        <VarVal Position="2.2" Length="1" Name="КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="312bf8a3-7aa0-40e1-aab4-122fcd458829" />
+        <VarVal Position="2.1" Length="1" Name="Повышенное входное напряжение" Id="e8f1ef4b-13c1-42e8-a26c-3569fe23b752" />
+        <VarVal Position="2.0" Length="1" Name="Перегрузка по току (&gt; 150 %)" Id="473dba04-c22b-4cab-bef5-963787e7d98a" />
+        <VarVal Position="3.1" Length="1" Name="Выходное напряжение включено" Id="0a42b78f-9482-4247-aec1-f32ecc1cc183" />
+        <CpzPrm Name="Заданная выходная частота, Гц" Expression="([s4] * 256.0 + [u5]) * 0.1" Id="da4ce204-ad0f-4481-bce2-5635c76ee277" />
+        <CpzPrm Name="Текущая выходная частота, Гц" Expression="([s6] * 256.0 + [u7]) * 0.1" Id="3c60b6df-3b77-461d-bf5f-23ae0eeba743" />
+        <CpzPrm Name="Ток фазы A, A" Expression="([s8] * 256.0 + [u9]) * 0.1" Id="6ba60dbc-d97a-49f7-9808-a3387372eaf7" />
+        <CpzPrm Name="Ток фазы B, A" Expression="([s10] * 256.0 + [u11]) * 0.1" Id="eb67df82-0d8b-4bba-8964-7df170ac0ccf" />
+        <CpzPrm Name="Ток фазы C, A" Expression="([s12] * 256.0 + [u13]) * 0.1" Id="d672c967-23b7-4708-9f3e-d6781dbae765" />
+        <CpzPrm Name="Напряжение цепи постоянного тока, В" Expression="([u14] * 256.0 + [u15]) * 6.8 / 6.0" Id="2e66ddd7-801a-412e-8f7c-3a350be302db" />
+        <VarVal Position="16.0" Length="1" Name="Включен инвертор" Id="7d5381bb-91f1-49b9-a3d5-42afea263d29" />
+        <VarVal Position="17.7" Length="1" Name="Состояние инвертора: отказ" Id="9dcbd5ca-ea5e-4737-b103-25664c9cb0cd" />
+        <VarVal Position="17.5" Length="1" Name="Состояние инвертора: наличие диагностической информации" Id="b22ecd4a-70b7-42c0-a726-699203e41582" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="0b91239f-8092-48de-96f4-7853b369fd8e" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="889e8917-750e-4058-a543-7b635af2d899" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="Чтение ПЧ4">
+      <Request Length="6" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="7a17e55f-0697-49a6-8c23-e8e279520241" />
+        <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="6c3fefc4-0a9d-4ec5-91d0-c6d71d15a5d9" />
+        <VarVal Position="3.7" Length="1" Name="Устройство включено" Id="08c0a856-7f6a-4abf-a99c-55baf25ac5bb" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="d7125645-0c3a-45c7-8250-9841b68de6ae" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="49ffbc5d-eaf2-44d5-9ba3-92298c58c0d6" />
+      </Request>
+      <Reply Length="20" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="63517c8e-b82c-4f50-8aa7-74345913df71" />
+        <DefVal Position="1.0" Length="8" Value="0xf0" Name="#NCMD" Id="47f73ffe-58bc-4f49-a874-a52f2c6c1b88" />
+        <VarVal Position="2.5" Length="1" Name="Перегрузка по току (&gt; 250 %)" Id="46b0d562-bebd-4c31-b4a5-7fa3f23b4a80" />
+        <VarVal Position="2.4" Length="1" Name="Защита по температуре (&gt; 110 °C)" Id="d3e046db-9693-4e6e-bf30-84830ede8ff7" />
+        <VarVal Position="2.3" Length="1" Name="Повышенное/пониженное напряжение питания транзисторов (15 В)" Id="41d00da2-7b59-41e6-8ef5-8198cc032104" />
+        <VarVal Position="2.2" Length="1" Name="КЗ нижних транзисторов или перекрытие управляющих сигналов" Id="71a88d81-2844-4043-8a17-9c33a8a1880a" />
+        <VarVal Position="2.1" Length="1" Name="Повышенное входное напряжение" Id="b1bbc1c1-68c1-4701-89a9-09530635367d" />
+        <VarVal Position="2.0" Length="1" Name="Перегрузка по току (&gt; 150 %)" Id="a023d793-fb91-4753-8bbb-9499a3f38640" />
+        <VarVal Position="3.1" Length="1" Name="Выходное напряжение включено" Id="92f2871a-95b7-476f-8be7-60c7c6a9c068" />
+        <CpzPrm Name="Заданная выходная частота, Гц" Expression="([s4] * 256.0 + [u5]) * 0.1" Id="ebfdbdc4-2d3a-4cd1-b493-7e0b3c8cea89" />
+        <CpzPrm Name="Текущая выходная частота, Гц" Expression="([s6] * 256.0 + [u7]) * 0.1" Id="37f85a4a-b127-481d-bbaa-258b646b688a" />
+        <CpzPrm Name="Ток фазы A, A" Expression="([s8] * 256.0 + [u9]) * 0.1" Id="38249de5-3609-400c-807c-df4a64b43f7a" />
+        <CpzPrm Name="Ток фазы B, A" Expression="([s10] * 256.0 + [u11]) * 0.1" Id="9815983d-0808-4255-ab19-de545cc2821b" />
+        <CpzPrm Name="Ток фазы C, A" Expression="([s12] * 256.0 + [u13]) * 0.1" Id="94c62be6-fce6-4db1-ba71-3716815f444f" />
+        <CpzPrm Name="Напряжение цепи постоянного тока, В" Expression="([u14] * 256.0 + [u15]) * 6.8 / 6.0" Id="6558f412-46d8-4edd-9787-7ca06716de29" />
+        <VarVal Position="16.0" Length="1" Name="Включен инвертор" Id="e4bdd7e8-8d10-4235-9adf-11cae5b51b5f" />
+        <VarVal Position="17.7" Length="1" Name="Состояние инвертора: отказ" Id="1d6dce8f-fb62-44b5-95f4-1eee776403a4" />
+        <VarVal Position="17.5" Length="1" Name="Состояние инвертора: наличие диагностической информации" Id="3352d9b7-000d-43d4-aa9e-d0acb87c98da" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="93a214ed-166a-4ff8-b213-890c56d0dc16" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="6507bee8-7b12-4fa1-9b0e-09e244bf9665" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КВУ: чтение статуса">
+      <Request Length="4" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="c90a8886-c758-40c1-a814-f4d9975ec65c" />
+        <DefVal Position="1.0" Length="8" Value="0x07" Name="#NCMD" Id="a8664e0f-8c4f-4277-805b-2cbd19ec8cd3" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="063115b2-521e-4d8d-8a19-7c30babe4d64" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="868eddae-e66c-4655-8fe6-413024bf6db4" />
+      </Request>
+      <Reply Length="6" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="52393198-4e40-4efc-a2c5-59ea3bf9fe95" />
+        <DefVal Position="1.0" Length="8" Value="0x07" Name="#NCMD" Id="f6cdfcda-8c05-4051-a30d-9413bcfb1658" />
+        <VarVal Position="3.6" Length="1" Name="КВУ: чтение статуса: Ошибка датчика температуры №1" Id="0d59ec20-d3ab-4e23-b881-36b345a84ad6" />
+        <VarVal Position="3.4" Length="1" Name="КВУ: чтение статуса: Включена установка" Id="a1368c7e-bb75-4ab8-be77-3fd1771cec70" />
+        <VarVal Position="3.3" Length="1" Name="КВУ: чтение статуса: Включен ТЕН" Id="07c314a9-cb98-4799-9563-f44c7afb1973" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="4fd8ce71-f97f-4afc-aa8b-9a36c2837c8f" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="374a3f83-4e81-4ba4-bf68-1ada18951803" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КВУ: включение">
+      <Request Length="7" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="0e96a00d-67ba-43da-9132-defab58e36b9" />
+        <DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="fe42ab2b-fa52-491b-ba1a-d79dd822654c" />
+        <VarVal Position="4.0" Length="1" Name="КВУ: включение: Команда включения" Id="91243601-f2a5-48bc-86bf-a2493c5fdf09" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="6abc370f-7b57-41e4-a033-f307c0ff182e" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="a5b0e145-be7c-4184-95a0-58f133105002" />
+      </Request>
+      <Reply Length="7" Position="7">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="a3d1a60e-05c6-4daa-9fa3-75a814f69485" />
+        <DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="3144d690-cdc6-4859-bbdd-27e3eff7b7ae" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="73ed1e73-3b54-48ac-ad2e-bc7c672c8920" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="85ec994e-9b46-4d22-ac64-0431d8b6fe8c" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КВУ: чтение параметров работы">
+      <Request Length="8" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="5d58a4d2-e414-47a8-97fe-56fb01327158" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="598b29fa-7aad-4d64-9f2e-51f83ecfa3ae" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="cc800481-aaaa-4b09-930d-0d5c86dd68c9" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="590dbfa4-3771-4ee5-a58e-477ef8a506d1" />
+      </Request>
+      <Reply Length="33" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="e3454876-12a5-4bbe-b08a-76d55af68c32" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="507596f6-2852-4188-b312-12fcf433da1c" />
+        <CpzPrm Name="КВУ: чтение параметров работы: Температура датчика №2" Expression="([s3] * 256.0 + [u4]) * 0.01" Id="fb4f40c1-4780-4527-b4da-18cbf17525b8" />
+        <CpzPrm Name="КВУ: чтение параметров работы: Температура датчика №1 (8500hex - код аварии) * 0.01" Expression="([s5] * 256.0 + [u6])" Id="33cc0225-d309-406d-bde4-2340742087d9" />
+        <CpzPrm Name="КВУ: чтение параметров работы: Версия ПО" Expression="([u7] * 256.0 + [u8])" Id="39fb102d-8660-4f91-aad3-4082e9800cae" />
+        <CpzPrm Name="КВУ: чтение параметров работы: Выход ПИД регулятора" Expression="([u9] * 256.0 + [u10])" Id="01475013-666f-40b6-b037-576b6b74aad3" />
+        <CpzPrm Name="КВУ: чтение параметров работы: Частота оборотов вентилятора, гц" Expression="([u11] * 256.0 + [u12])" Id="c5ffddf0-d5bb-4180-9a01-5ca594e09b71" />
+        <CpzPrm Name="КВУ: чтение параметров работы: Состояние регулятора, гц" Expression="([u13] * 256.0 + [u14])" Id="fc72e928-6836-4d33-a546-a14be181dbe9" />
+        <VarVal Position="31.0" Length="8" Name="#CRCH" Id="8f97db7b-a6d7-436b-9edb-d4f0e18207b1" />
+        <VarVal Position="32.0" Length="8" Name="#CRCL" Id="40946b91-8f04-4ba9-9927-4a6bd72089a7" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КТВ1: чтение статуса">
+      <Request Length="4" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="10c45bd3-5a2a-44b9-a0d5-84c0be88dfe2" />
+        <DefVal Position="1.0" Length="8" Value="0x07" Name="#NCMD" Id="c26bca18-1544-4ff3-8df9-4b1a9390eab6" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="492dabe2-cc63-4692-a29f-f20bc9902118" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="927a2b8b-2edf-4be3-b0d9-d154f43ce952" />
+      </Request>
+      <Reply Length="6" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="a1bf9f44-8053-460b-aa9a-5db2e671a54e" />
+        <DefVal Position="1.0" Length="8" Value="0x07" Name="#NCMD" Id="50a68d01-734d-4f44-9706-ea4f2a0d171f" />
+        <VarVal Position="3.6" Length="1" Name="КТВ1: чтение статуса: Ошибка датчика температуры №1" Id="b2d594d2-7921-4694-a15b-9778bc085fb7" />
+        <VarVal Position="3.4" Length="1" Name="КТВ1: чтение статуса: Включена установка" Id="58adc31b-f9a5-4673-9cb5-062564c32567" />
+        <VarVal Position="3.3" Length="1" Name="КТВ1: чтение статуса: Включен ТЕН" Id="e01631a4-f50d-4cb1-a16d-3bd33fe0569d" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="5e038448-7565-4d2d-8379-b75b143f7fb8" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="708f60c2-b83d-4e82-aba3-0d2177e47e7d" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КТВ1: включение">
+      <Request Length="7" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="646ac208-c818-495e-b0bc-2cda8bbb3bea" />
+        <DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="30ab9b10-6f25-4773-b9bc-a9ef04496708" />
+        <VarVal Position="4.0" Length="1" Name="КТВ1: включение: Команда включения" Id="c8cce566-e24d-4285-b8e1-40e7ba3d94a8" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="843d922b-d09c-4d26-828f-c9b14fe28e4a" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="a2eab6ab-df09-4391-873a-127448541aed" />
+      </Request>
+      <Reply Length="7" Position="7">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="8a1fc20b-1500-4b9e-b545-c0f37174cfc7" />
+        <DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="41db457d-c781-47e7-a13e-72a4696ace68" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="0da68204-94f8-4408-977a-89a5694c367e" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="d320244f-9a5a-4201-8909-d4315014165b" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КТВ1: чтение параметров работы">
+      <Request Length="8" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="fe889fe1-4599-4227-9112-e0888ba6068c" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="c5508d83-ed9e-44d5-bea8-917c051c6701" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="65f184ec-166c-4d15-ba81-5928dfdadbd8" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="7abc8752-7e89-4115-8ee0-55dad21af4bb" />
+      </Request>
+      <Reply Length="33" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="ca1550a0-e292-4ac3-886d-276c2b86b649" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="87d2c3e2-5413-4f78-bf09-fa3d1ad87328" />
+        <CpzPrm Name="КТВ1: чтение параметров работы: Температура датчика №2" Expression="([s3] * 256.0 + [u4]) * 0.01" Id="190ebdaa-59ce-4c94-a0e7-8b73adc4e8f1" />
+        <CpzPrm Name="КТВ1: чтение параметров работы: Температура датчика №1 (8500hex - код аварии)" Expression="([s5] * 256.0 + [u6]) * 0.01" Id="c50265d1-a924-4e32-bff8-063088121746" />
+        <CpzPrm Name="КТВ1: чтение параметров работы: Версия ПО" Expression="([u7] * 256.0 + [u8])" Id="6e0318e0-48d6-4c83-8c49-b239841800ed" />
+        <CpzPrm Name="КТВ1: чтение параметров работы: Выход ПИД регулятора" Expression="([u9] * 256.0 + [u10])" Id="72120b70-b98a-4645-a2f5-ccd28d2715bd" />
+        <CpzPrm Name="КТВ1: чтение параметров работы: Частота оборотов вентилятора, гц" Expression="([u11] * 256.0 + [u12])" Id="1233a837-d5b2-4f6e-8c19-12cf5a2a9f94" />
+        <CpzPrm Name="КТВ1: чтение параметров работы: Состояние регулятора, гц" Expression="([u13] * 256.0 + [u14])" Id="97e38f9c-b504-46fd-8d8e-db75836ec436" />
+        <VarVal Position="31.0" Length="8" Name="#CRCH" Id="dda2d364-7475-49a0-bb01-a8397e6df4e0" />
+        <VarVal Position="32.0" Length="8" Name="#CRCL" Id="8790da91-1000-49e8-b26d-73651d4a6113" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КТВ2: чтение статуса">
+      <Request Length="4" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="34217c69-7d6f-4951-8ea1-07f44683c032" />
+        <DefVal Position="1.0" Length="8" Value="0x07" Name="#NCMD" Id="c26b5099-7fe5-41cc-8cd1-d3372d770bdc" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="92542bd4-e73c-490b-968d-8d557989f229" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="04e9c72a-211f-46ba-b5d1-189913dcdce9" />
+      </Request>
+      <Reply Length="6" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="b4d3f6df-bf8d-4a17-9907-eb4cd211654e" />
+        <DefVal Position="1.0" Length="8" Value="0x07" Name="#NCMD" Id="999a580b-a83a-415b-9cdd-f843cd900a47" />
+        <VarVal Position="3.6" Length="1" Name="КТВ2: чтение статуса: Ошибка датчика температуры №1" Id="27b2e516-7c25-400e-a446-89dd7d2c145a" />
+        <VarVal Position="3.4" Length="1" Name="КТВ2: чтение статуса: Включена установка" Id="4fae15c9-d628-4657-b492-9528ec596687" />
+        <VarVal Position="3.3" Length="1" Name="КТВ2: чтение статуса: Включен ТЕН" Id="8026db30-cca4-46d5-833a-a3d127d56c19" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="f7abeb08-5faf-4755-9996-d2fe478a5ac7" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="63f2f2f4-7cef-4522-b815-89a4ed6d6812" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КТВ2: включение">
+      <Request Length="7" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="4f6f5748-2e29-461a-9b4a-3b74fc0a11a1" />
+        <DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="d1d9283a-3706-4941-8ed9-93ff3966a121" />
+        <VarVal Position="4.0" Length="1" Name="КТВ2: включение: Команда включения" Id="747c94c0-3c23-41cd-8fa6-abdcae4057d7" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="a842b5e7-61b9-479b-aba0-8cabf00d29af" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="460a92bb-8b22-4843-8dff-6a9e5d830929" />
+      </Request>
+      <Reply Length="7" Position="7">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="bcd638c9-4862-4883-8506-2d0f17b2e496" />
+        <DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="1612d437-b814-45fe-a206-95df44949e70" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="11cc87cb-3479-4a81-82b9-470d54bb9e63" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="34e310bd-3a01-4e2f-9f3c-d99fa3815946" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КТВ2: чтение параметров работы">
+      <Request Length="8" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="b1f505ec-cd7c-4e3d-a5a8-7fe301917036" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="273c34f2-f352-4bea-bf50-3075c13f130a" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="7332a351-f48a-4d58-a6d2-90bcf9d521b4" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="6301982e-b733-4b97-ae7e-cfe523c41c16" />
+      </Request>
+      <Reply Length="33" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="098de574-c9bf-4164-b070-f09097eaacb5" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="556e9be9-a53b-425d-b5cd-bfb369e537ef" />
+        <CpzPrm Name="КТВ2: чтение параметров работы: Температура датчика №2" Expression="([s3] * 256.0 + [u4]) * 0.01" Id="c6dbbb28-f577-4b5d-80fa-205f8ec26740" />
+        <CpzPrm Name="КТВ2: чтение параметров работы: Температура датчика №1 (8500hex - код аварии)" Expression="([s5] * 256.0 + [u6]) * 0.01" Id="270d65eb-bfe1-4c9e-ab17-c69e0217db71" />
+        <CpzPrm Name="КТВ2: чтение параметров работы: Версия ПО" Expression="([u7] * 256.0 + [u8])" Id="606e8f99-9e06-464a-9a8b-a10fc94f71c5" />
+        <CpzPrm Name="КТВ2: чтение параметров работы: Выход ПИД регулятора" Expression="([u9] * 256.0 + [u10])" Id="2fed08ef-271f-424b-b24a-15c7034c2c3b" />
+        <CpzPrm Name="КТВ2: чтение параметров работы: Частота оборотов вентилятора, гц" Expression="([u11] * 256.0 + [u12])" Id="f5f0d2fc-6f60-42f1-b4da-e03c10a0862e" />
+        <CpzPrm Name="КТВ2: чтение параметров работы: Состояние регулятора, гц" Expression="([u13] * 256.0 + [u14])" Id="c5d760c6-b87b-4ddd-8df9-3f6b34f41ba2" />
+        <VarVal Position="31.0" Length="8" Name="#CRCH" Id="172b0f97-e959-45b1-bbc6-7af063773289" />
+        <VarVal Position="32.0" Length="8" Name="#CRCL" Id="1be57e06-2002-451c-83cf-b7a34c6eff80" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КСМ: автодиагностика 1">
+      <Request Length="8" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="8f3d544a-a0f9-49c4-b34f-5348a0bbc118" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="2ed2670f-ae43-4730-87f6-2581c89259a9" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="7558661c-7209-4b10-a928-178549942ef3" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="16a470c5-ebff-444c-906a-273329be94b1" />
+      </Request>
+      <Reply Length="29" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="f3666ce0-700e-46d7-9cb1-5318406aa156" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="a1270fb7-3c7a-43f9-b8bc-88b9057bddfb" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Температура №1" Expression="([s3] * 256.0 + [u4]) * 0.01" Id="fe880505-a4c4-452c-939b-5c862b01de58" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Температура №2" Expression="([s5] * 256.0 + [u6]) * 0.01" Id="6cdbee8d-f04a-470c-b010-88176a8f3555" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Код диагностики КСМ" Expression="[u7] * 1.0" Id="4d2df520-9432-45a6-99b8-061708c19b36" />
+        <VarVal Name="КСМ: автодиагностика 1: Команда на включение ПЧ4" Position="8.7" Length="1" Id="8f3af7b4-efa7-4127-85f6-33cd24c0b390" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Уставка температуры в кабине" Expression="([u9] * 256.0 + [u10]) * 0.01" Id="c3a664d0-f5e8-4e1a-8a0b-581495362aef" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Уставка температуры приточного воздуха" Expression="([u11] * 256.0 + [u12]) * 0.01" Id="ccb6323d-adae-4275-a040-ee31dabc4146" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Код диагностики КТВ1" Expression="[u13] * 1.0" Id="5d8211a0-4936-4e9c-bea8-befb9e09214a" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Код диагностики КТВ2" Expression="[u14] * 1.0" Id="4fd3415c-4800-48dc-ad6d-d93f9fdd4aeb" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка связи с PIC процессором" Position="15.0" Length="1" Id="01cfa845-f22d-461d-8d43-6b7e997141f1" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка связи с EEPROM" Position="15.1" Length="1" Id="f4fd4777-f924-4c08-b769-c41b2234f7b9" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка датчика температуры 1" Position="15.3" Length="1" Id="9d66ef34-635f-40a8-9c99-e65d6ea3ccc5" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка датчика температуры 2" Position="15.4" Length="1" Id="741815b9-2c65-49a3-b919-5dccf7cef5b7" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка датчика температуры 3" Position="15.5" Length="1" Id="98de3067-1249-4576-bb66-50f5be2d7d03" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка датчика температуры 4" Position="15.6" Length="1" Id="b3a76d54-2df2-4d1a-85a4-0f472ebf534a" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка контроля контактора компрессора" Position="16.2" Length="1" Id="4a63241a-7c6e-43e4-82fb-0f512e5b1428" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка связи с одним из МУК" Position="16.6" Length="1" Id="da8b6ff8-189e-466b-99e6-0a0caa93bc69" />
+        <VarVal Name="КСМ: автодиагностика 1: Ошибка связи с одним из ПЧ" Position="16.7" Length="1" Id="bd6d7289-3614-4940-a4d4-3e6258d24c02" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Температура №3" Expression="([s17] * 256.0 + [u18]) * 0.01" Id="f170f330-8490-4b36-9cfd-8e4145dcde9c" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Температура №4" Expression="([s19] * 256.0 + [u20]) * 0.01" Id="9ee29500-9729-4199-8642-71234858fc03" />
+        <VarVal Name="КСМ: автодиагностика 1: ПИД регулятор вызван" Position="22.7" Length="1" Id="a6c5b682-4c96-4575-af40-fcfd2678ee5b" />
+        <VarVal Name="КСМ: автодиагностика 1: Наличие входных данных ПИД регулятора" Position="22.6" Length="1" Id="32d0a8c7-3c7d-4fe2-8e20-207ecf4a273f" />
+        <VarVal Name="КСМ: автодиагностика 1: Корректное значение давления с датчика испарителя" Position="22.5" Length="1" Id="72ce34c5-2bc4-41b0-a976-d7f86a490128" />
+        <VarVal Name="КСМ: автодиагностика 1: Пройден контроль контактора компрессора" Position="22.4" Length="1" Id="ae382365-21a0-4676-bb7b-ea4a18a02615" />
+        <VarVal Name="КСМ: автодиагностика 1: Включена система микроклимата" Position="22.2" Length="1" Id="de9100f9-9683-47da-8f8c-0507ebceb0ee" />
+        <VarVal Name="КСМ: автодиагностика 1: Автоматическое формирование уставки ШИМ" Position="22.1" Length="1" Id="8b22a3f1-da26-442b-ae55-d8157a6275c7" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Перегрев" Expression="[u24] * 1.0" Id="067cbdff-21d2-4535-8344-d71ce1db584a" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Версия ПО КСМ" Expression="[u25] * 1.0" Id="6f7a0b48-7c76-4e2f-990c-cbaafcfcb056" />
+        <CpzPrm Name="КСМ: автодиагностика 1: Уставка ШИМ клапана" Expression="[u26] * 1.0" Id="1a3c0028-948e-4719-aff6-d86df1df5c83" />
+        <VarVal Position="27.0" Length="8" Name="#CRCH" Id="9cacd68d-5fc4-4a78-b753-8ff0ffa7d5f2" />
+        <VarVal Position="28.0" Length="8" Name="#CRCL" Id="a7dc2922-9221-4a1c-8ccb-5f5dc13cbec9" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="КСМ: автодиагностика 2">
+      <Request Length="8" Position="0" CycleMsTime="300">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="8979919f-0e43-40fd-9d81-3cdca4178703" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="004a5aa9-d0ef-4c86-9615-06bdc7cf039f" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="93283deb-0872-4ae0-ad62-b51b0ce67a7f" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="1a3b81c5-ec9a-453c-a9f8-d2b293aba38e" />
+      </Request>
+      <Reply Length="19" Position="8">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="11546340-dedd-4a99-a472-d357456727b2" />
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="aba97ae2-c219-496d-bdd5-37adf1e27904" />
+        <CpzPrm Name="КСМ: автодиагностика 2: Уставка расхода приточного воздуха" Expression="[u3] * 1.0" Id="3c71e8a1-82a2-4002-a9ef-0f7017e4f396" />
+        <VarVal Name="КСМ: автодиагностика 2: Подтверждение включения контактора комперссора" Position="6.1" Length="1" Id="aa1a739d-cbd5-499e-989b-1ae7a290c5c5" />
+        <VarVal Name="КСМ: автодиагностика 2: Включение системы микроклимата" Position="6.3" Length="1" Id="3cced85a-0a8e-44da-ad4d-bddb9e4ac19b" />
+        <VarVal Name="КСМ: автодиагностика 2: Тумблер отопление/охлаждение" Position="6.4" Length="1" Id="cb617f44-e46e-4d9d-9f2a-f695fee00ca9" />
+        <VarVal Name="КСМ: автодиагностика 2: Блокировка (0) работы кондиционера" Position="6.5" Length="1" Id="a71a5556-6f1e-4f90-967e-87875d44c6d4" />
+        <VarVal Name="КСМ: автодиагностика 2: Наличие уставки расхода приточного воздуха" Position="7.2" Length="1" Id="f6b1a046-63d2-44dd-b0bc-45972013f0a0" />
+        <VarVal Name="КСМ: автодиагностика 2: Наличие расхода приточного воздуха" Position="7.3" Length="1" Id="b7ee6517-18eb-4c17-9160-367b02934075" />
+        <CpzPrm Name="КСМ: автодиагностика 2: Давление в испарителе" Expression="[u8] * 1.0" Id="c3ac193d-1452-4fda-befb-9254f3ad04f0" />
+        <CpzPrm Name="КСМ: автодиагностика 2: Давление в конденсаторе" Expression="[u9] * 1.0" Id="8007d887-fb8a-407b-9385-7db3a3957446" />
+        <CpzPrm Name="КСМ: автодиагностика 2: Температура в конденсаторе" Expression="[u10] * 1.0" Id="43aaefc1-0f9d-42ec-b853-dd161332a446" />
+        <CpzPrm Name="КСМ: автодиагностика 2: Температура №5" Expression="([s11] * 256.0 + [u12]) * 0.01" Id="974eccbd-b9a0-43f1-ada9-8cf601994ca0" />
+        <VarVal Position="17.0" Length="8" Name="#CRCH" Id="ffee7590-c2b9-4a4c-8546-0b198b0b4ca3" />
+        <VarVal Position="18.0" Length="8" Name="#CRCL" Id="48ec3385-3ea0-41e0-b88c-f99a3387fc29" />
+      </Reply>
+    </CmdMask>
+    <!--
+    <CmdMask Name="КСМ и КТВ1">
+      <Request Length="8" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR"/>
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD"/>
+        <CpzPrm Name="Стартовый адрес" Expression="([u2] * 256.0 + [u3])" />
+        <CpzPrm Name="Количество слов" Expression="([u4] * 256.0 + [u5])" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH"/>
+        <VarVal Position="7.0" Length="8" Name="#CRCL"/>
+      </Request>
+      <Reply Length="0" Position="8"/>
+    </CmdMask>
+
+    <CmdMask Name="3 ответ от КСМ">
+      <Request Length="0" Position="0"/>
+      <Reply Length="33" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR"/>
+        <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD"/>
+        <CpzPrm Name="Количество байт данных" Expression="[u2] * 0.01" />
+        <CpzPrm Name="Температура датчика №5 КСМ" Expression="([s3] * 256.0 + [u4]) * 0.01" />
+        <CpzPrm Name="Температура на выходе" Expression="([s5] * 256.0 + [u6]) * 0.01" />
+        <CpzPrm Name="Версия ПО" Expression="([u7] * 256.0 + [u8])" />
+        <CpzPrm Name="Значение ШИМ на ТЕН" Expression="([u9] * 256.0 + [u10])" />
+        <CpzPrm Name="Частота оборотов вентилятора, гц" Expression="([u11] * 256.0 + [u12])" />
+        <VarVal Position="14.0" Length="1" Name="Режим работы установки: Включено устройство"/>
+        <VarVal Position="14.1" Length="1" Name="Режим работы установки: Включен ТЕН"/>
+
+        <VarVal Position="16.0" Length="1" Name="Регулятор температуры приточного воздуха: есть собственный датчик выходной температуры"/>
+        <VarVal Position="16.1" Length="1" Name="Регулятор температуры приточного воздуха: есть датчик с обмена по RS"/>
+        <VarVal Position="16.2" Length="1" Name="Регулятор температуры приточного воздуха: работает ПИД регулятор по выходу"/>
+        <VarVal Position="16.3" Length="1" Name="Регулятор температуры приточного воздуха: работает регулятор по входу"/>
+        <VarVal Position="16.4" Length="1" Name="Регулятор температуры приточного воздуха: коэффициенты ПИД вычитаны верно"/>
+        <VarVal Position="16.5" Length="1" Name="Регулятор температуры приточного воздуха: отсутствие сигналов оборотов вентилятора при наличии ненулевой уставки расхода"/>
+
+        <CpzPrm Name="W0 уставка ПИДа" Expression="([u17] * 256.0 + [u18])" />
+        <CpzPrm Name="Zone зона нечувствительности ПИДа" Expression="([u19] * 256.0 + [u20])" />
+        <CpzPrm Name="Td дифференциальная составляющая" Expression="([u21] * 256.0 + [u22])" />
+        <CpzPrm Name="Kp коеффициент пропорциональности" Expression="([u23] * 256.0 + [u24])" />
+        <CpzPrm Name="T_i интегральная составляющая" Expression="([u25] * 256.0 + [u26])" />
+        <CpzPrm Name="T_0 время вызова ПИДа" Expression="([u27] * 256.0 + [u28])" />
+        <VarVal Position="31.0" Length="8" Name="#CRCH"/>
+        <VarVal Position="32.0" Length="8" Name="#CRCL"/>
+      </Reply>
+    </CmdMask>
+    -->
+    <!--
+	 <CmdMask Name="КСМ и КТВ1">
+		<Request Length="8" Position="0" CycleMsTime="100">
+		  <DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR"/>
+		  <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD"/>
+		  <CpzPrm Name="Стартовый адрес" Expression="([u2] * 256.0 + [u3])" />
+		  <CpzPrm Name="Количество слов" Expression="([u4] * 256.0 + [u5])" />
+		  <VarVal Position="6.0" Length="8" Name="#CRCH"/>
+		  <VarVal Position="7.0" Length="8" Name="#CRCL"/>
+		</Request>
+		<Reply Length="30" Position="8">
+		  <DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR"/>
+		  <DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD"/>
+		  <CpzPrm Name="Температура датчика №5 КСМ" Expression="([s2] * 256.0 + [u3]) * 0.01" />
+		  <CpzPrm Name="Температура на выходе" Expression="([s4] * 256.0 + [u5]) * 0.01" />
+		  <CpzPrm Name="Версия ПО" Expression="([u6] * 256.0 + [u7])" />
+		  <CpzPrm Name="Значение ШИМ на ТЕН" Expression="([u8] * 256.0 + [u9])" />
+		  <CpzPrm Name="Частота оборотов вентилятора, гц" Expression="([u10] * 256.0 + [u11])" />
+		  <VarVal Position="13.0" Length="1" Name="Режим работы установки: Включено устройство"/>
+		  <VarVal Position="13.1" Length="1" Name="Режим работы установки: Включен ТЕН"/>
+
+		  <VarVal Position="15.0" Length="1" Name="Регулятор температуры приточного воздуха: есть собственный датчик выходной температуры"/>
+		  <VarVal Position="15.1" Length="1" Name="Регулятор температуры приточного воздуха: есть датчик с обмена по RS"/>
+		  <VarVal Position="15.2" Length="1" Name="Регулятор температуры приточного воздуха: работает ПИД регулятор по выходу"/>
+		  <VarVal Position="15.3" Length="1" Name="Регулятор температуры приточного воздуха: работает регулятор по входу"/>
+		  <VarVal Position="15.4" Length="1" Name="Регулятор температуры приточного воздуха: коэффициенты ПИД вычитаны верно"/>
+		  <VarVal Position="15.5" Length="1" Name="Регулятор температуры приточного воздуха: отсутствие сигналов оборотов вентилятора при наличии ненулевой уставки расхода"/>
+
+		  <CpzPrm Name="W0 уставка ПИДа" Expression="([u16] * 256.0 + [u17])" />
+		  <CpzPrm Name="Zone зона нечувствительности ПИДа" Expression="([u18] * 256.0 + [u19])" />
+		  <CpzPrm Name="Td дифференциальная составляющая" Expression="([u20] * 256.0 + [u21])" />
+		  <CpzPrm Name="Kp коеффициент пропорциональности" Expression="([u22] * 256.0 + [u23])" />
+		  <CpzPrm Name="T_i интегральная составляющая" Expression="([u24] * 256.0 + [u25])" />
+		  <CpzPrm Name="T_0 время вызова ПИДа" Expression="([u26] * 256.0 + [u27])" />
+
+		  <VarVal Position="28.0" Length="8" Name="#CRCH"/>
+		  <VarVal Position="29.0" Length="8" Name="#CRCL"/>
+		</Reply>
+	 </CmdMask>-->
+  </Commands>
+</PsnConfiguration>

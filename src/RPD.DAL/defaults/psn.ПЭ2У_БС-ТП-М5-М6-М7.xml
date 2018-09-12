@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Электровоз ПЭ2У, БС-ТП с абонентами по М5 (М6, М7)" Version="4" Description="Конфигурация обмена БС-ТП с абонентами по М5 (М6, М7)" Id="5F358CF5-E64C-4253-AC6B-D7290F85C26A" RpdId="39">
+	<PsnMeters>
+		<PsnMeter Address="0x80" Name="ТП1 (3,5)" />
+		<PsnMeter Address="0x81" Name="ТП2 (4,6)" />
+		<PsnMeter Address="0x41" Name="УЗАРД1 (2,3)" />
+		<PsnMeter Address="0x82" Name="ТР1 (2,3)" />
+		<PsnMeter Address="0x03" Name="УВ1 (2,3)" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="БС-ТП и ТП1">
+			<Request Length="6" Position="0" CycleMsTime="50">
+				<DefVal Position="0.0" Length="8" Value="0x80" Name="#ADDR" Id="5022b97d-84ee-4ff3-8525-af67e776e646" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="6a7c1342-c870-4dab-ac4f-a54054472260" />
+				<VarVal Position="2.0" Length="8" Name="Резерв" Id="4e86d8a0-d011-42c8-b8bd-cefc9b0c6125" />
+				<VarVal Position="3.0" Length="8" Name="Резерв" Id="31160784-8fc1-4c11-91dd-d48b5793c6dd" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="82adef82-d29f-47a1-a77c-0887f44b9bcc" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="a26308e8-f38c-49ec-9aca-1f601cdc223a" />
+			</Request>
+			<Reply Length="15" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x80" Name="#ADDR" Id="f0d2c3a5-272e-486b-80cd-761fdd392192" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="f137cbac-9fc2-499c-998e-5ca7b0f5834a" />
+				<CpzPrm Name="Напряжение полумоста вверху, В" Expression="[u2] * 16.0" Id="c4a8b8e8-e93d-4166-8645-10879147f8a3" />
+				<CpzPrm Name="Напряжение полумоста внизу, В" Expression="[u3] * 16.0" Id="8451a20b-aed8-4aa8-856d-6b98d9b87bfe" />
+				<CpzPrm Name="Значение Iя, А" Expression="[s4] * 8.0" Id="90b69b78-4f43-443d-9e4a-a3c7da1ebb92" />
+				<CpzPrm Name="Выходное напряжение (на якоре), В" Expression="[u5] * 16.0" Id="2daf7f06-e611-4e94-b2d1-52733662d83f" />
+				<CpzPrm Name="Температура радиатора ТП, °С" Expression="[s6] * 1.0" Id="019ebcc9-b47c-4d85-92b0-0569c32159cd" />
+				<CpzPrm Name="ШИМ якоря" Expression="[s7] * 1.0" Id="99149f21-2981-4bb4-9dd7-e170924a9497" />
+				<CpzPrm Name="Коэффициент коррекции средней точки полумоста" Expression="[s8] * 1.0" Id="0737899a-29be-484c-9f9b-298a1c8df921" />
+				<VarVal Position="9.7" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="364f9440-1af4-48e9-8141-97338d3e1edd" />
+				<VarVal Position="9.6" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="63be54af-164c-453d-a128-aa750de453f7" />
+				<VarVal Position="9.5" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="05573dda-0e51-4ba9-8dac-665937e6d20e" />
+				<VarVal Position="9.4" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="90f3c758-870b-46c7-8091-3cfdee576775" />
+				<VarVal Position="9.3" Length="1" Name="Драйвер, сработавший по току СС: драйвер 3" Id="33202c4d-959b-4aab-a4e0-b4261c55b9b6" />
+				<VarVal Position="9.2" Length="1" Name="Драйвер, сработавший по току СС: драйвер 2" Id="eaae45cc-d4c4-45a7-8bde-57040166d476" />
+				<VarVal Position="9.1" Length="1" Name="Драйвер, сработавший по току СС: драйвер 1" Id="600c5fa1-298f-4c5d-b321-5e25759a709d" />
+				<VarVal Position="9.0" Length="1" Name="Драйвер, сработавший по току СС: драйвер 0" Id="c54fd12e-2ac3-46f0-bcc3-4590a5ab07ca" />
+				<VarVal Position="10.7" Length="1" Name="Статус: Авария в нагрузке " Id="d6f9138e-e762-4848-ab77-5cf22d0ee989" />
+				<VarVal Position="10.6" Length="1" Name="Статус: Перегрузка по току " Id="4b33c33c-348d-458c-9de5-2c4f13fb191f" />
+				<VarVal Position="10.5" Length="1" Name="Статус: Резерв" Id="cabfb2db-6376-43b6-8f70-960cd3d3dfae" />
+				<VarVal Position="10.4" Length="1" Name="Статус: Таймаут по SPI" Id="8aab3021-e61d-4f35-ac17-bfed23b53b59" />
+				<VarVal Position="10.3" Length="1" Name="Статус: Пониженное входное напряжение " Id="6060a893-699b-4e4a-8092-bc4682cbeda0" />
+				<VarVal Position="10.2" Length="1" Name="Статус: Повышенное входное напряжение" Id="5a5db02c-fe5e-498f-967c-ab7e301e21ad" />
+				<VarVal Position="10.1" Length="1" Name="Статус: Защита по току силовой сборки (СС)" Id="e3d0a621-6457-439f-bef4-dffb8ef5ca3c" />
+				<VarVal Position="10.0" Length="1" Name="Статус: Температура " Id="33c55a95-8811-44b0-bda3-23ef25c25668" />
+				<VarVal Position="11.0" Length="8" Name="Резерв" Id="13e1d027-c70c-4c3b-8727-28c1019f4803" />
+				<VarVal Position="12.0" Length="8" Name="Резерв" Id="9d178cad-37c1-466d-91d5-f6b6adc35ae6" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="e25a8983-ad46-4739-9ecf-effc27963054" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="64939ce8-6949-4b2a-85af-4f0ae036ddee" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-ТП и ТП2">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x81" Name="#ADDR" Id="7bb9160f-008c-45d2-b295-6530f9f5d73d" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="2715ecf2-ac2d-42d9-95d9-2d0a4ea8a3ab" />
+				<VarVal Position="2.0" Length="8" Name="Резерв" Id="c785c3b4-4a9a-4033-8ef2-0d0c678d414b" />
+				<VarVal Position="3.0" Length="8" Name="Резерв" Id="1e8e23ef-35cf-43f7-9e93-a97e34449c5f" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="aab0c724-e868-4a80-86d6-cef71d7d8c0d" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="6b70dc02-8251-421c-9811-58bbf4cb6c07" />
+			</Request>
+			<Reply Length="15" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x81" Name="#ADDR" Id="98c51e25-95bc-46aa-9c02-cf4db6298fc3" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="dfc9c50d-bc3c-4ad2-81b7-6bab295e7bab" />
+				<CpzPrm Name="Напряжение полумоста вверху, В" Expression="[u2] * 16.0" Id="c92e91b9-693c-4567-8711-40256dc7616d" />
+				<CpzPrm Name="Напряжение полумоста внизу, В" Expression="[u3] * 16.0" Id="863f77d7-7107-41b4-9eef-d6ba0fa9e72a" />
+				<CpzPrm Name="Значение Iя, А" Expression="[s4] * 8.0" Id="35ba18ca-2b1b-4158-aa5e-dfe3e4c3d2e9" />
+				<CpzPrm Name="Выходное напряжение (на якоре), В" Expression="[u5] * 16.0" Id="124b7821-fa5f-4cef-ab65-5339b6f06eb4" />
+				<CpzPrm Name="Температура радиатора ТП, °С" Expression="[s6] * 1.0" Id="13adf3ca-c3b9-4d15-8e57-f0b2d274ef92" />
+				<CpzPrm Name="ШИМ якоря" Expression="[s7] * 1.0" Id="c0e6267e-b866-48a4-badb-19eb2e5ff508" />
+				<CpzPrm Name="Коэффициент коррекции средней точки полумоста" Expression="[s8] * 1.0" Id="6e379b0c-6b19-401c-bb31-646b99f109e3" />
+				<VarVal Position="9.7" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="365bf2db-4fd6-4565-bb49-1c4d51e5ba0b" />
+				<VarVal Position="9.6" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="f213847d-be94-4ba5-ab78-ba4fb84a6fab" />
+				<VarVal Position="9.5" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="a75c985e-e008-42e5-a8a6-21d49d143ba3" />
+				<VarVal Position="9.4" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="827aed0e-1a6e-4c58-87d2-578ccd90dada" />
+				<VarVal Position="9.3" Length="1" Name="Драйвер, сработавший по току СС: драйвер 3" Id="3cd5409e-0e23-4521-9fe3-410d49429ce8" />
+				<VarVal Position="9.2" Length="1" Name="Драйвер, сработавший по току СС: драйвер 2" Id="abbe4278-4ff2-4ccc-a0e5-44c88484c2fe" />
+				<VarVal Position="9.1" Length="1" Name="Драйвер, сработавший по току СС: драйвер 1" Id="fc20437c-c450-42d2-a3ad-994aa1cc1c77" />
+				<VarVal Position="9.0" Length="1" Name="Драйвер, сработавший по току СС: драйвер 0" Id="6a9548f3-e7cb-4bd4-a1d5-dfe114e589f1" />
+				<VarVal Position="10.7" Length="1" Name="Статус: Авария в нагрузке " Id="756ec0e3-7f76-450a-bdb8-26b3a30de965" />
+				<VarVal Position="10.6" Length="1" Name="Статус: Перегрузка по току " Id="6b547dc7-f7b4-4b7a-af65-2d67e24540c8" />
+				<VarVal Position="10.5" Length="1" Name="Статус: Резерв" Id="29015425-9a46-4efb-a2b8-7b9823cf36b7" />
+				<VarVal Position="10.4" Length="1" Name="Статус: Таймаут по SPI" Id="8cb22937-bb1a-47b3-b2d2-4bf2a4071970" />
+				<VarVal Position="10.3" Length="1" Name="Статус: Пониженное входное напряжение " Id="3efcc82f-b147-4160-9564-a5520a2c6384" />
+				<VarVal Position="10.2" Length="1" Name="Статус: Повышенное входное напряжение" Id="bdb65ac4-dd73-4d71-a5ef-496a93d94337" />
+				<VarVal Position="10.1" Length="1" Name="Статус: Защита по току силовой сборки (СС)" Id="2996b216-6882-40d9-8135-8686d4f5c506" />
+				<VarVal Position="10.0" Length="1" Name="Статус: Температура " Id="41068152-2849-4b42-83cd-3cb23f5d3652" />
+				<VarVal Position="11.0" Length="8" Name="Резерв" Id="469513d5-8534-456a-88ce-46c2d4e72715" />
+				<VarVal Position="12.0" Length="8" Name="Резерв" Id="55bb1062-4d3b-467e-b3e5-0504e76a24b5" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="9334ac2b-9f0e-42d3-98c4-7ba76951974b" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="8aa7f6df-5f2e-42dc-a06c-6b62e5ba2810" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name=" БС-ТП и УЗАРД1">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x41" Name="#ADDR" Id="22fa8638-5a53-4920-80ec-621d1174ee0b" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="8819b028-bebc-4f19-9aeb-6dbe5f0e9fdb" />
+				<VarVal Position="2.7" Length="1" Name="D7 –Резерв" Id="f6d4b639-c263-4929-934e-ceaa2b85a40a" />
+				<VarVal Position="2.6" Length="1" Name="D6 –Резерв" Id="b3ff1438-5754-4130-8140-197ddfce1cac" />
+				<VarVal Position="2.5" Length="1" Name="D5 –Резерв" Id="2ab7b1e7-9753-458a-b1cb-40d332fef900" />
+				<VarVal Position="2.4" Length="1" Name="D4 –Резерв" Id="8a23c8e0-1bab-447c-be30-e37eaf7d1152" />
+				<VarVal Position="2.3" Length="1" Name="D3 –Резерв" Id="07e37489-1a9c-4b69-b10e-ebf8fa2cdcdb" />
+				<VarVal Position="2.2" Length="1" Name="D2 –Резерв" Id="b8f8f8b8-1498-4f79-8681-33fcbbe98e77" />
+				<VarVal Position="2.1" Length="1" Name="D1 –Резерв" Id="3172bbfc-17ed-4d65-9b4b-6464c926e583" />
+				<VarVal Position="2.0" Length="1" Name="D0 –Взведение" Id="f08dbf7c-fdb0-4f76-9bfe-72b136d9565f" />
+				<VarVal Position="3.0" Length="8" Name="Резерв" Id="cb0747ff-9436-4031-880b-b62608b42e84" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="48360a3a-f49e-4b27-a993-2903b55ebce9" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="0e7801d0-175b-473e-b1b8-f998e9b38c39" />
+			</Request>
+			<Reply Length="10" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x41" Name="#ADDR" Id="c5cc85f9-b201-4ecd-a333-c5aee20386d7" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="954a12bb-ff18-44ca-ab52-870f7c19673e" />
+				<VarVal Position="2.7" Length="1" Name="Байт состояния УЗАРД1:D7 –Резерв" Id="817f1692-39dc-420a-a6ab-04d9a2091feb" />
+				<VarVal Position="2.6" Length="1" Name="Байт состояния УЗАРД1:D6 –Резерв" Id="5e366245-4af5-43ee-af0b-64e492a3726b" />
+				<VarVal Position="2.5" Length="1" Name="Байт состояния УЗАРД1:D5 –Резерв" Id="aeb06e5c-170e-4d0d-9f3c-97530ee371fc" />
+				<VarVal Position="2.4" Length="1" Name="Байт состояния УЗАРД1:D4 –Резерв" Id="e9f3f3c9-43d6-41e5-a150-c8dd3c211d77" />
+				<VarVal Position="2.3" Length="1" Name="Байт состояния УЗАРД1:D3 –Резерв" Id="72f823f0-2ad5-4a0c-ac9f-9b0f0eca1d58" />
+				<VarVal Position="2.2" Length="1" Name="Байт состояния УЗАРД1:D2 –Резерв" Id="0a668641-7932-4501-8c89-ecba89589d5f" />
+				<VarVal Position="2.1" Length="1" Name="Байт состояния УЗАРД1:D1 –Готовность (Взвод)" Id="02efe64c-1f31-471c-8594-b2c804f08fa0" />
+				<VarVal Position="2.0" Length="1" Name="Байт состояния УЗАРД1:D0 –Ключ включен (Драйвер готов)" Id="96db9abf-3ae0-4509-820b-409cd606ae86" />
+				<VarVal Position="3.7" Length="1" Name="Байт диагностики 1 УЗАРД1:D7 –Резерв" Id="a9618989-17b2-4f61-a23f-218cc0814247" />
+				<VarVal Position="3.6" Length="1" Name="Байт диагностики 1 УЗАРД1:D6 –Резерв" Id="f16c4d22-f2a9-4ceb-ab4f-24f86ea5405b" />
+				<VarVal Position="3.5" Length="1" Name="Байт диагностики 1 УЗАРД1:D5 –err6" Id="e02faa79-a272-4663-ad82-244f34ceaec9" />
+				<VarVal Position="3.4" Length="1" Name="Байт диагностики 1 УЗАРД1:D4 –err5" Id="24745158-86d1-4e59-82f1-f7b76e7be08c" />
+				<VarVal Position="3.3" Length="1" Name="Байт диагностики 1 УЗАРД1:D3 –err4" Id="27242a52-f951-461a-888a-9fc8b58fdf92" />
+				<VarVal Position="3.2" Length="1" Name="Байт диагностики 1 УЗАРД1:D2 –err3" Id="dd38c1b0-82b4-44c7-a7b1-226c0aea7ee1" />
+				<VarVal Position="3.1" Length="1" Name="Байт диагностики 1 УЗАРД1:D1 –err2" Id="c2977293-4276-4f72-87f3-26cec860a57f" />
+				<VarVal Position="3.0" Length="1" Name="Байт диагностики 1 УЗАРД1:D0 –err1" Id="33b1a55a-c3f5-47e3-9b31-158af051d87f" />
+				<VarVal Position="4.7" Length="1" Name="Байт диагностики 2 УЗАРД1:D7 –Резерв" Id="1d485858-9170-4a8c-9ec6-5751e4133cbb" />
+				<VarVal Position="4.6" Length="1" Name="Байт диагностики 2 УЗАРД1:D6 –Резерв" Id="6dd19ce6-fa9e-4884-a4e1-9e51e24bae0c" />
+				<VarVal Position="4.5" Length="1" Name="Байт диагностики 2 УЗАРД1:D5 –отключение БВС" Id="04b5f3f8-e3bb-4043-9695-0973795a8375" />
+				<VarVal Position="4.4" Length="1" Name="Байт диагностики 2 УЗАРД1:D4 –отключение БВ" Id="371d7b67-bdcf-4bfc-8197-19b83c7fb964" />
+				<VarVal Position="4.3" Length="1" Name="Байт диагностики 2 УЗАРД1:D3 –тестовый" Id="290d3214-01ae-44bb-a2a5-5b919c400c43" />
+				<VarVal Position="4.2" Length="1" Name="Байт диагностики 2 УЗАРД1:D2 –Резерв" Id="8b4549fe-f29f-43b7-9984-a8e6b37c1b1b" />
+				<VarVal Position="4.1" Length="1" Name="Байт диагностики 2 УЗАРД1:D1 –выход на драйвер 2" Id="1db28162-b6d1-42c3-83e0-39278421b924" />
+				<VarVal Position="4.0" Length="1" Name="Байт диагностики 2 УЗАРД1:D0 –выход на драйвер 1" Id="3a5207b8-e6b0-4d98-a8d5-e3f9ffe9bd9e" />
+				<VarVal Position="5.0" Length="8" Name="Значение АЦП AD6 УЗАРД1" Id="84c605ee-93cf-424d-82ff-a4a288af2a10" />
+				<VarVal Position="6.0" Length="8" Name="Значение АЦП AD7 УЗАРД1" Id="f98356ae-eae6-4d24-b965-0e2e22552975" />
+				<VarVal Position="7.0" Length="8" Name="Значение АЦП AD2 УЗАРД1" Id="f7a4e5e0-65a7-4078-8447-d7104707ff4b" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="0f25b87f-dc35-4491-8cd4-405b5954f48b" />
+				<VarVal Position="9.0" Length="8" Name="#CRCL" Id="13f009b8-8a16-4a67-8628-ffcc3cd8df47" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-ТП и ТР1">
+			<Request Length="6" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x82" Name="#ADDR" Id="393c9ef6-952e-45af-a5c4-3ce714734aed" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="b168e649-2c1b-4f52-83cc-b333160968fe" />
+				<VarVal Position="2.0" Length="8" Name="Резерв" Id="78383736-4202-41ed-990d-c2f77ab4f371" />
+				<VarVal Position="3.0" Length="8" Name="Резерв" Id="5da041bd-5953-4072-b7ce-39e4a1fad9cf" />
+				<VarVal Position="4.0" Length="8" Name="#CRCH" Id="6645a0ea-2a10-426c-b460-1e130f7e168c" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="eb780d3c-64fa-4462-8e25-45d5840ef026" />
+			</Request>
+			<Reply Length="15" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x82" Name="#ADDR" Id="245743f9-9056-49c1-aa7e-b49884bd67f0" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="3ecea765-5ee3-4af0-a8d9-fb1e30a14f6f" />
+				<CpzPrm Name="Напряжение полумоста вверху, В" Expression="[u2] * 16.0" Id="5f41b760-0050-4d28-ade9-e0265f6f242d" />
+				<CpzPrm Name="Напряжение полумоста внизу, В" Expression="[u3] * 16.0" Id="4015f4f2-470f-4dcf-ae5e-357250153e65" />
+				<CpzPrm Name="Значение Iтр, А" Expression="[u4] * 8.0" Id="e3dcd889-2c0e-413d-8ce3-35ab03d028f8" />
+				<CpzPrm Name="Выходное напряжение (на резисторе), В" Expression="[u5] * 16.0" Id="848eb99a-b71c-4416-9cf6-aa5a952248b8" />
+				<CpzPrm Name="Температура радиатора ТР, °С" Expression="[s6] * 1.0" Id="7da580c6-68a4-4303-8798-da3c55d50fef" />
+				<CpzPrm Name="ШИМ ТР" Expression="[u7] * 1.0" Id="316e195b-a727-42e2-a7d3-26600646385c" />
+				<CpzPrm Name="Коэффициент коррекции средней точки полумоста" Expression="[s8] * 1.0" Id="6c08ee63-7184-4a97-a8d8-173070c51f88" />
+				<VarVal Position="9.7" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="4fe87fc5-0adf-48a9-8b50-8a119c0e8523" />
+				<VarVal Position="9.6" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="707769a4-2ac7-49fa-ad48-c77874cf7776" />
+				<VarVal Position="9.5" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="b6a46eb1-5159-48f8-b9f0-7488856612bb" />
+				<VarVal Position="9.4" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="f96c8519-260d-4e1f-b63d-1b32f7668085" />
+				<VarVal Position="9.3" Length="1" Name="Драйвер, сработавший по току СС: драйвер 3" Id="51ae8772-d3f5-4e50-acfa-a9bfb3f36192" />
+				<VarVal Position="9.2" Length="1" Name="Драйвер, сработавший по току СС: драйвер 2" Id="8f79bcc0-ac16-4f1a-8b01-e85bed6f3813" />
+				<VarVal Position="9.1" Length="1" Name="Драйвер, сработавший по току СС: драйвер 1" Id="864f0d46-d717-49ca-a203-65735e7ed0f1" />
+				<VarVal Position="9.0" Length="1" Name="Драйвер, сработавший по току СС: драйвер 0" Id="141e44f3-293b-4be3-bb4b-e1ab9f264163" />
+				<VarVal Position="10.7" Length="1" Name="Статус: Авария в нагрузке " Id="700c1cbf-4e59-425a-bf88-ddc1b66bf1c2" />
+				<VarVal Position="10.6" Length="1" Name="Статус: Резерв" Id="c1ab0954-5fca-437e-85bf-3610c0cc8672" />
+				<VarVal Position="10.5" Length="1" Name="Статус: Резерв" Id="315072f0-564c-449d-be5c-957d2cf3364b" />
+				<VarVal Position="10.4" Length="1" Name="Статус: Резерв" Id="47dd29f7-8200-4e1a-8160-50dda862859b" />
+				<VarVal Position="10.3" Length="1" Name="Статус: Резерв" Id="b0cd4bf3-554e-40bf-84df-eb770c6c0f5c" />
+				<VarVal Position="10.2" Length="1" Name="Статус: Резерв" Id="0fd60c31-0bd8-403a-b984-27ff979c2269" />
+				<VarVal Position="10.1" Length="1" Name="Статус: Защита по току силовой сборки (СС)" Id="6179e28f-3799-4dce-9e42-f2ffb68ac518" />
+				<VarVal Position="10.0" Length="1" Name="Статус: Резерв" Id="5c55aa4b-6f08-4fdc-96df-e2176d1304ee" />
+				<VarVal Position="11.0" Length="8" Name="Резерв" Id="e4e01c2a-63f9-414a-90bb-760ce469e37c" />
+				<VarVal Position="12.0" Length="8" Name="Резерв" Id="0ae51a42-2602-4ee8-8615-ebd8453949fc" />
+				<VarVal Position="13.0" Length="8" Name="#CRCH" Id="4a4d0a42-0746-4440-a8f5-51efadc34231" />
+				<VarVal Position="14.0" Length="8" Name="#CRCL" Id="f4f1c939-31de-419b-8149-af60a3abcda3" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-ТП и УВ1">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="05252215-81ac-4af8-b462-33090ab805e8" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="da6f9855-9fe8-4f3c-98bb-0c54c36de663" />
+				<VarVal Position="2.7" Length="1" Name="Команда БУ: D7 – Управление включением" Id="d00f9dc7-1aab-45a3-abd6-87faad23a38c" />
+				<VarVal Position="2.6" Length="1" Name="Команда БУ: D6 – Режим тяги (1)/Режим торможения (0)" Id="4154a8d1-fd61-4343-922a-43f39ed44cbe" />
+				<VarVal Position="2.5" Length="1" Name="Команда БУ: D5 – Резерв" Id="02c2279c-534e-4a76-bbda-b71d0ac6b85c" />
+				<VarVal Position="2.4" Length="1" Name="Команда БУ: D4 – Резерв" Id="e78e3f81-5cdf-45b3-8b2d-d5f873ce0e4d" />
+				<VarVal Position="2.3" Length="1" Name="Команда БУ: D3 – Резерв" Id="cd78d7c8-f9d7-47da-80f1-fb65fcb7bb76" />
+				<VarVal Position="2.2" Length="1" Name="Команда БУ: D2 – Резерв" Id="7dcd31d3-41a5-48f0-94ca-54860517cd7e" />
+				<VarVal Position="2.1" Length="1" Name="Команда БУ: D1 – Резерв" Id="902f6bbc-e7dc-4221-bc64-798bc8e22bcd" />
+				<VarVal Position="2.0" Length="1" Name="Команда БУ: D0 – Боксование" Id="2ebb30aa-245e-4fb2-b10e-9cbefb6618a9" />
+				<CpzPrm Name="Уставка тока якоря в % от номинала" Expression="[u3] * 1.0" Id="833168f8-6a1c-496c-a151-410965856b28" />
+				<CpzPrm Name="Среднее значение скорости состава, Vср" Expression="[u4] * 1.0" Id="511ed833-216b-4a7b-8710-9946e7376c3b" />
+				<VarVal Position="5.0" Length="8" Name="Резерв" Id="a8081518-2712-49c5-a323-db37ea5b5f28" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="5b7e69e6-13c6-4f11-9d3a-5b651ab3ce53" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="32e9bf78-4da9-47d2-a873-9299d6b2bf91" />
+			</Request>
+			<Reply Length="28" Position="8">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="fd162909-e957-44a9-ac7a-3b90348ff826" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="9905d8b7-27e2-4c33-abbd-4b184187a34d" />
+				<CpzPrm Name="Напряжение полумоста вверху, В" Expression="[u2] * 16.0" Id="0042b7d4-7882-4297-927a-23d45ef8cc64" />
+				<CpzPrm Name="Напряжение полумоста внизу, В" Expression="[u3] * 16.0" Id="78a7bcc4-6d33-4893-bc98-3fa925c45e7f" />
+				<CpzPrm Name="Значение Iя1 ТП1, А" Expression="[s4] * 8.0" Id="550fb8eb-1411-4895-8c76-024f7d53a966" />
+				<CpzPrm Name="Значение Iя2 ТП2, А" Expression="[s5] * 8.0" Id="3c08adfd-0f26-4321-82d1-270421ad6c96" />
+				<CpzPrm Name="Значение Iв УВ, А" Expression="[u6] * 4.0" Id="6fb45848-128a-4bbf-ba40-0606d57c12c2" />
+				<CpzPrm Name="Выходное напряжение ТП1 (на якоре 1), В" Expression="[u7] * 16.0" Id="1a171bc3-93e0-4d83-92f5-5f569aea7732" />
+				<CpzPrm Name="Выходное напряжение ТП2 (на якоре 2), В" Expression="[u8] * 16.0" Id="16e32d58-5deb-4493-a799-2c9aa936a3a9" />
+				<CpzPrm Name="Температура радиатора УВ" Expression="[s9] * 1.0" Id="fda4d066-efc6-4a57-94f0-7c598b5268a0" />
+				<CpzPrm Name="ШИМ якоря ТП1" Expression="[s10] * 1.0" Id="560bdd60-f9ae-4d81-bafd-25fce86e1371" />
+				<CpzPrm Name="ШИМ якоря ТП2" Expression="[s11] * 1.0" Id="ea174d4d-2325-4219-9b96-4ae5bf2c2e7c" />
+				<CpzPrm Name="ШИМ возбуждения УВ" Expression="[u12] * 1.0" Id="c9b37d39-9e65-48b6-97d1-5144f65e38b9" />
+				<CpzPrm Name="Коэффициент коррекции средней точки полумоста УВ" Expression="[s13] * 1.0" Id="7ff78ebc-4cbb-4675-a97f-46ca1be5113e" />
+				<CpzPrm Name="Расчетная уставка по току якоря ТП1, А" Expression="[s14] * 8.0" Id="35302563-1165-42f2-95dc-75adf09a48ac" />
+				<CpzPrm Name="Расчетная уставка по току якоря ТП2, А" Expression="[s15] * 8.0" Id="42497c14-5830-4f08-a949-44c819933e0d" />
+				<CpzPrm Name="Расчетная уставка по току возбуждения УВ, А" Expression="[u16] * 4.0" Id="ebe8f339-8e27-44f0-b318-bebb07608cf1" />
+				<CpzPrm Name="Расчетная уставка по напряжению на якоре ТП1, ТП2, В" Expression="[u17] * 16.0" Id="406c9782-0e0e-4311-bbeb-ff7896824655" />
+				<CpzPrm Name="Скорость расчетная ТП1" Expression="[u18] * 1.0" Id="05e3dcb1-ac91-4d57-a4ce-7294e97a0af0" />
+				<CpzPrm Name="Скорость расчетная ТП2" Expression="[u19] * 1.0" Id="c1ce71d5-9fa9-47e7-aa1a-0fdddad908ea" />
+				<VarVal Position="20.7" Length="1" Name="Режим УВ: D7 – резерв" Id="f9eeef23-763b-47dd-b7c4-4c858d3e4c38" />
+				<VarVal Position="20.6" Length="1" Name="Режим УВ: D6 – ошибка" Id="f3652292-03a0-4bfc-b4e4-14cb0bae4bcf" />
+				<VarVal Position="20.5" Length="1" Name="Режим УВ: D5 – торможение" Id="735c28d8-c2cd-40d6-b43f-393d48b6c031" />
+				<VarVal Position="20.4" Length="1" Name="Режим УВ: D4 – тяга" Id="d0c56ebb-2efb-4d8e-8dc3-c93f2fef988d" />
+				<VarVal Position="20.3" Length="1" Name="Режим УВ: D3 – выбег" Id="69a8fd9d-0851-4fe1-acfc-802cdf036d5d" />
+				<VarVal Position="20.2" Length="1" Name="Режим УВ: D2 – Боксование/Юз (Тележка2)" Id="260e62de-7947-4aba-b063-87a477751258" />
+				<VarVal Position="20.1" Length="1" Name="Режим УВ: D1 – Боксование/Юз (Тележка1)" Id="80d5f248-2261-4ae2-9763-470502f5009f" />
+				<VarVal Position="20.0" Length="1" Name="Режим УВ: D0 – Начальный пуск" Id="f70ab255-ae40-4860-ab05-e690491fff57" />
+				<VarVal Position="21.7" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="b25659a7-178a-43cd-8098-1ef080928ff9" />
+				<VarVal Position="21.6" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="9ff13485-4c57-46d4-a3ff-b7bb60a9d3b6" />
+				<VarVal Position="21.5" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="3d5e1c58-1202-406e-9f99-c6fca112bb9d" />
+				<VarVal Position="21.4" Length="1" Name="Драйвер, сработавший по току СС: Резерв" Id="6bfc4a17-06fb-431d-b090-442a437e676e" />
+				<VarVal Position="21.3" Length="1" Name="Драйвер, сработавший по току СС: драйвер 3" Id="318c7faf-94cd-4b9e-8c22-0bac55167211" />
+				<VarVal Position="21.2" Length="1" Name="Драйвер, сработавший по току СС: драйвер 2" Id="17b9f84f-c30e-41c0-9ad1-856aa300bfb6" />
+				<VarVal Position="21.1" Length="1" Name="Драйвер, сработавший по току СС: драйвер 1" Id="e23e7f36-66ad-4b7b-a5ff-60c3f09ad268" />
+				<VarVal Position="21.0" Length="1" Name="Драйвер, сработавший по току СС: драйвер 0" Id="30aabbf7-2059-46a7-bee0-e7dc203b31f0" />
+				<VarVal Position="22.7" Length="1" Name="Статус УВ: D7 – Авария в нагрузке (УВ)" Id="35ec3e09-18f8-4c0d-85bc-6c8b2a5ab355" />
+				<VarVal Position="22.6" Length="1" Name="Статус УВ: D6 – Перегрузка по току (УВ)" Id="c75c6273-2240-44cb-8416-ca56ed85f5f8" />
+				<VarVal Position="22.5" Length="1" Name="Статус УВ: D5 – Резерв" Id="4429782e-5609-4ecb-91ce-eaad95e516fb" />
+				<VarVal Position="22.4" Length="1" Name="Статус УВ: D4 – Резерв" Id="a757c553-5290-4bd6-8cad-fe6e240fd9bc" />
+				<VarVal Position="22.3" Length="1" Name="Статус УВ: D3 – Пониженное входное напряжение (УВ)" Id="e363f0c6-8851-444c-8b80-536f27b39d01" />
+				<VarVal Position="22.2" Length="1" Name="Статус УВ: D2 – Повышенное входное напряжение (УВ)" Id="dcc29468-45e0-45c3-8bef-9634ff9cb694" />
+				<VarVal Position="22.1" Length="1" Name="Статус УВ: D1 – Защита по току силовой сборки (СС)" Id="8552501b-b51b-4b85-a950-363738854246" />
+				<VarVal Position="22.0" Length="1" Name="Статус УВ: D0 – Температура (УВ)" Id="2b098ac8-bf6b-4389-8cb4-3e439e68c346" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="50316e46-1ec6-4ce2-aa81-08ddbebc0e03" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="1ea7011c-0f0b-47ab-85a5-ec873ca39689" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="43dbc31c-1798-4001-a37d-0c5070928822" />
+				<VarVal Position="26.0" Length="8" Name="#CRCH" Id="51f50bf2-b885-4af7-a58d-6d75f6e3bd93" />
+				<VarVal Position="27.0" Length="8" Name="#CRCL" Id="dc6a77d5-1100-44c1-99fe-6e19f06c2f83" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

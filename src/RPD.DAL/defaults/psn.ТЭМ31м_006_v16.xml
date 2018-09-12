@@ -1,0 +1,1333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Локомотив ТЭМ31М 006" Version="16" Description="" Id="FBB68265-BE65-4F83-9F16-6A4BAE679F51" RpdId="12">
+  <PsnMeters>
+    <PsnMeter Address="0x11" Name="БВС1" />
+    <PsnMeter Address="0x12" Name="БВС2" />
+    <PsnMeter Address="0x14" Name="БВС3" />
+    <PsnMeter Address="0x17" Name="БВС4" />
+    <PsnMeter Address="0x18" Name="БВС5" />
+    <PsnMeter Address="0x1B" Name="БВС6" />
+    <PsnMeter Address="0x20" Name="Управление БУК" />
+    <PsnMeter Address="0x21" Name="БУК1" />
+    <PsnMeter Address="0x22" Name="БУК2" />
+    <PsnMeter Address="0x24" Name="БУК3" />
+    <PsnMeter Address="0x27" Name="БУК4" />
+    <PsnMeter Address="0x28" Name="БУК5" />
+    <PsnMeter Address="0x33" Name="Джойстик 1" />
+    <PsnMeter Address="0x34" Name="Джойстик 2" />
+    <PsnMeter Address="0x42" Name="БС-КПД" />
+    <PsnMeter Address="0x43" Name="БС-ДГ" />
+    <PsnMeter Address="0x07" Name="БС-СМ" />
+    <PsnMeter Address="0x44" Name="БС-СМЕ" />
+    <PsnMeter Address="0x1A" Name="БПС" />
+    <PsnMeter Address="0x0B" Name="БС-ДУ" />
+    <PsnMeter Address="0x40" Name="РПД" />
+    <PsnMeter Address="0x0D" Name="КПА" />
+    <PsnMeter Address="0x41" Name="БЗС" />
+  </PsnMeters>
+  <Commands>
+    <CmdMask Name="БУ и БВС1">
+      <Request Length="4" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="3954c93d-163d-4669-8afe-43825298f345" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="42ace2d8-184d-4181-905b-ae8a2cec8cb4" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="3453dd35-53d2-4691-84bd-357d1786d89b" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="77083f87-a748-4483-ad33-dc6a71d8a717" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="d0bb1803-4ce1-48f1-8edb-6a982b134724" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="20529316-737d-4831-ab11-abe13b135cdc" />
+        <VarVal Position="2.7" Length="1" Name="Состояние входа 8: Экстренное торможение" Id="0f743cb0-180e-47f0-a134-3458e031d806" />
+        <VarVal Position="2.6" Length="1" Name="Состояние входа 7: Свисток" Id="9a65b081-312c-471f-9603-0541a52fdc2e" />
+        <VarVal Position="2.5" Length="1" Name="Состояние входа 6: Автоматическая подача свистка" Id="75089f25-422b-4e94-99b0-3e4d08649643" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Автоматическая подача песка" Id="54ca6b8b-33d1-415d-b9cb-c58ae69ccfbe" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Тифон" Id="af7be586-7b43-40c0-9d0b-fccb82ff7b61" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Автосцепка задняя" Id="35ce66ef-a6be-471b-819c-088c2898ee8c" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Автосцепка передняя" Id="78ac4476-8eb1-4849-be56-87ba620be8b0" />
+        <VarVal Position="2.0" Length="1" Name="Состояние входа 1: Песок" Id="3defc151-7a56-4da0-922c-8bc8d6ccc362" />
+        <VarVal Position="3.3" Length="1" Name="Состояние входа 12: РВ1 АЛСН" Id="9a25d51d-9e39-4007-9528-6c1eb629b141" />
+        <VarVal Position="3.2" Length="1" Name="Состояние входа 11: Р1 АЛСН" Id="1a23fb7e-3cc2-40b1-83fe-a08b6b6ca28d" />
+        <VarVal Position="3.0" Length="1" Name="Состояние входа 9: Автомат вентилятора ТЭД" Id="f1fa8d3b-e0c9-4cc5-838a-07620e1092c0" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="96af9256-548d-4693-81ed-dba18c5c0c38" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="444475a1-2e3f-46e6-a2ab-1d2eb225e4e5" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="77dc0c60-618d-4863-9ff4-c79b9b648d6b" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="03f6ef0b-576a-49c7-a399-8107b6014e2c" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БВС2">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="5e9f2b19-42ab-47b8-98df-85f1d63ed6c4" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="7ee8b941-fda6-46f7-881b-9e7088f4a651" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="d07d62a6-4952-4aa2-83e4-3b6aec5848bf" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="12834915-85a0-40f9-9efc-4cf50a441909" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="6eb50230-10a6-473f-aacb-0a5260e9ce7c" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="a57d295c-3be1-4ec3-8e0d-6b2d07351d12" />
+        <VarVal Position="2.7" Length="1" Name="Состояние входа 8: Экстренное торможение" Id="877bfcd7-21af-4822-832e-f873b8de009a" />
+        <VarVal Position="2.6" Length="1" Name="Состояние входа 7: Свисток" Id="6fa7c667-4630-40a8-a08a-70f93847e561" />
+        <VarVal Position="2.5" Length="1" Name="Состояние входа 6: Автоматическая подача свистка" Id="caeafd2a-da3c-49f0-8b47-cc118b87e073" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Автоматическая подача песка" Id="722e5d75-ab0b-4db5-bfb9-f9013cdb5f73" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Тифон" Id="c6c775f0-a706-43c6-ad59-5e381c54efbb" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Автосцепка задняя" Id="f8a8cac7-489b-4a16-aace-a542e0c15725" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Автосцепка передняя" Id="155725e5-277d-450d-84a7-9e0affda0695" />
+        <VarVal Position="2.0" Length="1" Name="Состояние входа 1: Песок" Id="13e8e876-4f08-4c69-96a4-24c7e0fe9545" />
+        <VarVal Position="3.0" Length="1" Name="Состояние входа 9: Дистанционное управление" Id="3f700a0f-6df7-4edd-ab4d-85b019e679ae" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="d0b22c81-924e-47de-bf35-596237b80108" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="87349b5c-c7dc-482c-bdb9-6c70365fbed4" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="cb6edac5-a567-47c9-ae22-b3c95784382f" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="a3520eac-b542-4379-81a7-a25b7cb89cd9" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БВС3">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="45422c01-867e-4a83-a945-12165451ef75" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="972160f5-256a-4f9d-a10a-b7dfe7839121" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="1b5419cc-0df7-4e16-b4e8-e96648036f3a" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="9637fff9-dbaa-424b-b437-f3146d5fa4a9" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="d925dda6-8447-4090-9f22-350c649a2f77" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="f1c6e765-0840-4e6c-bcdb-7feae561c600" />
+        <VarVal Position="2.7" Length="1" Name="Состояние входа 8: Прожектор ярко" Id="34cb5c88-7d83-4ea6-a4b2-43c3a82c25b4" />
+        <VarVal Position="2.6" Length="1" Name="Состояние входа 7: Прожектор тускло" Id="4bf40890-0e49-4d33-8323-a63b89763d97" />
+        <VarVal Position="2.5" Length="1" Name="Состояние входа 6: Направление движения назад" Id="a463d20b-7a92-441e-8b3c-943d1ac6d774" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Направление движения вперед" Id="1d22fa4e-c715-43fc-9137-4079cd7cdfc4" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Останов дизеля" Id="61d370cc-3289-4169-80d8-1d8b4c0895b4" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Сброс тяги" Id="9c8ff0d8-ac61-4b2a-85ae-4f4fb0bfcbdc" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Включение подогрева топлива" Id="baa4ae99-158f-48b5-8d14-acfcc0a6eff7" />
+        <VarVal Position="3.7" Length="1" Name="Состояние входа 16: Управление общее" Id="93b46e93-8a82-4d36-9115-31c4f06d8275" />
+        <VarVal Position="3.6" Length="1" Name="Состояние входа 15: Тормозной компрессор" Id="d28f00e9-cb7f-40ae-83d3-c7c5719d39be" />
+        <VarVal Position="3.5" Length="1" Name="Состояние входа 14: Вентилятор ТЭД" Id="dc8d49b8-ee86-4d69-ad79-136f4bfa5e21" />
+        <VarVal Position="3.4" Length="1" Name="Состояние входа 13: Запуск дизеля" Id="94be4685-c2d4-486d-8e21-983600d05cc4" />
+        <VarVal Position="3.3" Length="1" Name="Состояние входа 12: Управление по СМЕ (Ведомая секция)" Id="eaed46ab-7bfb-4c15-8933-eb96eed96f71" />
+        <VarVal Position="3.2" Length="1" Name="Состояние входа 11: Блокировка управления" Id="1d21a703-ae7b-43b5-8968-755f1d723030" />
+        <VarVal Position="3.1" Length="1" Name="Состояние входа 10: Управление с ВПУ" Id="0c662852-3823-4c87-b43f-f09d43839d49" />
+        <VarVal Position="3.0" Length="1" Name="Состояние входа 9: Управление с ОПУ" Id="c98f0e93-4e6f-4b3e-ac38-619947f12823" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="0ea193e6-15ec-473d-9fd2-49833f72ee3b" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="4541809f-8bd4-44f0-99ba-0e96d4427e93" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="b81323fb-36a1-4f5f-b428-625ca2ad72d3" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="df89285a-023f-494c-845c-43abec7cfd23" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БВС4">
+      <Request Length="4" Position="0" CycleMsTime="100">
+        <DefVal Position="0.0" Length="8" Value="0x17" Name="#ADDR" Id="9b8564be-17c4-4f9c-9a88-1321efa4a86a" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="02ab3700-127d-4859-b47d-9046b1db1a67" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="5d993f44-73a6-42a0-8fd2-f15297583387" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="799a94af-ab13-4e23-9a95-43a02de09551" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x17" Name="#ADDR" Id="d6e65b30-abba-4e4f-ac42-c04d8e8ddda6" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="5327a47d-3a90-4ac0-a1ff-efeb08945f4e" />
+        <VarVal Position="2.7" Length="1" Name="Состояние входа 8: Прожектор ярко" Id="7ef22c9e-fbb2-4e95-882d-115d959002d9" />
+        <VarVal Position="2.6" Length="1" Name="Состояние входа 7: Прожектор тускло" Id="1b4cec46-e9d3-44e1-8896-7f7761609499" />
+        <VarVal Position="2.5" Length="1" Name="Состояние входа 6: Направление движения назад" Id="912553fb-6b4d-489f-ab44-a5d4a27a0169" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Направление движения вперед" Id="27678a47-a28d-405f-85be-c83115ce69a5" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Останов дизеля" Id="408340a0-3dc9-4105-86b1-81fa2b1b54fe" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Сброс тяги" Id="d9a6f393-f39f-4110-b06d-e60fb883ab77" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Отключение ТЭД №2" Id="f70a64dd-14e9-4cff-b13c-b71466dce813" />
+        <VarVal Position="2.0" Length="1" Name="Состояние входа 1: Отключение ТЭД №1" Id="77d35530-1dd8-45f9-9265-ce26fdfda8a3" />
+        <VarVal Position="3.7" Length="1" Name="Состояние входа 16: Буферный фонарь передний левый белый" Id="6127ba04-36f7-482e-923d-7bcc2ddb8c99" />
+        <VarVal Position="3.6" Length="1" Name="Состояние входа 15: Буферный фонарь передний левый красный" Id="9b82a8bb-b9a2-43f3-9de7-023e5474a6e4" />
+        <VarVal Position="3.5" Length="1" Name="Состояние входа 14: Буферный фонарь передний правый белый" Id="f6b4a083-1262-4786-9c5b-55ea3a4f9ba0" />
+        <VarVal Position="3.4" Length="1" Name="Состояние входа 13: Буферный фонарь передний правый красный" Id="97cf15b5-7f51-405d-b408-a7ed0af169af" />
+        <VarVal Position="3.3" Length="1" Name="Состояние входа 12: Буферный фонарь передний правый красный" Id="3a5fcb0a-8887-45fc-be56-3c0ec4e5024a" />
+        <VarVal Position="3.2" Length="1" Name="Состояние входа 11: Буферный фонарь задний левый красный" Id="6d1e27ab-2cd9-4234-8559-f4907f0b2e72" />
+        <VarVal Position="3.1" Length="1" Name="Состояние входа 10: Буферный фонарь задний правый белый" Id="7ef78e30-bc7b-41a4-8fe3-81a2f09058ac" />
+        <VarVal Position="3.0" Length="1" Name="Состояние входа 9: Буферный фонарь задний правый красный" Id="94f924cf-5eb2-4c54-9025-21ad31b6f89f" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="c4e54cc9-b7b2-4bd5-a5cc-9190d1116ff6" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="7b082632-6a83-48bf-86ff-d58dd573bcd4" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="0f2dbdcc-c708-4a3c-85f8-9621b63a1227" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="20a90aac-bb8b-4a9b-ab12-43ba970590e7" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БВС5">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="dbcc4bbb-1fa8-4002-bdfd-c6e83be9c35b" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="02325a90-e663-477d-a679-af2edd330cf1" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="c9189e67-709d-4771-967c-daf63ae64973" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="7ad6fab0-fc30-485e-94a9-f5206d0a2559" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="59f6d584-680a-4f3a-bb34-7d87860b9871" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="40d2a90a-23b4-4d90-82dc-2702f199dfaf" />
+        <VarVal Position="2.7" Length="1" Name="Состояние входа 8: Перегрев масла компрессора" Id="acbb7a73-3529-4f86-9092-445235a6b957" />
+        <VarVal Position="2.6" Length="1" Name="Состояние входа 7: Разрешение работы компрессора" Id="f32f52ad-9abd-4c02-b48c-f8394052111e" />
+        <VarVal Position="2.5" Length="1" Name="Состояние входа 6: Предохранитель фазы C" Id="79b7dd88-0d02-4664-8414-3b63c3f2a191" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Предохранитель фазы B" Id="801759b8-f1f7-46e7-baa2-3bf8d47edc96" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Предохранитель фазы А" Id="548ae37f-9a05-4282-ab7c-f660719b729d" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Блокировка QS1 (переключатель на внешнюю сеть)" Id="081f5583-b4b9-47ea-93db-c39e3ece16f2" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Блокировка дверей МТ" Id="dad8ea5d-7b25-4581-9a60-3e195a921c8c" />
+        <VarVal Position="2.0" Length="1" Name="Состояние входа 1: Блокировка дверей ВВК" Id="d658e22f-655e-4b56-9e94-b7061f72bd85" />
+        <VarVal Position="3.6" Length="1" Name="Состояние входа 15: Блокировка контактор отключения ТЭД №2" Id="019afda3-cc67-41ab-a969-411492937afe" />
+        <VarVal Position="3.5" Length="1" Name="Состояние входа 14: Блокировка контактор отключения ТЭД №1" Id="33db979a-d080-4574-aff8-67f7f978bf5a" />
+        <VarVal Position="3.4" Length="1" Name="Состояние входа 13: Блокировка реле вентилятора обдува ТЭД" Id="91a5071f-aebd-477d-ba2d-cd6738257866" />
+        <VarVal Position="3.3" Length="1" Name="Состояние входа 12: Блокировка реверсор назад" Id="46a00fe7-af22-497e-b3a1-3ad43681848f" />
+        <VarVal Position="3.2" Length="1" Name="Состояние входа 11: Блокировка реверсор вперед" Id="abf2085f-d4d7-4ed2-8c9a-30d45c022e57" />
+        <VarVal Position="3.1" Length="1" Name="Состояние входа 10: Реле давления компрессора (РДК)" Id="2fc1b821-ac97-4306-be6a-d370353a0f6a" />
+        <VarVal Position="3.0" Length="1" Name="Состояние входа 9: Давление ТМ (ДТР)" Id="7b2433aa-842c-484f-a348-ef4e41b1e920" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="c3bd4581-332f-4638-b4ad-1cc9966c2826" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="be80ee84-a887-4ef2-ae34-1b642c5c1d9b" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="65afaa2d-cdde-4593-8b02-859d760041a9" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="3ab5e95f-f6f1-4b6b-b862-a3cc5c752a76" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БВС6">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x1B" Name="#ADDR" Id="b4434e42-fa49-4380-a654-c4f5b9166231" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="94fd0522-c20a-4231-80e3-b91122c5d13b" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="a462f6ba-1a77-492d-9ce8-8afeabe254e1" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="d3d0b6ad-2405-4dc7-8e7c-5ed35df9f47f" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x1B" Name="#ADDR" Id="a910be06-b93c-401a-9d99-81e37419be42" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="23f4ceb9-9c4b-4f85-950d-12e301341a8e" />
+        <VarVal Position="2.4" Length="1" Name="Состояние входа 5: Аварийное возбуждение генератора" Id="e5eb165d-bbcc-4a37-99bc-1b1262d93fa1" />
+        <VarVal Position="2.3" Length="1" Name="Состояние входа 4: Возбуждение генератора включено" Id="23a59369-1bba-429b-9748-131b80a2cb99" />
+        <VarVal Position="2.2" Length="1" Name="Состояние входа 3: Блокировка QS2 (ввод тепловоза в депо)" Id="bb36ec09-1b5b-408a-83ce-e12b62fd91ec" />
+        <VarVal Position="2.1" Length="1" Name="Состояние входа 2: Блокировка QF3 (питание БКО)" Id="403bcb81-033b-478e-92ad-e59cfb97617a" />
+        <VarVal Position="2.0" Length="1" Name="Состояние входа 1: Блокировка QF10 (питание МТ)" Id="f57add82-7d00-4557-838c-261614a975fe" />
+        <VarVal Position="4.1" Length="1" Name="Статус блока: Сброс от монитора питания" Id="1b0d948a-3892-4371-b35e-5a255f57b72d" />
+        <VarVal Position="4.0" Length="1" Name="Статус блока: Сброс от внешнего входа" Id="3d8307d5-325b-4aa7-bc61-6b48219287cb" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="070a3a90-b987-4d08-9cd6-3e859e9bffc8" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="e99ebc7a-27ac-4789-bbdc-2b5f0a09e900" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БУК 1">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x21" Name="#ADDR" Id="91015a56-d8da-451a-9c50-1d157ff60281" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="fc569140-1357-42e0-aebb-fe0ba78b39a5" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="3700a5d4-bd8e-423b-85e4-f47fc3d5c808" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="3f2ae687-7309-4e25-8056-fd9f48645edd" />
+      </Request>
+      <Reply Length="8" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x21" Name="#ADDR" Id="90ee793b-de49-468c-bf69-8afc77c6ae2f" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="501ba805-d7c8-4aeb-a16f-67d5e0d66842" />
+        <VarVal Position="2.7" Length="1" Name="Бит D0 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="233692f8-0fd7-47b1-9190-52183a3e3a63" />
+        <VarVal Position="2.6" Length="1" Name="Бит D0 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="c0ba6c9f-6b87-4eba-8c73-3354a6c604c9" />
+        <VarVal Position="2.5" Length="1" Name="Бит D0 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="a23e41b7-7914-4a6e-8c06-1cbd7c949b0a" />
+        <VarVal Position="2.4" Length="1" Name="Бит D0 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="9fc20d4a-e7f4-4526-b4b7-9ecbe62023ab" />
+        <VarVal Position="2.3" Length="1" Name="Бит D0 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="600a2d55-a3b9-414a-bdd4-748a13fc18a5" />
+        <VarVal Position="2.2" Length="1" Name="Бит D0 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="b50f71e6-a953-4c51-90f6-aa33ef861cb8" />
+        <VarVal Position="2.1" Length="1" Name="Бит D0 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="6259a0be-d585-45cc-b7a1-9e71956c30bc" />
+        <VarVal Position="2.0" Length="1" Name="Бит D0 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="26f32545-a2e1-423c-93db-7dc16bf25ea0" />
+        <VarVal Position="3.7" Length="1" Name="Бит D1 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="b363ae6e-cf4d-4673-9efa-feab89df242b" />
+        <VarVal Position="3.6" Length="1" Name="Бит D1 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="6c9ee3ce-029a-4b90-a92d-8ac2f6cb40b6" />
+        <VarVal Position="3.5" Length="1" Name="Бит D1 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="0773c908-7650-4a06-8cb5-8d086b7cb3fe" />
+        <VarVal Position="3.4" Length="1" Name="Бит D1 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="69bd38cc-640f-414b-a510-3917a635374e" />
+        <VarVal Position="3.3" Length="1" Name="Бит D1 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="a9899c6c-9dec-4cc1-9446-e21730f501e5" />
+        <VarVal Position="3.2" Length="1" Name="Бит D1 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="9eba42d0-1827-486f-bd43-1d9d62ece056" />
+        <VarVal Position="3.1" Length="1" Name="Бит D1 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="c3a6d9cd-ffd4-4fd5-b700-0f61cd468f19" />
+        <VarVal Position="3.0" Length="1" Name="Бит D1 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="d94afd1b-743c-4a0d-b929-eb8866236d32" />
+        <VarVal Position="4.7" Length="1" Name="Бит D2 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="11b58835-20f0-460f-9529-1c76df7de1c5" />
+        <VarVal Position="4.6" Length="1" Name="Бит D2 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="b033e4a4-8d96-4482-93e4-5ec2a6156320" />
+        <VarVal Position="4.5" Length="1" Name="Бит D2 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="8cb2e8a8-95b0-47a8-b515-70e41f1dba5e" />
+        <VarVal Position="4.4" Length="1" Name="Бит D2 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="d8cb51c5-5396-4796-92ef-f7ea23b1df6c" />
+        <VarVal Position="4.3" Length="1" Name="Бит D2 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="5d5c8867-86ee-4413-92d7-6727e32caccc" />
+        <VarVal Position="4.2" Length="1" Name="Бит D2 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="eee9c7cc-0365-4008-b6bc-6ebce9185f1b" />
+        <VarVal Position="4.1" Length="1" Name="Бит D2 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="7bf077fb-badf-4c69-8e1f-ca1510c41523" />
+        <VarVal Position="4.0" Length="1" Name="Бит D2 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="7415d28e-063f-4fee-96f9-49e2cabe31d1" />
+        <VarVal Position="5.1" Length="1" Name="Сброс от монитора питания" Multiplier="1.0" IsSigned="False" Id="df96de39-eaef-47c0-be64-537c4861ad1d" />
+        <VarVal Position="5.0" Length="1" Name="Сброс от внешнего входа" Multiplier="1.0" IsSigned="False" Id="99515c1d-d7bf-47d2-a5f4-0c38e8ba4349" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="96306e72-37b7-4ec6-ab32-7ede3a7f71e7" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="08ad1ee4-eb4c-406f-9f6a-b593b6909316" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БУК 2">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x22" Name="#ADDR" Id="e97d72e7-24b5-46a4-b9da-03818d40fb7e" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="fb4a7f6c-ec63-4493-bba5-8d3341f9cd7c" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="1e1cb8c3-a5f2-4475-9294-0cda1fe1a050" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="a11e45e3-e73f-4191-bb37-77e2847f8ea4" />
+      </Request>
+      <Reply Length="8" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x22" Name="#ADDR" Id="a7694916-0e22-489b-8d88-318813e81647" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="9ebf1c57-20c5-4994-849b-8483a06808e0" />
+        <VarVal Position="2.7" Length="1" Name="Бит D0 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="bcf1df44-921b-4c33-b864-782a8aef6ad5" />
+        <VarVal Position="2.6" Length="1" Name="Бит D0 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="487e706b-66f6-41b3-a521-54663a3bc421" />
+        <VarVal Position="2.5" Length="1" Name="Бит D0 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="bd0073d8-f40a-499b-8932-e69b4fec47b2" />
+        <VarVal Position="2.4" Length="1" Name="Бит D0 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="55d2b308-b9fc-4f36-a22d-83867650cf92" />
+        <VarVal Position="2.3" Length="1" Name="Бит D0 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="03d62255-cec0-4fa2-a0cf-0f33fff475cb" />
+        <VarVal Position="2.2" Length="1" Name="Бит D0 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="a04af8ac-a7a2-413f-8d00-d69263501281" />
+        <VarVal Position="2.1" Length="1" Name="Бит D0 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="2a940818-85cb-45df-85b5-eb0d1d1cb2da" />
+        <VarVal Position="2.0" Length="1" Name="Бит D0 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="7b509ace-3ec5-467e-9d51-35bb8844ca7b" />
+        <VarVal Position="3.7" Length="1" Name="Бит D1 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="ff5ebbcf-805d-49ac-bc7b-f71bba7d90e1" />
+        <VarVal Position="3.6" Length="1" Name="Бит D1 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="8cf1c151-a148-4383-8bf1-beb57aabba76" />
+        <VarVal Position="3.5" Length="1" Name="Бит D1 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="d0173712-39d8-464f-a7ba-e7eed80c1d67" />
+        <VarVal Position="3.4" Length="1" Name="Бит D1 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="43867585-07d6-4ba6-b02f-2859acc5fce6" />
+        <VarVal Position="3.3" Length="1" Name="Бит D1 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="6b4aea50-dce0-425e-bd30-11b696093908" />
+        <VarVal Position="3.2" Length="1" Name="Бит D1 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="afa954b4-6e16-4413-9d8e-512b65cd1efc" />
+        <VarVal Position="3.1" Length="1" Name="Бит D1 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="f63c6937-e935-42c2-8f10-85c2ec58a15a" />
+        <VarVal Position="3.0" Length="1" Name="Бит D1 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="527c35ad-08fa-48fb-869c-5022212033d6" />
+        <VarVal Position="4.7" Length="1" Name="Бит D2 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="7cfc4136-ae79-49e7-9692-f69f4d08b9f8" />
+        <VarVal Position="4.6" Length="1" Name="Бит D2 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="9548ea25-0769-494a-a516-ffa262905ece" />
+        <VarVal Position="4.5" Length="1" Name="Бит D2 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="cda395f7-90b4-4d29-ad34-09ed188c2ccb" />
+        <VarVal Position="4.4" Length="1" Name="Бит D2 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="19aa6734-dd99-4d2b-a9b5-e1408bbfcdd1" />
+        <VarVal Position="4.3" Length="1" Name="Бит D2 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="b440c577-5e99-48b8-b9ba-62b679b441dc" />
+        <VarVal Position="4.2" Length="1" Name="Бит D2 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="1097eda0-3ea3-4337-b3d1-085b53682d77" />
+        <VarVal Position="4.1" Length="1" Name="Бит D2 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="e3490188-6b6b-4923-a5bc-0611a345ae50" />
+        <VarVal Position="4.0" Length="1" Name="Бит D2 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="af1366e3-683f-4da7-b394-89966c5bb5a4" />
+        <VarVal Position="5.1" Length="1" Name="Сброс от монитора питания" Multiplier="1.0" IsSigned="False" Id="97f6c13a-33ba-4b97-92a5-11c6418db763" />
+        <VarVal Position="5.0" Length="1" Name="Сброс от внешнего входа" Multiplier="1.0" IsSigned="False" Id="d9b5b853-317e-408c-bfab-b120266d5190" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="a98450e9-5f7b-4a26-80cd-b13522b62288" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="4431b24c-d590-4925-9022-958dc1ea825a" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БУК 3">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x24" Name="#ADDR" Id="3877a569-3fd0-43ed-b217-9bf659303060" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="723904b8-6f95-4c2e-a61a-92805c9a4101" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="6a5d5e0a-8f68-4bfb-aac0-f40869764d63" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="a5a7b4a5-c9a1-47ef-95b1-0ec5e2b496c5" />
+      </Request>
+      <Reply Length="8" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x24" Name="#ADDR" Id="42a17972-9f72-4d6e-98ab-02d021fe0126" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="bc10290d-6b92-49f0-8005-70749029522f" />
+        <VarVal Position="2.7" Length="1" Name="Бит D0 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="436979bc-c87f-4720-ad69-5cf6e971fcfa" />
+        <VarVal Position="2.6" Length="1" Name="Бит D0 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="3737497d-29e5-475c-8dcf-811c6aede1a2" />
+        <VarVal Position="2.5" Length="1" Name="Бит D0 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="cb217fae-9d77-423a-ab94-3798b48c191c" />
+        <VarVal Position="2.4" Length="1" Name="Бит D0 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="78048895-4653-4e8c-87fb-4ac069712941" />
+        <VarVal Position="2.3" Length="1" Name="Бит D0 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="d5b0f80d-800f-42fb-8a98-c14307e95cff" />
+        <VarVal Position="2.2" Length="1" Name="Бит D0 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="6a2ec343-fcd2-47d5-abde-cc625eb5e1f4" />
+        <VarVal Position="2.1" Length="1" Name="Бит D0 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="6c1c41d4-1e9a-4382-bf29-b09306fb3b8a" />
+        <VarVal Position="2.0" Length="1" Name="Бит D0 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="513f79f4-d19c-47cc-933d-b24e4e1184fd" />
+        <VarVal Position="3.7" Length="1" Name="Бит D1 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="abb0f98e-8591-4b94-bed3-a70f65ce5d26" />
+        <VarVal Position="3.6" Length="1" Name="Бит D1 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="05de2c26-6922-481f-bc59-810ee7ae7d20" />
+        <VarVal Position="3.5" Length="1" Name="Бит D1 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="ec0f8528-09e1-4a03-93f9-50d0a911af07" />
+        <VarVal Position="3.4" Length="1" Name="Бит D1 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="0a3a7094-f178-42e7-bd1e-137a3256f9de" />
+        <VarVal Position="3.3" Length="1" Name="Бит D1 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="e85babf0-ad83-4c9c-935e-f02e84b18d0f" />
+        <VarVal Position="3.2" Length="1" Name="Бит D1 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="cebb29b0-54c2-4d81-bd59-5e4b5689b7dd" />
+        <VarVal Position="3.1" Length="1" Name="Бит D1 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="586474ea-4d1b-460f-bb23-3c503716fd7c" />
+        <VarVal Position="3.0" Length="1" Name="Бит D1 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="49e9270b-bb24-4a6b-8144-0acb6f09bd5e" />
+        <VarVal Position="4.7" Length="1" Name="Бит D2 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="665c21b1-f0e5-4f8d-a60b-763edd513535" />
+        <VarVal Position="4.6" Length="1" Name="Бит D2 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="b0ed58db-c8c1-4853-ace6-4e3608a9f828" />
+        <VarVal Position="4.5" Length="1" Name="Бит D2 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="0494d5fb-ab6c-467e-86a2-03801ae35899" />
+        <VarVal Position="4.4" Length="1" Name="Бит D2 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="1e63f6f2-54b9-4c9a-a2c5-adf7cf662e79" />
+        <VarVal Position="4.3" Length="1" Name="Бит D2 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="c6030a0e-e732-4264-b20f-29298a0979fa" />
+        <VarVal Position="4.2" Length="1" Name="Бит D2 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="8db158b1-a499-463d-b813-8dac84a13c7a" />
+        <VarVal Position="4.1" Length="1" Name="Бит D2 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="797cb08a-55d9-4ce9-957a-c8fdcdbffdad" />
+        <VarVal Position="4.0" Length="1" Name="Бит D2 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="ba39bd4d-e18f-45eb-a9b4-74bd8c92034e" />
+        <VarVal Position="5.1" Length="1" Name="Сброс от монитора питания" Multiplier="1.0" IsSigned="False" Id="256ac2df-f330-44e8-97b6-531b1fcd108c" />
+        <VarVal Position="5.0" Length="1" Name="Сброс от внешнего входа" Multiplier="1.0" IsSigned="False" Id="8670acf7-41fd-455d-a40f-8cc7bc93312b" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="71c94601-f948-47f3-a6bf-da8d2816a746" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="ca91513d-c975-40b6-8a7c-f8ad9d823264" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БУК 4">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x27" Name="#ADDR" Id="b9d5d5fd-399b-45d1-8a61-9666f519e122" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="80544e20-f510-4fa7-8bb0-810a0183f011" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="287160ed-af1c-4b34-8de7-2e77142252fa" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="9547c8c3-c06f-469e-9010-03aacdcb865f" />
+      </Request>
+      <Reply Length="8" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x27" Name="#ADDR" Id="482df31f-162c-41e8-a3e9-255da91e2fc5" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="b40d0453-56dd-4bf0-a600-02a823462e6b" />
+        <VarVal Position="2.7" Length="1" Name="Бит D0 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="93f4943e-6d21-4b06-8ed2-8f9882fdd42c" />
+        <VarVal Position="2.6" Length="1" Name="Бит D0 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="62147f8b-2f00-4e85-8e7c-6ff2708db9a0" />
+        <VarVal Position="2.5" Length="1" Name="Бит D0 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="c282b85f-bb96-495f-b8e7-b29a95188aa7" />
+        <VarVal Position="2.4" Length="1" Name="Бит D0 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="c155e36d-a466-4427-ab92-0fca8ac8a3c8" />
+        <VarVal Position="2.3" Length="1" Name="Бит D0 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="d8dbf2fb-2024-4a99-a449-a0f07bca3ce4" />
+        <VarVal Position="2.2" Length="1" Name="Бит D0 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="8d129ac8-15f5-44a2-8c86-5e7de6560c46" />
+        <VarVal Position="2.1" Length="1" Name="Бит D0 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="55c66d29-3f26-4ca7-b039-52ccdb5a6ee9" />
+        <VarVal Position="2.0" Length="1" Name="Бит D0 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="03f10927-bdfb-43b2-b620-54f48df81506" />
+        <VarVal Position="3.7" Length="1" Name="Бит D1 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="71bf5bb1-5cfe-4024-bfd9-0a32187d9bb8" />
+        <VarVal Position="3.6" Length="1" Name="Бит D1 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="5b586dca-0bc5-4b30-bba8-118c271e94db" />
+        <VarVal Position="3.5" Length="1" Name="Бит D1 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="46ac95db-5b06-4c34-9852-038d2cdd6551" />
+        <VarVal Position="3.4" Length="1" Name="Бит D1 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="f9b708fc-9944-48ff-9b6a-81ec325f7bd7" />
+        <VarVal Position="3.3" Length="1" Name="Бит D1 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="2869d367-1a65-4f47-a9f6-46277ffcf145" />
+        <VarVal Position="3.2" Length="1" Name="Бит D1 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="922ba9fc-3057-4d9b-8f0b-fc6656de0a4d" />
+        <VarVal Position="3.1" Length="1" Name="Бит D1 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="95eab9f9-3912-43a1-a98c-ac91633c99af" />
+        <VarVal Position="3.0" Length="1" Name="Бит D1 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="a0413417-ab71-48e0-af45-cf30b0d160a6" />
+        <VarVal Position="4.7" Length="1" Name="Бит D2 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="4137b86f-ce27-401c-8ba2-1385ba741c2d" />
+        <VarVal Position="4.6" Length="1" Name="Бит D2 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="4ecfb0b8-24fe-480f-afef-323662f99d78" />
+        <VarVal Position="4.5" Length="1" Name="Бит D2 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="2e4734c7-629d-464b-bccf-b81e01b5fd5c" />
+        <VarVal Position="4.4" Length="1" Name="Бит D2 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="233dade5-19de-4aa3-ad65-7c9f00fc9c13" />
+        <VarVal Position="4.3" Length="1" Name="Бит D2 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="ae7bce6b-b07e-44a0-b114-3723dc884c95" />
+        <VarVal Position="4.2" Length="1" Name="Бит D2 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="238aa403-abe9-4492-ac0c-b4f13667c2b3" />
+        <VarVal Position="4.1" Length="1" Name="Бит D2 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="af1876b5-ada6-4356-8a8e-07d6b14fb31f" />
+        <VarVal Position="4.0" Length="1" Name="Бит D2 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="80b09778-38cf-4497-8568-d6e441579829" />
+        <VarVal Position="5.1" Length="1" Name="Сброс от монитора питания" Multiplier="1.0" IsSigned="False" Id="ad05b327-927a-4920-a6d1-babce71c0c37" />
+        <VarVal Position="5.0" Length="1" Name="Сброс от внешнего входа" Multiplier="1.0" IsSigned="False" Id="a4176fd1-09a5-4493-b59a-79bf1e6cb578" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="799dbc7b-e69b-4592-a9fb-18030f8fc2a2" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="f4e1aa7b-830b-45f3-982f-cb5d7419dd22" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БУК 5">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x28" Name="#ADDR" Id="f9422ff8-d5ac-47f6-ac57-a1a70dc350ea" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="62c895fb-47e1-4819-b3c7-559d4d24c6e7" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="3bcffa52-5d32-4097-915b-793870c245c4" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="e4acdfe7-5600-45f1-a67d-df8371a5656d" />
+      </Request>
+      <Reply Length="8" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x28" Name="#ADDR" Id="e595ef15-3caf-461c-a591-bdaa2a6b703b" />
+        <DefVal Position="1.0" Length="8" Value="0x42" Name="#NCMD" Id="cb512698-b2b4-4293-8d7f-05cb4328862a" />
+        <VarVal Position="2.7" Length="1" Name="Бит D0 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="b423ea30-15b5-4604-825a-441bb215fcc5" />
+        <VarVal Position="2.6" Length="1" Name="Бит D0 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="92bf41b1-2b7b-4bc0-91e0-a5e9ee8c8ed9" />
+        <VarVal Position="2.5" Length="1" Name="Бит D0 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="336d6a49-fcf5-4494-a3e5-19b1dab242ff" />
+        <VarVal Position="2.4" Length="1" Name="Бит D0 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="f03d6908-aa07-45b7-8916-26b788f001ad" />
+        <VarVal Position="2.3" Length="1" Name="Бит D0 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="88a911ad-614d-48e6-8086-b347485c81a6" />
+        <VarVal Position="2.2" Length="1" Name="Бит D0 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="e7860b10-4d5d-4877-b30b-a8bc4c93e1cb" />
+        <VarVal Position="2.1" Length="1" Name="Бит D0 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="94e3873e-e981-47ff-b7db-3e01140779d3" />
+        <VarVal Position="2.0" Length="1" Name="Бит D0 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="51d078b3-4826-41f6-b4fe-73d821cbde30" />
+        <VarVal Position="3.7" Length="1" Name="Бит D1 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="91e0fb11-abe3-4ddb-bcfa-ab549ffb8699" />
+        <VarVal Position="3.6" Length="1" Name="Бит D1 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="539143de-94bc-4444-86cc-e89c5b51c057" />
+        <VarVal Position="3.5" Length="1" Name="Бит D1 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="47e9dc1a-ce3e-4f27-9c69-e529ef7963d7" />
+        <VarVal Position="3.4" Length="1" Name="Бит D1 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="94ff405f-c9a6-4d68-bf30-accb30fd1c28" />
+        <VarVal Position="3.3" Length="1" Name="Бит D1 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="ddb7f64a-32da-421c-972a-5c4ad6ec5d59" />
+        <VarVal Position="3.2" Length="1" Name="Бит D1 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="02df578f-7af0-4f35-843b-2fa1f696cbb4" />
+        <VarVal Position="3.1" Length="1" Name="Бит D1 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="b7ebb6a2-4a3a-44d2-b6a9-a72d07cdd58a" />
+        <VarVal Position="3.0" Length="1" Name="Бит D1 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="48d3c2dd-1282-4607-adc9-8712d3e1a038" />
+        <VarVal Position="4.7" Length="1" Name="Бит D2 кода неисправности ключа 8" Multiplier="1.0" IsSigned="False" Id="9d7d1006-bf91-478b-9085-51f31adfcb96" />
+        <VarVal Position="4.6" Length="1" Name="Бит D2 кода неисправности ключа 7" Multiplier="1.0" IsSigned="False" Id="526790f7-d2ee-4b96-b031-8de7001d6ccc" />
+        <VarVal Position="4.5" Length="1" Name="Бит D2 кода неисправности ключа 6" Multiplier="1.0" IsSigned="False" Id="e333745e-e59e-47d7-aae8-a4f0a5d9c58e" />
+        <VarVal Position="4.4" Length="1" Name="Бит D2 кода неисправности ключа 5" Multiplier="1.0" IsSigned="False" Id="514cabf7-fa7a-4f5b-b246-5f567539e2c0" />
+        <VarVal Position="4.3" Length="1" Name="Бит D2 кода неисправности ключа 4" Multiplier="1.0" IsSigned="False" Id="d25fe9c0-7ec9-48ba-b751-253c4f605ddf" />
+        <VarVal Position="4.2" Length="1" Name="Бит D2 кода неисправности ключа 3" Multiplier="1.0" IsSigned="False" Id="e0e8f0c4-ef1c-41cc-8a71-7f04b64724bf" />
+        <VarVal Position="4.1" Length="1" Name="Бит D2 кода неисправности ключа 2" Multiplier="1.0" IsSigned="False" Id="0e76a9ee-138c-4da4-b7cf-58a69cb41869" />
+        <VarVal Position="4.0" Length="1" Name="Бит D2 кода неисправности ключа 1" Multiplier="1.0" IsSigned="False" Id="49ee9349-00ae-40d4-8175-b4991913505a" />
+        <VarVal Position="5.1" Length="1" Name="Сброс от монитора питания" Multiplier="1.0" IsSigned="False" Id="6bc40e8c-eab7-429a-bf4d-6a6f29b71259" />
+        <VarVal Position="5.0" Length="1" Name="Сброс от внешнего входа" Multiplier="1.0" IsSigned="False" Id="338f06a7-fa63-4b3a-86d3-d81c0002dbd8" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="1ccb060b-483b-4bba-85c5-7a33712e0f82" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="50ada9d1-e2e3-476f-aa5a-709b0b930993" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и Джойстик 1">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x33" Name="#ADDR" Id="2a1c13dc-a830-475f-8376-640364e8e401" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="ea340614-7ab2-4611-b484-254032e40263" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="2170c89c-9347-4d94-b82e-8d35c73d4016" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="89ff0fd9-b7c1-4e5d-b14d-c2cfd50e4a3c" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x33" Name="#ADDR" Id="514d570a-60a8-4459-8a17-8b5e6e43c992" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="1b1048af-17b0-44bb-8b20-d71f89e2b4ee" />
+        <VarVal Position="2.7" Length="1" Name="Данные контроллера скорости: Ошибка данных рукоятки 'c', нет обмена с ДУ по байт-статусу" Multiplier="1.0" IsSigned="False" Id="c1eb2467-3067-446c-8c25-04d02721b215" />
+        <VarVal Position="2.6" Length="1" Name="Данные контроллера скорости: Ошибка диапазона рукоятки 'с', вышли за диапазон крайних точек, включая 30 дискрет" Multiplier="1.0" IsSigned="False" Id="69d43dc9-6be1-4b78-8dd0-895a28fc75f6" />
+        <VarVal Position="2.2" Length="1" Name="Данные контроллера скорости: -1 (com3)" Multiplier="1.0" IsSigned="False" Id="0386a092-7bb6-4cd2-9160-d8fe8d0d4f17" />
+        <VarVal Position="2.1" Length="1" Name="Данные контроллера скорости: Н (com2)" Multiplier="1.0" IsSigned="False" Id="19660bb1-9c92-4029-b59a-1a6372f27cba" />
+        <VarVal Position="2.0" Length="1" Name="Данные контроллера скорости: +1 (com1)" Multiplier="1.0" IsSigned="False" Id="c70db46b-36bf-4f69-8e1c-410f1361ab94" />
+        <VarVal Position="4.2" Length="1" Name="Статус: Ошибка контроллера скорости, при наличии одной из ошибок: ошибка диапазона рукоятки с или ошибка данных рукоятки 'с'" Multiplier="1.0" IsSigned="False" Id="cbaba150-fb09-437e-83a1-ee4448870fed" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="5e9de2a4-eef9-423c-b791-5d81796cf113" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="b35c2a24-19cb-4826-a684-d6157fdbdaa7" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и Джойстик 2">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x34" Name="#ADDR" Id="199602f5-8f7a-40bf-b562-93e608007b23" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="360a685d-4dfc-426a-8d71-6ab638dfdd9c" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="ba22cf01-1794-4d93-b199-11c9bd397506" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="809cdee9-031d-421c-bba1-4e79556b0d43" />
+      </Request>
+      <Reply Length="7" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x34" Name="#ADDR" Id="9b3a7a68-9eee-425a-b4e2-75cafac3cda8" />
+        <DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="25d11fcc-7001-44a6-9d7a-8e91b6fe936d" />
+        <VarVal Position="2.7" Length="1" Name="Данные контроллера скорости: Ошибка данных рукоятки 'c', нет обмена с ДУ по байт-статусу" Multiplier="1.0" IsSigned="False" Id="29eb6b0f-269a-4cf4-b422-a0270daaca2f" />
+        <VarVal Position="2.6" Length="1" Name="Данные контроллера скорости: Ошибка диапазона рукоятки 'с', вышли за диапазон крайних точек, включая 30 дискрет" Multiplier="1.0" IsSigned="False" Id="a3c22608-1dc9-4834-bc70-60bc20831128" />
+        <VarVal Position="2.2" Length="1" Name="Данные контроллера скорости: -1 (com3)" Multiplier="1.0" IsSigned="False" Id="c32542d3-65b3-4fe1-a7cf-e48a39dfe39a" />
+        <VarVal Position="2.1" Length="1" Name="Данные контроллера скорости: Н (com2)" Multiplier="1.0" IsSigned="False" Id="23eed8d8-ee07-41ff-a1ad-c8c2f74993d9" />
+        <VarVal Position="2.0" Length="1" Name="Данные контроллера скорости: +1 (com1)" Multiplier="1.0" IsSigned="False" Id="6016a3b0-0af5-4b93-bf9f-d5f6a156ad26" />
+        <VarVal Position="4.2" Length="1" Name="Статус: Ошибка контроллера скорости, при наличии одной из ошибок: ошибка диапазона рукоятки с или ошибка данных рукоятки 'с'" Multiplier="1.0" IsSigned="False" Id="b6fb4d8a-fc99-4924-9318-277ed4861db5" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="6e3c70c0-e2fa-40e5-b60e-2c99ddbb6973" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="3f7cd8cb-60d8-4fdd-9d26-3d74ccec0bcf" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БС-КПД">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x42" Name="#ADDR" Id="12d12e3c-0535-40ec-ab05-75aa259348e0" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="2c9d3bb9-2b77-4683-b87d-931489fced5d" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="e4d43247-81f5-49d9-8343-0e720490691e" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="57d4e5c2-a0be-4ac6-85a3-74dc48ad4d4b" />
+      </Request>
+      <Reply Length="29" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x42" Name="#ADDR" Id="5dc01980-39a1-439a-a3bb-99857664b265" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="f06215f6-fbef-47db-8ddf-e3add66a93e2" />
+        <CpzPrm Name="Давление в тормозной магистрали" Expression="[u2] * 0.1" Id="3051b946-91bd-423d-bdaf-b9554281fbd4" />
+        <CpzPrm Name="Давление в тормозном цилиндре" Expression="[u3] *0.1" Id="1d376b4f-20a2-42b2-a17c-0af17741eee3" />
+        <CpzPrm Name="Давление в главном резервуаре" Expression="[u4] *0.1" Id="f82fde41-8b6c-4070-a9e2-37497dfc2567" />
+        <CpzPrm Name="Давление в уравнительном резервуаре 1" Expression="[u5] *0.1" Id="35aabe8d-2199-4c7d-a9dd-10e7c8a031c1" />
+        <CpzPrm Name="Давление в уравнительном резервуаре 2" Expression="[u6] *0.1" Id="af8f85c2-3d22-4929-8760-2bde29b0bff3" />
+        <CpzPrm Name="Общий пробег" Expression="[u7] + [u8]*256.0 + [u9]*65536.0 + [u10]*16777216.0" Id="ae726a2d-8ad9-4c53-92ab-d7ced7401f67" />
+        <CpzPrm Name="Серия локомотива" Expression="[u11] + [u12]*256.0" Id="9c8b5b77-85f9-4489-9fd7-97a803818942" />
+        <CpzPrm Name="Номер локомотива" Expression="[u13] + [u14]*256.0" Id="ba03e865-e50e-45c0-80d1-2d3fad390d30" />
+        <VarVal Position="15.7" Length="1" Name="Ключ ЭПК 2 каб" Multiplier="1.0" IsSigned="False" Id="45a33f7f-3666-41f7-9d83-5d7fac8439e3" />
+        <VarVal Position="15.6" Length="1" Name="Ключ ЭПК 1 каб" Multiplier="1.0" IsSigned="False" Id="a97c5e64-87fd-4d76-9386-6abc8e964b71" />
+        <VarVal Position="16.5" Length="1" Name="Состояние ЭПК" Multiplier="1.0" IsSigned="False" Id="01441983-8138-4116-ab95-aab78de920ce" />
+        <CpzPrm Name="Коды огней светофора многозначной АЛС" Expression="[16.0.4] * 1.0" Id="894e82fb-8b24-41e5-9d9c-28f7f9bf9837" />
+        <CpzPrm Name="Скорость, км/ч" Expression="([u17] + [18.0.4]*256.0)*(1.0 - [18.7]*0.9)" Id="ea72e8d2-d842-4bc4-92f4-6f5985a132f9" />
+        <CpzPrm Name="Ускорение, м/с2" Expression="([u19] + [u20]*256.0)*0.01" Id="b5a934af-a6a3-4f35-805f-0c4f672c787e" />
+        <CpzPrm Name="Объем топлива (система Кварта), 1 дм3" Expression="[u21] + [u22]*256.0" Id="74059019-ab22-4245-b09d-86d9bcbba6d7" />
+        <CpzPrm Name="Температура топлива, °C" Expression="[s23] * 1.0" Id="3c8f8589-fd32-40d6-9a7e-a5e568ec2416" />
+        <CpzPrm Name="Плотность топлива (система Кварта), 1 кг/м3" Expression="[u24] + [u25]*256.0" Id="c59342a7-2ad4-436c-adf6-2ac82eb1a1d0" />
+        <VarVal Position="26.3" Length="1" Name="Отсутствие информации о пробеге и локомотиве" Multiplier="1.0" IsSigned="False" Id="a62077d5-1e4b-4836-8246-16351c15390a" />
+        <VarVal Position="26.2" Length="1" Name="Признак потери связи по данным АЛС" Multiplier="1.0" IsSigned="False" Id="42f6b73e-7c39-4c3c-b6dd-32a206b8c4ba" />
+        <VarVal Position="26.1" Length="1" Name="Отсутствие информации о топливе" Multiplier="1.0" IsSigned="False" Id="9cb8443a-e80b-4272-bf8e-5d52d7686632" />
+        <VarVal Position="26.0" Length="1" Name="Признак потери связи по скорости и давлениям" Multiplier="1.0" IsSigned="False" Id="7c1d7b69-0f10-47a1-93b8-4277222bad07" />
+        <VarVal Position="27.0" Length="8" Name="#CRCH" Id="0203b812-5339-4317-af72-dd4ff3c1b1f5" />
+        <VarVal Position="28.0" Length="8" Name="#CRCL" Id="cfea0bb0-fe0d-487c-9048-c3b8d87ff8e9" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БС-ДГ">
+      <Request Length="7" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x43" Name="#ADDR" Id="28557068-d676-468b-a3c9-29c161cc2cd9" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="65eafd52-c70e-4c3a-a620-d92e429b11e7" />
+        <CpzPrm Name="Уставка по частоте вращения дизеля (Engine Requested Speed/Speed Limit), об/мин" Expression="([u2] + [u3]*256.0) * 0.125" Id="56797ebd-8e34-4968-9218-818a82ef46a0" />
+        <VarVal Position="4.0" Length="1" Name="Останов Дизеля (Auxiliary Engine Shutdown Switch 0 - off, 1 - on)" Multiplier="1.0" IsSigned="False" Id="724823f7-be25-4b37-b766-f618ce480724" />
+        <VarVal Position="5.0" Length="8" Name="#CRCH" Id="8c60d068-6eda-48fa-98f2-0b3ac98ae59b" />
+        <VarVal Position="6.0" Length="8" Name="#CRCL" Id="02ed605e-0b50-4678-96a4-89f610c6932d" />
+      </Request>
+      <Reply Length="23" Position="7">
+        <DefVal Position="0.0" Length="8" Value="0x43" Name="#ADDR" Id="7ac1f312-c899-485e-a22c-3cef3afc847e" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="7800d038-03cb-47e7-93c8-535d0fe645ac" />
+        <CpzPrm Name="Процент загрузки дизеля на текущей скорости (Engine Percent Load At Current Speed), %" Expression="[u2] * 1.0" Id="2b7b5381-c2b5-4cf5-bfaf-97ed50c0f119" />
+        <CpzPrm Name="Текущая скорость (Engine Speed), об/мин" Expression="([u3] + [u4]*256.0) * 0.125" Id="dcd349e8-a851-4790-9367-23dd0d1010ae" />
+        <CpzPrm Name="Давление масла (Engine Oil Pressure), кПа" Expression="[u5] * 4.0" Id="d4c0c35d-7050-431e-a346-6ca1f611bbcc" />
+        <CpzPrm Name="Температура масла (Engine Oil Temperature 1), °С" Expression="([u6] + [u7]*256.0) * 0.03125 - 273.0" Id="769bd63b-c05d-4ef3-8fa2-32e13a2c13ce" />
+        <CpzPrm Name="Температура хладагента (Engine Coolant Temperature), °С" Expression="[u8] - 40.0" Id="c2ed31e6-2790-42a0-bd4f-7f0c5dd44bf2" />
+        <CpzPrm Name="Расход топлива за поездку (Engine Trip Fuel), л" Expression="([u9] + [u10]*256.0 + [u11]*65536.0 + [u12]*16777216.0)*0.5" Id="c0cceae6-2f1b-47a8-9677-3bcca6b1c93f" />
+        <CpzPrm Name="Расход топлива за все время эксплуатации (Engine Total Fuel Used), л" Expression="([u13] + [u14]*256.0 + [u15]*65536.0 + [u16]*16777216.0)*0.5" Id="dbfd2466-b8e1-47c6-a584-1da3427f6441" />
+        <CpzPrm Name="Давление топлива (Engine Fuel Delivery Pressure), кПа" Expression="[u17] * 4.0" Id="951490b0-a60c-42b5-a8f1-b6d4984b7e44" />
+        <CpzPrm Position="18.6" Length="2" Name="Состояние активных сигнальных ламп: Статус сигнала о неисправности (Malfunction Indicator Lamp Status)" Expression="[18.6.2] * 1.0" Id="27b1d421-b2b7-42a3-811e-2e172b769529" />
+        <CpzPrm Position="18.4" Length="2" Name="Состояние активных сигнальных ламп: Статус стоп-сигнала (Red Stop Lamp Status)" Expression="[18.4.2] * 1.0" Id="295ec22b-bfce-4205-ad7f-e6163b502018" />
+        <CpzPrm Position="18.2" Length="2" Name="Состояние активных сигнальных ламп: Статус сигнала предупреждения (Amber Warning Lamp Status)" Expression="[18.2.2] * 1.0" Id="0ce6d866-837b-4f31-b3c5-753e46d8e568" />
+        <CpzPrm Position="18.0" Length="2" Name="Состояние активных сигнальных ламп: Статус сигнала защиты (Protect Lamp Status)" Expression="[18.0.2] * 1.0" Id="96cb8313-39a1-4a2f-8e32-0ac0564ce2c6" />
+        <CpzPrm Position="19.6" Length="2" Name="Состояние пассивных сигнальных ламп: Статус сигнала о неисправности (Malfunction Indicator Lamp Status)" Expression="[19.6.2] * 1.0" Id="dd3f6fa2-dfef-4e88-9a5d-7bf504db5a14" />
+        <CpzPrm Position="19.4" Length="2" Name="Состояние пассивных сигнальных ламп: Статус стоп-сигнала (Red Stop Lamp Status)" Expression="[19.4.2] * 1.0" Id="93755927-7b2d-4d1d-b745-28470d17ee26" />
+        <CpzPrm Position="19.2" Length="2" Name="Состояние пассивных сигнальных ламп: Статус сигнала предупреждения (Amber Warning Lamp Status)" Expression="[19.2.2] * 1.0" Id="02032cc2-6609-41fd-97b6-fa5c05b1e57a" />
+        <CpzPrm Position="19.0" Length="2" Name="Состояние пассивных сигнальных ламп: Статус сигнала защиты (Protect Lamp Status)" Expression="[19.0.2] * 1.0" Id="a1a5a9e4-878a-4112-9007-c2e4defbe325" />
+        <VarVal Position="20.0" Length="1" Name="Нет связи БС-ДГ с системой управления дизелем более 3 секунд" Multiplier="1.0" IsSigned="False" Id="b6890c07-2d06-4041-8925-c3f3344b0a2a" />
+        <VarVal Position="21.0" Length="8" Name="#CRCH" Id="d64b2397-63e5-47c3-a88c-dfd5b613e23c" />
+        <VarVal Position="22.0" Length="8" Name="#CRCL" Id="892ed176-ada5-4296-8daf-946131c7d2fe" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БС СМ">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="93412250-5d0d-4dc2-9c67-64a678021271" />
+        <DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="25f5e3a9-6f98-41b8-be73-6e03fd95fc8e" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="08ddf765-528c-403b-aa65-6679b055e68f" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="6ee3d9ac-758c-46c1-af51-99e802692f77" />
+      </Request>
+      <Reply Length="20" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="4447d539-393c-4079-9cc3-d080593b2635" />
+        <DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="57715c10-013d-4c4d-8d23-0a002fe5fada" />
+        <CpzPrm Name="Байт диагностики управляющего контроллера СМ. Позиционный код" Expression="[u2] * 1.0" Id="aff7a42c-62f5-47ec-97aa-03882dd520b9" />
+        <CpzPrm Name="Уставка по температуре в помещении, °С" Expression="[u3] * 1.0" Id="7dc5b4a2-2cb9-4935-a5ef-5a2bde7f8b7b" />
+        <CpzPrm Name="Уставка по расходу приточного воздуха, %" Expression="[u4] * 1.0" Id="c7684dd6-a1ec-4e14-9b8c-00c8b6c4f88b" />
+        <CpzPrm Name="Температура в помещении (калорифер 1), °С" Expression="[u5] * 1.0" Id="96b25fba-bf3a-4b4c-913b-1bd16c51da1c" />
+        <CpzPrm Name="Байт диагностики калорифера 1. Позиционный код" Expression="[u6] * 1.0" Id="7705e07b-e8e2-44b5-b8da-8cf2dc632d65" />
+        <VarVal Position="7.5" Length="1" Name="Состояние калорифера 1: Неисправность калорифера" Multiplier="1.0" IsSigned="False" Id="e94219cf-f416-4d64-b12a-b7c14d539489" />
+        <VarVal Position="7.1" Length="1" Name="Состояние калорифера 1: Включен ТЭН" Multiplier="1.0" IsSigned="False" Id="ea85da72-a97b-479e-8abe-95f463e0c2d1" />
+        <VarVal Position="7.0" Length="1" Name="Состояние калорифера 1: Включена установка" Multiplier="1.0" IsSigned="False" Id="9543165c-8a50-44d0-8ab5-055ebf1ddef8" />
+        <VarVal Position="8.5" Length="1" Name="Диагностика ПЧ (калорифер 1): Перегрузка по току (&gt;250%)" Multiplier="1.0" IsSigned="False" Id="820883ee-2c35-44b5-9d9f-515f89889b62" />
+        <VarVal Position="8.4" Length="1" Name="Диагностика ПЧ (калорифер 1): Защита по температуре (&gt; 110°C)" Multiplier="1.0" IsSigned="False" Id="2fe195a4-54df-4d29-8b12-97727d1b944a" />
+        <VarVal Position="8.3" Length="1" Name="Диагностика ПЧ (калорифер 1): Пониженное/повышенное напряжение питания транзисторов (15В)" Multiplier="1.0" IsSigned="False" Id="d4988144-e813-47da-8294-0c697752a54f" />
+        <VarVal Position="8.2" Length="1" Name="Диагностика ПЧ (калорифер 1): КЗ нижних транзисторов или перекрытие управляющих сигналов" Multiplier="1.0" IsSigned="False" Id="91838b8e-9a83-4cfd-aa39-17d0fd08a7cb" />
+        <VarVal Position="8.1" Length="1" Name="Диагностика ПЧ (калорифер 1): Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="35b2a6a0-90d1-4c84-b9be-869925effbd7" />
+        <VarVal Position="8.0" Length="1" Name="Диагностика ПЧ (калорифер 1): Перегрузка по току (&gt;150%)" Multiplier="1.0" IsSigned="False" Id="1cdcb0d0-1547-4824-9dc3-dc969cda14c4" />
+        <CpzPrm Name="Температура в помещении (калорифер 2), °С" Expression="[u9] * 1.0" Id="c8056075-b20d-423a-804c-c1967db07a0f" />
+        <CpzPrm Name="Байт диагностики калорифера 2. Позиционный код" Expression="[u10] * 1.0" Id="7b8c1f20-9d7d-47b9-9cfd-3a442eb35a45" />
+        <VarVal Position="11.5" Length="1" Name="Состояние калорифера 2: Неисправность калорифера" Multiplier="1.0" IsSigned="False" Id="68778ffb-786b-48e4-8227-dbbcb94c75ba" />
+        <VarVal Position="11.1" Length="1" Name="Состояние калорифера 2: Включен ТЭН" Multiplier="1.0" IsSigned="False" Id="7bfbff5f-2027-4597-ba03-9280b7aa9cff" />
+        <VarVal Position="11.0" Length="1" Name="Состояние калорифера 2: Включена установка" Multiplier="1.0" IsSigned="False" Id="1c483cb9-b067-47e0-80e1-d4e461c212b7" />
+        <VarVal Position="12.5" Length="1" Name="Диагностика ПЧ (калорифер 2): Перегрузка по току (&gt;250%)" Multiplier="1.0" IsSigned="False" Id="9527a863-17bb-4558-978d-ab3599ba7102" />
+        <VarVal Position="12.4" Length="1" Name="Диагностика ПЧ (калорифер 2): Защита по температуре (&gt; 110°C)" Multiplier="1.0" IsSigned="False" Id="f935e07f-bc63-485f-bd68-bc89e2d6ba78" />
+        <VarVal Position="12.3" Length="1" Name="Диагностика ПЧ (калорифер 2): Пониженное/повышенное напряжение питания транзисторов (15В)" Multiplier="1.0" IsSigned="False" Id="2b74cb6a-7864-4780-912a-cef3fe7db1e8" />
+        <VarVal Position="12.2" Length="1" Name="Диагностика ПЧ (калорифер 2): КЗ нижних транзисторов или перекрытие управляющих сигналов" Multiplier="1.0" IsSigned="False" Id="9f6e5693-b7c9-4905-ada6-54178a756f86" />
+        <VarVal Position="12.1" Length="1" Name="Диагностика ПЧ (калорифер 2): Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="a7a71ca0-7f9e-44a5-8f56-fab158e6e0e9" />
+        <VarVal Position="12.0" Length="1" Name="Диагностика ПЧ (калорифер 2): Перегрузка по току (&gt;150%)" Multiplier="1.0" IsSigned="False" Id="baa69dc8-d396-4eef-80c4-e659f27cc77c" />
+        <CpzPrm Name="Байт диагностики кондиционера. Позиционный код" Expression="[u13] * 1.0" Id="4e5a9607-4a7e-4500-b0cc-95a613acf151" />
+        <CpzPrm Name="Температура в канале приточного воздуха, °С" Expression="[u14] * 1.0" Id="bf2aae90-7b45-4ccf-95f7-98693720defa" />
+        <VarVal Position="15.5" Length="1" Name="Состояние приточной установки и МВП: Неисправность приточной установки и МВП (любая ошибка УД адр.5 или отсутствие вращения вентилятора приточной уст. При вкл. СМК)" Multiplier="1.0" IsSigned="False" Id="7cc0a2c8-df98-46b0-ab16-a5add4d1bbd5" />
+        <VarVal Position="15.4" Length="1" Name="Состояние приточной установки и МВП: 1 - выдано управление вентилятором приточной установки (уставка ШИМ ≠ 0)" Multiplier="1.0" IsSigned="False" Id="96e2dba6-fd36-42d3-a87b-5b990d5b0376" />
+        <VarVal Position="15.3" Length="1" Name="Состояние приточной установки и МВП: Наличие вращения вентилятора приточной установки" Multiplier="1.0" IsSigned="False" Id="941a7c44-47b2-402d-99e0-331f6260c722" />
+        <VarVal Position="15.2" Length="1" Name="Состояние приточной установки и МВП: Включен вентилятор приточной установки" Multiplier="1.0" IsSigned="False" Id="f63a9448-4a63-464c-8371-ddf1afcf9a3d" />
+        <VarVal Position="15.1" Length="1" Name="Состояние приточной установки и МВП: Включен ТЭН (Уставка ШИМтэн ≠0)" Multiplier="1.0" IsSigned="False" Id="7fbe803d-9248-4b1b-b7ac-fe1c71b42bef" />
+        <VarVal Position="15.0" Length="1" Name="Состояние приточной установки и МВП: Включена установка" Multiplier="1.0" IsSigned="False" Id="9e23915e-7011-49db-a2eb-0d0b3282378c" />
+        <VarVal Position="16.5" Length="1" Name="Диагностика ПЧ (приточная установки и МВП): Перегрузка по току (&gt;250%)" Multiplier="1.0" IsSigned="False" Id="b917da94-d1c9-4499-9283-6679c7fdab7a" />
+        <VarVal Position="16.4" Length="1" Name="Диагностика ПЧ (приточная установки и МВП): Защита по температуре (&gt; 110°C)" Multiplier="1.0" IsSigned="False" Id="73a8cd04-81c5-4986-8c17-d7e0ea862397" />
+        <VarVal Position="16.3" Length="1" Name="Диагностика ПЧ (приточная установки и МВП): Пониженное/повышенное напряжение питания транзисторов (15В)" Multiplier="1.0" IsSigned="False" Id="1c3dfe6c-b479-4798-bbba-48bc114baf89" />
+        <VarVal Position="16.2" Length="1" Name="Диагностика ПЧ (приточная установки и МВП): КЗ нижних транзисторов или перекрытие управляющих сигналов" Multiplier="1.0" IsSigned="False" Id="2856ad2c-c6de-441c-b507-a4e1b5ab145d" />
+        <VarVal Position="16.1" Length="1" Name="Диагностика ПЧ (приточная установки и МВП): Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="3a953076-2402-4ede-a88f-8e917afb1f37" />
+        <VarVal Position="16.0" Length="1" Name="Диагностика ПЧ (приточная установки и МВП): Перегрузка по току (&gt;150%)" Multiplier="1.0" IsSigned="False" Id="5f52f56f-c904-4c04-bda9-0c16b50a8e18" />
+        <VarVal Position="17.5" Length="1" Name="Диагностика ПЧ (кондиционер и тепловые панели): Перегрузка по току (&gt;250%)" Multiplier="1.0" IsSigned="False" Id="912f736a-2dd7-4e1e-a40b-73137822c2d4" />
+        <VarVal Position="17.4" Length="1" Name="Диагностика ПЧ (кондиционер и тепловые панели): Защита по температуре (&gt; 110°C)" Multiplier="1.0" IsSigned="False" Id="f2d85c7b-378c-4575-a1e7-843bf0cd3490" />
+        <VarVal Position="17.3" Length="1" Name="Диагностика ПЧ (кондиционер и тепловые панели): Пониженное/повышенное напряжение питания транзисторов (15В)" Multiplier="1.0" IsSigned="False" Id="6b462138-38b2-404c-b947-9796feca1a14" />
+        <VarVal Position="17.2" Length="1" Name="Диагностика ПЧ (кондиционер и тепловые панели): КЗ нижних транзисторов или перекрытие управляющих сигналов" Multiplier="1.0" IsSigned="False" Id="d4d8a01f-8f59-4460-bbf7-ac7128689ba5" />
+        <VarVal Position="17.1" Length="1" Name="Диагностика ПЧ (кондиционер и тепловые панели): Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="95cd2951-c401-4368-b40e-691b9684b505" />
+        <VarVal Position="17.0" Length="1" Name="Диагностика ПЧ (кондиционер и тепловые панели): Перегрузка по току (&gt;150%)" Multiplier="1.0" IsSigned="False" Id="353f63d9-3875-45c1-bbc1-0c3e99407fc4" />
+        <VarVal Position="18.0" Length="8" Name="#CRCH" Id="86a06e7c-f935-4323-9c3b-578dc7473c67" />
+        <VarVal Position="19.0" Length="8" Name="#CRCL" Id="7bfa8baf-6218-41ab-84f7-3df71b0b6662" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БС-СМЕ">
+      <Request Length="6" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x44" Name="#ADDR" Id="0a5e76e8-29f6-4b86-b68b-c7299e6f6e95" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="1085ac50-6366-44b5-b313-a987c7801271" />
+        <VarVal Position="2.0" Length="8" Name="Номер текущей позиции" Multiplier="1.0" IsSigned="False" Id="fd2fe771-1f0d-4f09-bd54-8a58904e13ac" />
+        <VarVal Position="3.7" Length="1" Name="Состояние реверсора, прожектора, фонарей, автосцепки: D7 -" Multiplier="1.0" IsSigned="False" Id="47eb21ac-2855-4f95-9164-e8c4aa32c814" />
+        <VarVal Position="3.6" Length="1" Name="Состояние реверсора, прожектора, фонарей, автосцепки: D6 -" Multiplier="1.0" IsSigned="False" Id="6045d96b-bd24-4dbd-bd81-e80e82ebb3c3" />
+        <VarVal Position="3.5" Length="1" Name="Состояние реверсора, прожектора, фонарей, автосцепки: D5 -" Multiplier="1.0" IsSigned="False" Id="3bc4c61c-220d-4926-849a-2d57c74a7bae" />
+        <VarVal Position="3.4" Length="1" Name="Состояние реверсора, прожектора, фонарей, автосцепки: D4 -" Multiplier="1.0" IsSigned="False" Id="febb211e-dc66-4173-85ce-df832931911c" />
+        <VarVal Position="3.3" Length="1" Name="Состояние реверсора, прожектора, фонарей, автосцепки: D3 -" Multiplier="1.0" IsSigned="False" Id="44aa0593-5796-4f28-b8b7-e8c16ed86aea" />
+        <VarVal Position="3.2" Length="1" Name="Состояние реверсора, прожектора, фонарей, автосцепки: D2 -" Multiplier="1.0" IsSigned="False" Id="b01527ac-f022-4ea3-9183-68c690e5b791" />
+        <VarVal Position="3.1" Length="1" Name="Состояние реверсора, прожектора, фонарей, автосцепки: D1 -" Multiplier="1.0" IsSigned="False" Id="6a3c823b-1e50-4d29-ad76-4f5a8e1c2093" />
+        <VarVal Position="3.0" Length="1" Name="Состояние реверсора, прожектора, фонарей, автосцепки: D0 -" Multiplier="1.0" IsSigned="False" Id="75b79ac1-b701-42ef-8eb7-11946abd1d51" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="d7242c53-b358-42fb-8620-cdbb03af846b" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="00317bcc-5c61-4299-a91e-e6dbba74109b" />
+      </Request>
+      <Reply Length="9" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x44" Name="#ADDR" Id="7a3bc858-d2d2-4ad4-8c9c-1cb95957dcff" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="c30b4615-5994-4634-8ee7-7a5b24db0b0e" />
+        <CpzPrm Name="Обороты дизеля, об/мин" Expression="[u2] * 1.0" Id="d708ead4-6557-4221-a7aa-97e24caf145f" />
+        <CpzPrm Name="Температура охлаждающей жидкости дизеля, °С" Expression="[u3] * 1.0" Id="a3abe51c-3a17-4a11-be4a-b78f224ee9f9" />
+        <CpzPrm Name="Ток тяговых двигателей, 1 (А)" Expression="[u4] * 4.0" Id="dc1e4d9e-4df5-4596-b331-b9cbb46ecda0" />
+        <CpzPrm Name="Ток тяговых двигателей, 2 (А)" Expression="[u5] * 4.0" Id="a7d64587-ce75-4183-a92c-7edb95c2ff09" />
+        <VarVal Position="6.7" Length="1" Name="Диагностика отказов систем, срабатывание автоматов: D7 -" Multiplier="1.0" IsSigned="False" Id="eb481d1b-6eb3-42c7-8003-77e829e9a025" />
+        <VarVal Position="6.6" Length="1" Name="Диагностика отказов систем, срабатывание автоматов: D6 -" Multiplier="1.0" IsSigned="False" Id="d88fc66f-826f-43bf-b076-f3d3a05f4705" />
+        <VarVal Position="6.5" Length="1" Name="Диагностика отказов систем, срабатывание автоматов: D5 -" Multiplier="1.0" IsSigned="False" Id="3133cf9b-86d9-4ada-85a5-c47c91b3fb6f" />
+        <VarVal Position="6.4" Length="1" Name="Диагностика отказов систем, срабатывание автоматов: D4 -" Multiplier="1.0" IsSigned="False" Id="f265e307-d261-4787-8493-9365883b4199" />
+        <VarVal Position="6.3" Length="1" Name="Диагностика отказов систем, срабатывание автоматов: D3 -" Multiplier="1.0" IsSigned="False" Id="bd2b8ded-0297-490a-9fb0-2ba83908cc95" />
+        <VarVal Position="6.2" Length="1" Name="Диагностика отказов систем, срабатывание автоматов: D2 -" Multiplier="1.0" IsSigned="False" Id="1e8e7f9c-cc8c-4cbe-9879-4ec978cdd865" />
+        <VarVal Position="6.1" Length="1" Name="Диагностика отказов систем, срабатывание автоматов: D1 -" Multiplier="1.0" IsSigned="False" Id="2d9a32a4-8201-40cc-a27a-0c426f52ca49" />
+        <VarVal Position="6.0" Length="1" Name="Диагностика отказов систем, срабатывание автоматов: D0 -" Multiplier="1.0" IsSigned="False" Id="64ef4d3b-ec5a-4cff-8ca7-884f646bed3f" />
+        <VarVal Position="7.0" Length="8" Name="#CRCH" Id="6df6c13f-df70-4f71-bd9d-2effec1d5d64" />
+        <VarVal Position="8.0" Length="8" Name="#CRCL" Id="5d0e0fd6-8107-4340-ad26-3a3d82165ffa" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БПС">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x1A" Name="#ADDR" Id="3c1c8c78-35ac-4bbf-8f5b-231a2a144803" />
+        <DefVal Position="1.0" Length="8" Value="0x5A" Name="#NCMD" Id="227eed57-fc29-4d15-bd8e-9235239ac14c" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="39a9c4f1-4604-4c76-b2f0-6d1089ef1747" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="ef8ae52d-ac46-4c7a-97d2-87f3169dcaf1" />
+      </Request>
+      <Reply Length="8" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x1A" Name="#ADDR" Id="e37ed31f-9f60-4377-89ef-9ad9611f2848" />
+        <DefVal Position="1.0" Length="8" Value="0x5A" Name="#NCMD" Id="02a6c46f-a31d-46cf-8a0c-5638540f762f" />
+        <CpzPrm Name="Состояние датчика 1" Expression="[2.4.4] * 1.0" Id="cf36c8ee-a6cd-4b07-9b2b-f68061a9beac" />
+        <CpzPrm Name="Состояние датчика 2" Expression="[2.0.4] * 1.0" Id="99f851fd-4d31-4106-ad6d-a153e6d8fb42" />
+        <CpzPrm Name="Состояние датчика 3" Expression="[3.4.4] * 1.0" Id="db5c1e40-6012-4298-a1e1-7fd7f3892d2e" />
+        <CpzPrm Name="Состояние датчика 4" Expression="[3.0.4] * 1.0" Id="da4a284f-f50e-4cc4-a445-807dc464e9ca" />
+        <CpzPrm Name="Состояние линии генераторов" Expression="[u4] * 1.0" IsSigned="False" Id="1516a4f8-c0dd-48fb-829e-2a16eef24eb2" />
+        <VarVal Position="5.7" Length="1" Name="Состояние системы: Тест (Test)" Multiplier="1.0" IsSigned="False" Id="5060ffe2-12c4-4eeb-a80a-e926780914bb" />
+        <VarVal Position="5.6" Length="1" Name="Состояние системы: Сирена (Sound)" Multiplier="1.0" IsSigned="False" Id="b58c2ca5-733b-4d1c-b96e-df776680a4cb" />
+        <VarVal Position="5.5" Length="1" Name="Состояние системы: Ошибка сирены (SoundErr)" Multiplier="1.0" IsSigned="False" Id="70ce181d-b36e-4036-86e5-1183296462fe" />
+        <VarVal Position="5.4" Length="1" Name="Состояние системы: Пожар (Pojar)" Multiplier="1.0" IsSigned="False" Id="89ebca37-5312-4f7f-a4e1-d1a44380dd22" />
+        <VarVal Position="5.2" Length="1" Name="Состояние системы: Перезапуск (Reset)" Multiplier="1.0" IsSigned="False" Id="00c4479b-82f5-473b-9d6e-c751cd95532d" />
+        <VarVal Position="5.1" Length="1" Name="Состояние системы: Неисправность (Neispr)" Multiplier="1.0" IsSigned="False" Id="eaae14fc-011e-4931-a4e0-dc3f17e151fc" />
+        <VarVal Position="5.0" Length="1" Name="Состояние системы: Пуск (APusk)" Multiplier="1.0" IsSigned="False" Id="a933f8b1-c772-4ad0-8c1a-38fd3faec211" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="732dc9f0-0a37-4e06-b1eb-465aaf240279" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="251678de-94b1-415b-8e5c-d347dc7826eb" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="Управляющие команды для БУК'ов (49h)">
+      <Request Length="14" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x20" Name="#ADDR" Id="981dcf13-3a5e-4132-b71a-eb7529c03759" />
+        <DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="238cd7cc-bfc1-4fe0-b7a6-0ca942c47947" />
+        <VarVal Position="2.7" Length="1" Name="Команды БУК1: Буферный фонарь передний левый красный" Multiplier="1.0" IsSigned="False" Id="c5c68079-97fa-4c60-bd8a-a9020cca3448" />
+        <VarVal Position="2.6" Length="1" Name="Команды БУК1: Буферный фонарь передний левый белый" Multiplier="1.0" IsSigned="False" Id="881603ea-c87f-47c8-8f5a-a17a41cdd427" />
+        <VarVal Position="2.5" Length="1" Name="Команды БУК1: Буферный фонарь передний правый красный" Multiplier="1.0" IsSigned="False" Id="6aaeb309-7f7b-4c7b-9105-61fc82d9979b" />
+        <VarVal Position="2.4" Length="1" Name="Команды БУК1: Буферный фонарь передний правый белый" Multiplier="1.0" IsSigned="False" Id="16e58db0-f777-411f-934d-2767ae124ae1" />
+        <VarVal Position="2.3" Length="1" Name="Команды БУК1: Прожектор вперед ярко" Multiplier="1.0" IsSigned="False" Id="57f6aa87-ad47-4ade-b10b-481e79ab8abe" />
+        <VarVal Position="2.2" Length="1" Name="Команды БУК1: Прожектор вперед тускло" Multiplier="1.0" IsSigned="False" Id="225acb29-43d1-4deb-bf41-1fd275c0c90e" />
+        <VarVal Position="2.1" Length="1" Name="Команды БУК1: Реле управления дизеля" Multiplier="1.0" IsSigned="False" Id="414d2131-0455-4498-9e6e-f5603dd3768e" />
+        <VarVal Position="2.0" Length="1" Name="Команды БУК1: Реле стартера" Multiplier="1.0" IsSigned="False" Id="85706ebb-c716-488b-893a-4a2dccc508e7" />
+        <VarVal Position="3.7" Length="1" Name="Команды БУК2: Буферный фонарь задний левый красный" Multiplier="1.0" IsSigned="False" Id="6de6e8a8-3fe0-4645-a30d-207380b4c0d8" />
+        <VarVal Position="3.6" Length="1" Name="Команды БУК2: Буферный фонарь задний левый белый" Multiplier="1.0" IsSigned="False" Id="fda1d328-945a-4d95-83aa-5f4ff876f01e" />
+        <VarVal Position="3.5" Length="1" Name="Команды БУК2: Буферный фонарь задний правый красный" Multiplier="1.0" IsSigned="False" Id="c6868eaa-0ac0-46fe-beae-c6fe3927d3a7" />
+        <VarVal Position="3.4" Length="1" Name="Команды БУК2: Буферный фонарь задний правый белый" Multiplier="1.0" IsSigned="False" Id="e0a82707-c516-4046-b84e-ba0627be5148" />
+        <VarVal Position="3.3" Length="1" Name="Команды БУК2: Прожектор назад ярко" Multiplier="1.0" IsSigned="False" Id="58105cb6-d9e2-4e1f-94d1-f9ca350ad1cc" />
+        <VarVal Position="3.2" Length="1" Name="Команды БУК2: Прожектор назад тускло" Multiplier="1.0" IsSigned="False" Id="2f83dcd7-d48a-4218-ad6d-d4a6bf84e5c1" />
+        <VarVal Position="3.1" Length="1" Name="Команды БУК2: Реле тяги (для АЛСН)" Multiplier="1.0" IsSigned="False" Id="4a87c7b7-7464-4d61-bd37-d610c5570b00" />
+        <VarVal Position="4.7" Length="1" Name="Команды БУК3: Реле вентилятор обдува ТЭД" Multiplier="1.0" IsSigned="False" Id="882ac4ff-f3e2-4643-896c-61ac4b2d6b62" />
+        <VarVal Position="4.6" Length="1" Name="Команды БУК3: Клапан дренажный компрессора" Multiplier="1.0" IsSigned="False" Id="9feb775b-bf2f-4303-821f-cf821b8da1df" />
+        <VarVal Position="4.5" Length="1" Name="Команды БУК3: Влагомаслоотделитель компрессора" Multiplier="1.0" IsSigned="False" Id="217042f0-ae39-4d75-b63c-9987a99e3e19" />
+        <VarVal Position="4.3" Length="1" Name="Команды БУК3: Контактор отключения ТЭД №2" Multiplier="1.0" IsSigned="False" Id="e917dcbb-99b7-49ab-94fe-19570da3f057" />
+        <VarVal Position="4.2" Length="1" Name="Команды БУК3: Контактор отключения ТЭД №1" Multiplier="1.0" IsSigned="False" Id="e50a27bf-7f54-4b95-98f0-83a65565c0e9" />
+        <VarVal Position="4.1" Length="1" Name="Команды БУК3: Реверсор назад" Multiplier="1.0" IsSigned="False" Id="db4230f3-0ebc-45b0-bae1-9ea78d5aaa04" />
+        <VarVal Position="4.0" Length="1" Name="Команды БУК3: Реверсор вперед" Multiplier="1.0" IsSigned="False" Id="b8d24257-9d74-4397-9df2-7ed3c5926383" />
+        <VarVal Position="5.7" Length="1" Name="Команды БУК4: Свисток назад" Multiplier="1.0" IsSigned="False" Id="0c181a94-95fd-4a1f-81f5-4b848d35eb84" />
+        <VarVal Position="5.6" Length="1" Name="Команды БУК4: Свисток вперед" Multiplier="1.0" IsSigned="False" Id="dd5099dc-d413-4d9e-87db-e4fad5ea0d2b" />
+        <VarVal Position="5.5" Length="1" Name="Команды БУК4: Тифон назад" Multiplier="1.0" IsSigned="False" Id="a8336a6e-5ec7-4b7f-adde-3850f74f3db0" />
+        <VarVal Position="5.4" Length="1" Name="Команды БУК4: Тифон вперед" Multiplier="1.0" IsSigned="False" Id="cace4ded-16fa-4be9-b93b-dd9f0b2ef94a" />
+        <VarVal Position="5.3" Length="1" Name="Команды БУК4: Автосцепка передняя" Multiplier="1.0" IsSigned="False" Id="8b675341-8bfd-4c91-a24f-60f7f539a3dc" />
+        <VarVal Position="5.2" Length="1" Name="Команды БУК4: Песок вперед" Multiplier="1.0" IsSigned="False" Id="f1470f8d-9c8a-4c7d-a051-97733e72bd16" />
+        <VarVal Position="5.1" Length="1" Name="Команды БУК4: Автосцепка задняя" Multiplier="1.0" IsSigned="False" Id="5ed82be1-6caa-4102-adcd-8a675063e24e" />
+        <VarVal Position="5.0" Length="1" Name="Команды БУК4: Песок назад" Multiplier="1.0" IsSigned="False" Id="0c330b05-c5f5-4ed4-8c8c-3166cc7959dc" />
+        <VarVal Position="6.3" Length="1" Name="Команды БУК5: Аварийное возбуждение генератора" Multiplier="1.0" IsSigned="False" Id="f92b8317-5d18-46a2-ae40-a1368b63a9ae" />
+        <VarVal Position="6.2" Length="1" Name="Команды БУК5: Реле возбуждения генератора" Multiplier="1.0" IsSigned="False" Id="4f0c5615-a438-41b0-88a1-d335bb0cf582" />
+        <VarVal Position="6.1" Length="1" Name="Команды БУК5: Включение подогрева топлива" Multiplier="1.0" IsSigned="False" Id="8b710928-fe67-4e4e-9903-ffaa860b311a" />
+        <VarVal Position="6.0" Length="1" Name="Команды БУК5: Включение топливоподкачивающего насоса" Multiplier="1.0" IsSigned="False" Id="39a6aacb-3976-4884-8969-363ed4dcf7ed" />
+        <!--bytes 7-11 are reserved-->
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="7ba73197-ffeb-44ec-be13-4ca5f5894d94" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="5ea586c0-41f0-473b-81b5-3e67ade210e4" />
+      </Request>
+      <Reply Length="0" Position="14" />
+    </CmdMask>
+    <CmdMask Name="Управляющие команды для БУК'ов (89h)">
+      <Request Length="14" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x20" Name="#ADDR" Id="02eb39a8-d1f4-4224-bd37-d29d663f2e1e" />
+        <DefVal Position="1.0" Length="8" Value="0x89" Name="#NCMD" Id="b8df2c03-d4d1-4cd4-884f-ddf95dba4dd2" />
+        <VarVal Position="2.7" Length="1" Name="Команды БУК1: Буферный фонарь передний левый красный" Multiplier="1.0" IsSigned="False" Id="1940116a-d5e4-42dd-8664-8991d2c34f31" />
+        <VarVal Position="2.6" Length="1" Name="Команды БУК1: Буферный фонарь передний левый белый" Multiplier="1.0" IsSigned="False" Id="2e4c8191-7666-44e6-b903-69176434669d" />
+        <VarVal Position="2.5" Length="1" Name="Команды БУК1: Буферный фонарь передний правый красный" Multiplier="1.0" IsSigned="False" Id="1a65f30c-8387-497f-ab35-3a7b9a798dfb" />
+        <VarVal Position="2.4" Length="1" Name="Команды БУК1: Буферный фонарь передний правый белый" Multiplier="1.0" IsSigned="False" Id="dd8b9d59-f58c-4f17-aef8-a16c7c95e535" />
+        <VarVal Position="2.3" Length="1" Name="Команды БУК1: Прожектор вперед ярко" Multiplier="1.0" IsSigned="False" Id="f99f963a-020f-45a7-a35b-4119be67826f" />
+        <VarVal Position="2.2" Length="1" Name="Команды БУК1: Прожектор вперед тускло" Multiplier="1.0" IsSigned="False" Id="7105ac28-0e84-4f3c-8f96-c0f0635637ec" />
+        <VarVal Position="2.1" Length="1" Name="Команды БУК1: Реле управления дизеля" Multiplier="1.0" IsSigned="False" Id="5939e8b5-1a10-43d9-8150-fd491547782b" />
+        <VarVal Position="2.0" Length="1" Name="Команды БУК1: Реле стартера" Multiplier="1.0" IsSigned="False" Id="b2c313c5-23a5-47a9-85c7-22c501c238bb" />
+        <VarVal Position="3.7" Length="1" Name="Команды БУК2: Буферный фонарь задний левый красный" Multiplier="1.0" IsSigned="False" Id="d715c967-5865-4f3f-ae24-f2a578d7f6d4" />
+        <VarVal Position="3.6" Length="1" Name="Команды БУК2: Буферный фонарь задний левый белый" Multiplier="1.0" IsSigned="False" Id="028923b7-1393-42bb-84bc-622afd5fda0d" />
+        <VarVal Position="3.5" Length="1" Name="Команды БУК2: Буферный фонарь задний правый красный" Multiplier="1.0" IsSigned="False" Id="9e14d709-0137-449e-9a13-303835497731" />
+        <VarVal Position="3.4" Length="1" Name="Команды БУК2: Буферный фонарь задний правый белый" Multiplier="1.0" IsSigned="False" Id="d4d6987f-6bc6-4c0d-93f1-26e51ebfb002" />
+        <VarVal Position="3.3" Length="1" Name="Команды БУК2: Прожектор назад ярко" Multiplier="1.0" IsSigned="False" Id="96daa1d0-8c67-4e1d-a9b5-4f446ed6b54a" />
+        <VarVal Position="3.2" Length="1" Name="Команды БУК2: Прожектор назад тускло" Multiplier="1.0" IsSigned="False" Id="7bb7e712-c424-4f3a-8d41-d7fcc15835d4" />
+        <VarVal Position="3.1" Length="1" Name="Команды БУК2: Реле тяги (для АЛСН)" Multiplier="1.0" IsSigned="False" Id="1486ab93-d076-41c7-82c3-e14be985e971" />
+        <VarVal Position="4.7" Length="1" Name="Команды БУК3: Реле вентилятор обдува ТЭД" Multiplier="1.0" IsSigned="False" Id="e44be25d-517a-4509-b6fd-38833eed3231" />
+        <VarVal Position="4.6" Length="1" Name="Команды БУК3: Клапан дренажный компрессора" Multiplier="1.0" IsSigned="False" Id="d4963a9f-3ad1-47e8-8919-5b47b325be64" />
+        <VarVal Position="4.5" Length="1" Name="Команды БУК3: Влагомаслоотделитель компрессора" Multiplier="1.0" IsSigned="False" Id="1f642b34-7634-45b4-b2fa-1125b4af6014" />
+        <VarVal Position="4.3" Length="1" Name="Команды БУК3: Контактор отключения ТЭД №2" Multiplier="1.0" IsSigned="False" Id="d6cdb1f2-4dd3-4759-8e6c-fc14bef38f6d" />
+        <VarVal Position="4.2" Length="1" Name="Команды БУК3: Контактор отключения ТЭД №1" Multiplier="1.0" IsSigned="False" Id="8c89db13-1f49-4d91-bc10-c65edaecd9ef" />
+        <VarVal Position="4.1" Length="1" Name="Команды БУК3: Реверсор назад" Multiplier="1.0" IsSigned="False" Id="8646c903-a06f-486a-8826-e24ea66b568b" />
+        <VarVal Position="4.0" Length="1" Name="Команды БУК3: Реверсор вперед" Multiplier="1.0" IsSigned="False" Id="562223f3-75c6-4977-8a7d-0b1a40520f19" />
+        <VarVal Position="5.7" Length="1" Name="Команды БУК4: Свисток назад" Multiplier="1.0" IsSigned="False" Id="0bc51e03-b877-4674-8847-a2a5675dd564" />
+        <VarVal Position="5.6" Length="1" Name="Команды БУК4: Свисток вперед" Multiplier="1.0" IsSigned="False" Id="f548894b-0a1b-40d2-81fa-2dfacef540ef" />
+        <VarVal Position="5.5" Length="1" Name="Команды БУК4: Тифон назад" Multiplier="1.0" IsSigned="False" Id="d44d42b9-9f2a-4d81-b409-d7eaa02d1cba" />
+        <VarVal Position="5.4" Length="1" Name="Команды БУК4: Тифон вперед" Multiplier="1.0" IsSigned="False" Id="8027b601-6517-47fd-abb7-e3171ebcaac5" />
+        <VarVal Position="5.3" Length="1" Name="Команды БУК4: Автосцепка передняя" Multiplier="1.0" IsSigned="False" Id="a07d59b4-7162-4388-a5e2-68a05b4d0406" />
+        <VarVal Position="5.2" Length="1" Name="Команды БУК4: Песок вперед" Multiplier="1.0" IsSigned="False" Id="253ffc72-f6bb-46ed-9e6b-4420926614f4" />
+        <VarVal Position="5.1" Length="1" Name="Команды БУК4: Автосцепка задняя" Multiplier="1.0" IsSigned="False" Id="38ba0910-4c7d-427a-b864-a4b922d803b6" />
+        <VarVal Position="5.0" Length="1" Name="Команды БУК4: Песок назад" Multiplier="1.0" IsSigned="False" Id="ae1def3e-2add-4dae-b940-bab87c6755e2" />
+        <VarVal Position="6.3" Length="1" Name="Команды БУК5: Аварийное возбуждение генератора" Multiplier="1.0" IsSigned="False" Id="d556588c-f1d9-4f9f-8012-4e5cf74012b6" />
+        <VarVal Position="6.2" Length="1" Name="Команды БУК5: Реле возбуждения генератора" Multiplier="1.0" IsSigned="False" Id="bc80a925-a6b9-484f-a379-8bd89f811920" />
+        <VarVal Position="6.1" Length="1" Name="Команды БУК5: Включение подогрева топлива" Multiplier="1.0" IsSigned="False" Id="bd5120b6-1119-4385-9aa7-cd5abc4933a0" />
+        <VarVal Position="6.0" Length="1" Name="Команды БУК5: Включение топливоподкачивающего насоса" Multiplier="1.0" IsSigned="False" Id="e79a6b6e-8dbe-4902-b81d-592d4968000e" />
+        <!--bytes 7-11 are reserved-->
+        <VarVal Position="12.0" Length="8" Name="#CRCH" Id="83115a0e-3217-444b-8971-d5b1649ca1b5" />
+        <VarVal Position="13.0" Length="8" Name="#CRCL" Id="90140017-6d3d-4a2f-af0f-fbcf315d46cf" />
+      </Request>
+      <Reply Length="0" Position="14" />
+    </CmdMask>
+    <CmdMask Name="БУ и БС-ДУ">
+      <Request Length="12" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x0B" Name="#ADDR" Id="8f20706c-d154-4fe8-8be3-8438d82227c7" />
+        <DefVal Position="1.0" Length="8" Value="0x0B" Name="#NCMD" Id="03550db0-a3bc-4d6d-b46f-03d4157357bb" />
+        <VarVal Position="2.4" Length="1" Name="КМ, Быстрый сброс нагрузки (1-сброс)" Multiplier="1.0" IsSigned="False" Id="0700ede7-e268-46db-8dc6-8ca1eb086be2" />
+        <VarVal Position="2.1" Length="1" Name="Уменьшить позицию КМ" Multiplier="1.0" IsSigned="False" Id="2002f3a4-14b5-40c5-b46d-904bdf729375" />
+        <VarVal Position="2.0" Length="1" Name="Увеличить позицию КМ" Multiplier="1.0" IsSigned="False" Id="cbd9216d-3904-4fa1-8d2c-ad3a450e61d2" />
+        <VarVal Position="3.2" Length="1" Name="Реверсор, Назад (1-назад) - перевести реверсор  в положение НАЗАД" Multiplier="1.0" IsSigned="False" Id="2f48dacb-db7e-4014-a189-c9962d57b146" />
+        <VarVal Position="3.1" Length="1" Name="Реверсор, Вперед (1-вперед) - перевести реверсор  в положение ВПЕРЕД" Multiplier="1.0" IsSigned="False" Id="27b9bcb2-0fcb-4417-b3ba-66576877c2be" />
+        <VarVal Position="5.0" Length="1" Name="СТОП дизеля (1-стоп)" Multiplier="1.0" IsSigned="False" Id="68e33ec6-aeeb-48df-8863-ddbf9f9bd94b" />
+        <VarVal Position="6.2" Length="1" Name="Песок (1-да)" Multiplier="1.0" IsSigned="False" Id="2330afe7-a2c6-4415-84c5-12a75b4f6e93" />
+        <VarVal Position="6.0" Length="1" Name="Включение свистка (1-включить)" Multiplier="1.0" IsSigned="False" Id="b2db92a5-5797-421e-9fcc-d823d8d86355" />
+        <VarVal Position="7.0" Length="1" Name="Выход из режима радиоуправления" Multiplier="1.0" IsSigned="False" Id="76a92bd3-7906-435f-ab5e-a4ae318ecfe5" />
+        <VarVal Position="8.7" Length="1" Name="Тестирование завершено" Multiplier="1.0" IsSigned="False" Id="a2734c09-8214-461b-bcee-156fab79b842" />
+        <VarVal Position="8.6" Length="1" Name="Номер теста" Multiplier="1.0" IsSigned="False" Id="052ec640-bce2-44e9-90a6-1e76fb9ac91d" />
+        <VarVal Position="8.5" Length="1" Name="Номер теста" Multiplier="1.0" IsSigned="False" Id="8a2afbda-5143-44fc-870a-dba0ac54a0d9" />
+        <VarVal Position="8.4" Length="1" Name="Номер теста" Multiplier="1.0" IsSigned="False" Id="31d64564-b45d-4bab-9b8e-2bcc4faa415a" />
+        <VarVal Position="8.3" Length="1" Name="Номер теста" Multiplier="1.0" IsSigned="False" Id="aa9ef2ff-d5f0-45cf-b188-ae5286e9fbfb" />
+        <VarVal Position="8.2" Length="1" Name="Номер теста" Multiplier="1.0" IsSigned="False" Id="633a4a79-037b-45ca-98df-d7e8f659ba90" />
+        <VarVal Position="8.1" Length="1" Name="Номер теста" Multiplier="1.0" IsSigned="False" Id="20a7a53a-ee5f-4c69-a690-c90732a2afca" />
+        <VarVal Position="8.0" Length="1" Name="Номер теста" Multiplier="1.0" IsSigned="False" Id="36653639-4bf3-4280-b4b5-54fcd06af85f" />
+        <CpzPrm Name="Индекс аварийного сообщения (1-ошибка связи с КВТ, 2-неисправность СДУ)" Expression="[u9] * 1.0" Id="9d6330d8-00ec-4efe-a509-ce0730772832" />
+        <VarVal Position="10.0" Length="8" Name="#CRCH" Id="afc56b62-8750-45b9-babe-0710309061c7" />
+        <VarVal Position="11.0" Length="8" Name="#CRCL" Id="a8b296c4-5d48-473b-b9cf-0f93de0ab28f" />
+      </Request>
+      <Reply Length="9" Position="12">
+        <DefVal Position="0.0" Length="8" Value="0x0B" Name="#ADDR" Id="640e5dec-4ff0-4bbf-aa58-e4d4b5fa9a88" />
+        <DefVal Position="1.0" Length="8" Value="0x0B" Name="#NCMD" Id="3fcee5e6-ee57-4998-bba9-221972a0636a" />
+        <CpzPrm Name="Позиция контроллера машиниста (КМ) (от 1 до 4 )" Expression="[2.0.4] * 1.0" Id="ee6a4fab-242f-4dc8-99d7-54c6d9102ed9" />
+        <VarVal Position="3.1" Length="1" Name="Положение реверсора - назад(1)" Multiplier="1.0" IsSigned="False" Id="1c35023e-e5b4-4d49-893d-93c39abc4137" />
+        <VarVal Position="3.0" Length="1" Name="Положение реверсора - вперед (1)" Multiplier="1.0" IsSigned="False" Id="1d88d540-c7cf-4d2a-9bef-adcbe2f40244" />
+        <CpzPrm Name="Пост управления: 0-отключено, 1-основной пульт, 2-дополнительный пульт, 3- переносной пульт (наш)" Expression="[u4] * 1.0" Id="8b000e47-5634-4247-906d-61db8028ff17" />
+        <VarVal Position="5.0" Length="1" Name="Тест (1)" Multiplier="1.0" IsSigned="False" Id="c6ad80c2-c569-425d-a257-cef0df7e59ac" />
+        <VarVal Position="7.0" Length="8" Name="#CRCH" Id="06dda844-019e-49f1-b345-0b6a35a88683" />
+        <VarVal Position="8.0" Length="8" Name="#CRCL" Id="2d42de4b-6afb-4765-8c71-29c4f94615c9" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и РПД (1)">
+      <Request Length="24" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="260cbe95-c8e5-4631-996d-b454285cced4" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="f28f2797-d3e2-45dd-96c1-d5d82ecd5269" />
+        <VarVal Position="2.7" Length="1" Name="Нет связи с БВС1 (Р1)" Multiplier="1.0" IsSigned="False" Id="ce691dae-f717-46d0-9751-5515ff4aec14" />
+        <VarVal Position="2.6" Length="1" Name="Нет связи с БВС2 (Р3)" Multiplier="1.0" IsSigned="False" Id="8e566985-3224-4213-9e5c-1e34a1fe3290" />
+        <VarVal Position="2.5" Length="1" Name="Нет связи с БВС3 (Р5)" Multiplier="1.0" IsSigned="False" Id="fe136ec4-b3d6-4ba7-9c45-23b2e3ccdbd7" />
+        <VarVal Position="2.4" Length="1" Name="Нет связи с БВС4 (Р7)" Multiplier="1.0" IsSigned="False" Id="b40ac379-4390-4437-84ec-86018fcf0d4e" />
+        <VarVal Position="2.3" Length="1" Name="Нет связи с БВС5 (Р9)" Multiplier="1.0" IsSigned="False" Id="71171def-4281-4ea6-86ab-2691b59a515f" />
+        <VarVal Position="2.2" Length="1" Name="Нет связи с БУК1 (Р11)" Multiplier="1.0" IsSigned="False" Id="b42fed6f-5e20-409f-9d98-4c409ccb07f7" />
+        <VarVal Position="2.1" Length="1" Name="Нет связи с БУК2 (Р13)" Multiplier="1.0" IsSigned="False" Id="15b7a52a-dd45-42ab-a453-df8fede31b76" />
+        <VarVal Position="2.0" Length="1" Name="Нет связи с БУК3 (Р15)" Multiplier="1.0" IsSigned="False" Id="d4fdea7e-31f5-4ce9-8422-c33b25516536" />
+        <VarVal Position="3.7" Length="1" Name="Нет связи с БУК4 (Р17)" Multiplier="1.0" IsSigned="False" Id="8d9de06a-15e0-45a3-833d-8b0cd8c5374b" />
+        <VarVal Position="3.6" Length="1" Name="Нет связи с Дж1 (Р19)" Multiplier="1.0" IsSigned="False" Id="7f416d6d-5cdd-413a-ad05-70ba6e7591b7" />
+        <VarVal Position="3.5" Length="1" Name="Нет связи с Дж2 (Р21)" Multiplier="1.0" IsSigned="False" Id="b79adf7f-2c63-4e32-a0f9-14cb0aae9247" />
+        <VarVal Position="3.4" Length="1" Name="Нет связи с БВС6 (Р23)" Multiplier="1.0" IsSigned="False" Id="280b4ba5-2ecc-437a-aa33-c3fd0ce554b3" />
+        <VarVal Position="3.3" Length="1" Name="Нет связи с БС-ДГ (Р25)" Multiplier="1.0" IsSigned="False" Id="ca804e7f-5522-4c8e-a1a8-6c73d1564f02" />
+        <VarVal Position="3.1" Length="1" Name="Нет связи с БС-КПД (Р29)" Multiplier="1.0" IsSigned="False" Id="628abf83-4073-4249-914b-5674def260b3" />
+        <VarVal Position="3.0" Length="1" Name="Нет связи с КИ-ППУ (Р31)" Multiplier="1.0" IsSigned="False" Id="ab68f76c-95f8-437d-908b-9800d559cce7" />
+        <VarVal Position="4.7" Length="1" Name="Нет связи с ПНКВ1 (Р33)" Multiplier="1.0" IsSigned="False" Id="672c672d-1a5d-412e-8a89-c50f1813e790" />
+        <VarVal Position="4.6" Length="1" Name="Нет связи с ПНКВ2 (Р35)" Multiplier="1.0" IsSigned="False" Id="43da149f-4068-43a0-9641-c07b31eedbcf" />
+        <VarVal Position="4.5" Length="1" Name="Нет связи с ПНКВ3 (Р37)" Multiplier="1.0" IsSigned="False" Id="afb34bfd-7952-423b-9164-9f5c9c82e8b2" />
+        <VarVal Position="4.4" Length="1" Name="Нет связи с БС-СМ" Multiplier="1.0" IsSigned="False" Id="17ed7729-54c3-41ca-be77-60043b4f761f" />
+        <VarVal Position="4.3" Length="1" Name="Нет связи с БС-СМЕ" Multiplier="1.0" IsSigned="False" Id="29d5de0a-4b70-4dbc-8934-6153ac50b234" />
+        <VarVal Position="4.2" Length="1" Name="Нет связи с БПC" Multiplier="1.0" IsSigned="False" Id="2cc5131e-e741-4087-932d-4aeb087a8150" />
+        <VarVal Position="4.1" Length="1" Name="Нет связи с БУК5 (P66)" Multiplier="1.0" IsSigned="False" Id="32bd113a-21ff-405d-a7cb-2a1e9da44e06" />
+        <VarVal Position="4.0" Length="1" Name="Перегрузка цикла обмена" Multiplier="1.0" IsSigned="False" Id="0b80f827-e468-42c9-a131-9fffea8ffd94" />
+        <VarVal Position="5.7" Length="1" Name="Нет связи с БВС1 в одном цикле (Р2)" Multiplier="1.0" IsSigned="False" Id="3b455483-1dd3-429f-a5d7-730e45d8a916" />
+        <VarVal Position="5.6" Length="1" Name="Нет связи с БВС2 в одном цикле (Р4)" Multiplier="1.0" IsSigned="False" Id="194d107b-f5b8-437d-82b8-c98eba0625ca" />
+        <VarVal Position="5.5" Length="1" Name="Нет связи с БВС3 в одном цикле (Р6)" Multiplier="1.0" IsSigned="False" Id="579939dc-ed70-4553-97b7-66927a7b22b5" />
+        <VarVal Position="5.4" Length="1" Name="Нет связи с БВС4 в одном цикле (Р8)" Multiplier="1.0" IsSigned="False" Id="b2405479-73d9-4090-963f-df448c3dd894" />
+        <VarVal Position="5.3" Length="1" Name="Нет связи с БВС5 в одном цикле (Р10)" Multiplier="1.0" IsSigned="False" Id="26a55f03-f83b-4337-9f47-d8fc59591613" />
+        <VarVal Position="5.2" Length="1" Name="Нет связи с БУК1 в одном цикле (Р12)" Multiplier="1.0" IsSigned="False" Id="f6730897-3ac9-47cb-b64c-3be306200b97" />
+        <VarVal Position="5.1" Length="1" Name="Нет связи с БУК2 в одном цикле (Р14)" Multiplier="1.0" IsSigned="False" Id="ea6e0fc8-ad3f-4b8f-8b47-a556e1752d06" />
+        <VarVal Position="5.0" Length="1" Name="Нет связи с БУК3 в одном цикле (Р16)" Multiplier="1.0" IsSigned="False" Id="24941585-ddb3-4088-8b1c-bc49b0180db5" />
+        <VarVal Position="6.7" Length="1" Name="Нет связи с БУК4 в одном цикле (Р18)" Multiplier="1.0" IsSigned="False" Id="abba7788-1321-42dc-af3b-293bdf4a211f" />
+        <VarVal Position="6.6" Length="1" Name="Нет связи с Дж1 в одном цикле (Р20)" Multiplier="1.0" IsSigned="False" Id="75447dda-2572-4e87-8f0a-200e0672b823" />
+        <VarVal Position="6.5" Length="1" Name="Нет связи с Дж2 в одном цикле (Р22)" Multiplier="1.0" IsSigned="False" Id="011d54b9-c814-4e0c-9c2a-a46436115314" />
+        <VarVal Position="6.4" Length="1" Name="Нет связи с БВС6 в одном цикле (Р24)" Multiplier="1.0" IsSigned="False" Id="a2a31f93-b4ee-49ae-baeb-ecea1c9f34b7" />
+        <VarVal Position="6.3" Length="1" Name="Нет связи с БС-ДГ в одном цикле (Р26)" Multiplier="1.0" IsSigned="False" Id="0efcff56-9cb1-4a11-8377-82bbe1fc77bf" />
+        <VarVal Position="6.1" Length="1" Name="Нет связи с БС-КПД в одном цикле (Р30)" Multiplier="1.0" IsSigned="False" Id="18471262-83f1-400a-87d6-1eb2f4e7f282" />
+        <VarVal Position="6.0" Length="1" Name="Нет связи с КИ-ППУ в одном цикле (Р32)" Multiplier="1.0" IsSigned="False" Id="e4821c2e-2e87-4ebe-9c9a-940f0c650ec1" />
+        <VarVal Position="7.7" Length="1" Name="Нет связи с ПНКВ1 в одном цикле (Р34)" Multiplier="1.0" IsSigned="False" Id="3eeba3db-4f33-4146-ac7c-a52afa5578a2" />
+        <VarVal Position="7.6" Length="1" Name="Нет связи с ПНКВ2 в одном цикле (Р36)" Multiplier="1.0" IsSigned="False" Id="ca4a8193-abe2-4e15-9a75-8b17a00ee229" />
+        <VarVal Position="7.5" Length="1" Name="Нет связи с ПНКВ3 в одном цикле (Р38)" Multiplier="1.0" IsSigned="False" Id="aa21f9af-1de1-4ef5-b9d6-bd22c0de1aed" />
+        <VarVal Position="7.4" Length="1" Name="Нет связи с БС-СМ в одном цикле" Multiplier="1.0" IsSigned="False" Id="6b0cad36-6d5c-4849-9f95-19cf4dbdfc58" />
+        <VarVal Position="7.3" Length="1" Name="Нет связи с БС-СМЕ в одном цикле" Multiplier="1.0" IsSigned="False" Id="51fe640d-9787-46b8-b958-796c09880d6c" />
+        <VarVal Position="7.2" Length="1" Name="Нет связи с БПC в одном цикле" Multiplier="1.0" IsSigned="False" Id="ff2eafd3-69ac-4305-b16b-b55eb764c8f9" />
+        <VarVal Position="7.1" Length="1" Name="Нет связи с БУК5 в одном цикле (P67)" Multiplier="1.0" IsSigned="False" Id="81c3b631-feae-4ce7-b922-cf64f58f42b7" />
+        <VarVal Position="8.7" Length="1" Name="Срабатывание защит ТП1 (Р39)" Multiplier="1.0" IsSigned="False" Id="ed0a426e-23e1-4dd4-bce2-c2d65e203d4b" />
+        <VarVal Position="8.6" Length="1" Name="Срабатывание защит ТП2 (Р40)" Id="7e31be08-9cde-47bd-b352-c894d29b5e09" />
+        <VarVal Position="8.5" Length="1" Name="Срабатывание защит ПЧ-СГ(обм.возб.тэд) (Р41)" Multiplier="1.0" IsSigned="False" Id="59d5f67a-bbf2-4b83-a27c-47ab85f28eeb" />
+        <VarVal Position="8.4" Length="1" Name="Срабатывание защит ТП (2 канал) (Р42)" Multiplier="1.0" IsSigned="False" Id="49fdbbbf-0769-4d57-a390-248a291bdbd1" />
+        <VarVal Position="8.3" Length="1" Name="Срабатывание защит ТП (Ослабление поля) (Р43)" Multiplier="1.0" IsSigned="False" Id="525594d1-31a4-45bd-9a4c-d2b7beb8620d" />
+        <VarVal Position="8.2" Length="1" Name="Контактор блокировки управления включен (Р44)" Multiplier="1.0" IsSigned="False" Id="93a55063-e6b0-403a-9b73-a075afff1ae5" />
+        <VarVal Position="8.1" Length="1" Name="Отказ контактора блокировки управления (Р45)" Multiplier="1.0" IsSigned="False" Id="7475a6cd-b3a8-4917-a6ed-2415ab4c3f5e" />
+        <VarVal Position="8.0" Length="1" Name="Запуск двигателя компрессора (Р46)" Multiplier="1.0" IsSigned="False" Id="def411b0-8223-4b27-ad68-cd1ba73554df" />
+        <VarVal Position="9.7" Length="1" Name="Включение контактора вентилятора ТЭД (Р47)" Multiplier="1.0" IsSigned="False" Id="306e3faf-d237-4dc5-9412-5a534e1ef2b6" />
+        <VarVal Position="9.6" Length="1" Name="Отключен поездной контактор ТЭД1 (Р48)" Multiplier="1.0" IsSigned="False" Id="741cd47f-a70b-48a5-a89d-241e5653d5dd" />
+        <VarVal Position="9.5" Length="1" Name="Отключен поездной контактор ТЭД2 (Р49)" Multiplier="1.0" IsSigned="False" Id="525fee11-b9e3-47f6-b32c-cc19334cdc1d" />
+        <VarVal Position="9.4" Length="1" Name="Включен основной пульт (Р50)" Multiplier="1.0" IsSigned="False" Id="f5db2f5b-7790-4dba-aa7d-a565776d5c6b" />
+        <VarVal Position="9.3" Length="1" Name="Включен вспомогательный пульт (Р51)" Multiplier="1.0" IsSigned="False" Id="377fca4e-f5c3-4dd5-ab90-9f0eaa70d8d5" />
+        <VarVal Position="9.2" Length="1" Name="Реверсор вперед (Р52)" Multiplier="1.0" IsSigned="False" Id="1096a828-987a-4edc-b9ac-821eb82d724f" />
+        <VarVal Position="9.1" Length="1" Name="Реверсор назад (Р53)" Multiplier="1.0" IsSigned="False" Id="0819d426-1479-48c5-82c0-cbcd0134ec11" />
+        <VarVal Position="9.0" Length="1" Name="Движение вперед (Р54)" Multiplier="1.0" IsSigned="False" Id="07930c9c-9f64-4039-ab50-e1eafdbd1f82" />
+        <VarVal Position="10.7" Length="1" Name="Движение назад (Р55)" Multiplier="1.0" IsSigned="False" Id="84f63f62-9300-4def-ba1e-cded159e56af" />
+        <VarVal Position="10.6" Length="1" Name="Готовность Тяга (Преобразователь и ТЭД) (Р56)" Multiplier="1.0" IsSigned="False" Id="5ef9fbda-ff58-4cec-81e1-05824f3b937d" />
+        <VarVal Position="10.5" Length="1" Name="Обнуления уставки (Р57)" Multiplier="1.0" IsSigned="False" Id="fa6ce617-2716-471d-82b8-749078ff8a75" />
+        <VarVal Position="10.4" Length="1" Name="Давление ТМ (Р58)" Multiplier="1.0" IsSigned="False" Id="5c591be5-7a71-47aa-90a0-40b326031cf1" />
+        <VarVal Position="10.3" Length="1" Name="Р1 АЛСН (Р59)" Multiplier="1.0" IsSigned="False" Id="730eaffd-6bb4-4e56-9ca6-e91160389c81" />
+        <VarVal Position="10.2" Length="1" Name="Экстренное торможение (Р60)" Multiplier="1.0" IsSigned="False" Id="dc7405a2-14ef-4c89-832c-1b9273af6947" />
+        <VarVal Position="10.1" Length="1" Name="Торможение (Р61)" Multiplier="1.0" IsSigned="False" Id="7f9b17c3-e153-4d68-b48a-a9cdb1e2589e" />
+        <VarVal Position="10.0" Length="1" Name="Готовность Тяга (Безопасность) (Р62)" Multiplier="1.0" IsSigned="False" Id="07f79198-b36a-4bbc-8069-014c78d227c8" />
+        <VarVal Position="11.7" Length="1" Name="Влагомаслоотделитель компрессора (Р63)" Multiplier="1.0" IsSigned="False" Id="8b060dfd-4fba-43fb-b456-5e5e8e0233a1" />
+        <VarVal Position="11.6" Length="1" Name="Готовность Тяга (Схема) (P64)" Multiplier="1.0" IsSigned="False" Id="a7f4f419-9748-4787-a1e1-b601a9f8e693" />
+        <VarVal Position="11.5" Length="1" Name="Готовность Тяга (Реверсор) (P65)" Multiplier="1.0" IsSigned="False" Id="3d6d680b-95d3-4757-bee9-aa7325099bea" />
+        <VarVal Position="11.4" Length="1" Name="Готовность Тяга (Дизель) (P93)" Multiplier="1.0" IsSigned="False" Id="f3af480b-92a0-4499-bd70-f2a72770c35f" />
+        <VarVal Position="11.3" Length="1" Name="Готовность Тяга (Пульт) (P94)" Multiplier="1.0" IsSigned="False" Id="7e5eb801-4738-42b6-91cc-f9ef5443bcb8" />
+        <VarVal Position="11.2" Length="1" Name="Нет связи с БС-ДУ в одном цикле (Р92)" Multiplier="1.0" IsSigned="False" Id="a5233057-04ae-4ae4-9bd8-f09ea84e46e0" />
+        <VarVal Position="11.1" Length="1" Name="Нет связи с БC-ДУ (P91)" Multiplier="1.0" IsSigned="False" Id="fdf4ab90-5b10-4bab-b58c-ca5b0b0d3ba6" />
+        <VarVal Position="11.0" Length="1" Name="Включение режим Ведомого (P108)" Multiplier="1.0" IsSigned="False" Id="f7bf3c41-afc6-4b5c-b92f-56b20a2af848" />
+        <VarVal Position="12.7" Length="1" Name="Отклонение рукоятки джойстика вперед (Р100)" Multiplier="1.0" IsSigned="False" Id="7c7e7066-69c4-4408-9b3f-dc1251c56e7f" />
+        <VarVal Position="12.6" Length="1" Name="Отклонение рукоятки джойстика назад (Р101)" Multiplier="1.0" IsSigned="False" Id="4ce8348b-497c-4dba-aecb-cead6c4717dc" />
+        <VarVal Position="12.5" Length="1" Name="Контактор поездной №1 включен (Р102)" Multiplier="1.0" IsSigned="False" Id="30ecaac6-a40f-4d5f-a20e-ea5fe1b05642" />
+        <VarVal Position="12.4" Length="1" Name="Контактор поездной №2 включен (Р103)" Multiplier="1.0" IsSigned="False" Id="57df648d-a081-4dea-9974-f7583e864780" />
+        <VarVal Position="12.3" Length="1" Name="Автоматическая подача свистка (Р104)" Multiplier="1.0" IsSigned="False" Id="e4f7195f-2ef3-4c59-b548-a85ee8b10cf1" />
+        <VarVal Position="12.2" Length="1" Name="Задание на увеличение оборотов (Компрессор) (Р105)" Multiplier="1.0" IsSigned="False" Id="f61e11af-942f-45ae-9739-c50bfcfefa7f" />
+        <VarVal Position="12.1" Length="1" Name="Сброс режима Тяга (Р106)" Multiplier="1.0" IsSigned="False" Id="35deaa91-8cc7-4c02-893f-099a6616904e" />
+        <VarVal Position="12.0" Length="1" Name="Подключение внешней сети (Р107)" Multiplier="1.0" IsSigned="False" Id="d25f567b-cb49-44d3-9968-107b09b7d6e2" />
+        <VarVal Position="13.7" Length="1" Name="Отказ контакторов реверсора вперед (невкл.) (Р200)" Multiplier="1.0" IsSigned="False" Id="e2e5aa7d-c92b-407c-b944-31828d094606" />
+        <VarVal Position="13.6" Length="1" Name="Отказ контакторов реверсора вперед (невыкл.) (Р201)" Multiplier="1.0" IsSigned="False" Id="496c2ccc-e727-4bad-97ca-e19fe2a7ef16" />
+        <VarVal Position="13.5" Length="1" Name="Отказ контакторов реверсора назад (невкл.) (Р202)" Multiplier="1.0" IsSigned="False" Id="94136bdd-10a7-4e01-9702-0cc1d6e8a28a" />
+        <VarVal Position="13.4" Length="1" Name="Отказ контакторов реверсора назад (невыкл.) (Р203)" Multiplier="1.0" IsSigned="False" Id="d16bafd6-eabb-4053-81e0-f2cadecc6c2e" />
+        <VarVal Position="13.3" Length="1" Name="Отказ контактора отключение ТЭД1 (невкл.) (Р204)" Multiplier="1.0" IsSigned="False" Id="24a8bce0-08bc-4e33-8a80-b2b80819234c" />
+        <VarVal Position="13.2" Length="1" Name="Отказ контактора отключение ТЭД1 (невыкл.) (Р205)" Multiplier="1.0" IsSigned="False" Id="396ec457-229b-4232-a55d-e08e1589e1b0" />
+        <VarVal Position="13.1" Length="1" Name="Отказ контактора отключение ТЭД2 (невкл.) (Р206)" Multiplier="1.0" IsSigned="False" Id="416a3d63-b7fd-48e5-ae48-d773b82dfedb" />
+        <VarVal Position="13.0" Length="1" Name="Отказ контактора отключение ТЭД2 (невыкл.) (Р207)" Multiplier="1.0" IsSigned="False" Id="394335b2-d5cb-48ef-b938-704ee5bd2e9d" />
+        <VarVal Position="14.7" Length="1" Name="Отказ реле возбуждения (невкл.) (Р208)" Multiplier="1.0" IsSigned="False" Id="33565356-42ae-4e35-8498-43a196f66917" />
+        <VarVal Position="14.6" Length="1" Name="Отказ реле возбуждения (невыкл.) (Р209)" Multiplier="1.0" IsSigned="False" Id="b3a85a79-64a9-4ff9-991e-9f84354d1790" />
+        <VarVal Position="14.5" Length="1" Name="Отказ контактора вентилятора (невкл.) (Р210)" Multiplier="1.0" IsSigned="False" Id="95276a68-204b-4bfd-b803-371fefa30a38" />
+        <VarVal Position="14.4" Length="1" Name="Отказ контактора вентилятора (невыкл.) (Р211)" Multiplier="1.0" IsSigned="False" Id="4f85113a-07ec-44b3-b0ac-37f4ce4a736c" />
+        <VarVal Position="14.3" Length="1" Name="Отказ реле аварийного возбуждения (невкл.) (P212)" Multiplier="1.0" IsSigned="False" Id="791a6ce6-5e72-4823-9648-cf8fe69f9430" />
+        <VarVal Position="14.2" Length="1" Name="Отказ реле аварийного возбуждения (невыкл.) (P213)" Multiplier="1.0" IsSigned="False" Id="2a7aba66-3762-4ac6-97eb-f476fe4c5abc" />
+        <VarVal Position="14.1" Length="1" Name="Останов дизеля по давлению масла (P313)" Multiplier="1.0" IsSigned="False" Id="639c93ce-7d5a-48ec-ab58-236778733222" />
+        <VarVal Position="14.0" Length="1" Name="Критически низкое давление масла (P312)" Multiplier="1.0" IsSigned="False" Id="69f03e1e-8585-4f0e-bb9a-85d5beca282f" />
+        <VarVal Position="15.7" Length="1" Name="Стартер включен (Р300)" Multiplier="1.0" IsSigned="False" Id="48919370-7549-4384-862c-24a7af880cc1" />
+        <VarVal Position="15.6" Length="1" Name="Дизель запущен (Р301)" Multiplier="1.0" IsSigned="False" Id="6c2aaa2f-ac9e-42da-996a-b13cdc6d4a6b" />
+        <VarVal Position="15.5" Length="1" Name="Срабатывание защит ПЧ СГ (Р302)" Multiplier="1.0" IsSigned="False" Id="bba01284-4d99-4d73-8971-a96eb53362a6" />
+        <VarVal Position="15.4" Length="1" Name="Разрешение набора позиций (Р303)" Multiplier="1.0" IsSigned="False" Id="312b1a81-53e7-4541-802b-ccf91119f30c" />
+        <VarVal Position="15.3" Length="1" Name="Останов дизеля (нажата кнопка) (Р304)" Multiplier="1.0" IsSigned="False" Id="0f88ffe1-1a04-4441-91d7-ba9588d746e7" />
+        <VarVal Position="15.2" Length="1" Name="Процесс останова дизеля (Р305)" Multiplier="1.0" IsSigned="False" Id="a37c9cc6-00b0-451e-a852-8a3815b71b6b" />
+        <VarVal Position="15.1" Length="1" Name="Давление газов в картере дизеля из ПНКВ4 Pг &gt;58Па (Р306)" Multiplier="1.0" IsSigned="False" Id="f3a4f8da-ab77-48cd-8ec8-b0259db9d3ef" />
+        <VarVal Position="15.0" Length="1" Name="Давление газов в картере дизеля из ПНКВ4 Pг &gt;290Па (Р307)" Multiplier="1.0" IsSigned="False" Id="2330a65a-112a-406d-8c30-368741ecb126" />
+        <VarVal Position="16.7" Length="1" Name="Uвх в норме (Р400)" Multiplier="1.0" IsSigned="False" Id="ce424109-8c79-479c-8a2f-d0847f011469" />
+        <VarVal Position="16.6" Length="1" Name="Включение кнопки запуск дизеля (Р308)" Multiplier="1.0" IsSigned="False" Id="af00ae42-a6f4-43c7-a820-fe63e94fd810" />
+        <VarVal Position="16.5" Length="1" Name="Подогрев топлива выключился (Р309)" Multiplier="1.0" IsSigned="False" Id="bdb5c7d3-20fc-46ad-9a3a-b323c4fa54e1" />
+        <VarVal Position="16.4" Length="1" Name="Обрыв датчика давления газов в картере (ПНКВ4) (Р310)" Multiplier="1.0" IsSigned="False" Id="4ec36023-7e76-4b2d-aee9-23689e3279ea" />
+        <VarVal Position="16.3" Length="1" Name="Включен ПЧ СГ (Р311)" Multiplier="1.0" IsSigned="False" Id="b5c36c97-350e-493f-8d28-eb86beb75a6b" />
+        <VarVal Position="16.2" Length="1" Name="Режим реостатных испытаний" Multiplier="1.0" IsSigned="False" Id="9e9ea8de-37f3-47d9-9312-292d655edfc1" />
+        <VarVal Position="16.1" Length="1" Name="Нет связи с ПНКВ4 (P68)" Multiplier="1.0" IsSigned="False" Id="292c1736-986e-4d4f-ad43-e5d49648c745" />
+        <VarVal Position="16.0" Length="1" Name="Нет связи с ПНКВ4 в одном цикле (P69)" Multiplier="1.0" IsSigned="False" Id="f1f5498e-8416-42af-9307-ca0c7b87343f" />
+        <CpzPrm Name="Минимальное свободное время в цикле обмена, мкс" Expression="[u17] * 278.0" Id="52897606-cb23-4e43-85ae-291a5eec9742" />
+        <VarVal Position="18.6" Length="1" Name="Ток возбуждения генератора более 15А (Р407)" Multiplier="1.0" IsSigned="False" Id="f1daecd8-ebf7-4041-874d-0a188a7ee463" />
+        <VarVal Position="18.5" Length="1" Name="Токи якоря и возбуждения нулевые (Р406)" Multiplier="1.0" IsSigned="False" Id="79fbd756-c511-4663-ae48-0c61ae416954" />
+        <VarVal Position="18.4" Length="1" Name="Uвх в норме для вкл. БГР (Р405)" Multiplier="1.0" IsSigned="False" Id="85aa59a7-b9a1-475d-a5e0-e5b22e597daf" />
+        <VarVal Position="18.3" Length="1" Name="Обороты в норме (Р404)" Multiplier="1.0" IsSigned="False" Id="eda5639e-cb19-437a-9833-adc34092313c" />
+        <VarVal Position="18.2" Length="1" Name="Полное отключение (P403)" Multiplier="1.0" IsSigned="False" Id="f730f60d-0046-47aa-81da-7def80a6ea35" />
+        <VarVal Position="18.1" Length="1" Name="Команда на останов дизеля (P402)" Multiplier="1.0" IsSigned="False" Id="1f8af456-c13d-4114-b46b-14850a9ec9de" />
+        <VarVal Position="18.0" Length="1" Name="Снижение мощности дизеля (P401)" Multiplier="1.0" IsSigned="False" Id="2f1ee8e6-727a-4165-aeca-06de51b598f7" />
+        <CpzPrm Name="Полная мощность Nпол, кВт" Expression="[u19] * 2.0" Id="aaa8bfff-4ce8-4b42-8c9e-d8df08e819a6" />
+        <CpzPrm Name="Счетчик отключений компрессора, N, (0 – 40)" Expression="[u20] * 1.0" Id="a36ea3fb-5f3d-47df-97b6-2a01c7bce61d" />
+        <CpzPrm Name="Уставка по скорости, Vуст, (0 – 100), км/ч" Expression="[u21] * 0.5" Id="4c2a937b-83f1-4a2f-8463-0854850fc878" />
+        <VarVal Position="22.0" Length="8" Name="#CRCH" Id="d2d80c47-8df8-4f53-ab90-5f71ab3f4480" />
+        <VarVal Position="23.0" Length="8" Name="#CRCL" Id="ebacda38-887b-4e0c-8cb2-6b2561f4906f" />
+      </Request>
+      <Reply Length="0" Position="24" />
+    </CmdMask>
+    <CmdMask Name="БУ и РПД (2)">
+      <Request Length="13" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="a9af270f-165b-4733-bb05-eaa873ddbfdf" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="969b2287-bc9d-498c-bab5-9d05d2b81004" />
+        <CpzPrm Name="КИ-ППУ: Информация: Напряжение АБ, В" Expression="[u2] * 1.0" Id="3395fa17-4efe-4433-a4c5-1371cfdb8c54" />
+        <CpzPrm Name="КИ-ППУ: Информация: Ток заряда АБ, А" Expression="[u3] * 1.0" Id="636d0908-6ac3-4ccf-b434-f938c7db2d0e" />
+        <CpzPrm Name="КИ-ППУ: Информация: Напряжение непропадающее, В" Expression="[u4] * 1.0" Id="f8739b70-6f41-4894-8504-176d7731975f" />
+        <CpzPrm Name="КИ-ППУ: Информация: Ток непропадающей сети, А" Expression="[u5] * 1.0" Id="43fec2e4-519f-4b41-8ac6-567133da9936" />
+        <CpzPrm Name="КИ-ППУ: Информация: Напряжение пропадающее, В" Expression="[u6] * 1.0" Id="947f7d62-6863-4d87-8246-906cca2b7793" />
+        <CpzPrm Name="ПНКВ1: Информация: Напряжение выпрямитель-корпус, В" Expression="[u7] * 10.0" Id="f8cfc577-c485-4b4f-83bf-0162026e4b9a" />
+        <CpzPrm Name="ПНКВ2: Информация: Напряжение АБ-корпус, В" Expression="[u8] * 10.0" Id="a7ce5639-762b-46c5-87a2-1021a594cfa0" />
+        <CpzPrm Name="ПНКВ3: Информация: Напряжение стартерной АБ, В" Expression="[u9] * 0.4" Id="14cd8432-6c82-4f13-99db-7311a1c3a2aa" />
+        <CpzPrm Name="ПНКВ4: Информация: Давление газов в картере дизеля (Расчетная величина формируемая ФПМО), Па" Expression="[u10] * 2.0" Id="d883db86-c654-47ce-9aee-62b523f7dafc" />
+        <VarVal Position="11.0" Length="8" Name="#CRCH" Id="4df03b85-c2e8-4fbb-beb5-6062bd10920b" />
+        <VarVal Position="12.0" Length="8" Name="#CRCL" Id="ac4e9637-e91d-4ed1-8694-756a702f2cb5" />
+      </Request>
+      <Reply Length="0" Position="13" />
+    </CmdMask>
+    <CmdMask Name="БУ и РПД (3) (ПЧ-СГ (ов тд))">
+      <Request Length="24" Position="0" CycleMsTime="200">
+        <DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="fef9c69f-f8fa-465f-b93c-ec8c3d058da0" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="367d73ec-1838-4817-a32b-f683e8be84a9" />
+        <VarVal Position="2.7" Length="1" Name="ПЧ-СГ (ов тд): Команда БУ: Управление включением ПЧ-СГ (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="1ac0c9dc-a6e9-4f48-a49a-bec9d581e9f7" />
+        <CpzPrm Name="ПЧ-СГ (ов тд): Уставка по току, А" Expression="([u3] + [u4] * 256.0) * 4.0" Id="1dca301d-e06e-4d0d-a8b8-dd69ccc38970" />
+        <CpzPrm Name="ПЧ-СГ (ов тд): Выходное напряжение, В" Expression="([u6] + [u7]*256.0) * 1.0" Id="db4dbeda-a98b-468e-b6c4-d8b5ea0265ba" />
+        <CpzPrm Name="ПЧ-СГ (ов тд): Выходной ток фаза A, А" Expression="([u8] + [s9]*256.0) * 1.0" Id="ae9e0c28-4e31-4b7c-b6d0-4b9a0f771c46" />
+        <CpzPrm Name="ПЧ-СГ (ов тд): Выходной ток фаза B, А" Expression="([u10] + [s11]*256.0) * 1.0" Id="213de9a9-bf61-46c7-ba0d-5b02f53e3dbf" />
+        <CpzPrm Name="ПЧ-СГ (ов тд): Выходной ток фаза C, А" Expression="([u12] + [s13]*256.0) * 1.0" Id="1a3dea2d-b72e-409d-8d65-39ea84838084" />
+        <CpzPrm Name="ПЧ-СГ (ов тд): Температура, °С" Expression="([u14] + [s15]*256.0) * 1.0" Id="f011d247-32ad-4f9b-99e7-6e675c420999" />
+        <CpzPrm Name="ПЧ-СГ (ов тд): Величина ШИМ" Expression="([u16] + [u17]*256.0) * 1.0" Id="d5b105fb-e0c2-404c-a0ef-7baba9c0d306" />
+        <VarVal Position="18.7" Length="1" Name="ПЧ-СГ (ов тд): Диагностика: Авария в нагрузке (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="690bc056-ff98-436c-8be6-acd04bac5cdb" />
+        <VarVal Position="18.6" Length="1" Name="ПЧ-СГ (ов тд): Диагностика: Перегрузка по току (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="3354c1c4-52ab-4f90-9e39-b6d578ae2887" />
+        <VarVal Position="18.5" Length="1" Name="ПЧ-СГ (ов тд): Диагностика: Защита по температуре (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="442dd3dc-455f-4ff4-a175-528c9ad75b0b" />
+        <VarVal Position="18.4" Length="1" Name="ПЧ-СГ (ов тд): Диагностика: Защита по току силовой сборки (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="f33ca2f9-f8b0-405f-a811-244ac176f245" />
+        <VarVal Position="18.3" Length="1" Name="ПЧ-СГ (ов тд): Диагностика: Повышенное выходное напряжение (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="fb06ffed-e84d-45c4-bf92-092d739131e3" />
+        <VarVal Position="18.2" Length="1" Name="ПЧ-СГ (ов тд): Диагностика: Пониженное выходное напряжение (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="19df3594-ca32-427b-a32b-284096507a85" />
+        <VarVal Position="18.0" Length="1" Name="ПЧ-СГ (ов тд): Диагностика: Ошибка EEPROM (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="32f7ec14-4a0f-436b-b55a-be566623a06c" />
+        <VarVal Position="19.7" Length="1" Name="ПЧ-СГ (ов тд): Диагностика: Уставка не достигнута (обм.возб.тэд)" Multiplier="1.0" IsSigned="False" Id="3a3a05f1-d060-418a-b455-d7e39aa75291" />
+        <VarVal Position="22.0" Length="8" Name="#CRCH" Id="7e4e5241-5289-4212-93bf-5df39b904637" />
+        <VarVal Position="23.0" Length="8" Name="#CRCL" Id="baf1be16-2bdb-4441-b586-a22882da4097" />
+      </Request>
+      <Reply Length="0" Position="24" />
+    </CmdMask>
+    <CmdMask Name="БУ и РПД (4) (ТП)">
+      <Request Length="44" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x41" Name="#ADDR" Id="2963784d-98ca-4736-b5cf-71766e872b46" />
+        <DefVal Position="1.0" Length="8" Value="0x47" Name="#NCMD" Id="458ffef3-3eb3-49a1-88f4-003116ef3d85" />
+        <VarVal Position="2.7" Length="1" Name="ТП(1): Команда БУ: Управление включением" Multiplier="1.0" IsSigned="False" Id="6f6746ad-1760-40d4-85a0-556cacfdb3ea" />
+        <VarVal Position="2.6" Length="1" Name="ТП(1): Команда БУ: Режим тяги (1)/Режим торможения (0)" Multiplier="1.0" IsSigned="False" Id="4a1f1bc7-bc52-4b44-ab88-c6c44b4343d8" />
+        <CpzPrm Name="ТП(1): Уставка по току, А" Expression="[u3] * 4.0" Id="eab20bc1-e430-4101-85cd-d736162301b7" />
+        <CpzPrm Name="ТП(1): Уставка по напряжению, В" Expression="[u4] * 4.0" Id="65dca81c-8add-4fc0-b549-5a16c280f807" />
+        <CpzPrm Name="ТП(1): Ограничение по мощности, кВт" Expression="[u5] * 1.0" Id="7a25310f-006d-41ce-86d3-f1c0552feee4" />
+        <CpzPrm Name="ТП(1): Выходное напряжение (на якоре), В" Expression="([u6] + [u7]*256.0) * 1.0" Id="43dcbcfc-a4f3-41dc-b225-f5f7859da076" />
+        <CpzPrm Name="ТП(1): Выходной ток фаза A, А" Expression="([u8] + [s9]*256.0) * 1.0" Id="65aa4c45-d5f9-4535-aa9a-6b47aa830739" />
+        <CpzPrm Name="ТП(1): Выходной ток фаза B, А" Expression="([u10] + [s11]*256.0) * 1.0" Id="ce7e8de0-bef1-4cec-ac0f-84d522c70c9a" />
+        <CpzPrm Name="ТП(1): Выходной ток фаза C, А" Expression="([u12] + [s13]*256.0) * 1.0" Id="e181369f-b837-4a62-8d4a-cc3e2d12ac1a" />
+        <CpzPrm Name="ТП(1): Температура, °С" Expression="([u14] + [s15]*256.0) * 1.0" Id="f1de59bb-5fc3-4dec-b737-ef8fa2ae9d12" />
+        <CpzPrm Name="ТП(1): Величина ШИМ" Expression="([u16] + [u17]*256.0) * 1.0" Id="247c6ed9-a5f2-4b5c-b610-b2dcabc84751" />
+        <VarVal Position="18.7" Length="1" Name="ТП(1): Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="4d4eb705-3422-4322-9ae9-fd2fd0ba5d6b" />
+        <VarVal Position="18.6" Length="1" Name="ТП(1): Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="e3c714ee-2bbb-45ca-ad18-09f3236961f6" />
+        <VarVal Position="18.5" Length="1" Name="ТП(1): Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="5a753e61-b5e7-4799-84af-5a64e87a2b0d" />
+        <VarVal Position="18.4" Length="1" Name="ТП(1): Диагностика: Защита по току силовой сборки" Multiplier="1.0" IsSigned="False" Id="73a22b94-5caf-468a-a349-4c8a7a9dc82a" />
+        <VarVal Position="18.3" Length="1" Name="ТП(1): Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="872ad2f9-6596-4c32-beff-7d1052529078" />
+        <VarVal Position="18.2" Length="1" Name="ТП(1): Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="09a6f51c-8f87-41e9-8be9-0e68ba0bb732" />
+        <VarVal Position="18.0" Length="1" Name="ТП(1): Диагностика: Ошибка EEPROM" Multiplier="1.0" IsSigned="False" Id="7843b777-1b5c-41fb-957e-f42a8a57a8ce" />
+        <VarVal Position="19.7" Length="1" Name="ТП(1): Диагностика: Уставка не достигнута (ТП1)" Multiplier="1.0" IsSigned="False" Id="8cda0d3d-9531-46aa-ba84-5de3d618b541" />
+        <VarVal Position="19.6" Length="1" Name="ТП(1): Диагностика: Ограничение по мощности (ТП1)" Multiplier="1.0" IsSigned="False" Id="bc4ba6dc-937b-4697-ace4-14a592c78db1" />
+        <VarVal Position="19.5" Length="1" Name="ТП(1): Диагностика: Отключение торможения по повышенному напряжению (ТП1)" Multiplier="1.0" IsSigned="False" Id="8ef5a538-8959-49aa-a2bd-f55fce4609a6" />
+        <VarVal Position="22.7" Length="1" Name="ТП(2): Команда БУ: Управление включением" Multiplier="1.0" IsSigned="False" Id="8bff27fe-38c8-47b6-a584-2a18d0165c72" />
+        <VarVal Position="22.5" Length="1" Name="ТП(2): Команда БУ: Режим тяги (1)/Режим торможения (0)" Multiplier="1.0" IsSigned="False" Id="ffecaa63-2186-4ec1-aef5-210c0eb90f0b" />
+        <CpzPrm Name="ТП(2): Уставка по току, А" Expression="[u23] * 4.0" Id="6d739331-e003-4268-8d4f-e7266df1794d" />
+        <CpzPrm Name="ТП(2): Уставка по напряжению, В" Expression="[u24] * 4.0" Id="5d6a507f-c024-4b06-9f07-e4b5d5fb1ce3" />
+        <CpzPrm Name="ТП(2): Ограничение по мощности, кВт" Expression="[u25] * 1.0" Id="fe0e2c47-e955-4ded-831e-649c12d28b86" />
+        <CpzPrm Name="ТП(2): Выходное напряжение, В" Expression="([u26] + [u27]*256.0) * 1.0" Id="0d15741f-3be7-41ea-ad7b-94cd26235a46" />
+        <CpzPrm Name="ТП(2): Выходной ток фаза А, А" Expression="([u28] + [s29]*256.0) * 1.0" Id="71ffd2a5-e66d-42ac-945a-9fb4fb4a72c1" />
+        <CpzPrm Name="ТП(2): Выходной ток фаза B, А" Expression="([u30] + [s31]*256.0) * 1.0" Id="f457c0c8-b858-4e30-b61b-23ec3552240c" />
+        <CpzPrm Name="ТП(2): Выходной ток фаза C, А" Expression="([u32] + [s33]*256.0) * 1.0" Id="18fb9406-1a70-4ca7-8686-0032c8343a6e" />
+        <CpzPrm Name="ТП(2): Температура, °С" Expression="([u34] + [s35]*256.0) * 1.0" Id="eb3b66f7-ddab-495e-b0a2-4a026da32c6d" />
+        <CpzPrm Name="ТП(2): Величина ШИМ" Expression="([u36] + [u37]*256.0) * 1.0" Id="96a8ac67-2625-427a-b44e-efe3e1089a1a" />
+        <VarVal Position="38.7" Length="1" Name="ТП(2): Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="82e3de68-e025-413c-b40e-189155dbaab7" />
+        <VarVal Position="38.6" Length="1" Name="ТП(2): Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="d4e953f3-760d-43eb-9bd0-f6707bc3b971" />
+        <VarVal Position="38.5" Length="1" Name="ТП(2): Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="e44aa47d-038c-4604-b4b3-2fd2cb840b5b" />
+        <VarVal Position="38.4" Length="1" Name="ТП(2): Диагностика: Защита по току силовой сборки" Multiplier="1.0" IsSigned="False" Id="9d512e01-4cf3-45fb-b0f5-f8abd60f964c" />
+        <VarVal Position="38.3" Length="1" Name="ТП(2): Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="ecb8b461-a311-4d99-826b-6bed8adf150f" />
+        <VarVal Position="38.2" Length="1" Name="ТП(2): Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="b8bdabce-42f4-4387-8f3c-cc7c963b710b" />
+        <VarVal Position="38.0" Length="1" Name="ТП(2): Диагностика: Ошибка EEPROM (ТП2)" Multiplier="1.0" IsSigned="False" Id="50de45c9-f24d-441d-87b3-4acc0e3224a3" />
+        <VarVal Position="39.7" Length="1" Name="ТП(2): Диагностика: Уставка не достигнута (ТП2)" Multiplier="1.0" IsSigned="False" Id="a968391e-a3eb-4b04-8483-9e3deb3323d2" />
+        <VarVal Position="39.6" Length="1" Name="ТП(2): Диагностика: Ограничение по мощности (ТП2)" Multiplier="1.0" IsSigned="False" Id="3f230a7e-944a-41a6-a22b-a977747a5002" />
+        <VarVal Position="39.5" Length="1" Name="ТП(2): Диагностика: Отключение торможения по повышенному напряжению (ТП2)" Multiplier="1.0" IsSigned="False" Id="a9e01e8d-b4f7-4e2d-9cf6-96bd3858e6aa" />
+        <VarVal Position="42.0" Length="8" Name="#CRCH" Id="a88afbfd-b9fd-47f6-81e4-e8e0fbd2628b" />
+        <VarVal Position="43.0" Length="8" Name="#CRCL" Id="d1a0107f-1265-4139-863d-53a11fdf5fa5" />
+      </Request>
+      <Reply Length="0" Position="44" />
+    </CmdMask>
+    <CmdMask Name="БУ и РПД (5) (Инвертор 180)">
+      <Request Length="24" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="e072e7f2-c240-43d7-b72c-9a8f1a829c1e" />
+        <DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="1d2fe846-aa05-4c81-a376-2942def3d6e4" />
+        <VarVal Position="2.7" Length="1" Name="Инвертор 180: Команда БУ: Включение компрессора" Multiplier="1.0" IsSigned="False" Id="b864874c-7760-49a0-917e-59729d62ae96" />
+        <CpzPrm Name="Инвертор 180: Уставка по напряжению, В" Expression="[u3] * 4.0" Id="1a8186d0-2c92-4af1-b707-0e25b17ac0b8" />
+        <CpzPrm Name="Инвертор 180: Выходное напряжение, В" Expression="([u6] + [u7]*256.0) * 1.0" Id="d2a476a5-3871-4d25-a423-ad0c830dde14" />
+        <CpzPrm Name="Инвертор 180: Выходной ток фаза A, А" Expression="([u8] + [s9]*256.0) * 1.0" Id="61158139-e5e4-44c0-8eb0-fbf7c235c825" />
+        <CpzPrm Name="Инвертор 180: Выходной ток фаза B, А" Expression="([u10] + [s11]*256.0) * 1.0" Id="73de7aba-f7fc-4ba9-98cd-979b3149e0aa" />
+        <CpzPrm Name="Инвертор 180: Выходной ток фаза C, А" Expression="([u12] + [s13]*256.0) * 1.0" Id="8751c02a-fd36-4924-9475-4cd9a390e61c" />
+        <CpzPrm Name="Инвертор 180: Температура, °С" Expression="([u14] + [s15]*256.0) * 1.0" Id="1f5543f2-4135-40ad-badb-1337c5d6830a" />
+        <CpzPrm Name="Инвертор 180: Величина ШИМ" Expression="([u16] + [u17]*256.0) * 1.0" Id="82e387ab-6139-4bfc-9271-a2b259b83125" />
+        <VarVal Position="18.7" Length="1" Name="Инвертор 180: Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="cafba2e6-01db-4b43-a73a-ce5860b3ee4d" />
+        <VarVal Position="18.6" Length="1" Name="Инвертор 180: Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="2137364f-cd02-42f0-8ba9-fe25f1022234" />
+        <VarVal Position="18.5" Length="1" Name="Инвертор 180: Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="6868760a-055a-4898-b2a9-8c6eb6edb33c" />
+        <VarVal Position="18.4" Length="1" Name="Инвертор 180: Диагностика: Защита по току силовой сборки" Multiplier="1.0" IsSigned="False" Id="a8e9a318-16b4-461f-b18e-4c21d69639cc" />
+        <VarVal Position="18.3" Length="1" Name="Инвертор 180: Диагностика: Повышенное выходное напряжение " Multiplier="1.0" IsSigned="False" Id="d1b88c83-1b9a-4ad6-bc4a-9bd18b46669d" />
+        <VarVal Position="18.2" Length="1" Name="Инвертор 180: Диагностика: Пониженное выходное напряжение" Multiplier="1.0" IsSigned="False" Id="d6c69b6b-0a42-43e6-9906-2a59a9d64835" />
+        <VarVal Position="18.0" Length="1" Name="Инвертор 180: Диагностика: Ошибка EEPROM" Multiplier="1.0" IsSigned="False" Id="1c05a3c5-c24b-4866-951a-478e625dbf79" />
+        <VarVal Position="19.7" Length="1" Name="Инвертор 180: Диагностика: Уставка не достигнута" Multiplier="1.0" IsSigned="False" Id="47d851a8-1ac0-40f5-bdb1-a8df72132ca6" />
+        <VarVal Position="22.0" Length="8" Name="#CRCH" Id="9fd3c287-e8e1-4d38-af38-f75a66609f1f" />
+        <VarVal Position="23.0" Length="8" Name="#CRCL" Id="def26a6f-f931-4245-b250-e7220290efac" />
+      </Request>
+      <Reply Length="0" Position="24" />
+    </CmdMask>
+    <CmdMask Name="БУ и РПД (6) (БКО, БГР)">
+      <Request Length="40" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="49f6c47d-d2b1-4afb-be0d-a0eee29177c3" />
+        <DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="528ff1d7-179a-4e81-b152-b8745c7f6707" />
+        <VarVal Position="2.7" Length="1" Name="БКО(1): Команда БУ: Управление включением (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="c851dc2c-d461-4b4c-86a0-330fb64d7a26" />
+        <CpzPrm Name="БКО(1): Входное напряжение, В" Expression="[u4] * 4.0" Id="92e52127-da36-4040-aefa-ea9198af4d1b" />
+        <CpzPrm Name="БКО(1): Выходное напряжение, В" Expression="[u5] * 4.0" Id="9cdf3395-bc41-4db3-8d98-0f09620541df" />
+        <CpzPrm Name="БКО(1): Выходной ток, А" Expression="[u6] * 4.0" Id="5f8a0671-83ad-4c0b-9563-7731ef96c4dc" />
+        <CpzPrm Name="БКО(1): Температура, °С" Expression="([u7] + [s8]*256.0) * 1.0" Id="05e6c9a2-3ae1-4516-9c8b-930934efa6bb" />
+        <CpzPrm Name="БКО(1): Величина ШИМ" Expression="[u9] * 1.0" Id="169418e6-fcc2-4820-aa4d-5e303ff86bb4" />
+        <VarVal Position="10.7" Length="1" Name="БКО(1): Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="4592d3db-0d16-4c1c-b13e-2ac6a343f854" />
+        <VarVal Position="10.6" Length="1" Name="БКО(1): Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="81001ca1-7caa-4343-a2c2-45226201834a" />
+        <VarVal Position="10.5" Length="1" Name="БКО(1): Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="034c06ca-46c6-4b83-b827-66d5941c6cec" />
+        <VarVal Position="10.4" Length="1" Name="БКО(1): Диагностика: Защита по току силовой сборки инвертора" Multiplier="1.0" IsSigned="False" Id="a885d953-e6be-4b93-a760-6da0e075c451" />
+        <VarVal Position="10.3" Length="1" Name="БКО(1): Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="c225c563-ad80-44ad-8cbd-2a8e9e17b1bb" />
+        <VarVal Position="10.2" Length="1" Name="БКО(1): Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="6a47e5ce-aa2d-41f9-931c-d538078034b8" />
+        <VarVal Position="14.7" Length="1" Name="БКО(2): Команда БУ: Управление включением БКО (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="58dae410-d621-4b65-839c-c9c818f1373a" />
+        <CpzPrm Name="БКО(2): Входное напряжение, В" Expression="[u16] * 4.0" Id="58f2fad8-64cc-44e5-983d-b9a0dd7abae6" />
+        <CpzPrm Name="БКО(2): Выходное напряжение, В" Expression="[u17] * 4.0" Id="9a5ec316-c765-42da-a38e-b6fc0aaa148e" />
+        <CpzPrm Name="БКО(2): Выходной ток, А" Expression="[u18] * 4.0" Id="796c0a5b-0f0b-496f-8b2f-a34d3cb8a9de" />
+        <CpzPrm Name="БКО(2): Температура, °С" Expression="([u19] + [s20]*256.0) * 1.0" Id="864bd89a-6980-47a0-9c3b-c82f4771f3b3" />
+        <CpzPrm Name="БКО(2): Величина ШИМ" Expression="[u21] * 1.0" Id="42618d6e-b44f-4120-b225-882c1849bcd1" />
+        <VarVal Position="22.7" Length="1" Name="БКО(2): Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="c08d08d1-44ab-4de0-aa7e-65a217e7821c" />
+        <VarVal Position="22.6" Length="1" Name="БКО(2): Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="552b3b99-9a8f-4a09-99b0-19387973576d" />
+        <VarVal Position="22.5" Length="1" Name="БКО(2): Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="4ed42003-63ed-4409-ad9e-9e53e0add411" />
+        <VarVal Position="22.4" Length="1" Name="БКО(2): Диагностика: Защита по току силовой сборки инвертора" Multiplier="1.0" IsSigned="False" Id="5b52db39-b51d-4ebd-b019-f31cd918e99c" />
+        <VarVal Position="22.3" Length="1" Name="БКО(2): Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="02abf9b1-38ea-4700-b8f3-132f41babc50" />
+        <VarVal Position="22.2" Length="1" Name="БКО(2): Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="c5169097-33bb-4047-931b-46602b5c5986" />
+        <VarVal Position="26.7" Length="1" Name="БГР: Команда БУ: Управление включением БГР" Multiplier="1.0" IsSigned="False" Id="5ffe6d33-fd73-42fa-afb3-a0e9f9471c4b" />
+        <CpzPrm Name="БГР: Входное напряжение, В" Expression="[u28] * 4.0" Id="4daec61c-0c90-4b56-bf11-fd29d69ea0f7" />
+        <CpzPrm Name="БГР: Выходное напряжение, В" Expression="[u29] * 4.0" Id="6b0102f5-8106-44f7-8d4f-680fc591020c" />
+        <CpzPrm Name="БГР: Выходной ток, А" Expression="[u30] * 4.0" Id="f6690de0-a112-45a3-b865-a21613e76745" />
+        <CpzPrm Name="БГР: Температура, °С" Expression="([u31] + [s32]*256.0) * 1.0" Id="0ce69def-a008-46e5-92d9-6482fa86de93" />
+        <CpzPrm Name="БГР: Величина ШИМ" Expression="[u33] * 1.0" Id="227b3526-139e-4c34-ac69-80ba16cf7be8" />
+        <VarVal Position="34.7" Length="1" Name="БГР: Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="8d9d2ce7-9735-4561-b5a5-58e9fd5c79ea" />
+        <VarVal Position="34.6" Length="1" Name="БГР: Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="0c6ec837-e224-4a75-87ca-64a44ae6eeae" />
+        <VarVal Position="34.5" Length="1" Name="БГР: Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="ff4e3103-ea93-4790-9fed-bfea5d529493" />
+        <VarVal Position="34.4" Length="1" Name="БГР: Диагностика: Защита по току силовой сборки инвертора" Multiplier="1.0" IsSigned="False" Id="1c49478c-5d86-4ba0-b240-bce2a6ca17bf" />
+        <VarVal Position="34.3" Length="1" Name="БГР: Диагностика: Повышенное входное напряжение" Multiplier="1.0" IsSigned="False" Id="f6cad120-e5dd-415f-8ffe-da08be919acd" />
+        <VarVal Position="34.2" Length="1" Name="БГР: Диагностика: Пониженное входное напряжение" Multiplier="1.0" IsSigned="False" Id="245ea6df-aad8-4a8e-adba-3d2372e3c70c" />
+        <VarVal Position="38.0" Length="8" Name="#CRCH" Id="3a560f8c-8649-4d89-849d-94e6fff42ab4" />
+        <VarVal Position="39.0" Length="8" Name="#CRCL" Id="e3251659-217e-4b25-b0b7-4327a50d9114" />
+      </Request>
+      <Reply Length="0" Position="40" />
+    </CmdMask>
+    <CmdMask Name="БУ и РПД (7) (ПЧ-СГ)">
+      <Request Length="49" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x40" Name="#ADDR" Id="06d5af55-6226-40ee-b471-52d6fcea2fe0" />
+        <DefVal Position="1.0" Length="8" Value="0x50" Name="#NCMD" Id="0d2f76a4-be17-48d1-98cf-43dd10329646" />
+        <CpzPrm Name="ПЧ-СГ: Температура ЭМСГ максимальная (Формирует ФПМО), °С" Expression="[s2] * 2.0" Id="0c0b58e8-1ef2-40e3-9256-b10c6b32a59e" />
+        <VarVal Position="3.7" Length="1" Name="ПЧ-СГ: Команда БУ: Команда «Прокрутка дизеля» (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="62546798-dba8-4ad8-865d-a11cb566277b" />
+        <VarVal Position="3.6" Length="1" Name="ПЧ-СГ: Команда БУ: Команда «Останов дизеля в ПЧ-СГ» (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="e3474d41-e46b-40e2-8928-a5837387a430" />
+        <VarVal Position="3.5" Length="1" Name="ПЧ-СГ: Команда БУ: Команда «Сброс аварии в ПЧ-СГ» (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="7a9377e9-23ff-435e-a3aa-ef2eb734f1c4" />
+        <VarVal Position="3.4" Length="1" Name="ПЧ-СГ: Команда БУ: Выпрямитель (Формирует ФПМО)" Multiplier="1.0" IsSigned="False" Id="0fae3a54-83a4-4b5b-a31e-8259457f9e05" />
+        <CpzPrm Name="ПЧ-СГ: Частота вращения ротора ЭМСГ, об/мин" Expression="([u4] + [s5]*256.0) * 0.1" Id="21276382-3715-4279-a957-4fa2d2085330" />
+        <CpzPrm Name="ПЧ-СГ: Измеренный ток Iq, A" Expression="([u6] + [s7]*256.0) * 0.1" Id="f4bc85c6-2679-46de-ac72-7bb37f3d4daa" />
+        <CpzPrm Name="ПЧ-СГ: Измеренный ток Id, A" Expression="([u8] + [s9]*256.0) * 0.1" Id="183b67c3-8eb4-4df5-bc2f-a043f4e3c17e" />
+        <CpzPrm Name="ПЧ-СГ: Выходное напряжение, В" Expression="([u10] + [u11]*256.0) * 0.1" Id="f67a0a88-efe8-487d-9de2-f6df93440f2c" />
+        <CpzPrm Name="ПЧ-СГ: Мощность на валу ЭМСГ, кВт" Expression="([u12] + [u13]*256.0) * 1.0" Id="626f68de-e822-4bde-a679-0c6ad56c1635" />
+        <CpzPrm Name="ПЧ-СГ: Напряжение по оси q, %" Expression="[s14] * 1.0" Id="5bdb42bb-9e43-42bb-8378-b19a3ec903c3" />
+        <CpzPrm Name="ПЧ-СГ: Напряжение по оси d, %" Expression="[s15] * 1.0" Id="6febcc66-b2e6-4c13-bba8-bff0388d883a" />
+        <CpzPrm Name="ПЧ-СГ: Температура преобразователя, °С" Expression="[s16] * 2.0" Id="efcb7241-a2c6-4197-a43e-287e5faa3e90" />
+        <CpzPrm Name="ПЧ-СГ: Угол поворота ротора, %" Expression="[u17] * 0.5" Id="644c25c2-a000-4e56-9369-bfb095d94f54" />
+        <VarVal Position="18.7" Length="1" Name="ПЧ-СГ: Диагностика: Авария в нагрузке" Multiplier="1.0" IsSigned="False" Id="7089c386-6562-470c-89fe-2e6c60438969" />
+        <VarVal Position="18.6" Length="1" Name="ПЧ-СГ: Диагностика: Перегрузка по току" Multiplier="1.0" IsSigned="False" Id="e65178af-23c6-428a-9544-c884f298cb30" />
+        <VarVal Position="18.5" Length="1" Name="ПЧ-СГ: Диагностика: Защита по температуре" Multiplier="1.0" IsSigned="False" Id="f015d896-871e-47ee-8ed3-57d8f6237956" />
+        <VarVal Position="18.4" Length="1" Name="ПЧ-СГ: Диагностика: Защита по току силовой сборки инвертора" Multiplier="1.0" IsSigned="False" Id="09d6ee4c-abd1-4152-a91c-ca60d4b8fbca" />
+        <VarVal Position="18.3" Length="1" Name="ПЧ-СГ: Диагностика: Повышенное выходное напряжение (&gt; 648В)" Multiplier="1.0" IsSigned="False" Id="d035a74d-ab1b-4a7f-b0da-8e4cfa016ec8" />
+        <VarVal Position="18.2" Length="1" Name="ПЧ-СГ: Диагностика: Пониженное входное напряжение (&lt; 448В)" Multiplier="1.0" IsSigned="False" Id="1d07955b-e89f-4b53-8af3-5e914cf5cdb3" />
+        <VarVal Position="18.1" Length="1" Name="ПЧ-СГ: Диагностика: Готовность ПЧ-СГ" Multiplier="1.0" IsSigned="False" Id="98939287-7162-478b-978e-cfb50a788438" />
+        <VarVal Position="18.0" Length="1" Name="ПЧ-СГ: Диагностика: Ошибка состояния ДХ" Multiplier="1.0" IsSigned="False" Id="2d9bf847-8c78-4dc7-9c27-09ce26154735" />
+        <VarVal Position="19.7" Length="1" Name="ПЧ-СГ: Диагностика ЭМСГ: Режим работы «генератор»" Multiplier="1.0" IsSigned="False" Id="b9260f9d-9763-4fc3-a4c1-a51ecfa6f4f6" />
+        <VarVal Position="19.6" Length="1" Name="ПЧ-СГ: Диагностика ЭМСГ: Скорость выше нормы" Multiplier="1.0" IsSigned="False" Id="0f2db00d-05e4-40a8-8ba9-276d22be1fbb" />
+        <VarVal Position="19.5" Length="1" Name="ПЧ-СГ: Диагностика ЭМСГ: Защита по температуре ЭМСГ" Multiplier="1.0" IsSigned="False" Id="d5fd7659-1c2e-431a-9673-3ed3b47796e3" />
+        <VarVal Position="19.4" Length="1" Name="ПЧ-СГ: Диагностика ЭМСГ: Превышение времени ожидания скорости" Multiplier="1.0" IsSigned="False" Id="c304312b-98cd-4efa-a8a4-24ad7e3e069f" />
+        <CpzPrm Name="Счетчик МС (миллисекунд) (Код с переполнением), мс" Expression="([u20] + [u21]*256.0) * 1.0" Id="f48bfc48-6d13-4e76-aed1-cc64718607da" />
+        <VarVal Position="24.7" Length="1" Name="Нет связи с ТП (1) (Р71)" Multiplier="1.0" IsSigned="False" Id="f9e22dc3-b46f-430b-a17f-6b78727491a3" />
+        <VarVal Position="24.6" Length="1" Name="Нет связи с ТП (2) (Р73)" Multiplier="1.0" IsSigned="False" Id="01741528-462d-41c0-9c82-9564804d70e4" />
+        <VarVal Position="24.5" Length="1" Name="Нет связи с ПЧ-СГ (обм.возб.тэд) (Р75)" Multiplier="1.0" IsSigned="False" Id="5eab2f75-03ed-4d89-8363-b66f413d4ba3" />
+        <VarVal Position="24.3" Length="1" Name="Нет связи с Инвертор 180 (Р79)" Multiplier="1.0" IsSigned="False" Id="689ca457-bc7b-4c4e-9fdb-cb567f3b3658" />
+        <VarVal Position="24.1" Length="1" Name="Нет связи с БКО (1) (Р83)" Multiplier="1.0" IsSigned="False" Id="c6c272a4-d5f5-42fb-ada8-7df7f74ad901" />
+        <VarVal Position="24.0" Length="1" Name="Нет связи с БКО (2) (Р85)" Multiplier="1.0" IsSigned="False" Id="d81666cd-a6f8-4ef8-9ae3-6e540305e018" />
+        <VarVal Position="25.7" Length="1" Name="Нет связи с БГР (Р87)" Multiplier="1.0" IsSigned="False" Id="70a04fa5-bb6f-4dbe-a412-ef5c23981dd3" />
+        <VarVal Position="25.6" Length="1" Name="Нет связи с ПЧ-СГ (Р89)" Multiplier="1.0" IsSigned="False" Id="b847bd83-40bb-47ac-bee7-4dfaa4400925" />
+        <VarVal Position="25.5" Length="1" Name="Нет связи с БЗС (Р97)" Multiplier="1.0" IsSigned="False" Id="c172e7e8-5a2e-44d7-9e90-22ae78c2aa27" />
+        <VarVal Position="26.7" Length="1" Name="Нет связи с ТП (1) в одном цикле (Р72)" Multiplier="1.0" IsSigned="False" Id="6426082a-dbc8-40d3-b79a-aa4104c66424" />
+        <VarVal Position="26.6" Length="1" Name="Нет связи с ТП (2) в одном цикле (Р74)" Multiplier="1.0" IsSigned="False" Id="816eba54-e87a-4de5-a72b-68726bdf390d" />
+        <VarVal Position="26.5" Length="1" Name="Нет связи с ПЧ-СГ (обм.возб.тэд) в одном цикле (Р76)" Multiplier="1.0" IsSigned="False" Id="5e9995e7-2263-41d7-8ed1-d117a79d7c66" />
+        <VarVal Position="26.3" Length="1" Name="Нет связи с Инвертор 180 в одном цикле (Р80)" Multiplier="1.0" IsSigned="False" Id="132c200f-a682-4a39-8a5b-70ea99f6950a" />
+        <VarVal Position="26.1" Length="1" Name="Нет связи с БКО (1) в одном цикле (Р84)" Multiplier="1.0" IsSigned="False" Id="cc9f5810-5435-4c4e-b421-e98c69e8b4c5" />
+        <VarVal Position="26.0" Length="1" Name="Нет связи с БКО (2) в одном цикле (Р86)" Multiplier="1.0" IsSigned="False" Id="80116cc3-8454-43c3-89b9-9d469c8f2854" />
+        <VarVal Position="27.7" Length="1" Name="Нет связи с БГР в одном цикле (Р88)" Multiplier="1.0" IsSigned="False" Id="9ba29f73-3f84-4ed5-9c7d-30c925ea63e8" />
+        <VarVal Position="27.6" Length="1" Name="Нет связи с ПЧ-СГ в одном цикле (Р90)" Multiplier="1.0" IsSigned="False" Id="1673865e-3264-46a0-9efb-af2453f76b5a" />
+        <VarVal Position="25.5" Length="1" Name="Нет связи с БЗС в одном цикле (Р98)" Multiplier="1.0" IsSigned="False" Id="33e445d9-878c-4557-9284-d85a7579f31e" />
+        <CpzPrm Name="Адрес нижней границы стека" Expression="([u30] + [u31]*256.0) * 1.0" Id="ca531e84-ec89-466d-8baa-c1cb25114bbe" />
+        <VarVal Position="32.7" Length="1" Name="Признак: Процесс сброса уставки в ТП2 (P116)" Multiplier="1.0" IsSigned="False" Id="15defe84-1cbc-44d1-afaa-207bb764abb2" />
+        <VarVal Position="32.6" Length="1" Name="Признак: Сброс уставки в ТП2 (P115)" Multiplier="1.0" IsSigned="False" Id="5aa98a62-2b62-4d79-be1e-f8273354401d" />
+        <VarVal Position="32.5" Length="1" Name="Признак: Процесс сброса уставки в ТП1 (P114)" Multiplier="1.0" IsSigned="False" Id="6f1e7401-a89f-4fd4-958e-be99cfb37112" />
+        <VarVal Position="32.4" Length="1" Name="Признак: Сброс уставки в ТП1 (P113)" Multiplier="1.0" IsSigned="False" Id="3a89fb54-5fb4-4a96-9583-0b7f8e0e6d63" />
+        <VarVal Position="32.3" Length="1" Name="Признак: Процесс выдачи уставки тока якоря (P112)" Multiplier="1.0" IsSigned="False" Id="7808c09f-0df2-4d56-8849-a4daabda7b52" />
+        <VarVal Position="32.2" Length="1" Name="Признак: Уставка по току возбуждения выдана (P111)" Multiplier="1.0" IsSigned="False" Id="d54b9d10-fc57-40c5-ba20-f2bd07834992" />
+        <VarVal Position="32.1" Length="1" Name="Признак: Режим Электрическое торможение (P110)" Multiplier="1.0" IsSigned="False" Id="12f4056f-f795-46b3-a28b-7354c3d51ef6" />
+        <VarVal Position="32.0" Length="1" Name="Признак: Режим Тяга (P109)" Multiplier="1.0" IsSigned="False" Id="65c056af-c902-49f1-b85a-4e8de123871e" />
+        <CpzPrm Name="Скорость локомотива для диаметра бандажа 1.050 м (Формирует ФПМО), км/ч" Expression="([u33] + [u34]*256.0) / 16.0" Id="ed59b82d-e944-4537-8242-b280450f1539" />
+        <VarVal Position="35.7" Length="1" Name="Признак: Блокировка QS2 (P323)" Multiplier="1.0" IsSigned="False" Id="4f2b093b-6523-4c1c-9f0e-27491efabe35" />
+        <VarVal Position="35.6" Length="1" Name="Признак: Блокировка QF3 (P322)" Multiplier="1.0" IsSigned="False" Id="8f196cd9-5ef8-41e6-959e-d98864c668d5" />
+        <VarVal Position="35.5" Length="1" Name="Признак: Блокировка QF10 (P321)" Multiplier="1.0" IsSigned="False" Id="2ed7b463-d806-472c-9144-484964f455ec" />
+        <VarVal Position="35.4" Length="1" Name="Признак: Аварийное возбуждение генератора (P320)" Multiplier="1.0" IsSigned="False" Id="9067d2e7-fe7b-4e09-b990-5b1464e0c601" />
+        <VarVal Position="35.3" Length="1" Name="Признак: Переход на аварийное возбуждение (P319)" Multiplier="1.0" IsSigned="False" Id="65ea90ed-31d0-4f16-8b86-78208d9427a1" />
+        <VarVal Position="35.2" Length="1" Name="Признак: Отказ возбудителя генератора (P318)" Multiplier="1.0" IsSigned="False" Id="2777b4f1-3ff6-4f1d-ae37-70a8ce269ce0" />
+        <VarVal Position="35.1" Length="1" Name="Признак: Включение реле возбуждения генератора (P317)" Multiplier="1.0" IsSigned="False" Id="b8c55b12-259b-4bae-8165-4d73e4cee46e" />
+        <VarVal Position="35.0" Length="1" Name="Признак: Сработали предохранители фаз (P316)" Multiplier="1.0" IsSigned="False" Id="10d9775a-c160-4999-ac76-35c9ceaecd75" />
+        <VarVal Position="36.7" Length="1" Name="Признак: Счетчик уставки по скорости (P120)" Multiplier="1.0" IsSigned="False" Id="c1b0361e-20e0-4b54-8e6d-d67953894dd7" />
+        <VarVal Position="36.5" Length="1" Name="Признак: Срабатывание защит ECM ДГ (P329)" Multiplier="1.0" IsSigned="False" Id="7789fdac-7c88-4602-a788-822a7478ffd4" />
+        <VarVal Position="36.4" Length="1" Name="Признак: Срабатывание защит  БГР (P328)" Multiplier="1.0" IsSigned="False" Id="f7b6254b-0929-490e-9e0f-fba007e86ea9" />
+        <VarVal Position="36.3" Length="1" Name="Признак: Срабатывание защит  БКО1, БКО2 (P327)" Multiplier="1.0" IsSigned="False" Id="5a9990f5-c382-4079-8100-074eeeb2ccf4" />
+        <VarVal Position="36.2" Length="1" Name="Признак: Охлаждение МТ (P326)" Multiplier="1.0" IsSigned="False" Id="57b17df0-af1e-4917-91dc-8e0e0c34de89" />
+        <VarVal Position="36.1" Length="1" Name="Признак: Блокировка дверей МТ (P325)" Multiplier="1.0" IsSigned="False" Id="fa3e3763-8ea3-4ca3-adfd-eb4a9ab587ea" />
+        <VarVal Position="36.0" Length="1" Name="Признак: Блокировка дверей ВВК (P324)" Multiplier="1.0" IsSigned="False" Id="9eadceeb-1da1-4ba9-a672-c3bff57d8a6b" />
+        <CpzPrm Name="Ток якоря ТЭД №1 (Формирует ФПМО), А" Expression="([u37] + [u38]*256.0) * 1.0" Id="5511c923-c460-42dc-b434-5a6ef5f5665c" />
+        <CpzPrm Name="Ток якоря ТЭД №2 (Формирует ФПМО), А" Expression="([u39] + [u40]*256.0) * 1.0" Id="8c25e196-8d96-4946-9f65-64ae433b1e6e" />
+        <CpzPrm Name="Ток возбуждения ТЭД №1,2 (Формирует ФПМО), А" Expression="([u41] + [u42]*256.0) * 1.0" Id="add298d5-db9f-4c28-ada7-e40a766044ce" />
+        <CpzPrm Name="Интегральная составляющая тока якоря Iint" Expression="[u43] * 1.0" Id="ec68182f-34bf-4816-892b-1e6e37ef1516" />
+        <CpzPrm Name="Коэффициент передачи Kp" Expression="[u44] * 1.0" Id="8b267e25-6b99-4082-b4c6-722d8e3dd124" />
+        <CpzPrm Name="Уставка по току якоря" Expression="[u45] * 1.0" Id="5ecaf149-4b8d-4f04-81eb-364403b75f3a" />
+        <VarVal Position="47.0" Length="8" Name="#CRCH" Id="5dbb47e8-c5ff-4cc4-b850-df0ce2d940ce" />
+        <VarVal Position="48.0" Length="8" Name="#CRCL" Id="8cbcb6e3-bb38-4bbc-be3c-67b9b993fb34" />
+      </Request>
+      <Reply Length="0" Position="49" />
+    </CmdMask>
+    <CmdMask Name="БУ и КПА">
+      <Request Length="6" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x0D" Name="#ADDR" Id="dc876bfa-b326-481f-9700-3ed6aaa1c967" />
+        <DefVal Position="1.0" Length="8" Value="0x0D" Name="#NCMD" Id="76006085-c33b-40dc-be75-eafd31510739" />
+        <CpzPrm Name="Директивы РО БУ" Expression="[u2] * 1.0" Id="f346bc91-581e-4820-a751-d8c99f5cbb70" />
+        <CpzPrm Name="Значение байта РО БУ" Expression="[u3] * 1.0" Id="454d74f7-8a6d-4e93-803e-1fb5992105a1" />
+        <VarVal Position="4.0" Length="8" Name="#CRCH" Id="2fa13afa-fafa-414c-bf7e-5aa2c0bf3bba" />
+        <VarVal Position="5.0" Length="8" Name="#CRCL" Id="41458a55-379d-4438-9f34-abf088a7244f" />
+      </Request>
+      <Reply Length="9" Position="6">
+        <DefVal Position="0.0" Length="8" Value="0x0D" Name="#ADDR" Id="3358b32a-d1e1-444b-ab0b-ac94f3c254ea" />
+        <DefVal Position="1.0" Length="8" Value="0x0D" Name="#NCMD" Id="f3f92568-635e-4ae1-a851-0d046c3e491c" />
+        <VarVal Position="2.7" Length="1" Name="Байт команд тестового режима: Режим программирования контроллеров по магистрали RS-485" Multiplier="1.0" IsSigned="False" Id="62ed0e79-a490-47f9-b71f-2dd5c3ced73a" />
+        <CpzPrm Name="Адрес РО БУ" Expression="[u4] + [u3]*256.0" Id="7bc10615-8c07-4b07-8cca-201a09ac8a39" />
+        <CpzPrm Name="Значение байта РО БУ" Expression="[u5] * 1.0" Id="6bd21ba2-a0e8-46ff-952b-525013f4509c" />
+        <CpzPrm Name="Директивы РО БУ" Expression="[u6] * 1.0" Id="241598a6-fb26-4693-b816-743d4030edb9" />
+        <VarVal Position="7.0" Length="8" Name="#CRCH" Id="d005fe7c-20ff-40f9-8cfc-928be1f2c996" />
+        <VarVal Position="8.0" Length="8" Name="#CRCL" Id="004ac9d1-d3d0-49b3-b193-1957a2471798" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БС-КПД (2)">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x42" Name="#ADDR" Id="2603b9d6-06b6-4c64-b687-bed401ebee6a" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="e7c0f9e6-70f7-4637-9567-b4a2fde35527" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="c5bdf838-a81d-49ef-b795-fa2ef18ed932" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="04afeb1f-be6c-42aa-972a-80ce17af7a00" />
+      </Request>
+      <Reply Length="11" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x42" Name="#ADDR" Id="60a5b811-7e64-47fa-ac72-d9a59b2be107" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="78edb4d7-ce78-47af-acba-a15b9c2e5202" />
+        <CpzPrm Name="Текущая дата, год" Expression="[u2] * 256.0 + [u3]" Id="20d56789-5a36-4afa-9ebb-758c245df3f4" />
+        <CpzPrm Name="Текущая дата, месяц" Expression="[u4] * 1.0" Id="ba3440c6-b2c7-454b-a965-ee523237c188" />
+        <CpzPrm Name="Текущая дата, день" Expression="[u5] * 1.0" Id="9ce19808-d382-4d63-b16f-e0668ab71c01" />
+        <CpzPrm Name="Текущая дата, часы" Expression="[u6] * 1.0" Id="eb9c9283-f139-4996-97c0-c733efa311ab" />
+        <CpzPrm Name="Текущая дата, минуты" Expression="[u7] * 1.0" Id="7d980dcc-e235-4d7f-82a6-b1fa95519b10" />
+        <CpzPrm Name="Текущая дата, секунды" Expression="[u8] * 1.0" Id="c12cd9c0-5a0d-48a9-a6c5-1ed18939ce8c" />
+        <VarVal Position="9.0" Length="8" Name="#CRCH" Id="a5efd646-c95e-44d8-ad77-8c07e84824e6" />
+        <VarVal Position="10.0" Length="8" Name="#CRCL" Id="510afe87-0151-44ee-8b06-1e95d1dcf316" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БС-ДГ (2)">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x43" Name="#ADDR" Id="e54bcbfe-f733-47b0-8147-b201dfef39f9" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="d3621e48-e7f3-4c15-b1a8-a3ff23e8c7a5" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="d4c6f6ad-ca66-4c3f-94e1-5a83e446f797" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="ad2c07e5-0817-4797-a7dc-0289ef5681cc" />
+      </Request>
+      <Reply Length="22" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x43" Name="#ADDR" Id="f7b919e6-a77f-47ef-9c6d-a12f6cda296a" />
+        <DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="3ad0cecc-17f9-4af9-8bac-725ea776d5f5" />
+        <CpzPrm Name="Red Lamp (байт 3)" Expression="[u2] * 1.0" Id="4a3c47db-67a3-468e-b13f-d093c9e69d68" />
+        <CpzPrm Name="Red Lamp (байт 4)" Expression="[u3] * 1.0" Id="d6a03f32-1c20-49b7-a825-052fabbaaff7" />
+        <CpzPrm Name="Yellow Lamp (байт 5)" Expression="[u4] * 1.0" Id="f8b6d0c4-17d8-4600-8202-b12499f1d8ba" />
+        <CpzPrm Name="Yellow Lamp (байт 6)" Expression="[u5] * 1.0" Id="01b11a10-c1df-4442-b665-307e18b17ab1" />
+        <CpzPrm Name="Yellow Lamp (байт 7)" Expression="[u6] * 1.0" Id="5af16b39-e71f-45f0-ba1b-d2f03c4a8f02" />
+        <CpzPrm Name="Yellow Lamp (байт 8)" Expression="[u7] * 1.0" Id="9adc7746-93d3-4de7-abd2-eaa57ad81c7d" />
+        <CpzPrm Name="Yellow Lamp (байт 9)" Expression="[u8] * 1.0" Id="4d3ba5c1-8b7e-4d3e-902a-dc9c36688b35" />
+        <CpzPrm Name="Yellow Lamp (байт 10)" Expression="[u9] * 1.0" Id="5f515746-44f1-4f68-9e8d-71cf186f0dbe" />
+        <CpzPrm Name="Yellow Lamp (байт 11)" Expression="[u10] * 1.0" Id="24bff34b-7127-40a4-8bf0-9946ad7f7556" />
+        <CpzPrm Name="Yellow Lamp (байт 12)" Expression="[u11] * 1.0" Id="2dc69356-a208-4e81-ada9-fddeed8ff581" />
+        <CpzPrm Name="Yellow Lamp (байт 13)" Expression="[u12] * 1.0" Id="45c80e04-90ef-456a-9d97-acd0680d008a" />
+        <CpzPrm Name="Yellow Lamp (байт 14)" Expression="[u13] * 1.0" Id="564a6df9-9d7f-4b0d-8308-1b334cafba70" />
+        <CpzPrm Name="Счетчик моточасов" Expression="[u14] * 16777216.0 + [u15] * 65536.0 + [u16] * 256.0 + [u17]" Id="672d344a-d09a-4dc1-913d-bd0335812dc8" />
+        <CpzPrm Name="Номер версии ПМО БС-ДГ" Expression="[u19] * 1.0" Id="1a1a221b-a11c-4281-a7b4-5ca7ace16b15" />
+        <VarVal Position="20.0" Length="8" Name="#CRCH" Id="6151ab49-03d6-4c80-938f-97bbe6bc580b" />
+        <VarVal Position="21.0" Length="8" Name="#CRCL" Id="43c9c4cb-64f5-4809-a4ef-e03104c7f46a" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БЗС 44">
+      <Request Length="5" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x41" Name="#ADDR" Id="13be1bf4-623d-42f8-9434-5e40a8ac226e" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="06243c58-4e9c-4fc6-bd97-177abad92fdf" />
+        <CpzPrm Name="Дискретные сигналы от центрального вычислителя: Число секций" Expression="[2.5.2] * 1.0" Id="13eed32d-4ae9-4e93-9eb7-2344ecd857fe" />
+        <CpzPrm Name="Дискретные сигналы от центрального вычислителя: Индекс текущей секции" Expression="[2.2.4] * 1.0" Id="46c7836c-4902-440c-8ccf-ff98a9b5e1b8" />
+        <VarVal Position="2.1" Length="1" Name="Дискретные сигналы от центрального вычислителя: Разрешение автоматической реакции на скольжение" Multiplier="1.0" IsSigned="False" Id="01aacbca-8058-4d53-9b6a-cfa9d31879bb" />
+        <VarVal Position="2.0" Length="1" Name="Дискретные сигналы от центрального вычислителя: Признак режима «Тяга»" Multiplier="1.0" IsSigned="False" Id="766127d3-7184-43e6-b63a-a5d9edbfde8f" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="3ff341f6-4f42-4359-a1ed-45bc9382768b" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="a93af0f5-68f0-4b06-a879-933a2e9a591e" />
+      </Request>
+      <Reply Length="8" Position="5">
+        <DefVal Position="0.0" Length="8" Value="0x41" Name="#ADDR" Id="b7d48c73-9d4c-404a-833e-4f35564aeb7e" />
+        <DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="ddf46f04-2d8b-4ede-be7a-e937b8739d0a" />
+        <VarVal Position="2.7" Length="1" Name="Сигналы скольжения: Сильное скольжение четвертой оси" Multiplier="1.0" IsSigned="False" Id="da6281d8-4e7f-42b3-a7e4-932dfe09cb94" />
+        <VarVal Position="2.6" Length="1" Name="Сигналы скольжения: Сильное скольжение третьей оси" Multiplier="1.0" IsSigned="False" Id="6067f4a9-522c-40e5-899b-b4bf3ebb2990" />
+        <VarVal Position="2.5" Length="1" Name="Сигналы скольжения: Сильное скольжение второй оси" Multiplier="1.0" IsSigned="False" Id="e5a0bb7f-c7b7-4ba2-9420-4dc83a8039e3" />
+        <VarVal Position="2.4" Length="1" Name="Сигналы скольжения: Сильное скольжение первой оси" Multiplier="1.0" IsSigned="False" Id="8bf33dd3-afb5-4528-8aac-ba7abe42e133" />
+        <VarVal Position="2.3" Length="1" Name="Сигналы скольжения: Скольжение четвертой оси" Multiplier="1.0" IsSigned="False" Id="b2c0e927-7c9a-441f-8990-78c3b2c25b32" />
+        <VarVal Position="2.2" Length="1" Name="Сигналы скольжения: Скольжение третьей оси" Multiplier="1.0" IsSigned="False" Id="1c202eb6-88c4-4817-b6ac-96a87fa037be" />
+        <VarVal Position="2.1" Length="1" Name="Сигналы скольжения: Скольжение второй оси" Multiplier="1.0" IsSigned="False" Id="59d08584-2dc0-4486-9750-ffddd234e223" />
+        <VarVal Position="2.0" Length="1" Name="Сигналы скольжения: Скольжение первой оси" Multiplier="1.0" IsSigned="False" Id="862eae9d-f91f-4f44-96e9-75bc865144dd" />
+        <CpzPrm Name="Скорость локомотива для диаметра бандажа 1.225м, км/ч)" Expression="[u3] * 1.0" Id="2f1c3013-d091-4503-bc51-3e7bcaa4f362" />
+        <CpzPrm Name="Счетчик пройденного пути (в импульсах ДПС)" Expression="[4.4.4] * 1.0" Id="56e6fabe-d504-4d3d-91b4-66e85cdb7249" />
+        <CpzPrm Name="Скорость локомотива, км/ч" Expression="[4.0.4] / 16.0" Id="7b099b37-4e41-4028-b5ae-326ca28d5d6e" />
+        <CpzPrm Name="Максимальная величина скольжения (1 ед = 0.25 км/ч)" Expression="[5.2.6] * 0.25" Id="e04ed2a6-7d67-4483-bed9-6dc0c14593c5" />
+        <VarVal Position="5.1" Length="1" Name="Служебная информация для отладки ПО" Multiplier="1.0" IsSigned="False" Id="b17bb769-4cdf-4df6-baea-08c41302d067" />
+        <VarVal Position="5.0" Length="1" Name="Признак перезапуска" Multiplier="1.0" IsSigned="False" Id="3dbbafc3-7771-44b8-ab04-713a8f856fa5" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="3f8bc5f2-2671-4cab-896d-bcaf95f972e5" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="99fe064b-fbff-4328-9390-bf1e67c74f15" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БЗС 84">
+      <Request Length="5" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x41" Name="#ADDR" Id="4c025b16-4fe8-48a7-a2ed-f7dda8a20fec" />
+        <DefVal Position="1.0" Length="8" Value="0x84" Name="#NCMD" Id="d590398d-ba1d-485c-8d79-1762bddecf2c" />
+        <CpzPrm Name="Дискретные сигналы от центрального вычислителя: Число секций" Expression="[2.5.2] * 1.0" Id="776895e3-f188-408e-aea1-c8a93a488aef" />
+        <CpzPrm Name="Дискретные сигналы от центрального вычислителя: Индекс текущей секции" Expression="[2.2.4] * 1.0" Id="3e4378eb-cf87-463a-bf9c-e5287626412f" />
+        <VarVal Position="2.1" Length="1" Name="Дискретные сигналы от центрального вычислителя: Разрешение автоматической реакции на скольжение" Multiplier="1.0" IsSigned="False" Id="dc8c7cb3-5d78-4c30-9ee7-a603cec92f65" />
+        <VarVal Position="2.0" Length="1" Name="Дискретные сигналы от центрального вычислителя: Признак режима «Тяга»" Multiplier="1.0" IsSigned="False" Id="398cf101-a1fb-419a-bb55-768dba50ba76" />
+        <VarVal Position="3.0" Length="8" Name="#CRCH" Id="e43791fe-03a7-48c5-bbee-c07b6d06e8af" />
+        <VarVal Position="4.0" Length="8" Name="#CRCL" Id="eb41e6e3-a007-4975-93cc-9325fa718c65" />
+      </Request>
+      <Reply Length="8" Position="5">
+        <DefVal Position="0.0" Length="8" Value="0x41" Name="#ADDR" Id="eef39d3a-a067-40e8-bba7-8a1a1bc48567" />
+        <DefVal Position="1.0" Length="8" Value="0x84" Name="#NCMD" Id="f26b70e8-e365-4472-a25d-aa169be3e2b3" />
+        <VarVal Position="2.7" Length="1" Name="Сигналы скольжения: Сильное скольжение четвертой оси" Multiplier="1.0" IsSigned="False" Id="1ff4b323-4e6a-44f7-b319-b2770823f120" />
+        <VarVal Position="2.6" Length="1" Name="Сигналы скольжения: Сильное скольжение третьей оси" Multiplier="1.0" IsSigned="False" Id="3c87511a-6c6b-4baa-9a9d-1d3a0b22a52b" />
+        <VarVal Position="2.5" Length="1" Name="Сигналы скольжения: Сильное скольжение второй оси" Multiplier="1.0" IsSigned="False" Id="66c1d34e-872a-4007-abec-f02c24deee2a" />
+        <VarVal Position="2.4" Length="1" Name="Сигналы скольжения: Сильное скольжение первой оси" Multiplier="1.0" IsSigned="False" Id="1e5758ec-375f-42d0-a842-7cba483a3a2c" />
+        <VarVal Position="2.3" Length="1" Name="Сигналы скольжения: Скольжение четвертой оси" Multiplier="1.0" IsSigned="False" Id="0dd705b9-58f7-41c9-876c-68000ea36404" />
+        <VarVal Position="2.2" Length="1" Name="Сигналы скольжения: Скольжение третьей оси" Multiplier="1.0" IsSigned="False" Id="d050566f-bea0-43d6-abd9-16c6b8de2372" />
+        <VarVal Position="2.1" Length="1" Name="Сигналы скольжения: Скольжение второй оси" Multiplier="1.0" IsSigned="False" Id="7359de3f-475d-4713-8cf6-c5c6a57f0fa0" />
+        <VarVal Position="2.0" Length="1" Name="Сигналы скольжения: Скольжение первой оси" Multiplier="1.0" IsSigned="False" Id="ae792856-f294-4a4a-8661-18d61ff66185" />
+        <CpzPrm Name="Скорость локомотива для диаметра бандажа 1.225м, км/ч)" Expression="[u3] * 1.0" Id="18319662-73e0-4203-a303-00a5a2cf0cb4" />
+        <CpzPrm Name="Счетчик пройденного пути (в импульсах ДПС)" Expression="[4.4.4] * 1.0" Id="5b56a194-ead9-4b5e-b003-f2e882948610" />
+        <CpzPrm Name="Скорость локомотива, км/ч" Expression="[4.0.4] / 16.0" Id="e6ab24ac-aef3-407f-bbe4-92077e224f02" />
+        <CpzPrm Name="Максимальная величина скольжения (1 ед = 0.25 км/ч)" Expression="[5.2.6] * 0.25" Id="785a05c0-6cfe-456f-90fd-39106aff029b" />
+        <VarVal Position="5.1" Length="1" Name="Служебная информация для отладки ПО" Multiplier="1.0" IsSigned="False" Id="7f8decd7-edb1-4b86-b912-da88490b134f" />
+        <VarVal Position="5.0" Length="1" Name="Признак перезапуска" Multiplier="1.0" IsSigned="False" Id="8d8aeb7b-2dc2-43da-9026-83c2f0f3a1ed" />
+        <VarVal Position="6.0" Length="8" Name="#CRCH" Id="a353a110-1d41-4329-976c-747b22f3787b" />
+        <VarVal Position="7.0" Length="8" Name="#CRCL" Id="5224f982-61be-46dd-afdf-30f25807a178" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БС-ДГ (генератор)">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x43" Name="#ADDR" Id="27fff258-3652-4810-a0c9-f26a9358e4f9" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="e7cd8d53-2421-4554-bfac-adaff468f587" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="1f34414a-0f3f-4660-b72c-565489f1f0cf" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="1dc69f03-40df-4ce0-8393-e7b29c39a551" />
+      </Request>
+      <Reply Length="16" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x43" Name="#ADDR" Id="d5d4f546-a9fb-48f3-a6ff-6c32e60d021e" />
+        <DefVal Position="1.0" Length="8" Value="0x46" Name="#NCMD" Id="b046581e-d501-4fd0-8854-1e1243f290a4" />
+        <CpzPrm Name="Частота генератора, Гц" Expression="([u2] + [u3] * 256.0) / 128.0" Id="0eafbf29-060b-42fd-9d39-4c3c274af97b" />
+        <CpzPrm Name="Напряжение генератора, В" Expression="[u4] + [u5] * 256.0" Id="b310d14b-0d4d-4612-88f0-8a1a2675b4e0" />
+        <CpzPrm Name="Ток возбуждения генератора, А" Expression="([u6] + [u7] * 256.0) * 0.05" Id="56f1694f-d325-4f1a-be71-1c62cb04066e" />
+        <CpzPrm Name="Состояние активных сигнальных ламп: Статус сигнала о неисправности (Malfunction Indicator Lamp Status)" Expression="[8.6.2] * 1.0" Id="d87e5907-d544-4eb7-b197-cc2ab3f000ba" />
+        <CpzPrm Name="Состояние активных сигнальных ламп: Статус стоп-сигнала (Red Stop Lamp Status)" Expression="[8.4.2] * 1.0" Id="27db2c2e-8d34-481c-a4b3-8b525f55b102" />
+        <CpzPrm Name="Состояние активных сигнальных ламп: Статус сигнала предупреждения (Amber Warning Lamp Status)" Expression="[8.2.2] * 1.0" Id="bd7edd85-a5bf-43a0-9e5f-7be6ac9adbe6" />
+        <CpzPrm Name="Состояние активных сигнальных ламп: Статус сигнала защиты (Protect Lamp Status)" Expression="[8.0.2] * 1.0" Id="eb25f8bb-3d24-4634-9dd9-20829f50729f" />
+        <CpzPrm Name="Состояние пассивных сигнальных ламп: Статус сигнала о неисправности (Malfunction Indicator Lamp Status)" Expression="[9.6.2] * 1.0" Id="468f6472-aa70-44db-b2a0-5acd42324c25" />
+        <CpzPrm Name="Состояние пассивных сигнальных ламп: Статус стоп-сигнала (Red Stop Lamp Status)" Expression="[9.4.2] * 1.0" Id="df655f91-a17b-48e7-afc5-83ae8aabfbc1" />
+        <CpzPrm Name="Состояние пассивных сигнальных ламп: Статус сигнала предупреждения (Amber Warning Lamp Status)" Expression="[9.2.2] * 1.0" Id="61acea15-a08d-4f2d-8dfd-da14f9a9a01e" />
+        <CpzPrm Name="Состояние пассивных сигнальных ламп: Статус сигнала защиты (Protect Lamp Status)" Expression="[9.0.2] * 1.0" Id="14104ad7-616a-4cff-b6ab-199d5b4dc4c6" />
+        <CpzPrm Name="Red Lamp" Expression="[u10] * 1.0" Id="c7e656ac-2c81-4bc3-bb42-5010a844870f" />
+        <CpzPrm Name="Yellow Lamp" Expression="[u12] * 1.0" Id="0b723d64-5771-4b13-bcba-6c290acb433b" />
+        <VarVal Position="14.0" Length="8" Name="#CRCH" Id="b4680e91-acda-4803-9934-493a3713c63f" />
+        <VarVal Position="15.0" Length="8" Name="#CRCL" Id="3acc76cf-6263-4e8f-b1a3-268d7676e333" />
+      </Reply>
+    </CmdMask>
+    <CmdMask Name="БУ и БС-СМ (2)">
+      <Request Length="4" Position="0">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="dbc00641-deb7-4e7c-b42e-321d761754d2" />
+        <DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="03ff4b65-54a0-4053-8fb2-89c1ce324815" />
+        <VarVal Position="2.0" Length="8" Name="#CRCH" Id="39eba437-9e2c-40eb-a9f2-8910c14e6563" />
+        <VarVal Position="3.0" Length="8" Name="#CRCL" Id="eac097dd-9c84-4e3e-87e1-178952e53bd0" />
+      </Request>
+      <Reply Length="18" Position="4">
+        <DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="dc6db447-8253-43b3-bd5e-d5ed9ee5a43f" />
+        <DefVal Position="1.0" Length="8" Value="0x49" Name="#NCMD" Id="44718126-1eb4-42a8-90d5-1c4914bdce9c" />
+        <CpzPrm Name="Уставка по расходу приточного воздуха, %" Expression="[u2] * 1.0" Id="3e1401ef-6d6e-4209-a4d4-03b896d872b3" />
+        <CpzPrm Name="Температура на входе кондиционера (со стороны всаса)(ВК1) Т1_АМК , °С" Expression="[u3] * 1.0" Id="34bdfad4-4700-4f09-8541-e071917dc5c4" />
+        <CpzPrm Name="Температура на выходе кондиционера (ВК2) Т2_АМК, %" Expression="[u4] * 1.0" Id="e91a076b-eafb-4fe7-875b-6f98e8e3dc12" />
+        <CpzPrm Name="Температура конденсатора (ВК3) Т3_АМК, °С" Expression="[u5] * 1.0" Id="5291bb17-d4a7-4286-9e23-7b333d68d7b5" />
+        <CpzPrm Name="Температура испарителя (ВК4) Т4_АМК, °С" Expression="[u6] * 1.0" Id="51949baa-d7a3-4561-bc6c-6ac56fd7a1a0" />
+        <CpzPrm Name="Температура входного наружного воздуха кондиционера (ВК5) Т5_АМК, °С" Expression="[u7] * 1.0" Id="e33415d4-4813-44f2-9efb-927d3c8e25b8" />
+        <CpzPrm Name="Давление испарителя кГ/см² (Атм)" Expression="[u8] * 0.1" Id="46957494-14f4-4933-9d1f-d1fefa023d5d" />
+        <CpzPrm Name="Давление конденсатора  кГ/см² (Атм)" Expression="[u9] * 0.1" Id="0de37957-bc9a-4e78-9ed1-cae77708e87f" />
+        <CpzPrm Name="Уставка ШИМ клапана кондиционера" Expression="[u10] * 1.0" Id="035c55f6-20a4-4b8f-a7f4-d6a6e5508a32" />
+        <VarVal Position="11.5" Length="1" Name="Байт Входы платы расширения (дискретные входы АМК  Р17 и лог. состояние): нет блокировки компрессора по 15 ºC" Multiplier="1.0" IsSigned="False" Id="7f6b2b28-ba18-4a4c-81e1-0661af3521be" />
+        <VarVal Position="11.4" Length="1" Name="Байт Входы платы расширения (дискретные входы АМК  Р17 и лог. состояние): включение приточной установки" Multiplier="1.0" IsSigned="False" Id="2055a1fe-2f59-4312-ac60-1dacf9c88aa8" />
+        <VarVal Position="11.3" Length="1" Name="Байт Входы платы расширения (дискретные входы АМК  Р17 и лог. состояние): включение СМ" Multiplier="1.0" IsSigned="False" Id="0dda5562-4606-4c86-b22a-75bdbfbb1ff3" />
+        <VarVal Position="11.2" Length="1" Name="Байт Входы платы расширения (дискретные входы АМК  Р17 и лог. состояние): подтверждение включение контактора компрессора S7" Multiplier="1.0" IsSigned="False" Id="502b9bd6-52e5-4e4d-a0eb-deacca82c61f" />
+        <VarVal Position="11.1" Length="1" Name="Байт Входы платы расширения (дискретные входы АМК  Р17 и лог. состояние): подтверждение включение контактора компрессора S6" Multiplier="1.0" IsSigned="False" Id="7d1acb0d-ce8f-460c-8a5c-aaad541cab0f" />
+        <VarVal Position="11.0" Length="1" Name="Байт Входы платы расширения (дискретные входы АМК  Р17 и лог. состояние): подтверждение включение контактора компрессора S5" Multiplier="1.0" IsSigned="False" Id="a83ad3ef-b8e2-41f7-ab4e-ca59d31a0a39" />
+        <VarVal Position="12.7" Length="1" Name="Байт состояние регулятора испарителя кондиционера (АМК Р16): регулятор вызван" Multiplier="1.0" IsSigned="False" Id="ee4b2778-019e-4391-8f86-07ebc3ee979c" />
+        <VarVal Position="12.6" Length="1" Name="Байт состояние регулятора испарителя кондиционера (АМК Р16): получены все данные от датчиков («0» - нет данных по температуре)" Multiplier="1.0" IsSigned="False" Id="d1a3e68c-4c9c-4fec-9943-a8686a207f0a" />
+        <VarVal Position="12.5" Length="1" Name="Байт состояние регулятора испарителя кондиционера (АМК Р16): получено с датчика давления нормальное значение" Multiplier="1.0" IsSigned="False" Id="375d9a01-ef4f-4975-a532-d3810f936a44" />
+        <VarVal Position="12.4" Length="1" Name="Байт состояние регулятора испарителя кондиционера (АМК Р16): пройден контроль контактора компрессора" Multiplier="1.0" IsSigned="False" Id="227f2511-f021-4c00-9d9a-cb118404f1ea" />
+        <VarVal Position="12.3" Length="1" Name="Байт состояние регулятора испарителя кондиционера (АМК Р16): получено с датчика давления значение" Multiplier="1.0" IsSigned="False" Id="f3f6baee-b8a9-4d8e-8849-92259f7dd4e2" />
+        <VarVal Position="12.2" Length="1" Name="Байт состояние регулятора испарителя кондиционера (АМК Р16): включена система микроклимата" Multiplier="1.0" IsSigned="False" Id="302d0a55-0dff-40ad-b753-de65f1104a2b" />
+        <VarVal Position="12.1" Length="1" Name="Байт состояние регулятора испарителя кондиционера (АМК Р16): автоматическое формирование уставки ШИМ" Multiplier="1.0" IsSigned="False" Id="c195ce34-a99b-477f-b0a7-606efdfd324b" />
+        <VarVal Position="12.0" Length="1" Name="Байт состояние регулятора испарителя кондиционера (АМК Р16): летний режим" Multiplier="1.0" IsSigned="False" Id="f5385c52-d12a-49f8-939d-3e2198134925" />
+        <CpzPrm Name="Байт диагностики приточной установки и МВП. Позиционный код" Expression="[u13] * 1.0" Id="2fb82fe9-39b3-48c2-a0ec-ce78134018db" />
+        <VarVal Position="16.0" Length="8" Name="#CRCH" Id="b5558d77-640a-4e03-81bd-73eb25bff3f0" />
+        <VarVal Position="17.0" Length="8" Name="#CRCL" Id="19921149-91aa-4b06-94c2-c2f9a449a9e3" />
+      </Reply>
+    </CmdMask>
+  </Commands>
+</PsnConfiguration>

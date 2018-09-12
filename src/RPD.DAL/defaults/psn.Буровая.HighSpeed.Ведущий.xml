@@ -1,0 +1,755 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Буровая, высокоскоростная, ведущий+ведомый" Version="1" Description="Конфигурация для буровой. Обмен с ультра высокой скоростью. Ведущий+ведомый" Id="1216d58d-2210-4f41-8cac-1d8c6a987ba1" RpdId="38">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="АИН-1" />
+		<PsnMeter Address="0x02" Name="АИН-2" />
+		<PsnMeter Address="0x03" Name="АИН-3" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="БС-Ethernet и АИН-1. Пятая команда">
+			<Request Length="20" Position="0" CycleMsTime="20">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="b6c355ce-fdf0-4d95-b6f6-8b4c0dc5272f" />
+				<DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="d55c3b71-588a-41f7-8481-7011a4435edd" />
+				<CpzPrm Expression="([u6] + [s7] * 256.0) * 1.0" Name="MODESET" Id="e05ca43e-0a9a-45d8-871c-aa8a1e5991d4" />
+				<CpzPrm Expression="([u8] + [s9] * 256.0) * 1.0" Name="Fset" Id="3377f246-0265-4ff6-8d6a-10d53adb9aa6" />
+				<CpzPrm Expression="([u10] + [s11] * 256.0) * 1.0" Name="Mset" Id="5233fb5d-c187-4802-a324-a66c8da40da6" />
+				<CpzPrm Expression="([u12] + [s13] * 256.0) * 1.0" Name="Mout_ведомого, Нм" Id="f65bf9bc-6fce-440b-82d8-a1a962289ace" />
+				<CpzPrm Expression="([u14] + [s15] * 256.0) * 1.0" Name="Mmin" Id="9beeb633-9562-4372-9ec5-a91cca48c1b4" />
+				<CpzPrm Expression="([u16] + [s17] * 256.0) * 1.0" Name="Mmax" Id="35e26cae-45b9-4319-8c9b-25bdbb05cb9b" />
+				<VarVal Position="18.0" Length="8" Name="#CRCL" Id="ded42e10-7574-453d-9008-2871870e5c04" />
+				<VarVal Position="19.0" Length="8" Name="#CRCH" Id="caf713c3-a8f0-43b9-8540-791a0886b654" />
+			</Request>
+			<Reply Length="8" Position="20">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="6ab96dc1-8e6e-4cd1-bb69-1464a4198874" />
+				<DefVal Position="1.0" Length="8" Value="0x05" Name="#NCMD" Id="4c28f484-8cb4-4270-8c5c-9736d0731d04" />
+				<CpzPrm Expression="([u2] + [s3] * 256.0) * 1.0" Name="Mout_ведущего, Нм" Id="461e2a0b-4591-4662-b28d-a82687aa2b4e" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="2230400b-c3ed-430a-b39e-d6aaab401604" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="c4d5e1a6-af56-422b-80ba-85f9128ed93a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 0-5 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="b706c498-1d43-4a58-aea7-b8078e119b4b" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="80b6e968-d804-4366-b2de-cd1abcf3d2f2" />
+				<DefVal Position="2.0" Length="8" Value="0x00" Name="first param, lovv byte" Id="8c3a6b7c-852d-4a91-91ba-60c042c74656" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="eacd41a9-8ebb-47b5-8abd-db0b1f8f9ff3" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="3f9619e9-df8e-49c9-8923-ac2dbb4bdb16" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="86e43ce9-bfc7-45c7-9c25-be7b784fc6ca" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="27ea7cc7-aeab-467f-965c-0fad0768bffd" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="5f4b79b7-bfcc-49d3-ae0d-b69bd9239e0e" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="bcf01703-d691-4fbf-ae59-0b4a538f5f41" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="e467cdf6-fc37-4264-9bd9-96f80e51c536" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="d95a506e-d259-4187-8304-9d0b94ce0980" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 0.1" Name="Fe Вычисленная частота вращения (электрическая), Гц" Id="06a1ac4f-bb55-4dbd-a291-142c2dda1397" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Uout Коэффициент модуляции ШИМ, %" Id="0fcf21cf-97b4-4b40-bc07-24dfc8be0eb1" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="IQset Задание моментного тока, А" Id="24c20a11-5b68-4dca-82f7-c47c623ec3fc" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="T Температура радиатора, град" Id="7cca6b8b-9239-4b18-b62c-185abae1e084" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Udc Напряжение шины DC, В" Id="6fd4a2ed-dc0c-48f4-ae37-ca6ba9044d88" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Isum Амплитуда огибающей тока по всем трем фазам, А" Id="6f5fa60b-63af-4c55-b0ad-77fd473a0ffb" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="17ddc85b-6720-4910-9bca-7bad461525cc" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="6160e83e-045f-43b7-b61c-9455fe6360e9" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 6-11 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="68ce637c-0f9f-4ad4-90d6-c525b3bd1110" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="657c0ddd-822c-494b-9c90-c7f74fab1be5" />
+				<DefVal Position="2.0" Length="8" Value="0x06" Name="first param, lovv byte" Id="f8ecd27a-aa16-4236-ba21-63372ac939f4" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="51615bb3-f0c3-4f39-8f38-89d3de5046ac" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="34e96199-7d7f-4f98-9cda-75078081f089" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="9e0acb4b-3380-49e7-9a2d-8e5dee6f558f" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="b881f8d5-cf27-4896-afb8-018bd0e6d5d3" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="d402038f-85dd-4011-8cde-96b26140af94" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="e2f00af1-8489-499d-afc7-f52b99c8f684" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="c53f0117-e2fd-4410-bf78-6a3f1aad5381" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="1db39c02-559c-462f-b073-9e44cac10aeb" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 0.001" Name="Ud Выход регулятора тока D" Id="bc9bc59a-2856-4c2e-86c9-260ce9df06c3" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 0.001" Name="Uq Выход регулятора тока Q" Id="6c2f998d-fd3c-41ec-9204-4858382dcc9d" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 0.1" Name="Fout Выход задатчика интенсивности частоты (электрической), Гц" Id="ed8b0228-44f5-4ffe-b809-260824ed3893" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="FIset Уставка потока, мВб" Id="075bb087-2e4d-49e5-8d2f-466bc434b6c9" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Torq Измеренный момент, Нм" Id="2b3a46b1-bd42-41e5-95f9-c96d62dd59a7" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Mout Выход регулятора скорости или уставка момента, Нм" Id="6fd90d87-4340-4c12-8606-23f287c52643" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="64897d09-8b6b-4046-ab91-b1d75dfb70b6" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="7556b175-0771-456f-9346-6bc2e5e44093" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 12-17 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="f11478ef-f928-4d94-bccd-8e8daf7ee2e5" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="05065d07-bd71-435f-86f5-4160de486f38" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="first param, lovv byte" Id="baa9c71a-6757-418e-8eac-11dff3380a37" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="ec4de071-46db-4393-ba4d-3b99b8b13a80" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="ce4bd639-c5cd-4af2-baa9-a83466fd38e7" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="066708f8-9c9b-4480-8ba5-3f9c08f52e32" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="b7451264-5e6f-4522-8f9e-b1ed384b800d" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="f808c5c7-a230-439e-b72b-b92135004f21" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="a1d175f3-412a-43a3-be43-ea80441c3b99" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="5e674c70-e0d7-4a6f-ad25-398f294ef315" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="b72164b1-c8c5-4e98-aea8-b423eeca8591" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="FImag Измеренный поток, мВб" Id="47bf7e01-a9dc-4fd4-ae24-c8da14b03fba" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="IDset Задание тока возбуждения, А" Id="380df27e-4689-477a-bbd3-124749d8f37b" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="RUNMODE Текущий режим работы" Id="cc22dc69-2e53-411e-ae6e-54a652b1fb15" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="STATUS Биты ошибок " Id="3be3b9d4-1192-480d-877a-ce7f5b6280ba" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Fm Частота вращения, измеренная ДЧВ (электрическая)" Id="8dde6569-628d-4d27-9dc4-3ea30a2adf41" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Ffb_f Частота на ОС регулятора скорости после фильтра" Id="af48a2c4-c320-48b0-bf1e-db0e1263b91b" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="fe7f0840-45e4-48a9-b8ab-b7d5ecdacaff" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="057d71d7-4765-4d35-b504-888babe4b663" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 18-23 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="ce64a625-ece1-4afd-9346-d481efc199dd" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="c0ac0bd5-b4b0-43b3-9565-031cea3bb5ca" />
+				<DefVal Position="2.0" Length="8" Value="0x12" Name="first param, lovv byte" Id="aaa44be9-3a8b-460d-b95c-d43eb168bf09" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="a8c0f2c4-2af0-4716-b1f1-f8ca03ee93b1" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="01fe8eb0-1a2c-47c2-a1b4-e487b58f49c9" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="3dfdd49d-1c8f-41a0-8807-2a4d2a89e188" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="4aff04dd-ba77-4663-9dbf-39b84298bb55" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="eff5ea8b-034a-4311-98b0-21d86a3203b7" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="357919ea-ade6-4754-93f8-95219d363323" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="7de569fe-93eb-4cf6-8975-11f66e0aac87" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="a74812b7-5a3f-48db-a474-ffcf5b1db1bb" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="FImag_f FImag после фильтра" Id="a7fd41c4-5197-4146-87d3-0b7f3b26ee14" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Id Измеренная составляющая тока D" Id="f469a770-fcc2-4fec-88b2-e93b50a7c5e2" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Iq Измеренная составляющая тока Q" Id="1d1072d3-77de-4c13-ad4f-1df9107222e0" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Fset_f Fset после фильтра" Id="0e5ca4b1-67c2-48e0-916c-544504ec18c4" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Torq_f Torq после фильтра" Id="30c3ad71-95ab-48bb-bcd9-4da6606f4a8b" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Text Температура внешняя" Id="185d059e-db0e-4c33-9089-775f74a5ac1a" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="d671d270-77d5-4f11-9dd5-a9051df729ba" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="0bd51cc0-7193-4e0c-bf78-8fdd88a3423d" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 24-29 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="3c328618-7169-4772-9bce-c46d3e173a96" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="754df196-05e5-4e90-b282-25688778ad5a" />
+				<DefVal Position="2.0" Length="8" Value="0x18" Name="first param, lovv byte" Id="121e83c8-7d9d-4d42-9bec-71aa86ae802b" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="2df2e61c-ced5-4cb4-9cde-42605b7a1bd1" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="4d4a3086-23c8-4004-8c33-f50e1f4148ce" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="f89ee76b-5747-42b3-979e-0ddf569d292d" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="1b3cc8aa-5e54-4405-9f9d-fbee99018d83" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="bb329133-41de-4f66-a4cd-1b04cedac175" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="c4204962-12ba-4bd6-a40c-1ee6c8b69e5f" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="f8e1ff54-2cfd-4af4-87f4-79d6badeaad6" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="ff270761-31cb-4767-bd01-d9d54728feb0" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ed Пропорциональная часть регулятора тока D, А" Id="b6c42a57-baeb-464e-ade3-34b3f3ddea9f" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Eq Пропорциональная часть регулятора тока Q, А" Id="68be6f36-13ef-478a-a88b-f50ff2daea9b" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 0.1" Name="Ef Пропорциональная часть регулятора скорости, Гц" Id="71f31e76-1191-41d5-9d63-8ea89b5071c6" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Efi Пропорциональная часть регулятора потока, мВб" Id="ffa6f6b1-71a9-4f91-b979-e261d19d57f4" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 0.01" Name="Ucomp_D Выход регулятора компенсатора вычислителя потока D, В" Id="45192df5-4a0a-4d59-8f8d-587e9f00f0ce" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 0.01" Name="Ucomp_Q Выход регулятора компенсатора вычислителя потока Q, В" Id="108cdf0b-12ef-4161-b368-0ea1d59e5556" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="24b549bc-bbe7-4c78-87c1-411cc3991eaa" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="6dc0377b-dd2e-4a67-923d-496faf831b84" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 34 параметра">
+			<Request Length="8" Position="0" CycleMsTime="75">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="8570123e-54a0-4522-ab7a-8a3e15971241" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="6b3fae77-48ec-47e2-b04e-2be59cbce172" />
+				<DefVal Position="2.0" Length="8" Value="0x00" Name="first param, lovv byte" Id="5f39cb7e-981c-4a62-bab0-990750ade434" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="57410c18-abb9-4379-a708-736e4ead69fa" />
+				<DefVal Position="4.0" Length="8" Value="0x22" Name="count param, lovv byte" Id="13e94087-2882-4f65-9568-ba0b4efc526b" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="40d770b8-0e6f-423b-b643-b34e341c6ba4" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="bbd7d354-88c9-480d-b0e6-9e735e26079d" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="37cd9161-a7d2-45bc-b8ed-b272dd936fc1" />
+			</Request>
+			<Reply Length="73" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="ca37e13a-ac48-44bb-91fa-0d930860571a" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="8de9a928-436f-4b89-8165-a39eaad0d9c3" />
+				<DefVal Position="2.0" Length="8" Value="0x44" Name="bytes count, count param x2" Id="e35e40f8-9f38-48c5-88ed-d8e142c55a4c" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 0.1" Name="34: Fe, Вычисленная частота вращения, Гц" Id="57fe65f9-e0e5-4dcd-a059-f077344dc174" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="34: Uout, Коэффициент модуляции ШИМ, %" Id="09cfa3a2-b5bf-44d5-8946-0e4af77b5d04" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="34: IQset,Задание моментного тока, А" Id="c303e020-01e6-43fb-8ad4-9fbc875b6d89" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="34: T, Температура радиатора, град" Id="d60b7070-433b-4a29-af4c-efc97b2cac60" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="34: Udc, Напряжение шины DC, В" Id="ad2c67d3-1718-4cb7-b344-8f9b27aba32b" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="34: Isum, Амплитуда огибающей тока по всем трем фазам, А" Id="210c34f4-b7ac-402d-a7b4-4614531c3742" />
+				<CpzPrm Expression="([u15] + [s16] * 256.0) * 0.001" Name="34: Ud, Выход регулятора тока D" Id="d2070b39-4617-4509-ba1e-7435f9071658" />
+				<CpzPrm Expression="([u17] + [s18] * 256.0) * 0.001" Name="34: Uq, Выход регулятора тока Q" Id="6c0bbc56-51bb-4534-ac56-fe4883e37060" />
+				<CpzPrm Expression="([u19] + [s20] * 256.0) * 0.1" Name="34: Fout, Выход задатчика интенсивности частоты (электрической), Гц" Id="45109103-c374-48ec-8ed8-816937d2068c" />
+				<CpzPrm Expression="([u21] + [s22] * 256.0) * 1.0" Name="34: FIset, Уставка потока, мВб" Id="bfc29fa4-35aa-4ce1-843e-1d752972874a" />
+				<CpzPrm Expression="([u23] + [s24] * 256.0) * 1.0" Name="34: Torq, Измеренный момент, Нм" Id="69d48582-5779-45d9-ac10-0a7c7101439d" />
+				<CpzPrm Expression="([u25] + [s26] * 256.0) * 1.0" Name="34: Mout, Выход регулятора скорости или уставка момента, Нм" Id="6620c729-efc8-48c4-9d45-835cb526349c" />
+				<CpzPrm Expression="([u27] + [s28] * 256.0) * 1.0" Name="34: FImag, Измеренный поток, мВб" Id="9cb7163c-1058-48c8-9d84-48407e2d07c2" />
+				<CpzPrm Expression="([u29] + [s30] * 256.0) * 1.0" Name="34: IDset, Задание тока возбуждения, А" Id="58f195d8-5cda-4947-8228-033966a185a2" />
+				<CpzPrm Expression="([u31] + [s32] * 256.0) * 1.0" Name="34: RUNMODE, Текущий режим работы" Id="0b8a9dab-1e9f-47c6-9b5d-b5fd3eb642d7" />
+				<CpzPrm Expression="([u33] + [s34] * 256.0) * 1.0" Name="34: STATUS, Биты ошибок" Id="d4e9562d-711f-4cca-8bef-c863326c08cc" />
+				<CpzPrm Expression="([u35] + [s36] * 256.0) * 1.0" Name="34: Fm, Частота вращения, измеренная ДЧВ (электрическая)" Id="37a5d5f8-475c-4d9a-b36c-8c921bb8f996" />
+				<CpzPrm Expression="([u37] + [s38] * 256.0) * 1.0" Name="34: Ffb_f, Частота на ОС регулятора скорости после фильтра" Id="75728fe2-7bd5-4cad-a010-70be5314f315" />
+				<CpzPrm Expression="([u39] + [s40] * 256.0) * 1.0" Name="34: FImag_f, FImag после фильтра" Id="994b3a08-e5da-40cd-a2e0-f9cc55cfdd2f" />
+				<CpzPrm Expression="([u41] + [s42] * 256.0) * 1.0" Name="34: Id, Измеренная составляющая тока D" Id="c7bb82f2-58a4-4ff4-a6c2-a32b2ec6063f" />
+				<CpzPrm Expression="([u43] + [s44] * 256.0) * 1.0" Name="34: Iq, Измеренная составляющая тока Q" Id="148801ae-a6de-4131-be35-c6258e6e7888" />
+				<CpzPrm Expression="([u45] + [s46] * 256.0) * 1.0" Name="34: Fset_f, Fset после фильтра" Id="0e65baf2-bc31-43fc-8626-0525345779b1" />
+				<CpzPrm Expression="([u47] + [s48] * 256.0) * 1.0" Name="34: Torq_f, Torq после фильтра" Id="dd35fc63-a27b-4b6b-86d1-6bc388e4d359" />
+				<CpzPrm Expression="([u49] + [s50] * 256.0) * 1.0" Name="34: Text, Температура внешняя" Id="697ec0f1-aeb3-47d6-ba7e-e5d36f4b1c15" />
+				<CpzPrm Expression="([u51] + [s52] * 256.0) * 1.0" Name="34: Ed, Пропорциональная часть регулятора тока D, А" Id="a42f6c2d-4eea-45a5-9f47-2ab91f767f53" />
+				<CpzPrm Expression="([u53] + [s54] * 256.0) * 1.0" Name="34: Eq, Пропорциональная часть регулятора тока Q, А" Id="5b1d5d2e-cfe3-43d6-92dd-328e9e8e2c6a" />
+				<CpzPrm Expression="([u55] + [s56] * 256.0) * 0.1" Name="34: Ef, Пропорциональная часть регулятора скорости, Гц" Id="535c02b8-161f-44dd-8dc4-2b15796dc316" />
+				<CpzPrm Expression="([u57] + [s58] * 256.0) * 1.0" Name="34: Efi, Пропорциональная часть регулятора потока, мВб" Id="68bff769-db4e-43f4-a9fe-981fd0089324" />
+				<CpzPrm Expression="([u59] + [s60] * 256.0) * 0.01" Name="34: Ucomp_D, Выход регулятора компенсатора вычислителя потока D, В" Id="cc3bbb92-332c-4ba3-8627-ab101aa31a72" />
+				<CpzPrm Expression="([u61] + [s62] * 256.0) * 0.01" Name="34: Ucomp_Q, Выход регулятора компенсатора вычислителя потока Q, В" Id="75862cf0-a6d6-485e-9ca9-0617df9a959c" />
+				<CpzPrm Expression="([u63] + [s64] * 256.0) * 1.0" Name="34: AUX1, Вспомогательная ячейка 1" Id="08e736e9-780d-4561-8477-e0d504f41cc1" />
+				<CpzPrm Expression="([u65] + [s66] * 256.0) * 1.0" Name="34: AUX2, Вспомогательная ячейка 2" Id="98426efb-7e01-4be2-b493-b0d0ea3d9361" />
+				<CpzPrm Expression="([u67] + [s68] * 256.0) * 1.0" Name="34: PVER, Версия ПО" Id="8ae6138c-656f-4fa1-b733-79bf1dfb200a" />
+				<CpzPrm Expression="([u69] + [s70] * 256.0) * 1.0" Name="34: PVDATE, Дата билда ПО" Id="0aba17d9-4e76-44bd-85e1-d57204425c18" />
+				<VarVal Position="71.0" Length="8" Name="#CRCL" Id="3cad88a7-3771-42c6-b6e1-2c37ac06f59a" />
+				<VarVal Position="72.0" Length="8" Name="#CRCH" Id="d80703aa-5f43-40fc-9e16-c8a69662ed8e" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-2. Третья команда, 34 параметра">
+			<Request Length="8" Position="0" CycleMsTime="75">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="078eb6c5-01a1-41b0-b635-87cdea7b7876" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="abc597db-8824-454d-872f-edcf96d523cd" />
+				<DefVal Position="2.0" Length="8" Value="0x00" Name="first param, lovv byte" Id="8570fb10-5c08-4f89-b421-c30abdf85911" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="4325d3dd-9606-4fc9-a5d7-39fd05117aba" />
+				<DefVal Position="4.0" Length="8" Value="0x22" Name="count param, lovv byte" Id="260ef9c1-52d2-4c3e-95c1-ac624b59cc27" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="ee8d0cc5-d1c7-4e86-bee2-533bb24d6c36" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="1801379b-80dd-4980-b70f-876edf1e62bc" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="b63af5dd-8846-405c-a59c-5ef0c9a17cfd" />
+			</Request>
+			<Reply Length="73" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="b4654e8e-7d44-4103-953e-1b5be0ab02c8" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="da3a88ee-a4f7-4e43-89e8-bccc3386e726" />
+				<DefVal Position="2.0" Length="8" Value="0x44" Name="bytes count, count param x2" Id="ea4fb01e-d425-41e5-a642-d8f7fc587737" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 0.1" Name="34: Fe, Вычисленная частота вращения, Гц" Id="927936d4-545a-4391-abb9-56a4650e61a6" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="34: Uout, Коэффициент модуляции ШИМ, %" Id="479bc89a-4c2e-4c29-b11f-c661f88ba2cb" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="34: IQset,Задание моментного тока, А" Id="19073c80-a10e-4bb1-b439-f8eb16b34b7c" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0)  1.0" Name="34: T, Температура радиатора, град" Id="adbe3174-698c-490f-ba47-e7c19fb9e091" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="34: Udc, Напряжение шины DC, В" Id="d788e94b-e26a-4d1b-bf6f-2f18bd4f6b85" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="34: Isum, Амплитуда огибающей тока по всем трем фазам, А" Id="46596662-2a39-4da4-b899-2a76560727d7" />
+				<CpzPrm Expression="([u15] + [s16] * 256.0) * 0.001" Name="34: Ud, Выход регулятора тока D" Id="62bdd729-9c63-47f7-a75e-9c0f7751c179" />
+				<CpzPrm Expression="([u17] + [s18] * 256.0) * 0.001" Name="34: Uq, Выход регулятора тока Q" Id="2e3e6242-53e2-4829-a9bb-b1b1cf3001a8" />
+				<CpzPrm Expression="([u19] + [s20] * 256.0) * 0.1" Name="34: Fout, Выход задатчика интенсивности частоты (электрической), Гц" Id="8ba1c3ca-c563-436a-8793-846a73321c28" />
+				<CpzPrm Expression="([u21] + [s22] * 256.0) * 1.0" Name="34: FIset, Уставка потока, мВб" Id="8342ba7c-88e0-4cf5-864e-f2f69ba09099" />
+				<CpzPrm Expression="([u23] + [s24] * 256.0) * 1.0" Name="34: Torq, Измеренный момент, Нм" Id="803d7e17-01fa-4418-adba-3ad5fbf26ec3" />
+				<CpzPrm Expression="([u25] + [s26] * 256.0) * 1.0" Name="34: Mout, Выход регулятора скорости или уставка момента, Нм" Id="0a6c4c25-af92-4bac-bbc9-fa10329722a6" />
+				<CpzPrm Expression="([u27] + [s28] * 256.0) * 1.0" Name="34: FImag, Измеренный поток, мВб" Id="0220e974-384f-4d81-bc5b-c4dbe6b7eaae" />
+				<CpzPrm Expression="([u29] + [s30] * 256.0) * 1.0" Name="34: IDset, Задание тока возбуждения, А" Id="5e99a3f3-539c-486c-a703-63d39f9bdece" />
+				<CpzPrm Expression="([u31] + [s32] * 256.0) * 1.0" Name="34: RUNMODE, Текущий режим работы" Id="e7678ab7-fbce-496d-abf9-5ead1d8ddc91" />
+				<CpzPrm Expression="([u33] + [s34] * 256.0) * 1.0" Name="34: STATUS, Биты ошибок" Id="421f31b4-1f7e-48ab-ada2-87cbab0d7255" />
+				<CpzPrm Expression="([u35] + [s36] * 256.0) * 1.0" Name="34: Fm, Частота вращения, измеренная ДЧВ (электрическая)" Id="6089b4d9-c466-4b57-a78b-c078fab1d2dd" />
+				<CpzPrm Expression="([u37] + [s38] * 256.0) * 1.0" Name="34: Ffb_f, Частота на ОС регулятора скорости после фильтра" Id="5112a150-8b8a-4e54-a206-7fecd3c09f0d" />
+				<CpzPrm Expression="([u39] + [s40] * 256.0) * 1.0" Name="34: FImag_f, FImag после фильтра" Id="9ea12541-558e-4c41-84a4-f4d633a5647e" />
+				<CpzPrm Expression="([u41] + [s42] * 256.0) * 1.0" Name="34: Id, Измеренная составляющая тока D" Id="2ba624d8-7edb-4465-b2aa-46a735c89d48" />
+				<CpzPrm Expression="([u43] + [s44] * 256.0) * 1.0" Name="34: Iq, Измеренная составляющая тока Q" Id="b94fbbc0-8500-4b0d-815e-c731dbf6be3e" />
+				<CpzPrm Expression="([u45] + [s46] * 256.0) * 1.0" Name="34: Fset_f, Fset после фильтра" Id="a7d92f35-5ae8-4b46-859d-be734b3d2f4b" />
+				<CpzPrm Expression="([u47] + [s48] * 256.0) * 1.0" Name="34: Torq_f, Torq после фильтра" Id="45c015ca-3c57-4e57-8988-5ed2c1306acd" />
+				<CpzPrm Expression="([u49] + [s50] * 256.0) * 1.0" Name="34: Text, Температура внешняя" Id="e43c4ac2-a96e-4e00-8492-6846f2dd903a" />
+				<CpzPrm Expression="([u51] + [s52] * 256.0) * 1.0" Name="34: Ed, Пропорциональная часть регулятора тока D, А" Id="a876bdcf-1e6f-4dba-9ef0-fdc6475a789a" />
+				<CpzPrm Expression="([u53] + [s54] * 256.0) * 1.0" Name="34: Eq, Пропорциональная часть регулятора тока Q, А" Id="ebcbbc48-a0ca-4abb-9e88-f9ccff1aea8a" />
+				<CpzPrm Expression="([u55] + [s56] * 256.0) * 0.1" Name="34: Ef, Пропорциональная часть регулятора скорости, Гц" Id="cc4c3d35-12ec-41d8-9de1-9b04d1ec3c86" />
+				<CpzPrm Expression="([u57] + [s58] * 256.0) * 1.0" Name="34: Efi, Пропорциональная часть регулятора потока, мВб" Id="6a45af7b-4201-45e0-80a3-c311087df689" />
+				<CpzPrm Expression="([u59] + [s60] * 256.0) * 0.01" Name="34: Ucomp_D, Выход регулятора компенсатора вычислителя потока D, В" Id="cf1c0326-b171-48e7-b810-bd76d1268bc2" />
+				<CpzPrm Expression="([u61] + [s62] * 256.0) * 0.01" Name="34: Ucomp_Q, Выход регулятора компенсатора вычислителя потока Q, В" Id="d7ce250d-1e21-48be-b716-01ec7439b3bf" />
+				<CpzPrm Expression="([u63] + [s64] * 256.0) * 1.0" Name="34: AUX1, Вспомогательная ячейка 1" Id="dff7a644-4338-46cf-b9ab-5cab4b6d6075" />
+				<CpzPrm Expression="([u65] + [s66] * 256.0) * 1.0" Name="34: AUX2, Вспомогательная ячейка 2" Id="eb7efd10-cdf6-4902-bf3a-3cbe79e0aa0b" />
+				<CpzPrm Expression="([u67] + [s68] * 256.0) * 1.0" Name="34: PVER, Версия ПО" Id="ae35f835-245f-48d4-9390-3f14086852e7" />
+				<CpzPrm Expression="([u69] + [s70] * 256.0) * 1.0" Name="34: PVDATE, Дата билда ПО" Id="0b9e044b-4a31-4a63-9e82-3b779a18745e" />
+				<!--<CpzPrm Expression="[u] * 1.0 + [u] * 256.0" Name=""/>-->
+				<VarVal Position="71.0" Length="8" Name="#CRCL" Id="340ecff4-b06f-40d8-9a9e-3424567f4763" />
+				<VarVal Position="72.0" Length="8" Name="#CRCH" Id="c700bb41-c786-45ce-a703-9e1764c83e6d" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-3. Третья команда, 34 параметра">
+			<Request Length="8" Position="0" CycleMsTime="75">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="96d7d0cc-e538-4e8b-b14d-19a8069221f1" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="eca0e1a3-9a56-4e85-a1cc-514d01528889" />
+				<DefVal Position="2.0" Length="8" Value="0x00" Name="first param, lovv byte" Id="2f4851cc-50f8-43fe-8dbc-0aa6c45fa2b3" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="4e28f8ce-dc79-45d9-9cb6-e5b3824f1286" />
+				<DefVal Position="4.0" Length="8" Value="0x22" Name="count param, lovv byte" Id="b94c60dd-608e-4467-b7a4-89ea1d8852e1" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="a1a3fd44-d957-4adf-8f29-6d36c64ce9fd" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="2b80e3fc-2c35-4283-97af-0a477fe564f0" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="ae371d4f-bdfb-43db-a6f4-2eb2f4745251" />
+			</Request>
+			<Reply Length="73" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="9fd6423f-f4c1-4e1a-b9d9-ed11402a55d5" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="9b0d0d1e-5fad-4e01-b3a7-5a3dd82ef79d" />
+				<DefVal Position="2.0" Length="8" Value="0x44" Name="bytes count, count param x2" Id="f6648b30-6619-48ca-b5ad-9465c294a714" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 0.1" Name="34: Fe, Вычисленная частота вращения, Гц" Id="03a9c386-21b1-477f-8eda-7d0b15aa7a52" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="34: Uout, Коэффициент модуляции ШИМ, %" Id="d98746d2-5749-4afe-9d82-5a41b39b2b55" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="34: IQset,Задание моментного тока, А" Id="427dbcc7-bb51-4dac-b8dc-b53ba8407c5c" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0)  1.0" Name="34: T, Температура радиатора, град" Id="f199ec77-64e5-497c-bcd6-8fa9295e7b9e" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="34: Udc, Напряжение шины DC, В" Id="12f47d31-e4a3-44b6-9d55-f88cddda7676" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="34: Isum, Амплитуда огибающей тока по всем трем фазам, А" Id="13bc1110-539e-4444-85db-8879f82b2538" />
+				<CpzPrm Expression="([u15] + [s16] * 256.0) * 0.001" Name="34: Ud, Выход регулятора тока D" Id="3cfacae3-2835-46ea-a75c-9c776f6b087f" />
+				<CpzPrm Expression="([u17] + [s18] * 256.0) * 0.001" Name="34: Uq, Выход регулятора тока Q" Id="eef36c2a-af0a-479f-80cd-e0bc193c527c" />
+				<CpzPrm Expression="([u19] + [s20] * 256.0) * 0.1" Name="34: Fout, Выход задатчика интенсивности частоты (электрической), Гц" Id="6fbe297d-ec3d-4456-8321-d297a2e257c8" />
+				<CpzPrm Expression="([u21] + [s22] * 256.0) * 1.0" Name="34: FIset, Уставка потока, мВб" Id="f60ffc89-871d-4360-98ff-c527142d5de1" />
+				<CpzPrm Expression="([u23] + [s24] * 256.0) * 1.0" Name="34: Torq, Измеренный момент, Нм" Id="6371402a-8da3-48e9-aee5-02837c4b2f50" />
+				<CpzPrm Expression="([u25] + [s26] * 256.0) * 1.0" Name="34: Mout, Выход регулятора скорости или уставка момента, Нм" Id="c312e037-93fa-4576-95b6-97849c6d6482" />
+				<CpzPrm Expression="([u27] + [s28] * 256.0) * 1.0" Name="34: FImag, Измеренный поток, мВб" Id="0f34ec33-fa32-411c-8c9e-83846b19eaf3" />
+				<CpzPrm Expression="([u29] + [s30] * 256.0) * 1.0" Name="34: IDset, Задание тока возбуждения, А" Id="1b952797-8a61-4ee0-b815-946308a11a92" />
+				<CpzPrm Expression="([u31] + [s32] * 256.0) * 1.0" Name="34: RUNMODE, Текущий режим работы" Id="102803c8-2a73-4fc6-9fe9-43aee5e2970b" />
+				<CpzPrm Expression="([u33] + [s34] * 256.0) * 1.0" Name="34: STATUS, Биты ошибок" Id="173605d9-20d3-4d64-8849-70e614f1abfa" />
+				<CpzPrm Expression="([u35] + [s36] * 256.0) * 1.0" Name="34: Fm, Частота вращения, измеренная ДЧВ (электрическая)" Id="d336835d-ba36-492f-81f6-4aceb5db933a" />
+				<CpzPrm Expression="([u37] + [s38] * 256.0) * 1.0" Name="34: Ffb_f, Частота на ОС регулятора скорости после фильтра" Id="c4a5a4f1-6c7d-4eeb-ab4e-e2162c9ec5c0" />
+				<CpzPrm Expression="([u39] + [s40] * 256.0) * 1.0" Name="34: FImag_f, FImag после фильтра" Id="749ef265-4313-4361-95d9-2f54f7f56edf" />
+				<CpzPrm Expression="([u41] + [s42] * 256.0) * 1.0" Name="34: Id, Измеренная составляющая тока D" Id="920b3412-b779-4dff-826d-acf336e005ea" />
+				<CpzPrm Expression="([u43] + [s44] * 256.0) * 1.0" Name="34: Iq, Измеренная составляющая тока Q" Id="5c10169b-2f75-4b50-97f7-a277f3f1f963" />
+				<CpzPrm Expression="([u45] + [s46] * 256.0) * 1.0" Name="34: Fset_f, Fset после фильтра" Id="c7cf1487-7462-4b4e-9c82-95b246664247" />
+				<CpzPrm Expression="([u47] + [s48] * 256.0) * 1.0" Name="34: Torq_f, Torq после фильтра" Id="b779172f-8701-4bc1-a8dc-632e05794bb7" />
+				<CpzPrm Expression="([u49] + [s50] * 256.0) * 1.0" Name="34: Text, Температура внешняя" Id="06580676-bbc2-4fe3-b644-f94d3ff94b5a" />
+				<CpzPrm Expression="([u51] + [s52] * 256.0) * 1.0" Name="34: Ed, Пропорциональная часть регулятора тока D, А" Id="0f995ce1-03e0-4413-a814-10b7fec89464" />
+				<CpzPrm Expression="([u53] + [s54] * 256.0) * 1.0" Name="34: Eq, Пропорциональная часть регулятора тока Q, А" Id="c4c7483b-39d5-40b5-903f-985e6fcab210" />
+				<CpzPrm Expression="([u55] + [s56] * 256.0) * 0.1" Name="34: Ef, Пропорциональная часть регулятора скорости, Гц" Id="321056f6-3964-4630-8428-f3e5e23bc4ce" />
+				<CpzPrm Expression="([u57] + [s58] * 256.0) * 1.0" Name="34: Efi, Пропорциональная часть регулятора потока, мВб" Id="7ec8aa2d-fba5-46c4-a08f-1e84d374c8c8" />
+				<CpzPrm Expression="([u59] + [s60] * 256.0) * 0.01" Name="34: Ucomp_D, Выход регулятора компенсатора вычислителя потока D, В" Id="dfbad78f-96d8-4626-bcbb-93c9ffded2d1" />
+				<CpzPrm Expression="([u61] + [s62] * 256.0) * 0.01" Name="34: Ucomp_Q, Выход регулятора компенсатора вычислителя потока Q, В" Id="70f15eef-14ab-4fde-bb36-6c40ba3108ee" />
+				<CpzPrm Expression="([u63] + [s64] * 256.0) * 1.0" Name="34: AUX1, Вспомогательная ячейка 1" Id="baa8496b-6c01-46cc-8dc6-1ce64f9d42c2" />
+				<CpzPrm Expression="([u65] + [s66] * 256.0) * 1.0" Name="34: AUX2, Вспомогательная ячейка 2" Id="6f7a5a60-8cea-44b1-9d3b-808f060427cb" />
+				<CpzPrm Expression="([u67] + [s68] * 256.0) * 1.0" Name="34: PVER, Версия ПО" Id="a89ecb72-7ec5-4d49-b5cb-033a155f3f53" />
+				<CpzPrm Expression="([u69] + [s70] * 256.0) * 1.0" Name="34: PVDATE, Дата билда ПО" Id="0f228921-1c44-43d1-b608-7addd6d64bd4" />
+				<!--<CpzPrm Expression="[u] * 1.0 + [u] * 256.0" Name=""/>-->
+				<VarVal Position="71.0" Length="8" Name="#CRCL" Id="947ae788-9a28-4f97-9dd4-bc69a501cc25" />
+				<VarVal Position="72.0" Length="8" Name="#CRCH" Id="56cee016-c565-4e9e-bcaa-a2f8ad0d88f8" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-2. Третья команда, 3-8 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="32ee977d-1d89-4377-a906-2e8d722409c8" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="fbde4e1c-92cf-4a5a-80ba-a6a3e2e3d66a" />
+				<DefVal Position="2.0" Length="8" Value="0x03" Name="first param, lovv byte" Id="a28f11ce-bcdc-4964-8815-34fb17037844" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="b7bee61f-c1b0-46d2-b608-8dedf51b1228" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="485c6dfb-3d42-4bd9-ab9e-43cd8da53011" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="298f705e-14ac-4544-8672-54f32ebaae6f" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="95fe9ee2-0fc5-4680-bb66-544e33a34ca9" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="64082b7a-fbf5-4cca-bd69-2e6eac646c04" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="86f82739-47bc-4b51-ae6f-7dfc159d6bc8" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="19c3eb4e-a236-452d-b7bf-9d07eaaea35a" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="8fa44b1d-a9c7-441f-ba81-af6e98df4205" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="T Температура радиатора, град" Id="7f1f7bc7-2933-4cb2-87ac-9d56488c2880" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Udc Напряжение шины DC, В" Id="3c2827f8-278e-4b08-9d96-bb705926b7cd" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Isum Амплитуда огибающей тока по всем трем фазам, А" Id="f53c8f69-af49-4367-9cff-d86638840e5d" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 0.001" Name="Ud Выход регулятора тока D" Id="2f25d735-e97f-4071-aa91-dd4fc241a489" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 0.001" Name="Uq Выход регулятора тока Q" Id="5450562f-c534-4776-aef1-21f37b3493b3" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 0.1" Name="Fout Выход задатчика интенсивности частоты (электрической), Гц" Id="8ff28cdc-a92f-4a02-b9a2-4645c24bcdb4" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="9876046a-7338-4fe3-b411-c54824803662" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="b0d48058-d27a-417a-9267-458e3488af9e" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-3. Третья команда, 3-8 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="d60fd830-60b4-4e44-881a-bd18ccafca82" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="d1e49dff-e6c0-4167-a52f-d0962ab7246d" />
+				<DefVal Position="2.0" Length="8" Value="0x03" Name="first param, lovv byte" Id="e91019bc-7b7b-4c62-951a-da053998e5cf" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="479844e5-5d30-4e5e-8261-3b8ebf4feb4b" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="ca10f092-acf4-49b6-9e5a-20a0ccce4516" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="40114d18-f384-4283-a429-4aade33db863" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="3a8330a3-19b1-4e8a-9181-e136434b9958" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="754230c6-4c17-40d9-910e-8394e9ccc342" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="2eb24bfd-4268-4881-97ac-47a9e9de410d" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="70721c0a-2d55-4e98-89b3-06e9b54b0ffc" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="79f5beec-7a2f-4b98-a677-fd841192df46" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="T Температура радиатора, град" Id="eb74afeb-356e-4074-824e-3eb07c248e43" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Udc Напряжение шины DC, В" Id="8d806e9c-f7b5-4e8e-9955-d045757dfae7" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Isum Амплитуда огибающей тока по всем трем фазам, А" Id="a5645ec8-acfa-474a-8228-ec1189fda98b" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 0.001" Name="Ud Выход регулятора тока D" Id="ba3c0b23-b6f9-4085-b18c-cd792c86ff5b" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 0.001" Name="Uq Выход регулятора тока Q" Id="486cb745-0a67-4d14-b0aa-afc582f927bf" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 0.1" Name="Fout Выход задатчика интенсивности частоты (электрической), Гц" Id="c0955250-7e44-4ff7-87cb-2606376262fd" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="12696c44-37fc-44f9-953e-be25fcaf6a01" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="55580d3e-d83d-4234-8557-8b8321191c7a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-2. Третья команда, 14-19 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="afb70838-9df1-43d6-b6ca-dac036f76c8e" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="61cdc39f-a6c1-4b68-a2ae-3477a34548b7" />
+				<DefVal Position="2.0" Length="8" Value="0x0E" Name="first param, lovv byte" Id="c3e28dab-1f1d-43fa-90b3-59b7cf53150a" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="8fb720d6-7779-476b-91af-acfd1132c147" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="5cc5304d-9d5c-432f-8165-d5ab7a37ee69" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="da464794-2294-45eb-b0be-3d3ee7644f13" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="f2966465-55db-481c-8a5a-ae5dbaa89fa0" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="e20d49b4-8c13-4ce3-92b9-ae44c20f192b" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="f0ceb415-83ba-44e6-829b-b722cf46efc2" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="e0a998ee-2d1b-4062-9e70-7b07c1c30548" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="6d2b5434-3521-4cb7-8a5f-2e4694c1ea5d" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="RUNMODE, Текущий режим работы" Id="df43e550-1efe-462d-8bfc-9414a61209c8" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="STATUS, Биты ошибок" Id="42897ca3-8e49-4c25-acd9-fc3f50117e91" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Fm, Частота вращения, измеренная ДЧВ (электрическая)" Id="f2bbad39-7819-4d47-b1e4-1cecab6765d7" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ffb_f, Частота на ОС регулятора скорости после фильтра" Id="1f531b92-51ce-41ff-8391-2b02803fab8c" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="FImag_f, FImag после фильтра" Id="e45419cc-8690-4489-b527-f114e679668b" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Id, Измеренная составляющая тока D" Id="32e9f71b-0577-4013-aa2a-69eb961b5d56" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="a445d21b-6db1-4a96-bc49-44d15726d6fb" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="ebb55eeb-505f-4adf-9407-60edb4509dd6" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-3. Третья команда, 14-19 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="cfb57740-f49d-44c4-9874-37e407c8d690" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="c879cf35-d719-4e29-80ce-b219e8aaa7a0" />
+				<DefVal Position="2.0" Length="8" Value="0x0E" Name="first param, lovv byte" Id="42810fe9-db65-4f0c-8a9a-eb95e5b4a84a" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="a427c954-112f-43eb-bb70-0587bdbf0a19" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="5d866e1a-a411-44ab-bae3-d8c11db19709" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="836e732b-d769-4ea7-9e03-00800d418e01" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="2c821ad7-b4fd-4d50-afd5-b5d34fa50ccb" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="ab6994bd-9e2a-4403-a0c1-9bdd5bf524ae" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="21c9db51-9d4d-46d5-9123-f9253e68bd0d" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="ebda1186-2bf2-47a9-8c1f-5e1b58b29f51" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="be0850d7-4153-483a-97fa-b892e67a6483" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="RUNMODE, Текущий режим работы" Id="07fcea6d-f370-4b4e-87e9-aa225971f585" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="STATUS, Биты ошибок" Id="e6594a38-6706-4133-a770-dafb245c2cfa" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Fm, Частота вращения, измеренная ДЧВ (электрическая)" Id="4c4f1f7c-b7bf-4bf8-8658-ba8690d199ea" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ffb_f, Частота на ОС регулятора скорости после фильтра" Id="dad0ccb9-f96b-460d-85d6-7ee40dcbee06" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="FImag_f, FImag после фильтра" Id="d825e0c8-641e-4d2f-966a-05ba473fc875" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Id, Измеренная составляющая тока D" Id="d11f449d-8a54-4a04-b614-d3e395fc0336" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="4d2c3294-c54a-4d38-9d5e-7a7eb8bac1c1" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="4b2f2db5-c884-49eb-8221-21cb76227de6" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-2. Третья команда, 20-25 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="11704ea7-cc5f-489f-b097-14c2598169a2" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="ebc687ea-3baa-42f2-b477-aeb0d3a1d565" />
+				<DefVal Position="2.0" Length="8" Value="0x14" Name="first param, lovv byte" Id="9948eacd-5624-4d46-9d00-93bae0b32489" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="e044e8eb-b23b-46a7-9e16-26a9e3baee12" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="25046ce9-05ea-4956-86a4-1de73147f7f1" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="fa929d64-7499-4b65-9ae7-ec9f3fc5a3c3" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="a129d5df-d238-4dc0-8b91-d7f0d137d35d" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="f4955fc2-d884-4706-a395-49fe6a468a29" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="d796c46d-75a0-4dbe-96b1-0f5240792dea" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="3a6c4925-6b1a-4052-b729-6f0064ec644e" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="722b8d28-6059-4b94-8c61-f6717e4b4c88" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Iq, Измеренная составляющая тока Q" Id="88e9f59b-de26-4dca-a024-30d8c3f74b8f" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Fset_f, Fset после фильтра" Id="cb95a5bc-78d6-4f0f-b0fc-8f642ee757ee" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Torq_f, Torq после фильтра" Id="90c1842a-2bf5-4fad-824a-7ebcab441ee7" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Text, Температура внешняя" Id="973112ef-9be6-4281-bc18-a394699af55c" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ed, Пропорциональная часть регулятора тока D, А" Id="39cf7e60-d930-4dc6-a672-29c3b253e068" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Eq, Пропорциональная часть регулятора тока Q, А" Id="8d34145f-fe7b-4168-b1d0-e605675528b0" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="a7051c76-8eea-4318-a038-49ad6773ed42" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="c88caeaa-76ca-44ec-9ed9-19a75c3e1ae6" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-3. Третья команда, 20-25 параметры">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="28ce9f95-48d3-4042-827a-bb6e367ab588" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="6b161e0a-ef1f-4554-a7d4-2cb4e054111d" />
+				<DefVal Position="2.0" Length="8" Value="0x14" Name="first param, lovv byte" Id="1d16d96c-8607-4c07-bb8f-8d589741455f" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="447424b7-d359-4c07-a94a-68861a200674" />
+				<DefVal Position="4.0" Length="8" Value="0x06" Name="count param, lovv byte" Id="938bb185-ad79-48dd-9418-caf0dfc2387b" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="63dfa85a-c8bc-4dbf-878e-8a2d2fc758c7" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="3af3361f-1a2a-4666-969e-3cdb1e1f23b5" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="a595c098-5400-4eef-b077-36963b8131ea" />
+			</Request>
+			<Reply Length="17" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="d40267c8-b66e-4557-b3d5-c6ff349623c3" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="ae2663c1-a0ac-4338-8dd0-9b99a835209a" />
+				<DefVal Position="2.0" Length="8" Value="0x0C" Name="bytes count, count param x2" Id="dcf9ce82-7072-4d78-8cdc-f8972d5e4a09" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Iq, Измеренная составляющая тока Q" Id="195fbbee-7406-413f-bcd3-2c58fc1bf568" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Fset_f, Fset после фильтра" Id="1052fae7-859e-4dea-9c9b-8aeb2db42c7e" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Torq_f, Torq после фильтра" Id="c6aa750f-f32c-4f4f-9bd5-ec3b8ad2be32" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Text, Температура внешняя" Id="e85c2666-fbc1-4964-b2b8-521f119b3c86" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ed, Пропорциональная часть регулятора тока D, А" Id="65ce872b-2f4f-4b72-aa2f-c223954a1805" />
+				<CpzPrm Expression="([u13] + [s14] * 256.0) * 1.0" Name="Eq, Пропорциональная часть регулятора тока Q, А" Id="5da53532-36a0-400c-b455-849fbea23a00" />
+				<VarVal Position="15.0" Length="8" Name="#CRCL" Id="fa4e81fd-7820-48ab-993e-3ad314368453" />
+				<VarVal Position="16.0" Length="8" Name="#CRCH" Id="fc1536b2-5a5b-467a-8a35-3b170caa9b6d" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 0-4 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="69db286f-f935-4fe0-b64c-bd86216057fa" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="b21852a9-7aea-458e-8ce0-c1f6a0de9c0e" />
+				<DefVal Position="2.0" Length="8" Value="0x00" Name="first param, lovv byte" Id="23b8da78-7e93-460e-9241-7f6995e22768" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="1283defc-7b8b-43c0-b9bd-6d6c1b53282a" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="389e5a40-f2e4-4d15-b431-1cafc2076157" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="7bd9b764-bf41-4b18-8c8b-9617f363cb42" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="01488c57-bb29-404c-9859-3c89971a750b" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="8648a92b-14db-4105-aad2-50b41765ac1c" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="cc774eec-198b-4d11-8653-551ff4aea9ab" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="0f8a56ce-0a47-48f4-9fad-e564fc115078" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="ab20615f-2bfb-4594-8603-36cdf31a638d" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 0.1" Name="Ведомый: Fe Вычисленная частота вращения (электрическая), Гц" Id="7bae520a-496b-4309-b73e-4f684469855c" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: Uout Коэффициент модуляции ШИМ, %" Id="20ff52da-34ad-43de-88ea-100721e3c64a" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: IQset Задание моментного тока, А" Id="9cf1a343-48ab-4768-b0a9-a0824cdad0fe" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ведомый: T Температура радиатора, град" Id="70f0801d-9c06-4596-8c15-502312995a18" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: Udc Напряжение шины DC, В" Id="43a23ffc-afed-4edc-a3fe-44bf71c37bf6" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="cb82ad64-e4f4-4f2f-ae39-83b356c47775" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="af97ce17-c725-44c8-b561-f758df579fe0" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 5-9 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="d16e08e0-29fb-4656-a368-8e28955d087b" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="faddbe72-d790-4fc0-bd83-99975feb21f3" />
+				<DefVal Position="2.0" Length="8" Value="0x05" Name="first param, lovv byte" Id="4adbc67b-820e-494f-ba5c-6e062d562a88" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="ffd55ed0-76a2-4d90-a6cf-9783612534f0" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="8b01b293-b2d2-4889-9911-1b9f4e4c8c0d" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="8afbcb9f-9a0d-4fb3-9063-5053ba987d77" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="0ee0f9b7-ab03-429d-9040-266fd32b1e70" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="b607c75e-a856-40df-baee-c2947b56756f" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="19e4c0c4-3265-4886-9cc8-d112922aef1b" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="452e5159-6bcb-4179-a173-e10cca974a1e" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="c6fe7806-9425-44a4-9121-0e657b8925d0" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: Isum Амплитуда огибающей тока по всем трем фазам, А" Id="25a6571d-249b-4e1c-9cae-6ffffad6f7c4" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 0.001" Name="Ведомый: Ud Выход регулятора тока D" Id="4d316765-43ca-4332-8ae6-5252f83033c1" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 0.001" Name="Ведомый: Uq Выход регулятора тока Q" Id="e3a379f8-6818-441a-a61e-1ea82f5a8040" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 0.1" Name="Ведомый: Fout Выход задатчика интенсивности частоты (электрической), Гц" Id="35e20f95-3ed5-412d-b4f2-fbb1544211dc" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: FIset Уставка потока, мВб" Id="c3916fed-a045-4104-9806-478194138fc2" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="ef964563-d8ae-4a25-9973-ab0c7ac2e3e9" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="63e3efc2-c5ba-4b48-b975-3905b947f9d1" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 10-14 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="09e2d650-ec0d-45d8-b6a6-ac4d308807b7" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="290cbc8f-4758-4a8c-926c-3fc6e77e0f61" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="first param, lovv byte" Id="b4f197e2-ba2a-4389-ab95-48e802c2b707" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="33b051aa-2d3f-4ac9-badf-2e8b70a46318" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="53e0028c-644a-4788-a14e-5c5ee10a7468" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="2fd7e178-eeaa-4219-9a2c-91b5979be394" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="323cec09-f1ac-442e-b8e2-3be769e71814" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="28980385-8241-4377-bd5c-d734b881c7da" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="99a8b3a1-bbd3-4b2c-b79a-48a7b1de68cd" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="4ecce35f-c4ff-4a63-b53a-b370c59280b7" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="05f1e766-3920-4721-ac97-36b6188f6f00" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: Torq Измеренный момент, Нм" Id="dbef979d-5c7a-47d7-87cb-c9984ac4432b" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: Mout Выход регулятора скорости или уставка момента, Нм" Id="01c3f71c-bdcf-4176-91c7-3688843a852d" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: FImag Измеренный поток, мВб" Id="7708147b-dd28-441a-8bdb-c741935ac7fb" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ведомый: IDset Задание тока возбуждения, А" Id="69897cdb-b07e-43d0-80a5-968dcd646c14" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: RUNMODE Текущий режим работы" Id="35c857ed-d261-4a52-b34a-639e5c354313" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="c4179812-af54-4e5e-b2fb-4d78498dc65c" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="02e5b732-a11c-44b7-921f-c8b667e4e3a8" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 15-19 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="6a601dca-2bde-4afb-8d52-764f38ce1e5f" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="4998ea22-01f2-4a0e-81e3-b9b36ebcf6f7" />
+				<DefVal Position="2.0" Length="8" Value="0x0F" Name="first param, lovv byte" Id="610c073c-40d7-497e-bf7f-d95251ce498d" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="52878c0a-e049-445f-ac61-9ad998a868f9" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="0a4a62b5-7609-4e0a-9465-9880b511a8d3" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="9824daa3-82ef-4752-8c8a-a305e80c8800" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="8909e1e6-e24a-4845-bf3a-0edef20e2ccd" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="f8f4d76d-af8d-4b67-960f-bd9f9745ac51" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="c0e92ea3-9a99-4fa4-9e38-ee740391e824" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="8a968c6b-a931-4d33-962e-eb05c3e9343d" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="ff0d7df5-62bb-4d48-a053-c3a92ba76ea1" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: STATUS Биты ошибок " Id="ee7a8844-e757-4e10-8a46-fe555fc4af33" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: Fm Частота вращения, измеренная ДЧВ (электрическая)" Id="6c34f23d-7fc1-434b-83f7-bf7b7d92f299" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Ffb_f Частота на ОС регулятора скорости после фильтра" Id="416a6b79-8eb3-4756-af94-3f03e54a148a" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ведомый: FImag_f FImag после фильтра" Id="865791d6-3e96-4194-957b-567a37918923" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: Id Измеренная составляющая тока D" Id="e2398ad2-c1b3-486c-bb71-252ed98f805e" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="fa4896a1-cfc1-49cf-b34f-2d4d03bc60d5" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="fb505548-5df9-4fbb-84c3-526691072782" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 20-24 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="5800402d-5e62-431a-b71b-cb0e8eb4a88d" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="ef21232e-507c-4374-8900-c84a86cbe6f1" />
+				<DefVal Position="2.0" Length="8" Value="0x14" Name="first param, lovv byte" Id="76e8fbe2-7210-4274-9148-8afb29c75bed" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="2953506e-b2a4-4662-af22-30dc2ff43b23" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="92306cd0-1273-4870-aa64-cf183201a483" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="d8dce91a-d168-4bf1-9055-d3853f9d45fe" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="d5bda5a9-d6f8-4069-8190-832ddbadf207" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="6de7fb01-2627-4862-9896-9521941245ab" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="ef8b9d51-1cde-43a1-8212-f5e7040717f7" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="bc513972-7949-4daf-861e-632c967cdc3a" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="ba241cee-f5b3-4b53-b538-ac2125d3c67c" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: Iq Измеренная составляющая тока Q" Id="8200110a-545c-4dbf-aa56-ab5f0eb34153" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: Fset_f Fset после фильтра" Id="ec63bfee-819c-4cb5-92ba-d4f76943b485" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Torq_f Torq после фильтра" Id="4fd89b15-b56d-4cd6-8181-7ca2aeec8d1f" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ведомый: Text Температура внешняя" Id="129470fc-f613-4038-a683-aba9ff685a71" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: Ed Пропорциональная часть регулятора тока D, А" Id="497c6806-2ab5-4fb8-8511-caf72c78db60" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="1449616f-55c7-458b-9701-bc72bcc09bb9" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="5f2b4799-d02a-43ab-9fea-665d66d5226a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-1. Третья команда, 25-29 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="c1661ae6-7ef2-4bfc-8c39-4c1b839eb55c" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="f943fb3f-ad78-4e1b-9497-f97746ca0f0d" />
+				<DefVal Position="2.0" Length="8" Value="0x19" Name="first param, lovv byte" Id="6a1765fe-bec9-45ff-addb-6f298d9ff79d" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="e00aa7d0-80e3-4648-8d21-365c5aceed80" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="2ea6832b-308f-49a9-9567-0e080dbd3f04" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="e1505c09-6a86-46e4-b013-5ed870a7bed6" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="77eb8657-634c-461b-86e1-a0730bbfecc2" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="a117d9a9-9c7b-43a5-8c91-2ecd4451c5b6" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="d8ed6b55-42a3-48c6-a34d-740aeabbad12" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="d05bb5d2-807c-46bc-b9d1-421ff9d159c4" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="047e7f75-6274-41eb-ab82-b0d0c0861b40" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: Eq Пропорциональная часть регулятора тока Q, А" Id="bed5ea8a-cbc0-4e25-8d33-3d655855878d" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 0.1" Name="Ведомый: Ef Пропорциональная часть регулятора скорости, Гц" Id="0e42b712-447e-4f1a-a9d6-7d11c780420c" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Efi Пропорциональная часть регулятора потока, мВб" Id="1ae1970d-db8a-492a-a3c9-9a87832c143f" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 0.01" Name="Ведомый: Ucomp_D Выход регулятора компенсатора вычислителя потока D, В" Id="95095e80-f3bf-464c-952d-79460b7012e7" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 0.01" Name="Ведомый: Ucomp_Q Выход регулятора компенсатора вычислителя потока Q, В" Id="82d9bd33-4d7d-49b4-9ac2-ce5cfaeb87dd" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="c883033b-e3f4-4a6a-9f9d-65ab5c145388" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="a0e28474-bb75-4cd4-b06c-ffdb76955a6e" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-2. Третья команда, 3-7 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="6bdd07d5-de3c-4959-9fa1-93a9c9ebc06a" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="b7e7495e-b2f3-45e8-8ed7-755ef2e79904" />
+				<DefVal Position="2.0" Length="8" Value="0x03" Name="first param, lovv byte" Id="0de99e4a-1a94-4be1-94b4-7f76b8f76feb" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="d87be6dc-bca9-44fc-ab7a-22e0bc754280" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="97ef0488-3155-4a7e-94c6-e5c526737731" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="9adece5c-d08c-490c-a157-4b72225c3610" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="696f3a0e-0b87-45b1-89d8-a86380bd216e" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="519e870c-a45f-421c-b5f8-d9dcc3d6cba5" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="e5a29529-97d9-4bb5-9f65-7220600b5e2a" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="bdf642cc-1f7e-4185-8341-2e8b0a72f792" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="d4348b91-5ab1-4ec7-b41e-541f5f001d3f" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: T Температура радиатора, град" Id="f9fc66a9-1b16-4761-bec6-a3ab6e81fc52" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: Udc Напряжение шины DC, В" Id="6757dbb6-5d26-4f5b-b7c1-ba006e2f64e3" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Isum Амплитуда огибающей тока по всем трем фазам, А" Id="43af5343-8daa-432e-9d15-d5480a7fff10" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 0.001" Name="Ведомый: Ud Выход регулятора тока D" Id="ef2520ab-7e55-4710-826c-cd40145c8785" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 0.001" Name="Ведомый: Uq Выход регулятора тока Q" Id="e81cfa2d-e383-4938-847c-3562c636375d" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="3e8c4f80-e547-4009-969b-0d07abc16e31" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="c3142b3a-20a4-4e6d-9b60-0c0eb44054b7" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-3. Третья команда, 3-7 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="fcb5dfcb-6d0a-4644-96d7-f55bfdfe15ae" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="5fb70186-b7e8-4fb3-93a2-bc286da9599e" />
+				<DefVal Position="2.0" Length="8" Value="0x03" Name="first param, lovv byte" Id="9e7887bc-1916-4377-968b-2524e7077cc8" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="637c13f0-ae08-451a-ab2a-64f240cf4d76" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="da4ae018-f7c9-432c-9112-bf5c644b7599" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="f37c490c-a706-4139-a7fe-e36654c50f6e" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="189f889c-1eb2-49ba-a3bf-ef78b81fddc6" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="3fcea883-b5d4-471e-a155-9e01c0942356" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="ff980dfd-1797-4374-b272-0eeace1b8db1" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="00b0acac-198b-4a19-b115-eb2cf6b6e32d" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="072a41db-3c7d-4b66-9ea4-f02eed1c8a25" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: T Температура радиатора, град" Id="b6298f3b-d6d4-4edc-8f47-f2f12aadac10" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: Udc Напряжение шины DC, В" Id="6388fcbf-df1d-4dd7-a4df-235b06d31761" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Isum Амплитуда огибающей тока по всем трем фазам, А" Id="03572d2e-db05-46fd-9d0c-903334b69f36" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 0.001" Name="Ведомый: Ud Выход регулятора тока D" Id="a63c3c1e-cc77-4f38-8031-472d4a9c07ff" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 0.001" Name="Ведомый: Uq Выход регулятора тока Q" Id="314f9ffc-c0c3-4e02-9ce8-b99db152c176" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="c6abc6e1-bd17-411b-99d9-9a389c1f372b" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="f7ac773b-f1a2-4920-bab3-aa081491224b" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-2. Третья команда, 14-18 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="a28c4632-1c18-44bd-94b1-9b85adaf72ba" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="ac7e464a-5361-41b5-a117-8daf19831ae0" />
+				<DefVal Position="2.0" Length="8" Value="0x0E" Name="first param, lovv byte" Id="416437c3-02bc-4776-b556-44141e42dd20" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="889f8053-33ff-44fd-8676-c6f35b1e00ee" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="3bbd49b3-8deb-436c-bdbc-df2d36ae5b5a" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="ae70bfe7-ed71-469c-9079-6203f4f046cf" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="6436bff4-d6bb-4664-a830-13007abca162" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="f6139cb1-e930-4c36-bcff-07078d598e7c" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="c80d06b7-8e53-4d9f-95fa-846bdb66411c" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="46552a97-7c95-42b5-af88-9ccbcffd69a1" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="688181d6-4306-4b43-af99-2155401d0011" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: RUNMODE, Текущий режим работы" Id="6ff88533-a0c6-4d79-b566-00644e39e550" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: STATUS, Биты ошибок" Id="1ba8d184-05c3-474d-8253-602c20aa8361" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Fm, Частота вращения, измеренная ДЧВ (электрическая)" Id="9a928418-7f84-49d8-b421-f5d2b239d41b" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ведомый: Ffb_f, Частота на ОС регулятора скорости после фильтра" Id="e83f3667-63bc-4036-a3aa-90b78b3f25c7" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: FImag_f, FImag после фильтра" Id="d45fdb7d-fa7a-45a5-ba55-f1ae12ebf373" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="dd2ab190-a5f1-4c17-85b0-de02fa8fb687" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="6efed1dc-3b0b-4de3-a58b-ef1988dd8b15" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-3. Третья команда, 14-18 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="c084fdaa-b319-4f9f-a329-326a28f20b61" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="ad05f0d0-3007-4bd9-82d4-9df39d145444" />
+				<DefVal Position="2.0" Length="8" Value="0x0E" Name="first param, lovv byte" Id="0f7be1e6-9d3e-4a8c-85f0-a5c61825c0bc" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="852b8fb6-fa8c-4152-8355-b2cb470bf4c9" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="489ffb2c-1e4a-4278-83c7-0ddd35334b8a" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="6e4bace2-c13b-4f49-840d-d469ab255499" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="2ca51c10-07f6-4a77-820c-f4ad22eb1835" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="a66e353e-e9ac-4248-82dd-5b1dad693eaf" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="48992c6a-4534-4a38-aadb-2aa5ff1492aa" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="4bbd9705-7f83-40cc-b270-7d7246500c26" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="17ef95de-db28-494f-8eb6-beab7434c9b8" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: RUNMODE, Текущий режим работы" Id="912ddb28-3b92-4074-8bb7-a3fa103ae639" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: STATUS, Биты ошибок" Id="8a106821-1c47-4ce4-8414-5c7ed78a34e5" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Fm, Частота вращения, измеренная ДЧВ (электрическая)" Id="bfbed843-58c1-41af-a3bf-e04a02b8c909" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ведомый: Ffb_f, Частота на ОС регулятора скорости после фильтра" Id="8550c1bb-16b9-42e2-a97b-4f288c83501b" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: FImag_f, FImag после фильтра" Id="ff1e18b0-c03f-4d8f-abe2-7e1a4956810b" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="0875b182-bf4f-41f1-84e0-3f137305eab8" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="0b0a1fae-00e3-4b45-96d3-cf768dfa8158" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-2. Третья команда, 21-25 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="a9b9b874-83ab-4fa0-9c9d-4b384f481aa0" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="75e53219-a41e-42df-91c2-799bb3915a03" />
+				<DefVal Position="2.0" Length="8" Value="0x15" Name="first param, lovv byte" Id="accd3944-fafe-414f-8038-99e1127e6d3a" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="71a77ef8-3c67-4003-bb9b-d87d53bfb1bf" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="5338a55b-4bd4-4f5d-9f36-cfd831d6be6e" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="6ce86166-7c8e-48d3-9170-b49ad2f43584" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="c26bdd4a-2fc6-4c07-9be7-d3fb94b4e518" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="a406da9d-49b5-4248-bec0-cee670763cf8" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="a094b42d-ca3e-4ad1-b438-0d60501887fb" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="fa2db5ea-6f0b-471e-8672-06a1b66d8501" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="12825d74-2b5e-4541-84cd-52758de7e981" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: Iq, Измеренная составляющая тока Q" Id="5a633e10-b1a3-4d49-8867-7312e40a0747" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: Fset_f, Fset после фильтра" Id="c924841f-87d6-4fb7-be27-3b2b2668c4bf" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Torq_f, Torq после фильтра" Id="aba71649-4d64-4b07-b0f0-8f94afcc10e1" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ведомый: Text, Температура внешняя" Id="6f74af73-1d08-425f-ae5e-6645b28d36d1" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: Ed, Пропорциональная часть регулятора тока D, А" Id="b03adcc4-35f3-4f0d-80e9-98428ff18197" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="60f3e2a5-1ee5-4e9a-aad0-9d48c31da9c1" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="22686a5e-faaa-417a-b224-be9f71ae59f3" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БС-Ethernet и АИН-3. Третья команда, 21-25 параметры, ведомый">
+			<Request Length="8" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="043e51fe-e87b-4c7e-9504-6e78b8147323" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="c50c4d52-aa74-46ee-9613-b1adab6d963d" />
+				<DefVal Position="2.0" Length="8" Value="0x15" Name="first param, lovv byte" Id="737cfdc3-6236-49ea-9db5-84cbbc5c934e" />
+				<DefVal Position="3.0" Length="8" Value="0x00" Name="first param, high byte" Id="9443d0da-a943-4f58-8fb5-3646d3cae7a1" />
+				<DefVal Position="4.0" Length="8" Value="0x05" Name="count param, lovv byte" Id="879c1d1f-1c1f-4014-aeea-53e5fd94e602" />
+				<DefVal Position="5.0" Length="8" Value="0x00" Name="count param, high byte" Id="e0c41d18-a82f-45cb-b5a0-3f300208d2d2" />
+				<VarVal Position="6.0" Length="8" Name="#CRCL" Id="25a4d9a0-4dcd-4fb0-81cf-3ccfd52b6338" />
+				<VarVal Position="7.0" Length="8" Name="#CRCH" Id="a4ee5e2c-9f38-4e93-8b30-6f5f2dfef2d8" />
+			</Request>
+			<Reply Length="15" Position="8" IsRequestRequired="True">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="4b2b36f2-1f00-4e78-af65-a8b16ba36df0" />
+				<DefVal Position="1.0" Length="8" Value="0x03" Name="#NCMD" Id="c2e99485-4f79-4b66-b97a-66eda350ee90" />
+				<DefVal Position="2.0" Length="8" Value="0x0A" Name="bytes count, count param x2" Id="90ae085f-de7c-454f-b30f-97a83e96a263" />
+				<CpzPrm Expression="([u3] + [s4] * 256.0) * 1.0" Name="Ведомый: Iq, Измеренная составляющая тока Q" Id="6934ecc1-97f3-484d-a446-2c4b9f20bc62" />
+				<CpzPrm Expression="([u5] + [s6] * 256.0) * 1.0" Name="Ведомый: Fset_f, Fset после фильтра" Id="6d2fd27c-2f35-4b2a-9d18-d9a02965c2eb" />
+				<CpzPrm Expression="([u7] + [s8] * 256.0) * 1.0" Name="Ведомый: Torq_f, Torq после фильтра" Id="1ff3328a-b2d3-4f87-a34c-29dcc43c3820" />
+				<CpzPrm Expression="([u9] + [s10] * 256.0) * 1.0" Name="Ведомый: Text, Температура внешняя" Id="582c5c2d-5fc0-4797-8a96-286c9ecf7a74" />
+				<CpzPrm Expression="([u11] + [s12] * 256.0) * 1.0" Name="Ведомый: Ed, Пропорциональная часть регулятора тока D, А" Id="66c5d739-815b-4a20-a862-f16b6d6c7e84" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="d9fe8a26-fd3f-4bfd-ae99-b1ebe2d5b46d" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="2fdf6d86-f29e-4720-9db4-f4a8f3bcc213" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

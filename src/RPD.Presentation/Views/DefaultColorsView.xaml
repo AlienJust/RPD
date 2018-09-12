@@ -1,0 +1,145 @@
+﻿<Window x:Class="RPD.Presentation.Views.DefaultColorsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:valueConverters="clr-namespace:RPD.Presentation.Utils.ValueConverters;assembly=RPD.Presentation.Utils"
+        xmlns:converters="clr-namespace:Dnv.Utils.Converters;assembly=Dnv.Utils"
+        Title="Настройки цветов по умолчанию" Height="600" Width="800"
+        DataContext="{Binding Path=DefaultColors, Source={StaticResource Locator}}">
+    <Window.Resources>
+
+        <converters:ColorToSolidColorBrushConverter x:Key="ColorBrushConverter"/>
+
+        <Style x:Key="ListBoxStyle" >
+            <Setter Property="Control.Margin" Value="0"/>
+        </Style>
+        
+        <Style TargetType="GridSplitter">
+            <Setter Property="Grid.RowSpan" Value="2"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="ResizeDirection" Value="Columns"/>
+            <Setter Property="ResizeBehavior" Value="PreviousAndNext"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style x:Key="ListBoxItemStyle" >
+            <Setter Property="Control.Margin" Value="0 0 3 0"/>
+        </Style>
+
+        <Style x:Key="headerStyle" BasedOn="{StaticResource dialogHeader2Style}">
+            <Setter Property="Control.Margin" Value="3,3,3,3" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" Margin="5 5 5 0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" MinWidth="300"/>
+                    <ColumnDefinition Width="110"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Column="0" Grid.Row="0" 
+                           Style="{StaticResource headerStyle}">Конфигурация</TextBlock>
+                <ListBox Grid.Column="0" Grid.Row="1"
+                     Style="{StaticResource ListBoxStyle}"
+                     ItemsSource="{Binding Path=Configurations}"
+                     SelectedItem="{Binding Path=SelectedConfiguration, Mode=TwoWay}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ListBoxItemStyle}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <GridSplitter Grid.Column="1" Grid.Row="0" Grid.RowSpan="2"/>
+
+                <TextBlock Grid.Column="2" Grid.Row="0" 
+                           Style="{StaticResource headerStyle}">Измеритель</TextBlock>
+                <ListBox Grid.Column="2" Grid.Row="1" 
+                     Style="{StaticResource ListBoxStyle}"
+                     ItemsSource="{Binding Path=SelectedConfiguration.PsnMeterConfigs}"
+                     SelectedItem="{Binding Path=SelectedPsnMeterConfig}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ListBoxItemStyle}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <GridSplitter Grid.Column="3" Grid.Row="0"/>
+
+                <TextBlock Grid.Column="4" Grid.Row="0" 
+                           Style="{StaticResource headerStyle}">Канал</TextBlock>
+                <ListBox Grid.Column="4" Grid.Row="1"
+                     Style="{StaticResource ListBoxStyle}"
+                     ItemsSource="{Binding Path=SelectedPsnMeterConfig.PsnChannelConfigs}"
+                     SelectedItem="{Binding Path=SelectedChannelConfig}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="" Width="14" Height="14" VerticalAlignment="Center" 
+                                       Background="{Binding Path=Color, Converter={StaticResource ColorBrushConverter}}"
+                                       Margin="0 0 3 0"/>
+                                <TextBlock Text="{Binding Path=Name}" Style="{StaticResource ListBoxItemStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <TextBlock Grid.Column="5" Grid.Row="0" 
+                           Style="{StaticResource headerStyle}">Цвета</TextBlock>
+                <Grid Grid.Column="5" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Margin="3"
+                        Command="{Binding Path=ShowSelectColorDialog}">Подобрать цвет...</Button>
+                    <Button Grid.Row="1" Margin="3"
+                        Command="{Binding Path=AddSelectedColorToPalette}"
+                            ToolTip="Добавляет выбранный цвет в палитру, если его там нет">
+                        <TextBlock TextWrapping="Wrap">Добавить цвет в палитру</TextBlock></Button>
+                    <ListBox Grid.Row="2" HorizontalAlignment="Stretch" Margin="3"
+                             ToolTip="Нажмите на цвет, чтобы изменить цвет выбранного канала"
+                         Style="{StaticResource ListBoxStyle}"
+                         ItemsSource="{Binding Path=ColorBrushes}"
+                         SelectedItem="{Binding Path=SelectedColor, Mode=TwoWay, Converter={StaticResource ColorBrushConverter}}">
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="HorizontalContentAlignment" 
+                                    Value="Stretch"></Setter>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Height="20"  Text="" Background="{Binding}" Margin="0 0 3 0"/>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+
+        <DockPanel Grid.Row="1">
+            <Button HorizontalAlignment="Right" 
+                    DockPanel.Dock="Right" 
+                    Style="{StaticResource dialogButtonStyle}" 
+                    Command="{Binding Path=Close}">Сохранить изменения и закрыть</Button>
+        </DockPanel>
+    </Grid>
+    
+</Window>

@@ -1,0 +1,756 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="Разгонная тележка, БУ и абонентами по М7" Version="15" Description="Конфигурация обмена БУ с абонентами по Магистрили 7" Id="60F66B96-05DC-472B-8BF9-D4C5DFB35F75" RpdId="32">
+	<PsnMeters>
+		<PsnMeter Address="0x01" Name="БС КПО3" />
+		<PsnMeter Address="0x02" Name="БС КПО4" />
+		<PsnMeter Address="0x04" Name="БС МТ1" />
+		<PsnMeter Address="0x05" Name="БС МТ2" />
+		<PsnMeter Address="0xFF" Name="Broadcast" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="Обмен с БС КПО3, Режим «ПОДГОТОВКА К ПУСКУ»">
+			<Request Length="9" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="ec88435c-a9c3-4e3a-a52c-8f59d5d523fe" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="74753d7f-8bb0-41e1-8ab2-5fabd84ed8dc" />
+				<CpzPrm Name="Уставка частоты, Гц" Expression="([u2] + [s3] * 256.0) * 0.1" Id="181d8f30-b74a-4cb4-a829-dba3be21f9de" />
+				<CpzPrm Name="Уставка тока, А" Expression="([u4] + [s5] * 256.0) * 1.0" Id="5e801fbe-07bc-4923-88ba-d6aac15fc0f1" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Байт дискретных сигналов: D7 – команда сброса ошибок" Id="da0fb942-4741-4838-bd58-c616c875ebd2" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Байт дискретных сигналов: D6 – включение/выключение" Id="e9172336-0f3d-449d-82d8-43fea3e58e8b" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Байт дискретных сигналов: D5 – синхронизация" Id="f112f838-a1ae-4e8e-acf7-18fd4b519ead" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="e3721bea-7310-4a83-900f-150da57eb2d6" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="1be339a1-de37-4a1f-a2c3-03854e825700" />
+			</Request>
+			<Reply Length="19" Position="9">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="88412e3a-29d8-4557-93c0-065aafead1a0" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="ed0b093a-4681-4917-9477-e05111dc0535" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО3 с КПО3.ПЧ1" Id="2d5b097a-2dae-4382-9497-a194912062d4" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Нет связи БС КПО3 с КПО3.ПЧ2" Id="d80d6437-3e3b-49f8-9859-4afe476cb12d" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Нет связи БС КПО3 с КПО3.ПЧ3" Id="6dfdc388-8dd8-4914-8225-3e2b8ffbe33b" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Авария ПЧ" Id="37e2b943-083c-4dda-831a-9d1c6e0a7d21" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Перегрев преобразователя" Id="7c58e1dc-d11f-40aa-b5b2-a986d15dcfce" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Аппаратная защита" Id="6c3584fd-3dda-4d04-a7b4-4b7db409c982" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Повышенное входное напряжение" Id="9c8b6405-e040-477d-b54d-648a773f3789" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Пониженное входное напряжение" Id="9fcc2584-4869-4fbf-b958-db047caeb5e0" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Готовность ПЧ" Id="f786108c-32b8-4e6e-82cc-d074f3182bcc" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Признак режима МТ" Id="1d739062-c09a-4fc1-894f-e0866d66b10c" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Рассинхронизация" Id="11d4a839-4455-4000-998f-068f0354e2d7" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Перегрузка по току" Id="a60ca7b3-8147-4784-ac93-81119a7e49eb" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Обрыв фазы преобразователя" Id="c0dff368-2176-42b3-b63a-01f7a7e53d9f" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Повышенная скорость двигателя" Id="b34d9359-81a1-4d86-a32f-70e7273c59a0" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Работа" Id="158f7448-a5f5-495c-9ce2-1b42f6ebd605" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Нет связи с ведомым 2" Id="a800c198-8701-4c43-844b-94baac9a72f1" />
+				<BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Нет связи с ведомым 1 (ведущим)" Id="013acf2e-c4a3-41d5-a293-c9d6db06f48b" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Повышенное мгновенное напряжение" Id="f6122e0e-1ebd-452f-916f-9b0171f1868e" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ1: Перегрузка по мгновенному току" Id="794b59d2-56aa-498e-8b02-b12414ca8f5a" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Авария ПЧ" Id="270ee98a-f048-4ef6-8068-2bc664fdd0e3" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Перегрев преобразователя" Id="5683d3a6-25cd-458c-97fc-bd99cc5730eb" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Аппаратная защита" Id="8c735d41-33f7-4706-a6d4-6103730a4131" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Повышенное входное напряжение" Id="76c689e5-f806-4ce5-9985-c72b607145ed" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Пониженное входное напряжение" Id="d4a53ef9-27ad-42c1-8b69-f0f14edb4644" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Готовность ПЧ" Id="7dbd35ee-075f-4e10-a7d2-3d9b096e7733" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Признак режима МТ" Id="106b53aa-6750-4164-865e-eb4b18f3e332" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Рассинхронизация" Id="637ecb3a-8529-435a-8091-2349051976eb" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Перегрузка по току" Id="c013244c-ba2e-4ae6-a45a-798e4e26e6ec" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Обрыв фазы преобразователя" Id="a4fd5aa3-d098-4335-90c0-6e5bd30845cf" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Повышенная скорость двигателя" Id="1a11b100-10bd-4023-a92f-a9ed2d764424" />
+				<BitPrm Byte="6" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Работа" Id="97b9f58d-2d82-437d-a5dc-3e41e1bcdcee" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Нет связи с ведомым 2" Id="7fac5828-32ad-4d9e-a9ea-d1af2c3b0ffa" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Нет связи с ведомым 1 (ведущим)" Id="55583eca-9a94-4c9c-a62b-c7551be176e7" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Повышенное мгновенное напряжение" Id="2671880b-a014-42bc-be9c-2ff581ca9048" />
+				<BitPrm Byte="6" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ2: Перегрузка по мгновенному току" Id="cce99268-18aa-4499-a7de-010f6ac220b3" />
+				<BitPrm Byte="7" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Авария ПЧ" Id="945bb641-a633-4106-9e0f-c8ad9970be9d" />
+				<BitPrm Byte="7" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Перегрев преобразователя" Id="de6fe31c-80d6-43f1-9864-402922abda66" />
+				<BitPrm Byte="7" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Аппаратная защита" Id="0d3226ac-db91-4ede-992d-d3444f49b51d" />
+				<BitPrm Byte="7" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Повышенное входное напряжение" Id="e303de5c-f378-4a6a-a255-507c400ba13f" />
+				<BitPrm Byte="7" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Пониженное входное напряжение" Id="e5960570-e363-49be-9899-bc07c9b94e63" />
+				<BitPrm Byte="7" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Готовность ПЧ" Id="898bf097-3bbe-43ed-a14d-cc3b62686aaf" />
+				<BitPrm Byte="7" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Признак режима МТ" Id="48c5fa39-b126-4278-b0c8-f059cfd11195" />
+				<BitPrm Byte="7" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Рассинхронизация" Id="607799e6-0849-4de0-a493-50852c4e9e48" />
+				<BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Перегрузка по току" Id="36fb10c3-8d3d-42f1-895e-18f88ce12d40" />
+				<BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Обрыв фазы преобразователя" Id="898a6bdd-4911-4c59-b1d1-f6588094c384" />
+				<BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Повышенная скорость двигателя" Id="618f5224-32ac-4b2c-b883-a1e5c4466b1d" />
+				<BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Работа" Id="1b4a2bb0-c25a-4526-bf20-4a37dd943deb" />
+				<BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Нет связи с ведомым 2" Id="0af9b9c8-c080-4088-92f5-40ab63bf6255" />
+				<BitPrm Byte="8" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Нет связи с ведомым 1 (ведущим)" Id="9e0e6fe5-bae2-473e-bb16-b3a942509a1e" />
+				<BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Повышенное мгновенное напряжение" Id="7174aa67-086e-43d8-89ed-22de484a437e" />
+				<BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО3.ПЧ3: Перегрузка по мгновенному току" Id="260627c8-36d8-4742-85f9-036a4f25c690" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ1, ℃" Expression="[u9] * 2.0" Id="9e45f0b6-3f2a-4b77-bf40-cc2bbf3d5fb1" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО3.ПЧ1, В" Expression="[u10] * 10.0" Id="51931115-3489-407e-893d-2f1a8b3a4a38" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ2, ℃" Expression="[u11] * 2.0" Id="48ae81f0-14f0-4e9f-8477-49d471a9d24f" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО3.ПЧ2, В" Expression="[u12] * 10.0" Id="d90ef072-6df9-4653-b267-5b57e8c37a1b" />
+				<CpzPrm Name="Температура преобразователя КПО3.ПЧ3, ℃" Expression="[u13] * 2.0" Id="72ebb9b7-de87-4039-b751-dac140249ce9" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО3.ПЧ3, В" Expression="[u14] * 10.0" Id="b6ae9045-fd08-4a65-872d-80fc661920e6" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="D7 - признак работы КПО3.ПЧ1 с настройками из ПЗУ" Id="c53be6d6-b5f8-4af7-8ecd-1efedb083f4a" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="D6 - признак работы КПО3.ПЧ2 с настройками из ПЗУ" Id="538b480b-bd11-4734-ba06-930e2e051999" />
+				<BitPrm Byte="15" Bit="5" IsValueInverted="False" Name="D5 - признак работы КПО3.ПЧ3 с настройками из ПЗУ" Id="2e656d92-f829-4863-9cf1-0b92d05a7b33" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="Резерв" Id="7cf4d8cd-adcc-41cc-91c3-ca159b84c6d6" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="Резерв" Id="18040dc5-66e2-421d-896d-cff21158a642" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="Резерв" Id="26df5922-ec7e-4943-919e-0d63e7e96624" />
+				<BitPrm Byte="15" Bit="1" IsValueInverted="False" Name="Резерв" Id="b80426ec-de3d-49dc-a051-9651f2d46817" />
+				<BitPrm Byte="15" Bit="0" IsValueInverted="False" Name="Резерв" Id="529d2e4f-920f-403c-bcfd-5dcc12909e3a" />
+				<VarVal Position="16.0" Length="8" Name="Резерв" Id="61c20c9a-3629-4236-8b2e-ff25ed0dcd68" />
+				<VarVal Position="17.0" Length="8" Name="#CRCL" Id="23c0904a-10d0-461c-8ef4-05cd746b349a" />
+				<VarVal Position="18.0" Length="8" Name="#CRCH" Id="6e7ae343-486f-4c7a-916e-5b0da00d8c65" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="Обмен с БС КПО4, Режим «ПОДГОТОВКА К ПУСКУ»">
+			<Request Length="9" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="bc69d2ae-1655-4983-88b4-7a33ad836e1d" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="adf800b6-9b69-48b5-8862-f90d2150c65b" />
+				<CpzPrm Name="Уставка частоты, Гц" Expression="([u2] + [s3] * 256.0) * 0.1" Id="f2e8685e-a352-4eaf-82b0-bcde1eb96982" />
+				<CpzPrm Name="Уставка тока, А" Expression="([u4] + [s5] * 256.0) * 1.0" Id="be3f88e3-ea06-4274-b540-a45303771dad" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Байт дискретных сигналов: D7 – команда сброса ошибок" Id="fafc059d-e563-4621-9388-d0ff0451798b" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Байт дискретных сигналов: D6 – включение/выключение" Id="600a2ae0-4506-4460-9d41-d8f05304f269" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Байт дискретных сигналов: D5 – синхронизация" Id="391b4c43-3351-4791-8084-646e4fe0c5f1" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="b87f2f4f-8a9a-4bbe-a7b6-634d410abc69" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="8764f46a-886a-4634-a721-921b896231f8" />
+			</Request>
+			<Reply Length="19" Position="9">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="530a1bf6-0af3-486f-badb-3bb7b3b30e0a" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="7cedc3f1-284f-46e4-9baa-2e6f947c96b7" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС КПО4 с КПО4.ПЧ1" Id="89dbd05d-ed01-4139-982d-e7494d25c3e7" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Нет связи БС КПО4 с КПО4.ПЧ2" Id="221828aa-8913-4bf0-ae81-bf387b0c8927" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Нет связи БС КПО4 с КПО4.ПЧ3" Id="bb8a6491-172f-4e9e-8e01-0cd3ee79a1ec" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Авария ПЧ" Id="22130787-edab-4f4f-88e0-79f50a343c84" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Перегрев преобразователя" Id="85672234-acea-46ea-8ee1-9d352ab19e6d" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Аппаратная защита" Id="a6feb74d-a7cd-42ab-8802-0029b6488c8c" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Повышенное входное напряжение" Id="40bd4042-8265-4414-818b-36c0879b8aa4" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Пониженное входное напряжение" Id="2e2fc519-e168-4648-a8ad-9eab5c8b3d56" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Готовность ПЧ" Id="b47aeb7a-5c58-485e-a07d-0da5718c7f22" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Признак режима МТ" Id="0b9e7517-a0bf-4237-91c9-7956becc4f80" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Рассинхронизация" Id="5408fe6d-ce9d-4efd-ac6c-db9dd6911c0f" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Перегрузка по току" Id="823f8e5e-1eaf-437a-b38f-77551ccc1683" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Обрыв фазы преобразователя" Id="40108e29-c2c1-4a6c-b1b4-3fec3703aea0" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Повышенная скорость двигателя" Id="13311527-bf10-4e65-b729-ffde649a333b" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Работа" Id="664cc8ce-8dd1-4e1c-8365-510adb0bca27" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Нет связи с ведомым 2" Id="02bd3038-5171-4232-907a-200ea18abe0d" />
+				<BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Нет связи с ведомым 1 (ведущим)" Id="1e817206-a581-4e00-adb7-cc4dafd07f00" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Повышенное мгновенное напряжение" Id="a1e9a0cb-df42-4398-bd82-bac599c932d3" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ1: Перегрузка по мгновенному току" Id="92da72e2-f00e-425d-8c7d-cb116ef53499" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Авария ПЧ" Id="8a51604a-5a17-48bb-8a90-ff23fe2b5f87" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Перегрев преобразователя" Id="0e13394c-c6fb-4c24-94e7-ce1419efb361" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Аппаратная защита" Id="b545512c-ecc5-4c24-b119-aa085eaa5b95" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Повышенное входное напряжение" Id="6c8d5e5d-9b57-4e5b-882e-f8909462dade" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Пониженное входное напряжение" Id="cae8c837-d3b1-4b4e-84cb-03fce5e0acbd" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Готовность ПЧ" Id="811ea987-202c-4d63-9912-5d20bc397c7a" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Признак режима МТ" Id="74f0c117-b9dd-48be-ac21-412e1648a9da" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Рассинхронизация" Id="f48a95c4-7a46-4b66-821b-f94a1f4b2a9d" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Перегрузка по току" Id="801badb2-21ff-4bf8-9984-90b1161a60bb" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Обрыв фазы преобразователя" Id="ed8f4991-5ed8-48a1-acb5-5e27e6d57d00" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Повышенная скорость двигателя" Id="11c8a5bd-637c-4ace-9474-d4e94bcb588a" />
+				<BitPrm Byte="6" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Работа" Id="79145276-81f4-4712-bfb0-d65551cbd5a6" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Нет связи с ведомым 2" Id="5172fccf-0a03-4588-b325-7fd48bd92bd6" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Нет связи с ведомым 1 (ведущим)" Id="13e44888-721e-4bba-9f01-7db52145cfd6" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Повышенное мгновенное напряжение" Id="bc19df10-29d5-4c26-bc41-64f915b4fa8a" />
+				<BitPrm Byte="6" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ2: Перегрузка по мгновенному току" Id="3750a6b3-992d-4be5-90e1-b736ce383b7d" />
+				<BitPrm Byte="7" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Авария ПЧ" Id="def08913-6c76-4aeb-9856-b1284c2964c8" />
+				<BitPrm Byte="7" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Перегрев преобразователя" Id="721172d3-8524-427b-8110-243bf1b86e7d" />
+				<BitPrm Byte="7" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Аппаратная защита" Id="ee96921a-7dcc-4c31-a6a8-4d7a478a45c8" />
+				<BitPrm Byte="7" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Повышенное входное напряжение" Id="956d96da-d5d6-40ee-ba84-6b2ffe644347" />
+				<BitPrm Byte="7" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Пониженное входное напряжение" Id="5ec0af80-4ec0-48a8-bf42-dbd2f68bf88a" />
+				<BitPrm Byte="7" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Готовность ПЧ" Id="54b20921-25ab-4281-8607-949631d1d9d9" />
+				<BitPrm Byte="7" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Признак режима МТ" Id="69f8c30d-f03c-4863-8ec6-9c5d5530740c" />
+				<BitPrm Byte="7" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Рассинхронизация" Id="3625e2b1-a42d-4dba-8f17-6dfabe5d80ca" />
+				<BitPrm Byte="8" Bit="7" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Перегрузка по току" Id="4519ebf5-9145-47b7-98eb-491602435a67" />
+				<BitPrm Byte="8" Bit="6" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Обрыв фазы преобразователя" Id="6b9caae5-d26a-4dad-844f-d83289235ebb" />
+				<BitPrm Byte="8" Bit="5" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Повышенная скорость двигателя" Id="d9b331d1-e491-4654-948d-8cdd3354c9d6" />
+				<BitPrm Byte="8" Bit="4" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Работа" Id="fd844902-0d2c-4db8-b6e7-56ce5623c75a" />
+				<BitPrm Byte="8" Bit="3" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Нет связи с ведомым 2" Id="4c375ccd-5692-413d-971a-d23da476073e" />
+				<BitPrm Byte="8" Bit="2" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Нет связи с ведомым 1 (ведущим)" Id="ceedaab0-815e-4cff-ac7a-6c2921d9827a" />
+				<BitPrm Byte="8" Bit="1" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Повышенное мгновенное напряжение" Id="38a9b4cb-1b7e-49c1-8ad6-15be1f47cc18" />
+				<BitPrm Byte="8" Bit="0" IsValueInverted="False" Name="Диагностика блока КПО4.ПЧ3: Перегрузка по мгновенному току" Id="b0e87aa3-4eaf-4150-8a9c-1317d6f882df" />
+				<CpzPrm Name="Температура преобразователя КПО4.ПЧ1, ℃" Expression="[u9] * 2.0" Id="ed063753-5314-424c-be4c-5e212204fab4" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО4.ПЧ1, В" Expression="[u10] * 10.0" Id="50cce7f2-039a-4ebe-ba7b-5830fc843195" />
+				<CpzPrm Name="Температура преобразователя КПО4.ПЧ2, ℃" Expression="[u11] * 2.0" Id="ce6afd83-9858-4d67-9fd6-43707e80e2c9" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО4.ПЧ2, В" Expression="[u12] * 10.0" Id="50a44e02-f328-4b9f-977d-39ea801e31e6" />
+				<CpzPrm Name="Температура преобразователя КПО4.ПЧ3, ℃" Expression="[u13] * 2.0" Id="2613cf0d-838c-4d2e-9a97-a21d2ddaf6f3" />
+				<CpzPrm Name="Входное напряжение преобразователя КПО4.ПЧ3, В" Expression="[u14] * 10.0" Id="fd5ed6af-3d4e-473f-8656-cc1693825807" />
+				<BitPrm Byte="15" Bit="7" IsValueInverted="False" Name="D7 - признак работы КПО4.ПЧ1 с настройками из ПЗУ" Id="dc991273-9c31-4302-a84b-601179f3b108" />
+				<BitPrm Byte="15" Bit="6" IsValueInverted="False" Name="D6 - признак работы КПО4.ПЧ2 с настройками из ПЗУ" Id="a90b652d-e147-4955-80ae-3c64b9b82155" />
+				<BitPrm Byte="15" Bit="5" IsValueInverted="False" Name="D5 - признак работы КПО4.ПЧ3 с настройками из ПЗУ" Id="1f9d0521-acbd-4945-b447-48114f903a8b" />
+				<BitPrm Byte="15" Bit="4" IsValueInverted="False" Name="Резерв" Id="d5085efa-0244-46df-9182-2a84fecc7a67" />
+				<BitPrm Byte="15" Bit="3" IsValueInverted="False" Name="Резерв" Id="a40d38a5-33c4-441f-9cfa-66aa68b768ce" />
+				<BitPrm Byte="15" Bit="2" IsValueInverted="False" Name="Резерв" Id="e9abf6d2-23f9-4a78-add2-61296a4a96b4" />
+				<BitPrm Byte="15" Bit="1" IsValueInverted="False" Name="Резерв" Id="3ce5f12d-4369-4a0b-b694-c613a3aac2a8" />
+				<BitPrm Byte="15" Bit="0" IsValueInverted="False" Name="Резерв" Id="348b4e91-62fd-4199-ae46-93e3c39eff31" />
+				<VarVal Position="16.0" Length="8" Name="Резерв" Id="084b0839-6b3f-4804-847f-d73ddb9442ec" />
+				<VarVal Position="17.0" Length="8" Name="#CRCL" Id="72e6191e-60db-48c9-935a-008aa9542878" />
+				<VarVal Position="18.0" Length="8" Name="#CRCH" Id="d3a7f8d2-17d2-4a8c-903e-8ad3283779e3" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="Обмен с БС МТ1 по магистрали 7, Режим «ПОДГОТОВКА К ПУСКУ»">
+			<Request Length="6" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="127f77fc-6b4b-44eb-8538-3c5dcba391c3" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="5df931d1-7ad6-41e0-ae28-33f50c77032e" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Команда сброса ошибок" Id="fa041a90-4870-481c-8f48-f63cfc2dbfd9" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="включение/выключение (1/0)" Id="898ecce8-bd47-46bd-9929-4bebcf61266c" />
+				<!-- byte 3 is reserved-->
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="0b3148fc-ddbb-4a37-a8db-4e044e0ffbcb" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="01d54c36-8ba9-4f54-97d3-7b429f30c4c4" />
+			</Request>
+			<Reply Length="15" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="45801f33-7d28-4723-9af2-a5c5dbac51f2" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="284bf9b5-a90f-4c8b-9e2c-d7c01351247c" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС МТ1 с МТ11" Id="d90be9ae-9905-40b4-81b0-e67d475f0e70" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС МТ1 с МТ12" Id="b7f44dba-4a7d-4356-a78a-e727762d028e" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Диагностика МТ11: Авария МТ11" Id="a957ff91-d6df-43b9-9965-271b06f0e1f0" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Диагностика МТ11: Перегрев преобразователя" Id="18fb361c-6a30-4c7c-a003-749fb0e3f52f" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Диагностика МТ11: Аппаратная защита" Id="564723c3-1fee-47b4-a21e-b466fe1c5331" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Диагностика МТ11: Повышенное входное напряжение" Id="0ea7789b-4c97-4468-a9ce-bf691de3d0a5" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Диагностика МТ11: Пониженное входное напряжение" Id="bae41d7c-f8c1-4444-a423-75a31340eb6b" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Диагностика МТ11: Готовность" Id="e39f9ffc-ec99-43ef-bf2a-e9f8f0cbc2ff" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Диагностика МТ11: Признак работы в режиме МТ" Id="c9db0997-019e-462c-a3ce-b5c98ad64330" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Диагностика МТ11: Рассинхронизация" Id="03168d42-d25a-4df0-97be-c020ebe39d6d" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Диагностика МТ11: Перегрузка по току" Id="a437430a-ba05-4be3-8744-804f3caf1975" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Диагностика МТ11: Обрыв фазы преобразователя" Id="3e896510-27ab-4a66-8614-9540e8d632b4" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Диагностика МТ11: Повышенная скорость двигателя" Id="1b146ab7-a026-4216-aa29-e5c0da7ea735" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Диагностика МТ11: Работа" Id="c54989b0-0459-4de2-9fe5-e6436fb18c6e" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Диагностика МТ11: Нет связи с ведомым 2" Id="c97bb4a0-2eb2-4b1f-9005-f908315be475" />
+				<BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Диагностика МТ11: Нет связи с ведомым 1 (ведущим)" Id="e9a84195-c4a5-470f-823c-4b6101a71ef7" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Диагностика МТ11: Повышенное мгновенное напряжение" Id="51e2b458-9ca7-43a6-9d0e-518da116fce9" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Диагностика МТ11: Перегрузка по мгновенному току" Id="16e23f5f-bf35-4949-8d7f-127bb0dad586" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Диагностика МТ12: Авария МТ12" Id="3a80d88d-78d0-40b3-9414-57701e854258" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Диагностика МТ12: Перегрев преобразователя" Id="aac111cb-ca88-4f7b-8745-a8ea3c1e079b" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Диагностика МТ12: Аппаратная защита" Id="2d86ddd7-a95d-4296-910f-04379bd2ebfa" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Диагностика МТ12: Повышенное входное напряжение" Id="0d2d708a-8c5e-460c-8deb-d9e7e712f45e" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Диагностика МТ12: Пониженное входное напряжение" Id="80bd21f1-1b02-4767-a0df-dcc3ea5ac28d" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Диагностика МТ12: Готовность" Id="59b732b6-c488-4733-9528-cfe4d09fb630" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Диагностика МТ12: Признак работы в режиме МТ" Id="4b97892b-07cb-4b6b-929b-7c3b3efd95db" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Диагностика МТ12: Рассинхронизация" Id="b42bc92d-6b81-4bd3-98d1-0906adc42179" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Диагностика МТ12: Перегрузка по току" Id="4d63ed8e-c637-4bfd-9760-9ee13bcbec8c" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Диагностика МТ12: Обрыв фазы преобразователя" Id="d16eda61-2e24-4e75-b493-31ce48ff26a9" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Диагностика МТ12: Повышенная скорость двигателя" Id="feee0585-42fb-447c-8dcb-364112eb319b" />
+				<BitPrm Byte="6" Bit="4" IsValueInverted="False" Name="Диагностика МТ12: Работа" Id="7354f099-486f-4594-9fe7-be2b1d2e7470" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Диагностика МТ12: Нет связи с ведомым 2" Id="ac673c12-92d0-4402-a5d0-b310e62cd361" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Диагностика МТ12: Нет связи с ведомым 1 (ведущим)" Id="e205116c-2c1d-4622-9209-a88156e01b69" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Диагностика МТ12: Повышенное мгновенное напряжение" Id="60860e0e-8e42-468a-a30c-76142c18f0ce" />
+				<BitPrm Byte="6" Bit="0" IsValueInverted="False" Name="Диагностика МТ12: Перегрузка по мгновенному току" Id="f79eff8d-d04a-448f-b485-0de3ed9dee42" />
+				<CpzPrm Name="Температура преобразователя МТ11, ℃" Expression="[u7] * 2.0" Id="d9643af3-4704-498e-9708-1ce6e8973bfc" />
+				<CpzPrm Name="Температура преобразователя МТ12, ℃" Expression="[u8] * 2.0" Id="89e3d928-cd88-4380-9ab2-533c377514e2" />
+				<CpzPrm Name="Входное напряжение МТ11, В" Expression="[u9] * 10.0" Id="790671c9-f2a0-44f9-8e61-bf1f392a3e11" />
+				<CpzPrm Name="Входное напряжение МТ12, В" Expression="[u10] * 10.0" Id="42903083-71b6-49da-ac96-8a825d7782cb" />
+				<BitPrm Byte="11" Bit="7" IsValueInverted="False" Name="D7 -признак работы МТ11 с настройками из ПЗУ" Id="39aefb7e-9b06-4f5b-b34f-d6ece011be93" />
+				<BitPrm Byte="11" Bit="6" IsValueInverted="False" Name="D6 -признак работы МТ12 с настройками из ПЗУ" Id="40e1ebef-d3e2-4010-82cf-86935e88a411" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="Резерв" Id="d33954d0-edaf-4ee0-8a8c-3a10fa7bffa3" />
+				<BitPrm Byte="11" Bit="4" IsValueInverted="False" Name="Резерв" Id="66fb5991-7e2b-4574-957c-60f5dc920819" />
+				<BitPrm Byte="11" Bit="3" IsValueInverted="False" Name="Резерв" Id="8ce56024-fec4-46cd-8eb6-2ec3231c41c5" />
+				<BitPrm Byte="11" Bit="2" IsValueInverted="False" Name="Резерв" Id="0d31d99f-cef8-4786-84cc-a4e3d37c8b5b" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="Резерв" Id="978cf9f7-8d1c-436b-9401-cf2656160991" />
+				<BitPrm Byte="11" Bit="0" IsValueInverted="False" Name="Резерв" Id="4894be46-cb31-4814-9545-a6356a4af85a" />
+				<VarVal Position="12.0" Length="8" Name="Резерв" Id="09562418-04e4-419d-b0f6-8063ee582c74" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="b54cf560-184d-47ce-8218-1f493b2811fe" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="1faf8002-f704-4b77-9afb-415866b3f083" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="Обмен с БС МТ2 по магистрали 7, Режим «ПОДГОТОВКА К ПУСКУ»">
+			<Request Length="6" Position="0" CycleMsTime="100">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="5d63c7ba-4d92-48b6-9ae3-0818c72618d4" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="c7c18185-a92f-4810-a42e-29b20257abf9" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Команда сброса ошибок" Id="dddede49-7405-4409-a620-d794b2e98ca8" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="включение/выключение (1/0)" Id="b9880c14-a7fa-4c22-b1ca-df12141519d7" />
+				<!-- byte 3 is reserved-->
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="293c7b27-6727-42d6-836a-df0df9fd8852" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="a3a2c557-f549-4819-8720-3eafc045dca4" />
+			</Request>
+			<Reply Length="15" Position="6">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="74331cce-3bd6-4e46-b876-473c78ec4210" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="78199821-c45c-4256-a0b2-278b54df7fcf" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Нет связи БС МТ2 с МТ21" Id="d0088f72-b77a-48c3-b0d6-0ab100ca1c6c" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Нет связи БС МТ2 с МТ22" Id="8f323952-5840-4e17-ad77-ce46cb7e7bee" />
+				<BitPrm Byte="3" Bit="7" IsValueInverted="False" Name="Диагностика МТ21: Авария МТ21" Id="9963e6f5-63fe-4272-8b87-f14c0dc9a4c5" />
+				<BitPrm Byte="3" Bit="6" IsValueInverted="False" Name="Диагностика МТ21: Перегрев преобразователя" Id="fe539f8e-af3c-4e1a-81c3-2fd51a522ec8" />
+				<BitPrm Byte="3" Bit="5" IsValueInverted="False" Name="Диагностика МТ21: Аппаратная защита" Id="767dd9ac-ec6c-4c18-912f-49cec5ca0437" />
+				<BitPrm Byte="3" Bit="4" IsValueInverted="False" Name="Диагностика МТ21: Повышенное входное напряжение" Id="7eb3c90f-7653-490b-a50b-fe53b482dad7" />
+				<BitPrm Byte="3" Bit="3" IsValueInverted="False" Name="Диагностика МТ21: Пониженное входное напряжение" Id="bbbb8fec-fdd1-4c06-9b8d-ed32e927bc6f" />
+				<BitPrm Byte="3" Bit="2" IsValueInverted="False" Name="Диагностика МТ21: Готовность" Id="7a643fc2-8bc2-4d77-822d-89ac033d7d90" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Диагностика МТ21: Признак работы в режиме МТ" Id="dd9ec4b9-d4ee-47ff-90e0-522d27877d84" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Диагностика МТ21: Рассинхронизация" Id="c72d7f52-ef5f-441f-936e-217598b397c9" />
+				<BitPrm Byte="4" Bit="7" IsValueInverted="False" Name="Диагностика МТ21: Перегрузка по току" Id="b50c91c7-79e3-4fce-a2fe-716b5d8e8b73" />
+				<BitPrm Byte="4" Bit="6" IsValueInverted="False" Name="Диагностика МТ21: Обрыв фазы преобразователя" Id="7825060b-5dbd-4acf-b586-6da39d4571d0" />
+				<BitPrm Byte="4" Bit="5" IsValueInverted="False" Name="Диагностика МТ21: Повышенная скорость двигателя" Id="861ca791-9c09-41ef-b508-960ee7091de6" />
+				<BitPrm Byte="4" Bit="4" IsValueInverted="False" Name="Диагностика МТ21: Работа" Id="69926754-9d66-46b9-af7d-01fd9a79321b" />
+				<BitPrm Byte="4" Bit="3" IsValueInverted="False" Name="Диагностика МТ21: Нет связи с ведомым 2" Id="c4ec1e7e-4e05-4145-a174-e725fbcdf413" />
+				<BitPrm Byte="4" Bit="2" IsValueInverted="False" Name="Диагностика МТ21: Нет связи с ведомым 1 (ведущим)" Id="5e60b6fc-7d20-4183-8af3-93c4a3258ff3" />
+				<BitPrm Byte="4" Bit="1" IsValueInverted="False" Name="Диагностика МТ21: Повышенное мгновенное напряжение" Id="f022a6a4-fc44-44cf-9f19-adbade278a52" />
+				<BitPrm Byte="4" Bit="0" IsValueInverted="False" Name="Диагностика МТ21: Перегрузка по мгновенному току" Id="423805b8-2cc8-495d-9c47-e34205071f1b" />
+				<BitPrm Byte="5" Bit="7" IsValueInverted="False" Name="Диагностика МТ22: Авария МТ22" Id="a98948ba-da66-41fa-b4a6-b975badcaf42" />
+				<BitPrm Byte="5" Bit="6" IsValueInverted="False" Name="Диагностика МТ22: Перегрев преобразователя" Id="424d77e2-c903-45bf-90d8-909ea9d6a2e9" />
+				<BitPrm Byte="5" Bit="5" IsValueInverted="False" Name="Диагностика МТ22: Аппаратная защита" Id="f1f0c68a-1a16-4985-b319-6a6ffbd3b7c0" />
+				<BitPrm Byte="5" Bit="4" IsValueInverted="False" Name="Диагностика МТ22: Повышенное входное напряжение" Id="7e73053a-3bcb-4a10-a7cf-9367bbbedc92" />
+				<BitPrm Byte="5" Bit="3" IsValueInverted="False" Name="Диагностика МТ22: Пониженное входное напряжение" Id="b78e2720-cca6-499a-9211-5c29808316e4" />
+				<BitPrm Byte="5" Bit="2" IsValueInverted="False" Name="Диагностика МТ22: Готовность" Id="647fe469-9b9b-4b8a-a4c6-b577828d50f8" />
+				<BitPrm Byte="5" Bit="1" IsValueInverted="False" Name="Диагностика МТ22: Признак работы в режиме МТ" Id="31990f4a-316d-44a5-825f-9ccc8dc4f138" />
+				<BitPrm Byte="5" Bit="0" IsValueInverted="False" Name="Диагностика МТ22: Рассинхронизация" Id="ea6f8013-ac4a-49b8-858f-8afcfc56e2c0" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Диагностика МТ22: Перегрузка по току" Id="e57f3f36-fe51-453d-9a1a-cde6e5862011" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Диагностика МТ22: Обрыв фазы преобразователя" Id="a31c710a-ffb3-4631-a0da-aa000ffc3482" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Диагностика МТ22: Повышенная скорость двигателя" Id="68b063dd-df70-42a1-8d93-852d604bbc47" />
+				<BitPrm Byte="6" Bit="4" IsValueInverted="False" Name="Диагностика МТ22: Работа" Id="1d583a79-78bf-4d50-a667-a1d6bbb6a9f1" />
+				<BitPrm Byte="6" Bit="3" IsValueInverted="False" Name="Диагностика МТ22: Нет связи с ведомым 2" Id="3bfbfd55-9081-4bb7-9318-5dc138e30469" />
+				<BitPrm Byte="6" Bit="2" IsValueInverted="False" Name="Диагностика МТ22: Нет связи с ведомым 1 (ведущим)" Id="21c85c5c-d7d9-4c23-b2b3-5adf2cd644eb" />
+				<BitPrm Byte="6" Bit="1" IsValueInverted="False" Name="Диагностика МТ22: Повышенное мгновенное напряжение" Id="75ca82cf-9ae9-4f1f-a381-6463c74dea17" />
+				<BitPrm Byte="6" Bit="0" IsValueInverted="False" Name="Диагностика МТ22: Перегрузка по мгновенному току" Id="0abce2f9-c1be-42b1-bb32-7f9433e06164" />
+				<CpzPrm Name="Температура преобразователя МТ21, ℃" Expression="[u7] * 2.0" Id="8522515c-5965-4ff5-86dd-82a8babe49a7" />
+				<CpzPrm Name="Температура преобразователя МТ22, ℃" Expression="[u8] * 2.0" Id="62cdb37d-9653-48fa-a295-d750492cf7be" />
+				<CpzPrm Name="Входное напряжение преобразователя МТ21, В" Expression="[u9] * 10.0" Id="33f8456b-e962-4642-962b-a621a153e3f6" />
+				<CpzPrm Name="Входное напряжение преобразователя МТ22, В" Expression="[u10] * 10.0" Id="7def4db2-def9-4a7b-a89a-24c00999dfb2" />
+				<BitPrm Byte="11" Bit="7" IsValueInverted="False" Name="D7 -признак работы МТ21 с настройками из ПЗУ" Id="8343ad38-f5a7-498d-a49f-089d46ffffe3" />
+				<BitPrm Byte="11" Bit="6" IsValueInverted="False" Name="D6 -признак работы МТ22 с настройками из ПЗУ" Id="b4343642-514d-45e0-be68-236eee50eb72" />
+				<BitPrm Byte="11" Bit="5" IsValueInverted="False" Name="Резерв" Id="5e35bfcd-ccaf-4002-ac4f-cb7cb2cda183" />
+				<BitPrm Byte="11" Bit="4" IsValueInverted="False" Name="Резерв" Id="2fbfda2c-a6cc-481e-94e5-3d135cb64cda" />
+				<BitPrm Byte="11" Bit="3" IsValueInverted="False" Name="Резерв" Id="38080949-1227-46b5-adc6-a4f622070279" />
+				<BitPrm Byte="11" Bit="2" IsValueInverted="False" Name="Резерв" Id="13abcceb-8d3e-476f-8d61-9d0f6f2a576c" />
+				<BitPrm Byte="11" Bit="1" IsValueInverted="False" Name="Резерв" Id="f748e963-f3d5-4c04-a64a-a0df25834023" />
+				<BitPrm Byte="11" Bit="0" IsValueInverted="False" Name="Резерв" Id="79983a53-ba65-46b1-8aa9-b2a9adfa932b" />
+				<VarVal Position="12.0" Length="8" Name="Резерв" Id="601ef32c-59b5-443d-87d8-ed93fc753f64" />
+				<VarVal Position="13.0" Length="8" Name="#CRCL" Id="30b0d982-1ad1-44a2-9748-41a3335f30b6" />
+				<VarVal Position="14.0" Length="8" Name="#CRCH" Id="04778e23-d735-4dc9-aba3-613d217b29b4" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="Обмен с БС КПО 3,4 по магистрали 7, Режим «ПУСК»">
+			<Request Length="9" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0xFF" Name="#ADDR" Id="e7bf9699-0ac9-48ae-85b9-a0671a0482a4" />
+				<DefVal Position="1.0" Length="8" Value="0x45" Name="#NCMD" Id="3a71b2ae-deda-449a-811a-9da0b4ecf814" />
+				<CpzPrm Name="Уставка частоты, Гц" Expression="([u2] + [s3]* 256.0) * 0.1" Id="0e5c26a1-6ad5-457f-9934-3bb36d0e5132" />
+				<CpzPrm Name="Уставка тока, А" Expression="([u4] + [s5]* 256.0) * 1.0" Id="0ba57c60-1535-422f-a8d2-2a6dc50434ce" />
+				<BitPrm Byte="6" Bit="7" IsValueInverted="False" Name="Байт дискретных сигналов: D7 –команда сброса ошибок" Id="fd4a2ec8-bc5f-4b0f-9d7c-56934866bca6" />
+				<BitPrm Byte="6" Bit="6" IsValueInverted="False" Name="Байт дискретных сигналов: D6 –включение/выключение" Id="a90dcbef-6c16-485f-96ef-81c82a727fae" />
+				<BitPrm Byte="6" Bit="5" IsValueInverted="False" Name="Байт дискретных сигналов: D5 – синхронизация" Id="75b80505-15f1-41e6-9d35-ab82e0494345" />
+				<VarVal Position="7.0" Length="8" Name="#CRCL" Id="a1154257-b803-4301-a579-c570312172c1" />
+				<VarVal Position="8.0" Length="8" Name="#CRCH" Id="1a9fa76b-5919-4597-9f98-48483a48c9cb" />
+			</Request>
+			<Reply Length="0" Position="9" />
+		</CmdMask>
+		<CmdMask Name="БУ и БС КПО3, Настроечные  обмены">
+			<Request Length="46" Position="0" CycleMsTime="50">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="0448eb73-71c7-492c-995c-860ba3d66f50" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="6fd0f46a-d41c-49de-beb9-a3326d7b5834" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax, А " Expression="[u2] * 10.0" Id="de59ede5-168b-4286-9c41-11bac21c8b7b" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax, В" Expression="[u3] * 10.0" Id="3fb2aa49-9931-4feb-aeea-96bf209decd8" />
+				<CpzPrm Name="Минимальное напряжение ЗПТ, Umin, В" Expression="[u4] * 10.0" Id="48f25fa6-e4f8-4808-a20d-52510a9dd512" />
+				<CpzPrm Name="Максимальная температура инвертора, Temax,°С" Expression="[s5] * 2.0" Id="54985251-a051-4a17-b492-87f98e6b0e76" />
+				<CpzPrm Name="Ограничение задания частоты, ws_zmax, Гц)" Expression="[s6] * 2.0" Id="1a2b2855-8c2d-4a76-a22f-421077b27c75" />
+				<CpzPrm Name="Ограничение задания тока, Iref_max, А" Expression="[s7] * 10.0" Id="600cd9ee-47ad-457d-9ee5-fdc6751a8036" />
+				<CpzPrm Name="Пропорциональный коэффициент РТ, kip, о.е." Expression="([u8] * 1.0 + [s9] * 256.0) * 0.005" Id="69cec4ad-eb23-4287-8ef7-0c0aa5a2c1c3" />
+				<CpzPrm Name="Интегральный коэффициент РТ, kii, о.е." Expression="([u10] * 1.0 + [s11] * 256.0) * 0.005" Id="a9ee4b28-327a-4ffb-82a6-2beec707aef7" />
+				<CpzPrm Name="Верхняя граница работы чоппера, Udc_on, B" Expression="([u12] * 1.0 + [s13] * 256.0) * 1.0" Id="a26b6bd4-9927-4a39-adf3-b903b901d02e" />
+				<CpzPrm Name="Нижняя граница работы чоппера, Udc_off, B" Expression="([u14] * 1.0 + [s15] * 256.0) * 1.0" Id="ad1b40c7-fc42-49d4-8400-c93df0b860ba" />
+				<CpzPrm Name="Постоянная фильтра температуры ПЧ, Tfe, c" Expression="[u16] * 0.05" Id="ea6330ee-73b3-49b6-8b9a-41727671910f" />
+				<CpzPrm Name="Постоянная фильтра скважности ведущего ПЧ, TfU1, c" Expression="[u17] * 0.05" Id="4f3d4e92-b01b-42a3-9691-ad0512830171" />
+				<CpzPrm Name="Постоянная фильтра напряжения ЗПТ, Tf_Udc, c" Expression="[u18] * 0.001" Id="41cca26c-b3d9-47a8-8c7f-51f205ef5b1b" />
+				<CpzPrm Name="Постоянная фильтра аплитудного тока, Tf_Iampl, c" Expression="[u19] * 0.001" Id="abe55753-13ef-4cc8-a5a2-ec53fa324d0a" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax_inst, A" Expression="[u20] * 0.001" Id="0a94380b-031d-46a0-9f3f-d1f6cea95349" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax_inst, B" Expression="[u21] * 0.001" Id="fcfe5458-1c34-4f61-9788-3f13e40a6b5a" />
+				<BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="D7 – Резерв" Id="4ff5e163-0b62-4389-95d5-08a2077aad36" />
+				<BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="D6 – Резерв" Id="05ecf7b6-67c3-4507-924c-5260a69c6ad6" />
+				<BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="D5 – Резерв" Id="876c57a4-b9f6-4296-bab0-5210ab7d5220" />
+				<BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="D4 – Резерв" Id="acc4d648-5496-4884-8fb5-bd378a5354f4" />
+				<CpzPrm Name="D2-D3-роль абонента" Expression="[16.2.2] * 1.0" Id="ed977a5c-8b3b-4cde-9fda-29e67d18e912" />
+				<CpzPrm Name="D0-D1- кол-во МИ/МТ" Expression="[16.0.2] * 1.0" Id="d8af856d-2591-47f2-ba26-b50b8f40397d" />
+				<BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Команды: D3 – Признак тестового режима «ПОДГОТОВКА К ПУСКУ»" Id="c7224573-a86a-4583-8708-c59e3bba21d6" />
+				<BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Команды: D2 – Признак режима «ПУСК»" Id="5bfd357f-9cce-4787-8cfa-232b248017f5" />
+				<BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Команды: D1 – Признак послепускового режима «ДИАГНОСТИКА»" Id="7fbe927f-53f5-4a65-a195-bde1e0b115a7" />
+				<BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Команды: D0 – Признак  нештатной работы в пусковом режиме" Id="f4e662d9-4085-4172-b830-e5604452f44a" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="71397284-a6b2-4e83-99c9-ac7450532bd1" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="0d82e8be-cda3-4b56-9f46-4a69ba1e30f4" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="6763b7c0-d2c7-4227-becb-367696697bb3" />
+				<VarVal Position="26.0" Length="8" Name="Резерв" Id="187037fb-c43f-48b2-96b6-0a30d058e954" />
+				<VarVal Position="27.0" Length="8" Name="Резерв" Id="cd15ebe6-925d-4532-84c5-99b30402f3b0" />
+				<VarVal Position="28.0" Length="8" Name="Резерв" Id="480364d0-c3be-4ff6-a003-375a93783173" />
+				<VarVal Position="29.0" Length="8" Name="Резерв" Id="f5f8bdf5-de73-4038-97eb-66cbe7a60526" />
+				<VarVal Position="30.0" Length="8" Name="Резерв" Id="ae14648e-9496-4768-930b-dc9d7b7cc88c" />
+				<VarVal Position="31.0" Length="8" Name="Резерв" Id="1fbface1-61f3-4aff-a1e2-bb8b7a47caa7" />
+				<VarVal Position="32.0" Length="8" Name="Резерв" Id="cc1b028f-61b8-43fb-96cd-581f4c2c4253" />
+				<VarVal Position="33.0" Length="8" Name="Резерв" Id="a2c70e99-cc74-42c6-90b1-ac9207cfd50e" />
+				<VarVal Position="34.0" Length="8" Name="Резерв" Id="ab4f718e-08ef-4839-a98d-f5ac3a8d2fa9" />
+				<VarVal Position="35.0" Length="8" Name="Резерв" Id="ef146ecb-8e2e-4bb5-92f7-6c826edc7790" />
+				<VarVal Position="36.0" Length="8" Name="Резерв" Id="383c8fec-5965-48af-b0a7-171c95ce13de" />
+				<VarVal Position="37.0" Length="8" Name="Резерв" Id="1532ba25-df19-4475-8372-2e3acd132194" />
+				<VarVal Position="38.0" Length="8" Name="Резерв" Id="57d880da-4c61-4509-ade0-36081bcd0d5c" />
+				<VarVal Position="39.0" Length="8" Name="Резерв" Id="92a5f58d-4144-4938-b246-6c92af72e15e" />
+				<VarVal Position="40.0" Length="8" Name="Резерв" Id="ed613973-385c-4a1e-b2eb-a6e5037d9077" />
+				<VarVal Position="41.0" Length="8" Name="Резерв" Id="d44e1272-7009-4ae6-9d08-378e7e03215b" />
+				<VarVal Position="42.0" Length="8" Name="Запрос настроек 16 абонентов" Id="1e926790-0ece-4d54-82e1-d764167fd61a" />
+				<VarVal Position="43.0" Length="8" Name="Признак чтения настроек" Id="d8717e8f-3f20-4d1a-b84e-6c1debadf84d" />
+				<VarVal Position="44.0" Length="8" Name="#CRCL" Id="c9720514-c2e2-4e0c-a8c0-b09cec82e4fa" />
+				<VarVal Position="45.0" Length="8" Name="#CRCH" Id="6b9031dc-642f-4b0d-9376-563b1ed3480a" />
+			</Request>
+			<Reply Length="46" Position="46">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="7737a860-e780-4bdc-b145-b99979120137" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="ab52a824-23a2-4376-82ff-49215815a641" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax, А " Expression="[u2] * 10.0" Id="f3d1064d-14fa-4c87-b979-32b0c88b7269" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax, В" Expression="[u3] * 10.0" Id="0da7f760-5918-4548-8109-deabf168f3c3" />
+				<CpzPrm Name="Минимальное напряжение ЗПТ, Umin, В" Expression="[u4] * 10.0" Id="346e0d57-1850-489e-ab90-153134d6a6de" />
+				<CpzPrm Name="Максимальная температура инвертора, Temax,°С" Expression="[s5] * 2.0" Id="e737b461-3fff-44f1-a900-c1fa88e9c5b8" />
+				<CpzPrm Name="Ограничение задания частоты, ws_zmax, Гц)" Expression="[s6] * 2.0" Id="4412bcce-6af1-40bc-8746-c1e1bbe7abf9" />
+				<CpzPrm Name="Ограничение задания тока, Iref_max, А" Expression="[s7] * 10.0" Id="b77ca6d3-0a01-411d-a839-e50512dc51af" />
+				<CpzPrm Name="Пропорциональный коэффициент РТ, kip, о.е." Expression="([u8] * 1.0 + [s9] * 256.0) * 0.005" Id="cd8d9b77-7467-4ec4-a0b7-369669ef49bd" />
+				<CpzPrm Name="Интегральный коэффициент РТ, kii, о.е." Expression="([u10] * 1.0 + [s11] * 256.0) * 0.005" Id="c3ca46de-d536-4355-ad57-dbe905ec3978" />
+				<CpzPrm Name="Верхняя граница работы чоппера, Udc_on, B" Expression="([u12] * 1.0 + [s13] * 256.0) * 1.0" Id="55dabcea-cbec-4d79-8790-2d7c56c1f6d7" />
+				<CpzPrm Name="Нижняя граница работы чоппера, Udc_off, B" Expression="([u14] * 1.0 + [s15] * 256.0) * 1.0" Id="1ef6151e-936d-4246-8cb5-4603f1c6c7a9" />
+				<CpzPrm Name="Постоянная фильтра температуры ПЧ, Tfe, c" Expression="[u16] * 0.05" Id="f9af98f5-b08b-4314-8c78-0a7d7b7d5d89" />
+				<CpzPrm Name="Постоянная фильтра скважности ведущего ПЧ, TfU1, c" Expression="[u17] * 0.05" Id="138c2e7c-1ba0-406a-9936-ea71e3757b30" />
+				<CpzPrm Name="Постоянная фильтра напряжения ЗПТ, Tf_Udc, c" Expression="[u18] * 0.001" Id="eaebdb51-6943-42f5-bab6-f757df87a9c0" />
+				<CpzPrm Name="Постоянная фильтра аплитудного тока, Tf_Iampl, c" Expression="[u19] * 0.001" Id="ab0d1bb3-dd2c-46de-a1e5-b4b2a65f8a17" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax_inst, A" Expression="[u20] * 0.001" Id="281d59c2-13cd-4259-8af9-89d68e47d964" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax_inst, B" Expression="[u21] * 0.001" Id="aadfe7b4-117f-45bb-ba16-0cbd17538662" />
+				<BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="D7 – Резерв" Id="4ac5ba9a-a846-4286-8232-c0529726e5b1" />
+				<BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="D6 – Резерв" Id="fd93300d-2262-4548-8a37-a7ffb6a6c560" />
+				<BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="D5 – Резерв" Id="cc579aec-833a-4753-b9c3-bb946eeb0e72" />
+				<BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="D4 – Резерв" Id="15ab0c19-6381-4879-b5c1-5a61931764fc" />
+				<CpzPrm Name="D2-D3-роль абонента" Expression="[16.2.2] * 1.0" Id="5ca1da1d-c1c1-438b-ab17-7ab9bd901daf" />
+				<CpzPrm Name="D0-D1- кол-во МИ/МТ" Expression="[16.0.2] * 1.0" Id="4afd643d-3c01-442f-89ac-145c9b0e561d" />
+				<BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Команды: D3 – Признак тестового режима «ПОДГОТОВКА К ПУСКУ»" Id="d38f8cb4-004f-4da8-ab5a-ceeb5dd4f17d" />
+				<BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Команды: D2 – Признак режима «ПУСК»" Id="623afd40-46a4-4f3f-aefc-ff65cff6de95" />
+				<BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Команды: D1 – Признак послепускового режима «ДИАГНОСТИКА»" Id="5fbacd61-2617-4615-8d87-16e728d07c85" />
+				<BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Команды: D0 – Признак  нештатной работы в пусковом режиме" Id="37acc382-2645-4d55-aa3a-af1afa6d918b" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="3c8b21ae-fe07-4e57-869a-fdffef490bb5" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="383d5828-13fe-49ad-b576-672c28a86073" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="87b72970-ec32-40a5-9fed-1664ca69b7a1" />
+				<VarVal Position="26.0" Length="8" Name="Резерв" Id="0d823773-e984-4907-b2ca-a3fe44225ebc" />
+				<VarVal Position="27.0" Length="8" Name="Резерв" Id="9d431324-8b8a-4923-bed5-ddfc1d849e6d" />
+				<VarVal Position="28.0" Length="8" Name="Резерв" Id="9ceb4265-daf6-4762-9a1e-7595b5acce6f" />
+				<VarVal Position="29.0" Length="8" Name="Резерв" Id="65dcded7-ce6b-457c-9df5-b0d81ff075a6" />
+				<VarVal Position="30.0" Length="8" Name="Резерв" Id="a44f892f-dc0b-4850-8224-1094457f680e" />
+				<VarVal Position="31.0" Length="8" Name="Резерв" Id="be46bd3f-3bb4-4d9b-9c4d-1c07b3f4987a" />
+				<VarVal Position="32.0" Length="8" Name="Резерв" Id="d90bb594-dd81-4ab7-a953-371ccc2c8a2e" />
+				<VarVal Position="33.0" Length="8" Name="Резерв" Id="bec3d60a-1444-4e40-abb8-210787cbb4b2" />
+				<VarVal Position="34.0" Length="8" Name="Резерв" Id="37e1c110-6523-4fdc-abdb-c6bbcb172845" />
+				<VarVal Position="35.0" Length="8" Name="Резерв" Id="8c7562dc-f9e1-46ff-96bf-4ae187b0f1ae" />
+				<VarVal Position="36.0" Length="8" Name="Резерв" Id="5b07b172-5e94-4b4d-91e7-981e0e82e057" />
+				<VarVal Position="37.0" Length="8" Name="Резерв" Id="680901d6-fb09-478e-8b56-1cfc58ba6288" />
+				<VarVal Position="38.0" Length="8" Name="Резерв" Id="7643e759-fc54-485b-aea5-d2b4d7002c52" />
+				<VarVal Position="39.0" Length="8" Name="Резерв" Id="2d919939-ad35-4bf8-a02e-e5d279fdec8a" />
+				<VarVal Position="40.0" Length="8" Name="Резерв" Id="849c34c6-9159-48b9-8708-1502c28b9dbb" />
+				<VarVal Position="41.0" Length="8" Name="Резерв" Id="53eca7b0-4053-4bf8-849e-98b535cb32e0" />
+				<VarVal Position="42.0" Length="8" Name="Ответ настроек 16 абонентов" Id="5dd8fd2a-9c56-452c-a3a4-1858901039d7" />
+				<VarVal Position="43.0" Length="8" Name="Признак подтверждения" Id="19805373-2895-460a-93bd-d4db356a2951" />
+				<VarVal Position="44.0" Length="8" Name="#CRCL" Id="906143ba-4181-44ab-ac1a-69ce6a463532" />
+				<VarVal Position="45.0" Length="8" Name="#CRCH" Id="1b205e23-274f-48cc-9553-df3e78eccf25" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС КПО4, Настроечные  обмены">
+			<Request Length="46" Position="0" CycleMsTime="50">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="220c4134-2511-420e-99ae-9c89d432dac2" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="4ea45e3b-1d5c-47db-8af7-d1b7ea5f8770" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax, А " Expression="[u2] * 10.0" Id="65d970e4-bc3d-4c9f-9907-95c0c8fdfa8a" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax, В" Expression="[u3] * 10.0" Id="77d3c9f6-7201-40b6-8fd9-227040a1ac7d" />
+				<CpzPrm Name="Минимальное напряжение ЗПТ, Umin, В" Expression="[u4] * 10.0" Id="d64125ba-431a-4a18-bddc-275eaf8eb9b0" />
+				<CpzPrm Name="Максимальная температура инвертора, Temax,°С" Expression="[s5] * 2.0" Id="e9b4465f-a9d8-41ed-a834-f614edb53938" />
+				<CpzPrm Name="Ограничение задания частоты, ws_zmax, Гц)" Expression="[s6] * 2.0" Id="c10d6bed-ce45-45a4-b779-2e695ef4f300" />
+				<CpzPrm Name="Ограничение задания тока, Iref_max, А" Expression="[s7] * 10.0" Id="9faee206-346c-4151-ab85-cca941381a23" />
+				<CpzPrm Name="Пропорциональный коэффициент РТ, kip, о.е." Expression="([u8] * 1.0 + [s9] * 256.0) * 0.005" Id="73c74a5c-0901-4036-abcc-27e7c68f3aca" />
+				<CpzPrm Name="Интегральный коэффициент РТ, kii, о.е." Expression="([u10] * 1.0 + [s11] * 256.0) * 0.005" Id="0099066f-e4d3-4882-9d30-34d052c1fa08" />
+				<CpzPrm Name="Верхняя граница работы чоппера, Udc_on, B" Expression="([u12] * 1.0 + [s13] * 256.0) * 1.0" Id="864f5dfd-1034-4e12-87a4-a37b67942fdd" />
+				<CpzPrm Name="Нижняя граница работы чоппера, Udc_off, B" Expression="([u14] * 1.0 + [s15] * 256.0) * 1.0" Id="a247967a-2830-4fd4-8c44-521b9c78c557" />
+				<CpzPrm Name="Постоянная фильтра температуры ПЧ, Tfe, c" Expression="[u16] * 0.05" Id="f3944af7-f8a4-4a48-8707-20ed2c50774f" />
+				<CpzPrm Name="Постоянная фильтра скважности ведущего ПЧ, TfU1, c" Expression="[u17] * 0.05" Id="d7f829ac-2ea6-4a81-96e2-efdcd644f8d6" />
+				<CpzPrm Name="Постоянная фильтра напряжения ЗПТ, Tf_Udc, c" Expression="[u18] * 0.001" Id="f8681383-a5f8-49ee-a3bf-07c30d183e85" />
+				<CpzPrm Name="Постоянная фильтра аплитудного тока, Tf_Iampl, c" Expression="[u19] * 0.001" Id="b2387f75-ca9a-4c4b-a4f3-18123680666f" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax_inst, A" Expression="[u20] * 0.001" Id="d32b26aa-731d-4402-9bb1-48666e93f6ca" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax_inst, B" Expression="[u21] * 0.001" Id="d6e0b6a9-6fbb-4abe-aaa4-8f4d49174f93" />
+				<BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="D7 – Резерв" Id="a7b803ed-00f2-4ed6-8c80-e37701e026d8" />
+				<BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="D6 – Резерв" Id="cf4e8230-ceb0-4f72-afbe-46c910673157" />
+				<BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="D5 – Резерв" Id="af7d789a-590c-4f92-82a1-ce4d8c3ece18" />
+				<BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="D4 – Резерв" Id="c7de5e67-573a-4613-914b-c71bf43ca173" />
+				<CpzPrm Name="D2-D3-роль абонента" Expression="[16.2.2] * 1.0" Id="6b9864c5-cf6b-4954-95bc-fbdd2dd9e289" />
+				<CpzPrm Name="D0-D1- кол-во МИ/МТ" Expression="[16.0.2] * 1.0" Id="085a5a3e-b46d-431d-818a-170d782bbf73" />
+				<BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Команды: D3 – Признак тестового режима «ПОДГОТОВКА К ПУСКУ»" Id="3064b380-41cf-434b-b230-e5568752a9f8" />
+				<BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Команды: D2 – Признак режима «ПУСК»" Id="294499ca-fb4c-4cc3-9841-3d375c8b674e" />
+				<BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Команды: D1 – Признак послепускового режима «ДИАГНОСТИКА»" Id="fb2e7642-5636-430c-8d56-415cb391500a" />
+				<BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Команды: D0 – Признак  нештатной работы в пусковом режиме" Id="69d587ec-0138-4d5b-91a7-cb15d66b650b" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="2190b40b-4f03-45e0-8a51-7af97796847e" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="29aeac67-dff6-44d6-8ffe-c5d611a1ec2f" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="17eda526-6897-420e-8da6-2a2b5e79a161" />
+				<VarVal Position="26.0" Length="8" Name="Резерв" Id="ca2d5e8d-c8c0-4bc2-bb89-e01f6d62d291" />
+				<VarVal Position="27.0" Length="8" Name="Резерв" Id="7386d6fb-395d-405c-98df-43b4ba93cdfb" />
+				<VarVal Position="28.0" Length="8" Name="Резерв" Id="e5aa7a7d-e280-4dce-bd9a-cad27b328448" />
+				<VarVal Position="29.0" Length="8" Name="Резерв" Id="f2c9691c-874b-4cd5-9d63-f1b822568d46" />
+				<VarVal Position="30.0" Length="8" Name="Резерв" Id="140f134f-dce6-4aac-b13c-f6d8fe47d779" />
+				<VarVal Position="31.0" Length="8" Name="Резерв" Id="69181127-e41e-4f83-a675-a13d3b26f93c" />
+				<VarVal Position="32.0" Length="8" Name="Резерв" Id="867bbbbd-ca2f-4c7b-ada3-91d1e425637d" />
+				<VarVal Position="33.0" Length="8" Name="Резерв" Id="95392346-b44b-40f4-b2b8-1e5f4305a863" />
+				<VarVal Position="34.0" Length="8" Name="Резерв" Id="0a60042d-93a3-40e5-9be9-5df15ddf46dd" />
+				<VarVal Position="35.0" Length="8" Name="Резерв" Id="0f629e59-be7d-4ee5-a355-c63a4deb7d23" />
+				<VarVal Position="36.0" Length="8" Name="Резерв" Id="da2ceddf-4b87-451a-90b8-7db4b7531fa0" />
+				<VarVal Position="37.0" Length="8" Name="Резерв" Id="49c9a108-0673-4d5b-901e-2c791f4ce79f" />
+				<VarVal Position="38.0" Length="8" Name="Резерв" Id="e2e1de66-8921-46dd-a484-d2256cd4639f" />
+				<VarVal Position="39.0" Length="8" Name="Резерв" Id="18b4eb5d-3a43-419e-9e68-b9b75a8bf533" />
+				<VarVal Position="40.0" Length="8" Name="Резерв" Id="3c530531-49dc-4efc-993f-f9eed6fa07c7" />
+				<VarVal Position="41.0" Length="8" Name="Резерв" Id="41ff9b42-1164-4f2c-83a8-23f1e43d9d8b" />
+				<VarVal Position="42.0" Length="8" Name="Запрос настроек 16 абонентов" Id="b2b3b0e5-9c5d-4150-8419-6cba5ac38ab5" />
+				<VarVal Position="43.0" Length="8" Name="Признак чтения настроек" Id="fd015da1-34bd-4ba7-b868-fdfd723350ef" />
+				<VarVal Position="44.0" Length="8" Name="#CRCL" Id="9bc0038c-ce04-4209-93a5-e549c05836dc" />
+				<VarVal Position="45.0" Length="8" Name="#CRCH" Id="9925d7f3-5230-4620-981b-9296747bc18b" />
+			</Request>
+			<Reply Length="46" Position="46">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="e75b0242-e2a9-43b9-9f2d-ce2e2c4ae735" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="f1b5588c-3d85-49b6-aff3-06472be9cf7a" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax, А " Expression="[u2] * 10.0" Id="262fb615-e339-4561-bb0e-06628cc455f6" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax, В" Expression="[u3] * 10.0" Id="119cfe7c-e60a-42b9-8576-e23a02e211d9" />
+				<CpzPrm Name="Минимальное напряжение ЗПТ, Umin, В" Expression="[u4] * 10.0" Id="c014c502-63f7-4076-8341-8442eeeca805" />
+				<CpzPrm Name="Максимальная температура инвертора, Temax,°С" Expression="[s5] * 2.0" Id="b3edf3af-6e86-4783-aa53-c59688c1ef7d" />
+				<CpzPrm Name="Ограничение задания частоты, ws_zmax, Гц)" Expression="[s6] * 2.0" Id="c4ab3894-977d-4ade-b04e-37ed92b3442f" />
+				<CpzPrm Name="Ограничение задания тока, Iref_max, А" Expression="[s7] * 10.0" Id="459a7402-e3d9-421f-ad4c-50030878edac" />
+				<CpzPrm Name="Пропорциональный коэффициент РТ, kip, о.е." Expression="([u8] * 1.0 + [s9] * 256.0) * 0.005" Id="18463b63-6f82-46d3-a744-c5f9fc96fb51" />
+				<CpzPrm Name="Интегральный коэффициент РТ, kii, о.е." Expression="([u10] * 1.0 + [s11] * 256.0) * 0.005" Id="32af214e-6c3e-45ff-8aa4-a0b5cc7df278" />
+				<CpzPrm Name="Верхняя граница работы чоппера, Udc_on, B" Expression="([u12] * 1.0 + [s13] * 256.0) * 1.0" Id="e4ecddde-58ed-4bf1-ab21-437aab4b01d8" />
+				<CpzPrm Name="Нижняя граница работы чоппера, Udc_off, B" Expression="([u14] * 1.0 + [s15] * 256.0) * 1.0" Id="4565fe0e-836f-4c9b-bdc3-9b82664927d8" />
+				<CpzPrm Name="Постоянная фильтра температуры ПЧ, Tfe, c" Expression="[u16] * 0.05" Id="5be42830-ade9-4376-a2d7-bc8e09e35fef" />
+				<CpzPrm Name="Постоянная фильтра скважности ведущего ПЧ, TfU1, c" Expression="[u17] * 0.05" Id="cec8b039-4a2a-4613-bb14-3008e26c0145" />
+				<CpzPrm Name="Постоянная фильтра напряжения ЗПТ, Tf_Udc, c" Expression="[u18] * 0.001" Id="544dc441-1310-47b2-932b-f63a1d259ed8" />
+				<CpzPrm Name="Постоянная фильтра аплитудного тока, Tf_Iampl, c" Expression="[u19] * 0.001" Id="35384dcd-6299-4df4-a2e9-99ab58569dec" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax_inst, A" Expression="[u20] * 0.001" Id="6d06c0ef-493c-4522-874d-eb69f2ccc776" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax_inst, B" Expression="[u21] * 0.001" Id="19bdebd1-ae7e-4db2-a0bb-49e3fa67b0e0" />
+				<BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="D7 – Резерв" Id="f905f829-2485-482c-bb9c-9b625f4daf06" />
+				<BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="D6 – Резерв" Id="6b419e8f-bf2b-4d83-bd0d-de35515a305b" />
+				<BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="D5 – Резерв" Id="b16919a0-04a1-40bf-980c-9c3f56e0c9a2" />
+				<BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="D4 – Резерв" Id="45ab040a-50c9-40b6-956d-fdbd5de7c988" />
+				<CpzPrm Name="D2-D3-роль абонента" Expression="[16.2.2] * 1.0" Id="ad64abcc-ecf3-4df7-a68d-5c7f3076b34a" />
+				<CpzPrm Name="D0-D1- кол-во МИ/МТ" Expression="[16.0.2] * 1.0" Id="120a31be-887d-4431-8414-48d5d8776db5" />
+				<BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Команды: D3 – Признак тестового режима «ПОДГОТОВКА К ПУСКУ»" Id="5cecce39-7a2d-4a15-ac4d-9783851d8cb4" />
+				<BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Команды: D2 – Признак режима «ПУСК»" Id="8bc4ab9d-86c5-4728-be04-2da698132375" />
+				<BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Команды: D1 – Признак послепускового режима «ДИАГНОСТИКА»" Id="f4a87b25-cad0-4e0c-b998-3a62da28d615" />
+				<BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Команды: D0 – Признак  нештатной работы в пусковом режиме" Id="ac76fc12-1a68-4e7d-b680-57b8104d6db4" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="34ac429a-71cd-4ef4-98dd-fa4f011f2e51" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="6fca6cd4-5996-4432-872d-14a4e04ab137" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="88eea697-7df9-4e77-a0ba-dad8a24604ae" />
+				<VarVal Position="26.0" Length="8" Name="Резерв" Id="858ebb88-6b22-4433-adb8-cf052fe3c7af" />
+				<VarVal Position="27.0" Length="8" Name="Резерв" Id="ee9244bd-629e-426d-b05b-de5a774cf2e9" />
+				<VarVal Position="28.0" Length="8" Name="Резерв" Id="ad3cb60d-aa13-4e55-9474-7681644bfa7e" />
+				<VarVal Position="29.0" Length="8" Name="Резерв" Id="c8bec662-fc38-46cb-8505-e9c5f2c365ef" />
+				<VarVal Position="30.0" Length="8" Name="Резерв" Id="6e414f4a-7529-481b-ad6a-53a5070f68ff" />
+				<VarVal Position="31.0" Length="8" Name="Резерв" Id="940b27a1-bc06-4a4b-aaae-12c1ab7a6892" />
+				<VarVal Position="32.0" Length="8" Name="Резерв" Id="fe65cf86-b16a-418f-880e-6b6ce4a9da69" />
+				<VarVal Position="33.0" Length="8" Name="Резерв" Id="b218ebee-ce0d-4bc3-8e82-685eadb76900" />
+				<VarVal Position="34.0" Length="8" Name="Резерв" Id="e59b0e5a-9d3d-435c-922d-9e67247958ce" />
+				<VarVal Position="35.0" Length="8" Name="Резерв" Id="ee23483d-fd81-4660-bbf6-7a050224ece6" />
+				<VarVal Position="36.0" Length="8" Name="Резерв" Id="1409f778-764b-4162-9b44-87d8bb7524eb" />
+				<VarVal Position="37.0" Length="8" Name="Резерв" Id="324fbae7-537a-4ba9-970c-df34b6d93f33" />
+				<VarVal Position="38.0" Length="8" Name="Резерв" Id="34f1c1f0-3b31-4fce-a17d-a8606fd80b3b" />
+				<VarVal Position="39.0" Length="8" Name="Резерв" Id="290dceae-ac41-48c8-a961-d52f3cb16ca7" />
+				<VarVal Position="40.0" Length="8" Name="Резерв" Id="5262c79a-d707-4fef-b32e-38d3eca4f201" />
+				<VarVal Position="41.0" Length="8" Name="Резерв" Id="0c4ea4cd-e2e1-4db0-b99f-b29f15b35b7f" />
+				<VarVal Position="42.0" Length="8" Name="Ответ настроек 16 абонентов" Id="60497c65-a69e-47df-b0c0-f371d4f30d6b" />
+				<VarVal Position="43.0" Length="8" Name="Признак подтверждения" Id="6e321053-1101-46ae-86e3-5026e2155de9" />
+				<VarVal Position="44.0" Length="8" Name="#CRCL" Id="49d6ba1c-5e65-4b85-a129-5a6152e533a1" />
+				<VarVal Position="45.0" Length="8" Name="#CRCH" Id="e4082507-b6cb-45d5-baa9-508a99575de9" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС МТ1, Настроечные  обмены">
+			<Request Length="46" Position="0" CycleMsTime="50">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="939bb29c-5d55-48a0-8cfa-740ea773e558" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="0923bc98-6e9b-4f63-8a97-f9602b0305e2" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax, А " Expression="[u2] * 10.0" Id="791ccb2c-fc49-43de-a1d4-8080d737b018" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax, В" Expression="[u3] * 10.0" Id="1d03b62a-4e5c-46d1-9b69-aca5ad6269d7" />
+				<CpzPrm Name="Минимальное напряжение ЗПТ, Umin, В" Expression="[u4] * 10.0" Id="d38cc689-6263-4c76-be64-81c6d27d52b5" />
+				<CpzPrm Name="Максимальная температура инвертора, Temax,°С" Expression="[s5] * 2.0" Id="67899026-e346-4a95-9fc9-32fc884c113c" />
+				<CpzPrm Name="Ограничение задания частоты, ws_zmax, Гц)" Expression="[s6] * 2.0" Id="fbbf6ac2-1b26-481d-9eac-ec3fc2a3a903" />
+				<CpzPrm Name="Ограничение задания тока, Iref_max, А" Expression="[s7] * 10.0" Id="59b28c27-f331-449b-98a3-55286f862977" />
+				<CpzPrm Name="Пропорциональный коэффициент РТ, kip, о.е." Expression="([u8] * 1.0 + [s9] * 256.0) * 0.005" Id="e42156d7-4be8-4262-aadf-512d926d6c60" />
+				<CpzPrm Name="Интегральный коэффициент РТ, kii, о.е." Expression="([u10] * 1.0 + [s11] * 256.0) * 0.005" Id="f6045eca-5c37-4f7d-971d-8ae5a1e0b4cb" />
+				<CpzPrm Name="Верхняя граница работы чоппера, Udc_on, B" Expression="([u12] * 1.0 + [s13] * 256.0) * 1.0" Id="6e7d187d-61e2-4ebc-af28-e92b909db892" />
+				<CpzPrm Name="Нижняя граница работы чоппера, Udc_off, B" Expression="([u14] * 1.0 + [s15] * 256.0) * 1.0" Id="48ba8405-f09f-4ef1-8441-5f2d3c450a5c" />
+				<CpzPrm Name="Постоянная фильтра температуры ПЧ, Tfe, c" Expression="[u16] * 0.05" Id="97f46d7f-1c28-4dec-907a-2b3077e48918" />
+				<CpzPrm Name="Постоянная фильтра скважности ведущего ПЧ, TfU1, c" Expression="[u17] * 0.05" Id="a98f3e82-3db4-4b9f-bc35-7602a9af5708" />
+				<CpzPrm Name="Постоянная фильтра напряжения ЗПТ, Tf_Udc, c" Expression="[u18] * 0.001" Id="b133e82a-02a7-4483-9205-d49352453dd0" />
+				<CpzPrm Name="Постоянная фильтра аплитудного тока, Tf_Iampl, c" Expression="[u19] * 0.001" Id="2d7da9d3-9cf0-4dc5-8a00-38a28e2b6dd9" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax_inst, A" Expression="[u20] * 0.001" Id="0e66fa6d-5aa5-4b0b-a269-65dc4355a946" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax_inst, B" Expression="[u21] * 0.001" Id="4fb4cabe-5b55-4dd6-a15b-7f0e6b0d6642" />
+				<BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="D7 – Резерв" Id="b9903aa6-174b-47c3-a7a5-7fe8beb02fa2" />
+				<BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="D6 – Резерв" Id="c2f02d9e-9fc1-4baf-adb3-21889baf049c" />
+				<BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="D5 – Резерв" Id="8373fdb8-b5a6-41da-913a-345ea81ffd71" />
+				<BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="D4 – Резерв" Id="4bc537c1-3e16-4d39-9297-8147f1bd7dbe" />
+				<CpzPrm Name="D2-D3-роль абонента" Expression="[16.2.2] * 1.0" Id="59350a85-bfcc-4305-ba7a-3eccef49a5df" />
+				<CpzPrm Name="D0-D1- кол-во МИ/МТ" Expression="[16.0.2] * 1.0" Id="237f01cf-dbbc-4c58-9833-c42e01a4168d" />
+				<BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Команды: D3 – Признак тестового режима «ПОДГОТОВКА К ПУСКУ»" Id="49966b48-3243-4e60-8fe3-696e314d0b0c" />
+				<BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Команды: D2 – Признак режима «ПУСК»" Id="bdb756cb-f2bf-4e5c-97df-21709efce549" />
+				<BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Команды: D1 – Признак послепускового режима «ДИАГНОСТИКА»" Id="810afbdf-fdaa-4dc8-856f-ade623a5b552" />
+				<BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Команды: D0 – Признак  нештатной работы в пусковом режиме" Id="c2e02517-e839-4452-bb14-109e1f76a853" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="b3dffed6-ba91-4d8d-b331-b97c546ca5fa" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="87ff7ad5-4b40-4d09-9155-94396db3656b" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="0b83ef8d-2850-4380-b409-308a84c9ab79" />
+				<VarVal Position="26.0" Length="8" Name="Резерв" Id="78ab33c9-2ff1-476b-8789-d940d9d10847" />
+				<VarVal Position="27.0" Length="8" Name="Резерв" Id="5ba372a9-1a23-4b22-90b6-7cf43fd1dbdc" />
+				<VarVal Position="28.0" Length="8" Name="Резерв" Id="e0dd9caa-5adc-414e-8419-a78d6469c011" />
+				<VarVal Position="29.0" Length="8" Name="Резерв" Id="321a94f3-dc23-474e-8d2e-3930ef605ffc" />
+				<VarVal Position="30.0" Length="8" Name="Резерв" Id="1c3071b0-6289-499e-a967-8a75da6b9fbc" />
+				<VarVal Position="31.0" Length="8" Name="Резерв" Id="92307cf5-6a69-46ed-af03-cf1436954ea4" />
+				<VarVal Position="32.0" Length="8" Name="Резерв" Id="1aee2569-1f61-4fe9-ac3e-e31eb90982f2" />
+				<VarVal Position="33.0" Length="8" Name="Резерв" Id="45e24d34-7f4b-4563-8285-1855cca1408c" />
+				<VarVal Position="34.0" Length="8" Name="Резерв" Id="644e0b10-c9d1-435f-ab07-972f9232e4ed" />
+				<VarVal Position="35.0" Length="8" Name="Резерв" Id="47ac7097-f253-4434-bc21-c5695cc47801" />
+				<VarVal Position="36.0" Length="8" Name="Резерв" Id="7f425439-0e19-4fb1-b16c-7b6ecbfd3478" />
+				<VarVal Position="37.0" Length="8" Name="Резерв" Id="f585965b-53ad-42a5-b50a-f1f5df8e46d7" />
+				<VarVal Position="38.0" Length="8" Name="Резерв" Id="60c15b27-3f54-4d69-ac43-6dbca82db731" />
+				<VarVal Position="39.0" Length="8" Name="Резерв" Id="47476c82-4e26-471b-81c4-eacc68bcfd90" />
+				<VarVal Position="40.0" Length="8" Name="Резерв" Id="dbfca5f8-529e-429e-b51c-307369b364cd" />
+				<VarVal Position="41.0" Length="8" Name="Резерв" Id="2aaf1586-6509-45cf-bf38-140442bb5732" />
+				<VarVal Position="42.0" Length="8" Name="Запрос настроек 16 абонентов" Id="2dc6fb50-b781-4441-94fd-f361b2c7a6c1" />
+				<VarVal Position="43.0" Length="8" Name="Признак чтения настроек" Id="81fce97a-50c6-45ad-8c8c-c0d353788665" />
+				<VarVal Position="44.0" Length="8" Name="#CRCL" Id="09710bec-ff5f-49be-b0f2-17ee8fe4802d" />
+				<VarVal Position="45.0" Length="8" Name="#CRCH" Id="7eb667a8-f09b-4458-9fd5-37f1fed76056" />
+			</Request>
+			<Reply Length="46" Position="46">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="9c821d61-ccd6-42ad-8519-db908bdbb2c6" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="44e24657-2330-4fe7-a280-ab74040966e0" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax, А " Expression="[u2] * 10.0" Id="1b686fcf-a893-4f92-9cb7-4a7a8f227c27" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax, В" Expression="[u3] * 10.0" Id="68a68a3e-2488-4987-ab37-4e98c1fa1e46" />
+				<CpzPrm Name="Минимальное напряжение ЗПТ, Umin, В" Expression="[u4] * 10.0" Id="e5fec732-3b07-4c1d-8a64-08c0f02541b0" />
+				<CpzPrm Name="Максимальная температура инвертора, Temax,°С" Expression="[s5] * 2.0" Id="b61b9c7b-64c8-4526-af81-e2e3831029d0" />
+				<CpzPrm Name="Ограничение задания частоты, ws_zmax, Гц)" Expression="[s6] * 2.0" Id="fc714862-6d45-42b6-8307-3b8f92cef34d" />
+				<CpzPrm Name="Ограничение задания тока, Iref_max, А" Expression="[s7] * 10.0" Id="4e0a55e8-9937-4355-a146-49319063c188" />
+				<CpzPrm Name="Пропорциональный коэффициент РТ, kip, о.е." Expression="([u8] * 1.0 + [s9] * 256.0) * 0.005" Id="2dede915-e571-4148-8abe-4ee3d07a01ac" />
+				<CpzPrm Name="Интегральный коэффициент РТ, kii, о.е." Expression="([u10] * 1.0 + [s11] * 256.0) * 0.005" Id="c5644384-269f-48cc-a543-7f0bb6cdb096" />
+				<CpzPrm Name="Верхняя граница работы чоппера, Udc_on, B" Expression="([u12] * 1.0 + [s13] * 256.0) * 1.0" Id="ddabc3c3-d740-4413-ac54-c56996865b14" />
+				<CpzPrm Name="Нижняя граница работы чоппера, Udc_off, B" Expression="([u14] * 1.0 + [s15] * 256.0) * 1.0" Id="8d16cfee-ca76-4325-b816-ae6ff6a195be" />
+				<CpzPrm Name="Постоянная фильтра температуры ПЧ, Tfe, c" Expression="[u16] * 0.05" Id="1a8eb12e-0ff3-4d40-8548-143be7a54b46" />
+				<CpzPrm Name="Постоянная фильтра скважности ведущего ПЧ, TfU1, c" Expression="[u17] * 0.05" Id="9665659b-09f1-4caf-b830-d338c9f0b19e" />
+				<CpzPrm Name="Постоянная фильтра напряжения ЗПТ, Tf_Udc, c" Expression="[u18] * 0.001" Id="b0d95e91-9ac8-451c-bd36-dbbd152dc781" />
+				<CpzPrm Name="Постоянная фильтра аплитудного тока, Tf_Iampl, c" Expression="[u19] * 0.001" Id="52eb4f6f-1e63-4498-bd97-704b4d5354b4" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax_inst, A" Expression="[u20] * 0.001" Id="a58c6586-6ad5-4efa-ba62-aa0e829139a7" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax_inst, B" Expression="[u21] * 0.001" Id="78f182a1-ad7a-4433-bb53-75eee2e63534" />
+				<BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="D7 – Резерв" Id="599affb3-c32d-40a7-8128-276ccec59d5d" />
+				<BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="D6 – Резерв" Id="82a7e5c7-9f48-4294-a9a0-871b80fa0160" />
+				<BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="D5 – Резерв" Id="4845df9b-a543-461b-b640-bf05082769ec" />
+				<BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="D4 – Резерв" Id="a6c42437-4c59-43f5-99e6-501e37748302" />
+				<CpzPrm Name="D2-D3-роль абонента" Expression="[16.2.2] * 1.0" Id="0aabcbb1-53cd-43a3-8c92-bf4602f10ef9" />
+				<CpzPrm Name="D0-D1- кол-во МИ/МТ" Expression="[16.0.2] * 1.0" Id="7730708b-3339-4c87-af7d-31154b8789e4" />
+				<BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Команды: D3 – Признак тестового режима «ПОДГОТОВКА К ПУСКУ»" Id="43e12e9d-dc85-4ea8-8937-89441c686839" />
+				<BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Команды: D2 – Признак режима «ПУСК»" Id="a3099711-b86e-4435-80e3-da1ddb5d555f" />
+				<BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Команды: D1 – Признак послепускового режима «ДИАГНОСТИКА»" Id="0fb61281-edcf-4d6d-b07b-7997e3b7f193" />
+				<BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Команды: D0 – Признак  нештатной работы в пусковом режиме" Id="c028839b-9f74-425a-b7fb-8811104597e1" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="b97ab5d5-0258-4d95-a77c-47ce317a365e" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="c652bdb1-d709-437b-a729-4cb12ce5c487" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="325baf7c-2efb-4b79-89f8-4a787243cc68" />
+				<VarVal Position="26.0" Length="8" Name="Резерв" Id="6d6f97cd-fe05-42b8-87aa-d65a3c350137" />
+				<VarVal Position="27.0" Length="8" Name="Резерв" Id="47964c92-72d4-4335-9b01-d60803d8335d" />
+				<VarVal Position="28.0" Length="8" Name="Резерв" Id="b703a470-7d1b-441c-a426-a958db4acf64" />
+				<VarVal Position="29.0" Length="8" Name="Резерв" Id="3e423045-67e7-405d-adfe-1c20d77f0314" />
+				<VarVal Position="30.0" Length="8" Name="Резерв" Id="28a231ef-0b52-47fb-b5bb-7b93d915262c" />
+				<VarVal Position="31.0" Length="8" Name="Резерв" Id="a5f50f87-e5bc-4e59-9942-6acc7ead6848" />
+				<VarVal Position="32.0" Length="8" Name="Резерв" Id="9389c291-1ffa-47ce-9648-9e7ffd761c49" />
+				<VarVal Position="33.0" Length="8" Name="Резерв" Id="a0f99763-c063-4299-90ee-d4577ab8b2fc" />
+				<VarVal Position="34.0" Length="8" Name="Резерв" Id="79c0cb03-451f-49c1-86af-db747405e775" />
+				<VarVal Position="35.0" Length="8" Name="Резерв" Id="160e3d24-e63b-469a-b79b-8105b7cf0040" />
+				<VarVal Position="36.0" Length="8" Name="Резерв" Id="57b770b5-51af-4783-8f6a-03943a366067" />
+				<VarVal Position="37.0" Length="8" Name="Резерв" Id="fef9d168-9554-4058-8890-7ae7ff82558c" />
+				<VarVal Position="38.0" Length="8" Name="Резерв" Id="c4d8bfda-c545-4e09-a071-069b2baf310f" />
+				<VarVal Position="39.0" Length="8" Name="Резерв" Id="037361f1-ae5c-4c6b-934b-b435c267c3e4" />
+				<VarVal Position="40.0" Length="8" Name="Резерв" Id="7b1c9db7-07da-4514-879b-78b61e6793e5" />
+				<VarVal Position="41.0" Length="8" Name="Резерв" Id="f37bbc23-6e54-4ec8-9a4d-448f21ef8c96" />
+				<VarVal Position="42.0" Length="8" Name="Ответ настроек 16 абонентов" Id="b5a875b0-adb9-4adc-aa03-2030e9c4b03e" />
+				<VarVal Position="43.0" Length="8" Name="Признак подтверждения" Id="5759e963-d0a6-48d1-90ac-8512cc08e4fb" />
+				<VarVal Position="44.0" Length="8" Name="#CRCL" Id="aec01f20-0276-407a-853e-886402e261eb" />
+				<VarVal Position="45.0" Length="8" Name="#CRCH" Id="47f144e0-22ab-49a3-8e6a-69a1a730068b" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и БС МТ2, Настроечные  обмены">
+			<Request Length="46" Position="0" CycleMsTime="50">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="7d89aa2c-eb25-4a6e-b0bc-c9c465d01603" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="79a84eb5-06ac-441d-a67a-2c38470bc949" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax, А " Expression="[u2] * 10.0" Id="efa38da5-b51a-4b18-9157-bfdab8611fd8" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax, В" Expression="[u3] * 10.0" Id="fe234abb-e248-4fac-90b5-a564cc1c3dae" />
+				<CpzPrm Name="Минимальное напряжение ЗПТ, Umin, В" Expression="[u4] * 10.0" Id="9cddea4a-3a76-458e-8638-6544083e252a" />
+				<CpzPrm Name="Максимальная температура инвертора, Temax,°С" Expression="[s5] * 2.0" Id="10ab489c-30ca-4050-bc88-0badec20c622" />
+				<CpzPrm Name="Ограничение задания частоты, ws_zmax, Гц)" Expression="[s6] * 2.0" Id="311d363d-7924-4223-8449-a404eb2ffaad" />
+				<CpzPrm Name="Ограничение задания тока, Iref_max, А" Expression="[s7] * 10.0" Id="1e534186-d6cc-4fe1-928c-83459fabad00" />
+				<CpzPrm Name="Пропорциональный коэффициент РТ, kip, о.е." Expression="([u8] * 1.0 + [s9] * 256.0) * 0.005" Id="b82c69d5-7746-45a7-8bdc-a0fe90b9ce7c" />
+				<CpzPrm Name="Интегральный коэффициент РТ, kii, о.е." Expression="([u10] * 1.0 + [s11] * 256.0) * 0.005" Id="62c41f58-30de-4b5d-a421-6f3c070f67b1" />
+				<CpzPrm Name="Верхняя граница работы чоппера, Udc_on, B" Expression="([u12] * 1.0 + [s13] * 256.0) * 1.0" Id="9f4208db-6f7c-4f0e-964a-3b0de7eb96a4" />
+				<CpzPrm Name="Нижняя граница работы чоппера, Udc_off, B" Expression="([u14] * 1.0 + [s15] * 256.0) * 1.0" Id="dde609e1-e037-40ce-8aca-3c51e79ad4f7" />
+				<CpzPrm Name="Постоянная фильтра температуры ПЧ, Tfe, c" Expression="[u16] * 0.05" Id="19f35e54-fa92-4994-963c-1837f7bf894c" />
+				<CpzPrm Name="Постоянная фильтра скважности ведущего ПЧ, TfU1, c" Expression="[u17] * 0.05" Id="e04cc4a0-8381-4d5a-b977-e84fc8a37ca4" />
+				<CpzPrm Name="Постоянная фильтра напряжения ЗПТ, Tf_Udc, c" Expression="[u18] * 0.001" Id="7a9b30ce-9e61-43e3-a2e4-d2a00f181406" />
+				<CpzPrm Name="Постоянная фильтра аплитудного тока, Tf_Iampl, c" Expression="[u19] * 0.001" Id="d50aa4fd-dcd9-4209-b857-583039f39463" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax_inst, A" Expression="[u20] * 0.001" Id="fd782c63-fab6-445e-bc70-4b28c64a6154" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax_inst, B" Expression="[u21] * 0.001" Id="b33249f3-3402-454e-aee1-3f8d7db6390e" />
+				<BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="D7 – Резерв" Id="cd55750d-73f2-4406-82a6-d9714e23b212" />
+				<BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="D6 – Резерв" Id="1106e67d-79f3-4f8b-957e-ea9ca276f342" />
+				<BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="D5 – Резерв" Id="88cf7dda-1246-4221-9dc8-7aee392a0722" />
+				<BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="D4 – Резерв" Id="d43bb09f-6f76-4eea-9e87-556d7af0ba0d" />
+				<CpzPrm Name="D2-D3-роль абонента" Expression="[16.2.2] * 1.0" Id="ee3c5c3e-a06e-4133-a2f2-89a065d22aab" />
+				<CpzPrm Name="D0-D1- кол-во МИ/МТ" Expression="[16.0.2] * 1.0" Id="b38338ee-6681-409f-81a6-e7b325e8bdba" />
+				<BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Команды: D3 – Признак тестового режима «ПОДГОТОВКА К ПУСКУ»" Id="363a2ae5-e71d-438f-8cf6-429aec1aa854" />
+				<BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Команды: D2 – Признак режима «ПУСК»" Id="94de5aa9-623a-4aca-8f97-eb760fa4156a" />
+				<BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Команды: D1 – Признак послепускового режима «ДИАГНОСТИКА»" Id="5c382d46-7ff0-4d94-b19c-2d96b39a5a75" />
+				<BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Команды: D0 – Признак  нештатной работы в пусковом режиме" Id="03ad4337-c1b9-4382-ab98-046858ce1831" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="8d5cfaae-bcd3-498a-91e6-a9237c262426" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="9a3a5199-703b-4459-8659-a3f547d70747" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="04c451ae-3bca-4c6b-b754-1cb7d21bc5b0" />
+				<VarVal Position="26.0" Length="8" Name="Резерв" Id="2fa9ac75-d2cf-49b5-aba2-8e0cf985e3a7" />
+				<VarVal Position="27.0" Length="8" Name="Резерв" Id="65fa694b-131b-4713-a672-d8f4541cce8e" />
+				<VarVal Position="28.0" Length="8" Name="Резерв" Id="c467fa3e-5ec1-4bae-9748-bbfc0a105c4a" />
+				<VarVal Position="29.0" Length="8" Name="Резерв" Id="e188dd5c-4657-4b2f-b898-9d420213675d" />
+				<VarVal Position="30.0" Length="8" Name="Резерв" Id="3f6ca8c6-272b-411f-a277-1ef031f5bfea" />
+				<VarVal Position="31.0" Length="8" Name="Резерв" Id="aae229d0-b036-4893-942f-1d4e101c9e4e" />
+				<VarVal Position="32.0" Length="8" Name="Резерв" Id="32653b6e-b5f0-4db6-aca7-ebaf75a2b0c5" />
+				<VarVal Position="33.0" Length="8" Name="Резерв" Id="61e21607-d907-431a-a875-ac9b27c1d893" />
+				<VarVal Position="34.0" Length="8" Name="Резерв" Id="65db5728-8590-428d-b228-9c437af09f53" />
+				<VarVal Position="35.0" Length="8" Name="Резерв" Id="ce9bad57-d2d8-47a1-815c-399d81f4ddea" />
+				<VarVal Position="36.0" Length="8" Name="Резерв" Id="bff9e519-06b6-44b1-9841-c26ae0594af2" />
+				<VarVal Position="37.0" Length="8" Name="Резерв" Id="8b8a6a08-e27e-4eba-ba9d-1cab7552a610" />
+				<VarVal Position="38.0" Length="8" Name="Резерв" Id="725608fa-294f-4e90-a8fe-5cef7944bd21" />
+				<VarVal Position="39.0" Length="8" Name="Резерв" Id="ea353aba-a670-4e1b-b157-dd3508624797" />
+				<VarVal Position="40.0" Length="8" Name="Резерв" Id="7a45a53f-6569-400f-964a-bbd886ae20b4" />
+				<VarVal Position="41.0" Length="8" Name="Резерв" Id="97f25dd0-0d8b-4687-badd-bada457568fc" />
+				<VarVal Position="42.0" Length="8" Name="Запрос настроек 16 абонентов" Id="8e16497b-8228-4786-8b79-abdc48af1676" />
+				<VarVal Position="43.0" Length="8" Name="Признак чтения настроек" Id="380edf2c-3bf8-4890-9e6d-1f42b19a52ad" />
+				<VarVal Position="44.0" Length="8" Name="#CRCL" Id="7c717bdf-0d35-4e8a-aeb6-0242fc9dd365" />
+				<VarVal Position="45.0" Length="8" Name="#CRCH" Id="6f5f6293-e444-42a3-b5f3-8e3fb171607e" />
+			</Request>
+			<Reply Length="46" Position="46">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="2a458f90-e709-438d-a574-7534bdf3d5ea" />
+				<DefVal Position="1.0" Length="8" Value="0x48" Name="#NCMD" Id="a5ec3598-f321-4320-86f1-7df7c202235f" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax, А " Expression="[u2] * 10.0" Id="6693eb25-5cb7-4025-b45a-42e9fb8d92fe" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax, В" Expression="[u3] * 10.0" Id="5910dd95-8156-40b2-9b46-42cdccae4b4b" />
+				<CpzPrm Name="Минимальное напряжение ЗПТ, Umin, В" Expression="[u4] * 10.0" Id="aedc52b6-fa2c-4d77-a81d-a3fecc568193" />
+				<CpzPrm Name="Максимальная температура инвертора, Temax,°С" Expression="[s5] * 2.0" Id="b7f6bd49-caa0-487f-b493-00dd120ea4b4" />
+				<CpzPrm Name="Ограничение задания частоты, ws_zmax, Гц)" Expression="[s6] * 2.0" Id="16970ce3-5530-45e6-af17-a74ebf8dbd54" />
+				<CpzPrm Name="Ограничение задания тока, Iref_max, А" Expression="[s7] * 10.0" Id="c780fe32-1eea-4f69-8eb5-963db475f8d2" />
+				<CpzPrm Name="Пропорциональный коэффициент РТ, kip, о.е." Expression="([u8] * 1.0 + [s9] * 256.0) * 0.005" Id="cb50d39d-9ae2-4cfb-a8e0-765ee2c27b12" />
+				<CpzPrm Name="Интегральный коэффициент РТ, kii, о.е." Expression="([u10] * 1.0 + [s11] * 256.0) * 0.005" Id="fd2d96b5-5329-4e04-88df-82bd02779e3a" />
+				<CpzPrm Name="Верхняя граница работы чоппера, Udc_on, B" Expression="([u12] * 1.0 + [s13] * 256.0) * 1.0" Id="aaaf9067-21f0-456c-aa63-7ac1bfb7d49b" />
+				<CpzPrm Name="Нижняя граница работы чоппера, Udc_off, B" Expression="([u14] * 1.0 + [s15] * 256.0) * 1.0" Id="485796bf-d985-4bc3-89c9-daf0ac705ce1" />
+				<CpzPrm Name="Постоянная фильтра температуры ПЧ, Tfe, c" Expression="[u16] * 0.05" Id="78fdbd9b-93c8-408f-a043-067736a0a6f6" />
+				<CpzPrm Name="Постоянная фильтра скважности ведущего ПЧ, TfU1, c" Expression="[u17] * 0.05" Id="da02ac63-c22e-4bf6-88b7-5daea00ca2f4" />
+				<CpzPrm Name="Постоянная фильтра напряжения ЗПТ, Tf_Udc, c" Expression="[u18] * 0.001" Id="3f3af498-75a3-409d-a22d-48b09e4fcb29" />
+				<CpzPrm Name="Постоянная фильтра аплитудного тока, Tf_Iampl, c" Expression="[u19] * 0.001" Id="d944dd2d-dbfb-4baf-b673-03b7b1930fdf" />
+				<CpzPrm Name="Максимальное значение фазного тока, Imax_inst, A" Expression="[u20] * 0.001" Id="1341b9f4-db25-47a2-957d-184b8e657fc4" />
+				<CpzPrm Name="Максимальное напряжение ЗПТ, Umax_inst, B" Expression="[u21] * 0.001" Id="92cc7c5e-0c2c-426b-9a94-06d3a5998d28" />
+				<BitPrm Byte="22" Bit="7" IsValueInverted="False" Name="D7 – Резерв" Id="87c615d0-eb33-43e9-a088-9dc062ce7c21" />
+				<BitPrm Byte="22" Bit="6" IsValueInverted="False" Name="D6 – Резерв" Id="72159a91-1fb6-433c-8cc6-baaae217f954" />
+				<BitPrm Byte="22" Bit="5" IsValueInverted="False" Name="D5 – Резерв" Id="5f50198e-4e99-49f3-a8ff-2020238987d2" />
+				<BitPrm Byte="22" Bit="4" IsValueInverted="False" Name="D4 – Резерв" Id="ca3ebe06-1360-4b95-889f-075181d1528f" />
+				<CpzPrm Name="D2-D3-роль абонента" Expression="[16.2.2] * 1.0" Id="493b9f5c-da49-4281-875b-0001250e5914" />
+				<CpzPrm Name="D0-D1- кол-во МИ/МТ" Expression="[16.0.2] * 1.0" Id="49da1fe3-d590-4673-bf42-1f4ec2ee8798" />
+				<BitPrm Byte="22" Bit="3" IsValueInverted="False" Name="Команды: D3 – Признак тестового режима «ПОДГОТОВКА К ПУСКУ»" Id="2f5ad25c-a92b-43d0-af07-de8fd712455e" />
+				<BitPrm Byte="22" Bit="2" IsValueInverted="False" Name="Команды: D2 – Признак режима «ПУСК»" Id="e6474a2f-750a-4e5b-bacd-a1e5521b850f" />
+				<BitPrm Byte="22" Bit="1" IsValueInverted="False" Name="Команды: D1 – Признак послепускового режима «ДИАГНОСТИКА»" Id="31b576d7-18ad-428f-bb01-e5c2c1b35f62" />
+				<BitPrm Byte="22" Bit="0" IsValueInverted="False" Name="Команды: D0 – Признак  нештатной работы в пусковом режиме" Id="e61d4bbf-bd23-4cb4-b447-9bbf6cece790" />
+				<VarVal Position="23.0" Length="8" Name="Резерв" Id="00516f99-a42b-4e7c-b5bf-d7b2bb098ae1" />
+				<VarVal Position="24.0" Length="8" Name="Резерв" Id="14271f38-716c-4b01-8bf4-13653336fcf8" />
+				<VarVal Position="25.0" Length="8" Name="Резерв" Id="c42cd82b-e80a-4302-937f-f285f5b76f6f" />
+				<VarVal Position="26.0" Length="8" Name="Резерв" Id="75fd4692-0df0-49a7-bca4-be67bfdf94ca" />
+				<VarVal Position="27.0" Length="8" Name="Резерв" Id="56fb7542-0a85-453a-816b-98ecf2f50da0" />
+				<VarVal Position="28.0" Length="8" Name="Резерв" Id="88e6d9f8-d40d-474b-ae74-633102df3397" />
+				<VarVal Position="29.0" Length="8" Name="Резерв" Id="f0b6d232-3404-44ff-bb1d-87f864fd8a53" />
+				<VarVal Position="30.0" Length="8" Name="Резерв" Id="83025b53-2124-4761-9b71-4866a923f850" />
+				<VarVal Position="31.0" Length="8" Name="Резерв" Id="c08afe1d-2c35-4917-9abc-786b8f9f9ba3" />
+				<VarVal Position="32.0" Length="8" Name="Резерв" Id="60ec55bd-062b-4e0a-ad74-b4e9bc1153df" />
+				<VarVal Position="33.0" Length="8" Name="Резерв" Id="56972054-687d-44b0-9009-f1864e31b77b" />
+				<VarVal Position="34.0" Length="8" Name="Резерв" Id="85f315c2-634c-4506-8741-58862c7c2049" />
+				<VarVal Position="35.0" Length="8" Name="Резерв" Id="ea36c2b4-0a68-440c-b544-ec3babaaeae6" />
+				<VarVal Position="36.0" Length="8" Name="Резерв" Id="a6a54e03-32c8-4a6c-a61f-3294097bb04c" />
+				<VarVal Position="37.0" Length="8" Name="Резерв" Id="38e80191-5e88-43d5-a59e-1c31ccabad45" />
+				<VarVal Position="38.0" Length="8" Name="Резерв" Id="86a0929f-c461-4c97-ac73-86020895171e" />
+				<VarVal Position="39.0" Length="8" Name="Резерв" Id="bf074a7d-ddc4-4828-b43d-ea4e6a05aa40" />
+				<VarVal Position="40.0" Length="8" Name="Резерв" Id="6bcfb1ec-ce29-4dac-823d-f475634b92f8" />
+				<VarVal Position="41.0" Length="8" Name="Резерв" Id="a2ae4d7a-3c7a-4c73-9549-fa718e21a63e" />
+				<VarVal Position="42.0" Length="8" Name="Ответ настроек 16 абонентов" Id="a35f3636-fa1b-4aeb-ae6e-eb3006c8cf2d" />
+				<VarVal Position="43.0" Length="8" Name="Признак подтверждения" Id="678a6b0e-b2f7-42e5-bb95-95f1d8ff9db9" />
+				<VarVal Position="44.0" Length="8" Name="#CRCL" Id="22287ad1-f276-4e3c-84da-fab90afb2dd8" />
+				<VarVal Position="45.0" Length="8" Name="#CRCH" Id="68cf239e-0a56-41e2-8cac-3871964af306" />
+			</Reply>
+		</CmdMask>
+	</Commands>
+</PsnConfiguration>

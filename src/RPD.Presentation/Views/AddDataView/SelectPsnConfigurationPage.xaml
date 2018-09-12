@@ -1,0 +1,58 @@
+﻿<Page x:Class="RPD.Presentation.Views.AddDataView.SelectPsnConfigurationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:dt="clr-namespace:RPD.Presentation.ViewModels.AddDataViewModels.DesignTime"
+      mc:Ignorable="d" 
+      d:DesignHeight="331" d:DesignWidth="473"
+      d:DataContext="{d:DesignInstance Type=dt:SelectPsnConfigurationDesignTime}"
+	Title="SelectPsnConfigurationPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Style="{StaticResource dialogHeader2Style}" Margin="5">Конфигурация магистрали ПСН</TextBlock>
+
+        <!--Список конфигураций-->
+        <ListBox Grid.Row="1" 
+                 Style="{StaticResource listBoxWithTransparentItemStyle}"
+                 BorderBrush="Transparent"
+                 Background="Transparent"
+                 SelectedItem="{Binding Path=SelectPsnConfiguration.SelectedConfiguration}"
+                 ItemsSource="{Binding Path=SelectPsnConfiguration.AvailableConfigurations}"
+                 Margin="5,0,5,0">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <RadioButton Margin="5">
+                        <RadioButton.IsChecked>                            
+                            <Binding Path="IsSelected" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}"/>
+                        </RadioButton.IsChecked>
+                        <StackPanel Margin="5,0,0,0">
+                            <TextBlock Text="{Binding Path=Name}" FontWeight="Medium"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontWeight="Light" Text="{Binding Path=DescriptionAndVersionString}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </RadioButton>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <!--Кнопки навигации-->
+        <DockPanel Grid.Row="2">
+            <Button DockPanel.Dock="Right"
+                    Style="{StaticResource dialogButtonStyle}" 
+                    Command="{Binding Path=SelectPsnConfiguration.NextCommand}">Далее &gt;</Button>
+
+            <Button DockPanel.Dock="Right"
+                    Style="{StaticResource dialogButtonStyle}"
+                    HorizontalAlignment="Right"
+                    Command="{Binding Path=SelectPsnConfiguration.BackCommand}">&lt; Назад</Button>
+        </DockPanel>
+    </Grid>
+</Page>

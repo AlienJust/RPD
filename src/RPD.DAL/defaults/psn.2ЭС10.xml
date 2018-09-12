@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="2ЭС10" Version="0" Description="Протокол локомотива 2ЭС10, версия неизвестна" Id="26ADAF9D-0532-4B53-B2D8-0DF15688E5A8" RpdId="16">
+  <PsnMeters></PsnMeters>
+  <Commands></Commands>
+</PsnConfiguration>

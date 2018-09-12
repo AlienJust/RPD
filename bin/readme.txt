@@ -1,0 +1,1 @@
+Projects must be builded into this directory for futher generating installers

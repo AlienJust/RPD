@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PsnConfiguration Name="БУ и УСДП по М5" Version="8" Description="Конфигурация обмена БУ с УСДП по М5 ДМРТУ 7" Id="8FCDABEC-EC88-405B-935C-5DF60AF9BD36" RpdId="29">
+	<PsnMeters>
+		<PsnMeter Address="0x00" Name="Broadcast" />
+		<PsnMeter Address="0x01" Name="УСДП 01" />
+		<PsnMeter Address="0x02" Name="УСДП 02" />
+		<PsnMeter Address="0x03" Name="УСДП 03" />
+		<PsnMeter Address="0x04" Name="УСДП 04" />
+		<PsnMeter Address="0x05" Name="УСДП 05" />
+		<PsnMeter Address="0x06" Name="УСДП 06" />
+		<PsnMeter Address="0x07" Name="УСДП 07" />
+		<PsnMeter Address="0x08" Name="УСДП 08" />
+		<PsnMeter Address="0x09" Name="УСДП 09" />
+		<PsnMeter Address="0x0A" Name="УСДП 10" />
+		<PsnMeter Address="0x0B" Name="УСДП 11" />
+		<PsnMeter Address="0x0C" Name="УСДП 12" />
+		<PsnMeter Address="0x0D" Name="УСДП 13" />
+		<PsnMeter Address="0x0E" Name="УСДП 14" />
+		<PsnMeter Address="0x0F" Name="УСДП 15" />
+		<PsnMeter Address="0x10" Name="УСДП 16" />
+		<PsnMeter Address="0x11" Name="УСДП 17" />
+		<PsnMeter Address="0x12" Name="УСДП 18" />
+		<PsnMeter Address="0x13" Name="УСДП 19" />
+		<PsnMeter Address="0x14" Name="УСДП 20" />
+		<PsnMeter Address="0x15" Name="УСДП 21" />
+		<PsnMeter Address="0x16" Name="УСДП 22" />
+		<PsnMeter Address="0x17" Name="УСДП 23" />
+		<PsnMeter Address="0x18" Name="УСДП 24" />
+		<PsnMeter Address="0x19" Name="УСДП 25" />
+		<PsnMeter Address="0x1A" Name="УСДП 26" />
+	</PsnMeters>
+	<Commands>
+		<CmdMask Name="БУ и УСДП 1. Тестовый режим.">
+			<Request Length="4" Position="0" CycleMsTime="90">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="bd73e10b-705b-42c2-b981-5ca3c761839e" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="e2155883-959c-428d-b302-66bd95958e40" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 1" Id="e5aebdc4-2f5f-4cca-a015-d685d61268a8" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="5be538b8-28ee-4e1f-b652-c06c8aa2c203" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="1f1258e0-28ca-4c6e-9098-afc1291fb113" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="909e49cd-9f88-43f2-884d-2f67c0bf5e94" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="d73c5ae0-80b4-498f-ab5e-b96e18fee2ec" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 1" Id="fa8c305f-da26-48b2-8ffe-b121248d70b9" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 1" Id="7a9f74e7-fd09-49e6-8b46-81026b905a17" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 1" Id="4afc60a9-d373-4db0-93fb-cffebb1e2444" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 1" Id="72e2db21-1fbb-41d4-9b29-7df629eca339" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 1" Id="f78e93bb-fe01-4c44-851d-62672de3b786" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 1" Id="e5035126-5a96-4996-8095-8ef69b8df0be" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 1" Id="fa369a73-a3cd-4ef7-80c0-a57fe5afe93b" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 1: состояние датчика положения" Id="f599e667-5158-45d5-83ed-790c10b2318d" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 1: Сброс от монитора питания" Id="38d47461-6178-4a61-a94a-eb63dbfea8a4" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 1: Сброс от внешнего входа" Id="25886859-59be-4340-86d0-734790c15c02" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="57b63c3b-7b0e-42b3-96c5-37601f02c740" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="eedd8ea2-7952-4542-baae-cde230c93059" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 2. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="398cb732-a832-41cd-aa92-d1209d6299ec" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="5e6652c8-0c0e-4be0-a9c2-fb47b54418d6" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 2" Id="60bdf021-54d6-4e86-8dbf-c279450531f2" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="fff33dd2-5c5b-4a9b-8125-9a4c07a51586" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="1472b45d-331e-4310-a75f-595ab5052012" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="1129eb94-14d6-40bd-a051-a9b23d37ff4a" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="7e289a53-3044-4851-a848-f0c291627211" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 2" Id="205d02f5-0f37-4a47-8176-e28428d168c8" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 2" Id="f655a4e8-27e1-44f0-842a-19e7262cc3eb" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 2" Id="b04a74c2-b076-4a50-beb2-f80984c3eda9" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 2" Id="5f728c7d-2f48-477b-8cf6-474eeca03e65" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 2" Id="8f64ace0-1f64-4100-8b84-70de71f0b447" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 2" Id="6e913fc4-1e71-4cf1-8130-46113f3da804" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 2" Id="62f9e55c-386e-4532-ab87-ec442169ad31" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 2: состояние датчика положения" Id="83abe168-0590-4c39-82a7-80ebb347fbfe" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 2: Сброс от монитора питания" Id="c0fd1f87-e53a-4f12-b0af-c4c9eb40eedd" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 2: Сброс от внешнего входа" Id="a2cf7823-dd42-4454-8446-baf6a2ead5fe" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="feba2eae-35ce-4664-9724-21bd5af9aa7d" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="0bb768b2-ed0c-4b67-9656-a6758e7c8794" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 3. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="443172ec-08e3-4e02-b6be-40c7e4f26684" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="77814614-485a-499c-983a-7f0ef4b03c59" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 3" Id="ddf7e82a-fed9-4145-bcd2-830d03c5ccde" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="2d4309ce-50c1-460b-9c41-cf61a5500c91" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="7870fa14-001c-48b9-8ad8-83225ff03bc8" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="aecab49c-a0b6-46b0-9cc0-762c5a448a99" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="d79e4384-bac8-4c0d-bd90-4011fc1fb661" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 3" Id="65cf2a4a-3f2a-4857-be5c-e24da7799549" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 3" Id="02136621-691f-4cee-97f3-0c3b100a6ebc" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 3" Id="2801f3c4-00db-41ea-8c12-fb3c758e9357" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 3" Id="7473cd1d-b00c-4e7c-8adf-1ae354e39356" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 3" Id="5b1fb201-43c8-4af6-8900-2ff76e9581f7" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 3" Id="d763e3e6-56ec-4dfd-a8f0-c52f3d0c1367" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 3" Id="b40127b8-7bc9-4d15-9248-89894b6535d1" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 3: состояние датчика положения" Id="61de2091-53dc-4295-81eb-8e7906220bc6" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 3: Сброс от монитора питания" Id="f9f1c1c0-2e3d-44aa-aeca-0c95b528db5a" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 3: Сброс от внешнего входа" Id="2408d83b-2283-4df9-a5f7-c152153591aa" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="e132be6f-6eae-4b4e-934d-293dd2de0395" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="c3f9ba87-de21-4d94-bd7d-9d4a35e26b17" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 4. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="c7bb728c-7eb8-4132-a0ee-4adb1b75ab4a" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="7d69e280-8e2c-48bd-a976-8f915cd1df57" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 4" Id="0661206a-e98a-4fd9-bca7-efc5bd783cf0" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="c987a67c-428c-46a9-aafb-b3abf8db7f52" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="b9c7fe94-ba74-4f85-9b97-0c732a84e5a8" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="8677e08b-2bde-4383-a379-3a9c804fbb1a" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="bb5beb1a-f4fa-4037-969f-4df65e0290ab" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 4" Id="75037060-3194-4615-b9fb-00c7889b1734" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 4" Id="40c596dc-b49e-4fa1-b5ab-b57bb3f6275b" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 4" Id="876f6630-58d4-45bc-8801-a3bf85f06fc7" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 4" Id="3b1382d2-9b6d-40d9-bd96-898bd49c1478" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 4" Id="96261311-e900-4cc0-963f-cf246eb78ed6" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 4" Id="c5cd055d-10eb-482e-9961-2193fb6810b7" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 4" Id="b26302a3-a20c-44c0-9d34-772ede2a6abf" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 4: состояние датчика положения" Id="11872cb4-5195-4010-9fd5-0c4e255940de" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 4: Сброс от монитора питания" Id="f5994402-0987-441e-867b-74f0a08375be" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 4: Сброс от внешнего входа" Id="79aea38c-6515-4a8b-80d5-9347288a1149" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="fd58c71a-decd-42c1-adde-46537f8642a0" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="5aae7a51-ba07-453b-99dd-5e148229f63d" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 5. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="3fa977c7-7c09-45e4-ba3b-3fefd6db723a" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="649121c8-31f6-4cb7-b8b6-93f72dfa1e48" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 5" Id="bdfe2ead-fbb9-407b-8ccb-d99ffac346aa" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="a2f2d182-ccb8-4b8d-9e6b-9b9315830e74" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="4fca648f-aac3-477f-93c4-c1f703c4e77b" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="544a875b-ba56-4d6a-b3de-b1623d409d95" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="0f697092-4649-407e-a9c8-2904e0a5c192" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 5" Id="8c9879f1-e684-4091-83d4-d2c2e9d6defb" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 5" Id="203e72a4-128c-49c9-beb5-5323e871f281" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 5" Id="09b0fd91-635b-4002-8888-d332cdec7b07" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 5" Id="10daa9d1-776d-4544-81b3-8cc6546d3d9e" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 5" Id="c1e24f47-3044-4562-aaf4-00192309709b" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 5" Id="3fe96dd1-eb9e-48ca-a335-710706edc596" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 5" Id="c80f94d4-132b-43ab-9cb9-a8b86283c267" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 5: состояние датчика положения" Id="34037331-cc0e-4cef-9d5a-73a645ebbec7" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 5: Сброс от монитора питания" Id="0cdff8e8-b004-496a-982c-3dff119de70a" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 5: Сброс от внешнего входа" Id="1b4681a8-2374-4e42-a181-2305fdfd08e6" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="1b4c0925-7531-468f-8d6f-1bb43168b3d3" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="439af710-102f-4d4c-89dd-7131295d3603" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 6. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="60188199-9f91-44f5-8582-ed5c58bc13e5" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="58ac79f7-a7d2-4f07-9db2-76c35ca8ff67" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 6" Id="ed5f3d5f-aefe-4c74-8785-fefab2beb337" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="e28fbcd7-d28a-4513-8e04-d90027f53bd7" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="28df30da-2773-4b0b-9e70-1c16af3d6a70" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="e77e278b-c1d7-440a-8fb9-f39f6a5e5ced" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="b8f147f2-8e88-4f76-9bb3-ce2d51d0e50f" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 6" Id="49355cb6-88ba-429d-8009-82bc378a7f03" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 6" Id="091fd2e7-1f37-4b50-86b5-9c8719bbfa69" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 6" Id="9fdccde2-1677-4124-99be-9540dd160d91" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 6" Id="26263587-3a86-44dd-a8a3-29b1110954b8" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 6" Id="974ee3b5-da6c-4a9a-ac2c-922d3c032e17" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 6" Id="b18e7839-0923-4e64-82a9-82fefb2f2e5a" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 6" Id="4c84c65f-50e2-4379-accf-a21b4f281e79" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 6: состояние датчика положения" Id="55e9dbbf-8d7d-41cc-9c9c-c3368703c5e6" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 6: Сброс от монитора питания" Id="f4e41425-1117-405b-8947-e00a3d5aa913" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 6: Сброс от внешнего входа" Id="d9099898-fe60-493e-815d-b83ff62b89ce" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="be56627f-5de1-4f6c-a39f-ffff6192530b" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="b99324f3-abda-473d-adca-f6d6a4ce888b" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 7. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="483a9ce7-f766-4daf-884a-b82131a80d40" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="dde7e2b2-e6f7-41d3-a690-2f94861183f3" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 7" Id="618b730a-9db7-4688-be4d-30bf6e5c9754" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="681a8645-d732-4f6d-9f09-c6be94a2a9e6" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="6db56e0f-2c05-4220-99c1-83558b48a18c" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="e2704cf1-31d8-4d43-bff7-dbb3a7d07136" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="63108260-1996-4036-ae7e-420b6d060942" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 7" Id="c7e3ae0a-2b6c-4b36-89d9-9e1391f958b6" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 7" Id="027f8ab5-a598-4cc5-84a7-3784e7513a0a" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 7" Id="15915b37-a27e-4441-863b-47d70bd42523" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 7" Id="cc14433f-65ae-40c7-9e93-22946058759d" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 7" Id="6a1edfe8-f2cd-450c-90d6-0f1ea8ee74c0" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 7" Id="4b8be11e-1a15-4507-9b14-6c9c17ea847a" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 7" Id="b2a3da23-85a0-41c2-ac85-ed18bf44a82f" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 7: состояние датчика положения" Id="39f91ee8-0e3f-406f-93bc-33198c3fd2bd" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 7: Сброс от монитора питания" Id="78490793-489a-4d5e-a950-dafc03d787c7" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 7: Сброс от внешнего входа" Id="bfad16ed-5879-499c-a8f2-3d2444a67384" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="4dced2ce-fd37-4e77-90f9-28d364231b39" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="b1493c16-46f7-419c-a440-a1a8374b00d1" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 8. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="684a8a55-c533-4e2a-be7a-2b997027870f" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="f4e60e63-b18f-49eb-87d3-7641d0f0d4d1" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 8" Id="0bdf5142-f187-40dc-8601-6e76644bf2f3" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="a147b9d2-d02f-4499-a18b-e6a310fbcb2a" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="e0bfd0b9-b5e7-447e-ae1f-dd39ef8702f6" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="1dcd7674-6a81-43a2-b4c2-5f391d805bd4" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="9c329abe-e97e-449e-9c79-c2cbfa839ba9" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 8" Id="523906a7-3677-4bc4-bfd9-2361a0311e0f" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 8" Id="640546c7-00fb-4f2f-8462-b593733a2b9b" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 8" Id="f35c0f89-ef9f-474f-ab58-cbf776d0a5de" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 8" Id="d1326d74-36bf-4b5d-86db-d7d6f26fe954" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 8" Id="868efb43-44d1-4256-a557-8370cb31e49e" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 8" Id="1652081c-e354-4427-aaf7-48b1d7a3d66f" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 8" Id="067dfdec-d919-49bc-9669-3156d26595ff" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 8: состояние датчика положения" Id="aebc4865-c2b0-4a6a-99b4-f2c6288fb765" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 8: Сброс от монитора питания" Id="82c4a675-7048-410e-9833-2b47f38edf90" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 8: Сброс от внешнего входа" Id="a71d8428-16d5-4b47-bb90-af27d7283bad" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="49d15b91-3bb8-4a31-bd98-b9614ab90ca2" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="a132c8b5-d76f-46eb-acf7-1ee9c25f7eed" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 9. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x09" Name="#ADDR" Id="4cfa7837-c594-4fcb-8234-20854ce9705f" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="0bf9ce39-5330-4357-a630-3dc314828b95" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 9" Id="f0ac9f72-8569-4c44-bcf3-c0071b3ecaec" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="9407f979-1920-4a95-952d-8fecdb55a5bb" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="00734abe-74f2-40ff-a02f-b18b7d22d9ec" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x09" Name="#ADDR" Id="4f634945-5dfb-4b7d-b48d-d2b5b8f82f08" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="02b7ae17-a042-41b6-b917-c9cf04518f3b" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 9" Id="e2011305-5512-481e-b810-8f009d28f84d" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 9" Id="265fea5c-c322-4048-ac71-c4a61e808165" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 9" Id="1e4ce6ea-554a-4cdc-99c7-8ca1da6c4c35" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 9" Id="5a683076-ca21-4454-abdb-079045f7d753" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 9" Id="eab82396-2fc5-49d4-9c5d-6252dc99869f" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 9" Id="c03d40a9-fc2e-4861-b577-824153e4a9d0" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 9" Id="8989c5c5-1c30-4c29-9c71-390eed2de310" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 9: состояние датчика положения" Id="1489a8a4-f95d-4d88-8417-f3b4a6518f1a" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 9: Сброс от монитора питания" Id="1d0620c1-3eeb-4bb1-98a6-e01fa327f62b" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 9: Сброс от внешнего входа" Id="632bc72b-9427-4122-b083-1f585436269b" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="df60f0e3-5b23-4fe3-8a7e-3f7ebb9165fb" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="e6460520-8c28-4608-b99f-045448f9af5f" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 10. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="26bca192-e944-4229-b6be-7daeabcb1d75" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="450cc61a-d07d-40eb-9288-efe061b469c5" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 10" Id="84c9d17f-aa84-42e6-83db-931b29fbf2cc" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="b9192ecd-2579-4d76-acca-a454000310c5" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="012e8b13-5163-4da3-acb1-060399135cc1" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="eaaf0c50-831f-4fd1-bce5-544235d4e921" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="beba9759-6952-4b38-af85-004f520ea803" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 10" Id="2837ab68-9c64-4e25-b4d2-14ab230c2269" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 10" Id="bf220594-2968-4a65-b713-71e865335de2" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 10" Id="04d5e0d8-170a-4c94-8f0b-3f2f0fd9faef" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 10" Id="58b1f284-7862-4dac-a301-e87796fa6d7a" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 10" Id="83723c5b-f391-43cb-b45a-7046eaa34b02" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 10" Id="0efa099a-c9a6-4659-aad8-921c6ed13715" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 10" Id="0bdfde69-00ea-4848-bb7b-8a796cc73f40" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 10: состояние датчика положения" Id="24a44c56-00df-4855-ba06-da39c677c52d" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 10: Сброс от монитора питания" Id="c82ae653-86e5-408b-945e-725326e9362f" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 10: Сброс от внешнего входа" Id="34fbad51-e678-4000-9b98-086ed9c346ee" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="8cd2940c-4f57-42cb-afc7-a30b9cea2486" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="74fed46f-477a-40e0-ba9d-1721053b11ca" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 11. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0B" Name="#ADDR" Id="adb5abfd-9aac-41cb-bfaf-fd7bd2b7d2c1" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="e68cfb68-c184-480f-958f-02270bb8e93d" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 11" Id="a79f297e-3eb5-44bc-9350-b2f290572639" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="c464401d-1811-4c15-a9a8-ea644fb01b07" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="327591b6-c01d-4161-997e-3d27e2dab880" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x0B" Name="#ADDR" Id="e9d0b857-1764-4343-ae14-6349de3b9aec" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="0e100310-1cc6-4110-b86c-54058889d879" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 11" Id="7e1b0f9d-e149-4f4e-b6c0-330978d1f253" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 11" Id="a59dc6db-e2a1-47a9-9668-3e2de5ebca11" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 11" Id="071a03e3-1186-43a7-9015-732947b5cbd0" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 11" Id="f8eaaacb-44ec-4f7a-8333-eaec857d4403" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 11" Id="99de0742-efab-449e-8496-260d2fc615b9" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 11" Id="f634b2bd-ab94-421a-9ba4-c32abd432f4b" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 11" Id="9ca76012-3bed-4851-bfdb-ef09c07d4cb1" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 11: состояние датчика положения" Id="986a3954-3344-4c55-8c20-c057271ac7fe" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 11: Сброс от монитора питания" Id="7bfcb8a7-60a9-40ff-b70a-da0a34b44118" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 11: Сброс от внешнего входа" Id="d1d7c90b-926c-4be9-ab32-f850b40f8a26" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="1855e9de-51f0-474d-8129-24229769f521" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="20265f61-d5fb-4765-9120-7deb93ad8824" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 12. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0C" Name="#ADDR" Id="79cc3b45-c6d1-4a4f-9ec3-70b651f41f4d" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="1d0df193-bfc9-4866-a946-bb1962120130" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 12" Id="637b52be-afda-4c68-9b6e-4060ba2afc10" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="991996fd-fe31-4625-9495-d8e8e948e2a5" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="642fabc0-530e-4b91-8ff8-f67c065fee4d" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x0C" Name="#ADDR" Id="7f63eba4-1c4f-4b10-8034-7aced34dc9a0" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="82208e6f-5854-42e0-9709-d429ae8bf4ad" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 12" Id="5586f589-aff5-40bb-8887-6eba68914430" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 12" Id="f70f9cbf-e23e-4d29-ab01-e8f541776b1a" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 12" Id="f998071c-2786-4528-8f3f-a4f633b904fc" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 12" Id="217250c0-4d32-46a3-8330-3f29a817415f" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 12" Id="34a5da3d-580d-4957-8c31-b436f76e6d56" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 12" Id="5e817314-385d-411b-8bb4-a304a0245043" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 12" Id="a4d49535-3a7b-47d8-b0aa-6cefa9b4d2d5" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 12: состояние датчика положения" Id="24c0ce36-92d0-4493-ae03-3551844b9e01" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 12: Сброс от монитора питания" Id="fda5193c-458a-4a49-ad0e-6b8a44f2ec1e" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 12: Сброс от внешнего входа" Id="6cacf6bc-700f-4e10-960f-3a0f609c447a" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="9025421b-d971-499f-952e-161edb789619" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="994bd75d-c9bc-4b7a-a6f2-3ce4e723481a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 13. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0D" Name="#ADDR" Id="ad5887de-9e7d-44b5-a2ec-03f6e93a18c4" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="448f637f-c3f6-4c58-a584-edaa7567bc07" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 13" Id="0b9800e2-654e-4a0e-8d7d-cb7e759b6a84" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="afa5e74b-d424-46b8-ae6a-85d5b4cc2646" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="3ca44fcf-ebf4-4a90-afac-0d07f6b986d0" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x0D" Name="#ADDR" Id="f73797f1-e910-403e-b4eb-f8b40f394507" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="080bba2d-6cf5-480a-8f93-e6ab1a5df8fd" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 13" Id="e3012855-5ea8-472b-8ba8-96e2f9a3cdfb" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 13" Id="5edc9992-2fc9-4759-96ca-5524bff0fb88" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 13" Id="b718b987-addf-49e9-b285-a579d4ffb960" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 13" Id="51107158-4c58-48d2-9b96-403f67177918" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 13" Id="ac2077ac-34d1-4f2e-8ded-abf22e468fd2" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 13" Id="033c0148-6f19-4004-bd06-b68f21cf0be9" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 13" Id="108d6610-11bf-4d65-bc20-f2f3a35d42cf" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 13: состояние датчика положения" Id="45e260b7-5b3d-430e-b6d7-7b03a7f7fc13" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 13: Сброс от монитора питания" Id="9f82f407-9d66-4189-ab3f-59b86143449e" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 13: Сброс от внешнего входа" Id="6e80dab1-fb20-4afc-9729-1003ee5a4191" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="f88f905d-ffa5-4798-a1ce-e173f90ce255" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="c5184007-4f82-400a-a16d-cdf85e9c90de" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 14. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0E" Name="#ADDR" Id="1603577f-9a28-4491-9bde-f3d2dffa9ef7" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="de447bc8-f80c-4cb2-b8ca-47406242ecb2" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 14" Id="84ce7a19-ad8c-43a9-9055-933583464ec4" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="3e742810-b901-47ff-978d-aee532b981c6" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="1be80cc1-b07b-4e6c-9c9b-51be4f513d39" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x0E" Name="#ADDR" Id="3370fcf5-5632-44cf-bb8c-624f18c61783" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="d4f4ab6c-9160-4f6c-9a05-fc0e33634db7" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 14" Id="a3375637-c729-4045-9319-d619f8f45bc7" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 14" Id="ee45ebe8-6cd8-467d-8ff7-8379cb522ccf" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 14" Id="29fcc227-74c4-4824-8a6a-ec40659eb8a8" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 14" Id="8eb3bc42-fc96-4386-ae56-77eb4bac3376" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 14" Id="c2e36972-7c32-48c1-b6d7-8ec892e9960e" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 14" Id="2e2eddc6-9e4b-4af6-a3ee-4aece2e2fabf" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 14" Id="a7bcdfcc-7462-4c8d-b74e-292dfd7077ab" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 14: состояние датчика положения" Id="ad44a8c0-68ab-425d-a919-11c7133b84c1" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 14: Сброс от монитора питания" Id="c99ccf6b-3bf9-4aee-87fa-79cf035a74f1" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 14: Сброс от внешнего входа" Id="b4e7ea28-175e-4958-8d2b-a5df5d1e91a2" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="7002d309-adb6-483b-938f-07c1758900ac" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="7ef70737-e6bc-45d2-a8a3-8d926dfc1414" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 15. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0F" Name="#ADDR" Id="e414e768-b0f9-4ed2-959b-41be1c605e58" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="7fea0056-c3cb-4b76-a24e-4d7e5c36c703" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 15" Id="4eda6883-1bed-4845-880e-f6d8ceb8cf50" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="607f6a86-0511-4764-97d3-fb15c98814f5" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="caf94fdd-fe62-4453-8468-d49b300d55b0" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x0F" Name="#ADDR" Id="482ef56a-136b-40ba-bb42-7ce04d0aad4a" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="8f824928-33d7-4c12-a178-709a04a9eac6" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 15" Id="7e285688-7156-4b49-9e7f-8270d82f292d" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 15" Id="28d1f0aa-3705-4033-b650-2e250367fca7" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 15" Id="00f67af3-8059-4cb9-bfcb-375163a2f918" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 15" Id="620b2a30-528b-49f1-acee-e22812b41f22" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 15" Id="f9c39e21-c1ec-4252-90cb-04e26385e40f" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 15" Id="576425be-6f73-4bd3-8672-65bc3b1bbb3f" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 15" Id="505fafd9-2559-4586-8e03-3e6abdd35e66" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 15: состояние датчика положения" Id="b044431d-b8c5-4ab0-8e45-31a8ef9e1338" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 15: Сброс от монитора питания" Id="d8527677-53ad-44bb-9018-d5f89e7c2074" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 15: Сброс от внешнего входа" Id="f752d55f-4e2e-4527-9526-76ea55507142" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="941e4ed9-42a9-4de6-aa48-42f72ed4c2b6" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="e6502cc6-4d85-4430-b2b0-8bf26b5a4042" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 16. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x10" Name="#ADDR" Id="34a3d6b6-93a8-41c1-96d4-5e70883ed1da" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="09b77472-5356-4f3f-abc1-56a030a69da8" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 16" Id="688b3997-76fc-4880-848d-be190f1fee0c" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="cc26431d-7dd0-4f0a-9d37-737038fe9846" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="8d280371-5582-47a3-ba17-64e21e74f18b" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x10" Name="#ADDR" Id="a8839af3-81fc-4bbd-b220-53120f65f135" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="6f37126c-0389-44d1-b284-60fa6be11d52" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 16" Id="04a0a48f-4c93-49f6-bc74-dc70445dcc50" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 16" Id="04b0b0ec-5203-4590-af49-f5c2e0f7bf49" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 16" Id="74a5688d-fd9d-4d83-8883-ea6e20e4060f" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 16" Id="4457feb5-8d1d-4f12-901e-3c81bc1f45d2" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 16" Id="26002623-192c-463d-a350-b6932e99d6f0" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 16" Id="04da8f51-46a7-41b5-9b66-bf95a5feffd6" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 16" Id="32d8828f-2e00-4ade-81fc-8c433eeabe10" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 16: состояние датчика положения" Id="c768439d-833e-44fd-a06a-2883381f6290" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 16: Сброс от монитора питания" Id="c0eb933f-5ee1-48f7-92dc-7cdc68c1be44" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 16: Сброс от внешнего входа" Id="2952e13f-4035-4b37-a324-26c07aac2ae3" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="38e46dd7-168e-464b-8cf5-0fbb9cfad7aa" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="e5d09bdd-c198-42ee-81de-67b0dd20fa0b" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 17. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="38f9f031-7ecc-4345-906f-0278bde3805d" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="e1f7e583-c03a-4d5d-9f95-821c5e2f0bfd" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 17" Id="95167495-d834-4d44-9800-4aae0a228994" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="cd5399cc-b2c2-4619-b522-26d12af6ef29" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="f2130ec6-c013-41f2-8f5b-f2a3442fbaec" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="ea053137-7bb9-400b-8853-29e4125f79a8" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="a4c8bf43-866d-44a9-8afb-a6982b8436cf" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 17" Id="d7f6d550-054a-42e2-8b14-c032ca381f54" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 17" Id="6bc40aed-3f3d-4740-ac79-2db6f57a1883" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 17" Id="f324c7e2-e0ed-429a-bd06-98b97de13585" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 17" Id="593be5e6-bea1-43e5-bd59-e67de1a97f4e" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 17" Id="4f8bd195-e087-4b25-8674-c9c976e6357b" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 17" Id="42a51780-3281-4d2c-973b-97901dcc9c62" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 17" Id="ef638d6a-1461-49d3-9c51-9ca08b8b355f" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 17: состояние датчика положения" Id="7159fad0-05c1-4d27-810e-0904805a352c" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 17: Сброс от монитора питания" Id="c7e42c81-a89d-4d55-aad2-568fe51298e2" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 17: Сброс от внешнего входа" Id="1351d2da-c474-41dc-b944-7010da4e5120" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="127a7c1f-b14c-492f-90c1-1c4beee08330" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="57e19ee1-71fe-409a-a79f-0fe106db86c5" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 18. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="870a7ddb-4ff2-42df-9de1-5350e33b541c" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="974e3a7d-a497-4067-8c03-1e3bd160aa3f" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 18" Id="3b2c452b-708d-4f44-af67-bf0c5b02ffb2" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="7169ae38-d6d3-499d-a3eb-8eba99e74849" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="658a0eb8-1e5e-47b9-ac39-62827c3fd2f9" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="07fdc4d1-4290-4b50-9a68-9dfbf69721f1" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="5e064a18-0f26-4be8-b723-8f5344c0416f" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 18" Id="5256d08b-bc1f-4d87-8cee-1d72e001bfd6" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 18" Id="a107698e-db32-4505-a1c4-3212ca262ddf" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 18" Id="a38925cb-69b7-4fd9-bd9d-cdeb01a5e49c" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 18" Id="a702ee91-ed00-4df8-a956-8911ef1dc983" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 18" Id="fa4ab844-e4f0-4eed-aa5d-b8b516b1ae23" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 18" Id="0dafb22d-36ab-4ebf-9f59-7a7c242fd112" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 18" Id="fe4321e2-e190-4b02-a936-f80b3f1a09ef" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 18: состояние датчика положения" Id="961272c0-bc3a-4762-9183-197296e3531e" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 18: Сброс от монитора питания" Id="86d4c41e-dcf9-47f4-b356-faa13c6db027" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 18: Сброс от внешнего входа" Id="4926a6f9-29d8-4489-b8ae-2e65f652c31a" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="abd6bb1a-d4b2-4ee2-b2c7-1b5e4a02177b" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="68891bd4-39c4-4346-b89e-1851e2a3deab" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 19. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x13" Name="#ADDR" Id="321617c7-df0a-42d2-aaa5-20b010b375a1" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="05f44e7b-6e2f-4e01-87f3-54c75d4ab1cf" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 19" Id="c850441c-b434-45b7-9ebf-4912e0cf140a" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="52cc42ee-6ee5-485e-9721-27d35771efd8" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="912bcc0a-b7fc-4871-a27e-1ef432f1837b" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x13" Name="#ADDR" Id="c3e44624-5dc5-4ce5-a224-a75eb91b39ba" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="8f0adaa6-f466-417f-b01e-c22f8122f2f2" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 19" Id="8105f738-a30c-4d78-b686-48432f8290bc" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 19" Id="03a05867-7b6d-4db4-9ae9-20bad280b701" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 19" Id="b348c223-302a-4f61-a042-643aacbf5915" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 19" Id="d52a4474-6d9c-4f5c-a261-e9b0ada63b46" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 19" Id="5a53e21f-6326-4c19-8db3-a6a004f06e9e" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 19" Id="35f97d6c-0700-478c-98fe-0d2be4b6cf9d" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 19" Id="15654857-e082-4b88-8a30-7c4bb5cc39d8" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 19: состояние датчика положения" Id="ae0f4e4b-2b3b-4b71-94aa-97c55d88b283" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 19: Сброс от монитора питания" Id="7841a779-8f02-439c-bdb8-10134f42cc2a" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 19: Сброс от внешнего входа" Id="b1abdc31-1558-45ef-8e8d-0a82c96ea6e5" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="8c235d09-c54d-4a28-9fa9-9174e0809252" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="d1844ade-8737-49e4-8aa3-3a7367feaf9a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 20. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="f46d297d-09dd-4fe8-a88b-8e8b609b1cd4" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="d4a2fb6a-197c-4d57-bb10-9e70ad7b7219" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 20" Id="fcfcc1fa-b908-4050-ad24-6d25ec7e3609" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="bc641ec8-9bbc-4dd8-be1a-4fa72d5d23df" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="d57bfa83-b753-42cb-9168-3e158b8fc89a" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="87af2e45-2f45-4894-8da2-790ed9c0c500" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="5de4249c-9352-45e3-a63d-06e87f965092" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 20" Id="fb9e7f4c-54de-427a-9398-eaef18a4a1b9" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 20" Id="528d209a-45fb-44e8-b218-9c049a007554" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 20" Id="e39ffcda-b46b-4477-aefe-879a9103993c" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 20" Id="2481369e-9fb8-4538-8659-78cb362f5475" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 20" Id="3cd297de-e0b8-4729-99ac-e856eb96e225" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 20" Id="7c9a8060-0dcf-457f-9ed9-f34614a3332d" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 20" Id="f7e02b80-613d-4b78-99d6-ac918773bed8" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 20: состояние датчика положения" Id="0434ef62-a2ba-404b-8838-e284754871c5" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 20: Сброс от монитора питания" Id="be3899f1-8aa7-4937-b108-f0e5fdd12186" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 20: Сброс от внешнего входа" Id="5b941f88-c21d-4d9a-a8b3-05377e3b604b" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="1ba1ebf9-6cf7-498a-979d-ac4ae61aa118" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="894bf5a7-e1f2-4214-bc71-6a88ba21a3ce" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 21. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x15" Name="#ADDR" Id="f0c93079-c632-4b3b-b73f-919d0f583766" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="c24ce5fa-1ecd-40b5-8454-97470395531d" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 21" Id="04020488-2670-49fc-a0ce-766950a41d4a" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="a65897c6-575d-4366-919d-76fe4b968b09" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="c63784be-66fc-4488-be4f-cd1eb33b5f8f" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x15" Name="#ADDR" Id="7b221ccf-bc1b-4f82-a8c2-dfcb1c80612f" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="207dbd79-d5eb-4383-b6c4-4165f4430f5c" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 21" Id="a83dcbba-0f56-45dd-9b42-872b07107fa7" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 21" Id="d1ce67ba-5a2f-4789-8d36-4c2157ec0f78" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 21" Id="12b7deae-2379-48c2-bae8-51cf8ecd3fec" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 21" Id="dd841691-55a6-4570-a308-94351a36bcff" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 21" Id="007b7f5c-904c-429c-abe7-fdbd333e8cd0" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 21" Id="db9d690a-963f-4edf-8cc0-275b6711ee87" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 21" Id="f8a4c6da-ee15-4cce-8bbb-2ea840cecc6e" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 21: состояние датчика положения" Id="64234c43-7d10-4cb6-a79c-ca8b6b0af935" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 21: Сброс от монитора питания" Id="4e3f8e61-2e90-482c-bfa6-033aa0320258" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 21: Сброс от внешнего входа" Id="56dc220b-d305-497b-84b3-9c69baf43f35" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="1a2e0ebb-b978-4553-963c-9fcc8c04fd88" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="d762f78e-8644-4d60-8ecf-beef0551b30a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 22. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x16" Name="#ADDR" Id="661fb3fd-134a-47c1-9c4b-06c012c17c8d" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="52e11820-8f3a-4e19-9205-14ce30289ea3" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 22" Id="aa15fbae-a554-414c-88fe-b4d787e5428c" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="335a7a52-d16d-4afe-ac21-76b06e162e6b" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="86f95181-985a-4436-99ab-355695c62404" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x16" Name="#ADDR" Id="28e2ee8f-a1eb-4acc-9825-300257b859ef" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="260bc243-ab81-4d1f-92d5-2344d9748d45" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 22" Id="0730df42-ddb1-4c8b-a59b-792bde6c26f9" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 22" Id="2d5471b2-9e9e-424b-b7af-e4f9a1fe8472" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 22" Id="99f07957-137a-4971-acbb-9ca53497c885" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 22" Id="48526f65-665f-410f-842b-839e93a50cba" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 22" Id="01579416-a6e4-49a3-a768-bab0d81f74c8" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 22" Id="8c8f38fa-ebe0-4483-8370-f51bafbea37e" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 22" Id="dca132cb-4527-4397-a177-31e4e8f4de5b" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 22: состояние датчика положения" Id="b8cc829e-dae9-426b-8b43-213ea28bc60a" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 22: Сброс от монитора питания" Id="ec6302fb-cbdc-4c4f-8c3b-00f742bbb8df" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 22: Сброс от внешнего входа" Id="ed7b2b72-23c4-4b47-8b0e-ede6a761787d" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="28f4d773-d822-454c-9a6a-3ccffcc30f6a" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="24af0e0a-881c-4f67-b17a-8279f660a748" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 23. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x17" Name="#ADDR" Id="e0c47d21-c5ae-4214-962c-b4f4a16a4156" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="f7a9d98f-355a-4c74-80a7-78870f199b30" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 23" Id="aa5c4d30-eabb-43c3-b467-a1fbe04aa206" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="18ab3625-dbdc-4244-926f-e68fda511eb4" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="813b4cd5-f6e1-4379-88ee-04b8013b55e6" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x17" Name="#ADDR" Id="80fd5a2c-ba04-480c-a28b-979516168f23" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="1f022c2e-6ed6-4043-a1dd-579423b1530d" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 23" Id="2fcd9e1b-1ffb-48d6-b2f0-18bcc38794ab" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 23" Id="2f7846c0-5a53-4c5a-9045-29776381260b" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 23" Id="ecda7152-b38c-4a7c-85b1-84c17c488902" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 23" Id="64b1e62a-d47f-4c81-b0b1-bc67a691e4da" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 23" Id="d40f42be-fb5e-48d5-ad5b-ca712046503e" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 23" Id="fc5c3bbf-b262-4425-9758-841b1ba4e302" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 23" Id="ccc5b9b9-a38c-4340-8202-419e9061e1ed" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 23: состояние датчика положения" Id="a6b03f0f-f3b0-45e9-bec1-33f3063fe367" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 23: Сброс от монитора питания" Id="30617eed-4c5d-4ca1-b892-a54e22955d73" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 23: Сброс от внешнего входа" Id="2e649ce1-48b4-416b-ada1-8968ab10511d" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="63255abc-bc7b-4601-b272-6d9e57dd0bc6" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="e3079352-8d9b-4a2a-86c3-6a1f31488c4f" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 24. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="ea6f918e-8a19-43c3-8588-fe10d7e77bdb" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="c1514cdb-b424-47be-aab3-93408b2a7352" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 24" Id="734e337e-40be-45ae-bde9-91e06fdc0fa6" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="73742d27-d452-4c5c-98b3-cd803a4217d5" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="938f53b3-3331-41e1-a0d8-da3c77519434" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="e7f7351f-5769-4482-8bc2-a7d1d62ba9fb" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="ef187df4-ba66-4692-8133-344ff25ff6e8" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 24" Id="3e51033c-5e31-4e2e-a1be-4c32b519507f" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 24" Id="0aeadcb0-088e-4615-8a8d-890b1693098c" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 24" Id="51cfab62-a027-4b62-be61-0377ee72e2bd" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 24" Id="2cffe2e8-3782-4fdb-813a-44079e030e3a" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 24" Id="13a4fcee-d35c-4b7f-a49d-db1c4bef70f2" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 24" Id="b454bf96-6897-483c-accf-da1a8e042395" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 24" Id="89748b1e-d157-4011-ac5f-da517279fb09" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 24: состояние датчика положения" Id="49ef08b0-cbf1-4937-aba8-e832547a0725" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 24: Сброс от монитора питания" Id="753b2bb5-9c5a-43ec-bada-2f6f220bd428" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 24: Сброс от внешнего входа" Id="40008e7e-7677-4473-8138-8683cb7fc124" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="34e8e0b9-4324-490f-865a-bc5dc1f80e7f" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="eea093a4-9b86-4e73-842a-16d4b366c34a" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 25. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x19" Name="#ADDR" Id="4500eca8-741e-415f-800f-26e1a3f8f431" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="deeea6bc-0eaa-4365-b9a5-34247174f88e" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 25" Id="86327c20-55ed-46ba-bec7-73360c242a17" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="3be191ed-d21d-41b5-9f23-48d3b636dc25" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="9cea6bca-e826-4505-9c53-4f5997b6cbb5" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x19" Name="#ADDR" Id="5fe6d87c-d147-40f2-8569-074906b64026" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="2d79401f-c3ed-4789-8a86-3e285726fe85" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 25" Id="a591da17-3747-4ba9-9e29-8a15db31b699" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 25" Id="77a38bd5-652c-4765-97ba-f1faea1ba385" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 25" Id="c14391d3-4ffe-47e8-9685-f4730d83997f" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 25" Id="9ac6078e-af38-4317-b648-bc621cea862a" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 25" Id="8dcd9c29-7565-45a7-8db0-afd50408e793" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 25" Id="1dbf3ff5-1c4b-4696-9b44-de4e74284251" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 25" Id="cce5a85f-2b84-458f-ade8-305ef2fe45db" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 25: состояние датчика положения" Id="b1095efa-da60-45d3-b164-f05e0764cbff" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 25: Сброс от монитора питания" Id="0d837622-3da0-41fc-b2f1-c38460f2b3a8" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 25: Сброс от внешнего входа" Id="d1eac9eb-9ac4-4f27-9d77-60f118d34da8" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="a0b95e80-8f08-4ec6-ae25-c19ae986925a" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="aba53465-5b7d-40e4-a4ea-68585a0b9d1d" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="БУ и УСДП 26. Тестовый режим.">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x1A" Name="#ADDR" Id="16f0c9c0-b8b1-4535-9920-ae5292ff9116" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="cd81c547-8bd7-4e29-b708-de2a6fb842f5" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="Тестовый запрос БУ к УСДП 26" Id="7e5f96fc-3ba6-40af-a4fc-d2b1e3f46d99" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="b073702e-d612-48e1-94fb-ee5c64a9d3dc" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="4d8bf92f-3ba2-4424-a741-846d85d4cebc" />
+			</Request>
+			<Reply Length="6" Position="4">
+				<DefVal Position="0.0" Length="8" Value="0x1A" Name="#ADDR" Id="429dd1c5-d553-4faf-8693-a3f0ea6c4983" />
+				<DefVal Position="1.0" Length="8" Value="0x41" Name="#NCMD" Id="b18aa43b-fe88-469e-8cac-c2a3141ece9e" />
+				<BitPrm Byte="2" Bit="7" IsValueInverted="False" Name="Состояние входа №8 УСДП 26" Id="0c9c4517-068d-4366-a8f2-6bc08ab32e15" />
+				<BitPrm Byte="2" Bit="6" IsValueInverted="False" Name="Состояние входа №7 УСДП 26" Id="8896d2e0-2554-4c64-af8a-d8148529beb8" />
+				<BitPrm Byte="2" Bit="5" IsValueInverted="False" Name="Состояние входа №6 УСДП 26" Id="fd094e45-8d05-47cc-8796-b128e752f8cd" />
+				<BitPrm Byte="2" Bit="4" IsValueInverted="False" Name="Состояние входа №5 УСДП 26" Id="27ab748e-7574-4e0e-be41-8329c0533dd1" />
+				<BitPrm Byte="2" Bit="3" IsValueInverted="False" Name="Состояние входа №4 УСДП 26" Id="a3977e99-780e-424b-ab2f-bc4a1b15cae2" />
+				<BitPrm Byte="2" Bit="2" IsValueInverted="False" Name="Состояние входа №3 УСДП 26" Id="4bba7c9e-da13-4a7c-9d86-48a91bad67d4" />
+				<BitPrm Byte="2" Bit="1" IsValueInverted="False" Name="Состояние входа №2 УСДП 26" Id="b1ec1670-43a6-42d1-be1d-2daf7ba63e77" />
+				<BitPrm Byte="2" Bit="0" IsValueInverted="False" Name="Состояние входа №1 УСДП 26: состояние датчика положения" Id="21d004c5-1ead-4609-8fc7-7b6f540a7a1b" />
+				<BitPrm Byte="3" Bit="1" IsValueInverted="False" Name="Статус блока УСДП 26: Сброс от монитора питания" Id="80d7dd41-1f9d-401d-a53c-0830ebce656e" />
+				<BitPrm Byte="3" Bit="0" IsValueInverted="False" Name="Статус блока УСДП 26: Сброс от внешнего входа" Id="0ff81790-6e62-41cd-96bb-78a298b94629" />
+				<VarVal Position="4.0" Length="8" Name="#CRCL" Id="2a73b078-1b38-4ae4-9a83-35ad60317695" />
+				<VarVal Position="5.0" Length="8" Name="#CRCH" Id="63d879fc-dcd3-4084-a9db-0b0948db6268" />
+			</Reply>
+		</CmdMask>
+		<CmdMask Name="Вход в режим ПУСК">
+			<Request Length="4" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x00" Name="#ADDR" Id="244d0513-d4c8-47dd-89ba-1891feea3ae8" />
+				<DefVal Position="1.0" Length="8" Value="0x43" Name="#NCMD" Id="11446df7-9158-4b38-b609-9dd85c09e238" />
+				<BitPrm Byte="1" Bit="0" IsValueInverted="False" Name="БУ: ПУСК" Id="7a75f3c2-7f71-4e06-8447-047800a2033b" />
+				<VarVal Position="2.0" Length="8" Name="#CRCL" Id="544ff502-21d0-4487-9a9e-a011732032a1" />
+				<VarVal Position="3.0" Length="8" Name="#CRCH" Id="1e447780-78f6-4753-844a-782c2d13ad6d" />
+			</Request>
+			<Reply Length="0" Position="4" />
+		</CmdMask>
+		<CmdMask Name="УСДП 01. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x01" Name="#ADDR" Id="7ab9aae7-bd96-4ee0-9e12-ecef3b4d8da6" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="e5141d0e-22be-43bd-85d3-1449e5b24c36" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 01, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="43efeeb0-671a-4ac1-a0da-1d9baefc02f2" />
+				<CpzPrm Name="Номер УСДП" Expression="1.0" Id="7c0d8788-4063-4c6d-a45c-4cffbeca5fc3" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="ec79b3a2-df4d-4042-a50a-b44325133176" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="7022753c-c908-4fbf-970b-5379e3b55cd7" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 02. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x02" Name="#ADDR" Id="a0d218cf-65f7-4c74-9ace-d219fea20981" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="9b7c45bf-d508-4a6d-a793-5a59691a804a" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 02, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="ea0f7e34-17fd-4c6b-a2fb-e5fca1ea598a" />
+				<CpzPrm Name="Номер УСДП" Expression="2.0" Id="2db799aa-5d9d-4fd4-847b-792b7ad27755" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="9d7fde1a-ed6f-41b6-8760-532cf77ef4f6" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="8e1b8e11-b171-49aa-890a-dcf236f43be2" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 03. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x03" Name="#ADDR" Id="ba27ac80-9d08-42d9-9f1d-313f0e4cd850" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="855940cd-b275-43c0-8e5a-995e769e2b0d" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 03, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="d2f111c7-9a3c-4079-bdbe-a091f8b805b3" />
+				<CpzPrm Name="Номер УСДП" Expression="3.0" Id="c35f5656-e68d-4e58-8af7-c207ce032b77" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="50eacc14-3ee2-4004-889f-35bf32b4cec8" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="c2de60d0-a619-4da7-bd80-3ba8f5e5b31a" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 04. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x04" Name="#ADDR" Id="27729604-de87-4186-b4b8-6d31b4e76f02" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="1bb81c1a-257e-452c-a879-e3865731ae53" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 04, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="e2d64f02-fdfa-4b42-b8f3-d1175d7accaf" />
+				<CpzPrm Name="Номер УСДП" Expression="4.0" Id="1ea18eab-a730-4a95-9ef3-6f70aba1b5bf" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="a337a516-f03d-44b6-974b-f1ac9b240ed3" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="48e7a06b-c55d-49ad-b6e7-17b811ecd007" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 05. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x05" Name="#ADDR" Id="a23811b3-72fa-4d8a-8b2b-7db76b34cbff" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="d6e52750-671d-4b88-b920-e47d974a5cd9" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 05, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="72dcb1af-bd76-4c17-a1e0-ab12372d4f4e" />
+				<CpzPrm Name="Номер УСДП" Expression="5.0" Id="a0392c34-ace9-49f2-b165-420941e19602" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="f1eb564f-d884-4cb9-8a6a-614746b3bfc2" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="0099937b-a48e-4019-ba40-584b730edf2b" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 06. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x06" Name="#ADDR" Id="9d89cd00-05e3-4a0c-b4b9-3dd76014ab06" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="1aa1c223-c908-437a-8955-8bd07ccf839b" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 06, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="90398bbe-b241-4dc9-b56f-4283a3fdcf0c" />
+				<CpzPrm Name="Номер УСДП" Expression="6.0" Id="80e2c469-adbb-476d-89b8-0d17de1527aa" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="4cbbc898-f741-49cc-948e-4c1f55b4d32f" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="6ba71707-2be4-4980-90a0-40630192ff26" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 07. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x07" Name="#ADDR" Id="d0bbe053-1414-46b5-ab86-9d8b121f27eb" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="7380d073-d16e-4292-acd6-5701ea4da04a" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 07, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="7c94356f-27d9-4440-b3f4-f3ca28eebe4d" />
+				<CpzPrm Name="Номер УСДП" Expression="7.0" Id="f5615eec-65ee-40de-ae12-33a8ba0bd9d4" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="401dd3cb-665e-4522-955b-1cc48e585e43" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="68ff3ac5-0314-40b2-8aa3-dab74c286911" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 08. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x08" Name="#ADDR" Id="aee4c678-57c8-4df2-9356-e575ac3e02bb" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="37b1849e-acb3-49a6-9d4c-2c1ad8ad8a7a" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 08, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="a7a20923-edad-4a94-bc59-b75ebe1601cb" />
+				<CpzPrm Name="Номер УСДП" Expression="8.0" Id="cf49566c-d050-4218-ae38-980f535ae5e9" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="b92da74a-ad3e-4226-9da8-b1b6c6e0a317" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="11a4de7c-29ff-4e52-b976-6bd9f49a2637" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 09. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x09" Name="#ADDR" Id="acff2c41-4360-405a-b76a-03d444eb4d55" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="ca5f530a-77af-4dbc-bf77-8d0bc1aa4988" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 09, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="2750a041-d8db-4f6c-8a88-412272f3afed" />
+				<CpzPrm Name="Номер УСДП" Expression="9.0" Id="c681037b-22f4-4b26-80ac-fbb425198a60" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="e89424a1-586c-4807-a7fa-c752a3857de6" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="bca17a9a-f4b6-4353-9449-a69bc87ba169" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 10. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0A" Name="#ADDR" Id="a5f0f323-b980-455d-b800-a29ed997e0a7" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="198d0b5a-0799-43ea-bdee-2fa39732c3cd" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 10, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="5831378e-7af8-4848-9c50-2c2e458de692" />
+				<CpzPrm Name="Номер УСДП" Expression="10.0" Id="dd9edb0c-5a22-4187-9251-3500aec65daa" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="a0b541fd-0214-4cc4-9201-785a66f5694d" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="2bed362e-e2cc-4e64-a6d3-c18b8b0bc24d" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 11. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0B" Name="#ADDR" Id="5ff9df07-3939-4f76-b5f6-16ebe0bf43f8" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="61efa469-06ac-4351-8e0a-958363298819" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 11, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="11a9ade6-5f5d-472a-aba2-98d0da35e1b9" />
+				<CpzPrm Name="Номер УСДП" Expression="11.0" Id="ac762f0b-2279-4b65-b287-4a65ff1b6429" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="59eb2648-542b-435d-b9b0-5b44c6857a2d" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="4837a73e-79a1-4368-85d4-72e6769e1f40" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 12. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0C" Name="#ADDR" Id="83768ead-e234-421d-a445-3f51099e4ab8" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="312ef976-3a58-4350-b449-7e588ff01939" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 12, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="5d74913b-bbdc-4c7b-b98c-7af1d669fd43" />
+				<CpzPrm Name="Номер УСДП" Expression="12.0" Id="110ca63a-155f-45b4-a429-0362a76d5e2f" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="6d8c7dd0-9921-4e51-b1e0-e72594ffd77d" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="3a078455-3415-46c6-972b-a770f4930113" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 13. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0D" Name="#ADDR" Id="988c2e90-7b4c-4cf6-8e26-c903a81f9d2b" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="759e7e4f-81da-4ac7-951d-b9be42f13304" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 13, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="5711df1e-2e3a-47f3-b49f-033ffe004858" />
+				<CpzPrm Name="Номер УСДП" Expression="13.0" Id="038c1a3e-7fa5-48a3-9fbd-2b7f781c87fa" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="bfc91a34-1b5a-4981-bc80-0eaa029d13df" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="7a4bf797-9f6a-4cc9-81aa-ef917a7f1f7c" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 14. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0E" Name="#ADDR" Id="2591b59a-5fd4-43c2-aeac-3857b6778369" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="e345215d-5134-4f40-8882-d8cf768c0cb1" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 14, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="b92df0b5-c30b-4198-a86f-57cd96f487de" />
+				<CpzPrm Name="Номер УСДП" Expression="14.0" Id="2d50d370-79ad-435a-a372-6f3e32a1d626" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="79b75f6a-5037-4456-bb9a-9b5865c7bfd8" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="20b11d93-54f7-44c8-9057-c3a525463206" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 15. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x0F" Name="#ADDR" Id="0e3cf50f-549a-4231-aad9-50f25f4abc98" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="676e7b83-e379-415f-96bf-1fc9e83439c5" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 15, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="8552265c-df38-4a1d-bde5-bc7a3d698ef3" />
+				<CpzPrm Name="Номер УСДП" Expression="15.0" Id="728d785e-644c-4032-b07a-94eb98c4f041" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="52ba30af-0984-4e9a-b18b-8c8cf4622d50" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="809d1b99-51fe-4f37-a53b-1d310d959789" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 16. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x10" Name="#ADDR" Id="5d2953c3-af6a-4980-896b-98e22ee1f405" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="5000c61e-ba9e-4e0f-b6a5-c4b20f979131" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 16, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="d27f6c4f-2c38-4459-a526-9ff5ebc91212" />
+				<CpzPrm Name="Номер УСДП" Expression="16.0" Id="a464380d-db7f-4402-9bd6-f906f081d742" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="bec94da7-d06e-49a1-9556-c846023d7427" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="1d45036a-08a5-4180-8c93-6580f3e158b5" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 17. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x11" Name="#ADDR" Id="7ee1a982-09aa-47f2-a567-00d21d3d5224" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="23514836-010b-41fe-bf82-1b215fa34c31" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 17, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="f753ec82-01c5-4fba-8405-642293027858" />
+				<CpzPrm Name="Номер УСДП" Expression="17.0" Id="d318388a-c230-4790-9d01-c5cb4e78172a" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="29cfe8c2-758e-4f63-af83-4db2996c31a8" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="dd245e7d-a065-4250-9ee8-5a191e3faeb6" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 18. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x12" Name="#ADDR" Id="92bfaacd-904c-4579-9e3d-a26bfb614967" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="a0f3365a-4458-4258-9d43-c3bb388eefd3" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 18, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="d5c89bec-d085-49a1-937b-9bc8037dcaa0" />
+				<CpzPrm Name="Номер УСДП" Expression="18.0" Id="daa4220b-c3f2-440d-8e6f-7aac88c20593" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="ca940ae0-8e3b-4f70-b756-42ae58b462bd" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="6fa15f1e-781d-494b-88cc-47ee1d286e30" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 19. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x13" Name="#ADDR" Id="28e362ac-532a-426d-8e11-2aeac8d51cc1" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="bd190067-e5f0-4b9c-9192-050d59538ded" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 19, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="490dc9df-dbb5-4464-bfe9-da0852f911fb" />
+				<CpzPrm Name="Номер УСДП" Expression="19.0" Id="01ea16c9-c3b8-4856-b269-4127632d59f9" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="511724d5-8387-49fc-b3ca-453a0d682c01" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="9f0b3c87-663e-465a-b7ff-71fcd0d77009" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 20. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x14" Name="#ADDR" Id="3d2bb33f-b6b6-41ed-a521-731537deff58" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="648edd2d-a698-4d2d-b9c8-9650f3535f9d" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 20, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="e608beec-a271-4ad0-9a40-15c3f40394cd" />
+				<CpzPrm Name="Номер УСДП" Expression="20.0" Id="bcc7705e-a7b4-4d89-99a5-6662b9b3fdf0" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="b33d60dd-d2d5-4915-892c-d1df9bf45b0a" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="eaf3e94a-599c-4f64-b12c-31a843ee9f6b" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 21. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x15" Name="#ADDR" Id="6f287b25-a7ee-4bf4-a978-647b02c7db48" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="f8d01b24-73dc-405a-afc1-a1b2264e53ae" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 21, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="bb6fa4c7-62fa-4e27-8fe5-b8cdb9167911" />
+				<CpzPrm Name="Номер УСДП" Expression="21.0" Id="77cb9324-51ae-48a8-bc7b-c1877879623f" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="47e9ae45-2578-4bbe-9b90-04572c9420a3" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="454d8a42-5c82-4c31-a40e-69e689c3fe21" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 22. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x16" Name="#ADDR" Id="d837ba73-bc76-4241-a39a-480a6971b8e4" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="aaeda8a6-a340-4c69-81a8-fdcb8020607d" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 22, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="9effbbd0-9492-437e-ad79-c77ede0cfd53" />
+				<CpzPrm Name="Номер УСДП" Expression="22.0" Id="0d68d22a-d024-47d9-bac4-726bc37be39a" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="ad641bab-a22a-45df-9ea1-a18ea96fba7e" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="17c0237a-1f0b-40a8-aace-dd866af4fc50" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 23. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x17" Name="#ADDR" Id="4595ec9a-9980-4f48-a066-987be62f4c5b" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="536242f0-3775-466e-8744-ecf30c68df69" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 23, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="bc85c924-8893-4292-b16e-89ad3314e3e9" />
+				<CpzPrm Name="Номер УСДП" Expression="23.0" Id="6b67060f-b40b-4b26-ae46-0acf868f50ab" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="5391d8ca-9721-4372-9a62-07234b215a25" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="10a78e88-a1bc-4157-a387-f98aecabc5ca" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 24. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x18" Name="#ADDR" Id="d40739bc-2237-4619-9c21-00196c5b7f15" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="72f146f1-0c89-4072-8a1e-fddf17bea263" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 24, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="09ec99f6-6718-4390-b27e-48d736a4e5c3" />
+				<CpzPrm Name="Номер УСДП" Expression="24.0" Id="5324cc0b-2214-4d0c-8128-2583ce59c426" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="3db095bd-0b14-4f5b-bfa2-6f3688fe5781" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="a54ddfbb-129a-4289-b5e5-cbd36b9d1348" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 25. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x19" Name="#ADDR" Id="7c8ac80b-5f41-4921-b8fb-5ffb216b52f9" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="a5190ed2-56bc-443c-8246-55412e5e8d10" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 25, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="f918af66-75ec-408d-8758-8b544c5d6638" />
+				<CpzPrm Name="Номер УСДП" Expression="25.0" Id="a6b96d80-fadf-44d1-911f-2ea8c1d06dd5" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="0b77749c-b344-4c6d-a43d-38e50d4a241c" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="1babc6a8-58b6-45a2-ad53-e0c9f6f53162" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<CmdMask Name="УСДП 26. Режим ПУСК.">
+			<Request Length="7" Position="0">
+				<DefVal Position="0.0" Length="8" Value="0x1A" Name="#ADDR" Id="4a9f079d-6543-4aaf-ad22-d949806a0228" />
+				<DefVal Position="1.0" Length="8" Value="0x44" Name="#NCMD" Id="09706ffb-aa7c-44f9-91f0-9c66f24bf324" />
+				<CpzPrm Name="Текущее состояние таймера УСДП 26, сек" Expression="([u4] * 65536.0 + [u3] * 256.0 + [u2]) * 0.00005" Id="d65e0423-8727-4db4-a141-9fff49ab3970" />
+				<CpzPrm Name="Номер УСДП" Expression="26.0" Id="9f2df9a3-2d09-49c9-847e-a20955e63ddb" />
+				<VarVal Position="5.0" Length="8" Name="#CRCL" Id="c0e16dbb-6bd4-46b5-9c61-216a1897d852" />
+				<VarVal Position="6.0" Length="8" Name="#CRCH" Id="12a0fcf0-7da4-43cc-906e-dedfc4a4558c" />
+			</Request>
+			<Reply Length="0" Position="7" />
+		</CmdMask>
+		<PsnMergedlDevices></PsnMergedlDevices>
+	</Commands>
+</PsnConfiguration>

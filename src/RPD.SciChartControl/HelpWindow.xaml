@@ -1,0 +1,134 @@
+﻿<Window x:Class="RPD.SciChartControl.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Краткая справка по графику" Height="602.506" Width="908.807">
+    <Grid>
+        <FlowDocumentScrollViewer>
+            <FlowDocument>
+                <FlowDocument.Resources>
+                    <Style TargetType="InlineUIContainer" x:Key="{x:Type InlineUIContainer}">
+                        <Setter Property="BaselineAlignment" Value="Center"/>
+                    </Style>
+
+                    <Style TargetType="{x:Type Run}" x:Key="nav">
+                        <Setter Property="Foreground" Value="#FF00A010"/>
+                    </Style>
+
+                    <Style TargetType="{x:Type Run}" x:Key="header">
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Style>
+
+                    <Style TargetType="ContentControl" x:Key="btn">
+                        <Setter Property="Margin" Value="0,1,0,1"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="FontFamily" Value="Lucida Console"/>
+                    </Style>
+                </FlowDocument.Resources>
+                <Paragraph>
+                    <Run Style="{StaticResource header}">Управление графиком</Run>
+                </Paragraph>
+
+                <Paragraph>
+                    Используя мышь с зажатым
+                    <InlineUIContainer>
+                        <RepeatButton Content="CTRL"/>
+                    </InlineUIContainer>
+                    вы можете выбрать область для увеличения. Если на панели управления графиком отмечен пункт меню
+                    <InlineUIContainer>
+                        <CheckBox IsChecked="True">
+                            <TextBlock >Зум только по X</TextBlock>
+                        </CheckBox>
+                    </InlineUIContainer> , то увеличение будет происходить только по оси X.
+                </Paragraph>
+                <Paragraph>
+                    <Run Style="{StaticResource nav}">Колесо мыши</Run> - приближение/удаление.
+                </Paragraph>
+                <Paragraph>
+                    <Run Style="{StaticResource nav}">Двойной клик</Run> - отображаемая область по размеру данных.
+                </Paragraph>
+
+                <Paragraph>
+                    <InlineUIContainer>
+                        <RepeatButton Content="CTRL"/>
+                    </InlineUIContainer> +
+                    <Run Style="{StaticResource nav}">стрелка вправо</Run> - передвижение по графику вправо.
+                </Paragraph>
+
+                <Paragraph>
+                    <InlineUIContainer>
+                        <RepeatButton Content="CTRL"/>
+                    </InlineUIContainer> +
+                    <Run Style="{StaticResource nav}">стрелка влево</Run> - передвижение по графику влево.
+                </Paragraph>
+
+                <Paragraph>
+                    <InlineUIContainer>
+                        <RepeatButton Content="CTRL"/>
+                    </InlineUIContainer> +
+                    <Run Style="{StaticResource nav}">зажатая левая клавиша мыши</Run>
+                    +
+                    <Run Style="{StaticResource nav}">передвижение мышью</Run> - выделение области для приближения.
+                </Paragraph>
+
+                <Paragraph>
+                    <Run Style="{StaticResource nav}">Зажатая левая клавиша мыши</Run>
+                    +
+                    <Run Style="{StaticResource nav}">передвижение мышью</Run> - панорамирование (изменение видимой области).
+                </Paragraph>
+
+                <Paragraph>
+                    <Run Style="{StaticResource nav}">Зажатая левая клавиша мыши на Оси</Run>
+                    +
+                    <Run Style="{StaticResource nav}">передвижение мышью</Run> - панорамирование только по выбранной Оси. Аналогично работает в случае нескольких осей.
+                </Paragraph>
+
+                <Paragraph>
+                    <InlineUIContainer>
+                        <RepeatButton Content="CTRL"/>
+                    </InlineUIContainer> +
+                    <Run Style="{StaticResource nav}">зажатая левая клавиша мыши на Оси</Run>
+                    +
+                    <Run Style="{StaticResource nav}">передвижение мышью</Run> - масштабирование только по выбранной оси. Аналогично работает в случае нескольких осей.
+                </Paragraph>
+
+                <Paragraph>
+                    <Run Style="{StaticResource header}">Аннотации</Run>
+                </Paragraph>
+
+                <Paragraph>
+                    <Run>На график можно добавить аннотации в виде текста, вертикальных и горизонтальных линий и метки на оси.</Run>
+                </Paragraph>
+                
+                <Paragraph>
+                    <Run>Чтобы</Run>
+                    <Run Style="{StaticResource nav}">добавить аннотацию</Run>
+                    <Run>нажмите на соответствующую кнопку на панели инструментов графика, а затем нажмите на место на графике, в которое вы хотите поместить аннотацию.</Run>
+                </Paragraph>
+                
+                <Paragraph>
+                        <Run>Чтобы</Run>
+                    <Run Style="{StaticResource nav}">удалить аннотацию</Run>
+                    <Run>нажмите на кнопку</Run>
+                    <InlineUIContainer>
+                        <RepeatButton Content="Удалить"/>
+                    </InlineUIContainer> 
+                    <Run>на панели инструментов графика, а затем нажмите на аннотацию, которую вы хотите удалить.</Run>
+                </Paragraph>
+
+                <Paragraph>
+                    <Run>Чтобы добавить аннотацию</Run>
+                    <Run Style="{StaticResource nav}"> с текущим значением сигнала</Run>
+                    <Run>подведите указатель мыши на нужно место, затем нажмите правую кнопку мыши и в контекстном меню нажмите "Добавить метку".</Run>
+                </Paragraph>
+
+                <Paragraph>
+                    <Run>Аннотации можно перемещать. Для этого наведите курсор на аннотацию и когда курсор изменит внешний вид на крестик со стрелками зажмите левую клавишу мыши и передвигайте.</Run>
+                </Paragraph>
+
+                <Paragraph>
+                    <Run>Текстовые аннотации можно редактировать.</Run>
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentScrollViewer>
+    </Grid>
+</Window>
